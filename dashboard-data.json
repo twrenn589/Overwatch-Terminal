@@ -44,6 +44,19 @@
     {"date": "~Feb 17-20", "text": "PermissionedDEX activation", "color": "cyan"},
     {"date": "Q1 2026", "text": "Confidential Transfers (MPT)", "color": "default"},
     {"date": "Q2 2026", "text": "Lending Protocol + SAV + Smart Escrows", "color": "default"}
+    {"date": "Feb 12", "text": "XRPL overtakes Solana in RWA — 268% 30-day growth", "color": "green"},
+    {"date": "Feb 11", "text": "Aviva Investors (£227B AUM) tokenizing on XRPL", "color": "green"},
+    {"date": "Feb 11", "text": "Garlinghouse: XRP is North Star — offense mode 2026", "color": "green"},
+    {"date": "Feb 11", "text": "XRP ETFs approaching $1.5B AUM", "color": "green"},
+    {"date": "Feb 11", "text": "OCC banking charter for RLUSD confirmed", "color": "green"},
+    {"date": "Feb 11", "text": "Grayscale calls XRP truly global asset", "color": "green"},
+    {"date": "Feb 11", "text": "Monica Long: Institutional adoption at scale by Dec 2026", "color": "green"},
+    {"date": "Feb 10", "text": "LMAX launches Omnia Exchange — $150M Ripple backing", "color": "green"},
+    {"date": "Feb 11", "text": "Permissioned DEX technical spec published", "color": "cyan"},
+    {"date": "~Feb 12", "text": "Token Escrow activation", "color": "green"},
+    {"date": "~Feb 17-20", "text": "PermissionedDEX activation", "color": "cyan"},
+    {"date": "Q1 2026", "text": "Confidential Transfers (MPT)", "color": "default"},
+    {"date": "Q2 2026", "text": "Lending Protocol + SAV + Smart Escrows", "color": "default"}
   ],
   "stress": {
     "oil_jpy_trend": "Breaking up",
