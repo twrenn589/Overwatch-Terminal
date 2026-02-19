@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>◉ OVERWATCH TERMINAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #060a11;
+  --bg-secondary: #0c1220;
+  --bg-card: #101826;
+  --border: #1a2740;
+  --border-active: #2a3f60;
+  --text-primary: #dfe6f0;
+  --text-secondary: #8a9bba;
+  --text-muted: #44556e;
+  --accent-cyan: #00c8c8;
+  --accent-cyan-dim: rgba(0,200,200,0.08);
+  --accent-green: #00e599;
+  --accent-green-dim: rgba(0,229,153,0.08);
+  --accent-red: #ff4757;
+  --accent-red-dim: rgba(255,71,87,0.08);
+  --accent-amber: #ffb347;
+  --accent-amber-dim: rgba(255,179,71,0.08);
+  --accent-blue: #4d9fff;
+  --accent-blue-dim: rgba(77,159,255,0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+.header {
+  padding:16px 16px 12px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(0,200,200,0.03) 0%,transparent 100%);
+}
+.header-row { display:flex; justify-content:space-between; align-items:center; }
+.brand {
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:var(--accent-cyan);
+}
+.brand-sub {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:2px;
+  color:var(--text-muted);
+  margin-top:2px;
+}
+.refresh-btn {
+  background:var(--accent-cyan-dim);
+  border:1px solid rgba(0,200,200,0.2);
+  color:var(--accent-cyan);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  padding:6px 12px;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  letter-spacing:1px;
+}
+/* Ticker */
+.ticker {
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  padding:12px 16px 8px;
+}
+.ticker-price {
+  font-family:'JetBrains Mono',monospace;
+  font-size:28px;
+  font-weight:700;
+  color:var(--text-primary);
+}
+.ticker-change {
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+  font-weight:500;
+}
+.ticker-change.positive { color:var(--accent-green); }
+.ticker-change.negative { color:var(--accent-red); }
+.ticker-meta {
+  display:flex;
+  gap:16px;
+  padding:0 16px 10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.5px;
+}
+.ticker-meta span { display:flex; gap:4px; }
+.ticker-meta .val { color:var(--text-secondary); }
+/* Macro bar */
+.macro-bar {
+  display:flex;
+  gap:0;
+  padding:0 16px 10px;
+  overflow-x:auto;
+}
+.macro-pill {
+  flex:0 0 auto;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:5px 12px;
+  margin-right:8px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  white-space:nowrap;
+}
+.macro-pill .lbl { color:var(--text-muted); margin-right:4px; }
+.macro-pill .val { color:var(--text-secondary); }
+.macro-pill .val.green { color:var(--accent-green); }
+.macro-pill .val.red { color:var(--accent-red); }
+.macro-pill .val.amber { color:var(--accent-amber); }
+/* Live dot */
+.live-dot {
+  display:inline-block;
+  width:6px; height:6px;
+  background:var(--accent-green);
+  border-radius:50%;
+  margin-right:4px;
+  animation:pulse 2s infinite;
+  vertical-align:middle;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+/* Tab nav */
+.tab-nav {
+  display:flex;
+  overflow-x:auto;
+  border-bottom:1px solid var(--border);
+  background:var(--bg-secondary);
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar { display:none; }
+.tab-btn {
+  flex:0 0 auto;
+  background:none;
+  border:none;
+  padding:10px 14px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:1.5px;
+  color:var(--text-muted);
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+}
+.tab-btn.active {
+  color:var(--accent-cyan);
+  border-bottom-color:var(--accent-cyan);
+}
+/* Content */
+.content { padding:12px 12px 24px; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+/* Cards */
+.summary-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:12px;
+}
+.summary-card {
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:12px;
+}
+.card-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:1.5px;
+  color:var(--text-muted);
+  margin-bottom:6px;
+}
+.card-value {
+  font-family:'JetBrains Mono',monospace;
+  font-size:16px;
+  font-weight:700;
+}
+.card-sub {
+  font-size:10px;
+  color:var(--text-muted);
+  margin-top:3px;
+}
+.cyan .card-value { color:var(--accent-cyan); }
+.green .card-value { color:var(--accent-green); }
+.amber .card-value { color:var(--accent-amber); }
+.blue .card-value { color:var(--accent-blue); }
+.red .card-value { color:var(--accent-red); }
+/* Full-width card */
+.full-card {
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
+  margin-bottom:10px;
+}
+.full-card h3 {
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  color:var(--text-primary);
+  margin-bottom:10px;
+}
+/* Data rows */
+.data-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 0;
+  border-bottom:1px solid rgba(26,39,64,0.5);
+}
+.data-row:last-child { border-bottom:none; }
+.data-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.5px;
+}
+.data-value {
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  font-weight:500;
+  color:var(--text-secondary);
+}
+.data-value.green { color:var(--accent-green); }
+.data-value.red { color:var(--accent-red); }
+.data-value.amber { color:var(--accent-amber); }
+.data-value.blue { color:var(--accent-blue); }
+.data-value.cyan { color:var(--accent-cyan); }
+/* Interpret box */
+.interpret-box {
+  margin-top:10px;
+  padding:10px;
+  background:rgba(0,200,200,0.04);
+  border:1px solid rgba(0,200,200,0.1);
+  border-radius:var(--radius-sm);
+}
+.interpret-box .label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:1.5px;
+  color:var(--accent-cyan);
+  margin-bottom:4px;
+}
+.interpret-box p {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.5;
+}
+/* Countdown */
+.countdown {
+  text-align:center;
+  padding:16px;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,rgba(0,200,200,0.06),rgba(0,229,153,0.04));
+  border:1px solid rgba(0,200,200,0.15);
+  border-radius:var(--radius);
+}
+.countdown-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--accent-cyan);
+  margin-bottom:6px;
+}
+.countdown-value {
+  font-family:'JetBrains Mono',monospace;
+  font-size:24px;
+  font-weight:700;
+  color:var(--text-primary);
+}
+.countdown-sub {
+  font-size:10px;
+  color:var(--text-muted);
+  margin-top:4px;
+}
+/* Stress index */
+.stress-bar {
+  display:flex;
+  height:6px;
+  border-radius:3px;
+  overflow:hidden;
+  background:var(--bg-secondary);
+  margin:8px 0;
+}
+.stress-fill {
+  height:100%;
+  border-radius:3px;
+  transition:width 0.5s ease;
+}
+/* Signal badges */
+.signal { display:inline-block; padding:2px 8px; border-radius:10px; font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:700; letter-spacing:1px; }
+.signal.green { background:var(--accent-green-dim); color:var(--accent-green); border:1px solid rgba(0,229,153,0.2); }
+.signal.amber { background:var(--accent-amber-dim); color:var(--accent-amber); border:1px solid rgba(255,179,71,0.2); }
+.signal.red { background:var(--accent-red-dim); color:var(--accent-red); border:1px solid rgba(255,71,87,0.2); }
+
+/* Journal */
+.journal-entry {
+  background:var(--bg-secondary);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:10px;
+  margin-bottom:8px;
+}
+.journal-date {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  color:var(--accent-cyan);
+  letter-spacing:1px;
+  margin-bottom:4px;
+}
+.journal-text {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.5;
+}
+textarea {
+  width:100%;
+  min-height:80px;
+  background:var(--bg-secondary);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:var(--text-primary);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  padding:10px;
+  resize:vertical;
+  outline:none;
+}
+textarea:focus { border-color:var(--accent-cyan); }
+.btn-sm {
+  padding:8px 16px;
+  background:var(--accent-cyan-dim);
+  border:1px solid rgba(0,200,200,0.3);
+  color:var(--accent-cyan);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  letter-spacing:1px;
+}
+/* ── Event Timeline ──────────────────── */
+.event-item {
+  background:var(--bg-secondary);
+  border:1px solid var(--border);
+  border-left:3px solid var(--border);
+  border-radius:var(--radius-sm);
+  margin-bottom:6px;
+  cursor:pointer;
+  overflow:hidden;
+  transition:background 0.15s;
+}
+.event-item:active { background:rgba(255,255,255,0.02); }
+.event-item.critical  { border-left-color:var(--accent-red); }
+.event-item.elevated  { border-left-color:var(--accent-amber); }
+.event-item.monitoring{ border-left-color:var(--accent-green); }
+.event-meta {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 10px 0;
+  gap:6px;
+}
+.event-meta-left {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.event-date-tag {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  color:var(--text-muted);
+  letter-spacing:0.5px;
+}
+.event-cat {
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.8px;
+  padding:1px 6px;
+  border-radius:10px;
+}
+.event-cat.geo  { background:var(--accent-amber-dim);color:var(--accent-amber);border:1px solid rgba(255,179,71,0.2); }
+.event-cat.fin  { background:var(--accent-blue-dim);color:var(--accent-blue);border:1px solid rgba(77,159,255,0.2); }
+.event-cat.reg  { background:var(--accent-cyan-dim);color:var(--accent-cyan);border:1px solid rgba(0,200,200,0.2); }
+.event-cat.inst { background:var(--accent-green-dim);color:var(--accent-green);border:1px solid rgba(0,229,153,0.2); }
+.event-threat-badge {
+  display:flex;
+  align-items:center;
+  gap:3px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  color:var(--text-muted);
+  white-space:nowrap;
+}
+.event-title-row {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  padding:4px 10px 8px;
+  gap:8px;
+}
+.event-title {
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text-primary);
+  line-height:1.35;
+}
+.event-chevron {
+  color:var(--text-muted);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  flex-shrink:0;
+  padding-top:2px;
+  transition:transform 0.2s;
+}
+.event-item.expanded .event-chevron { transform:rotate(180deg); }
+.event-body {
+  display:none;
+  padding:8px 10px 12px;
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.6;
+  border-top:1px solid rgba(26,39,64,0.5);
+}
+.event-item.expanded .event-body { display:block; }
+/* Scrollbar */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+/* News Feed */
+.news-card {
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
+  margin-bottom:10px;
+}
+.news-card-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:8px;
+}
+.news-tags { display:flex; gap:4px; flex-wrap:wrap; }
+.news-tag {
+  display:inline-block;
+  padding:2px 7px;
+  border-radius:10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:1px;
+  background:var(--accent-cyan-dim);
+  color:var(--accent-cyan);
+  border:1px solid rgba(0,200,200,0.2);
+}
+.news-tag.amber { background:var(--accent-amber-dim); color:var(--accent-amber); border-color:rgba(255,179,71,0.2); }
+.news-tag.green { background:var(--accent-green-dim); color:var(--accent-green); border-color:rgba(0,229,153,0.2); }
+.news-tag.blue  { background:var(--accent-blue-dim);  color:var(--accent-blue);  border-color:rgba(77,159,255,0.2); }
+.news-time {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  color:var(--text-muted);
+  white-space:nowrap;
+  padding-top:1px;
+}
+.news-headline {
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  color:var(--text-primary);
+  line-height:1.4;
+  margin-bottom:4px;
+}
+.news-source {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  color:var(--text-muted);
+  letter-spacing:0.5px;
+  margin-bottom:8px;
+}
+.news-body {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.55;
+  padding-top:8px;
+  border-top:1px solid rgba(26,39,64,0.5);
+  margin-bottom:10px;
+}
+.news-footer {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.news-impact {
+  display:inline-block;
+  padding:2px 8px;
+  border-radius:10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+.news-impact.bullish { background:var(--accent-green-dim); color:var(--accent-green); border:1px solid rgba(0,229,153,0.2); }
+.news-impact.watch   { background:var(--accent-amber-dim); color:var(--accent-amber); border:1px solid rgba(255,179,71,0.2); }
+.news-impact.bearish { background:var(--accent-red-dim);   color:var(--accent-red);   border:1px solid rgba(255,71,87,0.2); }
+.news-priority {
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  color:var(--text-muted);
+  letter-spacing:1px;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-row">
+    <div>
+      <div class="brand">◉ OVERWATCH TERMINAL</div>
+      <div class="brand-sub">INSTITUTIONAL INFRASTRUCTURE MONITOR — v4.0</div>
+    </div>
+    <button class="refresh-btn" onclick="refreshAll()">↻ SYNC</button>
+  </div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-top:4px;" id="dataUpdated">Data: --</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-price" id="xrpPrice">--</span>
+  <span class="ticker-change" id="xrpChange">--</span>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);" id="lastUpdated">--</span>
+</div>
+<div class="ticker-meta">
+  <span>VOL <span class="val" id="xrpVol">--</span></span>
+  <span>MCAP <span class="val" id="xrpMcap">--</span></span>
+  <span>F&amp;G <span class="val" id="fng">--</span></span>
+</div>
+
+<!-- MACRO PILLS -->
+<div class="macro-bar">
+  <div class="macro-pill"><span class="lbl">USD/JPY</span><span class="val" id="usdJpy">--</span></div>
+  <div class="macro-pill"><span class="lbl">JPN 10Y</span><span class="val amber" id="jpn10y">~2.25%</span></div>
+  <div class="macro-pill"><span class="lbl">ETF FLOW</span><span class="val green" id="etfPill">+$39M/wk</span></div>
+  <div class="macro-pill"><span class="lbl">XRPL</span><span class="val" id="ledgerPill">--</span></div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="summary">OVERVIEW</button>
+  <button class="tab-btn" data-tab="briefing">◉ BRIEF</button>
+  <button class="tab-btn" data-tab="feed">FEED</button>
+  <button class="tab-btn" data-tab="stress">STRESS</button>
+  <button class="tab-btn" data-tab="etf">ETF</button>
+  <button class="tab-btn" data-tab="macro">MACRO</button>
+  <button class="tab-btn" data-tab="infra">XRPL</button>
+  <button class="tab-btn" data-tab="thesis">SCORE</button>
+  <button class="tab-btn" data-tab="journal">LOG</button>
+  <button class="tab-btn" data-tab="links">LINKS</button>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ==================== OVERVIEW ==================== -->
+  <div class="tab-panel active" id="panel-summary">
+    <div class="countdown">
+      <div class="countdown-label">PermissionedDEX Activation</div>
+      <div class="countdown-value" id="pdexCountdown">--d --h --m</div>
+      <div class="countdown-sub">Target: Feb 17-20, 2026</div>
+    </div>
+
+    <div class="summary-grid">
+      <div class="summary-card cyan">
+        <div class="card-label">ODL ACTIVITY</div>
+        <div class="card-value" id="odlStatus">$15B+</div>
+        <div class="card-sub">Annualized est.</div>
+      </div>
+      <div class="summary-card green">
+        <div class="card-label">XRP ETF FLOWS</div>
+        <div class="card-value" id="etfFlow">+$39M</div>
+        <div class="card-sub">Weekly (Feb 8)</div>
+      </div>
+      <div class="summary-card amber">
+        <div class="card-label">ETFs ACTIVE</div>
+        <div class="card-value">7 US Spot</div>
+        <div class="card-sub">$1.37B+ cumulative</div>
+      </div>
+      <div class="summary-card blue">
+        <div class="card-label">USD/JPY</div>
+        <div class="card-value" id="summaryJpy">--</div>
+        <div class="card-sub">Yen carry stress</div>
+      </div>
+    </div>
+
+    <!-- Live Chain Mini Card -->
+    <div class="full-card">
+      <h3>⛓ LIVE XRPL</h3>
+      <div class="data-row">
+        <span class="data-label">LEDGER</span>
+        <span class="data-value cyan" id="summaryLedger">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">LAST LEDGER TXNS</span>
+        <span class="data-value" id="summaryTxns">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">XRP DESTROYED</span>
+        <span class="data-value amber" id="summaryBurned">--</span>
+      </div>
+    </div>
+
+    <!-- Events Timeline -->
+    <div class="full-card" style="border-color:rgba(255,179,71,0.25);padding-bottom:6px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+        <h3 style="margin-bottom:0;">⚡ EVENTS TIMELINE</h3>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">TAP TO EXPAND</span>
+      </div>
+      <div id="eventsContainer"></div>
+    </div>
+
+    <!-- Thesis Pulse -->
+    <div class="full-card">
+      <h3>📡 THESIS PULSE</h3>
+      <div class="data-row"><span class="data-label">Direction</span><span class="signal green">CONFIRMED</span></div>
+      <div class="data-row"><span class="data-label">Timeline</span><span class="signal amber">TRACKING</span></div>
+      <div class="data-row"><span class="data-label">Risk Level</span><span class="signal amber">ELEVATED</span></div>
+      <div class="interpret-box">
+        <div class="label">ASSESSMENT</div>
+        <p>Infrastructure thesis confirmed by DXC partnership ($5T deposits), Ripple Custody expansion, and XRPL amendment activations. Timeline compression visible. Macro risk elevated: Japan supermajority + yen stress + extreme fear. ODL volume inflection remains primary falsification criterion: $20-30B by end 2026.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== BRIEFING ==================== -->
+  <div class="tab-panel" id="panel-briefing">
+    <div class="full-card" style="border-color:rgba(0,200,200,0.3);">
+      <h3>◉ DAILY INTELLIGENCE BRIEFING</h3>
+      <div id="briefingContent" style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
+        <p style="color:var(--text-muted);font-style:italic;">Paste your morning Telegram briefing below or wait for auto-load...</p>
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;">LAST UPDATED: <span id="briefingTime">--</span></div>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <h3>📡 MANUAL BRIEFING INPUT</h3>
+      <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Paste your Telegram briefing here:</p>
+      <textarea id="briefingInput" placeholder="Paste your morning briefing here..."></textarea>
+      <button class="btn-sm" onclick="loadManualBriefing()" style="margin-top:8px;">LOAD BRIEFING</button>
+    </div>
+
+    <div class="full-card">
+      <h3>⛓ LIVE CHAIN STATUS</h3>
+      <div class="data-row"><span class="data-label">XRPL Connection</span><span class="data-value" id="wsStatus"><span class="live-dot"></span>Connecting...</span></div>
+      <div class="data-row"><span class="data-label">Latest Ledger</span><span class="data-value blue" id="latestLedger">--</span></div>
+      <div class="data-row"><span class="data-label">Ledger Close Time</span><span class="data-value" id="ledgerTime">--</span></div>
+      <div class="data-row"><span class="data-label">Txns in Last Ledger</span><span class="data-value" id="ledgerTxns">--</span></div>
+      <div class="data-row"><span class="data-label">Base Fee</span><span class="data-value" id="baseFee">--</span></div>
+      <div class="data-row"><span class="data-label">Total XRP Supply</span><span class="data-value" id="totalXrp">--</span></div>
+      <div class="data-row"><span class="data-label">XRP Destroyed</span><span class="data-value amber" id="xrpDestroyed">--</span></div>
+      <div class="data-row"><span class="data-label">Validated Ledgers</span><span class="data-value" id="validatedRange">--</span></div>
+    </div>
+  </div>
+
+  <!-- ==================== NEWS FEED ==================== -->
+  <div class="tab-panel" id="panel-feed">
+
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--text-primary);">◉ INTELLIGENCE FEED</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;"><span id="feedCount">LIVE</span> STORIES · <span id="feedDate">FEB 17, 2026</span></div>
+    </div>
+
+    <div id="feedStatus"></div>
+    <div id="feedStories">
+      <div style="text-align:center;padding:24px 0;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;"><span class="live-dot"></span>LOADING...</div>
+    </div>
+
+  </div>
+
+  <!-- ==================== MACRO STRESS ==================== -->
+  <div class="tab-panel" id="panel-stress">
+    <div class="full-card" style="border-color:rgba(255,179,71,0.3);">
+      <h3>⚠ MACRO STRESS INDEX</h3>
+      <div style="text-align:center;margin:12px 0;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:700;color:var(--accent-amber);" id="stressScore">--</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;" id="stressLabel">CALCULATING...</div>
+      </div>
+      <div class="stress-bar">
+        <div class="stress-fill" id="stressFill" style="width:0%;background:var(--accent-green);"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">
+        <span>LOW RISK</span><span>ELEVATED</span><span>CRITICAL</span>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <h3>📊 STRESS COMPONENTS</h3>
+      <div class="data-row"><span class="data-label">Fear & Greed Index</span><span class="data-value red" id="stressFng">7 — Extreme Fear</span></div>
+      <div class="data-row"><span class="data-label">USD/JPY</span><span class="data-value amber" id="stressJpy">--</span></div>
+      <div class="data-row"><span class="data-label">Oil/JPY Trend</span><span class="data-value amber">Breaking up ↗</span></div>
+      <div class="data-row"><span class="data-label">JPN 10Y Yield</span><span class="data-value amber">~2.25% (Record zone)</span></div>
+      <div class="data-row"><span class="data-label">BTC ETF Flows</span><span class="data-value red">-$689M weekly</span></div>
+      <div class="data-row"><span class="data-label">XRP ETF Flows</span><span class="data-value green">+$39M weekly</span></div>
+      <div class="interpret-box">
+        <div class="label">STRESS INTERPRETATION</div>
+        <p>Extreme fear in crypto markets while Japan fiscal stress accelerates. Oil/JPY breaking upward from descending wedge adds energy cost pressure. BTC/ETH seeing institutional outflows while XRP sees continued inflows — divergent behavior signals thesis-driven accumulation vs. macro panic selling. Monitor BOJ rate decision as primary catalyst for stress resolution or escalation.</p>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h3 style="margin-bottom:0;">🌏 GEOPOLITICAL WATCHLIST</h3>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;" id="geoUpdated"></span>
+      </div>
+      <div id="geoWatchlist">
+        <div class="data-row"><span class="data-label">Japan</span><span class="signal amber">Takaichi supermajority — fiscal expansion</span></div>
+        <div class="data-row"><span class="data-label">Strait of Hormuz</span><span class="signal amber">Iran tensions elevated</span></div>
+        <div class="data-row"><span class="data-label">US-China AI Race</span><span class="signal amber">Accelerating</span></div>
+        <div class="data-row"><span class="data-label">Trade / Tariffs</span><span class="signal red">Active disruption</span></div>
+        <div class="data-row"><span class="data-label">Arctic / Russia</span><span class="signal amber">US acquisition signals</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ETF ==================== -->
+  <div class="tab-panel" id="panel-etf">
+    <div class="full-card" style="border-color:rgba(0,229,153,0.2);">
+      <h3>📊 XRP ETF DASHBOARD</h3>
+      <div class="data-row"><span class="data-label">Weekly Inflow (<span id="etfWeeklyDate">Feb 8</span>)</span><span class="data-value green" id="etfWeekly">+$39.04M</span></div>
+      <div class="data-row"><span class="data-label">Cumulative Inflows</span><span class="data-value green" id="etfCumulative">$1.37B+</span></div>
+      <div class="data-row"><span class="data-label">ETFs Active</span><span class="data-value">7 US Spot</span></div>
+      <div class="data-row"><span class="data-label">Total AUM</span><span class="data-value">~$1.24B</span></div>
+      <div class="data-row"><span class="data-label">Inflow Streak</span><span class="data-value green" id="etfStreak">55+ trading days</span></div>
+    </div>
+
+    <div class="full-card">
+      <h3>📈 COMPARATIVE ETF FLOWS (WEEKLY)</h3>
+      <div class="data-row"><span class="data-label">BTC ETFs</span><span class="data-value red" id="etfBtcWeekly">-$689.22M</span></div>
+      <div class="data-row"><span class="data-label">ETH ETFs</span><span class="data-value red" id="etfEthWeekly">-$149.07M</span></div>
+      <div class="data-row"><span class="data-label">SOL ETFs</span><span class="data-value green" id="etfSolWeekly">+$2.94M</span></div>
+      <div class="data-row"><span class="data-label">XRP ETFs</span><span class="data-value green" id="etfXrpWeekly">+$39.04M</span></div>
+      <div class="interpret-box">
+        <div class="label">ETF INTERPRETATION</div>
+        <p>XRP is the only major crypto asset seeing meaningful institutional inflows during extreme fear. BTC hemorrhaging $689M while XRP adds $39M indicates thesis-driven institutional accumulation — these are not the same buyers. This divergence is one of the strongest relative strength signals for XRP's institutional narrative.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MACRO ==================== -->
+  <div class="tab-panel" id="panel-macro">
+    <div class="full-card">
+      <h3>🇯🇵 JAPAN — CRITICAL VECTOR</h3>
+      <div class="data-row"><span class="data-label">USD/JPY</span><span class="data-value amber" id="macroJpy">--</span></div>
+      <div class="data-row"><span class="data-label">JPN 10Y Yield</span><span class="data-value amber">~2.25%</span></div>
+      <div class="data-row"><span class="data-label">JPN 40Y Yield</span><span class="data-value red">>4% (Record)</span></div>
+      <div class="data-row"><span class="data-label">Govt</span><span class="data-value green">LDP Supermajority (310+ seats)</span></div>
+      <div class="data-row"><span class="data-label">Fiscal Package</span><span class="data-value">¥21.3T stimulus</span></div>
+      <div class="data-row"><span class="data-label">FY2026 Budget</span><span class="data-value">¥122.3T (Record)</span></div>
+      <div class="data-row"><span class="data-label">BOJ Policy Rate</span><span class="data-value">0.50%</span></div>
+      <div class="data-row"><span class="data-label">Next Hike Expected</span><span class="data-value amber">Jul 2026 (GS est.)</span></div>
+      <div class="data-row"><span class="data-label">Debt/GDP</span><span class="data-value red">237%</span></div>
+      <div class="interpret-box">
+        <div class="label">JAPAN MACRO THESIS</div>
+        <p>Takaichi's supermajority removes all political friction for fiscal expansion. Weak yen + rising JGB yields + record oil/JPY = maximum pressure on BOJ. This creates the exact conditions where efficient cross-border settlement (ODL) becomes a necessity for Japanese institutions. SBI's long XRP bet was predicated on this environment. Watch BOJ announcements as the fulcrum.</p>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <h3>🛢 ENERGY & COMMODITIES</h3>
+      <div class="data-row"><span class="data-label">Oil/JPY</span><span class="data-value amber">Breaking out of descending wedge</span></div>
+      <div class="data-row"><span class="data-label">Brent/JPY</span><span class="data-value">¥10,874</span></div>
+      <div class="data-row"><span class="data-label">WTI/JPY</span><span class="data-value">¥10,125</span></div>
+      <div class="data-row"><span class="data-label">Hormuz Risk</span><span class="data-value amber">Elevated</span></div>
+      <div class="interpret-box">
+        <div class="label">ENERGY INTERPRETATION</div>
+        <p>Oil priced in yen breaking above descending trendline on weekly charts. Japan imports virtually all energy — rising oil/JPY directly increases trade deficit, weakens yen further, and forces BOJ closer to rate decision. Feedback loop amplifies Japan stress thesis.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== XRPL INFRASTRUCTURE ==================== -->
+  <div class="tab-panel" id="panel-infra">
+    <div class="full-card" style="border-color:rgba(0,200,200,0.2);">
+      <h3>🔧 XRPL AMENDMENT STATUS</h3>
+      <div class="data-row"><span class="data-label">Credentials</span><span class="signal green">LIVE</span></div>
+      <div class="data-row"><span class="data-label">Permissioned Domains</span><span class="signal green">LIVE</span></div>
+      <div class="data-row"><span class="data-label">Multi-Purpose Tokens</span><span class="signal green">LIVE</span></div>
+      <div class="data-row"><span class="data-label">Deep Freeze</span><span class="signal green">LIVE</span></div>
+      <div class="data-row"><span class="data-label">Simulate</span><span class="signal green">LIVE</span></div>
+      <div class="data-row"><span class="data-label">Token Escrow</span><span class="signal amber">~Feb 12 activation</span></div>
+      <div class="data-row"><span class="data-label">PermissionedDEX</span><span class="signal amber">~Feb 17-20 activation</span></div>
+      <div class="data-row"><span class="data-label">Batch Transactions</span><span class="signal amber">1 vote remaining</span></div>
+      <div class="data-row"><span class="data-label">Confidential Transfers</span><span class="data-value">Q1 2026</span></div>
+      <div class="data-row"><span class="data-label">Lending Protocol (XLS-66)</span><span class="data-value">Q2 2026</span></div>
+      <div class="data-row"><span class="data-label">Single Asset Vaults</span><span class="data-value">Q2 2026</span></div>
+      <div class="data-row"><span class="data-label">Smart Escrows</span><span class="data-value">Q2 2026</span></div>
+      <div class="data-row"><span class="data-label">MPT DEX Integration</span><span class="data-value">Q2 2026</span></div>
+    </div>
+
+    <div class="full-card">
+      <h3>🤝 RIPPLE PARTNERSHIPS (2026)</h3>
+      <div class="data-row"><span class="data-label">DXC Technology</span><span class="data-value green">$5T deposits / 300M accounts</span></div>
+      <div class="data-row"><span class="data-label">Hyperliquid (Prime)</span><span class="data-value green">Institutional derivatives</span></div>
+      <div class="data-row"><span class="data-label">Securosys</span><span class="data-value green">HSM custody integration</span></div>
+      <div class="data-row"><span class="data-label">Figment</span><span class="data-value green">Institutional staking</span></div>
+      <div class="data-row"><span class="data-label">Chainalysis</span><span class="data-value green">Real-time compliance</span></div>
+      <div class="data-row"><span class="data-label">Palisade (acquired)</span><span class="data-value green">Wallet-as-a-Service</span></div>
+      <div class="data-row"><span class="data-label">Evernorth</span><span class="data-value amber">Lending Protocol anchor</span></div>
+      <div class="interpret-box">
+        <div class="label">INFRASTRUCTURE ASSESSMENT</div>
+        <p>Ripple's unified stack is now production-ready: Payments, Custody, Prime Brokerage, Stablecoin (RLUSD), Treasury Management. DXC integration brings this directly into core banking for 300M+ accounts. Permissioned DEX is the final institutional puzzle piece — compliant secondary markets for tokenized assets on XRPL. Community Day Feb 11-12 with "The Era of XRP in Capital Markets" framing signals institutional positioning.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== THESIS SCORECARD ==================== -->
+  <div class="tab-panel" id="panel-thesis">
+    <div class="full-card" style="border-color:rgba(0,200,200,0.2);">
+      <h3>📋 THESIS SCORECARD</h3>
+      <div class="data-row"><span class="data-label">Regulatory Clarity</span><span class="signal green" id="thesis-regulatory">CONFIRMED</span></div>
+      <div class="data-row"><span class="data-label">Institutional Custody</span><span class="signal green" id="thesis-custody">STRONG</span></div>
+      <div class="data-row"><span class="data-label">ETF Adoption</span><span class="signal green" id="thesis-etf_adoption">CONFIRMED</span></div>
+      <div class="data-row"><span class="data-label">XRPL Infrastructure</span><span class="signal green" id="thesis-xrpl_infra">ACCELERATING</span></div>
+      <div class="data-row"><span class="data-label">Stablecoin (RLUSD)</span><span class="signal green" id="thesis-stablecoin">$1B+ circulation</span></div>
+      <div class="data-row"><span class="data-label">ODL Volume Growth</span><span class="signal amber" id="thesis-odl_volume">TRACKING — NEEDS DATA</span></div>
+      <div class="data-row"><span class="data-label">Japan Adoption</span><span class="signal amber" id="thesis-japan_adoption">FAVORABLE CONDITIONS</span></div>
+      <div class="data-row"><span class="data-label">Macro Environment</span><span class="signal amber" id="thesis-macro_env">STRESSED — WATCH</span></div>
+      <div class="data-row"><span class="data-label">China/BRICS Risk</span><span class="signal amber" id="thesis-china_brics">MULTIPOLAR THREAT</span></div>
+      <div class="data-row"><span class="data-label">DTCC Competition</span><span class="signal amber" id="thesis-dtcc_competition">MONITOR</span></div>
+    </div>
+
+    <div class="full-card" style="border-color:rgba(255,71,87,0.2);">
+      <h3>🎯 FALSIFICATION CRITERION</h3>
+      <div style="text-align:center;padding:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-bottom:8px;">ODL VOLUME TARGET</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--accent-red);">$20-30B</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">by end of 2026</div>
+      </div>
+      <div class="interpret-box" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);">
+        <div class="label" style="color:var(--accent-red);">KILL SWITCH</div>
+        <p>If ODL volume does not show clear acceleration toward $20-30B+ annualized by end of 2026, the institutional bridge asset thesis is not confirmed. This criterion exists to prevent unfalsifiable pattern matching. Direction is right. Volume must follow. No volume = reassess.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DECISION JOURNAL ==================== -->
+  <div class="tab-panel" id="panel-journal">
+    <div class="full-card">
+      <h3>📓 DECISION JOURNAL</h3>
+      <p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">Log observations, decisions, and reasoning. Review monthly to check for bias.</p>
+      <textarea id="journalInput" placeholder="Date — Observation — What I did/didn't do — Why..."></textarea>
+      <button class="btn-sm" onclick="addJournalEntry()" style="margin-top:8px;">ADD ENTRY</button>
+    </div>
+    <div id="journalEntries">
+      <!-- Entries loaded from localStorage -->
+    </div>
+    <div class="full-card" style="margin-top:8px;">
+      <button class="btn-sm" onclick="exportJournal()" style="background:var(--bg-secondary);border-color:var(--border);color:var(--text-muted);">EXPORT JOURNAL</button>
+    </div>
+  </div>
+
+  <!-- ==================== LINKS ==================== -->
+  <div class="tab-panel" id="panel-links">
+    <div class="full-card">
+      <h3>🔗 MONITORING RESOURCES</h3>
+      <div class="data-row"><a href="https://xrpscan.com/metrics" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">XRPScan Metrics</a></div>
+      <div class="data-row"><a href="https://xrpartisan.com" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">XRPartisan (ODL Corridors)</a></div>
+      <div class="data-row"><a href="https://livenet.xrpl.org" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">XRPL Livenet Explorer</a></div>
+      <div class="data-row"><a href="https://xrpl.org/docs/concepts/consensus-protocol/amendments" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">XRPL Amendments Status</a></div>
+      <div class="data-row"><a href="https://ripple.com/insights/" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">Ripple Blog / Insights</a></div>
+      <div class="data-row"><a href="https://sosovalue.com/assets/etf/us-xrp-spot" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">SoSoValue XRP ETF Tracker</a></div>
+    </div>
+    <div class="full-card">
+      <h3>📰 NEWS & INTELLIGENCE</h3>
+      <div class="data-row"><a href="https://www.coindesk.com/tag/xrp/" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">CoinDesk — XRP</a></div>
+      <div class="data-row"><a href="https://cointelegraph.com/tags/xrp" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">CoinTelegraph — XRP</a></div>
+      <div class="data-row"><a href="https://www.boj.or.jp/en/" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">Bank of Japan (English)</a></div>
+      <div class="data-row"><a href="https://www.bis.org/topic/fintech.htm" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">BIS — Fintech/Innovation Hub</a></div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+
+// ===== TAB SWITCHING =====
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    window.scrollTo(0, 0);
+  });
+});
+
+// ===== COUNTDOWN =====
+function updateCountdown() {
+  const target = new Date('2026-02-18T00:00:00Z');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('pdexCountdown').textContent = '🟢 LIVE';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  document.getElementById('pdexCountdown').textContent = `${d}d ${h}h ${m}m`;
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// ===== EVENTS TIMELINE DATA =====
+// Add new entries to this array — sorted newest-first automatically.
+// Fields: date (YYYY-MM-DD for sort), dateLabel, title, category,
+//         catClass (geo|fin|reg|inst), threat (CRITICAL|ELEVATED|MONITORING),
+//         threatEmoji, desc
+const EVENTS_DATA = [
+  {
+    date: '2026-02-18',
+    dateLabel: 'FEB 18',
+    title: 'US military strike on Iran possible this weekend',
+    category: 'GEOPOLITICAL',
+    catClass: 'geo',
+    threat: 'CRITICAL',
+    threatEmoji: '🔴',
+    desc: 'Intelligence reports indicate a US military strike on Iranian nuclear or proxy assets may occur within 72 hours. Maximum Strait of Hormuz disruption risk. XRP ODL Middle East corridors at risk. Japan oil/JPY feedback loop activated — SBI XRP exposure directly impacted by energy shock scenario.'
+  },
+  {
+    date: '2026-02-18',
+    dateLabel: 'FEB 18',
+    title: 'Russia-Iran-China joint naval exercises at Hormuz',
+    category: 'GEOPOLITICAL',
+    catClass: 'geo',
+    threat: 'CRITICAL',
+    threatEmoji: '🔴',
+    desc: 'Russia, Iran, and China conducting coordinated naval drills in and around the Strait of Hormuz. Signals unified deterrence posture against US/Western pressure. Hormuz closure scenario would spike oil/JPY, accelerate Japan fiscal stress, and pressure BOJ to act ahead of its July estimate.'
+  },
+  {
+    date: '2026-02-18',
+    dateLabel: 'FEB 18',
+    title: 'Iran fortifying nuclear sites with concrete burial',
+    category: 'GEOPOLITICAL',
+    catClass: 'geo',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Iran actively hardening underground nuclear infrastructure with concrete reinforcement, signaling expectation of imminent military strike. Reduces window for negotiated resolution and elevates probability of kinetic event. Prolonged energy market disruption increasingly priced in.'
+  },
+  {
+    date: '2026-02-18',
+    dateLabel: 'FEB 18',
+    title: 'Deutsche Bank deepens Ripple ecosystem integration',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Deutsche Bank expanding integration across payments, FX settlement, and custody layers within the Ripple ecosystem. Tier-1 European bank adoption validates Ripple\'s unified institutional stack. Direct thesis confirmation — banking infrastructure penetration at highest level to date.'
+  },
+  {
+    date: '2026-02-18',
+    dateLabel: 'FEB 18',
+    title: 'Deutsche Bank confirmed as lead architect of SWIFT blockchain ledger',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Deutsche Bank named as primary architect of SWIFT\'s blockchain settlement layer. Given Deutsche Bank\'s simultaneous Ripple ecosystem integration, XRPL technology may underpin this infrastructure. Largest SWIFT-adjacent development in the thesis — potential bridge between traditional correspondent banking and XRPL settlement.'
+  },
+  {
+    date: '2026-02-17',
+    dateLabel: 'FEB 17',
+    title: '50+ US fighter jets deployed to Eastern Mediterranean',
+    category: 'GEOPOLITICAL',
+    catClass: 'geo',
+    threat: 'CRITICAL',
+    threatEmoji: '🔴',
+    desc: 'Significant US air force deployment to Eastern Mediterranean staging bases signals imminent kinetic action against Iranian targets. Strait of Hormuz closure risk now at highest threat tier. Energy price shock scenario active. Monitor BOJ emergency response posture and safe-haven flows into JPY.'
+  },
+  {
+    date: '2026-02-17',
+    dateLabel: 'FEB 17',
+    title: 'Trump announces $550B Japan trade deal — energy infrastructure',
+    category: 'GEOPOLITICAL',
+    catClass: 'geo',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Landmark US-Japan energy infrastructure agreement reduces Japan\'s medium-term dependence on Middle East energy imports. Positive for long-term yen stability and reduces BOJ pressure timeline. Strategic alignment is bullish for US-Japan financial corridor activity — directly relevant for SBI ODL volume trajectory.'
+  },
+  {
+    date: '2026-02-17',
+    dateLabel: 'FEB 17',
+    title: 'Arizona SB 1649 names XRP in state digital asset reserve bill',
+    category: 'REGULATORY',
+    catClass: 'reg',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Arizona state senate bill SB 1649 explicitly names XRP as an eligible asset for the state digital asset reserve. First major US state legislation to name XRP by specific asset class. If passed, sets precedent for other state reserve bills and materially strengthens institutional allocation argument.'
+  },
+  {
+    date: '2026-02-12',
+    dateLabel: 'FEB 12',
+    title: 'Fed injecting $16B via Reserve Management Purchases',
+    category: 'FINANCIAL',
+    catClass: 'fin',
+    threat: 'MONITORING',
+    threatEmoji: '🟢',
+    desc: 'Federal Reserve conducting $16B in Reserve Management Purchases (Treasuries), effectively expanding balance sheet liquidity. Historically correlated with risk asset appreciation. Monitor for sustained QE pivot implications — if RMPs accelerate, crypto and XRP in particular historically benefit from dollar liquidity expansion.'
+  }
+];
+
+function renderEvents() {
+  const container = document.getElementById('eventsContainer');
+  if (!container) return;
+  const sorted = [...EVENTS_DATA].sort((a, b) => b.date.localeCompare(a.date) || EVENTS_DATA.indexOf(a) - EVENTS_DATA.indexOf(b));
+  container.innerHTML = sorted.map(e => {
+    const threatClass = e.threat === 'CRITICAL' ? 'critical' : e.threat === 'ELEVATED' ? 'elevated' : 'monitoring';
+    return `<div class="event-item ${threatClass}" onclick="this.classList.toggle('expanded')">
+  <div class="event-meta">
+    <div class="event-meta-left">
+      <span class="event-date-tag">${e.dateLabel}</span>
+      <span class="event-cat ${e.catClass}">${e.category}</span>
+    </div>
+    <span class="event-threat-badge">${e.threatEmoji}&nbsp;${e.threat}</span>
+  </div>
+  <div class="event-title-row">
+    <div class="event-title">${escHtml(e.title)}</div>
+    <span class="event-chevron">▾</span>
+  </div>
+  <div class="event-body">${escHtml(e.desc)}</div>
+</div>`;
+  }).join('');
+}
+
+// ===== XRP PRICE (Multi-source) =====
+async function fetchXRPPrice() {
+  let price = null, change = null, vol = null, mcap = null;
+
+  // Source 1: CoinCap
+  try {
+    const r = await fetch('https://api.coincap.io/v2/assets/xrp');
+    const d = await r.json();
+    if (d.data) {
+      price = parseFloat(d.data.priceUsd);
+      change = parseFloat(d.data.changePercent24Hr);
+      vol = parseFloat(d.data.volumeUsd24Hr);
+      mcap = parseFloat(d.data.marketCapUsd);
+    }
+  } catch(e) {}
+
+  // Source 2: Binance
+  if (!price) {
+    try {
+      const r = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=XRPUSDT');
+      const d = await r.json();
+      if (d.lastPrice) {
+        price = parseFloat(d.lastPrice);
+        change = parseFloat(d.priceChangePercent);
+        vol = parseFloat(d.quoteVolume);
+      }
+    } catch(e) {}
+  }
+
+  // Source 3: CoinGecko
+  if (!price) {
+    try {
+      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true');
+      const d = await r.json();
+      if (d.ripple) { price = d.ripple.usd; change = d.ripple.usd_24h_change; vol = d.ripple.usd_24h_vol; mcap = d.ripple.usd_market_cap; }
+    } catch(e) {}
+  }
+
+  if (price) {
+    document.getElementById('xrpPrice').textContent = '$' + price.toFixed(4);
+    document.getElementById('xrpPrice').style.color = '';
+    const ce = document.getElementById('xrpChange');
+    if (change !== null) {
+      ce.textContent = (change >= 0 ? '+' : '') + parseFloat(change).toFixed(2) + '%';
+      ce.className = 'ticker-change ' + (change >= 0 ? 'positive' : 'negative');
+    }
+    if (vol) document.getElementById('xrpVol').textContent = '$' + (vol / 1e9).toFixed(2) + 'B';
+    if (mcap) document.getElementById('xrpMcap').textContent = '$' + (mcap / 1e9).toFixed(1) + 'B';
+    document.getElementById('lastUpdated').innerHTML = '<span class="live-dot"></span>' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  } else {
+    document.getElementById('xrpPrice').textContent = 'OFFLINE';
+    document.getElementById('xrpPrice').style.color = 'var(--accent-red)';
+  }
+}
+
+// ===== FEAR & GREED =====
+async function fetchFearGreed() {
+  try {
+    const r = await fetch('https://api.alternative.me/fng/?limit=1');
+    const d = await r.json();
+    if (d.data && d.data[0]) {
+      const v = d.data[0].value;
+      const c = d.data[0].value_classification;
+      document.getElementById('fng').textContent = v + ' — ' + c;
+      document.getElementById('stressFng').textContent = v + ' — ' + c;
+      document.getElementById('fng').className = 'val' + (v < 25 ? ' red' : v < 50 ? ' amber' : ' green');
+      updateStressIndex(parseInt(v));
+    }
+  } catch(e) {}
+}
+
+// ===== STRESS INDEX =====
+let lastFng = 50;
+function updateStressIndex(fng) {
+  lastFng = fng;
+  // Invert: low fear & greed = high stress
+  const stress = Math.max(0, Math.min(100, 100 - fng));
+  document.getElementById('stressScore').textContent = stress + '/100';
+
+  let label, color;
+  if (stress >= 75) { label = 'CRITICAL'; color = 'var(--accent-red)'; }
+  else if (stress >= 50) { label = 'ELEVATED'; color = 'var(--accent-amber)'; }
+  else if (stress >= 25) { label = 'MODERATE'; color = 'var(--accent-blue)'; }
+  else { label = 'LOW'; color = 'var(--accent-green)'; }
+
+  document.getElementById('stressLabel').textContent = label;
+  document.getElementById('stressScore').style.color = color;
+  const fill = document.getElementById('stressFill');
+  fill.style.width = stress + '%';
+  fill.style.background = color;
+}
+
+// ===== USD/JPY =====
+async function fetchMacroData() {
+  try {
+    const r = await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=JPY');
+    const d = await r.json();
+    if (d.rates && d.rates.JPY) {
+      const rate = d.rates.JPY;
+      const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      setText('usdJpy', '¥' + rate.toFixed(2));
+      setText('summaryJpy', '¥' + rate.toFixed(2));
+      setText('macroJpy', '¥' + rate.toFixed(2));
+      setText('stressJpy', '¥' + rate.toFixed(2) + (rate > 155 ? ' ⚠ Weak' : ''));
+    }
+  } catch(e) {}
+}
+
+// ===== XRPL WEBSOCKET =====
+let xrplWs = null, reconnectAttempts = 0;
+const XRPL_NODES = ['wss://xrplcluster.com','wss://s1.ripple.com','wss://s2.ripple.com'];
+
+function connectXRPL() {
+  const url = XRPL_NODES[reconnectAttempts % XRPL_NODES.length];
+  try { xrplWs = new WebSocket(url); } catch(e) { return; }
+
+  xrplWs.onopen = () => {
+    reconnectAttempts = 0;
+    const el = document.getElementById('wsStatus');
+    if (el) el.innerHTML = '<span class="live-dot"></span>Connected';
+    xrplWs.send(JSON.stringify({command:'subscribe',streams:['ledger']}));
+  };
+
+  xrplWs.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      if (data.type === 'ledgerClosed') {
+        const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.textContent = val; };
+        set('latestLedger', '#' + data.ledger_index.toLocaleString());
+        set('summaryLedger', '#' + data.ledger_index.toLocaleString());
+        set('ledgerPill', '#' + data.ledger_index.toLocaleString());
+        if (data.txn_count !== undefined) {
+          set('ledgerTxns', data.txn_count.toLocaleString());
+          set('summaryTxns', data.txn_count.toLocaleString());
+        }
+        if (data.ledger_time) {
+          const d = new Date((data.ledger_time + 946684800) * 1000);
+          set('ledgerTime', d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
+        }
+        if (data.fee_base) set('baseFee', (data.fee_base / 1000000).toFixed(6) + ' XRP');
+        if (data.validated_ledgers) set('validatedRange', data.validated_ledgers);
+      }
+      if (data.result && data.result.ledger_index) {
+        const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.textContent = val; };
+        set('latestLedger', '#' + data.result.ledger_index.toLocaleString());
+        set('summaryLedger', '#' + data.result.ledger_index.toLocaleString());
+        set('ledgerPill', '#' + data.result.ledger_index.toLocaleString());
+      }
+    } catch(e) {}
+  };
+
+  xrplWs.onclose = () => {
+    const el = document.getElementById('wsStatus');
+    if (el) el.textContent = '⚠ Disconnected';
+    reconnectAttempts++;
+    if (reconnectAttempts < 15) setTimeout(connectXRPL, Math.min(reconnectAttempts * 2000, 30000));
+  };
+  xrplWs.onerror = () => {};
+}
+
+// ===== XRP SUPPLY =====
+async function fetchXRPSupply() {
+  try {
+    const r = await fetch('https://s1.ripple.com:51234/', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({method:'server_state',params:[{}]})
+    });
+    const d = await r.json();
+    if (d.result && d.result.state && d.result.state.validated_ledger) {
+      const tc = d.result.state.validated_ledger.total_coins;
+      if (tc) {
+        const totalXrp = parseInt(tc) / 1000000;
+        const destroyed = 100000000000 - totalXrp;
+        const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+        set('totalXrp', (totalXrp / 1e9).toFixed(4) + 'B XRP');
+        set('xrpDestroyed', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
+        set('summaryBurned', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
+      }
+    }
+  } catch(e) {
+    // Fallback
+    try {
+      const r = await fetch('https://xrplcluster.com/', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({method:'server_state',params:[{}]})
+      });
+      const d = await r.json();
+      if (d.result && d.result.state && d.result.state.validated_ledger) {
+        const tc = d.result.state.validated_ledger.total_coins;
+        if (tc) {
+          const totalXrp = parseInt(tc) / 1000000;
+          const destroyed = 100000000000 - totalXrp;
+          const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+          set('totalXrp', (totalXrp / 1e9).toFixed(4) + 'B XRP');
+          set('xrpDestroyed', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
+          set('summaryBurned', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
+        }
+      }
+    } catch(e2) {}
+  }
+}
+
+// ===== BRIEFING =====
+function displayBriefing(text, time) {
+  const el = document.getElementById('briefingContent');
+  if (!el) return;
+  let cleaned = text.replace(/<b>/g,'<strong>').replace(/<\/b>/g,'</strong>').replace(/<i>/g,'<em>').replace(/<\/i>/g,'</em>').replace(/\n/g,'<br>');
+  el.innerHTML = cleaned;
+  const t = document.getElementById('briefingTime');
+  if (t && time) t.textContent = time.toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  try { localStorage.setItem('overwatch_briefing', JSON.stringify({text:text,time:time.getTime()})); } catch(e) {}
+}
+
+function loadManualBriefing() {
+  const input = document.getElementById('briefingInput');
+  if (input && input.value.trim()) { displayBriefing(input.value.trim(), new Date()); input.value = ''; }
+}
+
+function loadSavedBriefing() {
+  try {
+    const saved = localStorage.getItem('overwatch_briefing');
+    if (saved) { const p = JSON.parse(saved); displayBriefing(p.text, new Date(p.time)); }
+  } catch(e) {}
+}
+
+// ===== DECISION JOURNAL =====
+function addJournalEntry() {
+  const input = document.getElementById('journalInput');
+  if (!input || !input.value.trim()) return;
+  let entries = [];
+  try { entries = JSON.parse(localStorage.getItem('overwatch_journal') || '[]'); } catch(e) {}
+  entries.unshift({ date: new Date().toISOString(), text: input.value.trim() });
+  try { localStorage.setItem('overwatch_journal', JSON.stringify(entries)); } catch(e) {}
+  input.value = '';
+  renderJournal();
+}
+
+function renderJournal() {
+  const container = document.getElementById('journalEntries');
+  if (!container) return;
+  let entries = [];
+  try { entries = JSON.parse(localStorage.getItem('overwatch_journal') || '[]'); } catch(e) {}
+  container.innerHTML = entries.map(e => {
+    const d = new Date(e.date);
+    const ds = d.toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}) + ' ' + d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    return `<div class="journal-entry"><div class="journal-date">${ds}</div><div class="journal-text">${e.text.replace(/</g,'&lt;').replace(/\n/g,'<br>')}</div></div>`;
+  }).join('');
+}
+
+function exportJournal() {
+  let entries = [];
+  try { entries = JSON.parse(localStorage.getItem('overwatch_journal') || '[]'); } catch(e) {}
+  const text = entries.map(e => `[${new Date(e.date).toLocaleString()}]\n${e.text}\n`).join('\n---\n\n');
+  const blob = new Blob([text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'overwatch_journal_' + new Date().toISOString().split('T')[0] + '.txt';
+  a.click();
+}
+
+// ===== DASHBOARD DATA (AUTO-UPDATE FROM GITHUB JSON) =====
+async function fetchDashboardData() {
+  try {
+    const r = await fetch('https://raw.githubusercontent.com/twrenn589/Overwatch-Terminal/main/dashboard-data.json?t=' + Date.now());
+    const d = await r.json();
+    const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+    const setHtml = (id, val) => { const el = document.getElementById(id); if (el && val) el.innerHTML = val; };
+
+    // Macro data
+    if (d.macro) {
+      set('jpn10y', '~' + d.macro.jpn_10y + '%');
+      set('macroJpn10y', d.macro.jpn_10y + '%');
+      set('macroJpn40y', '>' + d.macro.jpn_40y + '%');
+      set('macroBojRate', d.macro.boj_rate + '%');
+      set('macroBojHike', d.macro.boj_next_hike);
+      set('macroDebtGdp', d.macro.debt_gdp + '%');
+      set('macroFiscal', '¥' + d.macro.fiscal_package + ' stimulus');
+      set('macroBudget', '¥' + d.macro.fy2026_budget);
+      set('macroSeats', 'LDP Supermajority (' + d.macro.takaichi_seats + ' seats)');
+      set('macroBrentJpy', '¥' + parseInt(d.macro.brent_jpy).toLocaleString());
+      set('macroWtiJpy', '¥' + parseInt(d.macro.wti_jpy).toLocaleString());
+      set('macroOilTrend', d.macro.oil_jpy_trend);
+    }
+
+    // ETF data
+    if (d.etf) {
+      const xrpW = d.etf.xrp_weekly;
+      set('etfFlow', (xrpW.startsWith('+') ? '' : '+') + '$' + xrpW + 'M');
+      set('etfPill', (xrpW.startsWith('+') ? '' : '+') + '$' + xrpW + 'M/wk');
+      set('etfWeekly', (xrpW.startsWith('+') ? '' : '+') + '$' + xrpW + 'M');
+      set('etfWeeklyDate', d.etf.xrp_weekly_date);
+      set('etfCumulative', '$' + d.etf.xrp_cumulative);
+      set('etfStreak', d.etf.xrp_streak + ' trading days');
+      set('etfBtcWeekly', '$' + d.etf.btc_weekly + 'M');
+      set('etfEthWeekly', '$' + d.etf.eth_weekly + 'M');
+      set('etfSolWeekly', '$' + d.etf.sol_weekly + 'M');
+      set('etfXrpWeekly', '+$' + d.etf.xrp_weekly + 'M');
+    }
+
+    // Thesis scorecard
+    if (d.thesis) {
+      Object.keys(d.thesis).forEach(key => {
+        const el = document.getElementById('thesis-' + key);
+        if (el) {
+          el.textContent = d.thesis[key].status;
+          el.className = 'signal ' + (d.thesis[key].color || 'amber');
+        }
+      });
+    }
+
+
+    // Stress data
+    if (d.stress) {
+      set('stressOilTrend', d.stress.oil_jpy_trend);
+      set('stressJpn10y', d.stress.jpn_10y_note);
+      set('stressBtcEtf', d.stress.btc_etf_flow);
+      set('stressXrpEtf', d.stress.xrp_etf_flow);
+      set('geoJapan', d.stress.geo_japan);
+      set('geoHormuz', d.stress.geo_hormuz);
+      set('geoAiRace', d.stress.geo_ai_race);
+      set('geoTariffs', d.stress.geo_tariffs);
+      set('geoGreenland', d.stress.geo_greenland);
+    }
+
+    // Last updated timestamp
+    if (d.updated) {
+      const dt = new Date(d.updated);
+      set('dataUpdated', 'Data: ' + dt.toLocaleDateString([],{month:'short',day:'numeric'}) + ' ' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
+    }
+
+  } catch(e) {
+    console.log('Dashboard data fetch:', e.message);
+  }
+}
+
+// ===== GEOPOLITICAL WATCHLIST =====
+const GEO_CATEGORIES = [
+  { label: 'Japan / BOJ',     terms: ['japan', 'boj', 'yen', 'nikkei', 'takaichi', 'bank of japan'] },
+  { label: 'Middle East',     terms: ['iran', 'hormuz', 'israel', 'houthi', 'saudi', 'middle east', 'gaza', 'lebanon'] },
+  { label: 'US-China',        terms: ['china', 'beijing', 'taiwan', 'xi jinping', 'us-china', 'huawei', 'chips act'] },
+  { label: 'Trade / Tariffs', terms: ['tariff', 'trade war', 'trade deal', 'sanction', 'export control', 'wto'] },
+  { label: 'Arctic / Russia', terms: ['greenland', 'arctic', 'russia', 'ukraine', 'nato', 'putin', 'kremlin'] },
+];
+const GEO_HIGH_RISK = ['attack', 'strike', 'war', 'crisis', 'escalat', 'missile', 'invasion', 'collapse', 'blockade', 'conflict'];
+
+async function fetchGeopolitical() {
+  const rss = 'https://feeds.bbci.co.uk/news/world/rss.xml';
+  try {
+    const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rss) + '&count=50');
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    if (d.status !== 'ok' || !d.items) throw new Error('bad response');
+    renderGeoWatchlist(d.items);
+  } catch(e) {}
+}
+
+function renderGeoWatchlist(articles) {
+  const container = document.getElementById('geoWatchlist');
+  if (!container) return;
+  container.innerHTML = GEO_CATEGORIES.map(cat => {
+    const match = articles.find(a => {
+      const txt = (a.title + ' ' + (a.description || '')).toLowerCase();
+      return cat.terms.some(t => txt.includes(t));
+    });
+    const headline = match
+      ? (match.title.length > 50 ? match.title.substring(0, 50) + '…' : match.title)
+      : 'No recent coverage';
+    const txt = match ? (match.title + ' ' + (match.description || '')).toLowerCase() : '';
+    const isRed = match && GEO_HIGH_RISK.some(t => txt.includes(t));
+    const cls = !match ? '' : isRed ? 'red' : 'amber';
+    return `<div class="data-row"><span class="data-label">${cat.label}</span><span class="signal ${cls}">${escHtml(headline)}</span></div>`;
+  }).join('');
+  const el = document.getElementById('geoUpdated');
+  if (el) el.textContent = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+}
+
+// ===== NEWS FEED (RSS-based, no API key required) =====
+const RSS_FEEDS = [
+  'https://cointelegraph.com/rss/tag/xrp',
+  'https://decrypt.co/feed',
+  'https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=rss'
+];
+
+async function fetchNewsFeed() {
+  let allItems = [];
+  for (const rssUrl of RSS_FEEDS) {
+    try {
+      const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=20');
+      if (!r.ok) continue;
+      const d = await r.json();
+      if (d.status !== 'ok' || !d.items) continue;
+      const needsFilter = !rssUrl.includes('cointelegraph');
+      const items = needsFilter ? d.items.filter(item => {
+        const txt = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
+        return /\bxrp\b|ripple|xrpl|rlusd/.test(txt);
+      }) : d.items;
+      allItems = allItems.concat(items.map(normalizeRssItem));
+    } catch(e) {}
+  }
+  allItems.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+  const seen = new Set();
+  allItems = allItems.filter(item => {
+    const key = item.title.substring(0, 40).toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  if (allItems.length > 0) {
+    const top = allItems.slice(0, 7);
+    renderFeedStories(top.slice(0, 3));
+    try { localStorage.setItem('overwatch_feed', JSON.stringify({items: top, ts: Date.now()})); } catch(e) {}
+    const el = document.getElementById('feedDate');
+    if (el) el.textContent = new Date().toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}).toUpperCase();
+    const fs = document.getElementById('feedStatus');
+    if (fs) fs.innerHTML = '';
+  } else {
+    loadCachedFeed();
+  }
+}
+
+function normalizeRssItem(item) {
+  let src = '';
+  if (item.author) {
+    src = item.author;
+  } else if (item.link) {
+    try { src = new URL(item.link).hostname.replace('www.', ''); } catch(e) { src = 'Crypto News'; }
+  } else {
+    src = 'Crypto News';
+  }
+  return {
+    title: item.title || '',
+    url: item.link || '',
+    published_at: item.pubDate || new Date().toISOString(),
+    source: { title: src },
+    votes: {}
+  };
+}
+
+function loadCachedFeed() {
+  try {
+    const c = localStorage.getItem('overwatch_feed');
+    if (!c) return;
+    const p = JSON.parse(c);
+    if (p.items) {
+      renderFeedStories(p.items.slice(0, 3));
+      const el = document.getElementById('feedDate');
+      if (el) el.textContent = new Date(p.ts).toLocaleDateString([],{month:'short',day:'numeric'}).toUpperCase() + ' ↺';
+    }
+  } catch(e) {}
+}
+
+function renderFeedStories(stories) {
+  const el = document.getElementById('feedStories');
+  if (!el) return;
+  const ce = document.getElementById('feedCount');
+  if (ce) ce.textContent = stories.length;
+  el.innerHTML = stories.map((s, i) => {
+    const tags   = feedGetTags(s.title);
+    const impact = feedGetImpact(s.votes, s.title);
+    const note   = feedGetThesisNote(s.title);
+    const ago    = feedTimeAgo(new Date(s.published_at));
+    const src    = (s.source && s.source.title) ? s.source.title : 'Crypto News';
+    const date   = new Date(s.published_at).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'});
+    const border = impact.cls==='bullish' ? 'rgba(0,229,153,0.25)' : impact.cls==='bearish' ? 'rgba(255,71,87,0.25)' : 'rgba(255,179,71,0.25)';
+    const url    = s.url ? escHtml(s.url) : '';
+    const click  = url ? `onclick="window.open('${url}','_blank')" style="border-color:${border};cursor:pointer;"` : `style="border-color:${border}"`;
+    return `<div class="news-card" ${click}>
+      <div class="news-card-header">
+        <div class="news-tags">${tags}</div>
+        <span class="news-time">${ago}</span>
+      </div>
+      <div class="news-headline">${escHtml(s.title)}</div>
+      <div class="news-source">${escHtml(src)} · ${date}</div>
+      <div class="news-body">${escHtml(note)}</div>
+      <div class="news-footer">
+        <span class="news-impact ${impact.cls}">${impact.label}</span>
+        <span class="news-priority">P${i+1}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+
+function feedGetTags(title) {
+  const t = title.toLowerCase();
+  const out = [];
+  if (/\bripple\b|rlusd|ripplenet/.test(t))                            out.push('<span class="news-tag green">RIPPLE</span>');
+  if (/\bxrpl\b|xrp ledger|amendment|permissioned/.test(t))           out.push('<span class="news-tag">XRPL</span>');
+  if (/\betf\b|institutional|asset manager/.test(t))                   out.push('<span class="news-tag blue">ETF</span>');
+  if (/tokeniz|real.world asset|\brwa\b|bond|securities/.test(t))      out.push('<span class="news-tag amber">TOKENIZATION</span>');
+  if (/\bswift\b|cross.border|corridor|\bodl\b|remittance/.test(t))   out.push('<span class="news-tag">PAYMENTS</span>');
+  if (/\bjapan\b|\bsbi\b|\byen\b|\bboj\b/.test(t))                    out.push('<span class="news-tag amber">JAPAN</span>');
+  if (/stablecoin|\bcbdc\b|rlusd/.test(t))                             out.push('<span class="news-tag blue">STABLECOIN</span>');
+  if (out.length === 0) out.push('<span class="news-tag">XRP</span>');
+  return out.slice(0, 2).join('');
+}
+
+function feedGetImpact(votes, title) {
+  const v = votes || {};
+  const pos = (v.positive||0) + (v.important||0)*2;
+  const neg = (v.negative||0);
+  if (pos + neg > 0) {
+    if (neg > pos && neg >= 3) return { cls:'bearish', label:'▼ BEARISH — MONITOR' };
+    if (pos >= neg*2+1 || (v.important||0) >= 2) return { cls:'bullish', label:'▲ BULLISH — THESIS' };
+    return { cls:'watch', label:'◈ WATCH' };
+  }
+  const t = (title || '').toLowerCase();
+  const bullWords = ['launch', 'partnership', 'approv', 'surges', 'rises', 'gains', 'etf', 'adoption', 'integrat', 'expands', 'growth', 'bullish', 'record', 'milestone'];
+  const bearWords = ['crash', 'falls', 'drops', 'dumps', 'lawsuit', 'hack', 'exploit', 'bearish', 'concern', 'plunge', 'slump', 'tumble', 'warning', 'ban'];
+  const bScore = bullWords.filter(w => t.includes(w)).length;
+  const nScore = bearWords.filter(w => t.includes(w)).length;
+  if (nScore > bScore && nScore > 0) return { cls:'bearish', label:'▼ BEARISH — MONITOR' };
+  if (bScore > 0) return { cls:'bullish', label:'▲ BULLISH — THESIS' };
+  return { cls:'watch', label:'◈ WATCH' };
+}
+
+function feedGetThesisNote(title) {
+  const t = title.toLowerCase();
+  if (/odl|on.demand|corridor|remittance/.test(t))        return 'ODL volume signal — core falsification metric. Track for $20–30B trajectory.';
+  if (/etf|institutional|asset manager|fund/.test(t))     return 'Institutional adoption vector. Inflow divergence from BTC/ETH confirms thesis positioning.';
+  if (/partnership|custody|bank|financial inst/.test(t))  return 'Ripple infrastructure expansion — validates unified payments stack thesis.';
+  if (/amendment|permissioned|xrpl|ledger/.test(t))       return 'XRPL protocol development — track activation timeline against 2026 roadmap.';
+  if (/swift|tokeniz|settlement|real.world/.test(t))      return 'Tokenization/settlement market expanding. XRPL compliance infrastructure directly relevant.';
+  if (/japan|sbi|yen|boj/.test(t))                        return 'Japan macro vector — BOJ decisions and yen weakness are the primary ODL demand catalyst.';
+  if (/regulatory|sec|cftc|license|clarity/.test(t))      return 'Regulatory clarity thesis. Certainty unlocks institutional participation at scale.';
+  if (/stablecoin|rlusd|cbdc/.test(t))                    return 'RLUSD / stablecoin infrastructure. Settlement layer adoption signal.';
+  return 'Monitor for direct thesis impact across XRP adoption vectors.';
+}
+
+function feedTimeAgo(date) {
+  const s = Math.floor((Date.now() - date) / 1000);
+  if (s < 3600)  return Math.floor(s/60) + 'm ago';
+  if (s < 86400) return Math.floor(s/3600) + 'h ago';
+  return Math.floor(s/86400) + 'd ago';
+}
+
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== REFRESH ALL =====
+function refreshAll() {
+  fetchXRPPrice();
+  fetchFearGreed();
+  fetchMacroData();
+  fetchXRPSupply();
+  fetchDashboardData();
+  fetchNewsFeed();
+  fetchGeopolitical();
+  updateCountdown();
+  loadSavedBriefing();
+  if (!xrplWs || xrplWs.readyState > 1) { reconnectAttempts = 0; connectXRPL(); }
+}
+
+// ===== INIT =====
+fetchXRPPrice();
+fetchFearGreed();
+fetchMacroData();
+fetchXRPSupply();
+fetchDashboardData();
+connectXRPL();
+loadSavedBriefing();
+renderJournal();
+renderEvents();
+fetchNewsFeed();
+fetchGeopolitical();
+setInterval(fetchXRPPrice, 120000);
+setInterval(fetchFearGreed, 300000);
+setInterval(fetchMacroData, 300000);
+setInterval(fetchXRPSupply, 300000);
+setInterval(fetchDashboardData, 600000);
+setInterval(fetchNewsFeed, 900000);
+setInterval(fetchGeopolitical, 1800000);
+</script>
+</body>
+</html>
