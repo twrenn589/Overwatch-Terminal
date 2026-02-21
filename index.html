@@ -307,7 +307,9 @@ body {
 .signal { display:inline-block; padding:2px 8px; border-radius:10px; font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:700; letter-spacing:1px; }
 .signal.green { background:var(--accent-green-dim); color:var(--accent-green); border:1px solid rgba(0,229,153,0.2); }
 .signal.amber { background:var(--accent-amber-dim); color:var(--accent-amber); border:1px solid rgba(255,179,71,0.2); }
-.signal.red { background:var(--accent-red-dim); color:var(--accent-red); border:1px solid rgba(255,71,87,0.2); }
+.signal.red   { background:var(--accent-red-dim);   color:var(--accent-red);   border:1px solid rgba(255,71,87,0.2); }
+.signal.blue  { background:var(--accent-blue-dim);  color:var(--accent-blue);  border:1px solid rgba(77,159,255,0.2); }
+.signal.cyan  { background:var(--accent-cyan-dim);  color:var(--accent-cyan);  border:1px solid rgba(0,200,200,0.2); }
 
 /* Journal */
 .journal-entry {
@@ -561,7 +563,7 @@ textarea:focus { border-color:var(--accent-cyan); }
 <div class="macro-bar">
   <div class="macro-pill"><span class="lbl">USD/JPY</span><span class="val" id="usdJpy">--</span></div>
   <div class="macro-pill"><span class="lbl">JPN 10Y</span><span class="val amber" id="jpn10y">~2.25%</span></div>
-  <div class="macro-pill"><span class="lbl">ETF FLOW</span><span class="val green" id="etfPill">+$39M/wk</span></div>
+  <div class="macro-pill"><span class="lbl">ETF FLOW</span><span class="val green" id="etfPill">+$7.65M/wk</span></div>
   <div class="macro-pill"><span class="lbl">XRPL</span><span class="val" id="ledgerPill">--</span></div>
 </div>
 
@@ -576,6 +578,7 @@ textarea:focus { border-color:var(--accent-cyan); }
   <button class="tab-btn" data-tab="infra">XRPL</button>
   <button class="tab-btn" data-tab="thesis">SCORE</button>
   <button class="tab-btn" data-tab="journal">LOG</button>
+  <button class="tab-btn" data-tab="x402">x402</button>
   <button class="tab-btn" data-tab="links">LINKS</button>
 </div>
 
@@ -587,7 +590,7 @@ textarea:focus { border-color:var(--accent-cyan); }
     <div class="countdown">
       <div class="countdown-label">PermissionedDEX Activation</div>
       <div class="countdown-value" id="pdexCountdown">--d --h --m</div>
-      <div class="countdown-sub">Target: Feb 17-20, 2026</div>
+      <div class="countdown-sub">Activated Feb 20, 2026</div>
     </div>
 
     <div class="summary-grid">
@@ -598,13 +601,13 @@ textarea:focus { border-color:var(--accent-cyan); }
       </div>
       <div class="summary-card green">
         <div class="card-label">XRP ETF FLOWS</div>
-        <div class="card-value" id="etfFlow">+$39M</div>
-        <div class="card-sub">Weekly (Feb 8)</div>
+        <div class="card-value" id="etfFlow">+$7.65M</div>
+        <div class="card-sub">Weekly (Feb 13)</div>
       </div>
       <div class="summary-card amber">
         <div class="card-label">ETFs ACTIVE</div>
         <div class="card-value">7 US Spot</div>
-        <div class="card-sub">$1.37B+ cumulative</div>
+        <div class="card-sub">$1.4B+ cumulative</div>
       </div>
       <div class="summary-card blue">
         <div class="card-label">USD/JPY</div>
@@ -647,7 +650,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Risk Level</span><span class="signal amber">ELEVATED</span></div>
       <div class="interpret-box">
         <div class="label">ASSESSMENT</div>
-        <p>Infrastructure thesis confirmed by DXC partnership ($5T deposits), Ripple Custody expansion, and XRPL amendment activations. Timeline compression visible. Macro risk elevated: Japan supermajority + yen stress + extreme fear. ODL volume inflection remains primary falsification criterion: $20-30B by end 2026.</p>
+        <p>Institutional adoption accelerating beyond forecast. Feb 20 delivered convergence event: SBI/AWAJ (Japan ecosystem), Dubai DLD (RWA secondary markets), SG-FORGE (EUR stablecoin), SBI security token bonds (XRP to traditional investors), all on XRPL in a single day. SCOTUS struck down IEEPA tariffs 6-3; Trump immediately invoked Section 122 (10% global, 150-day clock expires ~Jul 20). Macro stress intensifying: tariff chaos + Japan pressure + Hormuz risk. Infrastructure thesis confirmed across multiple continents and institution types. ODL volume remains primary falsification criterion. Kill switches: 1 confirming (Japan), 0 tripped, 1 needs data (ODL). Mid-case probability trending upward.</p>
       </div>
     </div>
   </div>
@@ -722,7 +725,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Oil/JPY Trend</span><span class="data-value amber">Breaking up ↗</span></div>
       <div class="data-row"><span class="data-label">JPN 10Y Yield</span><span class="data-value amber">~2.25% (Record zone)</span></div>
       <div class="data-row"><span class="data-label">BTC ETF Flows</span><span class="data-value red">-$689M weekly</span></div>
-      <div class="data-row"><span class="data-label">XRP ETF Flows</span><span class="data-value green">+$39M weekly</span></div>
+      <div class="data-row"><span class="data-label">XRP ETF Flows</span><span class="data-value green">+$7.65M weekly (Feb 13)</span></div>
       <div class="interpret-box">
         <div class="label">STRESS INTERPRETATION</div>
         <p>Extreme fear in crypto markets while Japan fiscal stress accelerates. Oil/JPY breaking upward from descending wedge adds energy cost pressure. BTC/ETH seeing institutional outflows while XRP sees continued inflows — divergent behavior signals thesis-driven accumulation vs. macro panic selling. Monitor BOJ rate decision as primary catalyst for stress resolution or escalation.</p>
@@ -735,9 +738,10 @@ textarea:focus { border-color:var(--accent-cyan); }
         <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;" id="geoUpdated"></span>
       </div>
       <div id="geoWatchlist">
-        <div class="data-row"><span class="data-label">Japan</span><span class="signal amber">Takaichi supermajority — fiscal expansion</span></div>
-        <div class="data-row"><span class="data-label">Strait of Hormuz</span><span class="signal amber">Iran tensions elevated</span></div>
+        <div class="data-row"><span class="data-label">Japan</span><span class="signal amber">Takaichi supermajority + tariff pressure + yen weakness + rising JGB yields + SBI accelerating XRPL buildout</span></div>
+        <div class="data-row"><span class="data-label">Strait of Hormuz</span><span class="signal red">CRITICAL — 50+ fighter jets deployed, dual carrier groups, Russia-Iran-China naval exercises, strike preparations reported</span></div>
         <div class="data-row"><span class="data-label">US-China AI Race</span><span class="signal amber">Accelerating</span></div>
+        <div class="data-row"><span class="data-label">US Tariffs / SCOTUS</span><span class="signal amber">IEEPA struck down 6-3. Section 122 invoked: 10% global tariff, 150-day clock (~Jul 20). IEEPA trade deals now unstable.</span></div>
         <div class="data-row"><span class="data-label">Trade / Tariffs</span><span class="signal red">Active disruption</span></div>
         <div class="data-row"><span class="data-label">Arctic / Russia</span><span class="signal amber">US acquisition signals</span></div>
       </div>
@@ -748,11 +752,11 @@ textarea:focus { border-color:var(--accent-cyan); }
   <div class="tab-panel" id="panel-etf">
     <div class="full-card" style="border-color:rgba(0,229,153,0.2);">
       <h3>📊 XRP ETF DASHBOARD</h3>
-      <div class="data-row"><span class="data-label">Weekly Inflow (<span id="etfWeeklyDate">Feb 8</span>)</span><span class="data-value green" id="etfWeekly">+$39.04M</span></div>
-      <div class="data-row"><span class="data-label">Cumulative Inflows</span><span class="data-value green" id="etfCumulative">$1.37B+</span></div>
+      <div class="data-row"><span class="data-label">Weekly Inflow (<span id="etfWeeklyDate">Feb 13</span>)</span><span class="data-value green" id="etfWeekly">+$7.65M</span></div>
+      <div class="data-row"><span class="data-label">Cumulative Inflows</span><span class="data-value green" id="etfCumulative">$1.4B+</span></div>
       <div class="data-row"><span class="data-label">ETFs Active</span><span class="data-value">7 US Spot</span></div>
-      <div class="data-row"><span class="data-label">Total AUM</span><span class="data-value">~$1.24B</span></div>
-      <div class="data-row"><span class="data-label">Inflow Streak</span><span class="data-value green" id="etfStreak">55+ trading days</span></div>
+      <div class="data-row"><span class="data-label">Total AUM</span><span class="data-value amber">~$1.01B (price decline)</span></div>
+      <div class="data-row"><span class="data-label">Inflow Streak</span><span class="data-value amber" id="etfStreak">Streak ended — back-to-back positive weeks in Feb</span></div>
     </div>
 
     <div class="full-card">
@@ -760,7 +764,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">BTC ETFs</span><span class="data-value red" id="etfBtcWeekly">-$689.22M</span></div>
       <div class="data-row"><span class="data-label">ETH ETFs</span><span class="data-value red" id="etfEthWeekly">-$149.07M</span></div>
       <div class="data-row"><span class="data-label">SOL ETFs</span><span class="data-value green" id="etfSolWeekly">+$2.94M</span></div>
-      <div class="data-row"><span class="data-label">XRP ETFs</span><span class="data-value green" id="etfXrpWeekly">+$39.04M</span></div>
+      <div class="data-row"><span class="data-label">XRP ETFs</span><span class="data-value green" id="etfXrpWeekly">+$7.65M</span></div>
       <div class="interpret-box">
         <div class="label">ETF INTERPRETATION</div>
         <p>XRP is the only major crypto asset seeing meaningful institutional inflows during extreme fear. BTC hemorrhaging $689M while XRP adds $39M indicates thesis-driven institutional accumulation — these are not the same buyers. This divergence is one of the strongest relative strength signals for XRP's institutional narrative.</p>
@@ -781,6 +785,12 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">BOJ Policy Rate</span><span class="data-value">0.50%</span></div>
       <div class="data-row"><span class="data-label">Next Hike Expected</span><span class="data-value amber">Jul 2026 (GS est.)</span></div>
       <div class="data-row"><span class="data-label">Debt/GDP</span><span class="data-value red">237%</span></div>
+      <div class="data-row"><span class="data-label">SBI ST Bonds</span><span class="data-value green">¥10B security token bonds, XRP rewards to holders, Mizuho admin</span></div>
+      <div class="data-row"><span class="data-label">SBI / AWAJ</span><span class="data-value green">Fintech startup pipeline onto XRPL</span></div>
+      <div class="data-row"><span class="data-label">SBI BTC+XRP ETF</span><span class="data-value amber">Planned for Tokyo Stock Exchange — pending FSA approval</span></div>
+      <div class="data-row"><span class="data-label">FSA Reclassification</span><span class="data-value amber">XRP as regulated financial product — targeted Q2 2026</span></div>
+      <div class="data-row"><span class="data-label">SBI Coinhako</span><span class="data-value green">Acquired Singapore exchange — Japan-SEA digital asset corridor</span></div>
+      <div class="data-row"><span class="data-label">SBI Ripple Stake</span><span class="data-value green">~9% of Ripple Labs equity (Kitao confirmed Feb 15)</span></div>
       <div class="interpret-box">
         <div class="label">JAPAN MACRO THESIS</div>
         <p>Takaichi's supermajority removes all political friction for fiscal expansion. Weak yen + rising JGB yields + record oil/JPY = maximum pressure on BOJ. This creates the exact conditions where efficient cross-border settlement (ODL) becomes a necessity for Japanese institutions. SBI's long XRP bet was predicated on this environment. Watch BOJ announcements as the fulcrum.</p>
@@ -809,8 +819,8 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Multi-Purpose Tokens</span><span class="signal green">LIVE</span></div>
       <div class="data-row"><span class="data-label">Deep Freeze</span><span class="signal green">LIVE</span></div>
       <div class="data-row"><span class="data-label">Simulate</span><span class="signal green">LIVE</span></div>
-      <div class="data-row"><span class="data-label">Token Escrow</span><span class="signal amber">~Feb 12 activation</span></div>
-      <div class="data-row"><span class="data-label">PermissionedDEX</span><span class="signal amber">~Feb 17-20 activation</span></div>
+      <div class="data-row"><span class="data-label">Token Escrow</span><span class="signal green">LIVE</span></div>
+      <div class="data-row"><span class="data-label">PermissionedDEX</span><span class="signal green">LIVE</span></div>
       <div class="data-row"><span class="data-label">Batch Transactions</span><span class="signal amber">1 vote remaining</span></div>
       <div class="data-row"><span class="data-label">Confidential Transfers</span><span class="data-value">Q1 2026</span></div>
       <div class="data-row"><span class="data-label">Lending Protocol (XLS-66)</span><span class="data-value">Q2 2026</span></div>
@@ -828,9 +838,17 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Chainalysis</span><span class="data-value green">Real-time compliance</span></div>
       <div class="data-row"><span class="data-label">Palisade (acquired)</span><span class="data-value green">Wallet-as-a-Service</span></div>
       <div class="data-row"><span class="data-label">Evernorth</span><span class="data-value amber">Lending Protocol anchor</span></div>
+      <div class="data-row"><span class="data-label">Deutsche Bank</span><span class="data-value green">Cross-border, FX, custody + SWIFT ledger lead architect</span></div>
+      <div class="data-row"><span class="data-label">SBI Ripple Asia / AWAJ</span><span class="data-value green">Fintech startup pipeline onto XRPL (Japan ecosystem)</span></div>
+      <div class="data-row"><span class="data-label">Dubai Land Dept / Ctrl Alt</span><span class="data-value green">Phase 2 live — tokenized real estate secondary market on XRPL</span></div>
+      <div class="data-row"><span class="data-label">Societe Generale (SG-FORGE)</span><span class="data-value green">EUR CoinVertible stablecoin deployed on XRPL</span></div>
+      <div class="data-row"><span class="data-label">Aviva Investors</span><span class="data-value green">Intent to tokenize assets on XRPL — first European inv. manager</span></div>
+      <div class="data-row"><span class="data-label">LMAX Group</span><span class="data-value green">Omnia Exchange — FX/crypto/stablecoin with RLUSD, $8.2T vol</span></div>
+      <div class="data-row"><span class="data-label">T54 Labs</span><span class="data-value green">x402 protocol — AI agent micropayments in XRP + RLUSD</span></div>
+      <div class="data-row"><span class="data-label">SBI Holdings</span><span class="data-value green">¥10B security token bonds, XRP rewards to bondholders</span></div>
       <div class="interpret-box">
         <div class="label">INFRASTRUCTURE ASSESSMENT</div>
-        <p>Ripple's unified stack is now production-ready: Payments, Custody, Prime Brokerage, Stablecoin (RLUSD), Treasury Management. DXC integration brings this directly into core banking for 300M+ accounts. Permissioned DEX is the final institutional puzzle piece — compliant secondary markets for tokenized assets on XRPL. Community Day Feb 11-12 with "The Era of XRP in Capital Markets" framing signals institutional positioning.</p>
+        <p>Ripple's institutional infrastructure reached critical mass in February 2026. In a single day (Feb 20): SBI expanded XRPL ecosystem via AWAJ partnership, Dubai's government launched live RWA secondary trading on XRPL, Societe Generale deployed EUR stablecoin on XRPL, and SBI issued ¥10B in security token bonds with XRP rewards. Deutsche Bank is lead architect of SWIFT's blockchain ledger while deepening Ripple integration. Franklin Templeton describes a 'Universal Liquidity Layer' at Ondo Summit. Multiple institutional tiers building simultaneously rather than sequentially — timeline compression is observable.</p>
       </div>
     </div>
   </div>
@@ -845,22 +863,67 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">XRPL Infrastructure</span><span class="signal green" id="thesis-xrpl_infra">ACCELERATING</span></div>
       <div class="data-row"><span class="data-label">Stablecoin (RLUSD)</span><span class="signal green" id="thesis-stablecoin">$1B+ circulation</span></div>
       <div class="data-row"><span class="data-label">ODL Volume Growth</span><span class="signal amber" id="thesis-odl_volume">TRACKING — NEEDS DATA</span></div>
-      <div class="data-row"><span class="data-label">Japan Adoption</span><span class="signal amber" id="thesis-japan_adoption">FAVORABLE CONDITIONS</span></div>
-      <div class="data-row"><span class="data-label">Macro Environment</span><span class="signal amber" id="thesis-macro_env">STRESSED — WATCH</span></div>
+      <div class="data-row"><span class="data-label">Japan Adoption</span><span class="signal green" id="thesis-japan_adoption">CONFIRMING — AHEAD OF SCHEDULE</span></div>
+      <div class="data-row"><span class="data-label">Macro Environment</span><span class="signal amber" id="thesis-macro_env">STRESSED — ELEVATED</span></div>
       <div class="data-row"><span class="data-label">China/BRICS Risk</span><span class="signal amber" id="thesis-china_brics">MULTIPOLAR THREAT</span></div>
       <div class="data-row"><span class="data-label">DTCC Competition</span><span class="signal amber" id="thesis-dtcc_competition">MONITOR</span></div>
     </div>
 
     <div class="full-card" style="border-color:rgba(255,71,87,0.2);">
-      <h3>🎯 FALSIFICATION CRITERION</h3>
-      <div style="text-align:center;padding:16px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-bottom:8px;">ODL VOLUME TARGET</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--accent-red);">$20-30B</div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">by end of 2026</div>
+      <h3>🎯 KILL SWITCH FRAMEWORK</h3>
+      <div class="data-row">
+        <span class="data-label">1 · ODL Volume</span>
+        <span class="signal red">NEEDS DATA</span>
       </div>
-      <div class="interpret-box" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);">
-        <div class="label" style="color:var(--accent-red);">KILL SWITCH</div>
-        <p>If ODL volume does not show clear acceleration toward $20-30B+ annualized by end of 2026, the institutional bridge asset thesis is not confirmed. This criterion exists to prevent unfalsifiable pattern matching. Direction is right. Volume must follow. No volume = reassess.</p>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">$20-30B annualized by EOY 2026. Doubling from baseline by Q2.</div>
+      <div class="data-row">
+        <span class="data-label">2 · RLUSD Circulation</span>
+        <span class="signal amber">TRACKING — 22%</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">$5B + 3 institutional integrations by Q3 2026. Current: ~$1B.</div>
+      <div class="data-row">
+        <span class="data-label">3 · Permissioned DEX</span>
+        <span class="signal amber">EARLY</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">5+ institutions by Q3 2026. DEX activated Feb 20.</div>
+      <div class="data-row">
+        <span class="data-label">4 · XRP ETF AUM</span>
+        <span class="signal amber">TRACKING — 20%</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">$5B by EOY 2026. Current: ~$1.01B (price decline, inflows continue).</div>
+      <div class="data-row">
+        <span class="data-label">5 · Japan Adoption</span>
+        <span class="signal green">CONFIRMING ✓</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">SBI expanded XRPL integration or new Japanese institution by Q3. SBI/AWAJ, ST bonds, ETF planned.</div>
+      <div class="data-row">
+        <span class="data-label">6 · Clarity Act</span>
+        <span class="signal amber">PENDING</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">Meaningful advancement by Q4 2026. 75% probability per Garlinghouse.</div>
+      <div class="data-row">
+        <span class="data-label">7 · Announcement-to-Deployment</span>
+        <span class="signal amber">MONITORING</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">3 of 5 Tier 1 partners in live production by Q4. Dubai DLD Phase 2 is first confirmed.</div>
+      <div class="data-row">
+        <span class="data-label">8 · Token Velocity</span>
+        <span class="signal red">UNKNOWN</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">Monitor average hold times as volume data becomes available.</div>
+      <div class="data-row">
+        <span class="data-label">9 · Competitive Displacement</span>
+        <span class="signal amber">MONITORING</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">Watch BIS Nexus for independent operation without XRPL.</div>
+      <div class="data-row">
+        <span class="data-label">10 · ODL Transparency</span>
+        <span class="signal red">NOT YET AVAILABLE</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);padding:2px 0 6px;font-family:'JetBrains Mono',monospace;">Reliable public volume data must exist by Q3 2026.</div>
+      <div class="interpret-box" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);margin-top:8px;">
+        <div class="label" style="color:var(--accent-red);">KILL SWITCH STATUS</div>
+        <p>1 confirming (Japan), 0 tripped, 2 need data (ODL volume + transparency). Direction confirmed across multiple continents. Volume must follow. No ODL volume inflection by Q3 2026 = reassess thesis.</p>
       </div>
     </div>
   </div>
@@ -881,6 +944,128 @@ textarea:focus { border-color:var(--accent-cyan); }
     </div>
   </div>
 
+  <!-- ==================== AGENT ECONOMY & x402 ==================== -->
+  <div class="tab-panel" id="panel-x402">
+
+    <!-- What is x402 -->
+    <div class="full-card" style="border-color:rgba(77,159,255,0.3);background:linear-gradient(135deg,rgba(77,159,255,0.03),transparent);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h3 style="margin-bottom:0;">⚡ AGENT ECONOMY & x402</h3>
+        <span class="signal blue">EMERGING</span>
+      </div>
+      <p style="font-size:12px;color:var(--text-secondary);line-height:1.65;">
+        x402 is an internet-native micropayment protocol built on HTTP's long-dormant <span style="color:var(--accent-blue);font-family:'JetBrains Mono',monospace;">402 Payment Required</span> status code. It enables AI agents and autonomous software to pay for APIs, compute, and data without human intervention — turning machines into economic actors. The protocol is now live on XRPL via T54 Labs, with XRP and RLUSD as the settlement assets for machine-to-machine transactions.
+      </p>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="full-card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+        <h3 style="margin-bottom:0;">📊 KEY METRICS</h3>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">UPDATED: <span id="x402Updated">—</span></span>
+      </div>
+
+      <div class="summary-grid" style="margin-bottom:10px;">
+        <div class="summary-card blue">
+          <div class="card-label">x402 TOTAL TXNs</div>
+          <div class="card-value" id="x402TotalTxns">—</div>
+          <div class="card-sub">All chains</div>
+        </div>
+        <div class="summary-card blue">
+          <div class="card-label">x402 TOTAL VOLUME</div>
+          <div class="card-value" id="x402TotalVol">—</div>
+          <div class="card-sub">All chains</div>
+        </div>
+        <div class="summary-card cyan">
+          <div class="card-label">XRPL x402 TXNs</div>
+          <div class="card-value" id="x402XrplTxns">0</div>
+          <div class="card-sub">Live on XRPL</div>
+        </div>
+        <div class="summary-card green">
+          <div class="card-label">RLUSD SUPPLY</div>
+          <div class="card-value" id="x402Rlusd">—</div>
+          <div class="card-sub">In circulation</div>
+        </div>
+      </div>
+
+      <div class="data-row">
+        <span class="data-label">XRPL DAILY TXNs</span>
+        <span class="data-value cyan" id="x402XrplDaily">—</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">XRPL x402 STATUS</span>
+        <span class="signal green" id="x402XrplStatus">LIVE</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">XRPL INFRASTRUCTURE</span>
+        <span class="data-value blue" id="x402Infra">T54 Labs</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">SPEC CONTRIBUTORS</span>
+        <span class="data-value" id="x402Contributors">Coinbase, T54 Labs</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">SETTLEMENT ASSETS</span>
+        <span class="data-value" id="x402Assets">XRP · RLUSD</span>
+      </div>
+    </div>
+
+    <!-- Thesis Connection -->
+    <div class="full-card" style="border-color:rgba(0,200,200,0.2);">
+      <h3>📡 THESIS CONNECTION</h3>
+      <div style="border-left:3px solid var(--accent-cyan);padding:12px 14px;margin:10px 0 12px;background:rgba(0,200,200,0.04);border-radius:0 var(--radius-sm) var(--radius-sm) 0;">
+        <p style="font-size:13px;color:var(--text-primary);line-height:1.7;font-style:italic;">"XRPL is now a dual-layer settlement network: institutional payments (Deutsche Bank, SWIFT, Ripple Payments) + machine economy (x402 agent micropayments). Same ledger, same asset, two growth vectors."</p>
+      </div>
+      <div class="interpret-box">
+        <div class="label">WHY IT MATTERS</div>
+        <p>If AI agents become economic actors — paying for API calls, data, and compute at the speed of HTTP — the ledger they settle on becomes critical infrastructure. XRPL's 3–5 second finality and sub-cent fees make it uniquely suited. x402 on XRPL means XRP and RLUSD could underpin machine-to-machine commerce at scale. Watch XRPL x402 transaction count as the primary early indicator. A move from 0 → 10,000 txns/day would be the first proof point.</p>
+      </div>
+    </div>
+
+    <!-- Ecosystem Players -->
+    <div class="full-card">
+      <h3>🤝 ECOSYSTEM PLAYERS</h3>
+      <div class="data-row">
+        <span class="data-label">T54 Labs</span>
+        <span class="signal cyan">XRPL INFRA</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Coinbase</span>
+        <span class="signal blue">SPEC AUTHOR</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">RLUSD</span>
+        <span class="signal green">SETTLEMENT ASSET</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">XRP</span>
+        <span class="signal green">SETTLEMENT ASSET</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Ripple Payments</span>
+        <span class="signal amber">ADJACENT LAYER</span>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="full-card">
+      <h3>🔗 x402 RESOURCES</h3>
+      <div class="data-row">
+        <a href="https://x402.org" target="_blank" style="color:var(--accent-blue);text-decoration:none;font-size:12px;">x402.org — Protocol Specification</a>
+      </div>
+      <div class="data-row">
+        <a href="https://xrpl-x402.t54.ai" target="_blank" style="color:var(--accent-blue);text-decoration:none;font-size:12px;">xrpl-x402.t54.ai — T54 Labs XRPL Implementation</a>
+      </div>
+      <div class="data-row">
+        <a href="https://x402.org/ecosystem" target="_blank" style="color:var(--accent-blue);text-decoration:none;font-size:12px;">x402.org/ecosystem — Ecosystem Map</a>
+      </div>
+      <div class="data-row">
+        <a href="https://github.com/coinbase/x402" target="_blank" style="color:var(--accent-blue);text-decoration:none;font-size:12px;">github.com/coinbase/x402 — Spec Repo (Coinbase)</a>
+      </div>
+    </div>
+
+  </div>
+
   <!-- ==================== LINKS ==================== -->
   <div class="tab-panel" id="panel-links">
     <div class="full-card">
@@ -891,6 +1076,11 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><a href="https://xrpl.org/docs/concepts/consensus-protocol/amendments" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">XRPL Amendments Status</a></div>
       <div class="data-row"><a href="https://ripple.com/insights/" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">Ripple Blog / Insights</a></div>
       <div class="data-row"><a href="https://sosovalue.com/assets/etf/us-xrp-spot" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">SoSoValue XRP ETF Tracker</a></div>
+      <div class="data-row"><a href="https://xrp-insights.com" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">XRP ETF Tracker (XRP Insights)</a></div>
+      <div class="data-row"><a href="https://www.sbigroup.co.jp/english/" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">SBI Holdings News (English)</a></div>
+      <div class="data-row"><a href="https://www.ctrl-alt.co" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">Dubai Land Department Tokenization (Ctrl Alt)</a></div>
+      <div class="data-row"><a href="https://fred.stlouisfed.org" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">FRED Economic Data</a></div>
+      <div class="data-row"><a href="https://www.bis.org/about/bisih/topics/fmis/nexus.htm" target="_blank" style="color:var(--accent-cyan);text-decoration:none;font-size:12px;">BIS Project Nexus</a></div>
     </div>
     <div class="full-card">
       <h3>📰 NEWS & INTELLIGENCE</h3>
@@ -1029,6 +1219,76 @@ const EVENTS_DATA = [
     threat: 'MONITORING',
     threatEmoji: '🟢',
     desc: 'Federal Reserve conducting $16B in Reserve Management Purchases (Treasuries), effectively expanding balance sheet liquidity. Historically correlated with risk asset appreciation. Monitor for sustained QE pivot implications — if RMPs accelerate, crypto and XRP in particular historically benefit from dollar liquidity expansion.'
+  },
+  {
+    date: '2026-02-18',
+    dateLabel: 'FEB 18',
+    title: 'Societe Generale SG-FORGE deploys EUR CoinVertible on XRPL',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'SG-FORGE, Societe Generale\'s digital asset subsidiary, deployed the EUR CoinVertible stablecoin on XRPL. The token is exploring integration into Ripple products and use as trading collateral. First major European bank-issued euro stablecoin on XRPL — significant validation of XRPL as multi-currency settlement infrastructure.'
+  },
+  {
+    date: '2026-02-20',
+    dateLabel: 'FEB 20',
+    title: 'SBI Ripple Asia / AWAJ technical support partnership for XRPL startups',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'MONITORING',
+    threatEmoji: '🟢',
+    desc: 'SBI Ripple Asia announced a technical support partnership with AWAJ to assist fintech startups building on XRPL. Creates a structured pipeline of Japanese fintech companies developing on the XRP Ledger. Confirms SBI\'s ecosystem development strategy beyond its own direct operations — multiplier effect for Japan adoption thesis.'
+  },
+  {
+    date: '2026-02-20',
+    dateLabel: 'FEB 20',
+    title: 'Dubai Land Department Phase 2 — tokenized real estate secondary market live on XRPL',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Dubai Land Department and Ctrl Alt launched Phase 2 of tokenized real estate secondary market trading on XRPL. 10 properties, $5M+ value, 7.8M tokens actively trading. Secured by Ripple Custody. First government-backed RWA secondary market on XRPL — directly validates Permissioned DEX use case the same day it activated.'
+  },
+  {
+    date: '2026-02-20',
+    dateLabel: 'FEB 20',
+    title: 'SBI Holdings — ¥10B security token bonds with XRP rewards to bondholders',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'SBI Holdings announced ¥10B (approx. $65M) in security token bonds with XRP distributed as rewards to bondholders over 3 years. Administered by Mizuho Bank, traded on Osaka Digital Exchange. First instance of XRP distribution to traditional bond investors — creates XRP exposure for non-crypto institutional participants.'
+  },
+  {
+    date: '2026-02-20',
+    dateLabel: 'FEB 20',
+    title: 'SCOTUS strikes down IEEPA tariffs 6-3',
+    category: 'REGULATORY',
+    catClass: 'reg',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Supreme Court ruled 6-3 that tariffs imposed under the International Emergency Economic Powers Act (IEEPA) were unconstitutional. Trump administration immediately responded by invoking Section 122 of the Trade Act, imposing a 10% global tariff with a 150-day clock expiring approximately July 20, 2026. Trade deals negotiated under IEEPA leverage now legally unstable.'
+  },
+  {
+    date: '2026-02-20',
+    dateLabel: 'FEB 20',
+    title: 'Franklin Templeton — "Universal Liquidity Layer" at Ondo Summit 2026',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'MONITORING',
+    threatEmoji: '🟢',
+    desc: 'Franklin Templeton described XRPL as a "Universal Liquidity Layer" at the Ondo Summit 2026 — the first time a major asset manager used this framing publicly. Signals institutional understanding of XRPL as multi-asset settlement infrastructure, not merely a crypto network. Adds weight to cross-border and RWA thesis.'
+  },
+  {
+    date: '2026-02-20',
+    dateLabel: 'FEB 20',
+    title: 'Standard Chartered cuts XRP price target from $8 to $2.80',
+    category: 'FINANCIAL',
+    catClass: 'fin',
+    threat: 'MONITORING',
+    threatEmoji: '🟢',
+    desc: 'Standard Chartered revised its XRP price target downward from $8 to $2.80, citing macro headwinds and broader crypto market stress. Note: Standard Chartered still maintains XRP coverage and a bullish long-term outlook — the revision reflects near-term macro pressure, not thesis abandonment. Thesis is infrastructure adoption, not price prediction.'
   }
 ];
 
@@ -1053,6 +1313,40 @@ function renderEvents() {
   <div class="event-body">${escHtml(e.desc)}</div>
 </div>`;
   }).join('');
+}
+
+// ===== AGENT ECONOMY & x402 DATA =====
+// Update these values manually as new data becomes available.
+// x402_total_txns / x402_total_volume: pull from x402.org/ecosystem or T54 dashboard.
+// xrpl_x402_txns: from xrpl-x402.t54.ai metrics page.
+// rlusd_circulation: from Ripple's RLUSD transparency page.
+// xrpl_daily_txns: from xrpscan.com/metrics.
+const X402_DATA = {
+  updated:           '2026-02-19',
+  x402_total_txns:   '—',         // e.g. '24,500'  — update from x402.org/ecosystem
+  x402_total_volume: '—',         // e.g. '$8,320'  — update from x402.org/ecosystem
+  xrpl_x402_txns:   '0',          // XRPL-native x402 txns — just launched
+  rlusd_circulation: '$247M+',    // RLUSD supply in circulation
+  xrpl_daily_txns:  '~1.2M',     // XRPL baseline daily transactions
+  xrpl_status:      'LIVE',       // 'LIVE' | 'TESTNET' | 'INACTIVE'
+  infrastructure:   'T54 Labs',
+  contributors:     'Coinbase, T54 Labs',
+  settlement_assets: 'XRP · RLUSD'
+};
+
+function renderX402() {
+  const d = X402_DATA;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('x402Updated',      d.updated);
+  set('x402TotalTxns',    d.x402_total_txns);
+  set('x402TotalVol',     d.x402_total_volume);
+  set('x402XrplTxns',     d.xrpl_x402_txns);
+  set('x402Rlusd',        d.rlusd_circulation);
+  set('x402XrplDaily',    d.xrpl_daily_txns);
+  set('x402XrplStatus',   d.xrpl_status);
+  set('x402Infra',        d.infrastructure);
+  set('x402Contributors', d.contributors);
+  set('x402Assets',       d.settlement_assets);
 }
 
 // ===== XRP PRICE (Multi-source) =====
@@ -1620,6 +1914,7 @@ connectXRPL();
 loadSavedBriefing();
 renderJournal();
 renderEvents();
+renderX402();
 fetchNewsFeed();
 fetchGeopolitical();
 setInterval(fetchXRPPrice, 120000);
