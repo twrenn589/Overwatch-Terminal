@@ -231,7 +231,7 @@ async function main() {
   ]);
 
   // FRED calls are sequential to avoid hammering the API
-  const jpn10y = await fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, existing?.macro?.jpn_10y_yield);
+  const jpn10y = await fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, existing?.macro?.jpn_10y);
   const brent  = await fetchFRED('BRENT',   ENDPOINTS.fred.brent,   existing?.macro?.brent_crude);
   const us10y  = await fetchFRED('US_10Y',  ENDPOINTS.fred.us_10y,  existing?.macro?.us_10y_yield);
 
@@ -264,7 +264,7 @@ async function main() {
     rlusd,
     macro: {
       usd_jpy:       usdJpy,
-      jpn_10y_yield: jpn10y,
+      jpn_10y: jpn10y,
       us_10y_yield:  us10y,
       brent_crude:   brent,
       fear_greed:    fearGreed,
