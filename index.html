@@ -570,8 +570,6 @@ textarea:focus { border-color:var(--accent-cyan); }
 <!-- TAB NAV -->
 <div class="tab-nav">
   <button class="tab-btn active" data-tab="summary">OVERVIEW</button>
-  <button class="tab-btn" data-tab="briefing">◉ BRIEF</button>
-  <button class="tab-btn" data-tab="feed">FEED</button>
   <button class="tab-btn" data-tab="stress">STRESS</button>
   <button class="tab-btn" data-tab="etf">ETF</button>
   <button class="tab-btn" data-tab="macro">MACRO</button>
@@ -653,53 +651,6 @@ textarea:focus { border-color:var(--accent-cyan); }
         <p>Institutional adoption accelerating beyond forecast. Feb 20 delivered convergence event: SBI/AWAJ (Japan ecosystem), Dubai DLD (RWA secondary markets), SG-FORGE (EUR stablecoin), SBI security token bonds (XRP to traditional investors), all on XRPL in a single day. SCOTUS struck down IEEPA tariffs 6-3; Trump immediately invoked Section 122 (10% global, 150-day clock expires ~Jul 20). Macro stress intensifying: tariff chaos + Japan pressure + Hormuz risk. Infrastructure thesis confirmed across multiple continents and institution types. ODL volume remains primary falsification criterion. Kill switches: 1 confirming (Japan), 0 tripped, 1 needs data (ODL). Mid-case probability trending upward.</p>
       </div>
     </div>
-  </div>
-
-  <!-- ==================== BRIEFING ==================== -->
-  <div class="tab-panel" id="panel-briefing">
-    <div class="full-card" style="border-color:rgba(0,200,200,0.3);">
-      <h3>◉ DAILY INTELLIGENCE BRIEFING</h3>
-      <div id="briefingContent" style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
-        <p style="color:var(--text-muted);font-style:italic;">Paste your morning Telegram briefing below or wait for auto-load...</p>
-      </div>
-      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;">LAST UPDATED: <span id="briefingTime">--</span></div>
-      </div>
-    </div>
-
-    <div class="full-card">
-      <h3>📡 MANUAL BRIEFING INPUT</h3>
-      <p style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Paste your Telegram briefing here:</p>
-      <textarea id="briefingInput" placeholder="Paste your morning briefing here..."></textarea>
-      <button class="btn-sm" onclick="loadManualBriefing()" style="margin-top:8px;">LOAD BRIEFING</button>
-    </div>
-
-    <div class="full-card">
-      <h3>⛓ LIVE CHAIN STATUS</h3>
-      <div class="data-row"><span class="data-label">XRPL Connection</span><span class="data-value" id="wsStatus"><span class="live-dot"></span>Connecting...</span></div>
-      <div class="data-row"><span class="data-label">Latest Ledger</span><span class="data-value blue" id="latestLedger">--</span></div>
-      <div class="data-row"><span class="data-label">Ledger Close Time</span><span class="data-value" id="ledgerTime">--</span></div>
-      <div class="data-row"><span class="data-label">Txns in Last Ledger</span><span class="data-value" id="ledgerTxns">--</span></div>
-      <div class="data-row"><span class="data-label">Base Fee</span><span class="data-value" id="baseFee">--</span></div>
-      <div class="data-row"><span class="data-label">Total XRP Supply</span><span class="data-value" id="totalXrp">--</span></div>
-      <div class="data-row"><span class="data-label">XRP Destroyed</span><span class="data-value amber" id="xrpDestroyed">--</span></div>
-      <div class="data-row"><span class="data-label">Validated Ledgers</span><span class="data-value" id="validatedRange">--</span></div>
-    </div>
-  </div>
-
-  <!-- ==================== NEWS FEED ==================== -->
-  <div class="tab-panel" id="panel-feed">
-
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--text-primary);">◉ INTELLIGENCE FEED</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;"><span id="feedCount">LIVE</span> STORIES · <span id="feedDate">FEB 17, 2026</span></div>
-    </div>
-
-    <div id="feedStatus"></div>
-    <div id="feedStories">
-      <div style="text-align:center;padding:24px 0;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;"><span class="live-dot"></span>LOADING...</div>
-    </div>
-
   </div>
 
   <!-- ==================== MACRO STRESS ==================== -->
@@ -1551,29 +1502,6 @@ async function fetchXRPSupply() {
   }
 }
 
-// ===== BRIEFING =====
-function displayBriefing(text, time) {
-  const el = document.getElementById('briefingContent');
-  if (!el) return;
-  let cleaned = text.replace(/<b>/g,'<strong>').replace(/<\/b>/g,'</strong>').replace(/<i>/g,'<em>').replace(/<\/i>/g,'</em>').replace(/\n/g,'<br>');
-  el.innerHTML = cleaned;
-  const t = document.getElementById('briefingTime');
-  if (t && time) t.textContent = time.toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-  try { localStorage.setItem('overwatch_briefing', JSON.stringify({text:text,time:time.getTime()})); } catch(e) {}
-}
-
-function loadManualBriefing() {
-  const input = document.getElementById('briefingInput');
-  if (input && input.value.trim()) { displayBriefing(input.value.trim(), new Date()); input.value = ''; }
-}
-
-function loadSavedBriefing() {
-  try {
-    const saved = localStorage.getItem('overwatch_briefing');
-    if (saved) { const p = JSON.parse(saved); displayBriefing(p.text, new Date(p.time)); }
-  } catch(e) {}
-}
-
 // ===== DECISION JOURNAL =====
 function addJournalEntry() {
   const input = document.getElementById('journalInput');
@@ -1725,167 +1653,6 @@ function renderGeoWatchlist(articles) {
   if (el) el.textContent = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
 }
 
-// ===== NEWS FEED (RSS-based, no API key required) =====
-const RSS_FEEDS = [
-  'https://cointelegraph.com/rss/tag/xrp',
-  'https://decrypt.co/feed',
-  'https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=rss'
-];
-
-async function fetchNewsFeed() {
-  let allItems = [];
-  for (const rssUrl of RSS_FEEDS) {
-    try {
-      const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=20');
-      if (!r.ok) continue;
-      const d = await r.json();
-      if (d.status !== 'ok' || !d.items) continue;
-      const needsFilter = !rssUrl.includes('cointelegraph');
-      const items = needsFilter ? d.items.filter(item => {
-        const txt = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
-        return /\bxrp\b|ripple|xrpl|rlusd/.test(txt);
-      }) : d.items;
-      allItems = allItems.concat(items.map(normalizeRssItem));
-    } catch(e) {}
-  }
-  allItems.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-  const seen = new Set();
-  allItems = allItems.filter(item => {
-    const key = item.title.substring(0, 40).toLowerCase();
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-  if (allItems.length > 0) {
-    const top = allItems.slice(0, 7);
-    renderFeedStories(top.slice(0, 3));
-    try { localStorage.setItem('overwatch_feed', JSON.stringify({items: top, ts: Date.now()})); } catch(e) {}
-    const el = document.getElementById('feedDate');
-    if (el) el.textContent = new Date().toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'}).toUpperCase();
-    const fs = document.getElementById('feedStatus');
-    if (fs) fs.innerHTML = '';
-  } else {
-    loadCachedFeed();
-  }
-}
-
-function normalizeRssItem(item) {
-  let src = '';
-  if (item.author) {
-    src = item.author;
-  } else if (item.link) {
-    try { src = new URL(item.link).hostname.replace('www.', ''); } catch(e) { src = 'Crypto News'; }
-  } else {
-    src = 'Crypto News';
-  }
-  return {
-    title: item.title || '',
-    url: item.link || '',
-    published_at: item.pubDate || new Date().toISOString(),
-    source: { title: src },
-    votes: {}
-  };
-}
-
-function loadCachedFeed() {
-  try {
-    const c = localStorage.getItem('overwatch_feed');
-    if (!c) return;
-    const p = JSON.parse(c);
-    if (p.items) {
-      renderFeedStories(p.items.slice(0, 3));
-      const el = document.getElementById('feedDate');
-      if (el) el.textContent = new Date(p.ts).toLocaleDateString([],{month:'short',day:'numeric'}).toUpperCase() + ' ↺';
-    }
-  } catch(e) {}
-}
-
-function renderFeedStories(stories) {
-  const el = document.getElementById('feedStories');
-  if (!el) return;
-  const ce = document.getElementById('feedCount');
-  if (ce) ce.textContent = stories.length;
-  el.innerHTML = stories.map((s, i) => {
-    const tags   = feedGetTags(s.title);
-    const impact = feedGetImpact(s.votes, s.title);
-    const note   = feedGetThesisNote(s.title);
-    const ago    = feedTimeAgo(new Date(s.published_at));
-    const src    = (s.source && s.source.title) ? s.source.title : 'Crypto News';
-    const date   = new Date(s.published_at).toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'});
-    const border = impact.cls==='bullish' ? 'rgba(0,229,153,0.25)' : impact.cls==='bearish' ? 'rgba(255,71,87,0.25)' : 'rgba(255,179,71,0.25)';
-    const url    = s.url ? escHtml(s.url) : '';
-    const click  = url ? `onclick="window.open('${url}','_blank')" style="border-color:${border};cursor:pointer;"` : `style="border-color:${border}"`;
-    return `<div class="news-card" ${click}>
-      <div class="news-card-header">
-        <div class="news-tags">${tags}</div>
-        <span class="news-time">${ago}</span>
-      </div>
-      <div class="news-headline">${escHtml(s.title)}</div>
-      <div class="news-source">${escHtml(src)} · ${date}</div>
-      <div class="news-body">${escHtml(note)}</div>
-      <div class="news-footer">
-        <span class="news-impact ${impact.cls}">${impact.label}</span>
-        <span class="news-priority">P${i+1}</span>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-
-function feedGetTags(title) {
-  const t = title.toLowerCase();
-  const out = [];
-  if (/\bripple\b|rlusd|ripplenet/.test(t))                            out.push('<span class="news-tag green">RIPPLE</span>');
-  if (/\bxrpl\b|xrp ledger|amendment|permissioned/.test(t))           out.push('<span class="news-tag">XRPL</span>');
-  if (/\betf\b|institutional|asset manager/.test(t))                   out.push('<span class="news-tag blue">ETF</span>');
-  if (/tokeniz|real.world asset|\brwa\b|bond|securities/.test(t))      out.push('<span class="news-tag amber">TOKENIZATION</span>');
-  if (/\bswift\b|cross.border|corridor|\bodl\b|remittance/.test(t))   out.push('<span class="news-tag">PAYMENTS</span>');
-  if (/\bjapan\b|\bsbi\b|\byen\b|\bboj\b/.test(t))                    out.push('<span class="news-tag amber">JAPAN</span>');
-  if (/stablecoin|\bcbdc\b|rlusd/.test(t))                             out.push('<span class="news-tag blue">STABLECOIN</span>');
-  if (out.length === 0) out.push('<span class="news-tag">XRP</span>');
-  return out.slice(0, 2).join('');
-}
-
-function feedGetImpact(votes, title) {
-  const v = votes || {};
-  const pos = (v.positive||0) + (v.important||0)*2;
-  const neg = (v.negative||0);
-  if (pos + neg > 0) {
-    if (neg > pos && neg >= 3) return { cls:'bearish', label:'▼ BEARISH — MONITOR' };
-    if (pos >= neg*2+1 || (v.important||0) >= 2) return { cls:'bullish', label:'▲ BULLISH — THESIS' };
-    return { cls:'watch', label:'◈ WATCH' };
-  }
-  const t = (title || '').toLowerCase();
-  const bullWords = ['launch', 'partnership', 'approv', 'surges', 'rises', 'gains', 'etf', 'adoption', 'integrat', 'expands', 'growth', 'bullish', 'record', 'milestone'];
-  const bearWords = ['crash', 'falls', 'drops', 'dumps', 'lawsuit', 'hack', 'exploit', 'bearish', 'concern', 'plunge', 'slump', 'tumble', 'warning', 'ban'];
-  const bScore = bullWords.filter(w => t.includes(w)).length;
-  const nScore = bearWords.filter(w => t.includes(w)).length;
-  if (nScore > bScore && nScore > 0) return { cls:'bearish', label:'▼ BEARISH — MONITOR' };
-  if (bScore > 0) return { cls:'bullish', label:'▲ BULLISH — THESIS' };
-  return { cls:'watch', label:'◈ WATCH' };
-}
-
-function feedGetThesisNote(title) {
-  const t = title.toLowerCase();
-  if (/odl|on.demand|corridor|remittance/.test(t))        return 'ODL volume signal — core falsification metric. Track for $20–30B trajectory.';
-  if (/etf|institutional|asset manager|fund/.test(t))     return 'Institutional adoption vector. Inflow divergence from BTC/ETH confirms thesis positioning.';
-  if (/partnership|custody|bank|financial inst/.test(t))  return 'Ripple infrastructure expansion — validates unified payments stack thesis.';
-  if (/amendment|permissioned|xrpl|ledger/.test(t))       return 'XRPL protocol development — track activation timeline against 2026 roadmap.';
-  if (/swift|tokeniz|settlement|real.world/.test(t))      return 'Tokenization/settlement market expanding. XRPL compliance infrastructure directly relevant.';
-  if (/japan|sbi|yen|boj/.test(t))                        return 'Japan macro vector — BOJ decisions and yen weakness are the primary ODL demand catalyst.';
-  if (/regulatory|sec|cftc|license|clarity/.test(t))      return 'Regulatory clarity thesis. Certainty unlocks institutional participation at scale.';
-  if (/stablecoin|rlusd|cbdc/.test(t))                    return 'RLUSD / stablecoin infrastructure. Settlement layer adoption signal.';
-  return 'Monitor for direct thesis impact across XRP adoption vectors.';
-}
-
-function feedTimeAgo(date) {
-  const s = Math.floor((Date.now() - date) / 1000);
-  if (s < 3600)  return Math.floor(s/60) + 'm ago';
-  if (s < 86400) return Math.floor(s/3600) + 'h ago';
-  return Math.floor(s/86400) + 'd ago';
-}
-
-
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
@@ -1897,10 +1664,8 @@ function refreshAll() {
   fetchMacroData();
   fetchXRPSupply();
   fetchDashboardData();
-  fetchNewsFeed();
   fetchGeopolitical();
   updateCountdown();
-  loadSavedBriefing();
   if (!xrplWs || xrplWs.readyState > 1) { reconnectAttempts = 0; connectXRPL(); }
 }
 
@@ -1911,18 +1676,15 @@ fetchMacroData();
 fetchXRPSupply();
 fetchDashboardData();
 connectXRPL();
-loadSavedBriefing();
 renderJournal();
 renderEvents();
 renderX402();
-fetchNewsFeed();
 fetchGeopolitical();
 setInterval(fetchXRPPrice, 120000);
 setInterval(fetchFearGreed, 300000);
 setInterval(fetchMacroData, 300000);
 setInterval(fetchXRPSupply, 300000);
 setInterval(fetchDashboardData, 600000);
-setInterval(fetchNewsFeed, 900000);
 setInterval(fetchGeopolitical, 1800000);
 </script>
 </body>
