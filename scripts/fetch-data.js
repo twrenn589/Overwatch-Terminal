@@ -418,6 +418,69 @@ async function fetchXRPRadar(fallback) {
   }
 }
 
+// ─── XRPL on-chain metrics (ODL volume proxy) ────────────────────────────────
+
+/**
+ * Fetch XRPL network metrics from XRPScan public API.
+ * Uses /tokens for 24h DEX volume (closest ODL proxy) and /ledger for
+ * throughput/burn stats. Always returns an "xrpl_metrics" object — never throws.
+ */
+async function fetchXRPLMetrics(fallback) {
+  try {
+    const [tokensData, ledgerData] = await Promise.all([
+      fetchJSON('https://xrpscan.com/api/v1/tokens', 15_000),
+      fetchJSON('https://xrpscan.com/api/v1/ledger', 10_000),
+    ]);
+
+    // DEX volume = aggregate across all token pairs (USD, closest ODL proxy)
+    // Use Number(x) || 0 to safely handle null/undefined/NaN metric values
+    let dex_volume_24h_usd = null;
+    let dex_exchanges_24h = null;
+    let dex_takers_24h = null;
+    if (Array.isArray(tokensData)) {
+      dex_volume_24h_usd = tokensData.reduce((s, t) => s + (Number(t.metrics?.volume_24h) || 0), 0);
+      dex_exchanges_24h  = tokensData.reduce((s, t) => s + (Number(t.metrics?.exchanges_24h) || 0), 0);
+      dex_takers_24h     = tokensData.reduce((s, t) => s + (Number(t.metrics?.takers_24h) || 0), 0);
+    }
+
+    // Ledger throughput + fee burn from recent closed ledgers
+    let avg_tx_per_ledger = null;
+    let fee_burn_per_ledger_xrp = null;
+    let current_ledger = null;
+    if (ledgerData?.ledgers && Array.isArray(ledgerData.ledgers) && ledgerData.ledgers.length > 0) {
+      const ledgers = ledgerData.ledgers;
+      current_ledger = ledgerData.current_ledger ?? ledgers[0]?.ledger_index ?? null;
+      avg_tx_per_ledger = Math.round(ledgers.reduce((s, l) => s + (l.tx_count ?? 0), 0) / ledgers.length);
+      // destroyed_coins is negative (fee burn in drops); negate and convert to XRP
+      const totalBurnedDrops = ledgers.reduce((s, l) => s - (l.destroyed_coins ?? 0), 0);
+      fee_burn_per_ledger_xrp = parseFloat((totalBurnedDrops / 1_000_000 / ledgers.length).toFixed(4));
+    }
+
+    const result = {
+      last_fetched:            new Date().toISOString(),
+      source:                  'xrpscan',
+      dex_volume_24h_usd,
+      dex_volume_24h_xrp:     null,   // computed in main() after XRP price is known
+      dex_exchanges_24h,
+      dex_takers_24h,
+      avg_tx_per_ledger,
+      fee_burn_per_ledger_xrp,
+      current_ledger,
+    };
+
+    log('XRPL', `DEX vol 24h=$${dex_volume_24h_usd != null ? (dex_volume_24h_usd / 1e6).toFixed(1) + 'M' : 'N/A'} | trades=${dex_exchanges_24h ?? 'N/A'} | avg_tx/ledger=${avg_tx_per_ledger ?? 'N/A'} | burn=${fee_burn_per_ledger_xrp ?? 'N/A'} XRP/ledger`);
+    return result;
+  } catch (e) {
+    err('XRPL', e.message);
+    return fallback?.xrpl_metrics ?? {
+      last_fetched: null, source: 'none',
+      dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
+      dex_exchanges_24h: null, dex_takers_24h: null,
+      avg_tx_per_ledger: null, fee_burn_per_ledger_xrp: null, current_ledger: null,
+    };
+  }
+}
+
 // ─── News fetcher ─────────────────────────────────────────────────────────────
 
 /**
@@ -556,7 +619,7 @@ async function main() {
   const existing = loadExisting();
 
   // Fetch all live data. Each fetcher is self-contained and falls back gracefully.
-  const [xrp, rlusd, fearGreed, usdJpy, news, etf, supply, btc_etf, eth_etf] = await Promise.all([
+  const [xrp, rlusd, fearGreed, usdJpy, news, etf, supply, btc_etf, eth_etf, xrpl_metrics] = await Promise.all([
     fetchXRP(existing),
     fetchRLUSD(existing),
     fetchFearGreed(existing),
@@ -566,7 +629,13 @@ async function main() {
     fetchXRPRadar(existing),
     fetchBTCETF(existing),
     fetchETHETF(existing),
+    fetchXRPLMetrics(existing),
   ]);
+
+  // Compute XRPL DEX volume in XRP terms now that we have the XRP price
+  if (xrpl_metrics.dex_volume_24h_usd != null && xrp.price != null && xrp.price > 0) {
+    xrpl_metrics.dex_volume_24h_xrp = Math.round(xrpl_metrics.dex_volume_24h_usd / xrp.price);
+  }
 
   // Enrich ETF with % of circulating supply (market_cap / price = circ. supply)
   if (etf.total_xrp_locked != null && xrp.market_cap != null && xrp.price != null && xrp.price > 0) {
@@ -612,6 +681,7 @@ async function main() {
     btc_etf,
     eth_etf,
     supply,
+    xrpl_metrics,
     macro: {
       usd_jpy:       usdJpy,
       jpn_10y: jpn10y,
@@ -641,6 +711,7 @@ async function main() {
   console.log(`ETH ETF (ETHA):  $${eth_etf.total_aum != null ? (eth_etf.total_aum / 1e9).toFixed(2) + 'B' : 'N/A'} | daily: ${eth_etf.daily_flow != null ? (eth_etf.daily_flow >= 0 ? '+' : '') + (eth_etf.daily_flow / 1e6).toFixed(0) + 'M' : 'N/A'} | 5D: ${eth_etf.weekly_net_flow != null ? (eth_etf.weekly_net_flow / 1e6).toFixed(0) + 'M' : 'N/A'}`);
   console.log(`News headlines:  ${news.headlines.length} (source: ${news.source})`);
   console.log(`Supply escrow:   ${supply.escrow != null ? (supply.escrow / 1e9).toFixed(2) + 'B XRP' : 'N/A'} (${supply.source})`);
+  console.log(`XRPL DEX vol:    $${xrpl_metrics.dex_volume_24h_usd != null ? (xrpl_metrics.dex_volume_24h_usd / 1e6).toFixed(1) + 'M' : 'N/A'} | ${xrpl_metrics.dex_exchanges_24h ?? 'N/A'} trades | avg ${xrpl_metrics.avg_tx_per_ledger ?? 'N/A'} tx/ledger (${xrpl_metrics.source})`);
   console.log('───────────────────────────────────────────────\n');
 
   await pushToGitHub();

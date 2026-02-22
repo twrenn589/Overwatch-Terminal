@@ -827,6 +827,40 @@ textarea:focus { border-color:var(--accent-cyan); }
 
   <!-- ==================== XRPL INFRASTRUCTURE ==================== -->
   <div class="tab-panel" id="panel-infra">
+
+    <!-- Network Volume (24h) — auto-populated from dashboard-data.json -->
+    <div class="full-card" style="border-color:rgba(0,229,255,0.15);">
+      <h3>📊 NETWORK VOLUME (24H)</h3>
+      <div class="data-row">
+        <span class="data-label">DEX VOLUME (USD)</span>
+        <span class="data-value cyan" id="xrplDexVol">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">DEX VOLUME (XRP)</span>
+        <span class="data-value" id="xrplDexVolXrp">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">DEX TRADES (24H)</span>
+        <span class="data-value" id="xrplDexTrades">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">UNIQUE TAKERS</span>
+        <span class="data-value" id="xrplDexTakers">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">AVG TX / LEDGER</span>
+        <span class="data-value" id="xrplAvgTx">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">FEE BURN / LEDGER</span>
+        <span class="data-value amber" id="xrplFeeBurn">--</span>
+      </div>
+      <div class="interpret-box" style="margin-top:12px;">
+        <div class="label">ODL PROXY NOTE</div>
+        <p id="xrplVolumeNote">XRPL DEX volume is the closest available proxy for ODL activity. Cross-currency payments (XRP→USD, XRP→MXN, etc.) route through the DEX for currency conversion. Rising DEX volume with high taker counts indicates growing payment corridor utilization consistent with ODL growth.</p>
+      </div>
+    </div>
+
     <div class="full-card" style="border-color:rgba(0,200,200,0.2);">
       <h3>🔧 XRPL AMENDMENT STATUS</h3>
       <div class="data-row"><span class="data-label">Credentials</span><span class="signal green">LIVE</span></div>
@@ -1870,6 +1904,25 @@ async function fetchDashboardData() {
       set('geoAiRace', d.stress.geo_ai_race);
       set('geoTariffs', d.stress.geo_tariffs);
       set('geoGreenland', d.stress.geo_greenland);
+    }
+
+    // XRPL network volume (ODL proxy)
+    if (d.xrpl_metrics) {
+      const m = d.xrpl_metrics;
+      if (m.dex_volume_24h_usd != null) set('xrplDexVol', '$' + (m.dex_volume_24h_usd / 1e6).toFixed(2) + 'M');
+      if (m.dex_volume_24h_xrp != null) set('xrplDexVolXrp', m.dex_volume_24h_xrp.toLocaleString() + ' XRP');
+      if (m.dex_exchanges_24h != null)  set('xrplDexTrades', m.dex_exchanges_24h.toLocaleString());
+      if (m.dex_takers_24h != null)     set('xrplDexTakers', m.dex_takers_24h.toLocaleString());
+      if (m.avg_tx_per_ledger != null)  set('xrplAvgTx', m.avg_tx_per_ledger.toLocaleString() + ' tx');
+      if (m.fee_burn_per_ledger_xrp != null) set('xrplFeeBurn', m.fee_burn_per_ledger_xrp.toFixed(4) + ' XRP');
+
+      // Dynamic ODL note when data is available
+      if (m.dex_volume_24h_usd != null && m.dex_exchanges_24h != null) {
+        const vol = '$' + (m.dex_volume_24h_usd / 1e6).toFixed(1) + 'M';
+        const trades = m.dex_exchanges_24h.toLocaleString();
+        const noteEl = document.getElementById('xrplVolumeNote');
+        if (noteEl) noteEl.textContent = `XRPL DEX processed ${vol} across ${trades} trades in the past 24h. This is the closest available proxy for ODL payment corridor activity — cross-currency payments (XRP↔USD, XRP↔MXN, etc.) route through the DEX for FX conversion. Rising volume with high taker counts indicates growing corridor utilization.`;
+      }
     }
 
     // Last updated timestamp
