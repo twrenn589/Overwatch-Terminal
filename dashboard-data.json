@@ -1,18 +1,18 @@
 {
-  "updated": "2026-02-22T07:08:52.517Z",
+  "updated": "2026-02-22T07:12:20.997Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.42,
-    "change_24h": -0.5332565198747098,
-    "volume_24h": 1378404607.8316636,
+    "change_24h": -0.5926345901040898,
+    "volume_24h": 1373023871.7311633,
     "market_cap": 86735419388.57489
   },
   "rlusd": {
-    "market_cap": 1558269139.6174963,
+    "market_cap": 1558358337.3606184,
     "source": "coingecko"
   },
   "etf": {
-    "last_fetched": "2026-02-22T07:08:51.083Z",
+    "last_fetched": "2026-02-22T07:12:19.618Z",
     "source": "xrp-insights",
     "as_of_date": "2026-02-19",
     "total_aum": 1136362890.9500003,
@@ -77,7 +77,10 @@
         "xrp_locked": 24476035,
         "daily_flow": -1538794
       }
-    ]
+    ],
+    "pct_supply": 1.293,
+    "circ_supply": 61081281260,
+    "num_funds": 7
   },
   "macro": {
     "usd_jpy": 155.21,
@@ -90,9 +93,15 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-22T07:08:51.852Z",
+    "last_fetched": "2026-02-22T07:12:20.387Z",
     "source": "newsdata",
     "headlines": [
+      {
+        "title": "Winter Storms Disrupt Air Travel Across Norway: Oslo, Trondheim, and Stavanger Airports Hit by Major Cancellations and Delays",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/winter-storms-disrupt-air-travel-across-norway-oslo-trondheim-and-stavanger-airports-hit-by-major-cancellations-and-delays/",
+        "published": "2026-02-21 19:10:26"
+      },
       {
         "title": "Behind the recent blockade strangling Cuba",
         "source": "filmdaily",
@@ -146,12 +155,6 @@
         "source": "travelandtourworld",
         "url": "https://www.travelandtourworld.com/news/article/uk-drivers-hit-with-major-travel-nightmare-as-a5025-on-anglesey-shuts-after-crash-north-wales-in-chaos/",
         "published": "2026-02-21 18:24:23"
-      },
-      {
-        "title": "Grubbs coming to Apple Gallery",
-        "source": "thestokesnews",
-        "url": "https://www.thestokesnews.com/arts_and_entertainment/grubbs-coming-to-apple-gallery/article_68379962-ee8e-4328-ba65-9eace865ddd9.html",
-        "published": "2026-02-21 18:22:00"
       }
     ]
   },
@@ -173,7 +176,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1558269139.6174963,
+      "current": 1558358337.3606184,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
