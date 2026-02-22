@@ -1,18 +1,18 @@
 {
-  "updated": "2026-02-22T20:12:31.160Z",
+  "updated": "2026-02-22T20:31:26.867Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.38,
-    "change_24h": -3.95615270645793,
-    "volume_24h": 1299834981.0223072,
-    "market_cap": 84555723927.07216
+    "price": 1.39,
+    "change_24h": -3.9329356978681402,
+    "volume_24h": 1319192351.8764095,
+    "market_cap": 84526500983.74147
   },
   "rlusd": {
-    "market_cap": 1558283960.6645205,
+    "market_cap": 1558143008.7297194,
     "source": "coingecko"
   },
   "etf": {
-    "last_fetched": "2026-02-22T20:12:29.516Z",
+    "last_fetched": "2026-02-22T20:31:25.489Z",
     "source": "xrp-insights",
     "as_of_date": "2026-02-19",
     "total_aum": 1136362890.9500003,
@@ -78,12 +78,12 @@
         "daily_flow": -1538794
       }
     ],
-    "pct_supply": 1.289,
-    "circ_supply": 61272263715,
+    "pct_supply": 1.299,
+    "circ_supply": 60810432362,
     "num_funds": 7
   },
   "btc_etf": {
-    "last_fetched": "2026-02-22T20:12:29.892Z",
+    "last_fetched": "2026-02-22T20:31:25.590Z",
     "source": "ishares-ibit",
     "ticker": "IBIT",
     "as_of_date": "2026-02-20",
@@ -100,7 +100,7 @@
     ]
   },
   "eth_etf": {
-    "last_fetched": "2026-02-22T20:12:29.893Z",
+    "last_fetched": "2026-02-22T20:31:25.642Z",
     "source": "ishares-etha",
     "ticker": "ETHA",
     "as_of_date": "2026-02-20",
@@ -117,7 +117,7 @@
     ]
   },
   "supply": {
-    "last_fetched": "2026-02-22T20:12:30.815Z",
+    "last_fetched": "2026-02-22T20:31:25.979Z",
     "source": "xrp-insights",
     "total_supply": 100000000000,
     "circ_supply": 66075975893,
@@ -139,9 +139,15 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-22T20:12:30.252Z",
+    "last_fetched": "2026-02-22T20:31:26.343Z",
     "source": "newsdata",
     "headlines": [
+      {
+        "title": "SBI Holdings Launches 10B Yen Blockchain Bond With XRP Rewards",
+        "source": "cryptonews",
+        "url": "https://cryptonews.com/news/sbi-holdings-launches-10b-yen-blockchain-bond-with-xrp-rewards/",
+        "published": "2026-02-22 08:13:52"
+      },
       {
         "title": "Europe’s Battery Regulation Rewrites the Rules for a $100 Billion Industry — And the Rest of the World Is Watching",
         "source": "webpronews",
@@ -155,42 +161,6 @@
         "published": "2026-02-22 08:00:51"
       },
       {
-        "title": "Ireland climbs World Rugby rankings after thrashing England in thrilling Six Nations clash in Dublin",
-        "source": "tdpelmedia",
-        "url": "https://tdpelmedia.com/ireland-climbs-world-rugby-rankings-after-thrashing-england-in-thrilling-six-nations-clash-in-dublin/",
-        "published": "2026-02-22 07:37:35"
-      },
-      {
-        "title": "Florida Approves Landmark Vote to Rename Palm Beach International Airport After Donald Trump",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/florida-approves-landmark-vote-to-rename-palm-beach-international-airport-after-donald-trump/",
-        "published": "2026-02-22 07:36:55"
-      },
-      {
-        "title": "SAS Link, KLM, British Airways, and Air France Disrupt European Travel – 22 Flight Delays & 15 Cancellations Spark Chaos in Oslo, Copenhagen & Paris!",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/sas-link-klm-british-airways-and-air-france-disrupt-european-travel-22-flight-delays-15-cancellations-spark-chaos-in-oslo-copenhagen-paris/",
-        "published": "2026-02-22 07:35:00"
-      },
-      {
-        "title": "Asia Faces Major Air Travel Chaos as Indonesia, Malaysia, Japan, China, South Korea, Thailand and More Cancel 26 Flights, Delaying 569 – Batik Air, All Nippon, Cathay Pacific, Korean Air, Condor Airlines Affected in Beijing, Tokyo, Hong Kong, Incheon and Beyond",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/asia-faces-major-air-travel-chaos-as-indonesia-malaysia-japan-china-south-korea-thailand-and-more-cancel-26-flights-delaying-569-batik-air-all-nippon-cathay-pacific-korean-air-cond/",
-        "published": "2026-02-22 07:23:39"
-      },
-      {
-        "title": "China, Japan, South Korea, and India Flock to Jakarta for the 2026 Asian Fencing Championship , How Airlines Like Singapore Airlines and Qatar Airways Are Cashing In on This Economic Boom!",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/china-japan-south-korea-and-india-flock-to-jakarta-for-the-2026-asian-fencing-championship-how-airlines-like-singapore-airlines-and-qatar-airways-are-cashing-in-on-this-economic-boom/",
-        "published": "2026-02-22 07:05:00"
-      },
-      {
-        "title": "Hundreds of Passengers Stranded in Norway as Oslo Airport Delayed 105 and Cancelled 9 Flights, Causing Chaos Across Sweden, Poland, UK, Spain, Italy, and More in Amsterdam, Geneva, Krakow, Stockholm, Munich, and Beyond",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/hundreds-of-passengers-stranded-in-norway-as-oslo-airport-delayed-105-and-cancelled-9-flights-causing-chaos-across-sweden-poland-uk-spain-italy-and-more-in-amsterdam-geneva-krakow-stockholm/",
-        "published": "2026-02-22 07:04:49"
-      },
-      {
         "title": "Robinhood Says Investors View The Bear Market As 'An Opportunity To Buy The Dip'",
         "source": "menafn",
         "url": "https://menafn.com/1110773341/Robinhood-Says-Investors-View-The-Bear-Market-As-An-Opportunity-To-Buy-The-Dip",
@@ -201,6 +171,36 @@
         "source": "myjoyonline",
         "url": "https://www.myjoyonline.com/bridging-blight-and-opportunity-mark-tettey-ayumus-role-in-baltimores-vacant-property-revival-and-workforce-innovation/",
         "published": "2026-02-22 07:00:00"
+      },
+      {
+        "title": "AI agent invasion has people trying to pick winners",
+        "source": "geo",
+        "url": "https://www.geo.tv/latest/652244-ai-agent-invasion-has-people-trying-to-pick-winners",
+        "published": "2026-02-22 06:53:00"
+      },
+      {
+        "title": "Compass Point Issues Pessimistic Forecast for Coinbase Global (NASDAQ:COIN) Stock Price",
+        "source": "defenseworld",
+        "url": "https://www.defenseworld.net/2026/02/22/compass-point-issues-pessimistic-forecast-for-coinbase-global-nasdaqcoin-stock-price.html",
+        "published": "2026-02-22 06:52:43"
+      },
+      {
+        "title": "PM Modi pays tribute to Kerala’s youngest organ donor in Mann Ki Baat",
+        "source": "economictimes_indiatimes",
+        "url": "https://economictimes.indiatimes.com/news/india/pm-modi-pays-tribute-to-keralas-youngest-organ-donor-in-mann-ki-baat/articleshow/128668204.cms",
+        "published": "2026-02-22 06:43:30"
+      },
+      {
+        "title": "From my notebook: The first casualty will be democracy itself",
+        "source": "in_cyprus",
+        "url": "https://in-cyprus.philenews.com/opinion/from-my-notebook-the-first-casualty-will-be-democracy-itself/",
+        "published": "2026-02-22 06:40:00"
+      },
+      {
+        "title": "Stalemate as minimum wage dispute grounds activities at Rufus Giwa Poly",
+        "source": "thenationonlineng",
+        "url": "https://thenationonlineng.net/stalemate-as-minimum-wage-dispute-grounds-activities-at-rufus-giwa-poly/",
+        "published": "2026-02-22 06:39:00"
       }
     ]
   },
@@ -222,7 +222,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1558283960.6645205,
+      "current": 1558143008.7297194,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
@@ -280,13 +280,5 @@
       "status": "STRESSED",
       "confidence": "medium"
     }
-  },
-  "last_analysis": {
-    "timestamp": "2026-02-22T06:21:31.849Z",
-    "run_type": "morning",
-    "stress_level": "ELEVATED",
-    "stress_score": 72,
-    "applied_at": "2026-02-22T19:39:00.629Z",
-    "changes_applied": 0
   }
 }
