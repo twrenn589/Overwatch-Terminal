@@ -246,5 +246,13 @@
       "status": "STRESSED",
       "confidence": "medium"
     }
+  },
+  "last_analysis": {
+    "timestamp": "2026-02-22T06:21:31.849Z",
+    "run_type": "morning",
+    "stress_level": "ELEVATED",
+    "stress_score": 72,
+    "applied_at": "2026-02-22T19:39:00.629Z",
+    "changes_applied": 0
   }
 }
