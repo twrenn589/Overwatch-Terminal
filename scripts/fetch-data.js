@@ -161,6 +161,79 @@ async function fetchFRED(seriesLabel, url, fallbackValue) {
   }
 }
 
+// ─── ETF fetcher ──────────────────────────────────────────────────────────────
+
+/**
+ * Fetch XRP ETF data from xrp-insights.com's internal API.
+ * Returns total AUM, total XRP locked, daily flows, and per-fund breakdown.
+ * Always returns an "etf" object — never throws.
+ */
+async function fetchETF(fallback) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15_000);
+  try {
+    const res = await fetch('https://xrp-insights.com/api/flows?days=14', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
+        'Accept':     'application/json',
+        'Referer':    'https://xrp-insights.com/',
+      },
+      signal: controller.signal,
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    const data = await res.json();
+
+    if (!data?.success || !Array.isArray(data?.daily) || data.daily.length === 0) {
+      throw new Error('Unexpected response shape from xrp-insights API');
+    }
+
+    // Sort newest-first
+    const sorted = [...data.daily].sort((a, b) => b.date.localeCompare(a.date));
+    const latest = sorted[0];
+
+    // Most recent day with actual flow data (skip weekends / zero-flow days)
+    const latestWithFlow = sorted.find(d => d.inflow !== 0 || d.outflow !== 0) ?? latest;
+
+    const funds = (latest.etfFlows ?? []).map(f => ({
+      ticker:     f.ticker,
+      issuer:     f.issuer,
+      aum:        f.aum        ?? null,
+      xrp_locked: f.xrpHoldings ?? null,
+      daily_flow: f.flow       ?? null,
+    }));
+
+    const result = {
+      last_fetched:     new Date().toISOString(),
+      source:           'xrp-insights',
+      as_of_date:       latest.date,
+      total_aum:        latest.totalAUM        ?? null,
+      total_xrp_locked: latest.totalXRP        ?? null,
+      daily_net_flow:   latestWithFlow.netFlow  ?? null,
+      daily_inflow:     latestWithFlow.inflow   ?? null,
+      daily_outflow:    latestWithFlow.outflow  ?? null,
+      flow_date:        latestWithFlow.date     ?? null,
+      funds,
+    };
+
+    log('ETF', `AUM=$${(result.total_aum / 1e6).toFixed(1)}M | XRP=${(result.total_xrp_locked / 1e6).toFixed(0)}M | funds=${funds.length} | flow=${latestWithFlow.date}`);
+    return result;
+  } catch (e) {
+    err('ETF', e.message);
+    return fallback?.etf ?? {
+      last_fetched:     null,
+      source:           'none',
+      total_aum:        null,
+      total_xrp_locked: null,
+      daily_net_flow:   null,
+      daily_inflow:     null,
+      daily_outflow:    null,
+      funds:            [],
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ─── News fetcher ─────────────────────────────────────────────────────────────
 
 /**
@@ -237,10 +310,10 @@ function pct(current, target) {
   return Math.round((current / target) * 100);
 }
 
-function buildKillSwitches(manual, rlusd) {
+function buildKillSwitches(manual, rlusd, etf) {
   const odl    = manual?.odl_volume_annualized ?? null;
   const rlusdC = rlusd?.market_cap ?? manual?.rlusd_circulation ?? null;
-  const etfAum = manual?.xrp_etf_aum ?? null;
+  const etfAum = etf?.total_aum ?? manual?.xrp_etf_aum ?? null;
   const dex    = manual?.permissioned_dex_institutions ?? null;
   const clarity = manual?.clarity_act_status ?? 'pending';
 
@@ -292,12 +365,13 @@ async function main() {
   const existing = loadExisting();
 
   // Fetch all live data. Each fetcher is self-contained and falls back gracefully.
-  const [xrp, rlusd, fearGreed, usdJpy, news] = await Promise.all([
+  const [xrp, rlusd, fearGreed, usdJpy, news, etf] = await Promise.all([
     fetchXRP(existing),
     fetchRLUSD(existing),
     fetchFearGreed(existing),
     fetchUSDJPY(existing),
     fetchNews(existing),
+    fetchETF(existing),
   ]);
 
   // FRED calls are sequential to avoid hammering the API
@@ -332,6 +406,7 @@ async function main() {
     auto_fetched: true,
     xrp,
     rlusd,
+    etf,
     macro: {
       usd_jpy:       usdJpy,
       jpn_10y: jpn10y,
@@ -341,7 +416,7 @@ async function main() {
     },
     news,
     manual,
-    kill_switches:  buildKillSwitches(manual, rlusd),
+    kill_switches:  buildKillSwitches(manual, rlusd, etf),
     thesis_scores,
   };
 
@@ -356,6 +431,7 @@ async function main() {
   console.log(`US 10Y yield:    ${us10y ?? 'N/A'}%`);
   console.log(`Brent crude:     $${brent ?? 'N/A'}`);
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'})`);
+  console.log(`ETF total AUM:   $${etf.total_aum != null ? (etf.total_aum / 1e6).toFixed(1) + 'M' : 'N/A'} | XRP locked: ${etf.total_xrp_locked != null ? (etf.total_xrp_locked / 1e6).toFixed(0) + 'M' : 'N/A'} (${etf.source})`);
   console.log(`News headlines:  ${news.headlines.length} (source: ${news.source})`);
   console.log('───────────────────────────────────────────────\n');
 
