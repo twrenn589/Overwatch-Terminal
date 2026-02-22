@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-22T06:19:54.147Z",
+  "updated": "2026-02-22T06:21:00.049Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.42,
-    "change_24h": -0.9474530054540381,
-    "volume_24h": 1370466019.0556736,
+    "change_24h": -0.9484910764461565,
+    "volume_24h": 1369825418.467722,
     "market_cap": 86668184151.08133
   },
   "rlusd": {
@@ -22,7 +22,7 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-22T06:19:53.468Z",
+    "last_fetched": "2026-02-22T06:20:56.791Z",
     "source": "newsdata",
     "headlines": [
       {
