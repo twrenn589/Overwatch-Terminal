@@ -740,12 +740,12 @@ textarea:focus { border-color:var(--accent-cyan); }
 
     <div class="full-card">
       <h3>📊 STRESS COMPONENTS</h3>
-      <div class="data-row"><span class="data-label">Fear & Greed Index</span><span class="data-value red" id="stressFng">7 — Extreme Fear</span></div>
+      <div class="data-row"><span class="data-label">Fear & Greed Index</span><span class="data-value red" id="stressFng">--</span></div>
       <div class="data-row"><span class="data-label">USD/JPY</span><span class="data-value amber" id="stressJpy">--</span></div>
       <div class="data-row"><span class="data-label">Oil/JPY Trend</span><span class="data-value amber">Breaking up ↗</span></div>
-      <div class="data-row"><span class="data-label">JPN 10Y Yield</span><span class="data-value amber">~2.25% (Record zone)</span></div>
-      <div class="data-row"><span class="data-label">BTC ETF Flows</span><span class="data-value red">-$689M weekly</span></div>
-      <div class="data-row"><span class="data-label">XRP ETF Flows</span><span class="data-value green">+$7.65M weekly (Feb 13)</span></div>
+      <div class="data-row"><span class="data-label">JPN 10Y Yield</span><span class="data-value amber" id="stressJpn10y">--</span></div>
+      <div class="data-row"><span class="data-label">BTC ETF (IBIT)</span><span class="data-value" id="stressBtcEtf">--</span></div>
+      <div class="data-row"><span class="data-label">XRP ETF Flows</span><span class="data-value" id="stressXrpEtf">--</span></div>
       <div class="interpret-box">
         <div class="label">STRESS INTERPRETATION</div>
         <p>Extreme fear in crypto markets while Japan fiscal stress accelerates. Oil/JPY breaking upward from descending wedge adds energy cost pressure. BTC/ETH seeing institutional outflows while XRP sees continued inflows — divergent behavior signals thesis-driven accumulation vs. macro panic selling. Monitor BOJ rate decision as primary catalyst for stress resolution or escalation.</p>
@@ -861,7 +861,7 @@ textarea:focus { border-color:var(--accent-cyan); }
     <div class="full-card">
       <h3>🇯🇵 JAPAN — CRITICAL VECTOR</h3>
       <div class="data-row"><span class="data-label">USD/JPY</span><span class="data-value amber" id="macroJpy">--</span></div>
-      <div class="data-row"><span class="data-label">JPN 10Y Yield</span><span class="data-value amber">~2.25%</span></div>
+      <div class="data-row"><span class="data-label">JPN 10Y Yield</span><span class="data-value amber" id="macroJpn10y">--</span></div>
       <div class="data-row"><span class="data-label">JPN 40Y Yield</span><span class="data-value red">>4% (Record)</span></div>
       <div class="data-row"><span class="data-label">Govt</span><span class="data-value green">LDP Supermajority (310+ seats)</span></div>
       <div class="data-row"><span class="data-label">Fiscal Package</span><span class="data-value">¥21.3T stimulus</span></div>
@@ -882,10 +882,11 @@ textarea:focus { border-color:var(--accent-cyan); }
     </div>
 
     <div class="full-card">
-      <h3>🛢 ENERGY & COMMODITIES</h3>
-      <div class="data-row"><span class="data-label">Oil/JPY</span><span class="data-value amber">Breaking out of descending wedge</span></div>
-      <div class="data-row"><span class="data-label">Brent/JPY</span><span class="data-value">¥10,874</span></div>
-      <div class="data-row"><span class="data-label">WTI/JPY</span><span class="data-value">¥10,125</span></div>
+      <h3>🛢 ENERGY & RATES</h3>
+      <div class="data-row"><span class="data-label">Oil/JPY Trend</span><span class="data-value amber">Breaking out of descending wedge</span></div>
+      <div class="data-row"><span class="data-label">Brent Crude</span><span class="data-value" id="macroBrentUsd">--</span></div>
+      <div class="data-row"><span class="data-label">Brent/JPY</span><span class="data-value" id="macroBrentJpy">--</span></div>
+      <div class="data-row"><span class="data-label">US 10Y Yield</span><span class="data-value" id="macroUs10y">--</span></div>
       <div class="data-row"><span class="data-label">Hormuz Risk</span><span class="data-value amber">Elevated</span></div>
       <div class="interpret-box">
         <div class="label">ENERGY INTERPRETATION</div>
@@ -1663,24 +1664,27 @@ async function fetchFearGreed() {
 }
 
 // ===== STRESS INDEX =====
-let lastFng = 50;
-function updateStressIndex(fng) {
-  lastFng = fng;
-  // Invert: low fear & greed = high stress
-  const stress = Math.max(0, Math.min(100, 100 - fng));
-  document.getElementById('stressScore').textContent = stress + '/100';
-
+// updateStressScore: sets stress score display. Called from fetchFearGreed (F&G only)
+// and overwritten by fetchDashboardData (multi-factor) on each JSON refresh.
+function updateStressScore(score) {
+  score = Math.max(0, Math.min(100, Math.round(score)));
   let label, color;
-  if (stress >= 75) { label = 'CRITICAL'; color = 'var(--accent-red)'; }
-  else if (stress >= 50) { label = 'ELEVATED'; color = 'var(--accent-amber)'; }
-  else if (stress >= 25) { label = 'MODERATE'; color = 'var(--accent-blue)'; }
-  else { label = 'LOW'; color = 'var(--accent-green)'; }
+  if (score >= 80) { label = 'CRITICAL'; color = 'var(--accent-red)'; }
+  else if (score >= 60) { label = 'ELEVATED'; color = 'var(--accent-amber)'; }
+  else if (score >= 40) { label = 'MODERATE'; color = 'var(--accent-blue)'; }
+  else { label = 'LOW RISK'; color = 'var(--accent-green)'; }
 
-  document.getElementById('stressLabel').textContent = label;
-  document.getElementById('stressScore').style.color = color;
-  const fill = document.getElementById('stressFill');
-  fill.style.width = stress + '%';
-  fill.style.background = color;
+  const scoreEl = document.getElementById('stressScore');
+  if (scoreEl) { scoreEl.textContent = score; scoreEl.style.color = color; }
+  const lblEl = document.getElementById('stressLabel');
+  if (lblEl) lblEl.textContent = label;
+  const fillEl = document.getElementById('stressFill');
+  if (fillEl) { fillEl.style.width = score + '%'; fillEl.style.background = color; }
+}
+
+// Legacy: called from fetchFearGreed as a quick single-factor estimate
+function updateStressIndex(fng) {
+  updateStressScore(100 - fng);
 }
 
 // ===== USD/JPY =====
@@ -1836,20 +1840,67 @@ async function fetchDashboardData() {
     const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
     const setHtml = (id, val) => { const el = document.getElementById(id); if (el && val) el.innerHTML = val; };
 
-    // Macro data
+    // Macro data — wired to live dashboard-data.json fields
     if (d.macro) {
-      set('jpn10y', '~' + d.macro.jpn_10y + '%');
-      set('macroJpn10y', d.macro.jpn_10y + '%');
-      set('macroJpn40y', '>' + d.macro.jpn_40y + '%');
-      set('macroBojRate', d.macro.boj_rate + '%');
-      set('macroBojHike', d.macro.boj_next_hike);
-      set('macroDebtGdp', d.macro.debt_gdp + '%');
-      set('macroFiscal', '¥' + d.macro.fiscal_package + ' stimulus');
-      set('macroBudget', '¥' + d.macro.fy2026_budget);
-      set('macroSeats', 'LDP Supermajority (' + d.macro.takaichi_seats + ' seats)');
-      set('macroBrentJpy', '¥' + parseInt(d.macro.brent_jpy).toLocaleString());
-      set('macroWtiJpy', '¥' + parseInt(d.macro.wti_jpy).toLocaleString());
-      set('macroOilTrend', d.macro.oil_jpy_trend);
+      const m = d.macro;
+
+      // USD/JPY: seed all elements from JSON; fetchMacroData() will overwrite with live rate
+      if (m.usd_jpy != null) {
+        const jpyFmt = '¥' + m.usd_jpy.toFixed(2);
+        set('usdJpy', jpyFmt);
+        set('summaryJpy', jpyFmt);
+        set('macroJpy', jpyFmt);
+        const stressJpyEl = document.getElementById('stressJpy');
+        if (stressJpyEl) {
+          stressJpyEl.textContent = jpyFmt + (m.usd_jpy >= 155 ? ' ⚠' : '');
+          stressJpyEl.className = 'data-value ' + (m.usd_jpy >= 158 ? 'red' : m.usd_jpy >= 153 ? 'amber' : '');
+        }
+      }
+
+      // JPN 10Y yield: header pill, macro tab, stress tab
+      if (m.jpn_10y != null) {
+        set('jpn10y', m.jpn_10y.toFixed(2) + '%');
+        set('macroJpn10y', m.jpn_10y.toFixed(2) + '%');
+        const stressJpnEl = document.getElementById('stressJpn10y');
+        if (stressJpnEl) {
+          stressJpnEl.textContent = m.jpn_10y.toFixed(2) + '%' + (m.jpn_10y >= 2.0 ? ' (Record zone)' : '');
+          stressJpnEl.className = 'data-value ' + (m.jpn_10y >= 2.5 ? 'red' : m.jpn_10y >= 2.0 ? 'amber' : '');
+        }
+      }
+
+      // Brent crude (USD) + Brent/JPY (computed)
+      if (m.brent_crude != null) {
+        set('macroBrentUsd', '$' + m.brent_crude.toFixed(2));
+        if (m.usd_jpy != null) {
+          set('macroBrentJpy', '¥' + Math.round(m.brent_crude * m.usd_jpy).toLocaleString());
+        }
+      }
+
+      // US 10Y yield
+      if (m.us_10y_yield != null) {
+        set('macroUs10y', m.us_10y_yield.toFixed(2) + '%');
+      }
+
+      // Fear & Greed → stress tab
+      if (m.fear_greed?.value != null) {
+        const fgEl = document.getElementById('stressFng');
+        if (fgEl) {
+          fgEl.textContent = m.fear_greed.value + ' — ' + m.fear_greed.label;
+          fgEl.className = 'data-value ' + (m.fear_greed.value <= 25 ? 'red' : m.fear_greed.value <= 45 ? 'amber' : 'green');
+        }
+      }
+
+      // Stress score: computed from live macro inputs (stepped thresholds)
+      const stressInputs = [];
+      if (m.fear_greed?.value != null) stressInputs.push(100 - m.fear_greed.value);
+      if (m.usd_jpy      != null) stressInputs.push(m.usd_jpy >= 160 ? 100 : m.usd_jpy >= 155 ? 75 : m.usd_jpy >= 150 ? 50 : m.usd_jpy >= 145 ? 25 : 10);
+      if (m.jpn_10y      != null) stressInputs.push(m.jpn_10y >= 2.5 ? 100 : m.jpn_10y >= 2.0 ? 75 : m.jpn_10y >= 1.5 ? 50 : 25);
+      if (m.brent_crude  != null) stressInputs.push(m.brent_crude >= 100 ? 100 : m.brent_crude >= 85 ? 75 : m.brent_crude >= 75 ? 50 : m.brent_crude >= 65 ? 25 : 10);
+      if (m.us_10y_yield != null) stressInputs.push(m.us_10y_yield >= 5.0 ? 100 : m.us_10y_yield >= 4.5 ? 75 : m.us_10y_yield >= 4.0 ? 50 : m.us_10y_yield >= 3.5 ? 25 : 10);
+
+      if (stressInputs.length > 0) {
+        updateStressScore(stressInputs.reduce((s, v) => s + v, 0) / stressInputs.length);
+      }
     }
 
     // ETF data
@@ -1889,6 +1940,14 @@ async function fetchDashboardData() {
       if (xrpWEl && e.weekly_net_flow != null) {
         xrpWEl.textContent = fmtM(e.weekly_net_flow);
         xrpWEl.className = 'data-value ' + cls(e.weekly_net_flow);
+      }
+
+      // XRP ETF flows → stress tab
+      const xrpStressFlow = e.weekly_net_flow ?? e.daily_net_flow;
+      const xrpStressEl = document.getElementById('stressXrpEtf');
+      if (xrpStressEl && xrpStressFlow != null) {
+        xrpStressEl.textContent = fmtM(xrpStressFlow) + ' 5D';
+        xrpStressEl.className = 'data-value ' + cls(xrpStressFlow);
       }
 
       // Per-fund table
@@ -2031,6 +2090,15 @@ async function fetchDashboardData() {
       if (ewEl) {
         if (e2.weekly_net_flow != null) { ewEl.textContent = fmtMc(e2.weekly_net_flow); ewEl.className = 'data-value ' + clsc(e2.weekly_net_flow); }
         else ewEl.textContent = 'building history…';
+      }
+
+      // BTC ETF (IBIT) flows → stress tab
+      const btcStressFlow = b.weekly_net_flow ?? b.daily_flow;
+      const btcStressEl = document.getElementById('stressBtcEtf');
+      if (btcStressEl && btcStressFlow != null) {
+        const fmtMc = v => (v >= 0 ? '+' : '') + '$' + (Math.abs(v) / 1e6).toFixed(0) + 'M 5D';
+        btcStressEl.textContent = fmtMc(btcStressFlow) + ' (IBIT)';
+        btcStressEl.className = 'data-value ' + (btcStressFlow >= 0 ? 'green' : 'red');
       }
 
       // Divergence signal — uses 5-day flows when available, falls back to daily
