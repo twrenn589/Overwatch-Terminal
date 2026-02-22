@@ -1,14 +1,14 @@
 {
-  "updated": "2026-02-22T06:13:53.220Z",
+  "updated": "2026-02-22T06:16:24.655Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.42,
-    "change_24h": -0.87075545301908,
-    "volume_24h": 1375486078.243894,
-    "market_cap": 86631920219.70178
+    "change_24h": -0.9030063486653684,
+    "volume_24h": 1375608654.5141132,
+    "market_cap": 86668184151.08133
   },
   "rlusd": {
-    "market_cap": 1558710735.5255172,
+    "market_cap": 1558462050.239657,
     "source": "coingecko"
   },
   "macro": {
@@ -44,7 +44,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1558710735.5255172,
+      "current": 1558462050.239657,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
