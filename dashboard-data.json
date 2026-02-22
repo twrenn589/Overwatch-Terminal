@@ -1,15 +1,77 @@
 {
-  "updated": "2026-02-22T06:21:00.049Z",
+  "updated": "2026-02-22T07:01:41.169Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.42,
-    "change_24h": -0.9484910764461565,
-    "volume_24h": 1369825418.467722,
-    "market_cap": 86668184151.08133
+    "change_24h": -0.40185077620586773,
+    "volume_24h": 1376600793.5317683,
+    "market_cap": 86825004357.65723
   },
   "rlusd": {
-    "market_cap": 1558462050.239657,
+    "market_cap": 1558260640.2813933,
     "source": "coingecko"
+  },
+  "etf": {
+    "last_fetched": "2026-02-22T07:01:39.787Z",
+    "source": "xrp-insights",
+    "as_of_date": "2026-02-19",
+    "total_aum": 1136362890.9500003,
+    "total_xrp_locked": 789996736.7903999,
+    "daily_net_flow": -217055.52220004052,
+    "daily_inflow": 2876465.119999975,
+    "daily_outflow": 3093520.6422000155,
+    "flow_date": "2026-02-19",
+    "funds": [
+      {
+        "ticker": "XRPC",
+        "issuer": "Canary Capital",
+        "aum": 269509488.38,
+        "xrp_locked": 191388113.89,
+        "daily_flow": -2619.390000015497
+      },
+      {
+        "ticker": "XRP",
+        "issuer": "Bitwise",
+        "aum": 262105243.8,
+        "xrp_locked": 186115958.92,
+        "daily_flow": 1790344.4399999976
+      },
+      {
+        "ticker": "XRPZ",
+        "issuer": "Franklin Templeton",
+        "aum": 233259866.18,
+        "xrp_locked": 165633403.76,
+        "daily_flow": 1086120.6799999774
+      },
+      {
+        "ticker": "TOXR",
+        "issuer": "21Shares",
+        "aum": 173076313.59,
+        "xrp_locked": 122971034.88,
+        "daily_flow": 0
+      },
+      {
+        "ticker": "XRPR",
+        "issuer": "REX-Osprey",
+        "aum": 88368750,
+        "xrp_locked": 45862550,
+        "daily_flow": 0
+      },
+      {
+        "ticker": "GXRP",
+        "issuer": "Grayscale",
+        "aum": 75531018,
+        "xrp_locked": 53549640.3404,
+        "daily_flow": -1552107.2522
+      },
+      {
+        "ticker": "BITW",
+        "issuer": "Bitwise Index",
+        "aum": 34512211,
+        "xrp_locked": 24476035,
+        "daily_flow": -1538794
+      }
+    ]
   },
   "macro": {
     "usd_jpy": 155.21,
@@ -22,68 +84,68 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-22T06:20:56.791Z",
+    "last_fetched": "2026-02-22T07:01:40.478Z",
     "source": "newsdata",
     "headlines": [
+      {
+        "title": "US Lawmakers Slam Trump Tariffs, Warn They Will Derail The Economy",
+        "source": "menafn",
+        "url": "https://menafn.com/1110771957/US-Lawmakers-Slam-Trump-Tariffs-Warn-They-Will-Derail-The-Economy",
+        "published": "2026-02-21 19:00:56"
+      },
+      {
+        "title": "Travel Setback Hits France as SAS and Air France Ground 3 Flights with Multiple Delays, Affecting Major Airports in Paris",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/travel-setback-hits-france-as-sas-and-air-france-ground-3-flights-with-multiple-delays-affecting-major-airports-in-paris/",
+        "published": "2026-02-21 18:52:08"
+      },
+      {
+        "title": "Travel Disruption Across Brazil as 9 Delays and 2 Cancellations Affect Passengers on LATAM, Gol, and Azul Flights to São Paulo, Rio, Belo Horizonte, Curitiba, and International Destinations",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/travel-disruption-across-brazil-as-9-delays-and-2-cancellations-affect-passengers-on-latam-gol-and-azul-flights-to-sao-paulo-rio-belo-horizonte-curitiba-and-international-destinations/",
+        "published": "2026-02-21 18:49:44"
+      },
+      {
+        "title": "Jets Named as ‘Best Team Fit’ for Super Bowl Champion CB",
+        "source": "yardbarker",
+        "url": "https://www.yardbarker.com/nfl/articles/jets_named_as_best_team_fit_for_super_bowl_champion_cb/s1_17068_43499486",
+        "published": "2026-02-21 18:41:23"
+      },
+      {
+        "title": "Cup Series At Atlanta: Full Autotrader 400 Starting Lineup",
+        "source": "yardbarker",
+        "url": "https://www.yardbarker.com/nascar/articles/cup_series_at_atlanta_full_autotrader_400_starting_lineup/s1_17396_43499418",
+        "published": "2026-02-21 18:39:12"
+      },
+      {
+        "title": "Norway Hit by Travel Interference as 119 Flights are Affected by Delays and Cancellations across Airports of Oslo, Trondheim and Stavanger, Impacting Scandinavian Airlines, SAS Link, Norwegian Air Shuttle and others, New Update",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/norway-hit-by-travel-interference-as-119-flights-are-affected-by-delays-and-cancellations-across-airports-of-oslo-trondheim-and-stavanger-impacting-scandinavian-airlines-sas-link-norwegian-air-shuttle/",
+        "published": "2026-02-21 18:31:09"
+      },
+      {
+        "title": "Portland Fuel Hub Time Bomb Ignites Billion-Dollar Liability Fight",
+        "source": "hoodline",
+        "url": "https://hoodline.com/2026/02/portland-fuel-hub-time-bomb-ignites-billion-dollar-liability-fight/",
+        "published": "2026-02-21 18:30:07"
+      },
+      {
+        "title": "UK Drivers Hit With Major Travel Nightmare as A5025 on Anglesey Shuts After Crash – North Wales in Chaos",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/uk-drivers-hit-with-major-travel-nightmare-as-a5025-on-anglesey-shuts-after-crash-north-wales-in-chaos/",
+        "published": "2026-02-21 18:24:23"
+      },
+      {
+        "title": "Grubbs coming to Apple Gallery",
+        "source": "thestokesnews",
+        "url": "https://www.thestokesnews.com/arts_and_entertainment/grubbs-coming-to-apple-gallery/article_68379962-ee8e-4328-ba65-9eace865ddd9.html",
+        "published": "2026-02-21 18:22:00"
+      },
       {
         "title": "James Altucher Named A Leading Technology Expert Following Recent Presentation",
         "source": "menafn",
         "url": "https://menafn.com/1110771950/James-Altucher-Named-A-Leading-Technology-Expert-Following-Recent-Presentation",
         "published": "2026-02-21 18:15:57"
-      },
-      {
-        "title": "Canada Joins Germany, South Korea, France, China, India, and Others in Driving US Tourism Freefall With Over Ten Billion Dollars in Lost Revenue Last Year: Everything You Need to Know",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/canada-joins-germany-south-korea-france-china-india-and-others-in-driving-us-tourism-freefall-with-over-ten-billion-dollars-in-lost-revenue-last-year-everything-you-need-to-know/",
-        "published": "2026-02-21 18:12:50"
-      },
-      {
-        "title": "Moldova Shuts Skies to Afghanistan and Russia: A Heartbreaking Blow to Global Travelers and Tourism",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/moldova-shuts-skies-to-afghanistan-and-russia-a-heartbreaking-blow-to-global-travelers-and-tourism/",
-        "published": "2026-02-21 18:09:53"
-      },
-      {
-        "title": "Why Colorado Fans Should Watch Transfer Quarterback Ryan Staub at Tennessee",
-        "source": "si",
-        "url": "https://www.si.com/college/colorado/football/colorado-buffaloes-fans-watch-transfer-portal-quarterback-ryan-staub-tennessee-volunteers",
-        "published": "2026-02-21 18:00:03"
-      },
-      {
-        "title": "Why the Companies Using AI Will Beat the Ones Building It",
-        "source": "investorplace",
-        "url": "https://investorplace.com/smartmoney/2026/02/companies-using-ai-beat-ones-building/",
-        "published": "2026-02-21 18:00:00"
-      },
-      {
-        "title": "Germany’s Merz hopes for relief after Trump tariff verdict but uncertainty lingers",
-        "source": "brecorder",
-        "url": "https://www.brecorder.com/news/40408352/germanys-merz-hopes-for-relief-after-trump-tariff-verdict-but-uncertainty-lingers",
-        "published": "2026-02-21 17:58:50"
-      },
-      {
-        "title": "Chiefs Strongly Linked to Explosive 1,000-Yard RB as NFL Free Agency Nears",
-        "source": "newsweek",
-        "url": "https://www.newsweek.com/sports/nfl/chiefs-strongly-linked-to-explosive-1000-yard-rb-as-nfl-free-agency-nears-11561062",
-        "published": "2026-02-21 17:50:11"
-      },
-      {
-        "title": "This Ocean Is Losing Salt at Unprecedented Speed, And It Might Just Turn Our Climate Plans Upside Down",
-        "source": "dailygalaxy",
-        "url": "https://dailygalaxy.com/2026/02/ocean-losing-salt-why-it-matters-planet/",
-        "published": "2026-02-21 17:45:00"
-      },
-      {
-        "title": "Chiang Rai, Thailand: Transforming Environmental Adversity into a Sustainable Tourism Revival on the Mae Yao River",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/chiang-rai-thailand-transforming-environmental-adversity-into-a-sustainable-tourism-revival-on-the-mae-yao-river/",
-        "published": "2026-02-21 17:44:36"
-      },
-      {
-        "title": "Mediterranean Destinations See Costa Serena Return Boost Tourism in Italy, Spain, France, Greece 2027: All You Need to Know",
-        "source": "travelandtourworld",
-        "url": "https://www.travelandtourworld.com/news/article/mediterranean-destinations-see-costa-serena-return-boost-tourism-in-italy-spain-france-greece-2027/",
-        "published": "2026-02-21 17:38:19"
       }
     ]
   },
@@ -105,17 +167,17 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1558462050.239657,
+      "current": 1558260640.2813933,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
     },
     "xrp_etf_aum": {
       "target": 5000000000,
-      "current": null,
+      "current": 1136362890.9500003,
       "deadline": "2026-12-31",
-      "status": "NEEDS_DATA",
-      "pct_complete": null
+      "status": "TRACKING",
+      "pct_complete": 23
     },
     "permissioned_dex_adoption": {
       "target_institutions": 5,
@@ -163,13 +225,5 @@
       "status": "STRESSED",
       "confidence": "medium"
     }
-  },
-  "last_analysis": {
-    "timestamp": "2026-02-22T06:21:31.849Z",
-    "run_type": "morning",
-    "stress_level": "ELEVATED",
-    "stress_score": 72,
-    "applied_at": "2026-02-22T06:23:44.296Z",
-    "changes_applied": 0
   }
 }
