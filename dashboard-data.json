@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-22T06:17:23.901Z",
+  "updated": "2026-02-22T06:19:54.147Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.42,
-    "change_24h": -0.9363530537212738,
-    "volume_24h": 1373630989.591808,
+    "change_24h": -0.9474530054540381,
+    "volume_24h": 1370466019.0556736,
     "market_cap": 86668184151.08133
   },
   "rlusd": {
@@ -22,9 +22,70 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-22T06:10:34.716Z",
-    "source": "none",
-    "headlines": []
+    "last_fetched": "2026-02-22T06:19:53.468Z",
+    "source": "newsdata",
+    "headlines": [
+      {
+        "title": "James Altucher Named A Leading Technology Expert Following Recent Presentation",
+        "source": "menafn",
+        "url": "https://menafn.com/1110771950/James-Altucher-Named-A-Leading-Technology-Expert-Following-Recent-Presentation",
+        "published": "2026-02-21 18:15:57"
+      },
+      {
+        "title": "Canada Joins Germany, South Korea, France, China, India, and Others in Driving US Tourism Freefall With Over Ten Billion Dollars in Lost Revenue Last Year: Everything You Need to Know",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/canada-joins-germany-south-korea-france-china-india-and-others-in-driving-us-tourism-freefall-with-over-ten-billion-dollars-in-lost-revenue-last-year-everything-you-need-to-know/",
+        "published": "2026-02-21 18:12:50"
+      },
+      {
+        "title": "Moldova Shuts Skies to Afghanistan and Russia: A Heartbreaking Blow to Global Travelers and Tourism",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/moldova-shuts-skies-to-afghanistan-and-russia-a-heartbreaking-blow-to-global-travelers-and-tourism/",
+        "published": "2026-02-21 18:09:53"
+      },
+      {
+        "title": "Why Colorado Fans Should Watch Transfer Quarterback Ryan Staub at Tennessee",
+        "source": "si",
+        "url": "https://www.si.com/college/colorado/football/colorado-buffaloes-fans-watch-transfer-portal-quarterback-ryan-staub-tennessee-volunteers",
+        "published": "2026-02-21 18:00:03"
+      },
+      {
+        "title": "Why the Companies Using AI Will Beat the Ones Building It",
+        "source": "investorplace",
+        "url": "https://investorplace.com/smartmoney/2026/02/companies-using-ai-beat-ones-building/",
+        "published": "2026-02-21 18:00:00"
+      },
+      {
+        "title": "Germany’s Merz hopes for relief after Trump tariff verdict but uncertainty lingers",
+        "source": "brecorder",
+        "url": "https://www.brecorder.com/news/40408352/germanys-merz-hopes-for-relief-after-trump-tariff-verdict-but-uncertainty-lingers",
+        "published": "2026-02-21 17:58:50"
+      },
+      {
+        "title": "Chiefs Strongly Linked to Explosive 1,000-Yard RB as NFL Free Agency Nears",
+        "source": "newsweek",
+        "url": "https://www.newsweek.com/sports/nfl/chiefs-strongly-linked-to-explosive-1000-yard-rb-as-nfl-free-agency-nears-11561062",
+        "published": "2026-02-21 17:50:11"
+      },
+      {
+        "title": "This Ocean Is Losing Salt at Unprecedented Speed, And It Might Just Turn Our Climate Plans Upside Down",
+        "source": "dailygalaxy",
+        "url": "https://dailygalaxy.com/2026/02/ocean-losing-salt-why-it-matters-planet/",
+        "published": "2026-02-21 17:45:00"
+      },
+      {
+        "title": "Chiang Rai, Thailand: Transforming Environmental Adversity into a Sustainable Tourism Revival on the Mae Yao River",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/chiang-rai-thailand-transforming-environmental-adversity-into-a-sustainable-tourism-revival-on-the-mae-yao-river/",
+        "published": "2026-02-21 17:44:36"
+      },
+      {
+        "title": "Mediterranean Destinations See Costa Serena Return Boost Tourism in Italy, Spain, France, Greece 2027: All You Need to Know",
+        "source": "travelandtourworld",
+        "url": "https://www.travelandtourworld.com/news/article/mediterranean-destinations-see-costa-serena-return-boost-tourism-in-italy-spain-france-greece-2027/",
+        "published": "2026-02-21 17:38:19"
+      }
+    ]
   },
   "manual": {
     "odl_volume_annualized": null,
