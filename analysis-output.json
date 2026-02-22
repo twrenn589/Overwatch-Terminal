@@ -1,33 +1,30 @@
 {
-  "timestamp": "2026-02-22T03:47:30.913Z",
-  "run_type": "evening",
-  "market_summary": "XRP down 0.56% to $1.42 amid extreme fear (F&G: 9). Volume remains healthy at $1.4B. Macro stress elevated with USD/JPY at 155.21 and JGB yields at 2.24%.",
-  "thesis_pulse": "Institutional adoption metrics continue tracking toward targets despite market fear. RLUSD circulation at $1.56B (31% of $5B target) shows steady growth. XRP ETF AUM at $1.5B (30% of target) remains on trajectory. Critical data gaps persist for ODL volume and permissioned DEX adoption. Macro stress elevated but not critical, with USD/JPY at threshold level.",
+  "timestamp": "2026-02-22T06:21:31.849Z",
+  "run_type": "morning",
+  "market_summary": "XRP trading at $1.42 (-0.95% 24h) with healthy volume at $1.37B. Market sentiment remains in extreme fear territory (F&G: 9) as macro stress continues.",
+  "thesis_pulse": "Thesis framework remains intact with no kill switches triggered. RLUSD circulation at $1.56B (31% of $5B target) continues steady growth trajectory. Critical data gaps persist in ODL volume and XRP ETF AUM tracking. Macro stress environment elevated with USD/JPY at 155.21 (at elevated threshold) and JGB 10Y at 2.24% (above critical 2% level). News cycle shows no thesis-relevant developments.",
   "stress_assessment": {
     "level": "ELEVATED",
     "score": 72,
-    "interpretation": "Multiple stress indicators elevated: USD/JPY at 155.21 (threshold level), JGB yields at 2.24% (above critical 2%), extreme market fear at 9. Oil at $69.77 remains manageable but geopolitical tensions high."
+    "interpretation": "Multiple stress indicators flashing warning signals. USD/JPY at 155.21 hits elevated threshold while JGB yields at 2.24% exceed critical 2% level. Fear & Greed at extreme fear (9) reflects broader market anxiety."
   },
   "kill_switch_updates": [],
   "scorecard_updates": [],
   "alerts": [
     {
       "severity": "WARNING",
-      "message": "USD/JPY at 155.21 - at elevated stress threshold, monitor for breakthrough above 155"
+      "message": "JGB 10Y yield at 2.24% exceeds critical 2% threshold, indicating elevated Japan financial stress"
     },
     {
       "severity": "WARNING",
-      "message": "JGB 10Y yield at 2.24% - above critical threshold of 2%, indicating Japanese monetary stress"
+      "message": "USD/JPY at 155.21 reaches elevated stress threshold (>155), approaching critical level"
     },
     {
       "severity": "INFO",
-      "message": "Fear & Greed index at 9 (Extreme Fear) - potential contrarian opportunity but monitor for capitulation"
-    },
-    {
-      "severity": "WARNING",
-      "message": "Manual data stale since Feb 18 - ODL volume and permissioned DEX metrics unavailable for 4 days"
+      "message": "Multiple critical data points remain unavailable: ODL volume, XRP ETF AUM, permissioned DEX adoption"
     }
   ],
-  "etf_analysis": "ETF data unavailable for current analysis. Manual update shows $1.5B AUM, tracking 30% toward $5B target.",
-  "macro_analysis": "Elevated stress environment with USD/JPY at threshold and JGB yields in critical territory above 2%. Oil manageable at $69.77 but geopolitical risks remain high."
+  "etf_analysis": "No current ETF flow data available in dashboard. Need daily flow tracking to assess institutional sentiment and monitor for significant outflow warnings.",
+  "macro_analysis": "Japan showing elevated financial stress with JGB yields above critical levels and yen weakness persisting. Oil at $69.77 remains well below elevated threshold, providing some macro stability.",
+  "events_draft": []
 }

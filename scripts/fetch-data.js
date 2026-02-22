@@ -161,6 +161,75 @@ async function fetchFRED(seriesLabel, url, fallbackValue) {
   }
 }
 
+// ─── News fetcher ─────────────────────────────────────────────────────────────
+
+/**
+ * Fetch recent XRP/Ripple news headlines.
+ * Tries CryptoPanic free tier first (requires CRYPTOPANIC_API_KEY);
+ * falls back to NewsData.io if NEWSDATA_API_KEY is set.
+ * Always returns a "news" object — never throws.
+ */
+async function fetchNews(fallback) {
+  // ── CryptoPanic ────────────────────────────────────────────────────────────
+  const cpKey = process.env.CRYPTOPANIC_API_KEY;
+  if (cpKey) {
+    try {
+      await sleep(500);
+      const cpUrl = `https://cryptopanic.com/api/free/v1/posts/?auth_token=${encodeURIComponent(cpKey)}&currencies=XRP&kind=news&filter=important`;
+      const data = await fetchJSON(cpUrl, 12_000);
+      const results = data?.results;
+      if (!Array.isArray(results) || results.length === 0) throw new Error('Empty or unexpected CryptoPanic response');
+
+      const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+      const headlines = results
+        .filter(p => p.title && new Date(p.published_at).getTime() > cutoff)
+        .slice(0, 15)
+        .map(p => ({
+          title:     p.title,
+          source:    p.source?.title ?? 'CryptoPanic',
+          url:       p.url ?? '',
+          published: p.published_at ?? null,
+        }));
+
+      log('News', `CryptoPanic: ${headlines.length} headlines (last 24h)`);
+      return { last_fetched: new Date().toISOString(), source: 'cryptopanic', headlines };
+    } catch (e) {
+      warn('News', `CryptoPanic failed (${e.message}) — trying NewsData.io`);
+    }
+  } else {
+    warn('News', 'CRYPTOPANIC_API_KEY not set — skipping CryptoPanic');
+  }
+
+  // ── NewsData.io fallback ───────────────────────────────────────────────────
+  const ndKey = process.env.NEWSDATA_API_KEY;
+  if (ndKey) {
+    try {
+      const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL&language=en&size=10`;
+      const data = await fetchJSON(ndUrl, 12_000);
+      const results = data?.results;
+      if (!Array.isArray(results) || results.length === 0) throw new Error('Empty NewsData.io response');
+
+      const headlines = results.slice(0, 15).map(p => ({
+        title:     p.title ?? '',
+        source:    p.source_id ?? 'NewsData',
+        url:       p.link ?? '',
+        published: p.pubDate ?? null,
+      }));
+
+      log('News', `NewsData.io: ${headlines.length} headlines`);
+      return { last_fetched: new Date().toISOString(), source: 'newsdata', headlines };
+    } catch (e2) {
+      err('News', `NewsData.io also failed: ${e2.message}`);
+    }
+  } else {
+    warn('News', 'NEWSDATA_API_KEY not set — no fallback available');
+  }
+
+  // ── Graceful degradation ───────────────────────────────────────────────────
+  warn('News', 'Using cached/empty headlines');
+  return fallback?.news ?? { last_fetched: new Date().toISOString(), source: 'none', headlines: [] };
+}
+
 // ─── Kill-switch helpers ──────────────────────────────────────────────────────
 
 function pct(current, target) {
@@ -223,11 +292,12 @@ async function main() {
   const existing = loadExisting();
 
   // Fetch all live data. Each fetcher is self-contained and falls back gracefully.
-  const [xrp, rlusd, fearGreed, usdJpy] = await Promise.all([
+  const [xrp, rlusd, fearGreed, usdJpy, news] = await Promise.all([
     fetchXRP(existing),
     fetchRLUSD(existing),
     fetchFearGreed(existing),
     fetchUSDJPY(existing),
+    fetchNews(existing),
   ]);
 
   // FRED calls are sequential to avoid hammering the API
@@ -269,6 +339,7 @@ async function main() {
       brent_crude:   brent,
       fear_greed:    fearGreed,
     },
+    news,
     manual,
     kill_switches:  buildKillSwitches(manual, rlusd),
     thesis_scores,
@@ -285,6 +356,7 @@ async function main() {
   console.log(`US 10Y yield:    ${us10y ?? 'N/A'}%`);
   console.log(`Brent crude:     $${brent ?? 'N/A'}`);
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'})`);
+  console.log(`News headlines:  ${news.headlines.length} (source: ${news.source})`);
   console.log('───────────────────────────────────────────────\n');
 
   await pushToGitHub();

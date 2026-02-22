@@ -113,6 +113,17 @@ function formatTelegramMessage(analysis, dashboardData) {
 
   const stressScore = analysis.stress_assessment;
 
+  // Events draft
+  const eventsDraft = analysis.events_draft ?? [];
+  const eventsSection = eventsDraft.length > 0
+    ? `\n📰 <b>THESIS-RELEVANT NEWS: ${eventsDraft.length}</b>\n` +
+      eventsDraft.map(e => `• [${e.category}] [${e.severity}] — ${e.title}`).join('\n') +
+      `\n\n📋 <b>EVENTS DRAFT:</b>\n` +
+      eventsDraft.map(e =>
+        `<b>${e.date} · ${e.category} · ${e.severity}</b>\n${e.title}\n<i>${e.expanded}</i>`
+      ).join('\n\n')
+    : '\n📰 <b>THESIS-RELEVANT NEWS:</b> None flagged';
+
   return `🔭 <b>OVERWATCH ANALYSIS — ${runLabel} ${dateStr}</b>
 
 📊 <b>MARKET:</b> XRP ${price} (${chg}) | F&amp;G: ${fgi} | USD/JPY: ${usdJpy}
@@ -139,6 +150,7 @@ ${scChanges}
 
 🎲 <b>PROBABILITY:</b>
 ${probLine}
+${eventsSection}
 
 <i>To apply: trigger "Apply Approved Analysis" workflow in GitHub Actions.</i>`;
 }
@@ -202,7 +214,17 @@ Your output must be a JSON object with these fields:
     "mid": 25,
     "bull": 12,
     "reasoning": "only include if recommending a change, explain why"
-  }
+  },
+
+  "events_draft": [
+    {
+      "date": "Feb 20",
+      "category": "INSTITUTIONAL",
+      "severity": "ELEVATED",
+      "title": "Concise event title",
+      "expanded": "1-2 sentence detail on thesis relevance and context."
+    }
+  ]
 }
 
 Rules:
@@ -212,6 +234,7 @@ Rules:
 - If a kill switch should be tripped (thesis falsified on that dimension), say so clearly.
 - If data is missing or stale, note it — don't fill gaps with assumptions.
 - Keep all text fields concise. This feeds a dashboard, not a report.
+- For events_draft: only include headlines that materially affect the thesis framework. Ignore routine price commentary, opinion pieces, and pure speculation. Flag if any headline suggests a kill switch status change.
 - Output ONLY valid JSON. No markdown, no commentary outside the JSON.`;
 
 // ─── Determine run type ───────────────────────────────────────────────────────
@@ -258,11 +281,15 @@ async function main() {
   log('run', `Run type: ${runType}`);
 
   // 4. Build prompt
+  const newsHeadlines = dashboardData.news?.headlines ?? [];
   const userPrompt = `## CURRENT DASHBOARD DATA
 ${JSON.stringify(dashboardData, null, 2)}
 
 ## THESIS FRAMEWORK
 ${thesisContext}
+
+## RECENT NEWS HEADLINES
+${JSON.stringify(newsHeadlines, null, 2)}
 
 ## ANALYSIS INSTRUCTIONS
 - Current time: ${new Date().toISOString()}
@@ -272,6 +299,10 @@ ${thesisContext}
 - Evaluate ETF flow trends
 - Check if any scorecard items need status changes
 - Flag any alerts
+- Evaluate each news headline for thesis relevance
+- For thesis-relevant headlines, draft an events_draft entry with: date (from headline publish date, formatted as "Mon DD"), category (INSTITUTIONAL | REGULATORY | GEOPOLITICAL | FINANCIAL), severity (MONITORING | ELEVATED | CRITICAL), title (concise), expanded (1-2 sentence detail)
+- Only include headlines that materially affect the thesis framework — ignore routine price commentary, opinion pieces, and speculation
+- Flag if any headline suggests a kill switch status change
 
 Respond with the JSON analysis object only.`;
 
@@ -326,6 +357,7 @@ Respond with the JSON analysis object only.`;
   console.log(`Kill sw changes: ${(analysis.kill_switch_updates ?? []).filter(k => k.recommended_status !== k.previous_status).length}`);
   console.log(`Score changes:   ${(analysis.scorecard_updates ?? []).filter(s => s.recommended_status !== s.previous_status).length}`);
   console.log(`Alerts:          ${(analysis.alerts ?? []).length}`);
+  console.log(`Events drafted:  ${(analysis.events_draft ?? []).length}`);
   console.log('───────────────────────────────────────────────\n');
 
   console.log(`Done: ${new Date().toISOString()}`);

@@ -11,8 +11,10 @@
 const path = require('path');
 const fs   = require('fs');
 
-const DASHBOARD_PATH = path.join(__dirname, '..', 'dashboard-data.json');
-const ANALYSIS_PATH  = path.join(__dirname, '..', 'analysis-output.json');
+const DASHBOARD_PATH  = path.join(__dirname, '..', 'dashboard-data.json');
+const ANALYSIS_PATH   = path.join(__dirname, '..', 'analysis-output.json');
+const INDEX_PATH      = path.join(__dirname, '..', 'index.html');
+const EVENTS_LOG_PATH = path.join(__dirname, 'events-history.json');
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
@@ -49,6 +51,161 @@ const KS_KEY_MAP = {
   'Competitive Displacement':     'competitive_displacement',
   'ODL Transparency':             'odl_transparency',
 };
+
+// ─── Events Timeline helpers ──────────────────────────────────────────────────
+
+/** Slugify a title to ~40 chars for duplicate detection. */
+function titleKey(title) {
+  return String(title).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().substring(0, 40);
+}
+
+/** Load events-history.json (list of title keys already inserted). Returns a Set. */
+function loadEventsHistory() {
+  try {
+    if (fs.existsSync(EVENTS_LOG_PATH)) {
+      const data = JSON.parse(fs.readFileSync(EVENTS_LOG_PATH, 'utf8'));
+      return new Set(Array.isArray(data) ? data : []);
+    }
+  } catch (e) {
+    warn('events', `Could not read events-history.json: ${e.message}`);
+  }
+  return new Set();
+}
+
+/** Append new title keys to events-history.json. */
+function saveEventsHistory(history) {
+  try {
+    fs.writeFileSync(EVENTS_LOG_PATH, JSON.stringify([...history], null, 2));
+  } catch (e) {
+    warn('events', `Could not write events-history.json: ${e.message}`);
+  }
+}
+
+/** Map Claude severity → threat fields used in EVENTS_DATA. */
+function mapSeverity(severity) {
+  switch ((severity ?? '').toUpperCase()) {
+    case 'CRITICAL':   return { threat: 'CRITICAL',   threatEmoji: '🔴' };
+    case 'ELEVATED':   return { threat: 'ELEVATED',   threatEmoji: '🟡' };
+    default:           return { threat: 'MONITORING', threatEmoji: '🟢' };
+  }
+}
+
+/** Map Claude category → catClass used for CSS styling. */
+function mapCategory(category) {
+  switch ((category ?? '').toUpperCase()) {
+    case 'INSTITUTIONAL': return 'inst';
+    case 'REGULATORY':    return 'reg';
+    case 'GEOPOLITICAL':  return 'geo';
+    case 'FINANCIAL':     return 'fin';
+    default:              return 'inst';
+  }
+}
+
+/**
+ * Parse a date label like "Feb 20" into a YYYY-MM-DD sort key.
+ * Falls back to today's date if parsing fails.
+ */
+function parseDateLabel(label) {
+  try {
+    const d = new Date(`${label} ${new Date().getFullYear()}`);
+    if (!isNaN(d.getTime())) {
+      return {
+        date:      d.toISOString().substring(0, 10),
+        dateLabel: label.toUpperCase(),
+      };
+    }
+  } catch (_) { /* fall through */ }
+  const now = new Date();
+  return {
+    date:      now.toISOString().substring(0, 10),
+    dateLabel: now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase(),
+  };
+}
+
+/** Build the JS object literal string for a single EVENTS_DATA entry. */
+function buildEventEntry(evt) {
+  const { date, dateLabel } = parseDateLabel(evt.date);
+  const category = (evt.category ?? 'INSTITUTIONAL').toUpperCase();
+  const catClass  = mapCategory(category);
+  const { threat, threatEmoji } = mapSeverity(evt.severity);
+  const esc = s => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+
+  return `  {
+    date: '${date}',
+    dateLabel: '${dateLabel}',
+    title: '${esc(evt.title)}',
+    category: '${category}',
+    catClass: '${catClass}',
+    threat: '${threat}',
+    threatEmoji: '${threatEmoji}',
+    desc: '${esc(evt.expanded ?? '')}'
+  }`;
+}
+
+/**
+ * Insert new events_draft entries into the EVENTS_DATA array in index.html.
+ * Deduplicates against both existing HTML content and events-history.json.
+ * Returns the count of newly inserted events.
+ */
+function insertEventsIntoHTML(eventsDraft) {
+  if (!fs.existsSync(INDEX_PATH)) {
+    err('events', 'index.html not found — cannot insert events');
+    return 0;
+  }
+
+  let html = fs.readFileSync(INDEX_PATH, 'utf8');
+  const history = loadEventsHistory();
+
+  const markerStart = 'const EVENTS_DATA = [';
+  const markerIdx = html.indexOf(markerStart);
+  if (markerIdx === -1) {
+    err('events', 'Could not find EVENTS_DATA array in index.html');
+    return 0;
+  }
+
+  // Extract existing titles from html for in-file duplicate check
+  const existingTitles = new Set();
+  const titleRegex = /title:\s*'([^']+)'/g;
+  let m;
+  while ((m = titleRegex.exec(html)) !== null) {
+    existingTitles.add(titleKey(m[1]));
+  }
+
+  let inserted = 0;
+  const newEntries = [];
+
+  for (const evt of eventsDraft) {
+    if (!evt.title) continue;
+    const key = titleKey(evt.title);
+
+    if (existingTitles.has(key) || history.has(key)) {
+      log('events', `Skipping duplicate: "${evt.title.substring(0, 50)}"`);
+      continue;
+    }
+
+    newEntries.push(evt);
+    history.add(key);
+    existingTitles.add(key);
+    inserted++;
+  }
+
+  if (inserted === 0) {
+    log('events', 'All events already exist — no changes to index.html');
+    return 0;
+  }
+
+  // New entries go at the TOP of EVENTS_DATA (newest first)
+  const insertionBlock = newEntries.map(buildEventEntry).join(',\n') + ',\n';
+  const insertionPoint = markerIdx + markerStart.length + 1; // after the '['
+
+  html = html.substring(0, insertionPoint) + '\n' + insertionBlock + html.substring(insertionPoint);
+
+  fs.writeFileSync(INDEX_PATH, html);
+  log('events', `Wrote updated index.html (${inserted} new event${inserted === 1 ? '' : 's'})`);
+
+  saveEventsHistory(history);
+  return inserted;
+}
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
@@ -150,12 +307,24 @@ async function main() {
   fs.writeFileSync(DASHBOARD_PATH, JSON.stringify(dashboard, null, 2));
   log('io', `Wrote dashboard-data.json (${changes} change${changes === 1 ? '' : 's'} applied)`);
 
+  // 7. Insert events_draft entries into index.html Events Timeline
+  const eventsDraft = analysis.events_draft ?? [];
+  let eventsInserted = 0;
+  if (eventsDraft.length > 0) {
+    eventsInserted = insertEventsIntoHTML(eventsDraft);
+    log('events', `${eventsInserted} new event(s) inserted into index.html`);
+    changes += eventsInserted;
+  } else {
+    log('events', 'No events_draft in analysis — skipping timeline update');
+  }
+
   console.log('\n─── Apply Summary ──────────────────────────────');
   console.log(`Analysis timestamp: ${analysis.timestamp}`);
   console.log(`Changes applied:    ${changes}`);
   console.log(`Scorecard updates:  ${scorecardUpdates.filter(s => s.recommended_status !== s.previous_status).length}`);
   console.log(`Kill sw updates:    ${ksUpdates.filter(k => k.recommended_status !== k.previous_status).length}`);
   if (prob?.reasoning) console.log(`Probability:        Updated`);
+  console.log(`Events inserted:    ${eventsInserted}`);
   console.log('───────────────────────────────────────────────\n');
 
   if (changes === 0) {
