@@ -750,14 +750,38 @@ textarea:focus { border-color:var(--accent-cyan); }
     </div>
 
     <div class="full-card">
-      <h3>📈 COMPARATIVE ETF FLOWS (5-DAY)</h3>
-      <div class="data-row"><span class="data-label">BTC ETFs</span><span class="data-value red" id="etfBtcWeekly">--</span></div>
-      <div class="data-row"><span class="data-label">ETH ETFs</span><span class="data-value red" id="etfEthWeekly">--</span></div>
+      <h3>📈 COMPARATIVE ETF FLOWS</h3>
+
+      <div style="font-size:9px;letter-spacing:1px;color:var(--text-muted);margin-bottom:5px;margin-top:2px;opacity:0.55;">TOTAL AUM</div>
+      <div class="data-row">
+        <span class="data-label">IBIT <span style="color:var(--text-muted);font-size:9px;">BTC · BlackRock</span></span>
+        <span class="data-value" id="etfBtcAum">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">ETHA <span style="color:var(--text-muted);font-size:9px;">ETH · BlackRock</span></span>
+        <span class="data-value" id="etfEthAum">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">XRP ETFs <span style="color:var(--text-muted);font-size:9px;">7 funds</span></span>
+        <span class="data-value" id="etfXrpAum">--</span>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin:8px 0;"></div>
+      <div style="font-size:9px;letter-spacing:1px;color:var(--text-muted);margin-bottom:5px;opacity:0.55;">DAILY NET FLOW</div>
+      <div class="data-row"><span class="data-label">IBIT</span><span class="data-value" id="etfBtcDaily">--</span></div>
+      <div class="data-row"><span class="data-label">ETHA</span><span class="data-value" id="etfEthDaily">--</span></div>
+      <div class="data-row"><span class="data-label">XRP ETFs</span><span class="data-value" id="etfXrpDailyComp">--</span></div>
+
+      <div style="height:1px;background:var(--border);margin:8px 0;"></div>
+      <div style="font-size:9px;letter-spacing:1px;color:var(--text-muted);margin-bottom:5px;opacity:0.55;">5-DAY NET FLOW</div>
+      <div class="data-row"><span class="data-label">IBIT</span><span class="data-value" id="etfBtcWeekly">--</span></div>
+      <div class="data-row"><span class="data-label">ETHA</span><span class="data-value" id="etfEthWeekly">--</span></div>
       <div class="data-row"><span class="data-label">SOL ETFs</span><span class="data-value" id="etfSolWeekly">--</span></div>
       <div class="data-row"><span class="data-label">XRP ETFs</span><span class="data-value" id="etfXrpWeekly">--</span></div>
-      <div class="interpret-box">
-        <div class="label">ETF INTERPRETATION</div>
-        <p id="etfInterpretation">XRP ETF data loading...</p>
+
+      <div class="interpret-box" id="etfDivergenceBox">
+        <div class="label">DIVERGENCE SIGNAL</div>
+        <p id="etfInterpretation">Loading comparative data...</p>
       </div>
     </div>
 
@@ -1674,13 +1698,11 @@ async function fetchDashboardData() {
         setHtml('etfFundsTable', header + rows);
       }
 
-      // Auto-generate interpretation
-      const netM = e.weekly_net_flow != null ? (e.weekly_net_flow / 1e6).toFixed(2) : null;
-      const aumB = e.total_aum != null ? (e.total_aum / 1e9).toFixed(2) : null;
-      if (netM && aumB) {
-        const direction = parseFloat(netM) >= 0 ? 'net inflows' : 'net outflows';
-        const interpEl = document.getElementById('etfInterpretation');
-        if (interpEl) interpEl.textContent = `7 US spot XRP ETFs hold $${aumB}B AUM with ${direction} of ${Math.abs(parseFloat(netM)).toFixed(2)}M over the last 5 trading days. Data sourced from xrp-insights.com.`;
+      // Comparative: XRP AUM + daily + weekly for the comparative card
+      if (e.total_aum != null) set('etfXrpAum', '$' + (e.total_aum / 1e9).toFixed(3) + 'B');
+      if (e.daily_net_flow != null) {
+        const el = document.getElementById('etfXrpDailyComp');
+        if (el) { el.textContent = fmtM(e.daily_net_flow); el.className = 'data-value ' + cls(e.daily_net_flow); }
       }
     }
 
@@ -1744,6 +1766,83 @@ async function fetchDashboardData() {
             corpPct   > 0 ? dot('#996600') + `CORP ${corpPct.toFixed(2)}%` : '',
             dot('#111122') + `OTHER ${otherPct.toFixed(1)}%`,
           ].filter(Boolean).map(s => `<span style="display:flex;align-items:center;">${s}</span>`).join('');
+        }
+      }
+    }
+
+    // BTC / ETH ETF comparative data + divergence signal
+    if (d.btc_etf || d.eth_etf) {
+      const fmtMc = v => v == null ? '--' : (v >= 0 ? '+' : '') + '$' + (v / 1e6).toFixed(0) + 'M';
+      const clsc  = v => v == null ? '' : v >= 0 ? 'green' : 'red';
+
+      const b = d.btc_etf ?? {};
+      const e2 = d.eth_etf ?? {};
+
+      // AUM
+      if (b.total_aum != null) set('etfBtcAum', '$' + (b.total_aum / 1e9).toFixed(2) + 'B');
+      if (e2.total_aum != null) set('etfEthAum', '$' + (e2.total_aum / 1e9).toFixed(2) + 'B');
+
+      // Daily flow
+      const bdEl = document.getElementById('etfBtcDaily');
+      if (bdEl) {
+        if (b.daily_flow != null) { bdEl.textContent = fmtMc(b.daily_flow); bdEl.className = 'data-value ' + clsc(b.daily_flow); }
+        else bdEl.textContent = b.as_of_date ? 'building history…' : '--';
+      }
+      const edEl = document.getElementById('etfEthDaily');
+      if (edEl) {
+        if (e2.daily_flow != null) { edEl.textContent = fmtMc(e2.daily_flow); edEl.className = 'data-value ' + clsc(e2.daily_flow); }
+        else edEl.textContent = e2.as_of_date ? 'building history…' : '--';
+      }
+
+      // 5-day flow
+      const bwEl = document.getElementById('etfBtcWeekly');
+      if (bwEl) {
+        if (b.weekly_net_flow != null) { bwEl.textContent = fmtMc(b.weekly_net_flow); bwEl.className = 'data-value ' + clsc(b.weekly_net_flow); }
+        else bwEl.textContent = 'building history…';
+      }
+      const ewEl = document.getElementById('etfEthWeekly');
+      if (ewEl) {
+        if (e2.weekly_net_flow != null) { ewEl.textContent = fmtMc(e2.weekly_net_flow); ewEl.className = 'data-value ' + clsc(e2.weekly_net_flow); }
+        else ewEl.textContent = 'building history…';
+      }
+
+      // Divergence signal — uses 5-day flows when available, falls back to daily
+      const xrpFlow = d.etf?.weekly_net_flow ?? d.etf?.daily_net_flow ?? null;
+      const btcFlow = b.weekly_net_flow ?? b.daily_flow ?? null;
+      const ethFlow = e2.weekly_net_flow ?? e2.daily_flow ?? null;
+      const interpEl = document.getElementById('etfInterpretation');
+      const boxEl    = document.getElementById('etfDivergenceBox');
+
+      if (interpEl) {
+        if (xrpFlow != null && btcFlow != null) {
+          const xrpPos = xrpFlow >= 0;
+          const btcPos = btcFlow >= 0;
+          const ethPos = ethFlow != null ? ethFlow >= 0 : null;
+          const xrpMag = (xrpFlow / 1e6).toFixed(0);
+          const btcMag = (btcFlow / 1e6).toFixed(0);
+          let msg, boxStyle = '';
+
+          if (xrpPos && !btcPos && (ethPos === null || !ethPos)) {
+            msg = `BULLISH DIVERGENCE — XRP ETFs +${xrpMag}M vs IBIT ${btcMag}M${ethPos === null ? '' : ' / ETHA ' + (ethFlow / 1e6).toFixed(0) + 'M'}. Institutional capital rotating into XRP independent of broader crypto ETF selling.`;
+            boxStyle = 'border-color:rgba(0,229,153,0.4);background:rgba(0,229,153,0.05);';
+          } else if (!xrpPos && btcPos && (ethPos === null || ethPos)) {
+            msg = `UNDERPERFORMANCE — IBIT +${btcMag}M but XRP ETFs ${xrpMag}M. XRP lagging broader institutional crypto demand. Monitor for trend change.`;
+            boxStyle = 'border-color:rgba(255,64,64,0.25);background:rgba(255,64,64,0.03);';
+          } else if (xrpPos && btcPos) {
+            msg = `RISK-ON — All major crypto ETFs showing net inflows: XRP +${xrpMag}M, IBIT +${btcMag}M${ethPos ? ', ETHA +' + (ethFlow / 1e6).toFixed(0) + 'M' : ''}. Broad institutional participation.`;
+            boxStyle = '';
+          } else {
+            msg = `BROAD RISK-OFF — Net outflows across crypto ETFs: XRP ${xrpMag}M, IBIT ${btcMag}M${ethPos === false ? ', ETHA ' + (ethFlow / 1e6).toFixed(0) + 'M' : ''}. Watch macro triggers.`;
+            boxStyle = '';
+          }
+
+          interpEl.textContent = msg;
+          if (boxEl) boxEl.setAttribute('style', boxStyle);
+        } else if (xrpFlow != null) {
+          // Only XRP data available — fall back to XRP-only message
+          const aumB = d.etf?.total_aum != null ? (d.etf.total_aum / 1e9).toFixed(2) : null;
+          const direction = xrpFlow >= 0 ? 'net inflows' : 'net outflows';
+          interpEl.textContent = `${aumB ? '7 US spot XRP ETFs hold $' + aumB + 'B AUM with ' : ''}${direction} of $${Math.abs(xrpFlow / 1e6).toFixed(0)}M. IBIT/ETHA flow history building — check back after market close.`;
         }
       }
     }

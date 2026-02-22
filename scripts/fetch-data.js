@@ -161,7 +161,105 @@ async function fetchFRED(seriesLabel, url, fallbackValue) {
   }
 }
 
-// ─── ETF fetcher ──────────────────────────────────────────────────────────────
+// ─── BTC / ETH ETF fetchers (iShares IBIT + ETHA) ────────────────────────────
+
+const ISHARES_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+  'Accept':     'text/plain,text/csv,*/*',
+};
+
+/**
+ * Parse an iShares fund CSV and extract AUM, shares outstanding, and as-of date.
+ * Tracks day-over-day share delta to compute net flows.
+ * Maintains a rolling daily_flow_history array (up to 14 entries) for 5-day sums.
+ */
+async function fetchISharesETF({ label, csvUrl, assetRegex, fallbackKey, fallback }) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15_000);
+  try {
+    const res = await fetch(csvUrl, { headers: ISHARES_HEADERS, signal: controller.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const csv = await res.text();
+
+    // Header fields — date is quoted e.g. Fund Holdings as of,"Feb 20, 2026"
+    const asOfMatch     = csv.match(/Fund Holdings as of[^"]*"([^"]+)"/i);
+    const sharesMatch   = csv.match(/Shares Outstanding[,"\s]+"?([0-9,.]+)"?/i);
+    const assetRow      = csv.match(assetRegex);
+
+    if (!sharesMatch || !assetRow) throw new Error(`Could not parse ${label} CSV`);
+
+    const as_of_date       = asOfMatch ? new Date(asOfMatch[1].trim()).toISOString().substring(0, 10) : null;
+    const shares_outstanding = parseFloat(sharesMatch[1].replace(/,/g, ''));
+    const total_aum          = parseFloat(assetRow[1].replace(/,/g, ''));
+    const nav_per_share      = total_aum / shares_outstanding;
+
+    const prev = fallback?.[fallbackKey] ?? {};
+    let daily_flow = null;
+    const daily_flow_history = Array.isArray(prev.daily_flow_history) ? [...prev.daily_flow_history] : [];
+
+    // Append new daily flow when as_of_date advances
+    if (as_of_date && as_of_date !== prev.as_of_date && prev.shares_outstanding != null) {
+      daily_flow = (shares_outstanding - prev.shares_outstanding) * nav_per_share;
+      daily_flow_history.push({ date: as_of_date, flow: daily_flow });
+      if (daily_flow_history.length > 14) daily_flow_history.shift();
+    } else if (daily_flow_history.length > 0) {
+      // Re-use last known daily flow if date hasn't changed
+      daily_flow = daily_flow_history.at(-1).flow;
+    }
+
+    // 5-day (last 5 trading days) net flow
+    const last5 = daily_flow_history.slice(-5);
+    const weekly_net_flow = last5.length >= 1 ? last5.reduce((s, d) => s + d.flow, 0) : null;
+
+    const result = {
+      last_fetched: new Date().toISOString(),
+      source:       `ishares-${label.toLowerCase()}`,
+      ticker:       label,
+      as_of_date,
+      total_aum,
+      shares_outstanding,
+      nav_per_share,
+      daily_flow,
+      weekly_net_flow,
+      daily_flow_history,
+    };
+
+    log(label, `AUM=$${(total_aum / 1e9).toFixed(2)}B | shares=${(shares_outstanding / 1e6).toFixed(0)}M | daily_flow=${daily_flow != null ? (daily_flow >= 0 ? '+' : '') + '$' + (daily_flow / 1e6).toFixed(0) + 'M' : 'N/A (first run)'}`);
+    return result;
+  } catch (e) {
+    err(label, e.message);
+    return fallback?.[fallbackKey] ?? {
+      last_fetched: null, source: 'none', ticker: label,
+      as_of_date: null, total_aum: null, shares_outstanding: null,
+      nav_per_share: null, daily_flow: null, weekly_net_flow: null,
+      daily_flow_history: [],
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function fetchBTCETF(fallback) {
+  return fetchISharesETF({
+    label:      'IBIT',
+    csvUrl:     'https://www.ishares.com/us/products/333011/fund/1467271812596.ajax?fileType=csv&fileName=IBIT_holdings&dataType=fund',
+    assetRegex: /"BTC","BITCOIN","-","Alternative","([0-9,.]+)"/i,
+    fallbackKey: 'btc_etf',
+    fallback,
+  });
+}
+
+function fetchETHETF(fallback) {
+  return fetchISharesETF({
+    label:      'ETHA',
+    csvUrl:     'https://www.ishares.com/us/products/337614/fund/1467271812596.ajax?fileType=csv&fileName=ETHA_holdings&dataType=fund',
+    assetRegex: /"ETH","ETHER","-","Alternative","([0-9,.]+)"/i,
+    fallbackKey: 'eth_etf',
+    fallback,
+  });
+}
+
+// ─── XRP ETF fetcher ──────────────────────────────────────────────────────────
 
 /**
  * Fetch XRP ETF data from xrp-insights.com's internal API.
@@ -451,7 +549,7 @@ async function main() {
   const existing = loadExisting();
 
   // Fetch all live data. Each fetcher is self-contained and falls back gracefully.
-  const [xrp, rlusd, fearGreed, usdJpy, news, etf, supply] = await Promise.all([
+  const [xrp, rlusd, fearGreed, usdJpy, news, etf, supply, btc_etf, eth_etf] = await Promise.all([
     fetchXRP(existing),
     fetchRLUSD(existing),
     fetchFearGreed(existing),
@@ -459,6 +557,8 @@ async function main() {
     fetchNews(existing),
     fetchETF(existing),
     fetchXRPRadar(existing),
+    fetchBTCETF(existing),
+    fetchETHETF(existing),
   ]);
 
   // Enrich ETF with % of circulating supply (market_cap / price = circ. supply)
@@ -502,6 +602,8 @@ async function main() {
     xrp,
     rlusd,
     etf,
+    btc_etf,
+    eth_etf,
     supply,
     macro: {
       usd_jpy:       usdJpy,
@@ -527,7 +629,9 @@ async function main() {
   console.log(`US 10Y yield:    ${us10y ?? 'N/A'}%`);
   console.log(`Brent crude:     $${brent ?? 'N/A'}`);
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'})`);
-  console.log(`ETF total AUM:   $${etf.total_aum != null ? (etf.total_aum / 1e6).toFixed(1) + 'M' : 'N/A'} | XRP locked: ${etf.total_xrp_locked != null ? (etf.total_xrp_locked / 1e6).toFixed(0) + 'M' : 'N/A'} (${etf.source})`);
+  console.log(`XRP ETF AUM:     $${etf.total_aum != null ? (etf.total_aum / 1e6).toFixed(1) + 'M' : 'N/A'} | flow 5D: ${etf.weekly_net_flow != null ? (etf.weekly_net_flow / 1e6).toFixed(1) + 'M' : 'N/A'}`);
+  console.log(`BTC ETF (IBIT):  $${btc_etf.total_aum != null ? (btc_etf.total_aum / 1e9).toFixed(2) + 'B' : 'N/A'} | daily: ${btc_etf.daily_flow != null ? (btc_etf.daily_flow >= 0 ? '+' : '') + (btc_etf.daily_flow / 1e6).toFixed(0) + 'M' : 'N/A'} | 5D: ${btc_etf.weekly_net_flow != null ? (btc_etf.weekly_net_flow / 1e6).toFixed(0) + 'M' : 'N/A'}`);
+  console.log(`ETH ETF (ETHA):  $${eth_etf.total_aum != null ? (eth_etf.total_aum / 1e9).toFixed(2) + 'B' : 'N/A'} | daily: ${eth_etf.daily_flow != null ? (eth_etf.daily_flow >= 0 ? '+' : '') + (eth_etf.daily_flow / 1e6).toFixed(0) + 'M' : 'N/A'} | 5D: ${eth_etf.weekly_net_flow != null ? (eth_etf.weekly_net_flow / 1e6).toFixed(0) + 'M' : 'N/A'}`);
   console.log(`News headlines:  ${news.headlines.length} (source: ${news.source})`);
   console.log(`Supply escrow:   ${supply.escrow != null ? (supply.escrow / 1e9).toFixed(2) + 'B XRP' : 'N/A'} (${supply.source})`);
   console.log('───────────────────────────────────────────────\n');
