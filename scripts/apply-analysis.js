@@ -11,16 +11,111 @@
 const path = require('path');
 const fs   = require('fs');
 
-const DASHBOARD_PATH  = path.join(__dirname, '..', 'dashboard-data.json');
-const ANALYSIS_PATH   = path.join(__dirname, '..', 'analysis-output.json');
-const INDEX_PATH      = path.join(__dirname, '..', 'index.html');
-const EVENTS_LOG_PATH = path.join(__dirname, 'events-history.json');
+const DASHBOARD_PATH       = path.join(__dirname, '..', 'dashboard-data.json');
+const DASHBOARD_BACKUP     = path.join(__dirname, '..', 'dashboard-data.backup.json');
+const ANALYSIS_PATH        = path.join(__dirname, '..', 'analysis-output.json');
+const INDEX_PATH           = path.join(__dirname, '..', 'index.html');
+const INDEX_BACKUP         = path.join(__dirname, '..', 'index.backup.html');
+const EVENTS_LOG_PATH      = path.join(__dirname, 'events-history.json');
+const CHANGELOG_PATH       = path.join(__dirname, 'changelog.log');
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
 function log(label, msg)  { console.log(`[${label}] ${msg}`); }
 function warn(label, msg) { console.warn(`[${label}] WARN: ${msg}`); }
 function err(label, msg)  { console.error(`[${label}] ERROR: ${msg}`); }
+
+// ─── Backup / Restore helpers ─────────────────────────────────────────────────
+
+function backupFile(src, dest) {
+  try {
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+      log('backup', `${path.basename(src)} → ${path.basename(dest)}`);
+    }
+  } catch (e) {
+    warn('backup', `Could not back up ${path.basename(src)}: ${e.message}`);
+  }
+}
+
+function restoreFile(backup, dest) {
+  try {
+    if (fs.existsSync(backup)) {
+      fs.copyFileSync(backup, dest);
+      warn('restore', `Restored ${path.basename(dest)} from backup`);
+    }
+  } catch (e) {
+    err('restore', `Could not restore ${path.basename(dest)}: ${e.message}`);
+  }
+}
+
+// ─── Changelog ────────────────────────────────────────────────────────────────
+
+function appendChangelog(entries) {
+  if (entries.length === 0) return;
+  const ts = new Date().toISOString();
+  const lines = [`\n--- ${ts} ---`, ...entries];
+  try {
+    fs.appendFileSync(CHANGELOG_PATH, lines.join('\n') + '\n');
+    log('changelog', `${entries.length} entr${entries.length === 1 ? 'y' : 'ies'} written`);
+  } catch (e) {
+    warn('changelog', `Could not write changelog: ${e.message}`);
+  }
+}
+
+// ─── Qualitative HTML update helpers ─────────────────────────────────────────
+
+/**
+ * Replace the content of a <p id="ELEMENT_ID">...</p> in html string.
+ * Returns { html, changed } — changed=true if the content was actually different.
+ */
+function replaceParaById(html, elementId, newText) {
+  if (!newText || typeof newText !== 'string') return { html, changed: false };
+  const re = new RegExp(`(<p\\s[^>]*id="${elementId}"[^>]*>)([^<]*)(</p>)`, 's');
+  const match = html.match(re);
+  if (!match) {
+    warn('html', `Element id="${elementId}" not found in index.html`);
+    return { html, changed: false };
+  }
+  const existing = match[2].trim();
+  const incoming = newText.trim();
+  // Skip if text is identical or very similar (first 60 chars match)
+  if (existing === incoming || existing.substring(0, 60) === incoming.substring(0, 60)) {
+    return { html, changed: false };
+  }
+  return { html: html.replace(re, `$1${incoming}$3`), changed: true };
+}
+
+/**
+ * Replace the inner HTML of <div id="geoWatchlist">...</div> with new rows.
+ * newRows: [{region, status_text}]
+ */
+function replaceGeoWatchlist(html, newRows) {
+  if (!Array.isArray(newRows) || newRows.length === 0) return { html, changed: false };
+  const startTag = '<div id="geoWatchlist">';
+  const startIdx = html.indexOf(startTag);
+  if (startIdx === -1) {
+    warn('html', 'Element id="geoWatchlist" not found in index.html');
+    return { html, changed: false };
+  }
+  // Find closing </div>
+  const contentStart = startIdx + startTag.length;
+  let depth = 1;
+  let i = contentStart;
+  while (i < html.length && depth > 0) {
+    if (html.startsWith('<div', i)) depth++;
+    else if (html.startsWith('</div>', i)) { depth--; if (depth === 0) break; }
+    i++;
+  }
+  const existing = html.substring(contentStart, i);
+  const newContent = '\n' + newRows.map(r => {
+    const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return `        <div class="data-row"><span class="data-label">${esc(r.region)}</span><span class="signal amber">${esc(r.status_text)}</span></div>`;
+  }).join('\n') + '\n      ';
+  if (existing.trim() === newContent.trim()) return { html, changed: false };
+  const updatedHtml = html.substring(0, contentStart) + newContent + html.substring(i);
+  return { html: updatedHtml, changed: true };
+}
 
 // Map from Claude's scorecard category label → dashboard-data.json thesis_scores key
 const SCORE_KEY_MAP = {
@@ -230,6 +325,11 @@ async function main() {
   log('io', 'Loaded dashboard-data.json');
 
   let changes = 0;
+  const changelogEntries = [];
+
+  // 1b. Backup files before any writes
+  backupFile(DASHBOARD_PATH, DASHBOARD_BACKUP);
+  backupFile(INDEX_PATH, INDEX_BACKUP);
 
   // 2. Apply scorecard updates
   const scorecardUpdates = analysis.scorecard_updates ?? [];
@@ -250,6 +350,7 @@ async function main() {
       ...current,
       status: update.recommended_status,
     };
+    changelogEntries.push(`SCORECARD ${update.category}: ${current.status ?? '?'} → ${update.recommended_status}`);
     changes++;
   }
 
@@ -275,6 +376,7 @@ async function main() {
     if (update.reasoning) {
       dashboard.kill_switches[key]._analysis_note = update.reasoning;
     }
+    changelogEntries.push(`KILL_SWITCH ${update.name}: ${update.previous_status} → ${update.recommended_status}`);
     changes++;
   }
 
@@ -290,6 +392,7 @@ async function main() {
       last_updated: analysis.timestamp,
       last_reasoning: prob.reasoning,
     };
+    changelogEntries.push(`PROBABILITY: Bear ${prob.bear}% | Base ${prob.base}% | Mid ${prob.mid}% | Bull ${prob.bull}%`);
     changes++;
   }
 
@@ -303,9 +406,15 @@ async function main() {
     changes_applied: changes,
   };
 
-  // 6. Write updated dashboard-data.json
-  fs.writeFileSync(DASHBOARD_PATH, JSON.stringify(dashboard, null, 2));
-  log('io', `Wrote dashboard-data.json (${changes} change${changes === 1 ? '' : 's'} applied)`);
+  // 6. Write updated dashboard-data.json (restore on failure)
+  try {
+    fs.writeFileSync(DASHBOARD_PATH, JSON.stringify(dashboard, null, 2));
+    log('io', `Wrote dashboard-data.json (${changes} change${changes === 1 ? '' : 's'} applied)`);
+  } catch (writeErr) {
+    err('io', `Failed to write dashboard-data.json: ${writeErr.message}`);
+    restoreFile(DASHBOARD_BACKUP, DASHBOARD_PATH);
+    process.exit(1);
+  }
 
   // 7. Insert events_draft entries into index.html Events Timeline
   const eventsDraft = analysis.events_draft ?? [];
@@ -313,10 +422,60 @@ async function main() {
   if (eventsDraft.length > 0) {
     eventsInserted = insertEventsIntoHTML(eventsDraft);
     log('events', `${eventsInserted} new event(s) inserted into index.html`);
+    if (eventsInserted > 0) {
+      changelogEntries.push(`EVENTS: ${eventsInserted} new event(s) inserted into timeline`);
+    }
     changes += eventsInserted;
   } else {
     log('events', 'No events_draft in analysis — skipping timeline update');
   }
+
+  // 8. Apply qualitative text updates to index.html
+  let htmlChanges = 0;
+  if (fs.existsSync(INDEX_PATH)) {
+    let html = fs.readFileSync(INDEX_PATH, 'utf8');
+    let changed;
+
+    // Thesis pulse assessment
+    if (analysis.thesis_pulse_assessment) {
+      ({ html, changed } = replaceParaById(html, 'thesisPulseText', analysis.thesis_pulse_assessment));
+      if (changed) { log('html', 'Updated #thesisPulseText'); changelogEntries.push('HTML: thesis_pulse_assessment updated'); htmlChanges++; }
+    }
+
+    // Stress interpretation
+    if (analysis.stress_interpretation) {
+      ({ html, changed } = replaceParaById(html, 'stressInterpretText', analysis.stress_interpretation));
+      if (changed) { log('html', 'Updated #stressInterpretText'); changelogEntries.push('HTML: stress_interpretation updated'); htmlChanges++; }
+    }
+
+    // Energy interpretation
+    if (analysis.energy_interpretation) {
+      ({ html, changed } = replaceParaById(html, 'energyInterpretText', analysis.energy_interpretation));
+      if (changed) { log('html', 'Updated #energyInterpretText'); changelogEntries.push('HTML: energy_interpretation updated'); htmlChanges++; }
+    }
+
+    // Geopolitical watchlist
+    if (Array.isArray(analysis.geopolitical_watchlist) && analysis.geopolitical_watchlist.length > 0) {
+      ({ html, changed } = replaceGeoWatchlist(html, analysis.geopolitical_watchlist));
+      if (changed) { log('html', 'Updated #geoWatchlist'); changelogEntries.push('HTML: geopolitical_watchlist updated'); htmlChanges++; }
+    }
+
+    if (htmlChanges > 0) {
+      try {
+        fs.writeFileSync(INDEX_PATH, html);
+        log('html', `Wrote index.html (${htmlChanges} qualitative update${htmlChanges === 1 ? '' : 's'})`);
+        changes += htmlChanges;
+      } catch (writeErr) {
+        err('html', `Failed to write index.html: ${writeErr.message}`);
+        restoreFile(INDEX_BACKUP, INDEX_PATH);
+      }
+    } else {
+      log('html', 'No qualitative text changes needed');
+    }
+  }
+
+  // 9. Write changelog
+  appendChangelog(changelogEntries);
 
   console.log('\n─── Apply Summary ──────────────────────────────');
   console.log(`Analysis timestamp: ${analysis.timestamp}`);

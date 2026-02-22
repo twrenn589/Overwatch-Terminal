@@ -13,15 +13,20 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const Anthropic = require('@anthropic-ai/sdk');
 
-const DASHBOARD_PATH    = path.join(__dirname, '..', 'dashboard-data.json');
-const ANALYSIS_PATH     = path.join(__dirname, '..', 'analysis-output.json');
+const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
+const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
 const THESIS_CONTEXT_PATH = path.join(__dirname, 'thesis-context.md');
+const DEBUG_RESPONSE_PATH = path.join(__dirname, 'debug-claude-response.txt');
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
 function log(label, msg)  { console.log(`[${label}] ${msg}`); }
 function warn(label, msg) { console.warn(`[${label}] WARN: ${msg}`); }
 function err(label, msg)  { console.error(`[${label}] ERROR: ${msg}`); }
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // ─── Telegram ─────────────────────────────────────────────────────────────────
 
@@ -224,7 +229,36 @@ Your output must be a JSON object with these fields:
       "title": "Concise event title",
       "expanded": "1-2 sentence detail on thesis relevance and context."
     }
-  ]
+  ],
+
+  "geopolitical_watchlist": [
+    {
+      "region": "Japan / BOJ",
+      "status_text": "1 sentence current status with key signal"
+    },
+    {
+      "region": "Middle East",
+      "status_text": "1 sentence current status"
+    },
+    {
+      "region": "US-China",
+      "status_text": "1 sentence current status"
+    },
+    {
+      "region": "Trade / Tariffs",
+      "status_text": "1 sentence current status"
+    },
+    {
+      "region": "Arctic / Russia",
+      "status_text": "1 sentence current status"
+    }
+  ],
+
+  "energy_interpretation": "2-3 sentences on energy market conditions and their impact on the Japan stress thesis (oil, JPY, trade deficit feedback loop).",
+
+  "thesis_pulse_assessment": "3-4 sentences distilling the current thesis state for the dashboard assessment box. Terminal voice. Reference actual numbers. Be honest about risks.",
+
+  "stress_interpretation": "2-3 sentences explaining the current composite stress environment for the dashboard stress card. Reference specific thresholds breached or held."
 }
 
 Rules:
@@ -235,6 +269,8 @@ Rules:
 - If data is missing or stale, note it — don't fill gaps with assumptions.
 - Keep all text fields concise. This feeds a dashboard, not a report.
 - For events_draft: only include headlines that materially affect the thesis framework. Ignore routine price commentary, opinion pieces, and pure speculation. Flag if any headline suggests a kill switch status change.
+- For geopolitical_watchlist: provide current, factual status for each region. Use terminal-style language — terse, specific. Flag active escalation.
+- For energy_interpretation, thesis_pulse_assessment, stress_interpretation: terminal voice — precise, no fluff, signal-focused. These render directly in the dashboard.
 - Output ONLY valid JSON. No markdown, no commentary outside the JSON.`;
 
 // ─── Determine run type ───────────────────────────────────────────────────────
@@ -306,43 +342,61 @@ ${JSON.stringify(newsHeadlines, null, 2)}
 
 Respond with the JSON analysis object only.`;
 
-  // 5. Call Claude API
+  // 5. Call Claude API (1 retry after 5s on failure)
   let analysis;
-  try {
-    log('Claude', 'Calling claude-sonnet-4-20250514…');
-    const client = new Anthropic({ apiKey });
-    const response = await client.messages.create({
-      model:      'claude-sonnet-4-20250514',
-      max_tokens: 4000,
-      system:     SYSTEM_PROMPT,
-      messages:   [{ role: 'user', content: userPrompt }],
-    });
+  let raw;
+  const client = new Anthropic({ apiKey });
+  const callParams = {
+    model:      'claude-sonnet-4-20250514',
+    max_tokens: 4000,
+    system:     SYSTEM_PROMPT,
+    messages:   [{ role: 'user', content: userPrompt }],
+  };
 
-    const raw = response.content[0].text;
-    log('Claude', `Response received (${raw.length} chars)`);
-
-    // Strip any accidental markdown code fences
-    const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
-
+  let response;
+  for (let attempt = 0; attempt <= 1; attempt++) {
     try {
-      analysis = JSON.parse(cleaned);
-      log('Claude', 'JSON parsed successfully');
-    } catch (parseErr) {
-      err('Claude', `JSON parse failed: ${parseErr.message}`);
-      warn('Claude', 'Sending raw text to Telegram for manual review');
-      await sendTelegram(`⚠️ <b>OVERWATCH: JSON parse failed</b>\n\nRaw output:\n<pre>${raw.substring(0, 3000)}</pre>`);
-      process.exit(1);
+      log('Claude', `Calling claude-sonnet-4-20250514… (attempt ${attempt + 1})`);
+      response = await client.messages.create(callParams);
+      break; // success
+    } catch (e) {
+      if (attempt === 0) {
+        warn('Claude', `Attempt 1 failed: ${e.message} — retrying in 5s`);
+        await sleep(5_000);
+      } else {
+        err('Claude', `API call failed after retry: ${e.message}`);
+        await sendTelegram(`🚨 <b>OVERWATCH: Analysis failed — Claude API unreachable</b>\n\nError: ${e.message}`);
+        process.exit(1);
+      }
     }
+  }
 
-    // Ensure timestamp and run_type are set
-    analysis.timestamp = analysis.timestamp ?? new Date().toISOString();
-    analysis.run_type  = analysis.run_type  ?? runType;
+  raw = response.content[0].text;
+  log('Claude', `Response received (${raw.length} chars)`);
 
-  } catch (e) {
-    err('Claude', `API call failed: ${e.message}`);
-    await sendTelegram(`🚨 <b>OVERWATCH: Analysis failed</b>\n\nClaude API error: ${e.message}`);
+  // Strip any accidental markdown code fences
+  const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+
+  try {
+    analysis = JSON.parse(cleaned);
+    log('Claude', 'JSON parsed successfully');
+  } catch (parseErr) {
+    err('Claude', `JSON parse failed: ${parseErr.message}`);
+    try {
+      fs.writeFileSync(DEBUG_RESPONSE_PATH, raw);
+      warn('Claude', `Raw response saved to ${DEBUG_RESPONSE_PATH}`);
+    } catch (writeErr) {
+      warn('Claude', `Could not write debug file: ${writeErr.message}`);
+    }
+    await sendTelegram(
+      `⚠️ <b>OVERWATCH: JSON parse failed</b>\n\nDebug saved to scripts/debug-claude-response.txt\n\nRaw output preview:\n<pre>${raw.substring(0, 2000)}</pre>`
+    );
     process.exit(1);
   }
+
+  // Ensure timestamp and run_type are set
+  analysis.timestamp = analysis.timestamp ?? new Date().toISOString();
+  analysis.run_type  = analysis.run_type  ?? runType;
 
   // 6. Write analysis-output.json
   fs.writeFileSync(ANALYSIS_PATH, JSON.stringify(analysis, null, 2));

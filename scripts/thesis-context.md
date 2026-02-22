@@ -56,3 +56,11 @@ Monitoring institutional adoption metrics. This is an analytical framework, not 
 - Strait of Hormuz: CRITICAL (dual carrier groups, Russia-Iran-China exercises)
 - Japan: Takaichi supermajority + tariff pressure + yen weakness + rising JGB yields
 - US Tariffs: Section 122, 10% global, expires ~Jul 20, 2026
+
+## Qualitative Output Schema (for analyze-thesis.js)
+The analysis output JSON must include these additional qualitative fields:
+
+- `geopolitical_watchlist`: array of `{region, status_text}` for each of: Japan / BOJ, Middle East, US-China, Trade / Tariffs, Arctic / Russia. One terse sentence per region. Terminal voice.
+- `energy_interpretation`: 2-3 sentences on energy conditions and Japan stress feedback loop (oil, JPY, trade deficit, BOJ pressure).
+- `thesis_pulse_assessment`: 3-4 sentences distilling current thesis state for the dashboard ASSESSMENT box. Reference actual numbers. Honest about risks. Terminal voice.
+- `stress_interpretation`: 2-3 sentences explaining the composite stress environment for the dashboard stress card. Reference specific thresholds breached or held.

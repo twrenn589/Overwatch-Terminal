@@ -26,6 +26,63 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Retry wrapper — calls fn() up to (1 + retries) times.
+ * Waits delayMs before each retry. Throws on final failure.
+ */
+async function withRetry(fn, label, retries = 1, delayMs = 2_000) {
+  let lastErr;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    if (attempt > 0) {
+      warn(label, `Attempt ${attempt} failed (${lastErr.message}) — retrying in ${delayMs}ms`);
+      await sleep(delayMs);
+    }
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw lastErr;
+}
+
+/** Health tracking — populated by each fetcher, included in output. */
+const fetchHealth = {};
+
+function markHealth(key, status, error) {
+  fetchHealth[key] = { status, ts: new Date().toISOString(), ...(error ? { error: String(error) } : {}) };
+}
+
+/** Send a Telegram message. Used for critical failure alerts. */
+async function sendTelegram(text) {
+  const token  = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) {
+    warn('Telegram', 'TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set — skipping notification');
+    return false;
+  }
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15_000);
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+      signal: controller.signal,
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(`Telegram error: ${json.description}`);
+    log('Telegram', 'Alert sent');
+    return true;
+  } catch (e) {
+    err('Telegram', e.message);
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** Load existing dashboard-data.json so we can fall back to previous values. */
 function loadExisting() {
   try {
@@ -58,7 +115,7 @@ async function fetchJSON(url, timeoutMs = 10_000) {
 
 async function fetchXRP(fallback) {
   try {
-    const data = await fetchJSON(ENDPOINTS.xrp);
+    const data = await withRetry(() => fetchJSON(ENDPOINTS.xrp), 'XRP');
     const r = data?.ripple;
     if (!r) throw new Error('Unexpected response shape');
     const result = {
@@ -68,9 +125,11 @@ async function fetchXRP(fallback) {
       market_cap: r.usd_market_cap   ?? null,
     };
     log('XRP', `price=$${result.price}  24h=${result.change_24h?.toFixed(2)}%`);
+    markHealth('xrp', 'ok');
     return result;
   } catch (e) {
     err('XRP', e.message);
+    markHealth('xrp', 'fail', e.message);
     return fallback?.xrp ?? { price: null, change_24h: null, volume_24h: null, market_cap: null };
   }
 }
@@ -78,30 +137,32 @@ async function fetchXRP(fallback) {
 async function fetchRLUSD(fallback) {
   await sleep(COINGECKO_DELAY_MS);
   try {
-    const data = await fetchJSON(ENDPOINTS.rlusd);
+    const data = await withRetry(() => fetchJSON(ENDPOINTS.rlusd), 'RLUSD');
     const r = data?.['ripple-usd'];
     if (!r) throw new Error('Unexpected response shape — will try search');
     const result = { market_cap: r.usd_market_cap ?? null, source: 'coingecko' };
     log('RLUSD', `market_cap=$${result.market_cap?.toLocaleString()}`);
+    markHealth('rlusd', 'ok');
     return result;
   } catch (e) {
     warn('RLUSD', `Primary ID failed (${e.message}), trying search…`);
     try {
       await sleep(COINGECKO_DELAY_MS);
-      const search = await fetchJSON(ENDPOINTS.rlusd_search);
+      const search = await withRetry(() => fetchJSON(ENDPOINTS.rlusd_search), 'RLUSD-search');
       const coin = search?.coins?.find(c => c.symbol?.toUpperCase() === 'RLUSD');
       if (!coin) throw new Error('RLUSD not found in search results');
-      // Fetch by the discovered id
       await sleep(COINGECKO_DELAY_MS);
-      const data2 = await fetchJSON(
+      const data2 = await withRetry(() => fetchJSON(
         `https://api.coingecko.com/api/v3/simple/price?ids=${coin.id}&vs_currencies=usd&include_market_cap=true`
-      );
+      ), 'RLUSD-price');
       const r2 = data2?.[coin.id];
       const result = { market_cap: r2?.usd_market_cap ?? null, source: 'coingecko' };
       log('RLUSD', `market_cap=$${result.market_cap?.toLocaleString()} (via search id=${coin.id})`);
+      markHealth('rlusd', 'ok');
       return result;
     } catch (e2) {
       err('RLUSD', e2.message);
+      markHealth('rlusd', 'fail', e2.message);
       return fallback?.rlusd ?? { market_cap: null, source: 'manual' };
     }
   }
@@ -109,7 +170,7 @@ async function fetchRLUSD(fallback) {
 
 async function fetchFearGreed(fallback) {
   try {
-    const data = await fetchJSON(ENDPOINTS.fear_greed);
+    const data = await withRetry(() => fetchJSON(ENDPOINTS.fear_greed), 'FearGreed');
     const entry = data?.data?.[0];
     if (!entry) throw new Error('Unexpected response shape');
     const result = {
@@ -117,22 +178,26 @@ async function fetchFearGreed(fallback) {
       label: entry.value_classification,
     };
     log('Fear&Greed', `${result.value} — ${result.label}`);
+    markHealth('fear_greed', 'ok');
     return result;
   } catch (e) {
     err('Fear&Greed', e.message);
+    markHealth('fear_greed', 'fail', e.message);
     return fallback?.macro?.fear_greed ?? { value: null, label: null };
   }
 }
 
 async function fetchUSDJPY(fallback) {
   try {
-    const data = await fetchJSON(ENDPOINTS.usd_jpy);
+    const data = await withRetry(() => fetchJSON(ENDPOINTS.usd_jpy), 'USD/JPY');
     const rate = data?.rates?.JPY;
     if (!rate) throw new Error('Unexpected response shape');
     log('USD/JPY', rate);
+    markHealth('usd_jpy', 'ok');
     return rate;
   } catch (e) {
     err('USD/JPY', e.message);
+    markHealth('usd_jpy', 'fail', e.message);
     return fallback?.macro?.usd_jpy ?? null;
   }
 }
@@ -142,21 +207,24 @@ async function fetchUSDJPY(fallback) {
  */
 async function fetchFRED(seriesLabel, url, fallbackValue) {
   const key = process.env.FRED_API_KEY;
+  const healthKey = `fred_${seriesLabel.toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
   if (!key) {
     warn('FRED', `FRED_API_KEY not set — skipping ${seriesLabel}`);
+    markHealth(healthKey, 'skip');
     return fallbackValue ?? null;
   }
   try {
     const fullUrl = `${url}&api_key=${encodeURIComponent(key)}`;
-    const data = await fetchJSON(fullUrl);
-    // FRED returns observations newest-first; find the first with a real value
+    const data = await withRetry(() => fetchJSON(fullUrl), `FRED-${seriesLabel}`);
     const obs = data?.observations?.find(o => o.value !== '.' && o.value !== '');
     if (!obs) throw new Error('No valid observation in response');
     const value = parseFloat(obs.value);
     log('FRED', `${seriesLabel} = ${value} (date: ${obs.date})`);
+    markHealth(healthKey, 'ok');
     return value;
   } catch (e) {
     err('FRED', `${seriesLabel}: ${e.message}`);
+    markHealth(healthKey, 'fail', e.message);
     return fallbackValue ?? null;
   }
 }
@@ -174,11 +242,19 @@ const ISHARES_HEADERS = {
  * Maintains a rolling daily_flow_history array (up to 14 entries) for 5-day sums.
  */
 async function fetchISharesETF({ label, csvUrl, assetRegex, fallbackKey, fallback }) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 15_000);
+  const healthKey = label.toLowerCase();
   try {
-    const res = await fetch(csvUrl, { headers: ISHARES_HEADERS, signal: controller.signal });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await withRetry(async () => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15_000);
+      try {
+        const r = await fetch(csvUrl, { headers: ISHARES_HEADERS, signal: controller.signal });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r;
+      } finally {
+        clearTimeout(timer);
+      }
+    }, label);
     const csv = await res.text();
 
     // Header fields — date is quoted e.g. Fund Holdings as of,"Feb 20, 2026"
@@ -225,17 +301,17 @@ async function fetchISharesETF({ label, csvUrl, assetRegex, fallbackKey, fallbac
     };
 
     log(label, `AUM=$${(total_aum / 1e9).toFixed(2)}B | shares=${(shares_outstanding / 1e6).toFixed(0)}M | daily_flow=${daily_flow != null ? (daily_flow >= 0 ? '+' : '') + '$' + (daily_flow / 1e6).toFixed(0) + 'M' : 'N/A (first run)'}`);
+    markHealth(healthKey, 'ok');
     return result;
   } catch (e) {
     err(label, e.message);
+    markHealth(healthKey, 'fail', e.message);
     return fallback?.[fallbackKey] ?? {
       last_fetched: null, source: 'none', ticker: label,
       as_of_date: null, total_aum: null, shares_outstanding: null,
       nav_per_share: null, daily_flow: null, weekly_net_flow: null,
       daily_flow_history: [],
     };
-  } finally {
-    clearTimeout(timer);
   }
 }
 
@@ -267,18 +343,25 @@ function fetchETHETF(fallback) {
  * Always returns an "etf" object — never throws.
  */
 async function fetchETF(fallback) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 15_000);
   try {
-    const res = await fetch('https://xrp-insights.com/api/flows?days=14', {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
-        'Accept':     'application/json',
-        'Referer':    'https://xrp-insights.com/',
-      },
-      signal: controller.signal,
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    const res = await withRetry(async () => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15_000);
+      try {
+        const r = await fetch('https://xrp-insights.com/api/flows?days=14', {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
+            'Accept':     'application/json',
+            'Referer':    'https://xrp-insights.com/',
+          },
+          signal: controller.signal,
+        });
+        if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText}`);
+        return r;
+      } finally {
+        clearTimeout(timer);
+      }
+    }, 'ETF');
     const data = await res.json();
 
     if (!data?.success || !Array.isArray(data?.daily) || data.daily.length === 0) {
@@ -332,9 +415,11 @@ async function fetchETF(fallback) {
     };
 
     log('ETF', `AUM=$${(result.total_aum / 1e6).toFixed(1)}M | XRP=${(result.total_xrp_locked / 1e6).toFixed(0)}M | 5D flow=${(weeklyNetFlow / 1e6).toFixed(2)}M | funds=${funds.length}`);
+    markHealth('etf', 'ok');
     return result;
   } catch (e) {
     err('ETF', e.message);
+    markHealth('etf', 'fail', e.message);
     return fallback?.etf ?? {
       last_fetched:     null,
       source:           'none',
@@ -345,8 +430,6 @@ async function fetchETF(fallback) {
       daily_outflow:    null,
       funds:            [],
     };
-  } finally {
-    clearTimeout(timer);
   }
 }
 
@@ -358,18 +441,25 @@ async function fetchETF(fallback) {
  * Always returns a "supply" object — never throws.
  */
 async function fetchXRPRadar(fallback) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 15_000);
   try {
-    const res = await fetch('https://xrp-insights.com/api/allocations', {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
-        'Accept':     'application/json',
-        'Referer':    'https://xrp-insights.com/xrp-radar',
-      },
-      signal: controller.signal,
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    const res = await withRetry(async () => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15_000);
+      try {
+        const r = await fetch('https://xrp-insights.com/api/allocations', {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
+            'Accept':     'application/json',
+            'Referer':    'https://xrp-insights.com/xrp-radar',
+          },
+          signal: controller.signal,
+        });
+        if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText}`);
+        return r;
+      } finally {
+        clearTimeout(timer);
+      }
+    }, 'Supply');
     const json = await res.json();
     if (!json.success || !json.data) throw new Error('Unexpected response shape');
 
@@ -398,9 +488,11 @@ async function fetchXRPRadar(fallback) {
     };
 
     log('Supply', `Escrow=${escrow ? (escrow / 1e9).toFixed(2) + 'B' : 'N/A'} | Exchanges=${exchanges ? (exchanges / 1e9).toFixed(1) + 'B' : 'N/A'} | DeFi=${defi_total ? (defi_total / 1e6).toFixed(0) + 'M' : 'N/A'} | Corp=${corp_treasuries ? (corp_treasuries / 1e6).toFixed(0) + 'M' : 'N/A'}`);
+    markHealth('supply', 'ok');
     return result;
   } catch (e) {
     err('Supply', e.message);
+    markHealth('supply', 'fail', e.message);
     return fallback?.supply ?? {
       last_fetched:     null,
       source:           'none',
@@ -413,8 +505,6 @@ async function fetchXRPRadar(fallback) {
       amm_locked:       null,
       xrp_burned:       null,
     };
-  } finally {
-    clearTimeout(timer);
   }
 }
 
@@ -428,8 +518,8 @@ async function fetchXRPRadar(fallback) {
 async function fetchXRPLMetrics(fallback) {
   try {
     const [tokensData, ledgerData] = await Promise.all([
-      fetchJSON('https://xrpscan.com/api/v1/tokens', 15_000),
-      fetchJSON('https://xrpscan.com/api/v1/ledger', 10_000),
+      withRetry(() => fetchJSON('https://xrpscan.com/api/v1/tokens', 15_000), 'XRPL-tokens'),
+      withRetry(() => fetchJSON('https://xrpscan.com/api/v1/ledger', 10_000), 'XRPL-ledger'),
     ]);
 
     // DEX volume = aggregate across all token pairs (USD, closest ODL proxy)
@@ -469,9 +559,11 @@ async function fetchXRPLMetrics(fallback) {
     };
 
     log('XRPL', `DEX vol 24h=$${dex_volume_24h_usd != null ? (dex_volume_24h_usd / 1e6).toFixed(1) + 'M' : 'N/A'} | trades=${dex_exchanges_24h ?? 'N/A'} | avg_tx/ledger=${avg_tx_per_ledger ?? 'N/A'} | burn=${fee_burn_per_ledger_xrp ?? 'N/A'} XRP/ledger`);
+    markHealth('xrpl_metrics', 'ok');
     return result;
   } catch (e) {
     err('XRPL', e.message);
+    markHealth('xrpl_metrics', 'fail', e.message);
     return fallback?.xrpl_metrics ?? {
       last_fetched: null, source: 'none',
       dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
@@ -496,7 +588,7 @@ async function fetchNews(fallback) {
     try {
       await sleep(500);
       const cpUrl = `https://cryptopanic.com/api/free/v1/posts/?auth_token=${encodeURIComponent(cpKey)}&currencies=XRP&kind=news&filter=important`;
-      const data = await fetchJSON(cpUrl, 12_000);
+      const data = await withRetry(() => fetchJSON(cpUrl, 12_000), 'News-CryptoPanic');
       const results = data?.results;
       if (!Array.isArray(results) || results.length === 0) throw new Error('Empty or unexpected CryptoPanic response');
 
@@ -512,6 +604,7 @@ async function fetchNews(fallback) {
         }));
 
       log('News', `CryptoPanic: ${headlines.length} headlines (last 24h)`);
+      markHealth('news', 'ok');
       return { last_fetched: new Date().toISOString(), source: 'cryptopanic', headlines };
     } catch (e) {
       warn('News', `CryptoPanic failed (${e.message}) — trying NewsData.io`);
@@ -524,16 +617,13 @@ async function fetchNews(fallback) {
   const ndKey = process.env.NEWSDATA_API_KEY;
   if (ndKey) {
     try {
-      // Fetch extra results so there's a buffer after relevance filtering
       const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL&language=en&size=10&category=technology,business,top`;
-      const data = await fetchJSON(ndUrl, 12_000);
+      const data = await withRetry(() => fetchJSON(ndUrl, 12_000), 'News-NewsData');
       const results = data?.results;
       if (!Array.isArray(results) || results.length === 0) throw new Error('Empty NewsData.io response');
 
-      // Post-filter: only keep articles that actually mention XRP/Ripple/XRPL in title or description
       const XRP_RE = /\b(XRP|Ripple|XRPL|RLUSD|ODL|OnDemandLiquidity|RippleNet)\b/i;
       const relevant = results.filter(p => XRP_RE.test((p.title ?? '') + ' ' + (p.description ?? '')));
-      // Fall back to raw results only if zero XRP-relevant articles found
       const pool = relevant.length >= 1 ? relevant : results;
 
       const headlines = pool.slice(0, 15).map(p => ({
@@ -544,12 +634,15 @@ async function fetchNews(fallback) {
       }));
 
       log('News', `NewsData.io: ${headlines.length} headlines (${relevant.length} XRP-relevant of ${results.length} returned)`);
+      markHealth('news', 'ok');
       return { last_fetched: new Date().toISOString(), source: 'newsdata', headlines };
     } catch (e2) {
       err('News', `NewsData.io also failed: ${e2.message}`);
+      markHealth('news', 'fail', e2.message);
     }
   } else {
     warn('News', 'NEWSDATA_API_KEY not set — no fallback available');
+    markHealth('news', 'skip');
   }
 
   // ── Graceful degradation ───────────────────────────────────────────────────
@@ -693,10 +786,20 @@ async function main() {
     manual,
     kill_switches:  buildKillSwitches(manual, rlusd, etf),
     thesis_scores,
+    health_check:   fetchHealth,
   };
 
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
   log('io', `Wrote ${OUTPUT_PATH}`);
+
+  // Alert if too many sources failed
+  const failedSources = Object.entries(fetchHealth)
+    .filter(([, h]) => h.status === 'fail')
+    .map(([k]) => k);
+  if (failedSources.length >= 3) {
+    const msg = `⚠️ <b>OVERWATCH: ${failedSources.length} data sources failed</b>\n\nFailed: ${failedSources.join(', ')}\nCycle: ${new Date().toISOString()}`;
+    await sendTelegram(msg);
+  }
 
   console.log('\n─── Summary ───────────────────────────────────');
   console.log(`XRP price:       $${xrp.price ?? 'N/A'}`);
