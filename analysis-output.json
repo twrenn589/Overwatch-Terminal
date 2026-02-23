@@ -1,40 +1,51 @@
 {
-  "timestamp": "2026-02-23T01:36:29.537Z",
+  "timestamp": "2026-02-23T05:22:28.806Z",
   "run_type": "evening",
-  "market_summary": "XRP down 6.4% to $1.34 amid extreme fear (F&G: 5). ETF outflows accelerated to -$7.9K daily, -$5.5M weekly, signaling institutional retreat.",
-  "thesis_pulse": "SBI ¥10B blockchain bond with XRP rewards strengthens Japan adoption thesis ahead of schedule. However, accelerating ETF outflows (-$5.5M weekly) and extreme fear environment (F&G: 5) indicate institutional confidence wavering. RLUSD at $1.56B (31% of kill switch target) continues steady growth. PermissionedDEX live but institutional adoption data still missing.",
+  "market_summary": "XRP down 5.3% to $1.34 amid extreme fear conditions (F&G: 5). ETF outflows accelerated to -$5.5M weekly despite zero daily flows from major funds.",
+  "thesis_pulse": "SBI Holdings launched ¥10B blockchain bond with XRP rewards, validating Japan adoption thesis ahead of schedule. However, sustained ETF outflows (-$5.5M weekly) during extreme fear suggest institutional retreat velocity may be overcoming positive adoption momentum. USD/JPY at 155.21 approaches critical stress threshold while JGB yields remain elevated at 2.24%.",
   "stress_assessment": {
     "level": "ELEVATED",
-    "score": 78,
-    "interpretation": "USD/JPY at 155.21 breaches elevated threshold. JGB yields at 2.24% in critical range. Extreme fear (F&G: 5) compounds macro stress environment."
+    "score": 82,
+    "interpretation": "Multiple stress indicators converging: extreme fear index at 5, USD/JPY near 155 critical threshold, JGB yields elevated at 2.24%, accelerating ETF outflows during institutional adoption phase."
   },
-  "kill_switch_updates": [],
+  "kill_switch_updates": [
+    {
+      "name": "japan_adoption",
+      "previous_status": "CONFIRMING",
+      "recommended_status": "AHEAD OF SCHEDULE",
+      "reasoning": "SBI Holdings ¥10B blockchain bond with XRP rewards represents expanded institutional integration beyond expectations"
+    }
+  ],
   "scorecard_updates": [
     {
       "category": "japan_adoption",
       "previous_status": "FAVORABLE",
       "recommended_status": "ACCELERATING",
-      "reasoning": "SBI ¥10B blockchain bond with XRP rewards represents concrete institutional integration beyond earlier positioning"
+      "reasoning": "SBI bond launch demonstrates expanded XRPL institutional integration in Japan beyond baseline expectations"
     }
   ],
   "alerts": [
     {
       "severity": "WARNING",
-      "message": "ETF outflows accelerating: -$5.5M weekly across multiple funds during extreme fear"
+      "message": "ETF outflows accelerating (-$5.5M weekly) despite positive institutional adoption news"
+    },
+    {
+      "severity": "WARNING",
+      "message": "USD/JPY at 155.21 approaching critical stress threshold of 160"
     },
     {
       "severity": "INFO",
-      "message": "SBI Holdings ¥10B blockchain bond with XRP rewards strengthens Japan adoption case"
+      "message": "SBI Holdings validates Japan thesis with ¥10B blockchain bond incorporating XRP rewards"
     }
   ],
-  "etf_analysis": "Accelerating outflows (-$5.5M weekly, -$7.9K daily) across multiple funds signal institutional retreat. Only Canary Capital showing outflows while others flat suggests concentrated selling pressure.",
-  "macro_analysis": "Elevated stress persists with USD/JPY 155.21, JGB yields 2.24% in critical range, and extreme fear (F&G: 5). Oil at $69.77 provides some relief from energy shock risks.",
+  "etf_analysis": "Weekly outflows accelerated to -$5.5M driven entirely by Canary Capital redemptions, while other funds showed zero flows. Pattern suggests selective institutional retreat rather than broad confidence loss.",
+  "macro_analysis": "USD/JPY near critical 155 threshold with JGB yields at 2.24% maintaining BOJ credibility pressure. Extreme fear at 5 indicates broad institutional risk-off despite positive adoption signals.",
   "recommended_probability_adjustment": {
     "bear": 8,
-    "base": 40,
-    "mid": 40,
+    "base": 35,
+    "mid": 45,
     "bull": 12,
-    "reasoning": "SBI bond launch validates Japan adoption thesis, shifting 5% from base to mid despite ETF outflow headwinds"
+    "reasoning": "SBI bond launch validates Japan adoption thesis progression, shifting 5% from base to mid despite sustained ETF outflow headwinds"
   },
   "events_draft": [
     {
@@ -42,37 +53,37 @@
       "category": "INSTITUTIONAL",
       "severity": "ELEVATED",
       "title": "SBI Holdings Launches ¥10B Blockchain Bond With XRP Rewards",
-      "expanded": "Major Japanese financial institution deepens XRPL integration with tokenized bonds offering XRP rewards, advancing Japan adoption thesis ahead of Q3 timeline."
+      "expanded": "Major Japanese financial institution expands XRPL integration beyond baseline adoption expectations. Validates Japan thesis acceleration amid broader institutional retreat signals."
     }
   ],
   "geopolitical_watchlist": [
     {
       "region": "Japan / BOJ",
-      "status_text": "JGB yields at 2.24% in critical range while SBI advances blockchain bond integration."
+      "status_text": "USD/JPY at 155.21 approaching critical threshold with JGB yields elevated at 2.24% maintaining central bank credibility stress."
     },
     {
       "region": "Middle East",
-      "status_text": "Strait of Hormuz critical status continues with dual carrier presence."
+      "status_text": "Strait of Hormuz remains at critical status with dual carrier groups and Russia-Iran-China military exercises ongoing."
     },
     {
       "region": "US-China",
-      "status_text": "Section 122 tariff framework active with 150-day expiration countdown."
+      "status_text": "Section 122 tariff authority active with 10% global rates expiring approximately July 20, 2026."
     },
     {
       "region": "Trade / Tariffs",
-      "status_text": "10% global tariffs under Section 122 expire approximately July 20, 2026."
+      "status_text": "SCOTUS struck IEEPA tariffs but Section 122 invoked, creating 150-day countdown pressure on trading relationships."
     },
     {
       "region": "Arctic / Russia",
-      "status_text": "Russia-Iran-China joint exercises maintain elevated tensions."
+      "status_text": "Active military coordination with Iran and China in Strait of Hormuz exercises indicates expanded strategic alignment."
     }
   ],
-  "energy_interpretation": "Brent at $69.77 provides relief from earlier energy shock fears, reducing pressure on Japan's trade deficit feedback loop. However, USD/JPY at 155.21 and JGB yields at 2.24% indicate BOJ credibility stress continues despite lower oil prices.",
-  "thesis_pulse_assessment": "SBI ¥10B blockchain bond with XRP rewards validates Japan adoption thesis ahead of schedule. RLUSD growth to $1.56B (31% of kill switch) maintains momentum. However, accelerating ETF outflows (-$5.5M weekly) during extreme fear (F&G: 5) signal institutional confidence erosion. Core ODL volume data gap persists.",
-  "stress_interpretation": "Elevated stress environment with USD/JPY 155.21 breaching threshold and JGB yields 2.24% in critical range. Extreme fear index at 5 indicates broad market stress, though Brent at $69.77 provides some energy relief.",
+  "energy_interpretation": "Brent crude at $69.77 remains below elevated stress threshold despite Hormuz tensions, providing temporary relief for Japan's energy import costs. However, the yen weakness at 155.21 offsets crude price benefits, maintaining trade deficit pressure on BOJ monetary policy credibility.",
+  "thesis_pulse_assessment": "SBI Holdings ¥10B blockchain bond validates Japan adoption thesis acceleration, but sustained ETF outflows (-$5.5M weekly) during extreme fear suggest institutional confidence eroding faster than positive adoption can rebuild it. USD/JPY at 155.21 approaches critical stress threshold while macro conditions deteriorate. Adoption momentum confirmed but institutional capital retreat velocity concerning.",
+  "stress_interpretation": "Composite stress elevated at 82/100 with multiple converging indicators: extreme fear index at 5, USD/JPY near 155 critical threshold, sustained ETF outflows accelerating. JGB yields at 2.24% maintain BOJ credibility pressure despite positive institutional adoption signals.",
   "bear_case": {
-    "counter_thesis_score": 32,
-    "score_reasoning": "ETF outflows accelerating (-$5.5M weekly) during extreme fear (F&G: 5) suggest institutional retreat overcoming adoption news momentum.",
+    "counter_thesis_score": 38,
+    "score_reasoning": "ETF outflows accelerating to -$5.5M weekly during extreme fear override SBI adoption momentum. Institutional retreat velocity suggests confidence eroding faster than positive news can rebuild it.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
@@ -100,8 +111,8 @@
         "status_text": "Stable presence but no major settlement infrastructure advances"
       }
     ],
-    "odl_stagnation": "Continued lack of public ODL volume data prevents assessment of core utility thesis momentum",
-    "token_velocity_concern": "Accelerating ETF outflows during extreme fear suggest institutional confidence wavering faster than adoption can offset",
+    "odl_stagnation": "Continued lack of public ODL volume data prevents assessment of core utility thesis momentum during critical adoption phase",
+    "token_velocity_concern": "Accelerating ETF outflows during extreme fear indicate institutional confidence wavering despite positive adoption news flow",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
@@ -111,12 +122,12 @@
       {
         "name": "Crypto Winter Signals",
         "status": "ELEVATED_RISK",
-        "status_text": "Sustained ETF outflows across multiple funds signal institutional capital retreat"
+        "status_text": "Sustained ETF outflows across multiple funds signal institutional capital retreat accelerating"
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "Clarity Act pending but no negative regulatory signals from administration"
+        "status_text": "Clarity Act pending but no negative regulatory signals from current administration"
       },
       {
         "name": "Rate Hike Extension",
@@ -124,6 +135,6 @@
         "status_text": "JGB yields at 2.24% indicate central bank credibility stress persisting globally"
       }
     ],
-    "bear_narrative": "Accelerating ETF outflows (-$5.5M weekly) during extreme fear override SBI adoption signals. Institutional retreat velocity suggests confidence eroding faster than positive news can rebuild it. BIS Project Nexus represents credible bypass threat to XRPL bridge utility."
+    "bear_narrative": "Accelerating ETF outflows (-$5.5M weekly) during extreme fear override SBI adoption signals, suggesting institutional retreat velocity exceeds adoption momentum. BIS Project Nexus represents credible bypass threat to XRPL bridge utility. Lack of ODL transparency prevents validation of core utility thesis during critical period."
   }
 }
