@@ -266,32 +266,36 @@ body {
   color:var(--text-secondary);
   line-height:1.5;
 }
-/* Countdown */
-.countdown {
+/* Hero banner */
+.hero-banner {
   text-align:center;
-  padding:16px;
+  padding:20px 16px;
   margin-bottom:12px;
-  background:linear-gradient(135deg,rgba(0,200,200,0.06),rgba(0,229,153,0.04));
-  border:1px solid rgba(0,200,200,0.15);
+  background:linear-gradient(135deg,rgba(0,200,200,0.04),rgba(0,0,0,0));
+  border:1px solid rgba(0,200,200,0.2);
   border-radius:var(--radius);
+  box-shadow:0 0 24px rgba(0,200,200,0.04);
 }
-.countdown-label {
+.hero-title {
   font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  letter-spacing:2px;
-  color:var(--accent-cyan);
-  margin-bottom:6px;
-}
-.countdown-value {
-  font-family:'JetBrains Mono',monospace;
-  font-size:24px;
+  font-size:20px;
   font-weight:700;
   color:var(--text-primary);
+  letter-spacing:4px;
+  margin-bottom:5px;
 }
-.countdown-sub {
-  font-size:10px;
+.hero-subtitle {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:3px;
+  color:var(--accent-cyan);
+  margin-bottom:12px;
+}
+.hero-status {
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  letter-spacing:1px;
   color:var(--text-muted);
-  margin-top:4px;
 }
 /* Stress index */
 .stress-bar {
@@ -655,27 +659,27 @@ textarea:focus { border-color:var(--accent-cyan); }
 
   <!-- ==================== OVERVIEW ==================== -->
   <div class="tab-panel active" id="panel-summary">
-    <div class="countdown">
-      <div class="countdown-label">PermissionedDEX Activation</div>
-      <div class="countdown-value" id="pdexCountdown">--d --h --m</div>
-      <div class="countdown-sub">Activated Feb 20, 2026</div>
+    <div class="hero-banner">
+      <div class="hero-title">OVERWATCH TERMINAL</div>
+      <div class="hero-subtitle">AUTONOMOUS INSTITUTIONAL INTELLIGENCE</div>
+      <div class="hero-status" id="heroStatus">SYSTEM ONLINE • LAST ANALYSIS: -- • NEXT: --</div>
     </div>
 
     <div class="summary-grid">
       <div class="summary-card cyan">
-        <div class="card-label">ODL ACTIVITY</div>
-        <div class="card-value" id="odlStatus">$15B+</div>
-        <div class="card-sub">Annualized est.</div>
+        <div class="card-label">XRPL DEX VOL (24H)</div>
+        <div class="card-value" id="odlStatus">--</div>
+        <div class="card-sub">ODL activity proxy</div>
       </div>
       <div class="summary-card green">
         <div class="card-label">XRP ETF FLOWS</div>
-        <div class="card-value" id="etfFlow">+$7.65M</div>
-        <div class="card-sub">Weekly (Feb 13)</div>
+        <div class="card-value" id="etfFlow">--</div>
+        <div class="card-sub" id="etfFlowSub">--</div>
       </div>
       <div class="summary-card amber">
         <div class="card-label">ETFs ACTIVE</div>
         <div class="card-value">7 US Spot</div>
-        <div class="card-sub">$1.4B+ cumulative</div>
+        <div class="card-sub" id="etfAumSub">--</div>
       </div>
       <div class="summary-card blue">
         <div class="card-label">USD/JPY</div>
@@ -1345,21 +1349,6 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 // ===== COUNTDOWN =====
-function updateCountdown() {
-  const target = new Date('2026-02-18T00:00:00Z');
-  const now = new Date();
-  const diff = target - now;
-  if (diff <= 0) {
-    document.getElementById('pdexCountdown').textContent = '🟢 LIVE';
-    return;
-  }
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  document.getElementById('pdexCountdown').textContent = `${d}d ${h}h ${m}m`;
-}
-updateCountdown();
-setInterval(updateCountdown, 60000);
 
 // ===== EVENTS TIMELINE DATA =====
 // Add new entries to this array — sorted newest-first automatically.
@@ -2018,6 +2007,23 @@ async function fetchDashboardData() {
       }
     }
 
+    // Overview cards — wired to live dashboard-data.json
+    // XRPL DEX volume (ODL proxy)
+    if (d.xrpl_metrics?.dex_volume_24h_usd != null) {
+      const vol = d.xrpl_metrics.dex_volume_24h_usd;
+      set('odlStatus', '$' + (vol / 1e6).toFixed(2) + 'M');
+    }
+
+    // Hero status line
+    if (d.last_analysis?.timestamp) {
+      const dt = new Date(d.last_analysis.timestamp);
+      const lastStr = dt.toLocaleDateString('en-US', {month:'short', day:'numeric'}) + ' ' +
+        dt.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZone:'America/Chicago', timeZoneName:'short'});
+      const utcH = new Date().getUTCHours();
+      const nextLabel = utcH < 12 ? '6 AM CST' : '6 PM CST';
+      set('heroStatus', 'SYSTEM ONLINE \u2022 LAST ANALYSIS: ' + lastStr + ' \u2022 NEXT: ' + nextLabel);
+    }
+
     // ETF data
     if (d.etf) {
       const e = d.etf;
@@ -2025,12 +2031,25 @@ async function fetchDashboardData() {
       const fmtMabs = v => v == null ? '--' : '$' + Math.abs(v / 1e6).toFixed(2) + 'M';
       const cls   = v => v == null ? '' : v >= 0 ? 'green' : 'red';
 
-      // Overview
-      if (e.total_aum != null) set('etfTotalAum', '$' + (e.total_aum / 1e9).toFixed(3) + 'B');
+      // Overview cards wiring
+      if (e.total_aum != null) {
+        set('etfTotalAum', '$' + (e.total_aum / 1e9).toFixed(3) + 'B');
+        set('etfAumSub', '$' + (e.total_aum / 1e9).toFixed(2) + 'B cumulative AUM');
+      }
       if (e.total_xrp_locked != null) set('etfXrpLocked', (e.total_xrp_locked / 1e6).toFixed(1) + 'M XRP');
       if (e.pct_supply != null) set('etfPctSupply', e.pct_supply.toFixed(2) + '% of circulating');
       if (e.num_funds != null) set('etfNumFunds', e.num_funds + ' US Spot ETFs');
       set('etfAsOf', e.as_of_date ?? '--');
+
+      // ETF Flows overview card — daily preferred, weekly fallback
+      const overviewFlow = e.daily_net_flow ?? e.weekly_net_flow;
+      if (overviewFlow != null) {
+        const flowEl = document.getElementById('etfFlow');
+        if (flowEl) { flowEl.textContent = fmtM(overviewFlow); flowEl.className = 'card-value ' + cls(overviewFlow); }
+        const isDaily = e.daily_net_flow != null;
+        const dateStr = e.flow_date ? ' (' + e.flow_date + ')' : '';
+        set('etfFlowSub', (isDaily ? 'Daily' : 'Weekly') + dateStr);
+      }
 
       // Daily flows
       set('etfFlowDate', e.flow_date ?? '--');
@@ -2583,7 +2602,6 @@ function refreshAll() {
   fetchDashboardData();
   fetchGeopolitical();
   fetchAnalysisHistory();
-  updateCountdown();
   if (!xrplWs || xrplWs.readyState > 1) { reconnectAttempts = 0; connectXRPL(); }
 }
 
