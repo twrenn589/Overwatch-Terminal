@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "overwatch-bot"
           git config user.email "overwatch-bot@users.noreply.github.com"
-          git add dashboard-data.json
+          git add dashboard-data.json index.html scripts/events-history.json
           git diff --staged --quiet || git commit -m "approved: analysis applied $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
 
