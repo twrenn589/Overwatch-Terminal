@@ -305,13 +305,13 @@
     }
   },
   "bear_case": {
-    "counter_thesis_score": 25,
-    "score_reasoning": "Persistent ETF outflows and extreme fear environment create headwinds, but institutional adoption signals like SBI blockchain bond limit counter-thesis pressure.",
+    "counter_thesis_score": 30,
+    "score_reasoning": "ETF outflows accelerating (-$5.5M weekly) amid extreme fear suggest institutional retreat. However, SBI bond launch provides counter-evidence to adoption stagnation narrative.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "No new major announcements amid institutional crypto adoption trends"
+        "status_text": "No major expansion amid institutional crypto adoption trends"
       },
       {
         "name": "Visa B2B Connect",
@@ -321,60 +321,60 @@
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "Established but not expanding aggressively into XRPL use cases"
+        "status_text": "Established platform but not expanding into XRPL competitive space"
       },
       {
         "name": "BIS Project Nexus",
         "status": "ELEVATED_RISK",
-        "status_text": "Multi-CBDC platform could bypass need for XRPL bridge currency"
+        "status_text": "Multi-CBDC platform development could bypass XRPL bridge currency role"
       },
       {
         "name": "Ethereum Institutional",
         "status": "MONITORING",
-        "status_text": "Stable institutional presence but no major settlement infrastructure gains"
+        "status_text": "Stable presence but no major settlement infrastructure advances"
       }
     ],
-    "odl_stagnation": "No public ODL volume data available limits ability to assess core utility thesis momentum",
-    "token_velocity_concern": "Extreme fear environment and ETF outflows suggest institutional confidence wavering despite adoption headlines",
+    "odl_stagnation": "Continued lack of public ODL volume data prevents assessment of core utility thesis momentum",
+    "token_velocity_concern": "Extreme fear and persistent ETF outflows suggest institutional confidence wavering despite positive headlines",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "Extreme fear index at 5 suggests broad economic stress building"
+        "status_text": "Extreme fear index at 5 indicates broad economic stress building across markets"
       },
       {
         "name": "Crypto Winter Signals",
-        "status": "MONITORING",
-        "status_text": "Persistent ETF outflows across multiple funds signal institutional retreat"
+        "status": "ELEVATED_RISK",
+        "status_text": "Sustained ETF outflows across multiple funds signal institutional capital retreat"
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "Clarity Act pending but no negative signals from current administration"
+        "status_text": "Clarity Act pending but no negative regulatory signals from administration"
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "JGB yields at 2.24% suggest central bank credibility issues globally"
+        "status_text": "JGB yields at 2.24% indicate central bank credibility stress globally"
       }
     ],
-    "bear_narrative": "Persistent ETF outflows (-$5.5M weekly) suggest institutional confidence eroding despite positive headlines. Extreme fear environment (F&G: 5) indicates broader market stress that could overwhelm adoption narratives. BIS Project Nexus represents credible alternative settlement infrastructure that could bypass XRPL entirely.",
-    "last_updated": "2026-02-23T01:04:02.630Z"
+    "bear_narrative": "Accelerating ETF outflows (-$5.5M weekly) during extreme fear environment suggest institutional confidence eroding faster than adoption news can offset. BIS Project Nexus represents credible multi-CBDC alternative that could bypass XRPL entirely. Macro stress (F&G: 5, USD/JPY 155.21) threatens to overwhelm positive adoption signals.",
+    "last_updated": "2026-02-23T01:13:10.750Z"
   },
   "probability": {
     "bear": 8,
-    "base": 50,
-    "mid": 30,
+    "base": 45,
+    "mid": 35,
     "bull": 12,
-    "last_updated": "2026-02-23T01:04:02.630Z",
-    "last_reasoning": "SBI blockchain bond strengthens institutional case, shifting 5% from base to mid scenario despite ETF outflow concerns"
+    "last_updated": "2026-02-23T01:13:10.750Z",
+    "last_reasoning": "SBI blockchain bond strengthens Japan adoption case, shifting 5% from base to mid despite ETF outflow headwinds"
   },
   "last_analysis": {
-    "timestamp": "2026-02-23T01:04:02.630Z",
+    "timestamp": "2026-02-23T01:13:10.750Z",
     "run_type": "evening",
     "stress_level": "ELEVATED",
-    "stress_score": 72,
-    "applied_at": "2026-02-23T01:08:00.566Z",
+    "stress_score": 75,
+    "applied_at": "2026-02-23T01:22:38.858Z",
     "changes_applied": 2
   }
 }
