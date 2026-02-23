@@ -631,7 +631,7 @@ textarea:focus { border-color:var(--accent-cyan); }
 <!-- MACRO PILLS -->
 <div class="macro-bar">
   <div class="macro-pill"><span class="lbl">USD/JPY</span><span class="val" id="usdJpy">--</span></div>
-  <div class="macro-pill"><span class="lbl">JPN 10Y</span><span class="val amber" id="jpn10y">~2.25%</span></div>
+  <div class="macro-pill"><span class="lbl">JPN 10Y</span><span class="val" id="jpn10y">--</span></div>
   <div class="macro-pill"><span class="lbl">ETF FLOW</span><span class="val green" id="etfPill">+$7.65M/wk</span></div>
   <div class="macro-pill"><span class="lbl">XRPL</span><span class="val" id="ledgerPill">--</span></div>
 </div>
@@ -1806,21 +1806,6 @@ function updateStressIndex(fng) {
   updateStressScore(100 - fng);
 }
 
-// ===== USD/JPY =====
-async function fetchMacroData() {
-  try {
-    const r = await fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=JPY');
-    const d = await r.json();
-    if (d.rates && d.rates.JPY) {
-      const rate = d.rates.JPY;
-      const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      setText('usdJpy', '¥' + rate.toFixed(2));
-      setText('summaryJpy', '¥' + rate.toFixed(2));
-      setText('macroJpy', '¥' + rate.toFixed(2));
-      setText('stressJpy', '¥' + rate.toFixed(2) + (rate > 155 ? ' ⚠ Weak' : ''));
-    }
-  } catch(e) {}
-}
 
 // ===== XRPL WEBSOCKET =====
 let xrplWs = null, reconnectAttempts = 0;
@@ -1964,7 +1949,7 @@ async function fetchDashboardData() {
     if (d.macro) {
       const m = d.macro;
 
-      // USD/JPY: seed all elements from JSON; fetchMacroData() will overwrite with live rate
+      // USD/JPY: single source — dashboard-data.json (header pill, macro tab, stress tab)
       if (m.usd_jpy != null) {
         const jpyFmt = '¥' + m.usd_jpy.toFixed(2);
         set('usdJpy', jpyFmt);
@@ -2274,10 +2259,9 @@ async function fetchDashboardData() {
     }
 
 
-    // Stress data
+    // Stress data (stressJpy and stressJpn10y already set from d.macro above)
     if (d.stress) {
       set('stressOilTrend', d.stress.oil_jpy_trend);
-      set('stressJpn10y', d.stress.jpn_10y_note);
       set('stressBtcEtf', d.stress.btc_etf_flow);
       set('stressXrpEtf', d.stress.xrp_etf_flow);
       set('geoJapan', d.stress.geo_japan);
@@ -2585,7 +2569,6 @@ function renderBearAutoSignals() {
 function refreshAll() {
   fetchXRPPrice();
   fetchFearGreed();
-  fetchMacroData();
   fetchXRPSupply();
   fetchDashboardData();
   fetchGeopolitical();
@@ -2597,7 +2580,6 @@ function refreshAll() {
 // ===== INIT =====
 fetchXRPPrice();
 fetchFearGreed();
-fetchMacroData();
 fetchXRPSupply();
 fetchDashboardData();
 connectXRPL();
@@ -2609,7 +2591,6 @@ fetchGeopolitical();
 fetchAnalysisHistory();
 setInterval(fetchXRPPrice, 120000);
 setInterval(fetchFearGreed, 300000);
-setInterval(fetchMacroData, 300000);
 setInterval(fetchXRPSupply, 300000);
 setInterval(fetchDashboardData, 600000);
 setInterval(fetchGeopolitical, 1800000);
