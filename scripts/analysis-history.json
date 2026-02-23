@@ -1,1 +1,31 @@
-[]
+[
+  {
+    "timestamp": "2026-02-23T01:04:02.630Z",
+    "run_type": "evening",
+    "stress_score": 72,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.36,
+    "fear_greed": 5,
+    "usd_jpy": 155.21,
+    "jpn_10y": 2.24,
+    "brent_crude": 69.77,
+    "etf_daily_flow": -7865.159999996424,
+    "dex_volume_24h": 2269822.710377757,
+    "rlusd_market_cap": 1558208386.467648,
+    "probability_framework": {
+      "bear": 8,
+      "base": 50,
+      "mid": 30,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 3,
+    "events_drafted_count": 1,
+    "thesis_pulse": "SBI Holdings launches ¥10B blockchain bond with XRP rewards - significant institutional momentum in Japan thesis pillar. ETF flows remain concerning with persistent outflows but AUM holding above $1.1",
+    "counter_thesis_score": 25
+  }
+]
