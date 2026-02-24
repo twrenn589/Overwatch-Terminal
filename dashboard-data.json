@@ -1,18 +1,18 @@
 {
-  "updated": "2026-02-24T17:27:48.647Z",
+  "updated": "2026-02-24T17:31:29.701Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.36,
-    "change_24h": -0.008874393653054407,
-    "volume_24h": 2768465748.156043,
-    "market_cap": 82963649065.74744
+    "change_24h": 0.07025266555003609,
+    "volume_24h": 2770228106.40585,
+    "market_cap": 82923966336.38135
   },
   "rlusd": {
-    "market_cap": 1558279619.0384293,
+    "market_cap": 1558243570.2840827,
     "source": "coingecko"
   },
   "etf": {
-    "last_fetched": "2026-02-24T17:27:44.310Z",
+    "last_fetched": "2026-02-24T17:31:25.481Z",
     "source": "xrp-insights",
     "as_of_date": "2026-02-23",
     "total_aum": 1097779873.25,
@@ -78,12 +78,12 @@
         "daily_flow": 0
       }
     ],
-    "pct_supply": 1.295,
-    "circ_supply": 61002683137,
+    "pct_supply": 1.296,
+    "circ_supply": 60973504659,
     "num_funds": 7
   },
   "btc_etf": {
-    "last_fetched": "2026-02-24T17:27:44.616Z",
+    "last_fetched": "2026-02-24T17:31:25.792Z",
     "source": "ishares-ibit",
     "ticker": "IBIT",
     "as_of_date": "2026-02-23",
@@ -104,7 +104,7 @@
     ]
   },
   "eth_etf": {
-    "last_fetched": "2026-02-24T17:27:44.610Z",
+    "last_fetched": "2026-02-24T17:31:25.729Z",
     "source": "ishares-etha",
     "ticker": "ETHA",
     "as_of_date": "2026-02-23",
@@ -125,7 +125,7 @@
     ]
   },
   "supply": {
-    "last_fetched": "2026-02-24T17:27:45.344Z",
+    "last_fetched": "2026-02-24T17:31:26.304Z",
     "source": "xrp-insights",
     "total_supply": 100000000000,
     "circ_supply": 63075832961,
@@ -158,7 +158,7 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-24T17:27:47.659Z",
+    "last_fetched": "2026-02-24T17:31:28.779Z",
     "source": "newsdata",
     "headlines": [
       {
@@ -187,7 +187,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1558279619.0384293,
+      "current": 1558243570.2840827,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
@@ -249,56 +249,56 @@
   "health_check": {
     "etf": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:44.310Z"
+      "ts": "2026-02-24T17:31:25.481Z"
     },
     "xrp": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:44.330Z"
+      "ts": "2026-02-24T17:31:25.509Z"
     },
     "usd_jpy": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:44.403Z"
+      "ts": "2026-02-24T17:31:25.574Z"
     },
     "fear_greed": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:44.461Z"
+      "ts": "2026-02-24T17:31:25.619Z"
     },
     "etha": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:44.611Z"
+      "ts": "2026-02-24T17:31:25.730Z"
     },
     "ibit": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:44.618Z"
+      "ts": "2026-02-24T17:31:25.793Z"
     },
     "supply": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:45.344Z"
+      "ts": "2026-02-24T17:31:26.304Z"
     },
     "rlusd": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:45.540Z"
+      "ts": "2026-02-24T17:31:26.718Z"
     },
     "news": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:47.659Z"
+      "ts": "2026-02-24T17:31:28.779Z"
     },
     "xrpl_metrics": {
       "status": "fail",
-      "ts": "2026-02-24T17:27:47.762Z",
+      "ts": "2026-02-24T17:31:28.867Z",
       "error": "XRPScan 403 (blocked); OnTheDex fallback also failed — check endpoint/auth"
     },
     "fred_jpn_10y": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:48.337Z"
+      "ts": "2026-02-24T17:31:29.333Z"
     },
     "fred_brent": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:48.509Z"
+      "ts": "2026-02-24T17:31:29.514Z"
     },
     "fred_us_10y": {
       "status": "ok",
-      "ts": "2026-02-24T17:27:48.647Z"
+      "ts": "2026-02-24T17:31:29.701Z"
     }
   },
   "bear_case": {
