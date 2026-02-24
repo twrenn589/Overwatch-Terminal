@@ -143,5 +143,34 @@
     "events_drafted_count": 1,
     "thesis_pulse": "SBI Holdings' ¥10B blockchain bond with XRP rewards validates Japan adoption thesis progression, but ETF outflows accelerating (-$5.5M weekly) during extreme fear (F&G: 5) creates concerning instituti",
     "counter_thesis_score": 35
+  },
+  {
+    "timestamp": "2026-02-24T04:32:40.358Z",
+    "run_type": "evening",
+    "stress_score": 75,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.33,
+    "fear_greed": 8,
+    "usd_jpy": 154.82,
+    "jpn_10y": 2.24,
+    "brent_crude": 69.77,
+    "etf_daily_flow": -7865.159999996424,
+    "dex_volume_24h": 5228434.869774566,
+    "rlusd_market_cap": 1558193292.837251,
+    "probability_framework": {
+      "bear": 8,
+      "base": 40,
+      "mid": 40,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 3,
+    "events_drafted_count": 1,
+    "thesis_pulse": "SBI Holdings ¥10B blockchain bond launch with XRP rewards validates Japan adoption thesis progression. ETF outflows decelerated significantly (-$7.8K daily vs previous -$5.5M weekly pace). RLUSD circu",
+    "counter_thesis_score": 28
   }
 ]
