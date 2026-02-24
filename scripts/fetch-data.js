@@ -647,46 +647,60 @@ async function fetchXRPLMetrics(fallback) {
 
     log('XRPL', `ledgers ok — last_txns=${last_ledger_txns} | avg=${avg_tx_per_ledger} tx/ledger | burn=${fee_burn_per_ledger_xrp ?? 'N/A'} XRP/ledger`);
 
-    // 3. book_offers — XRP/USD.GateHub (rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq), top 10 each side
-    const GATEHUB_USD = { currency: 'USD', issuer: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq' };
-    const XRP_NATIVE  = { currency: 'XRP' };
+    // 3. book_offers — try GateHub USD first, Bitstamp USD as fallback, top 10 each side.
+    //    taker_gets=XRP / taker_pays=USD  → bids (XRP sellers, TakerGets=drops string)
+    //    taker_gets=USD / taker_pays=XRP  → asks (USD sellers, TakerGets=USD object)
+    //    XRP must be {"currency":"XRP"} with no issuer field.
+    const USD_ISSUERS = [
+      { label: 'GateHub',  issuer: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq' },
+      { label: 'Bitstamp', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'  },
+    ];
+    const XRP_NATIVE = { currency: 'XRP' };
 
     let book_depth_xrp_usd = null;
-    try {
-      const [bidsResult, asksResult] = await Promise.all([
-        // Bids: offer to give XRP, want USD (taker_gets XRP, taker_pays USD)
-        rippleRPC('book_offers', { taker_gets: XRP_NATIVE, taker_pays: GATEHUB_USD, limit: 10 }, 12_000),
-        // Asks: offer to give USD, want XRP (taker_gets USD, taker_pays XRP)
-        rippleRPC('book_offers', { taker_gets: GATEHUB_USD, taker_pays: XRP_NATIVE, limit: 10 }, 12_000),
-      ]);
+    for (const { label, issuer } of USD_ISSUERS) {
+      const USD = { currency: 'USD', issuer };
+      try {
+        const [bidsResult, asksResult] = await Promise.all([
+          withRetry(() => rippleRPC('book_offers', { taker_gets: XRP_NATIVE, taker_pays: USD, limit: 10 }, 12_000), `XRPL-bids-${label}`),
+          withRetry(() => rippleRPC('book_offers', { taker_gets: USD, taker_pays: XRP_NATIVE, limit: 10 }, 12_000), `XRPL-asks-${label}`),
+        ]);
 
-      // Bids: TakerGets is XRP (drops string), TakerPays is USD (object with .value)
-      const bids = (bidsResult?.offers ?? []).map(o => ({
-        xrp: Number(o.TakerGets) / 1_000_000,
-        usd: Number(o.TakerPays?.value ?? 0),
-      }));
-      // Asks: TakerGets is USD (object with .value), TakerPays is XRP (drops string)
-      const asks = (asksResult?.offers ?? []).map(o => ({
-        xrp: Number(o.TakerPays) / 1_000_000,
-        usd: Number(o.TakerGets?.value ?? 0),
-      }));
+        // Bids: TakerGets=XRP drops string, TakerPays=USD object with .value
+        const bids = (bidsResult?.offers ?? []).map(o => ({
+          xrp: Number(o.TakerGets) / 1_000_000,
+          usd: Number(o.TakerPays?.value ?? 0),
+        }));
+        // Asks: TakerGets=USD object with .value, TakerPays=XRP drops string
+        const asks = (asksResult?.offers ?? []).map(o => ({
+          xrp: Number(o.TakerPays) / 1_000_000,
+          usd: Number(o.TakerGets?.value ?? 0),
+        }));
 
-      const totalBidXrp = bids.reduce((s, o) => s + o.xrp, 0);
-      const totalAskXrp = asks.reduce((s, o) => s + o.xrp, 0);
+        if (bids.length === 0 && asks.length === 0) {
+          warn('XRPL', `book_offers ${label}: no offers on either side — trying next issuer`);
+          continue;
+        }
 
-      book_depth_xrp_usd = {
-        pair:          'XRP/USD.GateHub',
-        bids:          bids.length,
-        asks:          asks.length,
-        total_bid_xrp: Math.round(totalBidXrp),
-        total_ask_xrp: Math.round(totalAskXrp),
-        best_bid:      bids[0] ?? null,
-        best_ask:      asks[0] ?? null,
-      };
+        const totalBidXrp = bids.reduce((s, o) => s + o.xrp, 0);
+        const totalAskXrp = asks.reduce((s, o) => s + o.xrp, 0);
 
-      log('XRPL', `book XRP/USD.GateHub — ${bids.length} bids (${(totalBidXrp / 1000).toFixed(0)}K XRP) / ${asks.length} asks (${(totalAskXrp / 1000).toFixed(0)}K XRP)`);
-    } catch (bookErr) {
-      warn('XRPL', `book_offers failed: ${bookErr.message} — continuing without book depth`);
+        book_depth_xrp_usd = {
+          pair:          `XRP/USD.${label}`,
+          bids:          bids.length,
+          asks:          asks.length,
+          total_bid_xrp: Math.round(totalBidXrp),
+          total_ask_xrp: Math.round(totalAskXrp),
+          best_bid:      bids[0] ?? null,
+          best_ask:      asks[0] ?? null,
+        };
+
+        log('XRPL', `book XRP/USD.${label} — ${bids.length} bids (${(totalBidXrp / 1000).toFixed(0)}K XRP) / ${asks.length} asks (${(totalAskXrp / 1000).toFixed(0)}K XRP)`);
+        break;
+      } catch (bookErr) {
+        const next = label === 'GateHub' ? 'trying Bitstamp' : 'giving up';
+        warn('XRPL', `book_offers ${label} failed: ${bookErr.message} — ${next}`);
+      }
     }
 
     const result = {
