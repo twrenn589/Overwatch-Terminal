@@ -15,6 +15,9 @@
 ## COUNTER-THESIS ARCHITECTURE
 
 ### Why competing infrastructure is evaluated every cycle
+**Decision:** SWIFT GPI, Visa B2B Connect, JPMorgan Kinexys, BIS Project Nexus, and Ethereum institutional adoption are evaluated in every analysis cycle.
+**Why:** The biggest risk to the XRP thesis isn't that XRP fails — it's that something else succeeds. Competitive displacement is harder to detect than internal failure because it happens outside your monitoring perimeter. Forcing evaluation of 5 specific competitors in every cycle ensures this blind spot gets regular attention.
+**Date:** Session 11 Phase 5
 
 ### Why kill switches are reviewed quarterly, not set permanently
 **Decision:** Kill switches are defined during thesis construction (before data can influence thresholds) but are formally reviewed during quarterly audit cycles or when major structural changes occur.
