@@ -259,5 +259,34 @@
     "events_drafted_count": 1,
     "thesis_pulse": "Thesis tracking despite market stress. RLUSD at 31% of kill switch target ($1.56B/$5B), XRP ETFs at 22% ($1.1B/$5B). China blacklisting Japanese shipbuilders escalates trade tensions, adding pressure ",
     "counter_thesis_score": 35
+  },
+  {
+    "timestamp": "2026-02-24T18:26:38.588Z",
+    "run_type": "evening",
+    "stress_score": 78,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.36,
+    "fear_greed": 8,
+    "usd_jpy": 154.62,
+    "jpn_10y": 2.24,
+    "brent_crude": 69.77,
+    "etf_daily_flow": -2621.639999985695,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1558343947.8396251,
+    "probability_framework": {
+      "bear": 8,
+      "base": 40,
+      "mid": 40,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 2,
+    "events_drafted_count": 0,
+    "thesis_pulse": "Institutional foundation remains solid with 7 ETFs holding 790M XRP and RLUSD at $1.56B (31% of kill switch target). ETF outflows persist but slowing from previous weeks. Japan stress thesis under pre",
+    "counter_thesis_score": 40
   }
 ]
