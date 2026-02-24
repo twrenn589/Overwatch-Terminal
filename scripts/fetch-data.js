@@ -111,6 +111,21 @@ async function fetchJSON(url, timeoutMs = 10_000) {
   }
 }
 
+/**
+ * Fetch with custom headers and timeout. Used for APIs that require User-Agent.
+ */
+async function fetchJSONHeaders(url, headers, timeoutMs = 12_000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { headers, signal: controller.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ─── Individual fetchers ──────────────────────────────────────────────────────
 
 async function fetchXRP(fallback) {
@@ -188,11 +203,33 @@ async function fetchFearGreed(fallback) {
 }
 
 async function fetchUSDJPY(fallback) {
+  // ── Alpha Vantage (primary — real-time FX) ─────────────────────────────
+  const avKey = process.env.ALPHA_VANTAGE_KEY;
+  if (avKey) {
+    try {
+      const url = `https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=JPY&outputsize=compact&apikey=${encodeURIComponent(avKey)}`;
+      const data = await withRetry(() => fetchJSON(url, 12_000), 'USD/JPY-AV');
+      const timeSeries = data?.['Time Series FX (Daily)'];
+      if (!timeSeries) throw new Error('No time series in Alpha Vantage response');
+      const latestDate = Object.keys(timeSeries).sort().pop();
+      const rate = parseFloat(timeSeries[latestDate]?.['4. close']);
+      if (!rate || isNaN(rate)) throw new Error('Could not parse Alpha Vantage FX rate');
+      log('USD/JPY', `${rate} (Alpha Vantage, date: ${latestDate})`);
+      markHealth('usd_jpy', 'ok');
+      return rate;
+    } catch (e) {
+      warn('USD/JPY', `Alpha Vantage failed (${e.message}) — trying Frankfurter`);
+    }
+  } else {
+    warn('USD/JPY', 'ALPHA_VANTAGE_KEY not set — using Frankfurter');
+  }
+
+  // ── Frankfurter (fallback — ECB rates, may lag 1-2 days) ───────────────
   try {
-    const data = await withRetry(() => fetchJSON(ENDPOINTS.usd_jpy), 'USD/JPY');
+    const data = await withRetry(() => fetchJSON(ENDPOINTS.usd_jpy), 'USD/JPY-FX');
     const rate = data?.rates?.JPY;
     if (!rate) throw new Error('Unexpected response shape');
-    log('USD/JPY', rate);
+    log('USD/JPY', `${rate} (Frankfurter)`);
     markHealth('usd_jpy', 'ok');
     return rate;
   } catch (e) {
@@ -200,6 +237,35 @@ async function fetchUSDJPY(fallback) {
     markHealth('usd_jpy', 'fail', e.message);
     return fallback?.macro?.usd_jpy ?? null;
   }
+}
+
+/**
+ * Fetch Japan 10Y bond yield.
+ * Tries Twelve Data (daily updates) first, falls back to FRED (2-day lag).
+ */
+async function fetchJPN10Y(fallbackValue) {
+  // ── Twelve Data (primary — daily bond yield) ──────────────────────────
+  const tdKey = process.env.TWELVE_DATA_KEY;
+  if (tdKey) {
+    try {
+      const url = `https://api.twelvedata.com/time_series?symbol=JP10Y&interval=1day&outputsize=1&apikey=${encodeURIComponent(tdKey)}`;
+      const data = await withRetry(() => fetchJSON(url, 12_000), 'JPN10Y-TD');
+      const values = data?.values;
+      if (!Array.isArray(values) || values.length === 0) throw new Error('No values in Twelve Data response');
+      const value = parseFloat(values[0]?.close);
+      if (isNaN(value)) throw new Error('Could not parse Twelve Data yield');
+      log('FRED', `JPN_10Y = ${value} (Twelve Data, date: ${values[0]?.datetime})`);
+      markHealth('fred_jpn_10y', 'ok');
+      return value;
+    } catch (e) {
+      warn('JPN10Y', `Twelve Data failed (${e.message}) — falling back to FRED`);
+    }
+  } else {
+    warn('JPN10Y', 'TWELVE_DATA_KEY not set — using FRED');
+  }
+
+  // ── FRED (fallback — monthly series, may lag 1-3 days) ────────────────
+  return fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, fallbackValue);
 }
 
 /**
@@ -510,20 +576,27 @@ async function fetchXRPRadar(fallback) {
 
 // ─── XRPL on-chain metrics (ODL volume proxy) ────────────────────────────────
 
+const XRPSCAN_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
+  'Accept':     'application/json',
+};
+
 /**
- * Fetch XRPL network metrics from XRPScan public API.
- * Uses /tokens for 24h DEX volume (closest ODL proxy) and /ledger for
- * throughput/burn stats. Always returns an "xrpl_metrics" object — never throws.
+ * Fetch XRPL network metrics.
+ * Primary: XRPScan public API (with User-Agent to avoid 403).
+ * Fallback: OnTheDex.live aggregate ticker when XRPScan is blocked.
+ * Always returns an "xrpl_metrics" object — never throws.
  */
 async function fetchXRPLMetrics(fallback) {
+  // ── XRPScan (primary) ─────────────────────────────────────────────────
+  let xrpscanBlocked = false;
   try {
     const [tokensData, ledgerData] = await Promise.all([
-      withRetry(() => fetchJSON('https://xrpscan.com/api/v1/tokens', 15_000), 'XRPL-tokens'),
-      withRetry(() => fetchJSON('https://xrpscan.com/api/v1/ledger', 10_000), 'XRPL-ledger'),
+      withRetry(() => fetchJSONHeaders('https://xrpscan.com/api/v1/tokens', XRPSCAN_HEADERS, 15_000), 'XRPL-tokens'),
+      withRetry(() => fetchJSONHeaders('https://xrpscan.com/api/v1/ledger', XRPSCAN_HEADERS, 10_000), 'XRPL-ledger'),
     ]);
 
     // DEX volume = aggregate across all token pairs (USD, closest ODL proxy)
-    // Use Number(x) || 0 to safely handle null/undefined/NaN metric values
     let dex_volume_24h_usd = null;
     let dex_exchanges_24h = null;
     let dex_takers_24h = null;
@@ -541,7 +614,6 @@ async function fetchXRPLMetrics(fallback) {
       const ledgers = ledgerData.ledgers;
       current_ledger = ledgerData.current_ledger ?? ledgers[0]?.ledger_index ?? null;
       avg_tx_per_ledger = Math.round(ledgers.reduce((s, l) => s + (l.tx_count ?? 0), 0) / ledgers.length);
-      // destroyed_coins is negative (fee burn in drops); negate and convert to XRP
       const totalBurnedDrops = ledgers.reduce((s, l) => s - (l.destroyed_coins ?? 0), 0);
       fee_burn_per_ledger_xrp = parseFloat((totalBurnedDrops / 1_000_000 / ledgers.length).toFixed(4));
     }
@@ -562,15 +634,61 @@ async function fetchXRPLMetrics(fallback) {
     markHealth('xrpl_metrics', 'ok');
     return result;
   } catch (e) {
-    err('XRPL', e.message);
-    markHealth('xrpl_metrics', 'fail', e.message);
-    return fallback?.xrpl_metrics ?? {
-      last_fetched: null, source: 'none',
-      dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
-      dex_exchanges_24h: null, dex_takers_24h: null,
-      avg_tx_per_ledger: null, fee_burn_per_ledger_xrp: null, current_ledger: null,
-    };
+    if (e.message.includes('403')) {
+      xrpscanBlocked = true;
+      warn('XRPL', `XRPScan returned 403 (blocked) — trying OnTheDex.live fallback`);
+    } else {
+      err('XRPL', e.message);
+      markHealth('xrpl_metrics', 'fail', e.message);
+      return fallback?.xrpl_metrics ?? {
+        last_fetched: null, source: 'none',
+        dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
+        dex_exchanges_24h: null, dex_takers_24h: null,
+        avg_tx_per_ledger: null, fee_burn_per_ledger_xrp: null, current_ledger: null,
+      };
+    }
   }
+
+  // ── OnTheDex.live (fallback when XRPScan is blocked) ──────────────────
+  if (xrpscanBlocked) {
+    try {
+      const tickerData = await withRetry(
+        () => fetchJSONHeaders('https://api.onthedex.live/public/v1/ticker', XRPSCAN_HEADERS, 12_000),
+        'XRPL-OnTheDex'
+      );
+      // OnTheDex returns an array of trading pairs; aggregate 24h volume across all
+      const pairs = Array.isArray(tickerData) ? tickerData : (tickerData?.data ?? []);
+      if (!Array.isArray(pairs) || pairs.length === 0) throw new Error('Empty OnTheDex ticker response');
+      const dex_volume_24h_usd = pairs.reduce((s, p) => s + (Number(p.volume_24h_usd ?? p.quoteVolume ?? 0)), 0) || null;
+      const dex_exchanges_24h  = pairs.reduce((s, p) => s + (Number(p.trades_24h   ?? p.count        ?? 0)), 0) || null;
+
+      const result = {
+        last_fetched:            new Date().toISOString(),
+        source:                  'onthedex',
+        dex_volume_24h_usd,
+        dex_volume_24h_xrp:     null,
+        dex_exchanges_24h,
+        dex_takers_24h:          null,
+        avg_tx_per_ledger:       null,
+        fee_burn_per_ledger_xrp: null,
+        current_ledger:          null,
+      };
+
+      log('XRPL', `DEX vol 24h=$${dex_volume_24h_usd != null ? (dex_volume_24h_usd / 1e6).toFixed(1) + 'M' : 'N/A'} | trades=${dex_exchanges_24h ?? 'N/A'} (OnTheDex — XRPScan 403)`);
+      markHealth('xrpl_metrics', 'ok');
+      return result;
+    } catch (e2) {
+      err('XRPL', `OnTheDex also failed: ${e2.message}`);
+      markHealth('xrpl_metrics', 'fail', 'XRPScan 403 (blocked); OnTheDex fallback also failed — check endpoint/auth');
+    }
+  }
+
+  return fallback?.xrpl_metrics ?? {
+    last_fetched: null, source: 'none',
+    dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
+    dex_exchanges_24h: null, dex_takers_24h: null,
+    avg_tx_per_ledger: null, fee_burn_per_ledger_xrp: null, current_ledger: null,
+  };
 }
 
 // ─── News fetcher ─────────────────────────────────────────────────────────────
@@ -617,12 +735,12 @@ async function fetchNews(fallback) {
   const ndKey = process.env.NEWSDATA_API_KEY;
   if (ndKey) {
     try {
-      const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL&language=en&size=10&category=technology,business,top`;
+      const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL%20OR%20RLUSD%20OR%20%22stablecoin%20settlement%22%20OR%20%22tokenized%20treasury%22%20OR%20%22cross-border%20payment%20blockchain%22%20OR%20%22SBI%20Holdings%20blockchain%22&language=en&size=15&category=technology,business,top`;
       const data = await withRetry(() => fetchJSON(ndUrl, 12_000), 'News-NewsData');
       const results = data?.results;
       if (!Array.isArray(results) || results.length === 0) throw new Error('Empty NewsData.io response');
 
-      const XRP_RE = /\b(XRP|Ripple|XRPL|RLUSD|ODL|OnDemandLiquidity|RippleNet)\b/i;
+      const XRP_RE = /\b(?:XRP|Ripple|XRPL|RLUSD|ODL|OnDemandLiquidity|RippleNet)\b|stablecoin\s+settlement|tokenized\s+treasury|cross[- ]border\s+payment\s+blockchain|SBI\s+Holdings\s+blockchain/i;
       const relevant = results.filter(p => XRP_RE.test((p.title ?? '') + ' ' + (p.description ?? '')));
       const pool = relevant.length >= 1 ? relevant : results;
 
@@ -738,8 +856,8 @@ async function main() {
   }
   etf.num_funds = etf.funds?.length ?? 0;
 
-  // FRED calls are sequential to avoid hammering the API
-  const jpn10y = await fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, existing?.macro?.jpn_10y);
+  // FRED/Twelve Data calls are sequential to avoid hammering the APIs
+  const jpn10y = await fetchJPN10Y(existing?.macro?.jpn_10y);
   const brent  = await fetchFRED('BRENT',   ENDPOINTS.fred.brent,   existing?.macro?.brent_crude);
   const us10y  = await fetchFRED('US_10Y',  ENDPOINTS.fred.us_10y,  existing?.macro?.us_10y_yield);
 

@@ -119,6 +119,11 @@ function formatTelegramMessage(analysis, dashboardData) {
     ? `Bear ${prob.bear}% | Base ${prob.base}% | Mid ${prob.mid}% | Bull ${prob.bull}%`
     : '(no change recommended)';
 
+  // Bear case
+  const bearScore = analysis.bear_case?.counter_thesis_score ?? '--';
+  const bearNarrative = analysis.bear_case?.bear_narrative ?? '';
+  const bearOneLiner = bearNarrative.split(/\.\s+/)[0].replace(/\.$/, '');
+
   const stressScore = analysis.stress_assessment;
 
   // Events draft
@@ -158,6 +163,8 @@ ${scChanges}
 
 🎲 <b>PROBABILITY:</b>
 ${probLine}
+🐻 <b>COUNTER-THESIS:</b> ${bearScore}/100
+${bearOneLiner || '(no bear narrative)'}
 ${eventsSection}
 
 <i>To apply: trigger "Apply Approved Analysis" workflow in GitHub Actions.</i>`;
