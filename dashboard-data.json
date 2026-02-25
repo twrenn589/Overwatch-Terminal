@@ -397,20 +397,48 @@
     "agent_label": "Overwatch Analyst Agent",
     "provider_address": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
     "provider_label": "Premium Data Service (DEMO)",
-    "balance_xrp": 998.999988,
-    "demo_payments_sent": 1,
+    "balance_xrp": 997.999976,
+    "demo_payments_sent": 2,
     "last_payment": {
       "to": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
       "to_label": "Premium Data Service (DEMO)",
       "amount_xrp": 1,
       "memo": "x402:premium_data_access:overwatch-terminal",
-      "tx_hash": "FF8B885042F0E0AE922C1C245E76389DCB43FFD4839E923D0814C85B5B2F65A2",
-      "ledger_index": 15184709,
-      "timestamp": "2026-02-25T06:59:50.721Z",
+      "tx_hash": "9A806B2296F534595084A36FA052592F03511A1835C21ED73BAD2E2E2145744C",
+      "ledger_index": 15184719,
+      "timestamp": "2026-02-25T07:00:21.480Z",
       "status": "SUCCESS"
     },
-    "tx_history": [],
+    "tx_history": [
+      {
+        "type": "Payment",
+        "hash": "9A806B2296F534595084A36FA052592F03511A1835C21ED73BAD2E2E2145744C",
+        "amount_xrp": null,
+        "direction": "out",
+        "counterparty": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
+        "result": "tesSUCCESS",
+        "date": "2026-02-25T07:00:20.000Z"
+      },
+      {
+        "type": "Payment",
+        "hash": "FF8B885042F0E0AE922C1C245E76389DCB43FFD4839E923D0814C85B5B2F65A2",
+        "amount_xrp": null,
+        "direction": "out",
+        "counterparty": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
+        "result": "tesSUCCESS",
+        "date": "2026-02-25T06:59:50.000Z"
+      },
+      {
+        "type": "Payment",
+        "hash": "5ABC96273288580C611E1303C40C7EB7EABC7963EDC2F716D1D13F17E58B3805",
+        "amount_xrp": null,
+        "direction": "in",
+        "counterparty": "rJjHYTCPpNA3qAM8ZpCDtip3a8xg7B8PFo",
+        "result": "tesSUCCESS",
+        "date": "2026-02-25T06:59:22.000Z"
+      }
+    ],
     "demo_scenario": "Overwatch analyst agent auto-pays for premium data feeds using x402 micropayments on XRPL testnet",
-    "last_updated": "2026-02-25T06:59:50.929Z"
+    "last_updated": "2026-02-25T07:00:21.678Z"
   }
 }
