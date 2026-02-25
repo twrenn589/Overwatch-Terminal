@@ -1,0 +1,35 @@
+name: x402 Agent Wallet
+
+on:
+  workflow_dispatch:          # Manual trigger from GitHub Actions tab
+  schedule:
+    - cron: '30 12 * * *'    # Daily at 12:30 UTC (after morning fetch + analysis)
+
+permissions:
+  contents: write             # Needed to commit dashboard-data.json and x402-wallet.json
+
+jobs:
+  x402-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: scripts
+
+      - name: Configure git
+        run: |
+          git config user.name "Overwatch Bot"
+          git config user.email "overwatch-bot@users.noreply.github.com"
+
+      - name: Run x402 testnet agent
+        run: node x402-agent.js
+        working-directory: scripts

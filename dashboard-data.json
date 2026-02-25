@@ -389,5 +389,19 @@
     "stress_score": 82,
     "applied_at": "2026-02-24T17:35:12.699Z",
     "changes_applied": 1
+  },
+  "x402_agent": {
+    "network": "XRPL TESTNET",
+    "network_warning": "⚠ TESTNET ONLY — Not real XRP",
+    "agent_address": null,
+    "agent_label": "Overwatch Analyst Agent",
+    "provider_address": null,
+    "provider_label": "Premium Data Service (DEMO)",
+    "balance_xrp": null,
+    "demo_payments_sent": 0,
+    "last_payment": null,
+    "tx_history": [],
+    "demo_scenario": "Overwatch analyst agent auto-pays for premium data feeds using x402 micropayments on XRPL testnet",
+    "last_updated": null
   }
 }

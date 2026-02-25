@@ -947,6 +947,8 @@ async function main() {
     probability:    existing?.probability ?? null,
     // Preserve last_analysis stamp
     last_analysis:  existing?.last_analysis ?? null,
+    // Preserve x402_agent — managed by x402-agent.js
+    x402_agent:     existing?.x402_agent ?? null,
   };
 
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));

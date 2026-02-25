@@ -1292,6 +1292,76 @@ textarea:focus { border-color:var(--accent-cyan); }
       </div>
     </div>
 
+    <!-- TESTNET Agent Wallet -->
+    <div class="full-card" style="border-color:rgba(255,179,71,0.35);background:linear-gradient(135deg,rgba(255,179,71,0.03),transparent);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <h3 style="margin-bottom:0;">⚡ TESTNET AGENT WALLET</h3>
+        <span class="signal amber">TESTNET</span>
+      </div>
+      <div style="background:rgba(255,179,71,0.06);border:1px solid rgba(255,179,71,0.2);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:12px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-amber);letter-spacing:0.5px;">⚠ TESTNET ONLY — Not real XRP. Demonstrates autonomous AI agent micropayments via x402 protocol.</span>
+      </div>
+
+      <div class="data-row">
+        <span class="data-label">NETWORK</span>
+        <span class="data-value amber" id="x402AgentNetwork">XRPL TESTNET</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">AGENT ADDRESS</span>
+        <span class="data-value" id="x402AgentAddress" style="font-family:'JetBrains Mono',monospace;font-size:10px;">Awaiting first run…</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">BALANCE</span>
+        <span class="data-value cyan" id="x402AgentBalance">—</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">PAYMENTS SENT</span>
+        <span class="data-value green" id="x402PaymentCount">—</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">LAST UPDATED</span>
+        <span class="data-value" id="x402AgentUpdated">—</span>
+      </div>
+
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">LAST MICROPAYMENT</div>
+        <div class="data-row">
+          <span class="data-label">TO (PROVIDER)</span>
+          <span class="data-value" id="x402ProviderAddress" style="font-family:'JetBrains Mono',monospace;font-size:10px;">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">AMOUNT</span>
+          <span class="data-value cyan" id="x402PaymentAmount">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">PURPOSE</span>
+          <span class="data-value" id="x402PaymentMemo" style="font-size:10px;">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">TX HASH</span>
+          <span id="x402PaymentHash" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">STATUS</span>
+          <span class="signal" id="x402PaymentStatus">—</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">TIMESTAMP</span>
+          <span class="data-value" id="x402PaymentTime">—</span>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">RECENT TRANSACTIONS</div>
+        <div id="x402TxHistory" style="font-size:11px;color:var(--text-secondary);">Waiting for first agent run…</div>
+      </div>
+
+      <div class="interpret-box" style="margin-top:12px;border-color:rgba(255,179,71,0.2);">
+        <div class="label" style="color:var(--accent-amber);">DEMO SCENARIO</div>
+        <p id="x402DemoScenario">Overwatch analyst agent auto-pays for premium data feeds using x402 micropayments on XRPL testnet</p>
+      </div>
+    </div>
+
     <!-- Thesis Connection -->
     <div class="full-card" style="border-color:rgba(0,200,200,0.2);">
       <h3>📡 THESIS CONNECTION</h3>
@@ -1815,6 +1885,100 @@ function renderX402() {
   set('x402Infra',        d.infrastructure);
   set('x402Contributors', d.contributors);
   set('x402Assets',       d.settlement_assets);
+}
+
+// ===== x402 AGENT WALLET (live from dashboard-data.json) =====
+function renderX402AgentWallet(d) {
+  const a = d.x402_agent;
+  if (!a) return;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+  set('x402AgentNetwork', a.network ?? 'XRPL TESTNET');
+
+  if (a.agent_address) {
+    const addr = a.agent_address;
+    const el = document.getElementById('x402AgentAddress');
+    if (el) {
+      // Show first 8 + … + last 8 chars for readability
+      el.textContent = addr.length > 20 ? addr.slice(0, 10) + '…' + addr.slice(-8) : addr;
+      el.title = addr;
+    }
+  }
+
+  if (a.balance_xrp != null) {
+    set('x402AgentBalance', a.balance_xrp.toFixed(4) + ' XRP (testnet)');
+  }
+
+  set('x402PaymentCount', a.demo_payments_sent != null ? a.demo_payments_sent.toLocaleString() : '—');
+
+  if (a.last_updated) {
+    const dt = new Date(a.last_updated);
+    set('x402AgentUpdated', dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
+      dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+  }
+
+  const p = a.last_payment;
+  if (p) {
+    if (p.to) {
+      const addrEl = document.getElementById('x402ProviderAddress');
+      if (addrEl) {
+        addrEl.textContent = p.to.length > 20 ? p.to.slice(0, 10) + '…' + p.to.slice(-8) : p.to;
+        addrEl.title = p.to + (p.to_label ? ' (' + p.to_label + ')' : '');
+      }
+    }
+
+    if (p.amount_xrp != null) {
+      set('x402PaymentAmount', p.amount_xrp + ' XRP (testnet)');
+    }
+
+    set('x402PaymentMemo', p.memo ?? '—');
+
+    if (p.tx_hash) {
+      const hashEl = document.getElementById('x402PaymentHash');
+      if (hashEl) {
+        hashEl.textContent = p.tx_hash.slice(0, 12) + '…' + p.tx_hash.slice(-8);
+        hashEl.title = p.tx_hash;
+      }
+    }
+
+    const statusEl = document.getElementById('x402PaymentStatus');
+    if (statusEl) {
+      statusEl.textContent = p.status ?? '—';
+      statusEl.className = 'signal ' + (p.status === 'SUCCESS' ? 'green' : 'amber');
+    }
+
+    if (p.timestamp) {
+      const dt = new Date(p.timestamp);
+      set('x402PaymentTime', dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
+        dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    }
+  }
+
+  // Tx history table
+  const hist = a.tx_history ?? [];
+  const histEl = document.getElementById('x402TxHistory');
+  if (histEl && hist.length > 0) {
+    histEl.innerHTML = hist.slice(0, 7).map(tx => {
+      const arrow   = tx.direction === 'out' ? '↑' : '↓';
+      const color   = tx.direction === 'out' ? 'var(--accent-red)' : 'var(--accent-green)';
+      const amtStr  = tx.amount_xrp != null ? tx.amount_xrp.toFixed(2) + ' XRP' : '—';
+      const hashStr = tx.hash ? tx.hash.slice(0, 10) + '…' : '—';
+      const tsStr   = tx.date ? new Date(tx.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
+        new Date(tx.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—';
+      const res     = tx.result === 'tesSUCCESS' ? '' : ' ⚠';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);gap:6px;">` +
+        `<span style="font-family:'JetBrains Mono',monospace;color:${color};min-width:80px;">${arrow} ${tx.type}${res}</span>` +
+        `<span style="color:var(--text-secondary);min-width:70px;text-align:right;">${amtStr}</span>` +
+        `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);flex:1;text-align:right;">${hashStr}</span>` +
+        `<span style="font-size:10px;color:var(--text-muted);min-width:80px;text-align:right;">${tsStr}</span>` +
+        `</div>`;
+    }).join('');
+  }
+
+  if (a.demo_scenario) {
+    set('x402DemoScenario', a.demo_scenario);
+  }
 }
 
 // ===== XRP PRICE =====
@@ -2394,6 +2558,9 @@ async function fetchDashboardData() {
 
     // BEAR tab — render bear case from dashboard data
     if (d.bear_case) renderBearCase(d.bear_case, d.probability);
+
+    // x402 tab — render testnet agent wallet
+    if (d.x402_agent) renderX402AgentWallet(d);
     // Refresh auto signals when dashboard data updates (if history is loaded)
     if (_analysisHistory.length > 0) renderBearAutoSignals();
 

@@ -13,7 +13,8 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
     "dotenv": "^16.4.5",
-    "simple-git": "^3.27.0"
+    "simple-git": "^3.27.0",
+    "xrpl": "^4.0.0"
   },
   "license": "MIT"
 }
