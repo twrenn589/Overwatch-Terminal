@@ -398,102 +398,85 @@
     "changes_applied": 2
   },
   "x402_agent": {
-    "network": "XRPL TESTNET",
-    "network_warning": "⚠ TESTNET ONLY — Not real XRP",
+    "network": "XRPL MAINNET",
     "protocol": "x402 v2",
-    "facilitator": "https://xrpl-facilitator-testnet.t54.ai",
+    "facilitator": "https://xrpl-facilitator-mainnet.t54.ai",
     "facilitator_ok": true,
-    "agent_address": "rwtXERjcdatXvsgnza2E34revBYhamEuqe",
-    "agent_label": "Overwatch Analyst Agent",
-    "provider_address": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
-    "provider_label": "Premium Data Service (DEMO)",
-    "balance_xrp": 997.999752,
-    "demo_payments_sent": 1,
-    "last_payment": {
-      "protocol": "x402 v2",
-      "to": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
-      "to_label": "Premium Data Service (DEMO)",
-      "amount_drops": "100",
-      "amount_xrp": 0.0001,
-      "invoice_id": "33D3FB7B9F8741CAA5884A1149F0744B",
-      "tx_hash": "73A1EDFF8621E01F472A62880A6E92B10AADBEC6A72F02F601940F2AF95F954B",
-      "facilitator": "https://xrpl-facilitator-testnet.t54.ai",
-      "timestamp": "2026-02-25T13:47:42.604Z",
-      "status": "SUCCESS"
+    "agent_address": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
+    "merchant_base": "http://127.0.0.1:4403",
+    "balance_xrp": 14.995953,
+    "payments_sent": 3,
+    "session_drops_spent": 3000,
+    "session_xrp_spent": 0.003,
+    "lifetime_drops_spent": 3000,
+    "lifetime_xrp_spent": 0.003,
+    "guardrails": {
+      "balance_floor_xrp": 11,
+      "session_cap_drops": 10000,
+      "max_single_drops": 5000
     },
-    "last_data_received": {
-      "access": "GRANTED",
-      "resource": "Overwatch Terminal — Premium XRPL Testnet Data Feed",
-      "timestamp": "2026-02-25T13:47:42.602Z",
-      "payload": {
-        "description": "XRPL testnet metrics snapshot (x402 paid access demo)",
-        "network": "XRPL TESTNET",
-        "facilitator": "https://xrpl-facilitator-testnet.t54.ai",
-        "note": "Real x402 v2 payment settled on XRPL testnet by T54 facilitator"
+    "transactions": [
+      {
+        "endpoint": "/api/v1/premium-analysis",
+        "label": "Premium Analysis",
+        "amount_drops": "1000",
+        "amount_xrp": 0.001,
+        "invoice_id": "9F346DE4FEC9438D9438D86654739CD0",
+        "tx_hash": "B1172098B7321B1B16C76924946F3A119E62BFED04F8075BE46C9CE1058C7C29",
+        "status": "SUCCESS",
+        "timestamp": "2026-02-25T16:30:25.939Z"
       },
-      "payment": {
-        "protocol": "x402",
-        "version": 2,
-        "tx_hash": "73A1EDFF8621E01F472A62880A6E92B10AADBEC6A72F02F601940F2AF95F954B",
-        "payer": "rwtXERjcdatXvsgnza2E34revBYhamEuqe",
-        "amount_drops": "100"
+      {
+        "endpoint": "/api/v1/bear-case",
+        "label": "Bear Case",
+        "amount_drops": "1500",
+        "amount_xrp": 0.0015,
+        "invoice_id": "5CBC1D9314E24FFEB53E55585F7EEB45",
+        "tx_hash": "CD215E92336D0FA679955D2226CC1D5FEB8784F241135F49E73AA084F09D52E3",
+        "status": "SUCCESS",
+        "timestamp": "2026-02-25T16:30:33.562Z"
+      },
+      {
+        "endpoint": "/api/v1/stress-report",
+        "label": "Stress Report",
+        "amount_drops": "500",
+        "amount_xrp": 0.0005,
+        "invoice_id": "5FE5DCC2B9EC468EA08EA4C4BF5629C0",
+        "tx_hash": "CAA3181388F82547C6C0CE5B9004413BEB3AAAB0A27A0C7893369F44850C0AB4",
+        "status": "SUCCESS",
+        "timestamp": "2026-02-25T16:30:41.179Z"
       }
+    ],
+    "last_payment": {
+      "endpoint": "/api/v1/stress-report",
+      "label": "Stress Report",
+      "amount_drops": "500",
+      "amount_xrp": 0.0005,
+      "invoice_id": "5FE5DCC2B9EC468EA08EA4C4BF5629C0",
+      "tx_hash": "CAA3181388F82547C6C0CE5B9004413BEB3AAAB0A27A0C7893369F44850C0AB4",
+      "status": "SUCCESS",
+      "timestamp": "2026-02-25T16:30:41.179Z"
     },
     "x402_flow": [
-      "→ GET http://127.0.0.1:4402/api/premium-data  →  HTTP 402",
-      "← 402 PAYMENT-REQUIRED  amount=100 drops  invoiceId=33D3FB7B9F87…",
-      "→ Signed XRPL Payment  hash=73A1EDFF8621…  MemoData+InvoiceID bound",
-      "→ GET http://127.0.0.1:4402/api/premium-data (PAYMENT-SIGNATURE)  →  HTTP 200",
-      "← 200 PAYMENT-RESPONSE  tx=73A1EDFF8621…  payer=rwtXERjcda…"
+      "── Premium Analysis ──",
+      "→ GET http://127.0.0.1:4403/api/v1/premium-analysis  →  HTTP 402",
+      "← 402  amount=1000 drops  invoiceId=9F346DE4FEC9…",
+      "→ Signed Payment  hash=B1172098B732…  drops=1000",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=B1172098B732…  payer=rPiok45Qs8…",
+      "── Bear Case ──",
+      "→ GET http://127.0.0.1:4403/api/v1/bear-case  →  HTTP 402",
+      "← 402  amount=1500 drops  invoiceId=5CBC1D9314E2…",
+      "→ Signed Payment  hash=CD215E92336D…  drops=1500",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=CD215E92336D…  payer=rPiok45Qs8…",
+      "── Stress Report ──",
+      "→ GET http://127.0.0.1:4403/api/v1/stress-report  →  HTTP 402",
+      "← 402  amount=500 drops  invoiceId=5FE5DCC2B9EC…",
+      "→ Signed Payment  hash=CAA3181388F8…  drops=500",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=CAA3181388F8…  payer=rPiok45Qs8…"
     ],
-    "tx_history": [
-      {
-        "type": "Payment",
-        "hash": "73A1EDFF8621E01F472A62880A6E92B10AADBEC6A72F02F601940F2AF95F954B",
-        "amount_xrp": null,
-        "direction": "out",
-        "counterparty": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
-        "result": "tesSUCCESS",
-        "date": "2026-02-25T13:47:41.000Z"
-      },
-      {
-        "type": "Payment",
-        "hash": "3284A345EFCF4837FE6A7702CB313B6A674AA000694E09187EBAB58387027A19",
-        "amount_xrp": null,
-        "direction": "out",
-        "counterparty": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
-        "result": "tesSUCCESS",
-        "date": "2026-02-25T07:18:30.000Z"
-      },
-      {
-        "type": "Payment",
-        "hash": "9A806B2296F534595084A36FA052592F03511A1835C21ED73BAD2E2E2145744C",
-        "amount_xrp": null,
-        "direction": "out",
-        "counterparty": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
-        "result": "tesSUCCESS",
-        "date": "2026-02-25T07:00:20.000Z"
-      },
-      {
-        "type": "Payment",
-        "hash": "FF8B885042F0E0AE922C1C245E76389DCB43FFD4839E923D0814C85B5B2F65A2",
-        "amount_xrp": null,
-        "direction": "out",
-        "counterparty": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
-        "result": "tesSUCCESS",
-        "date": "2026-02-25T06:59:50.000Z"
-      },
-      {
-        "type": "Payment",
-        "hash": "5ABC96273288580C611E1303C40C7EB7EABC7963EDC2F716D1D13F17E58B3805",
-        "amount_xrp": null,
-        "direction": "in",
-        "counterparty": "rJjHYTCPpNA3qAM8ZpCDtip3a8xg7B8PFo",
-        "result": "tesSUCCESS",
-        "date": "2026-02-25T06:59:22.000Z"
-      }
-    ],
-    "demo_scenario": "Agent (rwtXERjc…) sends HTTP GET → receives 402 → signs XRPL Payment with invoice binding → retries with PAYMENT-SIGNATURE → T54 facilitator settles on XRPL testnet → 200 + data returned",
-    "last_updated": "2026-02-25T13:47:42.740Z"
+    "last_updated": "2026-02-25T16:30:41.608Z"
   }
 }
