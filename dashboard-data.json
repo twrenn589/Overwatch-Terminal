@@ -1,18 +1,18 @@
 {
-  "updated": "2026-02-25T19:19:21.427Z",
+  "updated": "2026-02-25T19:35:10.461Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.47,
-    "change_24h": 7.767487595918066,
-    "volume_24h": 4016543153.4857235,
-    "market_cap": 89403461830.77876
+    "price": 1.46,
+    "change_24h": 8.000492403095038,
+    "volume_24h": 4053249028.868314,
+    "market_cap": 89293340827.707
   },
   "rlusd": {
-    "market_cap": 1564925556.131052,
+    "market_cap": 1565127739.7225747,
     "source": "coingecko"
   },
   "etf": {
-    "last_fetched": "2026-02-25T19:19:17.559Z",
+    "last_fetched": "2026-02-25T19:35:06.623Z",
     "source": "xrp-insights",
     "as_of_date": "2026-02-24",
     "total_aum": 1103991361.69,
@@ -78,12 +78,12 @@
         "daily_flow": 0
       }
     ],
-    "pct_supply": 1.303,
-    "circ_supply": 60818681518,
+    "pct_supply": 1.295,
+    "circ_supply": 61159822485,
     "num_funds": 7
   },
   "btc_etf": {
-    "last_fetched": "2026-02-25T19:19:17.918Z",
+    "last_fetched": "2026-02-25T19:35:06.898Z",
     "source": "ishares-ibit",
     "ticker": "IBIT",
     "as_of_date": "2026-02-24",
@@ -108,7 +108,7 @@
     ]
   },
   "eth_etf": {
-    "last_fetched": "2026-02-25T19:19:17.866Z",
+    "last_fetched": "2026-02-25T19:35:06.925Z",
     "source": "ishares-etha",
     "ticker": "ETHA",
     "as_of_date": "2026-02-24",
@@ -133,7 +133,7 @@
     ]
   },
   "supply": {
-    "last_fetched": "2026-02-25T19:19:18.213Z",
+    "last_fetched": "2026-02-25T19:35:08.066Z",
     "source": "xrp-insights",
     "total_supply": 100000000000,
     "circ_supply": 63075832961,
@@ -145,21 +145,21 @@
     "xrp_burned": 14287104
   },
   "xrpl_metrics": {
-    "last_fetched": "2026-02-25T19:19:18.815Z",
+    "last_fetched": "2026-02-25T19:35:07.074Z",
     "source": "xrpl_native",
-    "current_ledger": 102491263,
-    "last_ledger_txns": 205,
-    "avg_tx_per_ledger": 190,
-    "fee_burn_per_ledger_xrp": 0.0093,
+    "current_ledger": 102491507,
+    "last_ledger_txns": 223,
+    "avg_tx_per_ledger": 159,
+    "fee_burn_per_ledger_xrp": 0.0184,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD.GateHub",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 167342,
-      "total_ask_xrp": 1128484,
+      "total_bid_xrp": 165722,
+      "total_ask_xrp": 1130427,
       "best_bid": {
-        "xrp": 2003.530442,
-        "usd": 2948.856098
+        "xrp": 1691.157729,
+        "usd": 2473.767708589593
       },
       "best_ask": {
         "xrp": 18.254771,
@@ -182,9 +182,15 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-25T19:19:20.634Z",
+    "last_fetched": "2026-02-25T19:35:09.819Z",
     "source": "newsdata",
     "headlines": [
+      {
+        "title": "Crypto News: Pepeto Presale Hits $7.31 as XRP Price Prediction Gets Slashed by Standard Chartered",
+        "source": "techbullion",
+        "url": "https://techbullion.com/crypto-news-pepeto-presale-hits-7-31-as-xrp-price-prediction-gets-slashed-by-standard-chartered/",
+        "published": "2026-02-25 07:32:50"
+      },
       {
         "title": "Why XRP’s 0.16 Leverage Floor Ends The Era Of The Flash Crash – And the Hope for a Quick Recovery",
         "source": "newsbtc",
@@ -223,7 +229,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1564925556.131052,
+      "current": 1565127739.7225747,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
@@ -283,57 +289,57 @@
     }
   },
   "health_check": {
+    "etf": {
+      "status": "ok",
+      "ts": "2026-02-25T19:35:06.623Z"
+    },
     "xrp": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:17.411Z"
+      "ts": "2026-02-25T19:35:06.630Z"
     },
     "usd_jpy": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:17.441Z"
+      "ts": "2026-02-25T19:35:06.715Z"
     },
     "fear_greed": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:17.447Z"
-    },
-    "etf": {
-      "status": "ok",
-      "ts": "2026-02-25T19:19:17.559Z"
-    },
-    "etha": {
-      "status": "ok",
-      "ts": "2026-02-25T19:19:17.866Z"
+      "ts": "2026-02-25T19:35:06.761Z"
     },
     "ibit": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:17.918Z"
+      "ts": "2026-02-25T19:35:06.898Z"
     },
-    "supply": {
+    "etha": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:18.213Z"
-    },
-    "rlusd": {
-      "status": "ok",
-      "ts": "2026-02-25T19:19:18.616Z"
+      "ts": "2026-02-25T19:35:06.925Z"
     },
     "xrpl_metrics": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:18.815Z"
+      "ts": "2026-02-25T19:35:07.074Z"
+    },
+    "rlusd": {
+      "status": "ok",
+      "ts": "2026-02-25T19:35:08.064Z"
+    },
+    "supply": {
+      "status": "ok",
+      "ts": "2026-02-25T19:35:08.066Z"
     },
     "news": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:20.634Z"
+      "ts": "2026-02-25T19:35:09.819Z"
     },
     "fred_jpn_10y": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:21.009Z"
+      "ts": "2026-02-25T19:35:10.108Z"
     },
     "fred_brent": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:21.202Z"
+      "ts": "2026-02-25T19:35:10.307Z"
     },
     "fred_us_10y": {
       "status": "ok",
-      "ts": "2026-02-25T19:19:21.427Z"
+      "ts": "2026-02-25T19:35:10.461Z"
     }
   },
   "bear_case": {

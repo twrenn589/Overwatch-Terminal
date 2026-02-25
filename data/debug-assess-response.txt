@@ -1,3 +1,4 @@
+```json
 {
   "threat_matrix": [
     {
@@ -6,7 +7,7 @@
       "impact": 9,
       "probability": 9,
       "time_weight": 10,
-      "composite": 81,
+      "composite": 81.0,
       "severity": "critical",
       "proximity": "immediate",
       "blind_spot": false,
@@ -19,7 +20,7 @@
       "impact": 10,
       "probability": 7,
       "time_weight": 10,
-      "composite": 70,
+      "composite": 70.0,
       "severity": "critical",
       "proximity": "immediate",
       "blind_spot": false,
@@ -84,7 +85,7 @@
       "impact": 7,
       "probability": 7,
       "time_weight": 10,
-      "composite": 49,
+      "composite": 49.0,
       "severity": "high",
       "proximity": "immediate",
       "blind_spot": false,
@@ -97,7 +98,7 @@
       "impact": 10,
       "probability": 6,
       "time_weight": 4,
-      "composite": 24,
+      "composite": 24.0,
       "severity": "critical",
       "proximity": "medium-term",
       "blind_spot": true,
@@ -107,38 +108,22 @@
   ],
   "compounding_risks": [
     {
-      "chain": [
-        "ODL Data Void Is Not Accidental",
-        "XRPL On-Chain Activity Is Trivially Low",
-        "Stablecoin Rails Commoditization"
-      ],
+      "chain": ["ODL Data Void Is Not Accidental", "XRPL On-Chain Activity Is Trivially Low", "Stablecoin Rails Commoditization"],
       "outcome": "The core utility thesis (bridge currency via ODL) has no verifiable traction, on-chain data confirms near-zero institutional usage, and competing stablecoin rails are already live and scaling. This is a triple-lock: the mechanism isn't working, the network isn't being used, and alternatives are winning. The bridge currency thesis may already be dead without confirmation data to prove otherwise.",
       "severity": "critical"
     },
     {
-      "chain": [
-        "Banks Building Internal Tokenized Deposit Networks",
-        "BIS Nexus + mBridge Convergence",
-        "Stablecoin Rails Commoditization"
-      ],
+      "chain": ["Banks Building Internal Tokenized Deposit Networks", "BIS Nexus + mBridge Convergence", "Stablecoin Rails Commoditization"],
       "outcome": "Three competing infrastructure categories are simultaneously closing XRP's addressable market: banks building proprietary rails (Kinexys $2B/day), central banks building sovereign rails (mBridge), and stablecoin networks building open rails (CCTP). XRP's bridge utility is being squeezed from above (sovereign), laterally (bank proprietary), and below (stablecoin commoditization). The total addressable market for a private bridge token may be approaching zero.",
       "severity": "critical"
     },
     {
-      "chain": [
-        "Extreme Fear Regime",
-        "XRP ETF AUM Stall",
-        "Escrow Overhang"
-      ],
+      "chain": ["Extreme Fear Regime", "XRP ETF AUM Stall", "Escrow Overhang"],
       "outcome": "Institutional capital is fleeing crypto (F&G 11, BTC/ETH outflows), ETF accumulation pace cannot reach targets ($550M/yr vs $5B goal), and escrow releases flood supply at 20x the ETF absorption rate. Price discovery is structurally impaired: too much supply, too little demand, in a risk-off environment. This creates a reflexive loop where price decline → narrative loss → further outflows.",
       "severity": "high"
     },
     {
-      "chain": [
-        "Japan Carry Trade Unwind",
-        "Extreme Fear Regime",
-        "Standard Chartered Price Cut"
-      ],
+      "chain": ["Japan Carry Trade Unwind", "Extreme Fear Regime", "Standard Chartered Price Cut"],
       "outcome": "BOJ yield crisis threatens SBI (Japan thesis anchor), macro fear drives institutional exit, and StanChart downgrade signals institutional narrative loss. The Japan corridor — the thesis's strongest regional proof point — faces simultaneous macro stress, partner balance sheet pressure, and credibility erosion from the exact institutions that should be adopting.",
       "severity": "high"
     }
@@ -256,3 +241,4 @@
   "score_reasoning": "Increase from 33 to 52 driven by: (1) +8 from XRPL on-chain data now quantitatively confirming near-zero usage — this was previously directionally known but not empirically measured against thesis requirements; (2) +5 from bank tokenized deposit networks (new blind spot, Kinexys at $2B/day is orders of magnitude beyond XRPL activity); (3) +3 from escrow overhang quantification showing 20x+ supply/demand imbalance against ETF absorption; (4) +2 from stablecoin rails achieving multi-chain settlement at scale; (5) +1 from Standard Chartered downgrade beginning institutional narrative cascade. Score stays below 60 because: regulatory environment remains favorable, ETF structure exists and has positive flows, RLUSD is growing (if slowly), and no kill switch has formally triggered yet. The thesis is not dead but is materially weaker than previously scored.",
   "commander_summary": "The XRPL network is processing 159 transactions per ledger with $2,473 in order book depth — this is not institutional settlement infrastructure, it is an empty highway, and this single data point does more damage to the thesis than any competitor announcement. Compounding this, ODL volume remains unverifiable with 7 months to deadline, while JPMorgan Kinexys alone processes $2B+/day on proprietary rails that don't need XRP. REDUCE EXPOSURE: the thesis requires utility growth that on-chain data proves is not happening, in a market where three competing infrastructure categories are already at scale."
 }
+```

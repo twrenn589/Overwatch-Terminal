@@ -1,0 +1,124 @@
+```json
+[
+  {
+    "threat": "BIS Nexus + mBridge Convergence",
+    "description": "BIS Project Nexus is merging with mBridge CBDC interoperability to create a sovereign-backed, multi-CBDC settlement layer that directly bypasses the need for any bridge currency. If 10+ central banks route cross-border flows through sovereign rails by 2027, XRP's bridge utility thesis becomes structurally obsolete. Central banks will choose sovereign infrastructure over private token rails every time when both are available.",
+    "severity": "critical",
+    "proximity": "medium-term",
+    "confidence": "high",
+    "evidence": "BIS published Nexus Phase 3 blueprint targeting 2027 live corridors. mBridge already has 26+ observing central banks. Thailand-China corridor live-tested $22M+ settlements without any bridge asset.",
+    "blind_spot": true,
+    "category": "competing_infra"
+  },
+  {
+    "threat": "Stablecoin Rails Commoditization",
+    "description": "Circle's CCTP v2, Stripe's Bridge acquisition, and PayPal's PYUSD are creating stablecoin-native cross-border rails that settle in seconds on multiple L2s with near-zero fees. Banks don't need XRP as a bridge when they can hold USDC and settle natively. RLUSD competes in this market but at $1.5B is dwarfed by USDC's $45B+. The bridge currency model loses to direct stablecoin-to-stablecoin settlement.",
+    "severity": "critical",
+    "proximity": "near-term",
+    "confidence": "high",
+    "evidence": "Stripe acquired Bridge for $1.1B in 2024; Circle CCTP cross-chain settlement live on 8+ chains; USDC dominates institutional stablecoin flows. RLUSD at 31% of $5B target with 10 months remaining.",
+    "blind_spot": false,
+    "category": "competing_infra"
+  },
+  {
+    "threat": "ODL Data Void Is Not Accidental",
+    "description": "Zero verifiable ODL volume data with a Q3 2026 deadline is the single most dangerous signal in this dataset. If Ripple were achieving institutional-grade ODL volumes, they would publicize it. The data void likely indicates ODL volume is flat or declining, meaning the core utility mechanism underpinning the entire thesis may already be failing. This isn't a data gap — it's a negative signal masquerading as missing data.",
+    "severity": "critical",
+    "proximity": "immediate",
+    "confidence": "medium",
+    "evidence": "ODL kill switch shows null current value, null pct_complete. Ripple stopped publishing quarterly markets reports with ODL metrics after 2024. No third-party on-chain analytics have confirmed growing ODL corridor volumes.",
+    "blind_spot": false,
+    "category": "assumption_decay"
+  },
+  {
+    "threat": "XRP ETF AUM Stall at Sub-Scale",
+    "description": "$1.1B AUM across 7 funds is structurally insignificant — it's 2.3% of IBIT alone. Daily net flow of $2.2M implies ~$550M/year accumulation pace, reaching only ~$1.6B by year-end, far below the $5B target. XRP ETFs may have found their ceiling: retail-driven, no pension/endowment mandates, no index inclusion. The ETF is a speculative wrapper, not institutional validation.",
+    "severity": "high",
+    "proximity": "near-term",
+    "confidence": "high",
+    "evidence": "7 funds with $1.1B total vs BTC's $48.6B. Weekly inflow only $2M net. No 13F filings showing major institutional holders. XRP not included in any major crypto index fund benchmarks used by allocators.",
+    "blind_spot": false,
+    "category": "narrative"
+  },
+  {
+    "threat": "Banks Building Internal Tokenized Deposit Networks",
+    "description": "JPMorgan Kinexys, Citi Token Services, HSBC Orion, and DBS's tokenized deposit platform are creating bank-issued tokenized deposits that settle interbank without any external token. These are permissioned, regulated, and don't require holding volatile crypto assets. Banks prefer balance sheet instruments they control over third-party bridge tokens with price risk.",
+    "severity": "high",
+    "proximity": "near-term",
+    "confidence": "high",
+    "evidence": "JPMorgan Kinexys processes $2B+/day in tokenized deposits. Citi Token Services went live with institutional clients in 2025. HSBC Orion handles tokenized gold settlement. None use or plan to use XRP.",
+    "blind_spot": true,
+    "category": "competing_infra"
+  },
+  {
+    "threat": "Japan Carry Trade Unwind Destroys SBI Corridor",
+    "description": "JPY 10Y at 2.24% signals BOJ is losing yield curve control. A forced rate hike to defend yen would trigger massive carry trade unwinds, capital repatriation, and risk-off across Japanese institutions. SBI Holdings — the thesis's Japan anchor — faces direct balance sheet pressure. Japanese institutional crypto adoption reverses as risk budgets contract and regulatory scrutiny increases during financial stress.",
+    "severity": "high",
+    "proximity": "immediate",
+    "confidence": "medium",
+    "evidence": "JGB 10Y at 2.24% is highest in decades. USD/JPY at 155.88 indicates continued yen weakness. BOJ emergency action risk is priced in. SBI's crypto revenues are margin businesses vulnerable to risk-off.",
+    "blind_spot": true,
+    "category": "macro"
+  },
+  {
+    "threat": "AI Agent Settlement Bypasses Human-Designed Rails",
+    "description": "AI agents executing autonomous transactions are building settlement preferences around programmable stablecoins on EVM/Solana, not XRPL. The x402 protocol demo in this data shows micro-payments, but the broader AI-agent economy (Fetch.ai, Autonolas, Morpheus) is standardizing on chains with richer smart contract environments. If AI-to-AI commerce becomes a major settlement category, XRPL's limited programmability is a structural disadvantage.",
+    "severity": "moderate",
+    "proximity": "medium-term",
+    "confidence": "medium",
+    "evidence": "AI agent transaction volume growing exponentially on Solana/Base. XRPL's hooks/smart contract capability is nascent compared to EVM ecosystem. x402 demo in data shows only 6 micro-payments — not evidence of ecosystem traction.",
+    "blind_spot": true,
+    "category": "technology"
+  },
+  {
+    "threat": "Extreme Fear Regime Signals Structural Crypto Deleveraging",
+    "description": "Fear & Greed at 11 with simultaneous BTC ETF outflows (-$117M) and ETH ETF outflows (-$46M) is not a dip — it's institutional capitulation from crypto as an asset class. XRP's +8% bounce is a dead cat divergence driven by thin liquidity, not genuine accumulation. If the crypto macro regime has shifted structurally bearish, all thesis catalysts depend on capital that is actively leaving.",
+    "severity": "high",
+    "proximity": "immediate",
+    "confidence": "medium",
+    "evidence": "F&G at 11 (extreme fear floor). BTC at $65K down from ATH. IBIT -$117M daily, ETHA -$46M daily. XRP ETF $2.2M inflow is noise-level against this backdrop. BTC dominance likely rising, crushing alt flows.",
+    "blind_spot": false,
+    "category": "macro"
+  },
+  {
+    "threat": "Regulatory Capture Reversal Post-2028 Election",
+    "description": "The thesis assumes current pro-crypto regulatory stance persists. A 2028 administration change could bring SEC enforcement revival, stablecoin restrictions, or bank crypto prohibitions. The Clarity Act is still 'pending' — not passed. Regulatory favorability is a political cycle artifact, not a structural condition. Any thesis with a multi-year horizon must price in regime change probability.",
+    "severity": "moderate",
+    "proximity": "medium-term",
+    "confidence": "medium",
+    "evidence": "Clarity Act status: Pending. No legislation actually passed. Current posture is executive/enforcement discretion, not statutory protection. 2028 election cycle begins in 18 months.",
+    "blind_spot": true,
+    "category": "regulatory"
+  },
+  {
+    "threat": "XRPL On-Chain Activity Is Trivially Low",
+    "description": "159 avg transactions per ledger with $0.018 XRP burned per ledger indicates XRPL has near-zero organic usage. The DEX book depth shows only $2,473 at best bid — a rounding error for institutional settlement. This is not infrastructure being used; it's infrastructure waiting. The gap between 'positioned to become' and 'actually being used' is the entire thesis risk.",
+    "severity": "critical",
+    "proximity": "immediate",
+    "confidence": "high",
+    "evidence": "Avg 159 tx/ledger. Fee burn 0.018 XRP/ledger. DEX best bid depth: $2,473. DEX volume: null. No verifiable institutional settlement activity on-chain despite years of partnership announcements.",
+    "blind_spot": false,
+    "category": "assumption_decay"
+  },
+  {
+    "threat": "Escrow Overhang Creates Permanent Sell Pressure",
+    "description": "36.9B XRP in escrow (37% of total supply) creates a structural overhang that institutional allocators model as dilution risk. Monthly escrow releases of ~1B XRP exceed any plausible demand absorption rate. This is a unique structural disadvantage versus BTC (fixed supply) and makes XRP uninvestable for many institutional frameworks that model supply inflation.",
+    "severity": "high",
+    "proximity": "near-term",
+    "confidence": "high",
+    "evidence": "Escrow: 36.9B XRP. Circulating: 63B. ETF locked: 792M (1.3% of supply). Monthly escrow release far exceeds ETF accumulation rate. No institutional allocator treats escrowed XRP as equivalent to BTC's hard cap.",
+    "blind_spot": true,
+    "category": "market_structure"
+  },
+  {
+    "threat": "Standard Chartered Price Cut Signals Institutional Thesis Downgrade",
+    "description": "Today's headline shows Standard Chartered slashed its XRP price prediction. When major institutional research desks downgrade, it cascades through allocator models, reduces ETF demand, and signals that the 'institutional adoption' narrative is losing credibility among the exact institutions that are supposed to be adopting. This is a reflexive loop — narrative loss causes the outcome the narrative was predicting.",
+    "severity": "moderate",
+    "proximity": "immediate",
+    "confidence": "medium",
+    "evidence": "Headline from 2026-02-25: 'XRP Price Prediction Gets Slashed by Standard Chartered.' StanChart is a major cross-border banking institution — their downgrade carries disproportionate weight in the settlement infrastructure narrative.",
+    "blind_spot": false,
+    "category": "narrative"
+  }
+]
+```
