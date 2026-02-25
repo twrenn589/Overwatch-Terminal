@@ -288,5 +288,34 @@
     "events_drafted_count": 0,
     "thesis_pulse": "Institutional foundation remains solid with 7 ETFs holding 790M XRP and RLUSD at $1.56B (31% of kill switch target). ETF outflows persist but slowing from previous weeks. Japan stress thesis under pre",
     "counter_thesis_score": 40
+  },
+  {
+    "timestamp": "2026-02-25T15:14:04.203Z",
+    "run_type": "morning",
+    "stress_score": 80,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.43,
+    "fear_greed": 11,
+    "usd_jpy": 155.88,
+    "jpn_10y": 2.24,
+    "brent_crude": 69.77,
+    "etf_daily_flow": 2235181.669999987,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1558248049.5237725,
+    "probability_framework": {
+      "bear": 8,
+      "base": 40,
+      "mid": 40,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 6,
+    "events_drafted_count": 1,
+    "thesis_pulse": "XRP ETF flows are diverging positively from BTC/ETH ETFs, posting net inflows while both majors saw significant outflows on Feb 24. RLUSD at $1.56B (31% of kill switch target) continues steady growth.",
+    "counter_thesis_score": 33
   }
 ]
