@@ -393,6 +393,9 @@
   "x402_agent": {
     "network": "XRPL TESTNET",
     "network_warning": "⚠ TESTNET ONLY — Not real XRP",
+    "protocol": "x402 v2",
+    "facilitator": "https://xrpl-facilitator-testnet.t54.ai",
+    "facilitator_ok": true,
     "agent_address": "rwtXERjcdatXvsgnza2E34revBYhamEuqe",
     "agent_label": "Overwatch Analyst Agent",
     "provider_address": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
@@ -409,6 +412,10 @@
       "timestamp": "2026-02-25T07:00:21.480Z",
       "status": "SUCCESS"
     },
+    "last_data_received": null,
+    "x402_flow": [
+      "ERROR: Payment rejected (HTTP 402): {\"error\":\"Settlement failed\"}"
+    ],
     "tx_history": [
       {
         "type": "Payment",
@@ -438,7 +445,7 @@
         "date": "2026-02-25T06:59:22.000Z"
       }
     ],
-    "demo_scenario": "Overwatch analyst agent auto-pays for premium data feeds using x402 micropayments on XRPL testnet",
-    "last_updated": "2026-02-25T07:00:21.678Z"
+    "demo_scenario": "Agent (rwtXERjc…) sends HTTP GET → receives 402 → signs XRPL Payment with invoice binding → retries with PAYMENT-SIGNATURE → T54 facilitator settles on XRPL testnet → 200 + data returned",
+    "last_updated": "2026-02-25T07:17:20.318Z"
   }
 }
