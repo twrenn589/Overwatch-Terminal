@@ -161,15 +161,25 @@ body {
   color:var(--accent-cyan);
   border-bottom-color:var(--accent-cyan);
 }
-.tab-btn.bear-tab {
-  border-left:3px solid #ef4444;
-  background:rgba(239,68,68,0.1);
+.tab-btn.three60-tab {
+  border-left:3px solid #f59e0b;
+  background:rgba(245,158,11,0.08);
 }
-.tab-btn.bear-tab.active {
-  color:#fca5a5;
-  border-bottom-color:#ef4444;
-  background:#7f1d1d;
+.tab-btn.three60-tab.active {
+  color:#fbbf24;
+  border-bottom-color:#f59e0b;
+  background:rgba(245,158,11,0.15);
 }
+/* 360 collapsible sections */
+.s360-hdr {
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;padding:2px 0 8px;user-select:none;
+}
+.s360-toggle {
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text-muted);transition:transform 0.2s;flex-shrink:0;
+}
+.s360-body.collapsed { display:none; }
 /* Content */
 .content { padding:12px 12px 24px; }
 .tab-panel { display:none; }
@@ -652,7 +662,7 @@ textarea:focus { border-color:var(--accent-cyan); }
 <!-- TAB NAV -->
 <div class="tab-nav">
   <button class="tab-btn active" data-tab="summary">OVERVIEW</button>
-  <button class="tab-btn bear-tab" data-tab="bear">⚠️ Bear</button>
+  <button class="tab-btn three60-tab" data-tab="bear">360</button>
   <button class="tab-btn" data-tab="stress">STRESS</button>
   <button class="tab-btn" data-tab="etf">ETF</button>
   <button class="tab-btn" data-tab="macro">MACRO</button>
@@ -1122,81 +1132,128 @@ textarea:focus { border-color:var(--accent-cyan); }
   <!-- ==================== BEAR / COUNTER-THESIS ==================== -->
   <div class="tab-panel" id="panel-bear">
 
-    <!-- Counter-thesis Pressure Score -->
-    <div class="full-card" style="border-color:rgba(255,71,87,0.35);background:linear-gradient(135deg,rgba(255,71,87,0.03),transparent);">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <h3 style="margin-bottom:0;">🐻 COUNTER-THESIS PRESSURE</h3>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;" id="bearLastUpdated"></span>
-      </div>
-      <div style="text-align:center;margin:10px 0 6px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:700;color:var(--accent-red);" id="bearScore">--</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;" id="bearLabel">AWAITING DATA</div>
-      </div>
-      <div class="bear-bar">
-        <div class="bear-fill" id="bearFill" style="width:0%;background:var(--accent-green);"></div>
-      </div>
-      <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">
-        <span>LOW PRESSURE</span><span>MODERATE</span><span>HIGH PRESSURE</span>
-      </div>
-      <div class="interpret-box" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);margin-top:10px;">
-        <div class="label" style="color:var(--accent-red);">SCORE REASONING</div>
-        <p id="bearScoreReasoning" style="color:var(--text-secondary);font-size:12px;line-height:1.55;">Awaiting analyst cycle.</p>
-      </div>
+    <!-- 360 pending state -->
+    <div id="s360-pending" class="full-card" style="display:none;text-align:center;padding:32px 16px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;">360 ANALYSIS PENDING — AWAITING NEXT SCHEDULED RUN</div>
     </div>
 
-    <!-- Bear Market Signals (auto-calculated + manual from bear_case) -->
-    <div class="full-card" style="border-color:rgba(255,179,71,0.25);">
-      <h3>⚡ BEAR MARKET SIGNALS</h3>
-      <div class="data-row"><span class="data-label">XRP ETF Outflow Streak</span><span class="data-value" id="bearEtfStreak">--</span></div>
-      <div class="data-row"><span class="data-label">RLUSD Pace vs $5B Target</span><span class="data-value" id="bearRlusdPace">--</span></div>
-      <div class="data-row"><span class="data-label">Exchange Float Trend</span><span class="data-value" id="bearExchangeFloat">--</span></div>
-      <div class="data-row"><span class="data-label">F&amp;G &lt;20 (Crypto Winter)</span><span class="data-value" id="bearFgStreak">--</span></div>
-      <div class="data-row"><span class="data-label">ODL Stagnation</span><span class="data-value" id="bearOdlStagnation">--</span></div>
-      <div class="data-row"><span class="data-label">Token Velocity Risk</span><span class="data-value" id="bearTokenVelocity">--</span></div>
-    </div>
+    <!-- 360 report content -->
+    <div id="s360-content" style="display:none;">
 
-    <!-- Competing Infrastructure -->
-    <div class="full-card" style="border-color:rgba(255,71,87,0.15);">
-      <h3>🏦 COMPETING INFRASTRUCTURE</h3>
-      <div id="bearCompeting">
-        <div class="data-row"><span class="data-label">SWIFT GPI</span><span class="signal">--</span></div>
-        <div class="data-row"><span class="data-label">Visa B2B Connect</span><span class="signal">--</span></div>
-        <div class="data-row"><span class="data-label">JPMorgan Kinexys</span><span class="signal">--</span></div>
-        <div class="data-row"><span class="data-label">BIS Project Nexus</span><span class="signal">--</span></div>
-        <div class="data-row"><span class="data-label">Ethereum Institutional</span><span class="signal">--</span></div>
+      <!-- 1. Commander Summary -->
+      <div class="full-card" style="border-color:rgba(245,158,11,0.35);background:linear-gradient(135deg,rgba(245,158,11,0.04),transparent);">
+        <div class="s360-hdr" onclick="toggle360('cmd')">
+          <h3 style="margin:0;">⚡ COMMANDER SUMMARY</h3>
+          <span class="s360-toggle" id="s360-toggle-cmd">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-cmd">
+          <div class="interpret-box" style="border-color:rgba(245,158,11,0.25);background:rgba(245,158,11,0.05);margin-top:6px;">
+            <p id="s360-commander" style="color:var(--text-primary);font-size:13px;line-height:1.65;">—</p>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Macro Headwinds -->
-    <div class="full-card" style="border-color:rgba(255,179,71,0.15);">
-      <h3>🌪 MACRO HEADWINDS</h3>
-      <div id="bearMacroHeadwinds">
-        <div class="data-row"><span class="data-label">Global Recession Risk</span><span class="signal">--</span></div>
-        <div class="data-row"><span class="data-label">Crypto Winter Signals</span><span class="signal">--</span></div>
-        <div class="data-row"><span class="data-label">Regulatory Reversal Risk</span><span class="signal">--</span></div>
-        <div class="data-row"><span class="data-label">Rate Hike Extension</span><span class="signal">--</span></div>
+      <!-- 2. Bear Pressure Score -->
+      <div class="full-card">
+        <div class="s360-hdr" onclick="toggle360('score')">
+          <h3 style="margin:0;">🔴 BEAR PRESSURE SCORE</h3>
+          <span class="s360-toggle" id="s360-toggle-score">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-score">
+          <div style="display:flex;align-items:baseline;justify-content:center;gap:12px;margin:12px 0 6px;">
+            <span id="s360-score-num" style="font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;">--</span>
+            <span id="s360-score-delta" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;"></span>
+          </div>
+          <div style="height:6px;border-radius:3px;background:rgba(255,255,255,0.06);overflow:hidden;margin:0 0 6px;">
+            <div id="s360-score-bar" style="height:100%;border-radius:3px;transition:width 0.6s,background 0.6s;width:0%;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:10px;">
+            <span style="color:#22c55e;">LOW &lt;25</span><span>MODERATE 25–50</span><span style="color:#f97316;">HIGH 50–75</span><span style="color:#ef4444;">CRITICAL &gt;75</span>
+          </div>
+          <div class="interpret-box" style="border-color:rgba(255,255,255,0.08);">
+            <div class="label">SCORE REASONING</div>
+            <p id="s360-score-reasoning" style="color:var(--text-secondary);font-size:11px;line-height:1.55;">—</p>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Bear Narrative -->
-    <div class="full-card" style="border-color:rgba(255,71,87,0.25);background:rgba(255,71,87,0.025);">
-      <h3>📉 BEAR NARRATIVE</h3>
-      <div class="interpret-box" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);">
-        <div class="label" style="color:var(--accent-red);">STRONGEST COUNTER-ARGUMENTS</div>
-        <p id="bearNarrativeText" style="color:var(--text-secondary);font-size:12px;line-height:1.55;">Awaiting analyst cycle. Counter-thesis evaluated twice daily with instructions to actively seek disconfirming evidence.</p>
+      <!-- 3. Tactical Recommendation -->
+      <div class="full-card">
+        <div class="s360-hdr" onclick="toggle360('rec')">
+          <h3 style="margin:0;">🎯 TACTICAL RECOMMENDATION</h3>
+          <span class="s360-toggle" id="s360-toggle-rec">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-rec">
+          <div style="text-align:center;margin:12px 0 10px;">
+            <span id="s360-rec-badge" style="display:inline-block;padding:8px 20px;border-radius:6px;border:2px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;">—</span>
+          </div>
+          <div class="interpret-box" style="border-color:rgba(255,255,255,0.08);">
+            <div class="label">REASONING</div>
+            <p id="s360-rec-reasoning" style="color:var(--text-secondary);font-size:11px;line-height:1.55;">—</p>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Thesis vs Counter-thesis comparison -->
-    <div class="full-card">
-      <h3>⚖️ THESIS vs COUNTER-THESIS</h3>
-      <div class="data-row"><span class="data-label">Probability (Base Case)</span><span class="data-value green" id="bearProbBase">--</span></div>
-      <div class="data-row"><span class="data-label">Probability (Bull Case)</span><span class="data-value cyan" id="bearProbBull">--</span></div>
-      <div class="data-row"><span class="data-label">Bear Case Probability</span><span class="data-value red" id="bearProbBear">--</span></div>
-      <div class="data-row"><span class="data-label">Counter-Thesis Pressure</span><span class="data-value" id="bearProbPressure">--/100</span></div>
-      <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);text-align:center;letter-spacing:0.5px;line-height:1.6;" id="bearConfidenceLabel">THESIS CONFIDENCE: -- | COUNTER-THESIS PRESSURE: --</div>
-      <p style="font-size:10px;color:var(--text-muted);margin-top:8px;line-height:1.5;">Updated twice daily. Analyst instructed to actively seek disconfirming evidence independent of bull case bias.</p>
-    </div>
+      <!-- 4. Threat Matrix -->
+      <div class="full-card">
+        <div class="s360-hdr" onclick="toggle360('threats')">
+          <h3 style="margin:0;">⚠ THREAT MATRIX</h3>
+          <span class="s360-toggle" id="s360-toggle-threats">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-threats">
+          <div id="s360-threats" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);padding:8px 0;">Loading...</div>
+        </div>
+      </div>
+
+      <!-- 5. Compounding Risks -->
+      <div class="full-card" style="border-color:rgba(239,68,68,0.2);">
+        <div class="s360-hdr" onclick="toggle360('compound')">
+          <h3 style="margin:0;">🔗 COMPOUNDING RISKS</h3>
+          <span class="s360-toggle" id="s360-toggle-compound">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-compound">
+          <div id="s360-compounding"></div>
+        </div>
+      </div>
+
+      <!-- 6. Blind Spots -->
+      <div class="full-card" style="border-color:rgba(168,85,247,0.3);background:linear-gradient(135deg,rgba(168,85,247,0.04),transparent);">
+        <div class="s360-hdr" onclick="toggle360('blindspots')">
+          <h3 style="margin:0;color:#a855f7;">👁 BLIND SPOTS DETECTED</h3>
+          <span class="s360-toggle" id="s360-toggle-blindspots">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-blindspots">
+          <div id="s360-blindspots"></div>
+        </div>
+      </div>
+
+      <!-- 7. Bias Check -->
+      <div class="full-card">
+        <div class="s360-hdr" onclick="toggle360('bias')">
+          <h3 style="margin:0;">⚖ BIAS CHECK</h3>
+          <span class="s360-toggle" id="s360-toggle-bias">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-bias">
+          <div id="s360-bias"></div>
+        </div>
+      </div>
+
+      <!-- 8. Kill Switch Status -->
+      <div class="full-card">
+        <div class="s360-hdr" onclick="toggle360('ks')">
+          <h3 style="margin:0;">🔴 KILL SWITCH STATUS</h3>
+          <span class="s360-toggle" id="s360-toggle-ks">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-ks">
+          <div id="s360-killswitches" style="display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:8px;"></div>
+          <div id="s360-new-ks-wrap" style="display:none;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#f59e0b;letter-spacing:1.5px;margin:10px 0 6px;padding-top:8px;border-top:1px solid rgba(245,158,11,0.2);">NEW KILL SWITCHES RECOMMENDED</div>
+            <div id="s360-new-killswitches"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /#s360-content -->
 
   </div>
 
@@ -2971,12 +3028,188 @@ function renderBearAutoSignals() {
   }
 }
 
+// ===== 360 COMMAND REPORT =====
+
+function toggle360(key) {
+  const body   = document.getElementById('s360-body-' + key);
+  const toggle = document.getElementById('s360-toggle-' + key);
+  if (!body) return;
+  const collapsed = body.classList.toggle('collapsed');
+  if (toggle) toggle.textContent = collapsed ? '▼' : '▲';
+}
+
+async function fetch360Report() {
+  try {
+    const r = await fetch('https://overwatch-589.github.io/Overwatch-Terminal/data/360-report.json?t=' + Date.now());
+    const d = await r.json();
+    const pending = document.getElementById('s360-pending');
+    const content = document.getElementById('s360-content');
+    if (!d || !d.tactical_recommendation) {
+      if (pending) pending.style.display = 'block';
+      if (content) content.style.display = 'none';
+      return;
+    }
+    if (pending) pending.style.display = 'none';
+    if (content) content.style.display = 'block';
+    render360Report(d);
+  } catch(e) {
+    console.log('360 report fetch:', e.message);
+    const pending = document.getElementById('s360-pending');
+    if (pending) pending.style.display = 'block';
+  }
+}
+
+function render360Report(r) {
+  const eh = escHtml;
+  const set    = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val ?? '—'; };
+  const setHtml = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val ?? ''; };
+
+  // 1. Commander Summary
+  set('s360-commander', r.commander_summary);
+
+  // 2. Bear Pressure Score
+  const score = r.bear_pressure_score ?? 0;
+  const delta = r.score_delta;
+  const scoreColor = score < 25 ? '#22c55e' : score < 50 ? '#eab308' : score < 75 ? '#f97316' : '#ef4444';
+  const scoreEl = document.getElementById('s360-score-num');
+  const deltaEl = document.getElementById('s360-score-delta');
+  const barEl   = document.getElementById('s360-score-bar');
+  if (scoreEl) { scoreEl.textContent = score; scoreEl.style.color = scoreColor; }
+  if (deltaEl && delta != null) {
+    deltaEl.textContent = (delta >= 0 ? '▲+' : '▼') + delta;
+    deltaEl.style.color = delta > 0 ? '#ef4444' : '#22c55e';
+  }
+  if (barEl) { barEl.style.width = Math.min(score, 100) + '%'; barEl.style.background = scoreColor; }
+  set('s360-score-reasoning', r.score_reasoning);
+
+  // 3. Tactical Recommendation
+  const recBadge = document.getElementById('s360-rec-badge');
+  if (recBadge && r.tactical_recommendation) {
+    const rec = r.tactical_recommendation;
+    const recMap = {
+      HOLD_POSITION:       { bg:'rgba(34,197,94,0.12)',  border:'#22c55e', color:'#22c55e'  },
+      INCREASE_MONITORING: { bg:'rgba(234,179,8,0.12)',  border:'#eab308', color:'#eab308'  },
+      REDUCE_EXPOSURE:     { bg:'rgba(249,115,22,0.12)', border:'#f97316', color:'#f97316'  },
+      EXIT_SIGNAL:         { bg:'rgba(239,68,68,0.12)',  border:'#ef4444', color:'#ef4444'  },
+    };
+    const c = recMap[rec] ?? recMap.INCREASE_MONITORING;
+    recBadge.textContent = rec.replace(/_/g, ' ');
+    recBadge.style.cssText = `display:inline-block;padding:8px 20px;border-radius:6px;border:2px solid ${c.border};background:${c.bg};color:${c.color};font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;` + (rec === 'EXIT_SIGNAL' ? 'animation:pulse 1.5s infinite;' : '');
+  }
+  set('s360-rec-reasoning', r.recommendation_reasoning);
+
+  // 4. Threat Matrix
+  const threats = (r.threat_matrix ?? []).slice().sort((a, b) => (b.composite ?? 0) - (a.composite ?? 0));
+  const sevColors = { critical:'#ef4444', high:'#f97316', moderate:'#eab308', low:'#22c55e' };
+  setHtml('s360-threats', threats.length === 0 ? '<div style="color:var(--text-muted);font-size:10px;padding:8px 0;">No threats in report.</div>' :
+    threats.map(t => {
+      const sc = sevColors[t.severity] ?? '#8a9bba';
+      const cc = (t.composite ?? 0) >= 60 ? '#ef4444' : (t.composite ?? 0) >= 35 ? '#f97316' : '#eab308';
+      const tags = [
+        `<span style="background:rgba(255,255,255,0.06);color:var(--text-secondary);border-radius:3px;padding:1px 6px;font-size:9px;">${eh(t.proximity ?? '')}</span>`,
+        `<span style="background:${sc}22;color:${sc};border-radius:3px;padding:1px 6px;font-size:9px;">${eh(t.severity ?? '')}</span>`,
+        t.blind_spot ? `<span style="background:rgba(168,85,247,0.15);color:#a855f7;border-radius:3px;padding:1px 6px;font-size:9px;">BLIND SPOT</span>` : '',
+        t.is_new    ? `<span style="background:rgba(245,158,11,0.15);color:#f59e0b;border-radius:3px;padding:1px 6px;font-size:9px;">NEW</span>` : '',
+      ].filter(Boolean).join(' ');
+      return `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <span style="flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:${cc};min-width:42px;line-height:1.2;">${t.composite ?? '--'}</span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-primary);margin-bottom:4px;">${eh(t.threat ?? '')}</div>
+            <div style="font-size:11px;color:var(--text-secondary);line-height:1.5;margin-bottom:6px;">${eh(t.description ?? '')}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">${tags}</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')
+  );
+
+  // 5. Compounding Risks
+  const risks = r.compounding_risks ?? [];
+  setHtml('s360-compounding', risks.length === 0 ? '<div style="color:var(--text-muted);font-size:10px;padding:8px 0;">None identified.</div>' :
+    risks.map(risk => {
+      const rc = sevColors[risk.severity] ?? '#eab308';
+      const chain = (risk.chain ?? []).map(c => `<span style="color:var(--text-primary);font-weight:600;">${eh(c)}</span>`).join(`<span style="color:${rc};padding:0 4px;">→</span>`);
+      return `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.7;margin-bottom:6px;">${chain}</div>
+        <div style="font-size:11px;color:${rc};line-height:1.5;margin-bottom:4px;">${eh(risk.outcome ?? '')}</div>
+        <span style="background:${rc}22;color:${rc};border-radius:3px;padding:1px 6px;font-size:9px;">${eh(risk.severity ?? '')}</span>
+      </div>`;
+    }).join('')
+  );
+
+  // 6. Blind Spots
+  const bspots = r.blind_spots ?? [];
+  setHtml('s360-blindspots', bspots.length === 0 ? '<div style="color:var(--text-muted);font-size:10px;padding:8px 0;">None identified.</div>' :
+    bspots.map(bs => {
+      const ic = sevColors[bs.importance] ?? '#eab308';
+      const x402tag = bs.x402_opportunity ? `<span style="border:1px solid #f59e0b;color:#f59e0b;border-radius:3px;padding:1px 6px;font-size:9px;margin-left:4px;">x402</span>` : '';
+      return `<div style="padding:10px 0;border-bottom:1px solid rgba(168,85,247,0.12);">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:5px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#a855f7;">${eh(bs.threat ?? '')}</span>
+          <span style="background:${ic}22;color:${ic};border-radius:3px;padding:1px 6px;font-size:9px;">${eh(bs.importance ?? '')}</span>
+          ${x402tag}
+        </div>
+        <div style="font-size:10px;color:var(--text-secondary);line-height:1.5;">${eh(bs.suggested_source ?? '')}</div>
+      </div>`;
+    }).join('')
+  );
+
+  // 7. Bias Check
+  const bc = r.bias_check ?? {};
+  const bull = bc.bull_indicators ?? 0;
+  const bear = bc.bear_indicators ?? 0;
+  const total = bull + bear || 1;
+  const bullPct = Math.round((bull / total) * 100);
+  const bearPct = 100 - bullPct;
+  setHtml('s360-bias',
+    `<div style="display:flex;height:22px;border-radius:4px;overflow:hidden;margin:8px 0 4px;">
+      <div style="width:${bullPct}%;background:#22c55e;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#000;font-weight:700;">${bull > 0 ? bull : ''}</div>
+      <div style="width:${bearPct}%;background:#ef4444;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#fff;font-weight:700;">${bear > 0 ? bear : ''}</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;margin-bottom:10px;">
+      <span style="color:#22c55e;">BULL (${bull})</span>
+      <span style="color:var(--text-muted);">${eh(bc.ratio ?? '')}</span>
+      <span style="color:#ef4444;">BEAR (${bear})</span>
+    </div>
+    <p style="font-size:11px;color:var(--text-secondary);line-height:1.55;">${eh(bc.assessment ?? '')}</p>`
+  );
+
+  // 8. Kill Switch Status
+  const ksColors = { safe:'#22c55e', warning:'#eab308', danger:'#f97316', triggered:'#ef4444', no_data:'#8a9bba' };
+  const ks = r.kill_switches ?? [];
+  setHtml('s360-killswitches', ks.map(k => {
+    const c = ksColors[k.status] ?? '#8a9bba';
+    const pulse = k.status === 'triggered' ? 'animation:pulse 1.5s infinite;' : '';
+    return `<div style="border:1px solid ${c}44;border-radius:8px;padding:10px;background:${c}0a;${pulse}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--text-primary);">${eh(k.name ?? '')}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:${c};letter-spacing:1px;">${(k.status ?? '').toUpperCase()}</span>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);line-height:1.5;">${eh(k.detail ?? '')}</div>
+    </div>`;
+  }).join(''));
+
+  // New kill switches recommended
+  const newKs = r.new_kill_switches_recommended ?? [];
+  const newKsWrap = document.getElementById('s360-new-ks-wrap');
+  if (newKsWrap) newKsWrap.style.display = newKs.length > 0 ? 'block' : 'none';
+  setHtml('s360-new-killswitches', newKs.map(k =>
+    `<div style="border:1px solid rgba(245,158,11,0.4);border-radius:8px;padding:10px;background:rgba(245,158,11,0.05);margin-bottom:6px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#f59e0b;margin-bottom:3px;">${eh(k.name ?? '')}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-bottom:5px;">TRIGGER: ${eh(k.trigger ?? '')}</div>
+      <div style="font-size:10px;color:var(--text-secondary);line-height:1.5;">${eh(k.reasoning ?? '')}</div>
+    </div>`
+  ).join(''));
+}
+
 // ===== REFRESH ALL =====
 function refreshAll() {
   fetchXRPPrice();
   fetchFearGreed();
   fetchDashboardData();
   fetchAnalysisHistory();
+  fetch360Report();
   if (!xrplWs || xrplWs.readyState > 1) { reconnectAttempts = 0; connectXRPL(); }
 }
 
@@ -2990,6 +3223,7 @@ renderEvents();
 initEventFilters();
 renderX402();
 fetchAnalysisHistory();
+fetch360Report();
 setInterval(fetchXRPPrice, 120000);
 setInterval(fetchFearGreed, 300000);
 setInterval(fetchDashboardData, 600000);
