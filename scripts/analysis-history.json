@@ -491,5 +491,34 @@
     "events_drafted_count": 2,
     "thesis_pulse": "XRP ETF AUM holds at $1.1B with 792M XRP locked (1.3% of supply), but the $5B EOY target requires 4.5x growth in 10 months — pace is insufficient at current accumulation rates. RLUSD crossed $1.56B, u",
     "counter_thesis_score": 62
+  },
+  {
+    "timestamp": "2026-02-26T13:29:10.923Z",
+    "run_type": "morning",
+    "stress_score": 78,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.44,
+    "fear_greed": 11,
+    "usd_jpy": 155.9858,
+    "jpn_10y": 2.24,
+    "brent_crude": 71.9,
+    "etf_daily_flow": 2235181.669999987,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1563644305.2789958,
+    "probability_framework": {
+      "bear": 8,
+      "base": 40,
+      "mid": 40,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 5,
+    "events_drafted_count": 1,
+    "thesis_pulse": "Thesis infrastructure continues building — RLUSD at $1.56B (31% of $5B kill switch), XRP ETF AUM at $1.1B (22% of $5B target), 7 funds operational. XRP's +2.6% move while F&G sits at 11 and broader cr",
+    "counter_thesis_score": 62
   }
 ]
