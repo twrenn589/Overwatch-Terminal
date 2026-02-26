@@ -1,58 +1,58 @@
 {
-  "updated": "2026-02-26T18:54:14.306Z",
+  "updated": "2026-02-26T23:59:46.636Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.39,
-    "change_24h": -5.63145357234272,
-    "volume_24h": 3975929758.665435,
-    "market_cap": 84818801729.62212
+    "price": 1.4,
+    "change_24h": -2.046668843248782,
+    "volume_24h": 3254111825.537552,
+    "market_cap": 85563356841.97064
   },
   "rlusd": {
-    "market_cap": 1563671061.2898018,
+    "market_cap": 1563724305.4304476,
     "source": "coingecko"
   },
   "etf": {
-    "last_fetched": "2026-02-26T18:54:05.051Z",
+    "last_fetched": "2026-02-26T23:59:30.990Z",
     "source": "xrp-insights",
-    "as_of_date": "2026-02-24",
-    "total_aum": 1103991361.69,
-    "total_xrp_locked": 792221431.6603999,
-    "daily_net_flow": 2235181.669999987,
-    "daily_inflow": 2237803.280000001,
-    "daily_outflow": 2621.610000014305,
-    "flow_date": "2026-02-24",
-    "weekly_net_flow": 2005017.5177999511,
-    "weekly_inflow": 5114268.399999976,
-    "weekly_outflow": 3109250.882200025,
-    "weekly_start_date": "2026-02-18",
-    "cum_net_flow": 19029713.373899966,
-    "cum_inflow": 32801391.152299978,
+    "as_of_date": "2026-02-25",
+    "total_aum": 1184296098.05,
+    "total_xrp_locked": 794860204.73,
+    "daily_net_flow": 2638773.0700000226,
+    "daily_inflow": 2638773.0700000226,
+    "daily_outflow": 0,
+    "flow_date": "2026-02-25",
+    "weekly_net_flow": 4646412.417799987,
+    "weekly_inflow": 7753041.469999999,
+    "weekly_outflow": 3106629.052200012,
+    "weekly_start_date": "2026-02-19",
+    "cum_net_flow": 14103245.823900014,
+    "cum_inflow": 27874923.602300026,
     "funds": [
       {
         "ticker": "XRPC",
         "issuer": "Canary Capital",
-        "aum": 260157861.69,
-        "xrp_locked": 191375005.48,
-        "daily_flow": -2621.610000014305
+        "aum": 281151460.75,
+        "xrp_locked": 191904269.35,
+        "daily_flow": 529263.8700000048
       },
       {
         "ticker": "XRP",
         "issuer": "Bitwise",
-        "aum": 256040570.19,
-        "xrp_locked": 188353762.2,
-        "daily_flow": 2237803.280000001
+        "aum": 278282488.47,
+        "xrp_locked": 189920211.06,
+        "daily_flow": 1566448.8600000143
       },
       {
         "ticker": "XRPZ",
         "issuer": "Franklin Templeton",
-        "aum": 225155423.73,
-        "xrp_locked": 165633403.76,
-        "daily_flow": 0
+        "aum": 243491725.78,
+        "xrp_locked": 166176464.1,
+        "daily_flow": 543060.3400000036
       },
       {
         "ticker": "TOXR",
         "issuer": "21Shares",
-        "aum": 167058785.08,
+        "aum": 180071904.05,
         "xrp_locked": 122971034.88,
         "daily_flow": 0
       },
@@ -66,8 +66,8 @@
       {
         "ticker": "GXRP",
         "issuer": "Grayscale",
-        "aum": 72697760,
-        "xrp_locked": 53549640.3404,
+        "aum": 78417558,
+        "xrp_locked": 53549640.34,
         "daily_flow": 0
       },
       {
@@ -78,12 +78,12 @@
         "daily_flow": 0
       }
     ],
-    "pct_supply": 1.298,
-    "circ_supply": 61020720669,
+    "pct_supply": 1.301,
+    "circ_supply": 61116683459,
     "num_funds": 7
   },
   "btc_etf": {
-    "last_fetched": "2026-02-26T18:54:05.434Z",
+    "last_fetched": "2026-02-26T23:59:31.420Z",
     "source": "ishares-ibit",
     "ticker": "IBIT",
     "as_of_date": "2026-02-25",
@@ -112,7 +112,7 @@
     ]
   },
   "eth_etf": {
-    "last_fetched": "2026-02-26T18:54:05.481Z",
+    "last_fetched": "2026-02-26T23:59:31.443Z",
     "source": "ishares-etha",
     "ticker": "ETHA",
     "as_of_date": "2026-02-25",
@@ -141,7 +141,7 @@
     ]
   },
   "supply": {
-    "last_fetched": "2026-02-26T18:54:05.962Z",
+    "last_fetched": "2026-02-26T23:59:31.776Z",
     "source": "xrp-insights",
     "total_supply": 100000000000,
     "circ_supply": 63075832961,
@@ -153,25 +153,25 @@
     "xrp_burned": 14287104
   },
   "xrpl_metrics": {
-    "last_fetched": "2026-02-26T18:54:12.145Z",
+    "last_fetched": "2026-02-26T23:59:45.544Z",
     "source": "xrpl_native",
-    "current_ledger": 102513076,
-    "last_ledger_txns": 114,
-    "avg_tx_per_ledger": 114,
-    "fee_burn_per_ledger_xrp": 0.0042,
+    "current_ledger": 102517795,
+    "last_ledger_txns": 143,
+    "avg_tx_per_ledger": 118,
+    "fee_burn_per_ledger_xrp": 0.0068,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD.GateHub",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 197974,
-      "total_ask_xrp": 1136880,
+      "total_bid_xrp": 189884,
+      "total_ask_xrp": 1135319,
       "best_bid": {
-        "xrp": 1672.751812,
-        "usd": 2344.125947
+        "xrp": 1580.947268,
+        "usd": 2230.599953
       },
       "best_ask": {
-        "xrp": 2231.848747,
-        "usd": 3098.35832001
+        "xrp": 1800.14201,
+        "usd": 2512.71439674869
       }
     },
     "dex_volume_24h_usd": null,
@@ -180,9 +180,9 @@
     "dex_takers_24h": null
   },
   "macro": {
-    "usd_jpy": 156.40527,
+    "usd_jpy": 155.84273,
     "jpn_10y": 2.24,
-    "us_10y_yield": 4.04,
+    "us_10y_yield": 4.05,
     "brent_crude": 71.9,
     "fear_greed": {
       "value": 11,
@@ -190,14 +190,68 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-26T18:54:08.119Z",
+    "last_fetched": "2026-02-26T23:59:34.065Z",
     "source": "newsdata",
     "headlines": [
       {
-        "title": "Crypto Prices Today: Bitcoin Price Near $69K, XRP at $1.46, Cardano Climbs 11.96%",
-        "source": "analyticsinsight",
-        "url": "https://www.analyticsinsight.net/price-analysis/crypto-prices-today-bitcoin-price-near-69k-xrp-at-146-cardano-climbs-1196",
-        "published": "2026-02-26 06:47:28"
+        "title": "The Role of Financial Data Analytics in Crypto, Forex, and Commodity Markets",
+        "source": "coinpedia",
+        "url": "https://coinpedia.org/press-release/the-role-of-financial-data-analytics-in-crypto-forex-and-commodity-markets/",
+        "published": "2026-02-26 11:51:03"
+      },
+      {
+        "title": "UK Still Preferred Spot For Ghanaian Students – British Council",
+        "source": "dailyguidenetwork",
+        "url": "https://dailyguidenetwork.com/uk-still-preferred-spot-for-ghanaian-students-british-council/",
+        "published": "2026-02-26 11:32:27"
+      },
+      {
+        "title": "Saudi Arabia launches $100 billion AI infrastructure fund to rival US and China",
+        "source": "siliconcanals",
+        "url": "https://siliconcanals.com/sc-n-saudi-arabia-launches-100-billion-ai-infrastructure-fund-to-rival-us-and-china/",
+        "published": "2026-02-26 11:27:08"
+      },
+      {
+        "title": "Apple’s Most Advanced Chips Still Can’t Escape Taiwan — And Arizona Won’t Change That Anytime Soon",
+        "source": "webpronews",
+        "url": "https://www.webpronews.com/apples-most-advanced-chips-still-cant-escape-taiwan-and-arizona-wont-change-that-anytime-soon/",
+        "published": "2026-02-26 11:25:06"
+      },
+      {
+        "title": "Supply chain attacks emerge as top global cyber threat in 2026",
+        "source": "gulfnews",
+        "url": "https://gulfnews.com/technology/supply-chain-attacks-emerge-as-top-global-cyber-threat-in-2026-1.500456194",
+        "published": "2026-02-26 11:13:59"
+      },
+      {
+        "title": "DWP makes HBAR custody available for clients",
+        "source": "assetservicingtimes",
+        "url": "https://www.assetservicingtimes.com/assetservicesnews/custodyarticle.php?article_id=17722",
+        "published": "2026-02-26 11:10:13"
+      },
+      {
+        "title": "Obama Foundation readies for uncertainty of development near presidential center",
+        "source": "chicagotribune",
+        "url": "https://www.chicagotribune.com/2026/02/26/obama-foundation-uncertainty-development-presidential-center/",
+        "published": "2026-02-26 11:00:10"
+      },
+      {
+        "title": "The golden milestone: A triumph worth celebrating",
+        "source": "thebftonline",
+        "url": "https://thebftonline.com/2026/02/26/the-golden-milestone-a-triumph-worth-celebrating/",
+        "published": "2026-02-26 10:45:44"
+      },
+      {
+        "title": "How Inflammatory Speech Can Backfire, And Trigger Suspicion",
+        "source": "thenews_chronicle",
+        "url": "https://thenews-chronicle.com/how-inflammatory-speech-can-backfire-and-trigger-suspicion/",
+        "published": "2026-02-26 10:45:14"
+      },
+      {
+        "title": "When growth outpaces design: The pressure of rising passenger traffic at MMIA",
+        "source": "businessday",
+        "url": "https://businessday.ng/aviation/article/when-growth-outpaces-design-the-pressure-of-rising-passenger-traffic-at-mmia/",
+        "published": "2026-02-26 10:45:11"
       }
     ]
   },
@@ -219,17 +273,17 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1563671061.2898018,
+      "current": 1563724305.4304476,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
     },
     "xrp_etf_aum": {
       "target": 5000000000,
-      "current": 1103991361.69,
+      "current": 1184296098.05,
       "deadline": "2026-12-31",
       "status": "TRACKING",
-      "pct_complete": 22
+      "pct_complete": 24
     },
     "permissioned_dex_adoption": {
       "target_institutions": 5,
@@ -281,55 +335,55 @@
   "health_check": {
     "xrp": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:04.963Z"
-    },
-    "etf": {
-      "status": "ok",
-      "ts": "2026-02-26T18:54:05.051Z"
-    },
-    "usd_jpy": {
-      "status": "ok",
-      "ts": "2026-02-26T18:54:05.064Z"
+      "ts": "2026-02-26T23:59:30.833Z"
     },
     "fear_greed": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:05.097Z"
+      "ts": "2026-02-26T23:59:30.978Z"
+    },
+    "etf": {
+      "status": "ok",
+      "ts": "2026-02-26T23:59:30.990Z"
+    },
+    "usd_jpy": {
+      "status": "ok",
+      "ts": "2026-02-26T23:59:31.025Z"
     },
     "ibit": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:05.434Z"
+      "ts": "2026-02-26T23:59:31.420Z"
     },
     "etha": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:05.481Z"
+      "ts": "2026-02-26T23:59:31.443Z"
     },
     "supply": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:05.962Z"
+      "ts": "2026-02-26T23:59:31.776Z"
     },
     "rlusd": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:06.267Z"
+      "ts": "2026-02-26T23:59:32.201Z"
     },
     "news": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:08.119Z"
+      "ts": "2026-02-26T23:59:34.065Z"
     },
     "xrpl_metrics": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:12.145Z"
+      "ts": "2026-02-26T23:59:45.544Z"
     },
     "fred_jpn_10y": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:13.878Z"
+      "ts": "2026-02-26T23:59:46.316Z"
     },
     "fred_brent": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:14.177Z"
+      "ts": "2026-02-26T23:59:46.494Z"
     },
     "fred_us_10y": {
       "status": "ok",
-      "ts": "2026-02-26T18:54:14.306Z"
+      "ts": "2026-02-26T23:59:46.636Z"
     }
   },
   "bear_case": {
