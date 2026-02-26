@@ -2142,10 +2142,24 @@ function renderX402AgentWallet(d) {
   if (flowEl) {
     const flow = a.x402_flow ?? [];
     if (flow.length > 0) {
+      // Build label → formatted time map from transactions array
+      const txTimes = {};
+      for (const tx of (a.transactions ?? [])) {
+        if (tx.label && tx.timestamp) {
+          txTimes[tx.label] = new Date(tx.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+      }
       flowEl.innerHTML = flow.map(step => {
-        const isError = step.startsWith('ERROR');
-        const isIn    = step.startsWith('←');
-        const col     = isError ? 'var(--accent-red)' : isIn ? 'var(--accent-green)' : 'var(--accent-cyan)';
+        // Section headers match "── Label ──"
+        const headerMatch = step.match(/^── (.+) ──$/);
+        if (headerMatch) {
+          const ts = txTimes[headerMatch[1]] ? ` — ${txTimes[headerMatch[1]]}` : '';
+          return `<div style="padding:6px 0 3px;color:var(--text-muted);font-size:9px;letter-spacing:1px;">${escHtml(step + ts)}</div>`;
+        }
+        const isError     = step.startsWith('ERROR');
+        const isGuardrail = step.startsWith('GUARDRAIL');
+        const isIn        = step.startsWith('←');
+        const col = isError || isGuardrail ? 'var(--accent-red)' : isIn ? 'var(--accent-green)' : 'var(--accent-cyan)';
         return `<div style="padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.04);color:${col};">${escHtml(step)}</div>`;
       }).join('');
     }
