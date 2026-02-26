@@ -688,6 +688,22 @@ IMPORTANT: Keep descriptions concise — under 100 words each. Ensure your respo
     err('360-assess', `Could not write 360-report.json: ${writeErr.message}`);
   }
 
+  // Archive to data/360-history.json (keep last 60 entries — ~30 days of twice-daily runs)
+  const historyPath = path.join(__dirname, '..', 'data', '360-history.json');
+  try {
+    let history = [];
+    if (fs.existsSync(historyPath)) {
+      try { history = JSON.parse(fs.readFileSync(historyPath, 'utf8')); } catch (_) { history = []; }
+    }
+    if (!Array.isArray(history)) history = [];
+    history.push({ timestamp: new Date().toISOString(), ...result });
+    if (history.length > 60) history = history.slice(history.length - 60);
+    fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+    log('360', `Archived assessment #${history.length} to 360-history.json`);
+  } catch (archiveErr) {
+    err('360', `Could not archive to 360-history.json: ${archiveErr.message}`);
+  }
+
   return result;
 }
 
