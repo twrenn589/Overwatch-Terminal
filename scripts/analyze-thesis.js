@@ -458,7 +458,6 @@ IMPORTANT: Keep each threat description under 100 words. Return a maximum of 12 
 
   const raw = response.content[0].text;
   log('360-sweep', `Response received (${raw.length} chars)`);
-  fs.writeFileSync(path.join(__dirname, '..', 'data', 'debug-sweep-response.txt'), raw);
 
   const cleaned = repairTruncatedJSON(
     raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim(),
@@ -663,7 +662,6 @@ IMPORTANT: Keep descriptions concise — under 100 words each. Ensure your respo
 
   const raw = response.content[0].text;
   log('360-assess', `Response received (${raw.length} chars)`);
-  fs.writeFileSync(path.join(__dirname, '..', 'data', 'debug-assess-response.txt'), raw);
 
   const cleaned = repairTruncatedJSON(
     raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim(),
