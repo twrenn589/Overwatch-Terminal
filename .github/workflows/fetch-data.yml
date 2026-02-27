@@ -1,9 +1,7 @@
 name: Fetch Dashboard Data
 
 on:
-  schedule:
-    - cron: '0 */6 * * *'   # Runs every 6 hours (midnight, 6am, noon, 6pm UTC)
-  workflow_dispatch:          # Allows manual trigger from GitHub website
+  workflow_dispatch:          # Manual trigger only — automated runs use analyze-thesis.yml
 
 permissions:
   contents: write             # Needed to commit and push dashboard-data.json
