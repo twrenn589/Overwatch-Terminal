@@ -17,41 +17,6 @@ twice daily (6am/6pm Chicago time). Telegram briefings are sent to the owner.
 
 ---
 
-## Data Sources (Current — as of Feb 24, 2026)
-
-| Source | Status | Notes |
-|--------|--------|-------|
-| XRP Price | ✅ ok | CoinGecko API |
-| Fear & Greed | ✅ ok | alternative.me |
-| USD/JPY | ✅ ok | Alpha Vantage FX_DAILY primary, Frankfurter fallback |
-| JPN 10Y | ⚠️ ok (lagging) | FRED monthly series — lags 1-3 days, needs better source |
-| ETF Flows (XRP) | ✅ ok | xrp-insights.com — blank on weekends/holidays (expected) |
-| BTC ETF (IBIT) | ✅ ok | iShares CSV |
-| ETH ETF (ETHA) | ✅ ok | iShares CSV |
-| RLUSD | ✅ ok | CoinGecko |
-| XRP Supply | ✅ ok | xrp-insights.com/api/allocations |
-| XRPL Metrics | ✅ ok | Native rippled JSON-RPC via s1.ripple.com:51234 (replaced XRPScan) |
-| News | ✅ ok (sparse) | NewsData.io — keywords: XRP OR Ripple OR XRPL OR RLUSD |
-| FRED Macro | ✅ ok | US 10Y (DGS10), Brent (DCOILBRENTEU) |
-
-## Known Issues (Feb 24, 2026)
-
-- **JPN 10Y** lags 1-3 days — FRED uses monthly international series; needs daily source
-- **News sparse** — NewsData.io free tier returns few results; consider CryptoPanic as secondary
-- **book_offers (DEX depth)** returning null — non-fatal, needs endpoint debugging
-- **ETF data blank on weekends/holidays** — expected behavior from xrp-insights.com
-- **Private repo fetch** — dashboard reads from GitHub Pages URL (`overwatch-589.github.io`), NOT `raw.githubusercontent.com` (returns 404 for private repos)
-
-## Build Status (Feb 24, 2026)
-
-- **Phase 5 COMPLETE** — hardening, BEAR tab, analysis history, qualitative automation, retry logic, health checks, Telegram alerts, backup/restore, staggered scheduling
-- **Phase 6 PLANNED** — reasoning traces, thesis schema, connection mapping, expanded kill switches, game theory lens
-- **Stability monitoring** — system running autonomously, waiting for 2-3 days clean operation
-- **Next builds** — professional README, prediction tracker, x402 testnet agent
-- **Monthly audit** — deploys after 30+ analysis-history.json entries (~2 weeks from Feb 23)
-
----
-
 ## File Structure
 
 ```
@@ -110,12 +75,10 @@ Runs every 6 hours via GitHub Actions. Fetches:
 - XRP price/vol/mcap from CoinGecko
 - RLUSD market cap from CoinGecko
 - Fear & Greed index from alternative.me
-- USD/JPY from Alpha Vantage FX_DAILY (primary) or Frankfurter (fallback)
-- JPN 10Y from FRED (monthly, lagging — Twelve Data attempted if TWELVE_DATA_KEY set)
-- US 10Y, Brent Crude from FRED
+- USD/JPY from Frankfurter API
+- JPN 10Y, US 10Y, Brent Crude from FRED
 - XRP ETF flows from `xrp-insights.com/api/flows?days=14`
 - XRP supply distribution from `xrp-insights.com/api/allocations`
-- XRPL metrics from `s1.ripple.com:51234` via JSON-RPC (server_info, ledger, book_offers)
 - News headlines from NewsData.io (fallback: CryptoPanic)
 
 Writes `dashboard-data.json`. Always falls back to cached values on fetch failure — never throws.
@@ -126,7 +89,7 @@ Runs at 6am and 6pm Chicago time. Steps:
 2. Builds a structured prompt including all live data + news headlines + thesis context
 3. Calls Claude API (`claude-opus-4-6`) to analyze thesis scorecard, kill switches, and events
 4. Saves `analysis-output.json`
-5. Sends Telegram briefing to owner (includes 🐻 COUNTER-THESIS score after probability line)
+5. Sends Telegram briefing to owner
 
 Claude output schema includes:
 - `scorecard_updates[]` — recommended status changes per thesis category
@@ -134,7 +97,6 @@ Claude output schema includes:
 - `recommended_probability_adjustment` — bear/base/mid/bull %
 - `events_draft[]` — thesis-relevant news events for timeline insertion
 - `stress_assessment` — level + score
-- `bear_case` — counter_thesis_score, bear_narrative, competing infrastructure
 
 ### `scripts/apply-analysis.js`
 Manually triggered. Reads `analysis-output.json` and:
@@ -162,13 +124,13 @@ after each successful data fetch.
 
 ### `fetch-data.yml`
 - **Trigger:** Every 6 hours (cron) + manual dispatch
-- **Secrets needed:** `FRED_API_KEY`, `NEWSDATA_API_KEY`, `CRYPTOPANIC_API_KEY`, `ALPHA_VANTAGE_KEY`, `TWELVE_DATA_KEY`
+- **Secrets needed:** `FRED_API_KEY`, `NEWSDATA_API_KEY`
 - **Steps:** checkout → setup node → npm install → configure git → `node fetch-data.js`
 - **Output:** commits updated `dashboard-data.json` to main
 
 ### `analyze-thesis.yml`
 - **Trigger:** 6am and 6pm Chicago time (12:00 UTC + 0:00 UTC) + manual dispatch
-- **Secrets needed:** `FRED_API_KEY`, `ANTHROPIC_API_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `NEWSDATA_API_KEY`, `ALPHA_VANTAGE_KEY`, `TWELVE_DATA_KEY`
+- **Secrets needed:** `FRED_API_KEY`, `ANTHROPIC_API_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`
 - **Steps:** runs fetch-data.js first (fresh data), then analyze-thesis.js
 - **Output:** commits `analysis-output.json` and updated `dashboard-data.json`
 
@@ -185,14 +147,14 @@ Set as GitHub Actions Secrets and in `scripts/.env` for local development:
 
 | Key | Source | Used By |
 |-----|--------|---------|
-| `FRED_API_KEY` | api.stlouisfed.org | fetch-data.js (US 10Y, Brent, JPN 10Y fallback) |
+| `FRED_API_KEY` | api.stlouisfed.org | fetch-data.js (macro yields, Brent) |
 | `NEWSDATA_API_KEY` | newsdata.io | fetch-data.js (news headlines) |
-| `CRYPTOPANIC_API_KEY` | cryptopanic.com | fetch-data.js (news primary — currently backup) |
-| `ALPHA_VANTAGE_KEY` | alphavantage.co | fetch-data.js (USD/JPY primary) |
-| `TWELVE_DATA_KEY` | twelvedata.com | fetch-data.js (JPN 10Y — JP10Y symbol, falls back to FRED) |
+| `CRYPTOPANIC_API_KEY` | cryptopanic.com | fetch-data.js (news, primary — currently 404, use as backup) |
 | `ANTHROPIC_API_KEY` | console.anthropic.com | analyze-thesis.js (Claude API) |
 | `TELEGRAM_BOT_TOKEN` | @BotFather on Telegram | analyze-thesis.js (briefings) |
 | `TELEGRAM_CHAT_ID` | your Telegram user ID | analyze-thesis.js (briefings) |
+
+**Note:** `NEWSDATA_API_KEY` and `CRYPTOPANIC_API_KEY` are NOT yet added to the `fetch-data.yml` workflow secrets. Add them if news ingestion is needed in CI.
 
 ---
 
@@ -251,7 +213,7 @@ node analyze-thesis.js      # Run Claude analysis → analysis-output.json + Tel
 node apply-analysis.js      # Apply approved analysis → dashboard-data.json + index.html
 ```
 
-Open `index.html` in a browser (no server needed — reads from GitHub Pages URL).
+Open `index.html` in a browser (no server needed — reads from GitHub raw URL).
 
 ---
 
@@ -259,7 +221,6 @@ Open `index.html` in a browser (no server needed — reads from GitHub Pages URL
 
 - **Never throw in fetchers** — all fetchers return cached/fallback values on error
 - **dashboard-data.json is the source of truth** — all live data flows through it
-- **index.html reads from GitHub Pages URL** — `overwatch-589.github.io/Overwatch-Terminal/` (not raw.githubusercontent.com, which 404s on private repos)
 - **index.html is hand-maintained for static content** (thesis context, macro notes, events)
 - **Manually-managed fields** in `dashboard-data.json.manual` are preserved on every fetch
 - **Thesis scores** are preserved on every fetch, only updated via `apply-analysis.js`
@@ -270,11 +231,14 @@ Open `index.html` in a browser (no server needed — reads from GitHub Pages URL
 
 ## FUTURE: XRPL Native API
 
-Currently using `s1.ripple.com:51234` (JSON-RPC POST) for `server_info` and `ledger`
-queries. Additional endpoints available for future expansion:
+We can query the XRPL ledger directly via public rippled servers (e.g. `s1.ripple.com:51234`
+or `wss://s1.ripple.com`) using the public JSON-RPC / WebSocket API. This eliminates
+dependency on XRPScan and OnTheDex for on-chain metrics.
 
-- `book_offers` — order book depth (currently returning null, needs debugging)
+Relevant methods:
+- `server_info` — ledger state, tx queue, fee levels
+- `ledger` — ledger header + transaction list for a specific ledger index
+- `book_offers` — order book for a given currency pair (DEX volume proxy)
 - `amm_info` — AMM pool state (liquidity, fees)
-- `account_tx` — per-account transaction history
 
 Reference: https://xrpl.org/docs/references/http-websocket-apis/public-api-methods
