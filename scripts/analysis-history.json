@@ -607,5 +607,34 @@
     "events_drafted_count": 2,
     "thesis_pulse": "XRP ETF total AUM has pulled back to $1.184B from ~$1.2B as price declined 4.2%, though weekly net inflows of $4.65M remain positive — institutional accumulation continues despite drawdown. RLUSD circ",
     "counter_thesis_score": 34
+  },
+  {
+    "timestamp": "2026-02-27T14:56:23.339Z",
+    "run_type": "morning",
+    "stress_score": 78,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.37,
+    "fear_greed": 13,
+    "usd_jpy": 156.09232,
+    "jpn_10y": 2.24,
+    "brent_crude": 71.9,
+    "etf_daily_flow": 332527.60069999844,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1583127877.457227,
+    "probability_framework": {
+      "bear": 10,
+      "base": 42,
+      "mid": 37,
+      "bull": 11
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 6,
+    "events_drafted_count": 2,
+    "thesis_pulse": "XRP ETF AUM at $1.14B with steady weekly net inflows of 5.2M XRP (~$7.1M at current prices) — accumulation continues despite price decline. RLUSD reached $1.58B, up from ~$1B baseline and now 32% towa",
+    "counter_thesis_score": 52
   }
 ]
