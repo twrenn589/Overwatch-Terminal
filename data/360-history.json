@@ -531,5 +531,276 @@
     "score_delta": 29,
     "score_reasoning": "Previous score of 33 was calculated before the sweep revealed 7 blind spots, including 4 critical-severity findings that were not previously tracked. The three most impactful new discoveries — ghost-chain on-chain metrics (composite 81), Ripple ≠ XRP value capture gap (composite 72), and stablecoin bridge function subsumption (composite 44.8) — collectively represent a fundamental challenge to thesis validity rather than mere headwinds. The compounding chain of ghost-chain + ODL void + no value capture mechanism is uniquely dangerous because it attacks the thesis's logical foundation, not just its execution. Score increase of 29 points reflects: +12 for on-chain activity contradiction (new, critical, empirically verified), +8 for value capture gap (new, critical, structurally unfixable by external catalyst), +5 for stablecoin/Partior competing infrastructure previously untracked, +4 for escrow overhang formalization as permanent structural discount. Score held below 70 because: regulatory clarity is genuinely positive, ETF infrastructure exists and shows positive (if small) flows, RLUSD is growing, and macro conditions may normalize.",
     "commander_summary": "The sweep exposed a potentially thesis-breaking contradiction: XRPL's on-chain data shows a ghost chain (91 TPS, null DEX volume, $2,449 book depth) while the thesis scores infrastructure as 'ACCELERATING/high confidence' — this is not a data gap, it is empirical falsification of the core narrative. Combined with zero ODL data after 10 months, no verifiable mechanism linking Ripple's corporate success to XRP token value, and three independent settlement paradigms (stablecoins, Partior bank-deposit tokens, BIS sovereign rails) converging to eliminate the bridge asset requirement, the thesis is under structural assault from both internal contradictions and external competition. REDUCE EXPOSURE until XRPL on-chain activity demonstrates actual institutional usage and ODL data materializes — without these, the thesis is narrative without evidence."
+  },
+  {
+    "timestamp": "2026-02-27T02:25:39.440Z",
+    "threat_matrix": [
+      {
+        "threat": "ODL Data Black Hole Masks Possible Collapse",
+        "description": "Zero verifiable ODL volume data exists for the core utility thesis. Ripple stopped publishing metrics post-rebrand. Absence of data at this stage likely indicates stagnation or contraction. No third-party verification source exists. Q3 2026 deadline approaching with no baseline. This is the single highest-risk item because it strikes at the foundational utility claim.",
+        "impact": 10,
+        "probability": 8,
+        "time_weight": 10,
+        "composite": 80,
+        "severity": "critical",
+        "proximity": "immediate",
+        "blind_spot": false,
+        "is_new": false,
+        "category": "assumption_decay"
+      },
+      {
+        "threat": "XRPL On-Chain Activity Exposes Ghost Chain Risk",
+        "description": "96 TPS effective, 907 XRP in order book bids, null DEX volume, $199M DeFi TVL, $8.75M AMM locked. This on-chain profile is incompatible with an institutional settlement infrastructure narrative. The gap between marketing claims and verifiable chain activity is the widest of any top-20 asset. Directly undermines infrastructure thesis rated ACCELERATING.",
+        "impact": 9,
+        "probability": 9,
+        "time_weight": 10,
+        "composite": 81,
+        "severity": "critical",
+        "proximity": "immediate",
+        "blind_spot": true,
+        "is_new": true,
+        "category": "technology"
+      },
+      {
+        "threat": "XRP ETF AUM Illusion — Velocity Without Conviction",
+        "description": "$14.1M cumulative net flow vs $1.18B AUM means 98.8% is seed capital. $2.6M daily inflow requires 450+ days to $5B target. No single day exceeded $2M across all funds. Weekly outflows of $3.1M occurred same week as inflows. This is product-launch scaffolding, not institutional demand. Thesis_scores rate ETF adoption as CONFIRMED with HIGH confidence — materially overstated.",
+        "impact": 8,
+        "probability": 8,
+        "time_weight": 7,
+        "composite": 44.8,
+        "severity": "high",
+        "proximity": "near-term",
+        "blind_spot": true,
+        "is_new": true,
+        "category": "narrative"
+      },
+      {
+        "threat": "Circle CCTP v2 + Stablecoin Settlement Rails",
+        "description": "USDC at $35B+ circulation with CCTP v2 across 15+ chains vs RLUSD at $1.56B. RLUSD needs $11.16M/day to hit $5B by year-end — currently pacing far behind. If CCTP v2 becomes default institutional stablecoin rail, RLUSD never reaches critical mass. First-mover advantage in stablecoin settlement may already be locked by Circle.",
+        "impact": 8,
+        "probability": 7,
+        "time_weight": 7,
+        "composite": 39.2,
+        "severity": "high",
+        "proximity": "near-term",
+        "blind_spot": true,
+        "is_new": true,
+        "category": "competing_infra"
+      },
+      {
+        "threat": "Permissioned Domains — Vaporware Until Proven Otherwise",
+        "description": "Zero verified institutional deployments. Target is 5 by Q3 2026 — 7 months away. No announcements of any production deployment found. Feature discussed since 2024 with no traction. Institutions may prefer permissioned L2s or private chains. Kill switch at NEEDS_DATA with deadline approaching fast.",
+        "impact": 7,
+        "probability": 7,
+        "time_weight": 7,
+        "composite": 34.3,
+        "severity": "high",
+        "proximity": "near-term",
+        "blind_spot": false,
+        "is_new": false,
+        "category": "assumption_decay"
+      },
+      {
+        "threat": "BIS Nexus + mBridge CBDC Interop Convergence",
+        "description": "BIS merging Nexus and mBridge learnings into sovereign multi-CBDC settlement. 6 central banks in expanded pilot. If 10+ adopt unified standard by 2027, XRP bridge function becomes structurally redundant at sovereign level. Already tracked as ELEVATED_RISK but thesis_scores rate infrastructure as ACCELERATING — a contradiction.",
+        "impact": 9,
+        "probability": 6,
+        "time_weight": 4,
+        "composite": 21.6,
+        "severity": "critical",
+        "proximity": "medium-term",
+        "blind_spot": false,
+        "is_new": false,
+        "category": "competing_infra"
+      },
+      {
+        "threat": "Ripple Concentrated Control Over XRP Supply",
+        "description": "36.9B XRP in escrow (37% of total) with 1B monthly releases plus 473M in corporate treasuries. No comparable traditional asset has this concentration. Institutional allocators model supply overhang as permanent discount. ETF issuers face governance questions from clients. Structural headwind for institutional adoption thesis.",
+        "impact": 7,
+        "probability": 7,
+        "time_weight": 4,
+        "composite": 19.6,
+        "severity": "high",
+        "proximity": "medium-term",
+        "blind_spot": true,
+        "is_new": true,
+        "category": "market_structure"
+      },
+      {
+        "threat": "Extreme Fear Regime Shift — Structural Not Cyclical",
+        "description": "F&G at 13 with BTC ETF -$117M and ETH ETF -$46M single-day outflows. If this represents structural institutional reallocation away from crypto rather than cyclical bottom, XRP's institutional thesis addresses a shrinking market. XRP ETF positive divergence at $2.6M is statistically insignificant against $160M+ combined outflows.",
+        "impact": 7,
+        "probability": 5,
+        "time_weight": 10,
+        "composite": 35,
+        "severity": "high",
+        "proximity": "immediate",
+        "blind_spot": false,
+        "is_new": false,
+        "category": "macro"
+      }
+    ],
+    "compounding_risks": [
+      {
+        "chain": [
+          "ODL Data Black Hole",
+          "XRPL Ghost Chain Activity",
+          "Permissioned Domains Vaporware"
+        ],
+        "outcome": "Triple data vacuum: the three pillars of XRP utility — payments volume, on-chain activity, and institutional infrastructure adoption — all show null or negligible verifiable data simultaneously. This transforms the thesis from 'unproven but plausible' to 'unfalsifiable by design.' If none of these can be verified by Q3 2026, the entire institutional settlement narrative collapses into a pure speculation play with no utility floor under the price.",
+        "severity": "critical"
+      },
+      {
+        "chain": [
+          "Circle CCTP v2 Dominance",
+          "RLUSD Pacing Failure",
+          "BIS Nexus CBDC Convergence"
+        ],
+        "outcome": "Pincer attack on XRP's settlement function: stablecoins capture private institutional corridors (bottom-up) while CBDCs capture sovereign corridors (top-down). XRP's addressable market compresses from both directions simultaneously. RLUSD's failure to reach scale means Ripple has no stablecoin counterweight, leaving XRP with no viable settlement niche at either level.",
+        "severity": "critical"
+      },
+      {
+        "chain": [
+          "ETF AUM Illusion",
+          "Extreme Fear Regime",
+          "Liquidity Fragmentation Across 7 ETFs"
+        ],
+        "outcome": "Thin ETF liquidity built on seed capital faces stress test during extended fear regime. If redemptions hit smaller funds (GXRP $78M, BITW $34M), forced XRP selling cascades across all 7 products. With only $14M in organic flows supporting $1.18B in AUM, the structure is fragile — a single bad week of outflows could trigger a negative feedback loop between ETF redemptions and XRP spot price.",
+        "severity": "high"
+      },
+      {
+        "chain": [
+          "Japan BOJ Yield Crisis",
+          "Extreme Fear Regime",
+          "SBI Corridor Dependency"
+        ],
+        "outcome": "BOJ emergency action triggers JPY volatility spike, making XRP-based JPY corridors uneconomical. SBI freezes crypto infrastructure spending. Simultaneously, global risk-off sentiment accelerates crypto ETF outflows. Japan adoption thesis — one of the few geographically specific bull cases — collapses at the same time macro conditions prevent other regions from compensating.",
+        "severity": "high"
+      }
+    ],
+    "blind_spots": [
+      {
+        "threat": "XRPL On-Chain Activity Exposes Ghost Chain Risk",
+        "importance": "critical",
+        "suggested_source": "XRPL native ledger metrics — expand current xrpl_metrics collection to include daily unique accounts, payment volume in USD equivalent, and DEX trade count. Cross-reference with bithomp or xrpscan APIs.",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": true
+      },
+      {
+        "threat": "XRP ETF AUM Illusion — Seed Capital vs Organic Demand",
+        "importance": "high",
+        "suggested_source": "Track cumulative net flow / total AUM ratio weekly. Flag when ratio falls below 5%. Monitor per-fund daily flows — flag funds with zero flow for 5+ consecutive days as dormant.",
+        "x402_opportunity": false,
+        "recommend_permanent_monitoring": true
+      },
+      {
+        "threat": "Circle CCTP v2 + Stablecoin Settlement Rails",
+        "importance": "high",
+        "suggested_source": "Track USDC cross-chain transfer volume via Circle's public CCTP dashboard. Compare monthly CCTP settlement volume against estimated RLUSD transaction volume. Monitor institutional CCTP integrations.",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": true
+      },
+      {
+        "threat": "Ripple Concentrated Supply Control",
+        "importance": "high",
+        "suggested_source": "Already partially tracked via supply.escrow. Add: monthly escrow release tracking, net Ripple selling (escrow released minus re-escrowed), and corporate treasury change rate. Flag if net selling exceeds 500M XRP/quarter.",
+        "x402_opportunity": false,
+        "recommend_permanent_monitoring": true
+      },
+      {
+        "threat": "AI-Native Settlement Agents Bypass Bridge Currencies",
+        "importance": "moderate",
+        "suggested_source": "Monitor x402 protocol adoption across chains. Track agent payment volume by chain. Flag if XRPL share of agent payments drops below 20% of multi-chain total.",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": true
+      },
+      {
+        "threat": "Clarity Act Failure or Dilution",
+        "importance": "moderate",
+        "suggested_source": "Congressional bill tracker API (congress.gov). Monitor GENIUS Act (stablecoin) advancement relative to market structure legislation. Flag if stablecoin bill passes without crypto market structure companion.",
+        "x402_opportunity": false,
+        "recommend_permanent_monitoring": true
+      },
+      {
+        "threat": "Liquidity Fragmentation Across 7 ETFs",
+        "importance": "moderate",
+        "suggested_source": "Already tracked per-fund. Add: dormancy flag (zero daily flow for 5+ days), concentration ratio (top 3 funds as % of total AUM), and per-fund tracking error vs XRP spot.",
+        "x402_opportunity": false,
+        "recommend_permanent_monitoring": true
+      }
+    ],
+    "bias_check": {
+      "bull_indicators": 6,
+      "bear_indicators": 17,
+      "ratio": "1:2.8 bear-heavy",
+      "assessment": "The monitoring system has a significant confirmation gap. Six bull indicators (regulatory CONFIRMED, institutional custody STRONG, ETF adoption CONFIRMED, infrastructure ACCELERATING, stablecoin GROWING, Japan FAVORABLE) are assessed at high confidence despite multiple findings showing underlying data is absent, illusory, or contradicted by on-chain evidence. Bear indicators span 12 sweep findings plus 5 existing bear_case items, most backed by verifiable data. The thesis_scores section operates as a narrative layer disconnected from kill_switch reality. Specifically: ETF adoption rated CONFIRMED/HIGH when organic flows are $14M; infrastructure rated ACCELERATING/HIGH when on-chain shows ghost chain metrics; ODL rated NEEDS_DATA yet institutional_custody rated STRONG without ODL proving utility. The system is structurally biased toward preserving bull confidence ratings that were set during a more favorable period and have not been downgraded despite deteriorating evidence.",
+      "recommended_additions": [
+        "Add on-chain activity health score that must exceed thresholds before infrastructure can be rated ACCELERATING",
+        "Require ETF organic flow ratio (cum_net_flow/AUM) > 10% before ETF adoption can be rated CONFIRMED",
+        "Degrade any thesis_score to NEEDS_DATA if its corresponding kill_switch is at NEEDS_DATA",
+        "Add competing infrastructure displacement index — composite of CCTP volume, BIS Nexus pilot count, and stablecoin market share",
+        "Add supply concentration risk score to permanent monitoring"
+      ]
+    },
+    "kill_switches": [
+      {
+        "name": "ODL Volume",
+        "status": "danger",
+        "detail": "Status remains NEEDS_DATA with zero verifiable data and Q3 2026 deadline 7 months away. No third-party verification source exists. Ripple stopped publishing metrics. Upgraded from no_data to DANGER because the sweep confirms this is likely deliberate opacity masking stagnation. Without any baseline, the deadline is effectively already failed — you cannot demonstrate growth trajectory from null."
+      },
+      {
+        "name": "RLUSD Circulation",
+        "status": "warning",
+        "detail": "$1.56B of $5B target (31%) with 10 months remaining. Requires $11.16M/day growth. Current trajectory unverified but sweep identifies CCTP v2/USDC as structural competitor that may cap RLUSD's addressable market. Pacing is behind required rate. Not yet danger because stablecoin adoption can be nonlinear, but the competitive threat from Circle is a new compounding factor."
+      },
+      {
+        "name": "XRP ETF AUM",
+        "status": "warning",
+        "detail": "$1.18B of $5B target (24%) with 10 months remaining. Sweep reveals 98.8% of AUM is seed capital, not organic demand. At $2.6M daily net flow pace, 450+ days to target. 4 of 7 funds showed zero daily flow on 2026-02-25. Fragmentation risk is real. Upgraded from TRACKING to WARNING because organic flow data reframes the entire metric."
+      },
+      {
+        "name": "Permissioned DEX Adoption",
+        "status": "danger",
+        "detail": "Zero verified institutional deployments against target of 5 by Q3 2026 (7 months). No announcements found. Feature discussed since 2024 with no production confirmation. Upgraded to DANGER because timeline makes achieving 5 institutional deployments from zero extremely unlikely without imminent announcements."
+      },
+      {
+        "name": "Clarity Act",
+        "status": "warning",
+        "detail": "Still PENDING with no legislative momentum detected. Sweep identifies risk that stablecoin legislation (GENIUS Act) advances faster, giving regulatory clarity to USDC/USDT while XRP remains ambiguous. This would invert the current perceived regulatory advantage."
+      },
+      {
+        "name": "Fear & Greed Extended Below 20",
+        "status": "warning",
+        "detail": "Currently at 13 (Extreme Fear). Previous reading was 11. Sustained below 20 for multiple readings. BTC and ETH ETF outflows confirm this is not just sentiment — institutional capital is exiting. Not yet triggered because the kill switch requires 'extended period' and the duration threshold is ambiguous. Recommend defining as 14+ consecutive days below 20."
+      }
+    ],
+    "new_kill_switches_recommended": [
+      {
+        "name": "On-Chain Activity Floor",
+        "trigger": "XRPL avg_tx_per_ledger falls below 50 OR DEX volume remains null for 60+ consecutive days. If triggered, infrastructure thesis must be downgraded from ACCELERATING to STALLED.",
+        "reasoning": "Sweep finding reveals ghost chain metrics directly contradict ACCELERATING infrastructure rating. A verifiable on-chain floor prevents the system from maintaining bullish infrastructure scores while the chain is functionally dormant."
+      },
+      {
+        "name": "ETF Organic Flow Ratio",
+        "trigger": "If cum_net_flow / total_aum remains below 5% for 60 days, ETF adoption thesis must be downgraded from CONFIRMED to WEAK. If ratio goes negative (net outflows exceed cumulative inflows), trigger EXIT consideration.",
+        "reasoning": "Current 1.2% ratio exposes that AUM is seed capital theater. Without organic demand threshold, the system conflates product existence with institutional adoption."
+      },
+      {
+        "name": "Competing Stablecoin Displacement",
+        "trigger": "If CCTP v2 monthly settlement volume exceeds 10x RLUSD monthly transaction volume, or USDC circulation exceeds 25x RLUSD circulation, flag RLUSD thesis as STRUCTURALLY CHALLENGED.",
+        "reasoning": "RLUSD cannot be evaluated in isolation. Its viability depends on capturing market share against an entrenched, larger, and faster-scaling competitor. The kill switch forces relative assessment."
+      },
+      {
+        "name": "Supply Concentration Governance Risk",
+        "trigger": "If Ripple net sells (escrow released minus re-escrowed) > 2B XRP in any quarter, or if any ETF issuer publicly flags supply concentration concerns, escalate to board-level review.",
+        "reasoning": "37% supply concentration by a single corporate entity is an untracked governance risk that institutional allocators will increasingly scrutinize."
+      }
+    ],
+    "tactical_recommendation": "REDUCE_EXPOSURE",
+    "recommendation_reasoning": "Two kill switches are at DANGER (ODL volume, PermissionedDEX) with zero data and approaching deadlines. Two more are at WARNING with deteriorating trajectories (RLUSD pacing, ETF organic flows illusory). The sweep reveals three critical blind spots: ghost chain on-chain activity directly contradicts the ACCELERATING infrastructure thesis, ETF AUM is 98.8% seed capital masking absence of organic institutional demand, and CCTP v2 represents an untracked competitor that may structurally cap RLUSD growth. The compounding risk of triple data vacuum (ODL + on-chain + PermissionedDEX) means the utility thesis cannot be validated — and may be unfalsifiable by design. Macro conditions (F&G 13, BTC/ETH outflows, BOJ yield stress) compound timing risk. While no single finding triggers a full EXIT, the convergence of 2 DANGER kill switches, 4 WARNING kill switches, 3 critical blind spots, and hostile macro conditions warrants immediate partial de-risk. The thesis is not disproven, but it is currently unprovable, and the risk of holding full exposure to an unprovable thesis in an extreme fear environment is asymmetric to the downside.",
+    "bear_pressure_score": 52,
+    "score_delta": 19,
+    "score_reasoning": "Previous score of 33 was set before the sweep exposed three critical blind spots (ghost chain, ETF seed capital illusion, CCTP v2 competition) and before two kill switches were upgraded to DANGER. The +19 increase reflects: (1) XRPL ghost chain evidence is new and directly contradicts a HIGH confidence thesis score (+6), (2) ETF organic flow analysis reframes the flagship adoption metric from bullish to concerning (+4), (3) ODL and PermissionedDEX both upgraded to DANGER with approaching deadlines (+4), (4) CCTP v2 competitive threat is new, untracked, and near-term (+3), (5) supply concentration risk newly identified (+2). Partially offset by: XRP ETF positive flow divergence is real (-1), regulatory environment has no negative signals (-1), and some macro stress may be cyclical rather than structural (net 0). Score of 52 reflects a thesis that has crossed from 'challenged but intact' to 'structurally questionable pending data that may never arrive.'",
+    "commander_summary": "The sweep exposes a fundamental credibility gap: XRPL's on-chain activity shows a dormant chain (96 TPS, null DEX volume, 907 XRP in order book depth) while thesis scores rate infrastructure as ACCELERATING with HIGH confidence — this contradiction alone warrants immediate score correction and partial de-risk. Two kill switches are now at DANGER with zero data and 7-month deadlines, ETF AUM is 98.8% seed capital with negligible organic demand, and an untracked competitor (Circle CCTP v2) threatens to structurally cap RLUSD before it reaches scale. Tactical recommendation is REDUCE_EXPOSURE — maintain core position but de-risk 30-40% until at least one DANGER kill switch resolves to verifiable data."
   }
 ]
