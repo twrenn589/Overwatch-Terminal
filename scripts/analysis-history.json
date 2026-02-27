@@ -636,5 +636,34 @@
     "events_drafted_count": 2,
     "thesis_pulse": "XRP ETF AUM at $1.14B with steady weekly net inflows of 5.2M XRP (~$7.1M at current prices) — accumulation continues despite price decline. RLUSD reached $1.58B, up from ~$1B baseline and now 32% towa",
     "counter_thesis_score": 52
+  },
+  {
+    "timestamp": "2026-02-27T15:22:28.671Z",
+    "run_type": "morning",
+    "stress_score": 77,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.36,
+    "fear_greed": 13,
+    "usd_jpy": 156.11,
+    "jpn_10y": 2.156,
+    "brent_crude": 71.9,
+    "etf_daily_flow": 332527.60069999844,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1583138479.1203308,
+    "probability_framework": {
+      "bear": 9,
+      "base": 40,
+      "mid": 39,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 5,
+    "events_drafted_count": 2,
+    "thesis_pulse": "XRP ETF ecosystem continues positive accumulation with $332K daily net inflow and $5.2M weekly net inflow across 7 funds — small but consistently positive in an extreme fear environment. RLUSD grew to",
+    "counter_thesis_score": 34
   }
 ]
