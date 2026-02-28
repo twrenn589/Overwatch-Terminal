@@ -694,5 +694,34 @@
     "events_drafted_count": 0,
     "thesis_pulse": "RLUSD at $1.495B has pulled back slightly from the ~$1.564B tracked in the thesis context, a modest reversal that bears watching — 30% toward the $5B kill switch target with 10 months remaining requir",
     "counter_thesis_score": 78
+  },
+  {
+    "timestamp": "2026-02-28T19:14:01.486Z",
+    "run_type": "evening",
+    "stress_score": 62,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.34,
+    "fear_greed": 11,
+    "usd_jpy": 155.98,
+    "jpn_10y": 2.24,
+    "brent_crude": 71.9,
+    "etf_daily_flow": null,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1495114718.1572187,
+    "probability_framework": {
+      "bear": 13,
+      "base": 42,
+      "mid": 34,
+      "bull": 11
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 3,
+      "TRACKING": 1,
+      "PENDING": 1
+    },
+    "alerts_count": 4,
+    "events_drafted_count": 0,
+    "thesis_pulse": "RLUSD market cap at $1.495B, slight decline from the $1.564B reference but still within tracking range — 30% toward the $5B kill switch target with ~10 months remaining. Fear & Greed at 11 signals cap",
+    "counter_thesis_score": 72
   }
 ]
