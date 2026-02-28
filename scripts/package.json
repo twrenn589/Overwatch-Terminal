@@ -10,9 +10,12 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "dependencies": {
+    "dependencies": {
     "dotenv": "^16.4.5",
-    "simple-git": "^3.27.0"
+    "simple-git": "^3.27.0",
+    "@anthropic-ai/sdk": "^0.39.0"
+  },
+
   },
   "license": "MIT"
 }
