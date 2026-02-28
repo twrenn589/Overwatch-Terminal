@@ -15,7 +15,6 @@
     "simple-git": "^3.27.0",
     "@anthropic-ai/sdk": "^0.39.0"
   },
-
-  },
   "license": "MIT"
 }
+
