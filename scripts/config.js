@@ -10,9 +10,15 @@ const ENDPOINTS = {
   fear_greed: 'https://api.alternative.me/fng/?limit=1',
   usd_jpy: 'https://api.frankfurter.app/latest?from=USD&to=JPY',
   fred: {
-    jpn_10y:    `${FRED_BASE}?series_id=IRLTLT01JPM156N&file_type=json&sort_order=desc&limit=1`,
     brent:      `${FRED_BASE}?series_id=DCOILBRENTEU&file_type=json&sort_order=desc&limit=1`,
     us_10y:     `${FRED_BASE}?series_id=DGS10&file_type=json&sort_order=desc&limit=1`,
+  },
+  stooq: {
+    jpn_10y: 'https://stooq.com/q/l/?s=10jpy.b&f=sd2t2ohlcv&h&e=csv',
+  },
+  twelve_data: {
+    dxy:   'https://api.twelvedata.com/time_series?symbol=DXY&interval=1day&outputsize=1',
+    sp500: 'https://api.twelvedata.com/time_series?symbol=SPX&interval=1day&outputsize=1',
   },
 };
 
