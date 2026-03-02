@@ -397,6 +397,24 @@ async function validateDataContract() {
     for (const f of missing) {
       warn('contract', `missing field: ${f}`);
     }
+
+    // Write pipeline health snapshot for downstream consumers (e.g. analyze-thesis.js).
+    // WHY: downstream scripts shouldn't re-run validation themselves — they just need
+    // a cheap status read to append one line to Telegram without slowing the pipeline.
+    try {
+      const health = {
+        fetch_timestamp:  new Date().toISOString(),
+        fields_populated: populated,
+        fields_total:     fields.length,
+        missing_fields:   missing,
+        status:           missing.length === 0 ? 'OK' : 'DEGRADED',
+      };
+      const healthPath = path.join(__dirname, 'pipeline-health.json');
+      fs.writeFileSync(healthPath, JSON.stringify(health, null, 2));
+      log('contract', `Pipeline health written (${health.status})`);
+    } catch (writeErr) {
+      err('contract', `Could not write pipeline-health.json (non-fatal): ${writeErr.message}`);
+    }
   } catch (e) {
     err('contract', `Validation failed (non-fatal): ${e.message}`);
   }

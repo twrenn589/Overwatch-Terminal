@@ -971,7 +971,18 @@ IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete
   }
 
   // 7. Send Telegram notification
-  const message = formatTelegramMessage(analysis, dashboardData);
+  // Append one-line pipeline health status from fetch stage if available.
+  // WHY: surface data source degradation in every briefing without touching
+  // the message formatter — analyst sees it, no format logic changes needed.
+  let pipelineHealthLine = '⚡ Pipeline: health check unavailable';
+  try {
+    const healthPath = path.join(__dirname, 'pipeline-health.json');
+    if (fs.existsSync(healthPath)) {
+      const h = JSON.parse(fs.readFileSync(healthPath, 'utf8'));
+      pipelineHealthLine = `⚡ Pipeline: ${h.fields_populated}/${h.fields_total} sources | ${h.status}`;
+    }
+  } catch (_) {}
+  const message = formatTelegramMessage(analysis, dashboardData) + '\n' + pipelineHealthLine;
   await sendTelegram(message);
 
   console.log('\n─── Analysis Summary ───────────────────────────');
