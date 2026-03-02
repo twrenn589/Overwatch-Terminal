@@ -961,5 +961,67 @@
     "events_drafted_count": 0,
     "thesis_pulse": "Institutional infrastructure thesis remains structurally intact but faces severe sentiment headwinds. RLUSD market cap at $1.494B — down from $1.564B last reading, confirming contraction trend flagged",
     "counter_thesis_score": 72
+  },
+  {
+    "timestamp": "2026-03-02T23:03:21.011Z",
+    "run_type": "evening",
+    "stress_score": 48,
+    "stress_level": "MONITORING",
+    "xrp_price": 1.34,
+    "fear_greed": 10,
+    "usd_jpy": 155.98,
+    "jpn_10y": 2.24,
+    "brent_crude": 71.9,
+    "dxy": null,
+    "sp500": 0.1,
+    "etf_daily_flow": null,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1494279915.3227608,
+    "probability_framework": {
+      "bear": 13,
+      "base": 42,
+      "mid": 34,
+      "bull": 11
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 3,
+      "TRACKING": 1,
+      "PENDING": 1
+    },
+    "alerts_count": 5,
+    "events_drafted_count": 0,
+    "thesis_pulse": "Evening data shows USD/JPY retreating from the 157 elevated threshold to 155.98, temporarily reducing compound stress from one-leg-breached to pre-loaded but below trigger. However, JGB 10Y at 2.24% c",
+    "counter_thesis_score": 70
+  },
+  {
+    "timestamp": "2026-03-02T23:21:13.340Z",
+    "run_type": "evening",
+    "stress_score": 47,
+    "stress_level": "MONITORING",
+    "xrp_price": 1.34,
+    "fear_greed": 10,
+    "usd_jpy": 155.98,
+    "jpn_10y": 2.24,
+    "brent_crude": 71.9,
+    "dxy": null,
+    "sp500": 0.1,
+    "etf_daily_flow": null,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1494279915.3227608,
+    "probability_framework": {
+      "bear": 12,
+      "base": 43,
+      "mid": 34,
+      "bull": 11
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 3,
+      "TRACKING": 1,
+      "PENDING": 1
+    },
+    "alerts_count": 5,
+    "events_drafted_count": 0,
+    "thesis_pulse": "Evening update shows one meaningful change from morning: USD/JPY has retreated from 157.2 to 155.98, pulling one leg back below elevated threshold. This eases the pre-loaded compound stress posture sl",
+    "counter_thesis_score": 72
   }
 ]

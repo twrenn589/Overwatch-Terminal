@@ -3999,5 +3999,255 @@
     "score_delta": 22,
     "score_reasoning": "Previous score of 50 reflected balanced uncertainty. This sweep reveals: (1) the data void is far worse than previously understood — 3 of 5 kill switches are blind, (2) competing infrastructure threats have materialized beyond theoretical into production systems with real volume, (3) macro conditions have deteriorated to lowest decile, (4) RLUSD is regressing not just stalling, (5) six new blind spots were identified including two critical ones. The +22 increase reflects the compounding of data opacity with competitive execution — we cannot see whether the thesis is working while we can clearly see competitors executing. The score would be 80+ if ODL data confirmed flatline; the 72 reflects residual probability that ODL data, if surfaced, could be neutral-to-positive.",
     "commander_summary": "The thesis is flying blind: three of five kill switches return no data, the only measurable kill switch (RLUSD) shows contraction, and Fear & Greed at 10 has triggered the macro kill switch. Meanwhile, three competing infrastructure paradigms — BIS mBridge CBDCs, Circle/USDC institutional settlement, and Stripe/Bridge stablecoin FX networks — are executing in production with real volume, converging to eliminate the bridge-asset use case from every direction. REDUCE EXPOSURE immediately and establish a hard 90-day data opacity timeout — if ODL volume and ETF AUM remain unverifiable by June 2026, escalate to EXIT."
+  },
+  {
+    "timestamp": "2026-03-02T23:21:13.337Z",
+    "commander_summary": "REDUCE EXPOSURE. At 10 months to deadline, three of five automated kill switches return no data, the only measurable one (RLUSD) is contracting, and four of ten total switches are at WARNING. The core finding across all layers is convergent: Ripple's own behavior — chain-agnostic acquisitions, stablecoin launch on competing chains, cessation of ODL disclosure, removal of XRP from product naming — tells a different story than the institutional settlement thesis requires. The thesis may be correct that global settlement infrastructure needs upgrading, but central banks (Nexus, mBridge) and stablecoin networks (USDC, Stripe Bridge) are building the solutions, and the evidence that XRP captures that demand is absent where it should be loudest. We hold the paradox honestly: we cannot prove ODL is failing because the data is withheld, but at this stage and at this price, the burden of proof is on the thesis to demonstrate progress, not on the bear case to prove its absence.",
+    "bear_pressure_score": 72,
+    "score_delta": 0,
+    "score_reasoning": "Layer 2 bear case already scored 72. Layer 3 analysis confirmed and deepened every major threat without identifying any material bearish inference that should be rejected. The three highest threats (Data Opacity 9.5, Stablecoin Competition 9, Token Velocity Reframing 9) are all VALID with full data support. Four kill switches escalated to WARNING. The only mitigating factors (ETF null hypothesis holds, geopolitical ambiguity, Permissioned DEX too early to judge) are low-confidence offsets to high-confidence threats. Layer 3 added crucial qualitative depth — particularly the Ripple say-do gap analysis and the speculative-vs-utility thesis reframing — but the quantitative bear pressure was already correctly calibrated at 72.",
+    "tactical_recommendation": "REDUCE_EXPOSURE",
+    "recommendation_reasoning": "Four kill switches at WARNING with zero at GREEN. Three of five automated kill switches return no data at 10 months to deadline. The only measurable kill switch (RLUSD) is contracting. The core thesis metric (ODL volume) is classified SUSPICIOUS_ABSENCE. Layer 3's deepest finding — that the thesis is structurally speculative rather than utility-driven — means the institutional adoption framework is tracking narrative catalysts, not fundamental value drivers. In an Extreme Fear environment (F&G=10) with no fundamental floor and pre-loaded compound stress, the risk/reward does not justify maintaining full exposure.",
+    "threat_matrix": [
+      {
+        "threat": "Data Opacity Is Not a Gap — It Is the Signal",
+        "description": "Layer 3 VALID inference confirms: incentive analysis shows Ripple has enormous financial motivation to disclose favorable ODL data. Silence is costly. Historical disclosure pattern confirms selection bias. ODL-to-Ripple Payments rebrand removes XRP from product identity.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 9.5,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "Stablecoin FX Networks Capture Settlement Before XRP Scales",
+        "description": "Layer 3 VALID inference: Stripe $1.1B Bridge acquisition is a mainstream payments company declaring stablecoin settlement is the future. Ripple creating RLUSD is the strongest evidence — the company itself built the competitor to volatile-asset bridging. Narrow say-do gap among stablecoin competitors: they are doing exactly what they say at scale.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 9,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "Token Velocity Problem Is Structurally Fatal",
+        "description": "Layer 3 NULL_HYPOTHESIS_HOLDS: the velocity problem is real but the market doesn't price XRP on utility mechanics. This REFRAMES rather than reduces the threat. The thesis is revealed as speculative rather than utility-driven, which eliminates the fundamental floor. All utility metrics become narrative catalysts not fundamental drivers. Full weight applied to the reframing.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 9,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "RLUSD Cannibalization of XRP Bridge Utility",
+        "description": "Layer 3 VALID: Ripple's incentive structure favors RLUSD revenue over XRP price appreciation for bridge transactions. Every non-XRP revenue stream reduces token dependency. Metaco + Standard Custody + RLUSD + Prime Brokerage = systematic diversification away from XRP.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 8.5,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "BIS Project Nexus IPS Interlink Goes Live",
+        "description": "Layer 3 VALID: Central banks' revealed preference is sovereign infrastructure over private tokens. Corridor overlap with Ripple's targets is verifiable and not coincidental. Diplomatic framing (improving efficiency) conceals architectural reality (eliminating bridge assets).",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 8,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "CBDC Interoperability Layer Renders Bridge Assets Obsolete",
+        "description": "Layer 3 confirmed: mBridge demonstrates architecture works. BIS stepping back is political not technical. However, production timeline is longer and geopolitical headwinds are real. Central Bank Sovereignty Loop is active_orderly — the direction is clear but the pace is uncertain.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 7,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "Ripple Corporate-Token Holder Incentive Divergence",
+        "description": "Layer 3 identified WIDE say-do gap for Ripple. Every major capital allocation decision is chain-agnostic or stablecoin-oriented. The Enterprise Diversification behavioral pattern is confirmed across multiple players. However, this is a Tier 2 derived analysis, not primary source data, so the weighted score stands.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 5.5,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "Ethereum L2 + RWA Tokenization Absorbs Institutional Capital",
+        "description": "Layer 3 confirmed: BlackRock chose Ethereum for BUIDL. This is a $10T manager making an architecture decision. Scale divergence pattern is verified — Ethereum RWA ecosystem is orders of magnitude ahead of XRPL.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 7,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "Geopolitical Fragmentation Eliminates Universal Bridge Asset Demand",
+        "description": "Layer 3 NULL_HYPOTHESIS_HOLDS at low confidence. Directional ambiguity is genuine. However, the insight that XRP's US domicile makes it non-neutral tilts the balance. Reduced weight applied per burden of proof (null holds, partial data).",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 4.2,
+        "severity": "moderate",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "Japan Stress Thesis Backfires — BOJ Crisis Triggers Capital Controls",
+        "description": "Layer 3 confirmed: BOJ-to-XRPL causal chain has zero observed evidence. SBI is maintaining optionality not driving transformation. Capital controls remain extreme tail risk in G7 nation. However, compound stress pre-loading means the tail is fatter than base rates suggest.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 4.2,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "ETF Approval Is a Sell-the-News Liquidity Trap",
+        "description": "Layer 3 NULL_HYPOTHESIS_HOLDS at low confidence. F&G at 10 is too powerful a confounding variable. BTC ETF precedent of volatile early months supports patience. Reduced weight per burden of proof.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 4.2,
+        "severity": "moderate",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "threat": "AI-Native Settlement and Treasury Automation",
+        "description": "Layer 2 correctly scored this low. Conceptually sound but operationally distant. No production evidence of cross-chain AI settlement routing.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 1.6,
+        "severity": "moderate",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      }
+    ],
+    "compounding_risks": [
+      {
+        "chain": [
+          "USD/JPY at 157.2 — AT elevated threshold",
+          "JGB 10Y at 2.24% — 6bps from elevated threshold (2.3%)",
+          "Brent trending up but still $6-13 below elevated threshold ($85)"
+        ],
+        "outcome": "A disorderly Japan carry-trade unwind simultaneously crashes XRP price through risk-off liquidation AND validates the macro thesis that existing settlement infrastructure is fragile and alternatives are needed — because the same cascade that proves the settlement system is broken would destroy the price of the asset proposed to fix it.",
+        "severity": "moderate"
+      },
+      {
+        "chain": [
+          "Data",
+          "Behavior",
+          "Paradox"
+        ],
+        "outcome": "Both are true simultaneously. Regulatory clarity IS confirmed. But the thesis assumed it would unlock institutional utility adoption, and there is zero evidence of that transmission mechanism operating. Regulatory clarity unlocked financial product creation (ETFs) and speculative access, not settlement utility. This is a paradox because the thesis pillar is verified while the thesis conclusion (utility adoption) is unverified. The pillar is load-bearing but what it's supporting may be a different structure than the thesis assumed.",
+        "severity": "high"
+      }
+    ],
+    "blind_spots": [],
+    "bias_check": {
+      "bull_indicators": 7,
+      "bear_indicators": 3,
+      "ratio": "7:3",
+      "assessment": "Layer 2 bear case already scored 72. Layer 3 analysis confirmed and deepened every major threat without identifying any material bearish inference that should be rejected. The three highest threats (Data Opacity 9.5, Stablecoin Competition 9, Token Velocity Reframing 9) are all VALID with full data support. Four kill switches escalated to WARNING. The only mitigating factors (ETF null hypothesis holds, geopolitical ambiguity, Permissioned DEX too early to judge) are low-confidence offsets to high-confidence threats. Layer 3 added crucial qualitative depth — particularly the Ripple say-do gap analysis and the speculative-vs-utility thesis reframing — but the quantitative bear pressure was already correctly calibrated at 72.",
+      "recommended_additions": null
+    },
+    "kill_switches": [
+      {
+        "name": "ODL Volume ($25B annualized)",
+        "status": "danger",
+        "detail": "Upgraded from NEEDS_DATA to WARNING. At 10 months to a $25B target with zero data points, the responsible assessment is not 'we don't know' — it's 'we should know and the fact that we don't is itself a warning.' The 90-day opacity timeout starting NOW is appropriate. If no verifiable data by June 2026, this escalates to TRIGGERED. The thesis cannot remain indefinitely unfalsifiable on its core metric."
+      },
+      {
+        "name": "RLUSD Circulation ($5B)",
+        "status": "danger",
+        "detail": "WARNING is correct. First contraction is a real negative signal. The required daily growth rate ($11.53M/day) is aggressive. However, stablecoin market caps can accelerate rapidly with institutional integrations — one major exchange listing or institutional partnership could shift trajectory. Not yet TRIGGERED but the direction is wrong."
+      },
+      {
+        "name": "XRP ETF AUM ($5B)",
+        "status": "warning",
+        "detail": "Data gap on automated feed but thesis context gives $1.184B. At 23.7% of target with 10 months remaining, this requires acceleration but is not structurally broken. Macro normalization is the key variable. Monitor weekly flows when data feed is fixed."
+      },
+      {
+        "name": "Permissioned DEX (5+ institutions)",
+        "status": "warning",
+        "detail": "Too early to escalate — 10 days post-launch is insufficient time for institutional onboarding. But set a timer: if zero adoption data by May 2026 (Q2, 3 months post-launch), escalate to WARNING. The pattern of XRPL features launching without institutional follow-through warrants structured monitoring."
+      },
+      {
+        "name": "Clarity Act",
+        "status": "warning",
+        "detail": "Normal legislative timeline. No signals of reversal or acceleration. Maintain monitoring."
+      },
+      {
+        "name": "Japan Adoption (SBI expansion)",
+        "status": "warning",
+        "detail": "SBI commitments are real but pilot-scale. No new institutional partners beyond existing ecosystem. The thesis requires expansion beyond SBI and there is no evidence of that occurring. Not yet WARNING because SBI engagement is ongoing, but no upgrade either."
+      },
+      {
+        "name": "Announcement-to-Deployment (Tier 1 partners)",
+        "status": "danger",
+        "detail": "Upgraded to WARNING. The thesis requires 3 of 5 Tier 1 partners in live production by Q4 2026 (9 months). Zero confirmed production deployments at this point with a persistent pattern of announcements without follow-through. Enterprise sales cycles for Tier 1 banks are 12-18 months. If none are in production now, hitting 3 by Q4 requires multiple institutions to be in advanced pipeline stages — and there is no evidence of that."
+      },
+      {
+        "name": "Token Velocity",
+        "status": "danger",
+        "detail": "Upgraded to WARNING not because of the velocity data itself (which was never expected to be published) but because of Layer 3's reframing: the thesis is structurally a speculative thesis, not a utility thesis. This means the fundamental floor implied by institutional adoption doesn't exist — price is narrative-driven with no verifiable utility anchor. This is a thesis-level concern, not a data-level concern."
+      },
+      {
+        "name": "Competitive Displacement (BIS Nexus)",
+        "status": "danger",
+        "detail": "Upgraded to WARNING. Nexus is now on a confirmed production track that overlaps with the thesis timeline and targets the same corridors. This is no longer a hypothetical — it's a funded, staffed, central-bank-backed initiative with a go-live window inside the thesis evaluation period. Any pilot transaction in an ASEAN corridor would trigger further escalation."
+      },
+      {
+        "name": "ODL Transparency (reliable data by Q3 2026)",
+        "status": "danger",
+        "detail": "Upgraded to WARNING. This kill switch is structurally linked to the ODL Volume switch — if transparency doesn't arrive, the volume switch can never be evaluated, rendering the thesis core unfalsifiable. The 90-day opacity timeout (June 2026) provides a clear timeline. If Ripple files an IPO S-1 before then, the data question resolves one way or another."
+      }
+    ],
+    "new_kill_switches_recommended": [],
+    "_pipeline_version": "4-layer-v1",
+    "_generated_at": "2026-03-02T23:21:13.329Z"
   }
 ]

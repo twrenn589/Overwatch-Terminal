@@ -2,9 +2,27 @@
 'use strict';
 
 /**
- * Overwatch Terminal — Stage 3 Autonomous Analyst
- * Reads dashboard-data.json + thesis-context.md, calls Claude API,
- * writes analysis-output.json, and sends a Telegram summary for review.
+ * Overwatch Terminal — Four-Layer Autonomous Analyst
+ *
+ * Architecture: SWEEP → CONTEXTUALIZE → INFER → RECONCILE
+ * Each layer receives ONLY the output of the layer before it.
+ * Each layer filters signal from noise (compression funnel).
+ *
+ * Layer 1 (SWEEP):        Widest intake, no filtering. 100+ observations → top 15.
+ * Layer 2 (CONTEXTUALIZE): Knowledge audit + contextual scoring. Verifies before scoring.
+ * Layer 3 (INFER):         Game theory, circuit breakers, feedback loops. WHY is this happening?
+ * Layer 4 (RECONCILE):     Judgment. Burden of proof. Final score and recommendation.
+ *
+ * Design docs (PRIVATE — never commit prompts to public repo):
+ *   LAYER-2-3-4-PROMPTS-DRAFT.md
+ *   OVERWATCH-CIRCUIT-BREAKERS.md
+ *   ARCHITECTURE-DECISION-CORRECTIONS-LEDGER.md
+ *   ARCHITECTURE-DECISION-LAYER2-CONTEXTUALIZE.md
+ *
+ * Reads: dashboard-data.json, thesis-context.md, data/corrections-ledger.json
+ * Writes: analysis-output.json, data/360-report.json, data/360-history.json,
+ *         data/rejection-log.json, analysis-history.json
+ * Sends: Telegram briefing
  */
 
 const path = require('path');
@@ -72,6 +90,39 @@ function repairTruncatedJSON(text, label) {
   const repaired = candidate + closers;
   warn(label, `Repair applied — appended: ${JSON.stringify(closers)}`);
   return repaired;
+}
+
+/**
+ * Shared helper: load corrections ledger from data/corrections-ledger.json.
+ * Returns empty array if file doesn't exist or is malformed.
+ * Used by Layer 2, Layer 3, and Layer 4.
+ */
+function loadCorrectionsLedger() {
+  try {
+    const ledgerPath = path.join(__dirname, '..', 'data', 'corrections-ledger.json');
+    if (fs.existsSync(ledgerPath)) {
+      const data = JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
+      if (Array.isArray(data)) {
+        log('ledger', `Corrections ledger loaded: ${data.length} active entries`);
+        return data;
+      }
+    }
+    log('ledger', 'Corrections ledger not found or empty — proceeding with empty ledger');
+    return [];
+  } catch (e) {
+    err('ledger', `Corrections ledger read failed (non-fatal): ${e.message}`);
+    return [];
+  }
+}
+
+/**
+ * Shared helper: strip markdown fences and parse JSON from Claude response.
+ * Applies truncation repair. Throws on parse failure.
+ */
+function parseClaudeJSON(rawText, label) {
+  const cleaned = rawText.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+  const repaired = repairTruncatedJSON(cleaned, label);
+  return JSON.parse(repaired);
 }
 
 // ─── Telegram ─────────────────────────────────────────────────────────────────
@@ -163,7 +214,7 @@ function formatTelegramMessage(analysis, dashboardData) {
   const macro  = dashboardData?.macro;
   const etf    = dashboardData?.etf;
 
-  const price   = xrp?.price != null   ? `$${xrp.price.toFixed(4)}` : '--';
+  const price   = xrp?.price != null   ? `${xrp.price.toFixed(4)}` : '--';
   const chg     = xrp?.change_24h != null ? `${xrp.change_24h >= 0 ? '+' : ''}${xrp.change_24h.toFixed(2)}%` : '--';
   const fgi     = macro?.fear_greed?.value ?? '--';
   const usdJpy  = macro?.usd_jpy != null ? `¥${macro.usd_jpy.toFixed(2)}` : '--';
@@ -174,10 +225,10 @@ function formatTelegramMessage(analysis, dashboardData) {
   let etfLine = '--';
   if (etf?.daily_net_inflow != null) {
     const m = etf.daily_net_inflow / 1e6;
-    etfLine = `${m >= 0 ? '+' : ''}$${Math.abs(m).toFixed(2)}M daily`;
+    etfLine = `${m >= 0 ? '+' : ''}${Math.abs(m).toFixed(2)}M daily`;
   } else if (etf?.weekly_net_inflow != null) {
     const m = etf.weekly_net_inflow / 1e6;
-    etfLine = `${m >= 0 ? '+' : ''}$${Math.abs(m).toFixed(2)}M/wk`;
+    etfLine = `${m >= 0 ? '+' : ''}${Math.abs(m).toFixed(2)}M/wk`;
   }
 
   // Alerts
@@ -399,10 +450,11 @@ function getRunType() {
   return chicagoHour < 12 ? 'morning' : 'evening';
 }
 
-// ─── 360 Sweep — Pass 1 ───────────────────────────────────────────────────────
+// ─── Layer 1: SWEEP ───────────────────────────────────────────────────────────
 
 /**
- * Runs the 360 counter-thesis sweep (Pass 1).
+ * Runs the 360 counter-thesis sweep (Layer 1 — SWEEP).
+ * Widest intake, no filtering, no judgment.
  * Feeds all market data to Claude with no checklist — lets it find threats
  * on its own. Returns the array of threat objects, or [] on any failure.
  *
@@ -502,13 +554,8 @@ IMPORTANT: Keep each threat description under 100 words. Return a maximum of 12 
   const raw = response.content[0].text;
   log('360-sweep', `Response received (${raw.length} chars)`);
 
-  const cleaned = repairTruncatedJSON(
-    raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim(),
-    '360-sweep'
-  );
-
   try {
-    const threats = JSON.parse(cleaned);
+    const threats = parseClaudeJSON(raw, '360-sweep');
     if (!Array.isArray(threats)) {
       err('360-sweep', 'Response is not a JSON array — returning empty');
       return [];
@@ -521,237 +568,880 @@ IMPORTANT: Keep each threat description under 100 words. Return a maximum of 12 
   }
 }
 
-// ─── 360 Assessment — Pass 2 ──────────────────────────────────────────────────
+// ─── Layer 2: CONTEXTUALIZE ───────────────────────────────────────────────────
 
 /**
- * Runs the 360 counter-thesis assessment (Pass 2).
- * Takes Pass 1 sweep findings and structures them into a prioritized,
- * scored assessment with tactical recommendation.
- * Writes the result to data/360-report.json.
- * Returns the full assessment object, or null on any failure.
+ * Layer 2: CONTEXTUALIZE — Knowledge Audit + Contextual Scoring.
+ * Receives Layer 1 sweep results, verifies understanding BEFORE scoring.
+ * Two phases: (1) Knowledge Audit, (2) Contextual Scoring.
+ *
+ * Design rationale: ARCHITECTURE-DECISION-LAYER2-CONTEXTUALIZE.md
+ * Prompt source: LAYER-2-3-4-PROMPTS-DRAFT.md
  *
  * @param {Array}  sweepResults  — threat array returned by runSweep()
  * @param {object} marketData    — current dashboard data
  * @param {number} previousScore — previous bear pressure score (0-100)
+ * @param {string} thesisContext  — contents of thesis-context.md
  * @returns {Promise<object|null>}
  */
-async function runAssessment(sweepResults, marketData, previousScore) {
+async function runContextualize(sweepResults, marketData, previousScore, thesisContext) {
+  log('analysis', '=== LAYER 2: CONTEXTUALIZE ===');
+  log('analysis', `Processing ${sweepResults.length} threats from Layer 1 SWEEP`);
+
+  const correctionsLedger = loadCorrectionsLedger();
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    err('360-assess', 'ANTHROPIC_API_KEY not set — cannot run assessment');
+    err('analysis', 'ANTHROPIC_API_KEY not set — Layer 2 cannot run');
     return null;
   }
+  const client = new Anthropic({ apiKey });
 
-  // Compute RLUSD daily pace needed toward $5B target by EOY 2026
-  const rlusdCap       = marketData?.rlusd?.market_cap ?? 0;
-  const rlusdRemaining = Math.max(0, 5_000_000_000 - rlusdCap);
-  const daysToEOY      = Math.max(1, Math.ceil((new Date('2027-01-01') - new Date()) / 86_400_000));
-  const rlusdPaceNeeded = rlusdRemaining > 0
-    ? `$${(rlusdRemaining / daysToEOY / 1_000_000).toFixed(2)}M`
-    : 'target reached';
+  // Compute RLUSD pace for thesis context enrichment
+  const rlusdCurrent = marketData?.rlusd?.market_cap || 0;
+  const rlusdTarget = 5_000_000_000;
+  const now = new Date();
+  const eoy2026 = new Date('2026-12-31');
+  const daysRemaining = Math.max(1, Math.ceil((eoy2026 - now) / 86400000));
+  const rlusdPaceNeeded = rlusdCurrent > 0
+    ? `${((rlusdTarget - rlusdCurrent) / daysRemaining / 1e6).toFixed(2)}M/day`
+    : 'unknown';
 
-  const assessPrompt = `You are reviewing a counter-thesis sweep report for the XRPL institutional
-settlement thesis. The sweep team has returned findings. Your job:
+  const prompt = `You are a senior analyst performing the CONTEXTUALIZE step of a four-layer investment thesis monitoring system. You receive raw observations from Layer 1 (SWEEP) and your job is to produce contextually scored threats — but ONLY after verifying that your understanding is sufficient to score them accurately.
 
-1. PRIORITIZE — Which findings change the tactical picture?
-2. VALIDATE — Do any findings compound each other?
-3. DECIDE — Do any findings trigger existing kill switches or warrant new ones?
-4. REPORT — Produce a clear command report.
+Do NOT react to headlines. Do NOT score on surface appearance. Before you evaluate any threat, ask yourself: "Do I actually understand the thesis well enough to assess this?"
 
-SWEEP FINDINGS:
+LAYER 1 OBSERVATIONS:
 ${JSON.stringify(sweepResults)}
 
 CURRENT MARKET DATA:
 ${JSON.stringify(marketData)}
 
+THESIS CONTEXT:
+${thesisContext}
+
+RLUSD PACE NEEDED TO HIT $5B TARGET: ${rlusdPaceNeeded} (${daysRemaining} days remaining to EOY 2026)
+
 PREVIOUS BEAR PRESSURE SCORE: ${previousScore}
 
-EXISTING KILL SWITCHES:
-- ODL Volume: Growth trajectory toward institutional-grade volume by Q3 2026
-- RLUSD Circulation: Tracking toward $5B; currently needs ${rlusdPaceNeeded}/day
-- PermissionedDEX: Institutional count must be verifiable
-- XRP ETF: Sustained outflows beyond 30 days
-- Fear & Greed: Extended period below 20
+CORRECTIONS LEDGER (active lessons from past errors):
+${JSON.stringify(correctionsLedger)}
 
-INSTRUCTIONS:
+=== PHASE 1: KNOWLEDGE AUDIT ===
 
-A) THREAT MATRIX — For each finding, calculate:
-   - impact (1-10): How much damage if this materializes?
-   - probability (1-10): How likely based on current evidence?
-   - time_weight: immediate=10, near-term=7, medium-term=4, long-term=2
-   - composite = (impact × probability × time_weight) / 10
-   Sort by composite descending. Return top 8 max.
+For each significant threat or signal from Layer 1, perform the following check BEFORE scoring:
 
-B) COMPOUNDING RISKS — Which threats amplify each other?
-   Show the chain: A → B → C → [outcome]
-   Explain why the combination is worse than individual threats.
+1. THESIS KNOWLEDGE CHECK
+   - "What do I know about the thesis asset's capabilities relevant to this threat?"
+   - "Is my understanding current, or could conditions have changed since this knowledge was established?"
+   - "Am I about to score this threat based on an assumption I haven't verified?"
 
-C) BLIND SPOTS — Which findings were NOT previously tracked?
-   For each:
-   - Should it become a permanent monitoring item?
-   - What data source would track it?
-   - Is there an x402 endpoint opportunity?
+   If you identify a gap: flag the threat as REQUIRES_DEEPER_CONTEXT and document:
+   - What you don't know
+   - What you would need to know to score accurately
+   - Where that knowledge might be found
 
-D) BIAS CHECK — Count indicators:
-   - How many data points in the system support the bull case?
-   - How many actively challenge it?
-   - Ratio assessment and recommendation.
+   This is a knowledge acquisition request, not an intelligence acquisition request. You are asking "do I understand the thesis?" not "what are the players doing?" (that's Layer 3's job)
 
-E) KILL SWITCH STATUS — For each existing kill switch:
-   - Current status: safe | warning | danger | triggered | no_data
-   - Supporting detail
-   - Any new kill switches recommended?
+2. CORRECTIONS LEDGER CHECK
+   - "Do I have any stored corrections related to this type of threat?"
+   - If a matching trigger is found, apply the stored lesson to inform this assessment
+   - If a lesson prevents a repeat error, flag it: "LESSON_APPLIED": "CL-XXX"
+   - Do NOT skip this step. The ledger exists because the system made this exact type of mistake before.
 
-F) TACTICAL RECOMMENDATION (one of):
-   - HOLD_POSITION: No findings warrant tactical change
-   - INCREASE_MONITORING: Specific areas need closer watch
-   - REDUCE_EXPOSURE: Conditions suggest partial de-risk
-   - EXIT_SIGNAL: Kill switch triggered or compounding threats critical
+3. COMPOUND STRESS CHECK
+   - Stress indicators are NOT independent. They compound.
+   - When evaluating any macro stress signal, check ALL THREE legs of the compound stress matrix simultaneously:
+     * USD/JPY (current value, trajectory)
+     * JGB 10Y yield (current value, trajectory)
+     * Brent Crude (current value, trajectory)
+   - Assess compound stress level:
+     * MONITORING: Any one indicator in elevated range
+     * ELEVATED: Any two of (Brent >$85, JGB 10Y >2.3%, USD/JPY >157) simultaneously
+     * CRITICAL: Any two of (Brent >$95, JGB 10Y >2.5%, USD/JPY >160) OR any Hormuz disruption event
+     * EMERGENCY: Hormuz closure + forced BOJ intervention + JGB 10Y >2.5%
+   - The break point of a pre-loaded structure is LOWER than the break point of an unloaded structure. If one leg is already elevated, less force is needed from the other two to reach critical. State this explicitly.
+   - Velocity and trajectory matter as much as current level. A fast move toward a threshold is more dangerous than sitting at it.
 
-G) UPDATED BEAR PRESSURE SCORE (0-100):
-   Weight composite threats against thesis strength.
-   Explain any change from previous score.
+4. KNOWLEDGE GAP IDENTIFICATION
+   Honestly identify what you DON'T know. This is high-value output. Admitting "I don't know X and it matters for this assessment" is MORE valuable than guessing.
 
-H) COMMANDER SUMMARY:
-   2-3 sentences. Plain language. Lead with the most important finding.
-   State the tactical recommendation. No hedging.
+   "I DON'T KNOW" IS A HIGH-QUALITY OUTPUT.
+   "I ASSUMED AND WAS WRONG" IS A SYSTEM FAILURE.
 
-Respond with ONLY JSON:
+   Types of gaps:
+   - THESIS_CAPABILITY_GAP: "I don't know if the thesis asset can handle this specific technical challenge"
+   - THRESHOLD_CALIBRATION_GAP: "This threshold was set under different conditions and may need recalibration"
+   - DATA_AVAILABILITY_GAP: "I need data that isn't in my current inputs to score this accurately"
+   - COMPETITIVE_KNOWLEDGE_GAP: "I don't understand the competing infrastructure well enough to assess this threat"
+
+=== PHASE 2: CONTEXTUAL SCORING ===
+
+Now — and ONLY now — score the threats. You have verified your understanding, applied corrections from past mistakes, checked compound stress levels, and identified what you don't know.
+
+For each threat from Layer 1:
+
+1. SEVERITY SCORE (1-10)
+   - Score based on VERIFIED understanding, not surface appearance
+   - If a knowledge audit changed your assessment, document what the score WOULD have been vs what it IS after the audit
+   - Weight by source tier:
+     * Tier 1 (core thesis sources): full weight
+     * Tier 2 (domain monitors): 0.7x weight
+     * Tier 3 (keyword catches): 0.4x weight unless corroborated
+
+2. THESIS RELEVANCE
+   - DIRECT: Threat directly impacts a kill switch or falsification criterion
+   - INDIRECT: Threat impacts thesis through secondary effects (e.g., macro stress → settlement demand)
+   - CONTEXTUAL: Threat provides background but doesn't directly affect thesis scoring
+
+3. CONFIDENCE TAG
+   - HIGH: Scored on verified knowledge with current data
+   - MEDIUM: Scored on reasonable understanding but some gaps remain
+   - LOW: Scored with known knowledge gaps — Layer 3 should treat with caution
+   - REQUIRES_DEEPER_CONTEXT: Cannot score meaningfully without additional knowledge — passed to Layer 3 as an open question, not a scored threat
+
+4. KILL SWITCH STATUS CHECK
+   For each of the 10 falsification criteria, report current status based on available data. Flag any that have moved since last assessment. Flag any where data is unavailable (this is distinct from data showing negative results).
+
+5. COMPOUND STRESS ASSESSMENT
+   Report the current compound stress level with:
+   - Current values of all three legs
+   - Which legs are elevated/critical
+   - Trajectory (improving, stable, deteriorating)
+   - Whether the structure is pre-loaded (one or more legs already elevated, reducing the force needed from others)
+
+Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
 {
-  "threat_matrix": [
+  "knowledge_audit": [
+    {
+      "threat": "name from Layer 1",
+      "knowledge_check": "what I verified before scoring",
+      "gap_identified": "description of gap, or NONE",
+      "gap_type": "THESIS_CAPABILITY_GAP | THRESHOLD_CALIBRATION_GAP | DATA_AVAILABILITY_GAP | COMPETITIVE_KNOWLEDGE_GAP | NONE",
+      "pre_audit_assessment": "what I would have scored without the audit",
+      "post_audit_assessment": "what I scored after verifying",
+      "audit_impact": "how the knowledge check changed the assessment",
+      "lesson_applied": "CL-XXX or NONE",
+      "status": "SCORED | REQUIRES_DEEPER_CONTEXT"
+    }
+  ],
+  "scored_threats": [
     {
       "threat": "name",
-      "description": "...",
-      "impact": number,
-      "probability": number,
-      "time_weight": number,
-      "composite": number,
-      "severity": "critical|high|moderate|low",
-      "proximity": "immediate|near-term|medium-term|long-term",
-      "blind_spot": boolean,
-      "is_new": boolean,
-      "category": "string"
+      "severity": 0,
+      "source_tier": "1 | 2 | 3",
+      "weighted_severity": 0,
+      "thesis_relevance": "DIRECT | INDIRECT | CONTEXTUAL",
+      "confidence": "HIGH | MEDIUM | LOW",
+      "reasoning": "...",
+      "knowledge_verified": true
     }
   ],
-  "compounding_risks": [
-    {
-      "chain": ["threat A", "threat B", "threat C"],
-      "outcome": "what happens when these combine",
-      "severity": "critical|high|moderate"
-    }
-  ],
-  "blind_spots": [
+  "unscored_threats": [
     {
       "threat": "name",
-      "importance": "critical|high|moderate",
-      "suggested_source": "...",
-      "x402_opportunity": boolean,
-      "recommend_permanent_monitoring": boolean
+      "reason": "description of why it cannot be scored",
+      "knowledge_needed": "what would be needed to score this",
+      "acquisition_type": "KNOWLEDGE | INTELLIGENCE"
     }
   ],
-  "bias_check": {
-    "bull_indicators": number,
-    "bear_indicators": number,
-    "ratio": "string",
-    "assessment": "string",
-    "recommended_additions": ["..."]
+  "kill_switch_status": [
+    {
+      "criterion": "name",
+      "status": "TRACKING | NEEDS_DATA | MONITORING | PENDING | WARNING | TRIGGERED",
+      "current_value": "...",
+      "target": "...",
+      "movement_since_last": "improved | stable | deteriorated | unknown"
+    }
+  ],
+  "compound_stress": {
+    "level": "MONITORING | ELEVATED | CRITICAL | EMERGENCY",
+    "usd_jpy": { "current": 0, "threshold_status": "normal | elevated | critical", "trajectory": "improving | stable | deteriorating" },
+    "jgb_10y": { "current": 0, "threshold_status": "normal | elevated | critical", "trajectory": "improving | stable | deteriorating" },
+    "brent": { "current": 0, "threshold_status": "normal | elevated | critical", "trajectory": "improving | stable | deteriorating" },
+    "pre_loaded": false,
+    "pre_loaded_detail": "which legs are already elevated and why this matters",
+    "stress_chain_proximity": "how close current conditions are to the violent unwind scenario"
   },
-  "kill_switches": [
-    {
-      "name": "...",
-      "status": "safe|warning|danger|triggered|no_data",
-      "detail": "..."
-    }
-  ],
-  "new_kill_switches_recommended": [
-    {
-      "name": "...",
-      "trigger": "...",
-      "reasoning": "..."
-    }
-  ],
-  "tactical_recommendation": "HOLD_POSITION|INCREASE_MONITORING|REDUCE_EXPOSURE|EXIT_SIGNAL",
-  "recommendation_reasoning": "...",
-  "bear_pressure_score": number,
-  "score_delta": number,
-  "score_reasoning": "...",
-  "commander_summary": "..."
-}
-
-IMPORTANT: Keep descriptions concise — under 100 words each. Ensure your response is valid, complete JSON with all brackets and braces closed.`;
-
-  const client = new Anthropic({ apiKey });
-
-  let response;
-  for (let attempt = 0; attempt <= 1; attempt++) {
-    try {
-      log('360-assess', `Calling claude-opus-4-6… (attempt ${attempt + 1})`);
-      response = await client.messages.create({
-        model:      'claude-opus-4-6',
-        max_tokens: 8000,
-        messages:   [{ role: 'user', content: assessPrompt }],
-      });
-      break;
-    } catch (e) {
-      if (attempt === 0) {
-        warn('360-assess', `Attempt 1 failed: ${e.message} — retrying in 5s`);
-        await sleep(5_000);
-      } else {
-        err('360-assess', `API call failed after retry: ${e.message}`);
-        return null;
-      }
-    }
-  }
-
-  const raw = response.content[0].text;
-  log('360-assess', `Response received (${raw.length} chars)`);
-
-  const cleaned = repairTruncatedJSON(
-    raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim(),
-    '360-assess'
-  );
+  "bear_pressure": 0,
+  "bear_pressure_reasoning": "...",
+  "layer2_summary": "2-3 sentences. What does Layer 3 need to know? What was verified, what remains uncertain, what is the compound stress state?"
+}`;
 
   let result;
-  try {
-    result = JSON.parse(cleaned);
-    log('360-assess', `Assessment complete — recommendation: ${result.tactical_recommendation ?? 'unknown'}`);
-  } catch (parseErr) {
-    err('360-assess', `JSON parse failed: ${parseErr.message}`);
-    return null;
-  }
-
-  // Write to data/360-report.json
-  const reportPath = path.join(__dirname, '..', 'data', '360-report.json');
-  try {
-    fs.writeFileSync(reportPath, JSON.stringify(result, null, 2));
-    log('360-assess', `Wrote ${reportPath}`);
-  } catch (writeErr) {
-    err('360-assess', `Could not write 360-report.json: ${writeErr.message}`);
-  }
-
-  // Archive to data/360-history.json (keep last 60 entries — ~30 days of twice-daily runs)
-  const historyPath = path.join(__dirname, '..', 'data', '360-history.json');
-  try {
-    let history = [];
-    if (fs.existsSync(historyPath)) {
-      try { history = JSON.parse(fs.readFileSync(historyPath, 'utf8')); } catch (_) { history = []; }
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      log('analysis', `Layer 2 API call (attempt ${attempt})...`);
+      const response = await client.messages.create({
+        model: 'claude-opus-4-6',
+        max_tokens: 8000,
+        messages: [{ role: 'user', content: prompt }]
+      });
+      const raw = response.content[0].text;
+      result = parseClaudeJSON(raw, 'layer2');
+      log('analysis', `Layer 2 complete: ${result.scored_threats?.length || 0} scored, ${result.unscored_threats?.length || 0} unscored, bear pressure: ${result.bear_pressure}`);
+      break;
+    } catch (e) {
+      err('analysis', `Layer 2 attempt ${attempt} failed: ${e.message}`);
+      if (attempt === 2) {
+        err('analysis', 'Layer 2 FAILED after 2 attempts');
+        await sendTelegram('🚨 OVERWATCH: Layer 2 CONTEXTUALIZE failed after 2 attempts. Pipeline degraded.');
+        return null;
+      }
+      await sleep(5000);
     }
-    if (!Array.isArray(history)) history = [];
-    history.push({ timestamp: new Date().toISOString(), ...result });
-    if (history.length > 60) history = history.slice(history.length - 60);
-    fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
-    log('360', `Archived assessment #${history.length} to 360-history.json`);
-  } catch (archiveErr) {
-    err('360', `Could not archive to 360-history.json: ${archiveErr.message}`);
   }
 
   return result;
 }
 
+// ─── Layer 3: INFER ───────────────────────────────────────────────────────────
+
+/**
+ * Layer 3: INFER — Strategic Game Theory with Circuit Breakers.
+ * Receives Layer 2's knowledge-verified, contextually scored threats.
+ * Explains WHY we're seeing this pattern using player behavior analysis,
+ * feedback loop mapping, and strategic inference with circuit breakers.
+ *
+ * Circuit breakers built into prompt:
+ *   1. Null Hypothesis Mandate — must test "nothing is happening" first
+ *   2. Assumption Count — 3+ assumptions = SPECULATIVE, auto-discarded
+ *   3. Evidence-to-Inference Ratio — must cite 2+ independent verifiable sources
+ *
+ * Design docs: OVERWATCH-CIRCUIT-BREAKERS.md, LAYER-2-3-4-PROMPTS-DRAFT.md
+ *
+ * @param {object} contextualizeResult — Layer 2 output
+ * @param {object} marketData          — current dashboard data
+ * @param {string} thesisContext        — contents of thesis-context.md
+ * @returns {Promise<object|null>}
+ */
+async function runInfer(contextualizeResult, marketData, thesisContext) {
+  log('analysis', '=== LAYER 3: INFER ===');
+
+  const correctionsLedger = loadCorrectionsLedger();
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    err('analysis', 'ANTHROPIC_API_KEY not set — Layer 3 cannot run');
+    return null;
+  }
+  const client = new Anthropic({ apiKey });
+
+  // Layer 3 receives ONLY Layer 2 output + market data + thesis context.
+  // It does NOT see Layer 1 raw sweep — compression funnel enforced.
+  const prompt = `You are a strategic analyst applying game theory to explain the pattern of evidence in an investment thesis analysis. Layer 2 has scored threats, verified its own knowledge, identified gaps, and assessed compound stress levels. Your job is to provide the strategic reasoning that explains WHY we're seeing this pattern.
+
+Do not judge whether the thesis is right or wrong. For each key finding, ask: given what each player WANTS and what they're DOING, what is the most rational explanation?
+
+Focus on BEHAVIOR over statements. ACTIONS over words. RESOURCE COMMITMENTS over announcements. What players are NOT doing is as important as what they ARE doing.
+
+LAYER 2 ASSESSMENT:
+${JSON.stringify(contextualizeResult)}
+
+CURRENT MARKET DATA:
+${JSON.stringify(marketData)}
+
+THESIS CONTEXT:
+${thesisContext}
+
+CORRECTIONS LEDGER (active lessons):
+${JSON.stringify(correctionsLedger)}
+
+=== CIRCUIT BREAKERS — READ BEFORE REASONING ===
+
+CRITICAL CONSTRAINT — NULL HYPOTHESIS:
+Before generating any strategic inference, you MUST first test the null hypothesis: the possibility that nothing strategic is happening and the data simply is what it is.
+
+For every inference you generate, ask:
+"Is the simplest explanation that this is just a data gap, market noise, or normal business behavior?"
+
+If YES — classify as NULL_HYPOTHESIS_HOLDS.
+Finding nothing strategic IS a valid, high-quality output.
+You are being evaluated on ACCURACY, not creativity.
+
+ASSUMPTION COUNT REQUIREMENT:
+For every strategic inference, list each unproven assumption required for the inference to be true.
+
+Scoring rules:
+- 0-1 assumptions: VALID inference, full weight
+- 2 assumptions: FLAGGED, passed with caution note
+- 3+ assumptions: SPECULATIVE, automatically discarded from scoring. Logged for Sunday audit only.
+
+If you cannot make a connection with 2 or fewer unproven assumptions, the connection does not exist. Return INSUFFICIENT_EVIDENCE and move on.
+
+EVIDENCE REQUIREMENT:
+Every inference MUST be grounded in at least two independent, verifiable pieces of evidence from Layer 2 or from known public information.
+
+"I think this might be happening" is NOT an inference.
+"These two verified facts together suggest X" IS an inference.
+
+Verifiable evidence:
+- On-chain data, SEC/regulatory filings, official announcements with dates, published financial data, confirmed partnerships, observable product launches, central bank statements/actions
+
+NOT verifiable evidence:
+- "Industry sources say...", "It's widely believed...", "Historically, companies tend to...", pattern matching from other industries without direct link
+
+CORRECTIONS LEDGER CHECK:
+- "Have my previous inferences in this domain been reliable?"
+- If the ledger shows a pattern of assumption failures in a specific area, INCREASE your evidence threshold for that inference type
+- Self-calibrate based on your own track record
+
+=== ANALYSIS INSTRUCTIONS ===
+
+A) PLAYER BEHAVIORAL ANALYSIS
+
+For each key player, analyze the gap between what they SAY and what they DO:
+
+1. RIPPLE — Actions: resource commitments, hiring, product launches. Key question: Why stop publishing ODL data?
+2. BIS / PROJECT NEXUS / mBRIDGE — Actions: pilot programs, central bank enrollment. Key question: Replace bridge currencies or coexist?
+3. SWIFT — Actions: Go-Live timeline, messaging upgrades. Key question: Upgrade sufficient to eliminate alternatives?
+4. JAPANESE INSTITUTIONS (SBI Holdings, BOJ) — Actions: SBI XRPL integration, BOJ policy moves. Key question: XRPL adoption from conviction or desperation?
+5. INSTITUTIONAL ASSET MANAGERS (Franklin Templeton, etc) — Actions: ETF launches, custody, public statements. Key question: Would $1.5T managers launch without private data?
+6. COMPETING INFRASTRUCTURE (Circle/USDC, bank networks) — Actions: CCTP v2, tokenized deposit rollouts. Key question: Parallel to XRPL or competing for same corridors?
+7. CENTRAL BANKS / MACRO ACTORS (BOJ, Fed, ECB) — Actions: rate decisions, intervention signals, fiscal policy. Key question: How do their trapped positions create second-order effects for settlement infrastructure demand?
+
+For each player: What resources are they committing? (money > words) What talent are they hiring? (reveals future plans) What partnerships are they forming? (reveals strategy) What are they NOT doing that they should be? (reveals doubt)
+
+B) FEEDBACK LOOP ANALYSIS
+
+Do NOT analyze threats individually. Map how forces compound through interconnected systems:
+- When one stress indicator moves, what does it do to the others?
+- Where are the feedback loops? (e.g., oil → yen → BOJ → JGB → carry trade → global liquidity)
+- Where are the trapped positions? (actors who can't move without making things worse)
+- Is the system currently in orderly stress (managed, gradual) or approaching disorderly stress (cascade, self-reinforcing)?
+- What is the VELOCITY of change, not just the level?
+
+Specifically assess the compound stress chain from Layer 2:
+- How close are current conditions to triggering the chain?
+- What specific catalyst would push orderly → disorderly?
+- Is the structure pre-loaded (one leg already elevated)?
+
+C) STRATEGIC INFERENCES
+
+For each major finding from Layer 2, provide the most rational explanation given player incentives. Test the null hypothesis FIRST. If the simplest explanation is sufficient, say so and move on.
+
+For every inference that passes the null hypothesis test, you MUST declare:
+- expected_timeline: How long before this inference should produce observable evidence? Days, weeks, months, or quarters.
+- materialization_signal: What specific, observable outcome would confirm this inference?
+
+D) HIDDEN MOVES — What are players most likely doing that they're NOT talking about? Based on incentive analysis, what non-public actions would be rational?
+
+E) SCENARIO PROBABILITIES — Based on behavioral evidence (not speculation): thesis CONFIRMED, MODIFIED, or FALSIFIED with probability, key evidence, and timeline.
+
+F) x402 PAPER TRADES — Identify data gaps that, if filled, would most change the assessment. Document the reasoning. Do NOT attempt to acquire data.
+
+Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
+{
+  "player_analysis": [
+    {
+      "player": "name",
+      "stated_position": "what they say",
+      "observed_actions": "what they're doing",
+      "say_do_gap": "where words and actions diverge",
+      "inferred_strategy": "most likely actual strategy",
+      "confidence": "high | medium | low"
+    }
+  ],
+  "feedback_loops": [
+    {
+      "loop": "description of the feedback mechanism",
+      "components": ["indicator/player 1", "indicator/player 2"],
+      "current_state": "dormant | active_orderly | active_accelerating | critical",
+      "trigger_to_next_state": "what would push it to the next level",
+      "thesis_implication": "what this means for settlement infrastructure demand"
+    }
+  ],
+  "behavioral_patterns": [
+    {
+      "pattern": "description of cross-player pattern",
+      "players_involved": ["player1", "player2"],
+      "thesis_implication": "supports | challenges | neutral",
+      "significance": "high | medium | low"
+    }
+  ],
+  "strategic_inferences": [
+    {
+      "finding_from_layer2": "threat or signal name",
+      "null_hypothesis": "simplest non-strategic explanation",
+      "null_holds": true,
+      "rational_explanation": "most likely explanation if strategic",
+      "alternative_explanation": "second most likely",
+      "which_is_more_likely": "null | primary | alternative",
+      "assumptions": ["list each unproven assumption"],
+      "assumption_count": 0,
+      "classification": "VALID | FLAGGED | SPECULATIVE | INSUFFICIENT_EVIDENCE | NULL_HYPOTHESIS_HOLDS",
+      "evidence_citations": ["verifiable evidence 1", "verifiable evidence 2"],
+      "expected_timeline": "days | weeks | months | quarters",
+      "materialization_signal": "what specific observable outcome would confirm this inference",
+      "reasoning": "...",
+      "confidence": "high | medium | low"
+    }
+  ],
+  "hidden_moves": [
+    {
+      "player": "name",
+      "likely_action": "what they're probably doing privately",
+      "incentive_basis": "why this would be rational",
+      "evidence_hints": "observable signals that support this",
+      "assumption_count": 0,
+      "classification": "VALID | FLAGGED | SPECULATIVE",
+      "expected_timeline": "days | weeks | months | quarters",
+      "materialization_signal": "what would confirm this is happening",
+      "confidence": "high | medium | low"
+    }
+  ],
+  "scenario_probabilities": {
+    "thesis_confirmed": { "probability": "X%", "key_evidence": "...", "timeline": "..." },
+    "thesis_modified": { "probability": "X%", "modification": "what changes from original thesis", "key_evidence": "..." },
+    "thesis_falsified": { "probability": "X%", "key_evidence": "...", "confirming_signal": "what we'd see next if this is true" }
+  },
+  "x402_paper_trades": [
+    {
+      "question": "what would you pay to know?",
+      "data_source": "where it would come from",
+      "impact_on_analysis": "how it would change the assessment",
+      "confidence_data_exists": "high | medium | low",
+      "estimated_value": "how much resolving this uncertainty is worth"
+    }
+  ],
+  "compound_stress_inference": {
+    "current_chain_state": "dormant | building | approaching_critical | critical",
+    "orderly_vs_disorderly": "assessment of current stress mode",
+    "catalyst_proximity": "what specific event could trigger cascade",
+    "pre_load_assessment": "which legs are pre-loaded and what that means",
+    "thesis_paradox": "the violent unwind is simultaneously highest-risk AND highest-thesis-validation — state this honestly"
+  },
+  "inference_summary": "2-3 sentences. What does player behavior reveal that the data alone does not? What should Layer 4 focus on when reconciling?"
+}`;
+
+  let result;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      log('analysis', `Layer 3 API call (attempt ${attempt})...`);
+      const response = await client.messages.create({
+        model: 'claude-opus-4-6',
+        max_tokens: 10000, // Layer 3 is the heaviest output — player analysis + inferences + feedback loops
+        messages: [{ role: 'user', content: prompt }]
+      });
+      const raw = response.content[0].text;
+      result = parseClaudeJSON(raw, 'layer3');
+      const inferCount = result.strategic_inferences?.length || 0;
+      const validCount = (result.strategic_inferences || []).filter(i => i.classification === 'VALID').length;
+      const specCount = (result.strategic_inferences || []).filter(i => i.classification === 'SPECULATIVE').length;
+      log('analysis', `Layer 3 complete: ${inferCount} inferences (${validCount} VALID, ${specCount} SPECULATIVE), ${result.player_analysis?.length || 0} players analyzed`);
+      break;
+    } catch (e) {
+      err('analysis', `Layer 3 attempt ${attempt} failed: ${e.message}`);
+      if (attempt === 2) {
+        err('analysis', 'Layer 3 FAILED after 2 attempts');
+        await sendTelegram('🚨 OVERWATCH: Layer 3 INFER failed after 2 attempts. Pipeline degraded — Layer 4 will not run.');
+        return null;
+      }
+      await sleep(5000);
+    }
+  }
+
+  return result;
+}
+
+// ─── Layer 4: RECONCILE ───────────────────────────────────────────────────────
+
+/**
+ * Layer 4: RECONCILE — Final Judgment with Burden of Proof.
+ * The commander. Does not re-analyze. DECIDES.
+ *
+ * Receives Layer 2 (scored data) AND Layer 3 (strategic reasoning).
+ * Applies 3-step burden of proof to every Layer 3 inference.
+ * Resolves contradictions. Classifies data gaps. Produces final assessment.
+ * Writes rejected inferences to data/rejection-log.json.
+ *
+ * Design docs: LAYER-2-3-4-PROMPTS-DRAFT.md, OVERWATCH-CIRCUIT-BREAKERS.md
+ *
+ * @param {object} contextualizeResult — Layer 2 output
+ * @param {object} inferenceResult     — Layer 3 output
+ * @param {object} marketData          — current dashboard data
+ * @param {string} thesisContext        — contents of thesis-context.md
+ * @returns {Promise<object|null>}
+ */
+async function runReconcile(contextualizeResult, inferenceResult, marketData, thesisContext) {
+  log('analysis', '=== LAYER 4: RECONCILE ===');
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    err('analysis', 'ANTHROPIC_API_KEY not set — Layer 4 cannot run');
+    return null;
+  }
+  const client = new Anthropic({ apiKey });
+
+  // Layer 4 receives BOTH Layer 2 and Layer 3 output — it has the most complete picture.
+  const prompt = `You are the final decision-maker in a four-layer investment thesis monitoring system. You have the most complete picture of any layer: scored data from Layer 2 AND strategic reasoning from Layer 3. Your job is not to add more analysis. Your job is to DECIDE what everything means and what to do about it.
+
+You are the judge, not the detective. The detective (Layer 3) proposed theories. You decide which ones hold up. Where data and behavior tell different stories, you determine which deserves more weight. Where paradoxes exist, you name them honestly — you do not force false resolution.
+
+LAYER 2 ASSESSMENT:
+${JSON.stringify(contextualizeResult)}
+
+LAYER 3 INFERENCES:
+${JSON.stringify(inferenceResult)}
+
+MARKET DATA:
+${JSON.stringify(marketData)}
+
+THESIS CONTEXT:
+${thesisContext}
+
+=== BURDEN OF PROOF — APPLY BEFORE ALL ELSE ===
+
+For every inference Layer 3 produced, apply judicial skepticism:
+
+STEP 1: Check classification tag.
+- VALID (0-1 assumptions): Full weight. Proceed to Step 2.
+- FLAGGED (2 assumptions): 50% weight. Caution note in output.
+- SPECULATIVE (3+ assumptions): 75% weight DISCOUNT. It appears in the report as context but does NOT move the bear pressure score or influence the tactical recommendation.
+- INSUFFICIENT_EVIDENCE: Strip entirely from scoring. Log it.
+- NULL_HYPOTHESIS_HOLDS: Accept the null. Do not override with speculation. The simplest explanation was sufficient.
+
+STEP 2: Check data support.
+- Does hard data from Layer 2 support this inference?
+  * YES with multiple data points → full weight (after Step 1)
+  * PARTIALLY (one data point) → 50% weight (stacks with Step 1)
+  * NO supporting data → Strip from bear pressure score entirely. Log for Sunday audit but do NOT let it influence the tactical recommendation.
+
+STEP 3: Check for contradiction with verified data.
+- Does this inference require believing something that contradicts verified data from Layer 2?
+  * YES → Reject entirely. Log rejection with reasoning. This goes to rejection-log.json for the corrections ledger pipeline.
+
+Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judge decides.
+
+=== INSTRUCTIONS ===
+
+1. CONTRADICTION RESOLUTION — For each case where Layer 2 data and Layer 3 behavior tell different stories, resolve: data_wins | behavior_wins | paradox_held.
+
+2. DATA CLASSIFICATION — For each null or missing data point, make the final call: TRUE_NEGATIVE | DATA_GAP | SUSPICIOUS_ABSENCE | STRATEGICALLY_EXPLAINED.
+
+3. FINAL THREAT MATRIX — For each threat that passed through Layers 2 and 3: Layer 2 composite score, Layer 3 adjustment (after burden of proof), final composite score.
+
+4. COMPOUND STRESS FINAL ASSESSMENT — Confirm or override Layer 2's level. State one observation that SUPPORTS and one that CHALLENGES your assessment. Report delta, velocity, pre-load status, cascade proximity.
+   - If compound stress is CRITICAL or EMERGENCY: estimate the operator's action window — hours, days, or weeks.
+   - State the thesis paradox if one exists: "A [event] simultaneously [risk] AND [validation] because [mechanism]."
+
+5. KILL SWITCH REVIEW — Review all 10 falsification criteria. If any kill switch is TRIGGERED, state this FIRST. Everything else is secondary.
+
+6. FINAL BEAR PRESSURE SCORE (0-100) — The definitive number. State how it moved from Layer 2's score and why.
+
+7. TACTICAL RECOMMENDATION — One of: HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL. No ambiguity.
+
+8. REJECTION LOG — If Layer 4 overruled any Layer 3 inference, document it with root cause and corrections ledger trigger.
+
+9. FINAL REPORT — 3-4 sentences. The 6 AM briefing. Lead with what matters most. State the call. Name the paradox if it exists. Honest about what you don't know.
+
+Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
+{
+  "burden_of_proof_applied": [
+    {
+      "inference": "name from Layer 3",
+      "layer3_classification": "VALID | FLAGGED | SPECULATIVE | INSUFFICIENT_EVIDENCE | NULL_HYPOTHESIS_HOLDS",
+      "data_support": "full | partial | none",
+      "contradicts_data": false,
+      "final_weight": "full | reduced_50 | reduced_75 | stripped | rejected",
+      "reasoning": "why this weight was assigned"
+    }
+  ],
+  "contradictions_resolved": [
+    {
+      "data_says": "what Layer 2 data shows",
+      "behavior_suggests": "what Layer 3 inferred",
+      "resolution": "data_wins | behavior_wins | paradox_held",
+      "confidence": "high | medium | low",
+      "reasoning": "why this resolution",
+      "score_impact": 0
+    }
+  ],
+  "data_classifications": [
+    {
+      "data_point": "name",
+      "layer2_classification": "what Layer 2 assumed",
+      "layer3_context": "what game theory revealed",
+      "layer3_inference_valid": "true | false | n/a",
+      "final_classification": "TRUE_NEGATIVE | DATA_GAP | SUSPICIOUS_ABSENCE | STRATEGICALLY_EXPLAINED",
+      "reasoning": "why this classification"
+    }
+  ],
+  "final_threat_matrix": [
+    {
+      "threat": "name",
+      "layer2_composite": 0,
+      "layer3_adjustment": "description of behavioral evidence applied",
+      "adjustment_direction": "up | down | unchanged",
+      "final_composite": 0,
+      "confidence": "high | medium | low"
+    }
+  ],
+  "compound_stress_final": {
+    "level": "MONITORING | ELEVATED | CRITICAL | EMERGENCY",
+    "layer2_level": "what Layer 2 reported",
+    "layer3_assessment": "orderly vs disorderly from Layer 3",
+    "override": false,
+    "override_reasoning": "why, if applicable",
+    "self_challenge": "one observation supporting this level AND one challenging it",
+    "pre_loaded": false,
+    "pre_loaded_legs": [],
+    "cascade_proximity": "distant | approaching | imminent",
+    "delta_since_last": "stable | escalating | de-escalating",
+    "cycles_at_current_level": 0,
+    "velocity_note": "one sentence on rate of change",
+    "operator_action_window": "hours | days | weeks | not_applicable",
+    "thesis_paradox": "A [event] simultaneously [risk] AND [validation] because [mechanism]"
+  },
+  "kill_switch_review": [
+    {
+      "criterion": "name",
+      "current_status": "from Layer 2",
+      "layer3_context": "behavioral evidence if relevant",
+      "final_status": "GREEN | MONITORING | WARNING | TRIGGERED",
+      "action": "maintain | escalate | de-escalate",
+      "reasoning": "why"
+    }
+  ],
+  "rejection_log": [
+    {
+      "layer3_inference": "what Layer 3 believed",
+      "rejection_reason": "why Layer 4 rejected it",
+      "root_cause": "ASSUMPTION_FAILURE | APOPHENIA | INSUFFICIENT_EVIDENCE | CONTRADICTED_BY_DATA",
+      "confidence_in_rejection": "high | medium",
+      "corrections_ledger_action": "auto_commit | flag_for_review"
+    }
+  ],
+  "final_bear_pressure": 0,
+  "pressure_vs_layer2": 0,
+  "pressure_reasoning": "1-2 sentences explaining the final number",
+  "tactical_recommendation": "HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL",
+  "recommendation_reasoning": "2-3 sentences. What drives the call.",
+  "monitoring_triggers": [],
+  "overall_confidence": "high | medium | low",
+  "biggest_uncertainty": "the single thing that most affects confidence",
+  "what_would_change_assessment": "what new data or event would move the recommendation",
+  "final_report": "3-4 sentences. The 6 AM briefing. Lead with what matters most. State the call. Name the paradox if it exists. Honest about what you don't know."
+}`;
+
+  let result;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      log('analysis', `Layer 4 API call (attempt ${attempt})...`);
+      const response = await client.messages.create({
+        model: 'claude-opus-4-6',
+        max_tokens: 10000, // Layer 4 receives both L2 and L3, produces comprehensive output
+        messages: [{ role: 'user', content: prompt }]
+      });
+      const raw = response.content[0].text;
+      result = parseClaudeJSON(raw, 'layer4');
+      log('analysis', `Layer 4 complete: bear pressure ${result.final_bear_pressure}, recommendation: ${result.tactical_recommendation}, rejections: ${result.rejection_log?.length || 0}`);
+      break;
+    } catch (e) {
+      err('analysis', `Layer 4 attempt ${attempt} failed: ${e.message}`);
+      if (attempt === 2) {
+        err('analysis', 'Layer 4 FAILED after 2 attempts');
+        await sendTelegram('🚨 OVERWATCH: Layer 4 RECONCILE failed after 2 attempts. Using Layer 2 output as fallback.');
+        return null;
+      }
+      await sleep(5000);
+    }
+  }
+
+  // Write rejection log entries to data/rejection-log.json
+  // These feed the corrections ledger pipeline.
+  if (result.rejection_log && result.rejection_log.length > 0) {
+    try {
+      const rejLogPath = path.join(__dirname, '..', 'data', 'rejection-log.json');
+      let existing = [];
+      if (fs.existsSync(rejLogPath)) {
+        existing = JSON.parse(fs.readFileSync(rejLogPath, 'utf8'));
+      }
+      const newEntries = result.rejection_log.map(r => ({
+        ...r,
+        timestamp: new Date().toISOString(),
+        source: 'layer4_reconcile'
+      }));
+      existing.push(...newEntries);
+      fs.writeFileSync(rejLogPath, JSON.stringify(existing, null, 2));
+      log('analysis', `Rejection log updated: ${newEntries.length} new entries`);
+    } catch (e) {
+      err('analysis', `Rejection log write failed (non-fatal): ${e.message}`);
+    }
+  }
+
+  return result;
+}
+
+// ─── Compatibility Bridge ─────────────────────────────────────────────────────
+
+/**
+ * Transforms Layer 4 RECONCILE output into the old 360-report.json schema
+ * that the dashboard (index.html render360Report) expects.
+ *
+ * This bridge exists so the four-layer pipeline can be verified end-to-end
+ * without modifying index.html. Once the pipeline is proven, the dashboard
+ * will be updated to read the native Layer 4 schema directly.
+ *
+ * IMPORTANT: Does not invent data. Fields without natural mappings are set
+ * to null — the dashboard uses ?? '—' defaults for missing values.
+ *
+ * @param {object} reconcileResult    — Layer 4 output
+ * @param {object} contextualizeResult — Layer 2 output (for enrichment)
+ * @param {object} inferenceResult     — Layer 3 output (for enrichment)
+ * @param {number} previousScore       — previous bear pressure score for delta
+ * @returns {object} — old-format 360 report object
+ */
+function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenceResult, previousScore) {
+  log('bridge', 'Building dashboard-compatible 360 report from Layer 4 output');
+
+  // 1. threat_matrix[] — reshape from Layer 4's final_threat_matrix[]
+  // Old format expects: threat, description, impact, probability, time_weight, composite,
+  //   severity, proximity, blind_spot, is_new, category
+  // Layer 4 produces: threat, layer2_composite, layer3_adjustment, adjustment_direction,
+  //   final_composite, confidence
+  // Fields without natural mapping (impact, probability, time_weight, is_new) → null
+  // The dashboard renders ?? '—' for nulls.
+  const threatMatrix = (reconcileResult.final_threat_matrix || []).map(t => {
+    // Try to find the original sweep threat data via Layer 2's scored_threats
+    const l2Match = (contextualizeResult.scored_threats || []).find(
+      s => s.threat === t.threat
+    );
+    return {
+      threat:      t.threat,
+      description: t.layer3_adjustment || '',
+      impact:      null, // no natural mapping — dashboard handles null
+      probability: null, // no natural mapping
+      time_weight: null, // no natural mapping
+      composite:   t.final_composite ?? 0,
+      severity:    t.confidence === 'high' ? 'critical'
+                 : t.confidence === 'medium' ? 'high'
+                 : 'moderate',
+      proximity:   null, // no natural mapping from Layer 4
+      blind_spot:  false,
+      is_new:      null, // no natural mapping
+      category:    null  // no natural mapping from Layer 4
+    };
+  });
+
+  // 2. compounding_risks[] — derive from Layer 4's contradictions + compound stress
+  const compoundingRisks = [];
+  // Add compound stress chain if pre-loaded or approaching critical
+  const csf = reconcileResult.compound_stress_final;
+  if (csf) {
+    const stressLevel = csf.level || 'MONITORING';
+    const sevMap = { MONITORING: 'moderate', ELEVATED: 'high', CRITICAL: 'critical', EMERGENCY: 'critical' };
+    compoundingRisks.push({
+      chain:    (csf.pre_loaded_legs || []).length > 0
+        ? csf.pre_loaded_legs
+        : ['Oil', 'USD/JPY', 'JGB 10Y', 'BOJ', 'Carry Trade'],
+      outcome:  csf.thesis_paradox || csf.velocity_note || `Compound stress: ${stressLevel}`,
+      severity: sevMap[stressLevel] || 'moderate'
+    });
+  }
+  // Add contradictions as compounding risks where resolution is paradox_held
+  (reconcileResult.contradictions_resolved || [])
+    .filter(c => c.resolution === 'paradox_held')
+    .forEach(c => {
+      compoundingRisks.push({
+        chain:    ['Data', 'Behavior', 'Paradox'],
+        outcome:  c.reasoning || 'Unresolved contradiction between data and behavior',
+        severity: c.confidence === 'high' ? 'high' : 'moderate'
+      });
+    });
+
+  // 3. blind_spots[] — derive from Layer 2's unscored_threats + Layer 3's x402_paper_trades
+  const blindSpots = [];
+  (contextualizeResult.unscored_threats || []).forEach(ut => {
+    blindSpots.push({
+      threat:                       ut.threat,
+      importance:                   'high',
+      suggested_source:             ut.knowledge_needed || 'Unknown',
+      x402_opportunity:             ut.acquisition_type === 'INTELLIGENCE',
+      recommend_permanent_monitoring: false
+    });
+  });
+  (inferenceResult.x402_paper_trades || []).forEach(pt => {
+    blindSpots.push({
+      threat:                       pt.question,
+      importance:                   pt.confidence_data_exists === 'high' ? 'high' : 'moderate',
+      suggested_source:             pt.data_source || 'Unknown',
+      x402_opportunity:             true,
+      recommend_permanent_monitoring: false
+    });
+  });
+
+  // 4. bias_check — derive from burden of proof counts
+  const bop = reconcileResult.burden_of_proof_applied || [];
+  // Bull indicators: inferences where Layer 3 found thesis support and Layer 4 kept them
+  const bullCount = bop.filter(b =>
+    (b.final_weight === 'full' || b.final_weight === 'reduced_50') &&
+    !b.contradicts_data
+  ).length;
+  // Bear indicators: inferences stripped, rejected, or where null hypothesis held
+  const bearCount = bop.filter(b =>
+    b.final_weight === 'stripped' || b.final_weight === 'rejected' || b.final_weight === 'reduced_75' ||
+    b.layer3_classification === 'NULL_HYPOTHESIS_HOLDS'
+  ).length;
+  const biasCheck = {
+    bull_indicators:      bullCount,
+    bear_indicators:      bearCount,
+    ratio:                `${bullCount}:${bearCount}`,
+    assessment:           reconcileResult.pressure_reasoning || '',
+    recommended_additions: null
+  };
+
+  // 5. kill_switches[] — reshape from Layer 4's kill_switch_review[]
+  const killSwitches = (reconcileResult.kill_switch_review || []).map(ks => {
+    const statusMap = {
+      GREEN:      'safe',
+      MONITORING: 'warning',
+      WARNING:    'danger',
+      TRIGGERED:  'triggered'
+    };
+    return {
+      name:   ks.criterion,
+      status: statusMap[ks.final_status] || 'no_data',
+      detail: ks.reasoning || ''
+    };
+  });
+
+  // 6. Top-level scalar fields
+  const bearPressure = reconcileResult.final_bear_pressure ?? 0;
+  const scoreDelta = bearPressure - (previousScore || 0);
+
+  const dashCompat = {
+    // Fields the dashboard reads directly
+    commander_summary:          reconcileResult.final_report || '',
+    bear_pressure_score:        bearPressure,
+    score_delta:                scoreDelta,
+    score_reasoning:            reconcileResult.pressure_reasoning || '',
+    tactical_recommendation:    reconcileResult.tactical_recommendation || 'INCREASE_MONITORING',
+    recommendation_reasoning:   reconcileResult.recommendation_reasoning || '',
+    threat_matrix:              threatMatrix,
+    compounding_risks:          compoundingRisks,
+    blind_spots:                blindSpots,
+    bias_check:                 biasCheck,
+    kill_switches:              killSwitches,
+    new_kill_switches_recommended: [],
+
+    // Preserve the raw four-layer output for audit/debugging
+    // The dashboard ignores these fields, but they're available for inspection
+    _layer4_raw: reconcileResult,
+    _layer3_raw: inferenceResult,
+    _layer2_raw: contextualizeResult,
+    _pipeline_version: '4-layer-v1',
+    _generated_at: new Date().toISOString()
+  };
+
+  log('bridge', `Bridge complete: score=${bearPressure}, delta=${scoreDelta}, rec=${dashCompat.tactical_recommendation}, threats=${threatMatrix.length}`);
+  return dashCompat;
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log('\n━━━ Overwatch Terminal — Stage 3 Analysis ━━━');
+  console.log('\n━━━ Overwatch Terminal — Four-Layer Analysis ━━━');
   console.log(`Started: ${new Date().toISOString()}\n`);
 
   // 1. Load dashboard data
@@ -782,15 +1472,25 @@ async function main() {
   const runType = getRunType();
   log('run', `Run type: ${runType}`);
 
-  // 4. Run 360 two-pass sweep (before main analysis — falls back gracefully on failure)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FOUR-LAYER PIPELINE: SWEEP → CONTEXTUALIZE → INFER → RECONCILE
+  // Each layer receives ONLY the output of the layer before it.
+  // If any layer fails, the pipeline degrades gracefully.
+  // ═══════════════════════════════════════════════════════════════════════════
+
   let assessment360 = null;
   const previousBearScore = dashboardData.bear_case?.counter_thesis_score ?? 50;
 
-  console.log('\n360 SWEEP: starting...');
+  // ── Layer 1: SWEEP ──────────────────────────────────────────────────────
+  console.log('\n═══ LAYER 1: SWEEP ═══');
   const sweepResults = await runSweep(dashboardData);
 
+  if (sweepResults.length === 0) {
+    warn('pipeline', 'Layer 1 SWEEP returned empty — four-layer pipeline cannot run');
+  }
+
   if (sweepResults.length > 0) {
-    // Prune to top 15 threats: critical → high → moderate → low, preserving original order within tier
+    // Prune to top 15 threats: critical → high → moderate → low
     const SEVERITY_RANK = { critical: 0, high: 1, moderate: 2, low: 3 };
     let threatsToAssess = sweepResults;
     if (sweepResults.length > 15) {
@@ -800,18 +1500,114 @@ async function main() {
         .slice(0, 15)
         .sort((a, b) => a.i - b.i)
         .map(({ t }) => t);
-      console.log(`[360] PRUNE: trimmed sweep from ${sweepResults.length} to 15 threats`);
+      log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 threats`);
     }
-    console.log(`360 ASSESS: starting with ${threatsToAssess.length} threats from sweep`);
-    assessment360 = await runAssessment(threatsToAssess, dashboardData, previousBearScore);
-    if (assessment360) {
-      log('360', `Assessment complete — bear pressure: ${assessment360.bear_pressure_score}, recommendation: ${assessment360.tactical_recommendation}`);
+
+    // ── Layer 2: CONTEXTUALIZE ────────────────────────────────────────────
+    console.log('\n═══ LAYER 2: CONTEXTUALIZE ═══');
+    const contextualizeResult = await runContextualize(threatsToAssess, dashboardData, previousBearScore, thesisContext);
+
+    if (contextualizeResult) {
+      // ── Layer 3: INFER ──────────────────────────────────────────────────
+      console.log('\n═══ LAYER 3: INFER ═══');
+      const inferenceResult = await runInfer(contextualizeResult, dashboardData, thesisContext);
+
+      if (inferenceResult) {
+        // ── Layer 4: RECONCILE ────────────────────────────────────────────
+        console.log('\n═══ LAYER 4: RECONCILE ═══');
+        const reconcileResult = await runReconcile(contextualizeResult, inferenceResult, dashboardData, thesisContext);
+
+        if (reconcileResult) {
+          // ── Compatibility Bridge ──────────────────────────────────────
+          assessment360 = buildDashboardCompatible(reconcileResult, contextualizeResult, inferenceResult, previousBearScore);
+          log('pipeline', '✓ Full four-layer pipeline complete');
+        } else {
+          // Layer 4 failed — fall back to Layer 2 output via old bridge
+          warn('pipeline', 'Layer 4 failed — using Layer 2 output as fallback');
+          assessment360 = {
+            commander_summary: contextualizeResult.layer2_summary || '',
+            bear_pressure_score: contextualizeResult.bear_pressure ?? 0,
+            score_delta: (contextualizeResult.bear_pressure ?? 0) - previousBearScore,
+            score_reasoning: contextualizeResult.bear_pressure_reasoning || '',
+            tactical_recommendation: 'INCREASE_MONITORING',
+            recommendation_reasoning: 'Layer 4 RECONCILE failed. Using Layer 2 data only. Increase monitoring until full pipeline is restored.',
+            threat_matrix: [],
+            compounding_risks: [],
+            blind_spots: [],
+            bias_check: { bull_indicators: 0, bear_indicators: 0, ratio: '0:0', assessment: 'Pipeline degraded — Layer 4 unavailable' },
+            kill_switches: [],
+            new_kill_switches_recommended: [],
+            _pipeline_version: '2-layer-fallback',
+            _generated_at: new Date().toISOString()
+          };
+        }
+      } else {
+        // Layer 3 failed — fall back to Layer 2 output
+        warn('pipeline', 'Layer 3 failed — using Layer 2 output as fallback');
+        assessment360 = {
+          commander_summary: contextualizeResult.layer2_summary || '',
+          bear_pressure_score: contextualizeResult.bear_pressure ?? 0,
+          score_delta: (contextualizeResult.bear_pressure ?? 0) - previousBearScore,
+          score_reasoning: contextualizeResult.bear_pressure_reasoning || '',
+          tactical_recommendation: 'INCREASE_MONITORING',
+          recommendation_reasoning: 'Layer 3 INFER failed. Using Layer 2 data only. Strategic reasoning unavailable.',
+          threat_matrix: [],
+          compounding_risks: [],
+          blind_spots: [],
+          bias_check: { bull_indicators: 0, bear_indicators: 0, ratio: '0:0', assessment: 'Pipeline degraded — Layers 3-4 unavailable' },
+          kill_switches: [],
+          new_kill_switches_recommended: [],
+          _pipeline_version: '2-layer-fallback',
+          _generated_at: new Date().toISOString()
+        };
+      }
     } else {
-      warn('360', 'Assessment returned null — falling back to standard analysis');
+      warn('pipeline', 'Layer 2 failed — four-layer pipeline cannot continue');
     }
-  } else {
-    warn('360', 'Sweep returned empty — falling back to standard analysis');
   }
+
+  // ── Write 360 report and history ──────────────────────────────────────────
+  if (assessment360) {
+    try {
+      const reportPath = path.join(__dirname, '..', 'data', '360-report.json');
+      fs.writeFileSync(reportPath, JSON.stringify(assessment360, null, 2));
+      log('io', '360-report.json updated');
+    } catch (e) {
+      err('io', `Failed to write 360-report.json: ${e.message}`);
+    }
+
+    try {
+      const historyPath = path.join(__dirname, '..', 'data', '360-history.json');
+      let history = [];
+      if (fs.existsSync(historyPath)) {
+        history = JSON.parse(fs.readFileSync(historyPath, 'utf8'));
+      }
+      const historyEntry = {
+        timestamp: new Date().toISOString(),
+        ...assessment360
+      };
+      // Don't store raw layer data in history — too large
+      delete historyEntry._layer4_raw;
+      delete historyEntry._layer3_raw;
+      delete historyEntry._layer2_raw;
+      history.push(historyEntry);
+      if (history.length > 60) {
+        history = history.slice(-60);
+      }
+      fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+      log('io', `360-history.json updated (${history.length} entries)`);
+    } catch (e) {
+      err('io', `Failed to update 360-history.json: ${e.message}`);
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MAIN ANALYSIS CALL (legacy — produces dashboard primary data)
+  // This will be replaced by the four-layer pipeline once verified.
+  // For now, both run. The 360 pipeline feeds bear_case overlay only.
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  console.log('\n═══ MAIN ANALYSIS (legacy) ═══');
 
   // 5. Build prompt
   const newsHeadlines = dashboardData.news?.headlines ?? [];
@@ -900,13 +1696,13 @@ IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete
   analysis.timestamp = analysis.timestamp ?? new Date().toISOString();
   analysis.run_type  = analysis.run_type  ?? runType;
 
-  // Overlay 360 results if the two-pass system succeeded
+  // Overlay 360 results if the four-layer pipeline (or fallback) succeeded
   if (assessment360) {
     analysis.bear_case = analysis.bear_case ?? {};
     analysis.bear_case.counter_thesis_score = assessment360.bear_pressure_score;
     analysis.bear_case.bear_narrative       = assessment360.commander_summary;
     analysis.assessment_360                 = assessment360;
-    log('360', 'Overlaid 360 bear pressure score and commander summary onto analysis');
+    log('pipeline', 'Overlaid 360 bear pressure score and commander summary onto analysis');
   }
 
   // 6. Write analysis-output.json
@@ -971,9 +1767,6 @@ IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete
   }
 
   // 7. Send Telegram notification
-  // Append one-line pipeline health status from fetch stage if available.
-  // WHY: surface data source degradation in every briefing without touching
-  // the message formatter — analyst sees it, no format logic changes needed.
   let pipelineHealthLine = '⚡ Pipeline: health check unavailable';
   try {
     const healthPath = path.join(__dirname, 'pipeline-health.json');
@@ -982,7 +1775,17 @@ IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete
       pipelineHealthLine = `⚡ Pipeline: ${h.fields_populated}/${h.fields_total} sources | ${h.status}`;
     }
   } catch (_) {}
-  const message = formatTelegramMessage(analysis, dashboardData) + '\n' + pipelineHealthLine;
+
+  // Add four-layer pipeline status to Telegram
+  const pipelineVersion = assessment360?._pipeline_version ?? 'not-run';
+  const pipelineStatus = pipelineVersion === '4-layer-v1'
+    ? '🟢 4-LAYER'
+    : pipelineVersion.includes('fallback')
+    ? '🟡 DEGRADED'
+    : '🔴 OFFLINE';
+  const fourLayerLine = `🏗️ Pipeline: ${pipelineStatus} (${pipelineVersion})`;
+
+  const message = formatTelegramMessage(analysis, dashboardData) + '\n' + pipelineHealthLine + '\n' + fourLayerLine;
   await sendTelegram(message);
 
   console.log('\n─── Analysis Summary ───────────────────────────');
@@ -991,6 +1794,9 @@ IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete
   console.log(`Score changes:   ${(analysis.scorecard_updates ?? []).filter(s => s.recommended_status !== s.previous_status).length}`);
   console.log(`Alerts:          ${(analysis.alerts ?? []).length}`);
   console.log(`Events drafted:  ${(analysis.events_draft ?? []).length}`);
+  console.log(`4-Layer:         ${pipelineStatus}`);
+  console.log(`Bear pressure:   ${assessment360?.bear_pressure_score ?? 'N/A'}`);
+  console.log(`Recommendation:  ${assessment360?.tactical_recommendation ?? 'N/A'}`);
   console.log('───────────────────────────────────────────────\n');
 
   console.log(`Done: ${new Date().toISOString()}`);
