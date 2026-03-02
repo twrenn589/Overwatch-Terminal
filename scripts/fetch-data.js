@@ -161,6 +161,53 @@ async function fetchFRED(seriesLabel, url, fallbackValue) {
   }
 }
 
+// ─── Stooq fetcher (CSV) ──────────────────────────────────────────────────────
+
+async function fetchStooq(label, url, fallbackValue) {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10_000);
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const lines = text.trim().split('\n');
+    if (lines.length < 2) throw new Error('No data rows in CSV');
+    const values = lines[1].split(',');
+    // Stooq CSV columns: Symbol,Date,Time,Open,High,Low,Close,Volume
+    const close = parseFloat(values[6]);
+    if (isNaN(close)) throw new Error('Could not parse close price');
+    log('Stooq', `${label} = ${close} (date: ${values[1]})`);
+    return close;
+  } catch (e) {
+    err('Stooq', `${label}: ${e.message}`);
+    return fallbackValue ?? null;
+  }
+}
+
+// ─── Twelve Data fetcher ──────────────────────────────────────────────────────
+
+async function fetchTwelveData(label, url, fallbackValue) {
+  const key = process.env.TWELVE_DATA_KEY;
+  if (!key) {
+    warn('TwelveData', `TWELVE_DATA_KEY not set — skipping ${label}`);
+    return fallbackValue ?? null;
+  }
+  try {
+    const fullUrl = `${url}&apikey=${encodeURIComponent(key)}`;
+    const data = await fetchJSON(fullUrl);
+    if (data.status === 'error') throw new Error(data.message || 'API error');
+    const value = parseFloat(data?.values?.[0]?.close);
+    if (isNaN(value)) throw new Error('Could not parse close value');
+    const date = data?.values?.[0]?.datetime ?? 'unknown';
+    log('TwelveData', `${label} = ${value} (date: ${date})`);
+    return value;
+  } catch (e) {
+    err('TwelveData', `${label}: ${e.message}`);
+    return fallbackValue ?? null;
+  }
+}
+
 // ─── Kill-switch helpers ──────────────────────────────────────────────────────
 
 function pct(current, target) {
@@ -231,9 +278,15 @@ async function main() {
   ]);
 
   // FRED calls are sequential to avoid hammering the API
-  const jpn10y = await fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, existing?.macro?.jpn_10y);
   const brent  = await fetchFRED('BRENT',   ENDPOINTS.fred.brent,   existing?.macro?.brent_crude);
   const us10y  = await fetchFRED('US_10Y',  ENDPOINTS.fred.us_10y,  existing?.macro?.us_10y_yield);
+
+  // Stooq — daily JGB 10Y (replaces stale FRED monthly)
+  const jpn10y = await fetchStooq('JPN_10Y', ENDPOINTS.stooq.jpn_10y, existing?.macro?.jpn_10y);
+
+  // Twelve Data — DXY and S&P 500
+  const dxy   = await fetchTwelveData('DXY',   ENDPOINTS.twelve_data.dxy,   existing?.macro?.dxy);
+  const sp500 = await fetchTwelveData('SP500', ENDPOINTS.twelve_data.sp500, existing?.macro?.sp500);
 
   // Preserve manually-managed fields from existing JSON (never overwrite with null)
   const manual = {
@@ -264,9 +317,11 @@ async function main() {
     rlusd,
     macro: {
       usd_jpy:       usdJpy,
-      jpn_10y: jpn10y,
+      jpn_10y:       jpn10y,
       us_10y_yield:  us10y,
       brent_crude:   brent,
+      dxy:           dxy,
+      sp500:         sp500,
       fear_greed:    fearGreed,
     },
     manual,
@@ -284,6 +339,8 @@ async function main() {
   console.log(`JPN 10Y yield:   ${jpn10y ?? 'N/A'}%`);
   console.log(`US 10Y yield:    ${us10y ?? 'N/A'}%`);
   console.log(`Brent crude:     $${brent ?? 'N/A'}`);
+  console.log(`DXY:             ${dxy ?? 'N/A'}`);
+  console.log(`S&P 500:         ${sp500 ?? 'N/A'}`);
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'})`);
   console.log('───────────────────────────────────────────────\n');
 
