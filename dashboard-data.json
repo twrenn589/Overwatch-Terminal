@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-03T17:22:59.229Z",
+  "updated": "2026-03-03T17:26:46.443Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.36,
-    "change_24h": -3.13736154594694,
-    "volume_24h": 3281674737.1299047,
-    "market_cap": 83023149719.82253,
+    "change_24h": -3.0080593640280857,
+    "volume_24h": 3285110209.2439265,
+    "market_cap": 83115144479.2557,
     "data_date": "2026-03-03",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1583663833.888376,
+    "market_cap": 1583385279.0073118,
     "data_date": "2026-03-03",
     "source": "coingecko"
   },
@@ -31,17 +31,17 @@
       "source": "fred"
     },
     "brent_crude": {
-      "value": 83.204,
+      "value": 82.79,
       "data_date": "2026-03-03",
       "source": "financeflow"
     },
     "dxy": {
-      "value": null,
-      "data_date": null,
-      "source": "twelve_data"
+      "value": 99.2241,
+      "data_date": "2026-03-03",
+      "source": "financeflow"
     },
     "sp500": {
-      "value": 6792.03,
+      "value": 6795.57,
       "data_date": "2026-03-03",
       "source": "stooq"
     },
@@ -60,12 +60,12 @@
         "created_at": "2026-03-03T14:02:36.000Z",
         "tweet_id": "2028833421816987709",
         "metrics": {
-          "retweet_count": 870,
+          "retweet_count": 877,
           "reply_count": 133,
-          "like_count": 3141,
-          "quote_count": 89,
-          "bookmark_count": 199,
-          "impression_count": 164985
+          "like_count": 3152,
+          "quote_count": 90,
+          "bookmark_count": 201,
+          "impression_count": 167711
         },
         "tier": 1,
         "weight": 3
@@ -81,7 +81,7 @@
           "like_count": 8,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 967
+          "impression_count": 972
         },
         "tier": 1,
         "weight": 3
@@ -97,7 +97,7 @@
           "like_count": 11,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 725
+          "impression_count": 729
         },
         "tier": 1,
         "weight": 3
@@ -113,7 +113,7 @@
           "like_count": 11,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 861
+          "impression_count": 865
         },
         "tier": 1,
         "weight": 3
@@ -129,7 +129,7 @@
           "like_count": 5,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 1076
+          "impression_count": 1080
         },
         "tier": 1,
         "weight": 3
@@ -145,7 +145,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 678
+          "impression_count": 680
         },
         "tier": 1,
         "weight": 3
@@ -161,7 +161,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 669
+          "impression_count": 671
         },
         "tier": 1,
         "weight": 3
@@ -177,7 +177,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 567
+          "impression_count": 569
         },
         "tier": 1,
         "weight": 3
@@ -193,7 +193,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 594
+          "impression_count": 596
         },
         "tier": 1,
         "weight": 3
@@ -209,7 +209,7 @@
           "like_count": 91,
           "quote_count": 0,
           "bookmark_count": 4,
-          "impression_count": 10385
+          "impression_count": 10406
         },
         "tier": 1,
         "weight": 3
@@ -225,7 +225,7 @@
           "like_count": 490,
           "quote_count": 3,
           "bookmark_count": 15,
-          "impression_count": 61716
+          "impression_count": 61745
         },
         "tier": 1,
         "weight": 3
@@ -241,7 +241,7 @@
           "like_count": 151,
           "quote_count": 2,
           "bookmark_count": 10,
-          "impression_count": 21678
+          "impression_count": 21765
         },
         "tier": 1,
         "weight": 3
@@ -257,7 +257,7 @@
           "like_count": 648,
           "quote_count": 19,
           "bookmark_count": 66,
-          "impression_count": 128580
+          "impression_count": 129031
         },
         "tier": 1,
         "weight": 3
@@ -270,10 +270,10 @@
         "metrics": {
           "retweet_count": 26,
           "reply_count": 8,
-          "like_count": 435,
+          "like_count": 436,
           "quote_count": 0,
           "bookmark_count": 14,
-          "impression_count": 20723
+          "impression_count": 20761
         },
         "tier": 1,
         "weight": 3
@@ -289,7 +289,7 @@
           "like_count": 390,
           "quote_count": 9,
           "bookmark_count": 19,
-          "impression_count": 66544
+          "impression_count": 66708
         },
         "tier": 1,
         "weight": 3
@@ -305,7 +305,7 @@
           "like_count": 175,
           "quote_count": 0,
           "bookmark_count": 15,
-          "impression_count": 18645
+          "impression_count": 18678
         },
         "tier": 1,
         "weight": 3
@@ -316,12 +316,12 @@
         "created_at": "2026-03-03T01:14:06.000Z",
         "tweet_id": "2028640023579599245",
         "metrics": {
-          "retweet_count": 1631,
-          "reply_count": 292,
-          "like_count": 7828,
+          "retweet_count": 1632,
+          "reply_count": 293,
+          "like_count": 7834,
           "quote_count": 116,
           "bookmark_count": 731,
-          "impression_count": 418967
+          "impression_count": 419879
         },
         "tier": 1,
         "weight": 3
@@ -334,10 +334,10 @@
         "metrics": {
           "retweet_count": 478,
           "reply_count": 130,
-          "like_count": 3455,
-          "quote_count": 39,
+          "like_count": 3456,
+          "quote_count": 40,
           "bookmark_count": 234,
-          "impression_count": 162303
+          "impression_count": 162509
         },
         "tier": 1,
         "weight": 3
@@ -384,10 +384,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 1,
+          "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 1901
+          "impression_count": 2649
         },
         "tier": 2,
         "weight": 2
@@ -398,12 +398,12 @@
         "created_at": "2026-03-03T17:15:05.000Z",
         "tweet_id": "2028881862693900421",
         "metrics": {
-          "retweet_count": 8,
-          "reply_count": 9,
-          "like_count": 29,
+          "retweet_count": 14,
+          "reply_count": 12,
+          "like_count": 43,
           "quote_count": 0,
           "bookmark_count": 2,
-          "impression_count": 2301
+          "impression_count": 3376
         },
         "tier": 2,
         "weight": 2
@@ -414,12 +414,12 @@
         "created_at": "2026-03-03T17:14:36.000Z",
         "tweet_id": "2028881742355153129",
         "metrics": {
-          "retweet_count": 163,
-          "reply_count": 263,
-          "like_count": 1233,
-          "quote_count": 34,
-          "bookmark_count": 51,
-          "impression_count": 30945
+          "retweet_count": 218,
+          "reply_count": 310,
+          "like_count": 1699,
+          "quote_count": 44,
+          "bookmark_count": 69,
+          "impression_count": 53567
         },
         "tier": 2,
         "weight": 2
@@ -430,12 +430,12 @@
         "created_at": "2026-03-03T16:45:07.000Z",
         "tweet_id": "2028874319506346290",
         "metrics": {
-          "retweet_count": 112,
-          "reply_count": 318,
-          "like_count": 1738,
-          "quote_count": 28,
+          "retweet_count": 119,
+          "reply_count": 333,
+          "like_count": 1845,
+          "quote_count": 29,
           "bookmark_count": 8,
-          "impression_count": 61465
+          "impression_count": 66964
         },
         "tier": 2,
         "weight": 2
@@ -446,12 +446,12 @@
         "created_at": "2026-03-03T16:31:06.000Z",
         "tweet_id": "2028870793300525183",
         "metrics": {
-          "retweet_count": 90,
-          "reply_count": 24,
-          "like_count": 359,
-          "quote_count": 12,
+          "retweet_count": 97,
+          "reply_count": 25,
+          "like_count": 391,
+          "quote_count": 14,
           "bookmark_count": 37,
-          "impression_count": 13548
+          "impression_count": 14608
         },
         "tier": 2,
         "weight": 2
@@ -464,10 +464,10 @@
         "metrics": {
           "retweet_count": 2,
           "reply_count": 4,
-          "like_count": 10,
+          "like_count": 11,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 2995
+          "impression_count": 3084
         },
         "tier": 2,
         "weight": 2
@@ -478,7 +478,7 @@
         "created_at": "2026-03-03T16:18:42.000Z",
         "tweet_id": "2028867672947950062",
         "metrics": {
-          "retweet_count": 51,
+          "retweet_count": 52,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -494,12 +494,12 @@
         "created_at": "2026-03-03T15:58:47.000Z",
         "tweet_id": "2028862659639255210",
         "metrics": {
-          "retweet_count": 301,
-          "reply_count": 250,
-          "like_count": 2386,
+          "retweet_count": 308,
+          "reply_count": 253,
+          "like_count": 2437,
           "quote_count": 36,
-          "bookmark_count": 81,
-          "impression_count": 124625
+          "bookmark_count": 82,
+          "impression_count": 129622
         },
         "tier": 2,
         "weight": 2
@@ -512,10 +512,10 @@
         "metrics": {
           "retweet_count": 32,
           "reply_count": 0,
-          "like_count": 169,
+          "like_count": 170,
           "quote_count": 5,
           "bookmark_count": 13,
-          "impression_count": 9998
+          "impression_count": 10417
         },
         "tier": 2,
         "weight": 2
@@ -531,7 +531,7 @@
           "like_count": 37,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 3338
+          "impression_count": 3395
         },
         "tier": 2,
         "weight": 2
@@ -547,7 +547,7 @@
           "like_count": 5,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 5339
+          "impression_count": 5402
         },
         "tier": 2,
         "weight": 2
@@ -560,10 +560,10 @@
         "metrics": {
           "retweet_count": 39,
           "reply_count": 37,
-          "like_count": 196,
+          "like_count": 202,
           "quote_count": 2,
           "bookmark_count": 14,
-          "impression_count": 14485
+          "impression_count": 14828
         },
         "tier": 2,
         "weight": 2
@@ -579,7 +579,7 @@
           "like_count": 55,
           "quote_count": 2,
           "bookmark_count": 2,
-          "impression_count": 8356
+          "impression_count": 8426
         },
         "tier": 2,
         "weight": 2
@@ -627,7 +627,7 @@
           "like_count": 28,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 2730
+          "impression_count": 2748
         },
         "tier": 2,
         "weight": 2
@@ -640,10 +640,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 1,
-          "like_count": 53,
+          "like_count": 54,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 3312
+          "impression_count": 3329
         },
         "tier": 2,
         "weight": 2
@@ -656,10 +656,10 @@
         "metrics": {
           "retweet_count": 78,
           "reply_count": 26,
-          "like_count": 471,
+          "like_count": 474,
           "quote_count": 7,
           "bookmark_count": 15,
-          "impression_count": 14029
+          "impression_count": 14275
         },
         "tier": 2,
         "weight": 2
@@ -671,11 +671,11 @@
         "tweet_id": "2028832245364969970",
         "metrics": {
           "retweet_count": 35,
-          "reply_count": 74,
-          "like_count": 195,
-          "quote_count": 13,
+          "reply_count": 76,
+          "like_count": 196,
+          "quote_count": 14,
           "bookmark_count": 18,
-          "impression_count": 33262
+          "impression_count": 33516
         },
         "tier": 2,
         "weight": 2
@@ -686,18 +686,18 @@
         "created_at": "2026-03-03T13:49:04.000Z",
         "tweet_id": "2028830018688651608",
         "metrics": {
-          "retweet_count": 1845,
+          "retweet_count": 1855,
           "reply_count": 413,
-          "like_count": 11628,
+          "like_count": 11671,
           "quote_count": 119,
-          "bookmark_count": 384,
-          "impression_count": 455712
+          "bookmark_count": 385,
+          "impression_count": 461996
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-03T17:22:58.595Z",
+    "fetched_at": "2026-03-03T17:26:45.920Z",
     "post_count": 40,
     "errors": []
   },
@@ -719,7 +719,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1583663833.888376,
+      "current": 1583385279.0073118,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
