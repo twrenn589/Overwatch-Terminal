@@ -1,2 +1,7 @@
 scripts/node_modules
 scripts/.env
+scripts/.env.save
+scripts/package-lock.json
+*.backup
+.DS_Store
+scripts/.DS_Store
