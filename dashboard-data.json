@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-03T02:27:34.161Z",
+  "updated": "2026-03-03T15:21:26.342Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.38,
-    "change_24h": 1.3202118781809613,
-    "volume_24h": 3587271193.332408,
-    "market_cap": 84208812717.32155,
+    "price": 1.35,
+    "change_24h": -3.516571345258776,
+    "volume_24h": 3116976711.036134,
+    "market_cap": 82298669254.8335,
     "data_date": "2026-03-03",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1583579199.6000812,
+    "market_cap": 1583346552.4248762,
     "data_date": "2026-03-03",
     "source": "coingecko"
   },
@@ -48,6 +48,655 @@
       "source": "alternative.me"
     }
   },
+  "x_intelligence": {
+    "tier1_posts": [
+      {
+        "username": "Ripple",
+        "text": "Ripple Payments now gives businesses everything they need to move money globally across fiat and digital rails in one place: collect, hold, exchange, and pay out in both fiat and stablecoins: https://t.co/pbDNA3Nq9Y\n\n➡️ Managed Custody\n➡️ Unified Collections\n➡️ Advanced Liquidity",
+        "created_at": "2026-03-03T14:02:36.000Z",
+        "tweet_id": "2028833421816987709",
+        "metrics": {
+          "retweet_count": 581,
+          "reply_count": 103,
+          "like_count": 2041,
+          "quote_count": 65,
+          "bookmark_count": 113,
+          "impression_count": 71633
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@Tiozaka @sciencegirl Then the man would have to be both 170 (first picture) and 200 (second picture), which is impossible.",
+        "created_at": "2026-03-03T08:09:33.000Z",
+        "tweet_id": "2028744574072700970",
+        "metrics": {
+          "retweet_count": 2,
+          "reply_count": 5,
+          "like_count": 7,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 813
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@grok @aquariusflux @sciencegirl The man alone is not 170. Look at the second picture again.",
+        "created_at": "2026-03-03T08:07:02.000Z",
+        "tweet_id": "2028743939872657777",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 0,
+          "like_count": 9,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 614
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@sunsetscholar27 You would see a hundred world records broken in one day.",
+        "created_at": "2026-03-03T06:14:09.000Z",
+        "tweet_id": "2028715532543803764",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 4,
+          "like_count": 9,
+          "quote_count": 1,
+          "bookmark_count": 0,
+          "impression_count": 755
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@schinskytrades @mwfowlie Except that's what they said it was for! For example, see the paragraph beginning \"A market on\" in this post: \nhttps://t.co/GGtCrzmzop",
+        "created_at": "2026-03-03T05:53:14.000Z",
+        "tweet_id": "2028710270386975041",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 940
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@DarkEndMoon1 @mrddmia @RonColeman I'm not saying that wouldn't be a good rule to have. I am saying that the claim that it's obvious that it's the case seems quite absurd without some citation to some authority holding so.",
+        "created_at": "2026-03-03T04:40:03.000Z",
+        "tweet_id": "2028691850958377221",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 613
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@DarkEndMoon1 @mrddmia @RonColeman It is not obvious to me that given that Congress has the power to create or destroy courts inferior to the Supreme Court, they nevertheless don't have the power to monitor with little or no restriction what goes on in those inferior courts.",
+        "created_at": "2026-03-03T04:38:53.000Z",
+        "tweet_id": "2028691557436789065",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 604
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@dogg_not @RAHarrisonPA @RobertFreundLaw @DrSarteschi Also, to address the libel issue more directly, we don't hold people liable for libel absent some evidence of wrongdoing. If, with no wrongdoing, I libel you and cause you severe damages, you still have no remedy at law in the United States.\n\nWhy do we do this? Because we don't",
+        "created_at": "2026-03-03T04:36:04.000Z",
+        "tweet_id": "2028690849920672063",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 514
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@dogg_not @RAHarrisonPA @RobertFreundLaw @DrSarteschi No.\n\n\"The AI's speech is that of its creator\" is not at all what I'm saying. I'm saying the AI is a tool that the creator is using to speak. These are not the same thing at all.\n\nIf I hand you a book written by someone else to explain to you my opinion of Donald Trump, I am using",
+        "created_at": "2026-03-03T04:33:56.000Z",
+        "tweet_id": "2028690311531356311",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 540
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@mrddmia @RonColeman Do you have any citation to precedential holdings that make it obvious that they couldn't do so even if a statute says they can? It's certainly not obvious to me.",
+        "created_at": "2026-03-03T02:20:45.000Z",
+        "tweet_id": "2028656794248036767",
+        "metrics": {
+          "retweet_count": 2,
+          "reply_count": 8,
+          "like_count": 91,
+          "quote_count": 0,
+          "bookmark_count": 4,
+          "impression_count": 9882
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@reeeesistance These guys get a pass though. https://t.co/F5aWGtFWG7",
+        "created_at": "2026-03-03T02:13:54.000Z",
+        "tweet_id": "2028655073476448508",
+        "metrics": {
+          "retweet_count": 4,
+          "reply_count": 43,
+          "like_count": 480,
+          "quote_count": 3,
+          "bookmark_count": 15,
+          "impression_count": 60638
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@Britannica \"Holmes?! Are you in bed with some sort of a schoolgirl?!\"",
+        "created_at": "2026-03-03T01:46:23.000Z",
+        "tweet_id": "2028648146054918157",
+        "metrics": {
+          "retweet_count": 6,
+          "reply_count": 14,
+          "like_count": 144,
+          "quote_count": 2,
+          "bookmark_count": 10,
+          "impression_count": 20159
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@tavXRP @7_paradigm I was hoping I could find something public that I could find a link to, but couldn't. So I don't think I can say anything more.",
+        "created_at": "2026-03-03T01:40:15.000Z",
+        "tweet_id": "2028646602064474410",
+        "metrics": {
+          "retweet_count": 55,
+          "reply_count": 56,
+          "like_count": 625,
+          "quote_count": 18,
+          "bookmark_count": 62,
+          "impression_count": 117406
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@7_paradigm I think it's because this comes from something that's been in the works since a bit before the acquisition was 100% final due to some straggling regulatory approvals.",
+        "created_at": "2026-03-03T01:31:02.000Z",
+        "tweet_id": "2028644285319610661",
+        "metrics": {
+          "retweet_count": 26,
+          "reply_count": 8,
+          "like_count": 423,
+          "quote_count": 0,
+          "bookmark_count": 14,
+          "impression_count": 19925
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@JesterJum Forrrest Gump",
+        "created_at": "2026-03-03T01:24:35.000Z",
+        "tweet_id": "2028642662182736333",
+        "metrics": {
+          "retweet_count": 15,
+          "reply_count": 67,
+          "like_count": 367,
+          "quote_count": 7,
+          "bookmark_count": 17,
+          "impression_count": 58424
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@BallerToy1327 The first episode is so unbelievably good.",
+        "created_at": "2026-03-03T01:16:15.000Z",
+        "tweet_id": "2028640564477092338",
+        "metrics": {
+          "retweet_count": 9,
+          "reply_count": 14,
+          "like_count": 175,
+          "quote_count": 0,
+          "bookmark_count": 15,
+          "impression_count": 17945
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "Seems important. https://t.co/tSiTsdlS3S",
+        "created_at": "2026-03-03T01:14:06.000Z",
+        "tweet_id": "2028640023579599245",
+        "metrics": {
+          "retweet_count": 1585,
+          "reply_count": 281,
+          "like_count": 7610,
+          "quote_count": 114,
+          "bookmark_count": 700,
+          "impression_count": 396544
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@Vet_X0 @AbsGEC @IOHK_Charles @bgarlinghouse @digitalassetbuy @DigPerspectives @johnnykrypto00 Ripple had a lot of opportunities where we could have advocated only for ourselves to the detriment of those who would follow us. We absolutely try as hard as we possibly can not to do that, I don't think we ever have done that, but I also think we would do that if we had to. We",
+        "created_at": "2026-03-03T00:25:02.000Z",
+        "tweet_id": "2028627674156212525",
+        "metrics": {
+          "retweet_count": 468,
+          "reply_count": 127,
+          "like_count": 3392,
+          "quote_count": 38,
+          "bookmark_count": 228,
+          "impression_count": 156514
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@analyst_404 @AriDavidPaul @RecTheRegime I love how you have to put \"in this instance\" at the end otherwise reality completely destroys your point.",
+        "created_at": "2026-03-02T23:52:24.000Z",
+        "tweet_id": "2028619462753034462",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 500
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@dogg_not @RAHarrisonPA @RobertFreundLaw @DrSarteschi And it's quite possible that speaking by embedding your views in an AI could become (some might argue, already is) one of the most effective ways to spread ideas and advocate for them. It is likely no less important as a form of speech as television and the internet.",
+        "created_at": "2026-03-02T23:03:09.000Z",
+        "tweet_id": "2028607070451437850",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 426
+        },
+        "tier": 1,
+        "weight": 3
+      }
+    ],
+    "tier2_posts": [
+      {
+        "username": "CoinDesk",
+        "text": "INSIGHT: On-chain data shows a surge in activity across major Iranian exchanges following the February 28, 2026 U.S.–Israeli airstrikes, with approximately $10.3 million in crypto outflows recorded between February 28 and March 2.\n\n(h/t @chainalysis) https://t.co/OJ7rAOPBEo",
+        "created_at": "2026-03-03T14:53:33.000Z",
+        "tweet_id": "2028846245377089798",
+        "metrics": {
+          "retweet_count": 6,
+          "reply_count": 12,
+          "like_count": 27,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4728
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "RT @CoinDeskMarkets: The CoinDesk 20 is currently trading at 1924.9, down 3.3% (-66.23) since 4 p.m. ET on Monday.\n\nOne of the 20 assets ar…",
+        "created_at": "2026-03-03T14:35:36.000Z",
+        "tweet_id": "2028841727964963094",
+        "metrics": {
+          "retweet_count": 2,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 9
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "RT @DeatonforSenate: Ed Markey coauthored the Green New Deal. He campaigns on it. But when it came time to vote? He voted present. Not yes.…",
+        "created_at": "2026-03-03T14:01:35.000Z",
+        "tweet_id": "2028833166740308272",
+        "metrics": {
+          "retweet_count": 46,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "OndoFinance",
+        "text": "https://t.co/QzAxd8SGhe",
+        "created_at": "2026-03-03T14:01:09.000Z",
+        "tweet_id": "2028833057659126005",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 14,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2004
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "OndoFinance",
+        "text": "More details 👇\n\nhttps://t.co/6N6JQpqZqT",
+        "created_at": "2026-03-03T14:01:09.000Z",
+        "tweet_id": "2028833055691993193",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 35,
+          "quote_count": 1,
+          "bookmark_count": 0,
+          "impression_count": 2473
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "OndoFinance",
+        "text": "Ondo digital securities are the first to be admitted for trading under the ADGM (@Adglobalmarket) framework with their landmark listing on @binance Alpha.\n\nBinance now supports ten Ondo digital securities from Ondo Global Markets on its Multilateral Trading Facility (MTF), which https://t.co/Z8KQ894fgw",
+        "created_at": "2026-03-03T14:01:08.000Z",
+        "tweet_id": "2028833052734964061",
+        "metrics": {
+          "retweet_count": 43,
+          "reply_count": 18,
+          "like_count": 277,
+          "quote_count": 4,
+          "bookmark_count": 10,
+          "impression_count": 6928
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "LATEST: @JPMorgan CEO Jamie Dimon says stablecoins paying yield should be regulated like banks. \n\n\"If you're going to be holding balances and paying interest, that's a bank. You should be regulated like a bank.\" https://t.co/vbnITaJIee",
+        "created_at": "2026-03-03T13:57:55.000Z",
+        "tweet_id": "2028832245364969970",
+        "metrics": {
+          "retweet_count": 27,
+          "reply_count": 50,
+          "like_count": 141,
+          "quote_count": 5,
+          "bookmark_count": 11,
+          "impression_count": 21805
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇮🇶 Iraq shuts down the world's second-largest oil field, Rumaila, following the Strait of Hormuz closure. https://t.co/uLNHhXwegb",
+        "created_at": "2026-03-03T13:49:04.000Z",
+        "tweet_id": "2028830018688651608",
+        "metrics": {
+          "retweet_count": 1213,
+          "reply_count": 379,
+          "like_count": 7788,
+          "quote_count": 87,
+          "bookmark_count": 242,
+          "impression_count": 235702
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: World's third-largest shipping company CMA CGM suspends all Middle East bookings amid US-Israeli war with Iran.",
+        "created_at": "2026-03-03T13:29:07.000Z",
+        "tweet_id": "2028824997960061063",
+        "metrics": {
+          "retweet_count": 334,
+          "reply_count": 189,
+          "like_count": 2699,
+          "quote_count": 18,
+          "bookmark_count": 60,
+          "impression_count": 149025
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "TODAY: A new paper from the European Central Bank warns that growing stablecoin adoption could pull deposits out of banks, constrain lending, and weaken it's ability to transmit monetary policy, with the risks rising sharply as adoption scales. https://t.co/tOPXrYU5Oo",
+        "created_at": "2026-03-03T12:57:41.000Z",
+        "tweet_id": "2028817084218540109",
+        "metrics": {
+          "retweet_count": 49,
+          "reply_count": 61,
+          "like_count": 188,
+          "quote_count": 10,
+          "bookmark_count": 22,
+          "impression_count": 20244
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "NEW: The Bank of Japan will experiment with blockchain to settle deposits held by financial institutions at the central bank, enabling 24/7 instant settlement and reducing gridlock risk in stress events. https://t.co/PM1uzBa3Xs",
+        "created_at": "2026-03-03T11:57:08.000Z",
+        "tweet_id": "2028801847318675899",
+        "metrics": {
+          "retweet_count": 248,
+          "reply_count": 91,
+          "like_count": 1053,
+          "quote_count": 56,
+          "bookmark_count": 138,
+          "impression_count": 121325
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "@FranciscoMemor reportS:\nhttps://t.co/Tni1oPfsRP",
+        "created_at": "2026-03-03T11:08:04.000Z",
+        "tweet_id": "2028789500411773217",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 7,
+          "like_count": 3,
+          "quote_count": 2,
+          "bookmark_count": 0,
+          "impression_count": 9731
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "Latest: @tether released its first reserve report for U.S.-regulated stablecoin $USAT showing $17.6M in reserves backing 17.5M tokens in circulation. https://t.co/R09f44UUCt",
+        "created_at": "2026-03-03T10:52:47.000Z",
+        "tweet_id": "2028785655736590716",
+        "metrics": {
+          "retweet_count": 21,
+          "reply_count": 38,
+          "like_count": 95,
+          "quote_count": 3,
+          "bookmark_count": 4,
+          "impression_count": 13894
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "@btcjvs reports:\nhttps://t.co/kgIWreQ7ZN",
+        "created_at": "2026-03-03T10:09:21.000Z",
+        "tweet_id": "2028774725309038950",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 6,
+          "like_count": 14,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7276
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "INSIGHT: Bitcoin is days away from its 20 millionth coin being mined, over 95% of the total 21M supply now in circulation. \n\nThe final 1 million $BTC will take another 114 years. https://t.co/VXK37iIWnp",
+        "created_at": "2026-03-03T09:46:39.000Z",
+        "tweet_id": "2028769011215786195",
+        "metrics": {
+          "retweet_count": 85,
+          "reply_count": 73,
+          "like_count": 293,
+          "quote_count": 12,
+          "bookmark_count": 14,
+          "impression_count": 19304
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "RT @DeatonforSenate: Too many veterans are still fighting for the care and benefits they were promised. Long wait times. Endless red tape.…",
+        "created_at": "2026-03-03T02:34:46.000Z",
+        "tweet_id": "2028660325579427948",
+        "metrics": {
+          "retweet_count": 27,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "As someone who has represented mesothelioma and lung cancer victims for the last 25 years, all of whom have been on chemotherapy, Congrats to @mcuban.\nWe must break up the 3 vertically integrated insurance companies that have a stranglehold on America’shealthcare system and https://t.co/CF0kFKfo6d",
+        "created_at": "2026-03-03T01:07:59.000Z",
+        "tweet_id": "2028638482294521926",
+        "metrics": {
+          "retweet_count": 16,
+          "reply_count": 3,
+          "like_count": 86,
+          "quote_count": 0,
+          "bookmark_count": 3,
+          "impression_count": 7891
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "https://t.co/RlvGwsEzFB",
+        "created_at": "2026-03-03T00:47:05.000Z",
+        "tweet_id": "2028633224369582287",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 9184
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "The news moves fast. The CoinDesk app keeps you ahead of it\n\nExclusively sponsored by @Grayscale. https://t.co/HUEydL8Gtx",
+        "created_at": "2026-03-03T00:47:02.000Z",
+        "tweet_id": "2028633212541665427",
+        "metrics": {
+          "retweet_count": 5,
+          "reply_count": 13,
+          "like_count": 37,
+          "quote_count": 1,
+          "bookmark_count": 0,
+          "impression_count": 10962
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "The most ridiculous thing I’ve heard in a long time related to the banks. Is that why they debanked so many in the industry? Because they wanted to be treated fairly? https://t.co/cIUBLUg2qt",
+        "created_at": "2026-03-02T23:54:15.000Z",
+        "tweet_id": "2028619929004413412",
+        "metrics": {
+          "retweet_count": 117,
+          "reply_count": 42,
+          "like_count": 721,
+          "quote_count": 3,
+          "bookmark_count": 13,
+          "impression_count": 28622
+        },
+        "tier": 2,
+        "weight": 2
+      }
+    ],
+    "fetched_at": "2026-03-03T15:21:25.719Z",
+    "post_count": 40,
+    "errors": []
+  },
   "manual": {
     "odl_volume_annualized": null,
     "xrp_etf_aum": null,
@@ -66,7 +715,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1583579199.6000812,
+      "current": 1583346552.4248762,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
@@ -124,78 +773,5 @@
       "status": "STRESSED — ELEVATED",
       "confidence": "medium"
     }
-  },
-  "probability": {
-    "bear": 12,
-    "base": 42,
-    "mid": 34,
-    "bull": 12,
-    "last_updated": "2026-03-03T02:38:20.324Z",
-    "last_reasoning": "Shifting 2% from base to bear and 2% from base to mid. Bear increase reflects: XRP at $1.38 (well below $2 base floor), extreme fear at 14, compound stress pre-loaded, multiple data feeds degraded. Mid increase reflects: RLUSD recovery to $1.584B, institutional infrastructure buildout continuing (PermissionedDEX live, Ripple Prime, Metallicus FedNow), 7 ETFs operational. The thesis infrastructure is advancing while market conditions deteriorate — this divergence justifies widening the distribution rather than collapsing toward bear."
-  },
-  "bear_case": {
-    "counter_thesis_score": 52,
-    "score_reasoning": "Elevated from baseline due to: XRP trading 31% below base case floor, extreme fear environment, 3 of 5 automated kill switches lacking data, zero PermissionedDEX adoption after 11 days live, and compound macro stress pre-loaded. Thesis infrastructure is advancing but the market is not validating it, and key metrics remain unverifiable.",
-    "competing_infrastructure": [
-      {
-        "name": "SWIFT GPI",
-        "status": "MONITORING",
-        "status_text": "SWIFT continues incremental upgrades to GPI tracking and pre-validation. 11,500-bank network effects remain the strongest competitive moat. No XRPL integration announced."
-      },
-      {
-        "name": "Visa B2B Connect",
-        "status": "MONITORING",
-        "status_text": "Visa B2B Connect operational across 100+ countries. Enterprise adoption steady. Competes directly for the same cross-border settlement corridors XRP targets."
-      },
-      {
-        "name": "JPMorgan Kinexys",
-        "status": "ELEVATED_RISK",
-        "status_text": "Kinexys (formerly Onyx) processing $2B+/day in institutional transfers. JPMorgan's balance sheet and client base give it distribution advantages Ripple cannot match. Ripple Prime paper explicitly positions against JPMorgan — acknowledges the threat."
-      },
-      {
-        "name": "BIS Project Nexus",
-        "status": "MONITORING",
-        "status_text": "Multi-central-bank initiative to interlink domestic fast payment systems. If successful, could eliminate the need for bridge currencies entirely. Kill Switch #9 tracks this. No live deployment yet but political backing is strong."
-      },
-      {
-        "name": "Ethereum Institutional",
-        "status": "MONITORING",
-        "status_text": "Ethereum L2 ecosystem expanding institutional DeFi. BlackRock BUIDL fund on Ethereum. However, settlement speed and cost still favor XRPL for high-frequency cross-border use cases."
-      }
-    ],
-    "odl_stagnation": "ODL volume data has been unavailable for an extended period — Ripple's decision to stop publishing this data is itself a bearish signal. Without volume proof, the core utility thesis remains an assertion, not a measurement.",
-    "token_velocity_concern": "Token velocity data (Kill Switch #8) remains UNKNOWN. If XRP functions purely as a bridge asset with sub-second hold times, value capture for token holders may be minimal regardless of volume growth. This is the most underexamined bear thesis dimension.",
-    "macro_headwinds": [
-      {
-        "name": "Global Recession Risk",
-        "status": "ELEVATED_RISK",
-        "status_text": "Fear & Greed at 14, compound macro stress pre-loaded, S&P data anomalous but likely declining. Trade war via Section 122 tariffs actively depressing global growth expectations."
-      },
-      {
-        "name": "Crypto Winter Signals",
-        "status": "MONITORING",
-        "status_text": "XRP at $1.38 down significantly from recent highs. Extreme fear readings. However, institutional infrastructure buildout (ETFs, PermissionedDEX, Ripple Prime) is counter-cyclical — not typical of crypto winter capitulation."
-      },
-      {
-        "name": "Regulatory Reversal Risk",
-        "status": "LOW_RISK",
-        "status_text": "Clarity Act pending but SEC/CFTC regulatory posture remains favorable. 7 ETFs approved and operational. No reversal signals detected."
-      },
-      {
-        "name": "Rate Hike Extension",
-        "status": "MONITORING",
-        "status_text": "US 10Y at 3.97% suggests markets pricing some easing. However, BOJ tightening risk is the more relevant rate threat — a BOJ hike compresses the carry trade, triggering global liquidity withdrawal that would pressure all risk assets including XRP."
-      }
-    ],
-    "bear_narrative": "Bear pressure at 52 — thesis underwater but not drowning. Three kill switches at WARNING: ODL volume data classified as SUSPICIOUS_ABSENCE with behavioral evidence suggesting Ripple is pivoting from XRP bridge asset to diversified infrastructure provider; RLUSD stalling at $1.58B needing $11.28M/day to hit target with no visible catalyst; and the ODL transparency kill switch may not be met on its original terms because the product has evolved beyond XRP-specific metrics. The infrastructure story is real — live ETFs, multi-regulator registrations, SBI's ¥10B bonds, record on-chain activity — but the volume story that would convert infrastructure into thesis confirmation remains a black box. Compound stress is pre-loaded with all three legs deteriorating toward elevated simultaneously; one external shock (Hormuz, BOJ surprise) could cascade the macro environment from orderly to disorderly. The paradox holds: the conditions that would most stress this position are the same conditions that most validate the need for alternative settlement infrastructure. INCREASE_MONITORING with Q2 2026 as the next decision gate — if RLUSD doesn't accelerate and ODL data doesn't surface, the recommendation hardens.",
-    "last_updated": "2026-03-03T02:38:20.324Z"
-  },
-  "last_analysis": {
-    "timestamp": "2026-03-03T02:38:20.324Z",
-    "run_type": "evening",
-    "stress_level": "ELEVATED",
-    "stress_score": 62,
-    "applied_at": "2026-03-03T02:39:48.173Z",
-    "changes_applied": 2
   }
 }
