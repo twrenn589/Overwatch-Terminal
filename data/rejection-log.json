@@ -109,5 +109,14 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-03T21:55:29.494Z"
+  },
+  {
+    "layer3_inference": "Institutional Adoption Narrative Is Reflexive Trap — scored as threat",
+    "rejection_reason": "Layer 2 already scored this at 4 after CL-006 correction. Layer 3 did not produce a strategic inference on this threat because its core concern (announcement-to-deployment gap) is already captured by kill switch #7. The 'reflexive trap' framing adds narrative editorializing without new evidence. The threat is redundant with other scored items.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-03T22:30:25.742Z",
+    "source": "layer4_reconcile"
   }
 ]
