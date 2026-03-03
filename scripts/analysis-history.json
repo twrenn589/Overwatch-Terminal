@@ -1147,5 +1147,36 @@
     "events_drafted_count": 0,
     "thesis_pulse": "RLUSD market cap reads $1.584B, recovering from the $1.494B contraction low — a $90M rebound that partially reverses the first-ever decline, though still above the $1.564B prior peak by ~$20M. Kill sw",
     "counter_thesis_score": 52
+  },
+  {
+    "timestamp": "2026-03-03T15:34:13.934Z",
+    "run_type": "morning",
+    "stress_score": 68,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.34,
+    "fear_greed": 14,
+    "usd_jpy": 157.45,
+    "jpn_10y": null,
+    "brent_crude": 71.9,
+    "dxy": null,
+    "sp500": 0.094999999,
+    "etf_daily_flow": null,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1583346552.4248762,
+    "probability_framework": {
+      "bear": 14,
+      "base": 42,
+      "mid": 32,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 3,
+      "TRACKING": 1,
+      "PENDING": 1
+    },
+    "alerts_count": 9,
+    "events_drafted_count": 8,
+    "thesis_pulse": "The thesis enters a critical inflection point. The Hormuz situation has escalated from threat to active disruption — Rumaila shutdown and shipping suspensions are real supply-chain events, not posturi",
+    "counter_thesis_score": 62
   }
 ]

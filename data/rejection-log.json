@@ -52,5 +52,14 @@
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-03T02:38:20.316Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Ripple Payments Pivot — alternative explanation that 'XRP remains primary settlement mechanism but Ripple downplays it for enterprise sales optics'",
+    "rejection_reason": "Not rejected outright, but deprioritized. Layer 3 correctly identified this as the alternative explanation and assessed the primary explanation (genuine strategic diversification) as more likely. I concur. However, I note that the alternative explanation is not falsified — it remains possible. The weight given to the primary explanation is appropriate but should not exclude the possibility that XRP still operates under the hood.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-03T15:34:13.922Z",
+    "source": "layer4_reconcile"
   }
 ]
