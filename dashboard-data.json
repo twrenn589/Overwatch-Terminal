@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-03T17:34:27.098Z",
+  "updated": "2026-03-03T17:58:57.439Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.36,
-    "change_24h": -2.9980338811524607,
-    "volume_24h": 3275231089.1748066,
-    "market_cap": 83113955723.79391,
+    "price": 1.37,
+    "change_24h": -1.6870506873586217,
+    "volume_24h": 3253111008.97166,
+    "market_cap": 83501529217.22865,
     "data_date": "2026-03-03",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1583386333.603248,
+    "market_cap": 1583536703.6910472,
     "data_date": "2026-03-03",
     "source": "coingecko"
   },
@@ -31,17 +31,17 @@
       "source": "fred"
     },
     "brent_crude": {
-      "value": 82.876,
+      "value": 82.283,
       "data_date": "2026-03-03",
       "source": "financeflow"
     },
     "dxy": {
-      "value": 99.2251,
+      "value": 99.2315,
       "data_date": "2026-03-03",
       "source": "financeflow"
     },
     "sp500": {
-      "value": 6781.67,
+      "value": 6790.4,
       "data_date": "2026-03-03",
       "source": "stooq"
     },
@@ -52,6 +52,12 @@
       "source": "alternative.me"
     }
   },
+  "xrpl_metrics": {
+    "ledger_index": 102623681,
+    "rlusd_supply": 345005078.2918869,
+    "data_date": "2026-03-03",
+    "source": "xrpl"
+  },
   "x_intelligence": {
     "tier1_posts": [
       {
@@ -60,12 +66,12 @@
         "created_at": "2026-03-03T14:02:36.000Z",
         "tweet_id": "2028833421816987709",
         "metrics": {
-          "retweet_count": 889,
-          "reply_count": 133,
-          "like_count": 3191,
-          "quote_count": 93,
-          "bookmark_count": 203,
-          "impression_count": 171818
+          "retweet_count": 920,
+          "reply_count": 135,
+          "like_count": 3288,
+          "quote_count": 96,
+          "bookmark_count": 211,
+          "impression_count": 183185
         },
         "tier": 1,
         "weight": 3
@@ -77,11 +83,11 @@
         "tweet_id": "2028744574072700970",
         "metrics": {
           "retweet_count": 2,
-          "reply_count": 5,
-          "like_count": 8,
+          "reply_count": 6,
+          "like_count": 9,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 976
+          "impression_count": 1005
         },
         "tier": 1,
         "weight": 3
@@ -94,10 +100,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 1,
-          "like_count": 11,
+          "like_count": 12,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 734
+          "impression_count": 759
         },
         "tier": 1,
         "weight": 3
@@ -113,7 +119,7 @@
           "like_count": 11,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 867
+          "impression_count": 893
         },
         "tier": 1,
         "weight": 3
@@ -129,7 +135,7 @@
           "like_count": 5,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 1085
+          "impression_count": 1112
         },
         "tier": 1,
         "weight": 3
@@ -145,7 +151,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 681
+          "impression_count": 694
         },
         "tier": 1,
         "weight": 3
@@ -161,7 +167,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 672
+          "impression_count": 686
         },
         "tier": 1,
         "weight": 3
@@ -177,7 +183,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 570
+          "impression_count": 580
         },
         "tier": 1,
         "weight": 3
@@ -193,7 +199,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 597
+          "impression_count": 607
         },
         "tier": 1,
         "weight": 3
@@ -206,10 +212,10 @@
         "metrics": {
           "retweet_count": 2,
           "reply_count": 8,
-          "like_count": 91,
+          "like_count": 92,
           "quote_count": 0,
           "bookmark_count": 4,
-          "impression_count": 10449
+          "impression_count": 10604
         },
         "tier": 1,
         "weight": 3
@@ -222,10 +228,10 @@
         "metrics": {
           "retweet_count": 5,
           "reply_count": 43,
-          "like_count": 490,
+          "like_count": 492,
           "quote_count": 3,
           "bookmark_count": 15,
-          "impression_count": 61781
+          "impression_count": 61926
         },
         "tier": 1,
         "weight": 3
@@ -241,7 +247,7 @@
           "like_count": 152,
           "quote_count": 2,
           "bookmark_count": 10,
-          "impression_count": 21872
+          "impression_count": 22287
         },
         "tier": 1,
         "weight": 3
@@ -252,12 +258,12 @@
         "created_at": "2026-03-03T01:40:15.000Z",
         "tweet_id": "2028646602064474410",
         "metrics": {
-          "retweet_count": 58,
-          "reply_count": 57,
-          "like_count": 649,
-          "quote_count": 19,
-          "bookmark_count": 66,
-          "impression_count": 129666
+          "retweet_count": 59,
+          "reply_count": 58,
+          "like_count": 657,
+          "quote_count": 20,
+          "bookmark_count": 67,
+          "impression_count": 132895
         },
         "tier": 1,
         "weight": 3
@@ -268,12 +274,12 @@
         "created_at": "2026-03-03T01:31:02.000Z",
         "tweet_id": "2028644285319610661",
         "metrics": {
-          "retweet_count": 26,
+          "retweet_count": 27,
           "reply_count": 8,
-          "like_count": 436,
+          "like_count": 440,
           "quote_count": 0,
           "bookmark_count": 14,
-          "impression_count": 20804
+          "impression_count": 20995
         },
         "tier": 1,
         "weight": 3
@@ -286,10 +292,10 @@
         "metrics": {
           "retweet_count": 16,
           "reply_count": 68,
-          "like_count": 391,
-          "quote_count": 9,
+          "like_count": 394,
+          "quote_count": 10,
           "bookmark_count": 19,
-          "impression_count": 66990
+          "impression_count": 67788
         },
         "tier": 1,
         "weight": 3
@@ -305,7 +311,7 @@
           "like_count": 175,
           "quote_count": 0,
           "bookmark_count": 15,
-          "impression_count": 18743
+          "impression_count": 18919
         },
         "tier": 1,
         "weight": 3
@@ -316,12 +322,12 @@
         "created_at": "2026-03-03T01:14:06.000Z",
         "tweet_id": "2028640023579599245",
         "metrics": {
-          "retweet_count": 1633,
-          "reply_count": 293,
-          "like_count": 7846,
+          "retweet_count": 1644,
+          "reply_count": 296,
+          "like_count": 7894,
           "quote_count": 116,
-          "bookmark_count": 732,
-          "impression_count": 421010
+          "bookmark_count": 735,
+          "impression_count": 424785
         },
         "tier": 1,
         "weight": 3
@@ -332,12 +338,12 @@
         "created_at": "2026-03-03T00:25:02.000Z",
         "tweet_id": "2028627674156212525",
         "metrics": {
-          "retweet_count": 478,
+          "retweet_count": 482,
           "reply_count": 130,
-          "like_count": 3460,
+          "like_count": 3470,
           "quote_count": 40,
-          "bookmark_count": 235,
-          "impression_count": 162827
+          "bookmark_count": 236,
+          "impression_count": 163701
         },
         "tier": 1,
         "weight": 3
@@ -353,7 +359,7 @@
           "like_count": 8,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 516
+          "impression_count": 520
         },
         "tier": 1,
         "weight": 3
@@ -369,7 +375,7 @@
           "like_count": 5,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 430
+          "impression_count": 431
         },
         "tier": 1,
         "weight": 3
@@ -378,16 +384,32 @@
     "tier2_posts": [
       {
         "username": "CoinDesk",
+        "text": "Tether and the City of Lugano commit up to CHF 5M ($6.3M) to expand their Bitcoin initiative, aiming to position Lugano as a global digital infrastructure hub.\n\nThe program builds on 400+ merchants already accepting $BTC and $USDT. https://t.co/fBa6mhiK2m",
+        "created_at": "2026-03-03T17:50:00.000Z",
+        "tweet_id": "2028890648716427592",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 7,
+          "like_count": 12,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2343
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
         "text": "@sndr_krisztian reports.\nhttps://t.co/2akBlexseD",
         "created_at": "2026-03-03T17:15:08.000Z",
         "tweet_id": "2028881874656084169",
         "metrics": {
           "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 4,
+          "reply_count": 3,
+          "like_count": 5,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 3450
+          "impression_count": 4756
         },
         "tier": 2,
         "weight": 2
@@ -398,12 +420,12 @@
         "created_at": "2026-03-03T17:15:05.000Z",
         "tweet_id": "2028881862693900421",
         "metrics": {
-          "retweet_count": 22,
-          "reply_count": 19,
-          "like_count": 78,
-          "quote_count": 0,
-          "bookmark_count": 3,
-          "impression_count": 4751
+          "retweet_count": 33,
+          "reply_count": 27,
+          "like_count": 175,
+          "quote_count": 3,
+          "bookmark_count": 7,
+          "impression_count": 8629
         },
         "tier": 2,
         "weight": 2
@@ -414,12 +436,12 @@
         "created_at": "2026-03-03T17:14:36.000Z",
         "tweet_id": "2028881742355153129",
         "metrics": {
-          "retweet_count": 378,
-          "reply_count": 403,
-          "like_count": 3017,
-          "quote_count": 70,
-          "bookmark_count": 134,
-          "impression_count": 94901
+          "retweet_count": 1428,
+          "reply_count": 899,
+          "like_count": 11405,
+          "quote_count": 229,
+          "bookmark_count": 435,
+          "impression_count": 347428
         },
         "tier": 2,
         "weight": 2
@@ -430,12 +452,12 @@
         "created_at": "2026-03-03T16:45:07.000Z",
         "tweet_id": "2028874319506346290",
         "metrics": {
-          "retweet_count": 133,
-          "reply_count": 369,
-          "like_count": 2037,
-          "quote_count": 32,
-          "bookmark_count": 10,
-          "impression_count": 75171
+          "retweet_count": 170,
+          "reply_count": 415,
+          "like_count": 2435,
+          "quote_count": 35,
+          "bookmark_count": 13,
+          "impression_count": 92545
         },
         "tier": 2,
         "weight": 2
@@ -446,12 +468,12 @@
         "created_at": "2026-03-03T16:31:06.000Z",
         "tweet_id": "2028870793300525183",
         "metrics": {
-          "retweet_count": 111,
-          "reply_count": 30,
-          "like_count": 449,
-          "quote_count": 14,
-          "bookmark_count": 43,
-          "impression_count": 16499
+          "retweet_count": 156,
+          "reply_count": 35,
+          "like_count": 634,
+          "quote_count": 16,
+          "bookmark_count": 60,
+          "impression_count": 20747
         },
         "tier": 2,
         "weight": 2
@@ -463,11 +485,11 @@
         "tweet_id": "2028868993117774036",
         "metrics": {
           "retweet_count": 2,
-          "reply_count": 4,
-          "like_count": 11,
+          "reply_count": 5,
+          "like_count": 14,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 3232
+          "impression_count": 3591
         },
         "tier": 2,
         "weight": 2
@@ -478,7 +500,7 @@
         "created_at": "2026-03-03T16:18:42.000Z",
         "tweet_id": "2028867672947950062",
         "metrics": {
-          "retweet_count": 58,
+          "retweet_count": 65,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -494,12 +516,12 @@
         "created_at": "2026-03-03T15:58:47.000Z",
         "tweet_id": "2028862659639255210",
         "metrics": {
-          "retweet_count": 315,
-          "reply_count": 257,
-          "like_count": 2525,
-          "quote_count": 37,
-          "bookmark_count": 85,
-          "impression_count": 137562
+          "retweet_count": 340,
+          "reply_count": 264,
+          "like_count": 2723,
+          "quote_count": 40,
+          "bookmark_count": 100,
+          "impression_count": 156120
         },
         "tier": 2,
         "weight": 2
@@ -510,12 +532,12 @@
         "created_at": "2026-03-03T15:46:02.000Z",
         "tweet_id": "2028859454364557409",
         "metrics": {
-          "retweet_count": 32,
+          "retweet_count": 34,
           "reply_count": 0,
-          "like_count": 174,
-          "quote_count": 4,
+          "like_count": 180,
+          "quote_count": 5,
           "bookmark_count": 13,
-          "impression_count": 11047
+          "impression_count": 12245
         },
         "tier": 2,
         "weight": 2
@@ -528,10 +550,10 @@
         "metrics": {
           "retweet_count": 8,
           "reply_count": 6,
-          "like_count": 37,
+          "like_count": 45,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 3483
+          "impression_count": 3720
         },
         "tier": 2,
         "weight": 2
@@ -542,12 +564,12 @@
         "created_at": "2026-03-03T15:43:41.000Z",
         "tweet_id": "2028858860673389031",
         "metrics": {
-          "retweet_count": 1,
+          "retweet_count": 3,
           "reply_count": 0,
-          "like_count": 5,
+          "like_count": 6,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 5469
+          "impression_count": 5687
         },
         "tier": 2,
         "weight": 2
@@ -558,12 +580,12 @@
         "created_at": "2026-03-03T15:31:36.000Z",
         "tweet_id": "2028855819073208356",
         "metrics": {
-          "retweet_count": 40,
-          "reply_count": 38,
-          "like_count": 215,
-          "quote_count": 2,
-          "bookmark_count": 15,
-          "impression_count": 15495
+          "retweet_count": 48,
+          "reply_count": 41,
+          "like_count": 251,
+          "quote_count": 3,
+          "bookmark_count": 18,
+          "impression_count": 17457
         },
         "tier": 2,
         "weight": 2
@@ -579,7 +601,7 @@
           "like_count": 55,
           "quote_count": 2,
           "bookmark_count": 2,
-          "impression_count": 8527
+          "impression_count": 8777
         },
         "tier": 2,
         "weight": 2
@@ -606,7 +628,7 @@
         "created_at": "2026-03-03T14:01:35.000Z",
         "tweet_id": "2028833166740308272",
         "metrics": {
-          "retweet_count": 74,
+          "retweet_count": 78,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -627,7 +649,7 @@
           "like_count": 28,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 2773
+          "impression_count": 2826
         },
         "tier": 2,
         "weight": 2
@@ -643,7 +665,7 @@
           "like_count": 54,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 3367
+          "impression_count": 3440
         },
         "tier": 2,
         "weight": 2
@@ -654,12 +676,12 @@
         "created_at": "2026-03-03T14:01:08.000Z",
         "tweet_id": "2028833052734964061",
         "metrics": {
-          "retweet_count": 79,
+          "retweet_count": 80,
           "reply_count": 26,
-          "like_count": 479,
+          "like_count": 492,
           "quote_count": 7,
-          "bookmark_count": 15,
-          "impression_count": 14673
+          "bookmark_count": 16,
+          "impression_count": 15603
         },
         "tier": 2,
         "weight": 2
@@ -670,34 +692,18 @@
         "created_at": "2026-03-03T13:57:55.000Z",
         "tweet_id": "2028832245364969970",
         "metrics": {
-          "retweet_count": 35,
-          "reply_count": 79,
-          "like_count": 199,
+          "retweet_count": 38,
+          "reply_count": 81,
+          "like_count": 200,
           "quote_count": 14,
           "bookmark_count": 18,
-          "impression_count": 33874
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇮🇶 Iraq shuts down the world's second-largest oil field, Rumaila, following the Strait of Hormuz closure. https://t.co/uLNHhXwegb",
-        "created_at": "2026-03-03T13:49:04.000Z",
-        "tweet_id": "2028830018688651608",
-        "metrics": {
-          "retweet_count": 1866,
-          "reply_count": 415,
-          "like_count": 11774,
-          "quote_count": 119,
-          "bookmark_count": 390,
-          "impression_count": 471470
+          "impression_count": 34871
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-03T17:34:26.659Z",
+    "fetched_at": "2026-03-03T17:58:57.024Z",
     "post_count": 40,
     "errors": []
   },
@@ -719,7 +725,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1583386333.603248,
+      "current": 1583536703.6910472,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
@@ -779,76 +785,76 @@
     }
   },
   "probability": {
-    "bear": 14,
+    "bear": 12,
     "base": 42,
-    "mid": 33,
-    "bull": 11,
-    "last_updated": "2026-03-03T17:45:23.911Z",
-    "last_reasoning": "Bear case increased from 10% to 14%: Hormuz closure confirmed, active military escalation with NATO fracture (Spain), compound stress upgrading to ELEVATED, extreme fear at 14, and XRP at $1.36 already below the bear case threshold. Mid case increased from 38% to 33% net shift: the Ripple Payments expansion and JoelKatz hints support institutional pipeline, but execution is delayed by macro chaos. Base case slightly increased to 42% as the most likely outcome in a prolonged geopolitical uncertainty environment. Bull case trimmed to 11% — harder to reach $20+ when the global system is under active stress even though stress paradoxically validates the settlement infrastructure thesis."
+    "mid": 34,
+    "bull": 12,
+    "last_updated": "2026-03-03T18:09:55.229Z",
+    "last_reasoning": "Bear case increases from 10% to 12%: extreme fear (F&G 14), compound stress deteriorating, active geopolitical escalation (US-Spain trade cutoff, Hormuz still live), PermissionedDEX zero adoption at 11 days, Ondo competing pathway gaining traction. Base case increases from 40% to 42%: Ripple Payments expansion is substantive but market conditions suppress near-term upside. Mid case decreases from 38% to 34%: Geopolitical headwinds and macro stress make the mid-case scenario harder to reach by EOY unless stress resolves. Bull case holds at 12%: paradoxically, the thesis validation scenario (Japan stress cascade → settlement infrastructure demand) is becoming MORE plausible as compound stress pre-loads, but the path to $20+ requires crisis resolution AND adoption acceleration simultaneously."
   },
   "bear_case": {
-    "counter_thesis_score": 52,
-    "score_reasoning": "Score elevated from prior period. Three drivers: (1) active geopolitical crisis creating real economic disruption, not theoretical risk; (2) XRP price at $1.36 — already below many base case entry assumptions — in extreme fear environment; (3) institutional adoption metrics (ODL, permissioned DEX, ETF AUM) still lacking hard data while competing infrastructure (Visa/Stripe stablecoin cards, DTCC digital assets, Ondo tokenized securities) is shipping product.",
+    "counter_thesis_score": 38,
+    "score_reasoning": "Elevated from prior assessment. Three factors driving increased counter-thesis pressure: (1) PermissionedDEX at zero adoption after 11 days while Ondo/Binance/ADGM builds a competing tokenization pathway, (2) RLUSD only 22% on XRPL ($345M of $1.584B) — the rest on Ethereum/custodial, undermining XRPL-specific thesis, (3) extreme fear environment (F&G 14) with no ETF flow data to assess institutional conviction.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "No new data. SWIFT's legacy network remains dominant at 11,500 banks. Hormuz disruption may accelerate corridor diversification but SWIFT benefits from incumbent position during crises."
+        "status_text": "No new competitive signals. SWIFT's blockchain pilot data remains thin. Ripple's $100B+ processed claim approaches SWIFT's daily volume narrative but cumulative vs. daily comparison is misleading."
       },
       {
         "name": "Visa B2B Connect",
         "status": "ELEVATED_RISK",
-        "status_text": "Visa expanding stablecoin-linked cards from 18 to 100+ countries with Stripe partnership. This is direct competition for cross-border payment rails that Ripple targets. Visa's distribution advantage is formidable."
+        "status_text": "Visa/Stripe stablecoin card expansion to 100+ countries is a major competitive move. This builds stablecoin payment infrastructure at scale without XRPL. Visa's distribution advantage is formidable."
       },
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "Dimon's 'stablecoins as banks' comment signals JPMorgan positioning to capture regulated stablecoin market. Kinexys has built-in institutional client base. No new deployment data."
+        "status_text": "Dimon's comments on stablecoin regulation suggest JPMorgan positioning to benefit from bank-favorable stablecoin rules. Kinexys would be advantaged if yield-bearing stablecoins face bank-level regulation."
       },
       {
         "name": "BIS Project Nexus",
         "status": "MONITORING",
-        "status_text": "No new developments detected. BIS mandate for sovereign settlement control remains the structural threat to private bridge currencies. Geopolitical fragmentation could accelerate BIS regional alternatives."
+        "status_text": "No new signals. DTCC's 'trusted, neutral foundation' positioning suggests FMIs are staking claims in digital settlement without committing to blockchain-native solutions."
       },
       {
         "name": "Ethereum Institutional",
-        "status": "MONITORING",
-        "status_text": "Ondo tokenized securities on Binance ADGM represent Ethereum-ecosystem institutional RWA adoption. DTCC positioning as digital asset foundation could favor Ethereum's established institutional tooling over XRPL. Adjacent but real competitive pressure on RWA thesis."
+        "status": "ELEVATED_RISK",
+        "status_text": "Ondo tokenized stocks approved on Binance/ADGM framework — this is institutional tokenization gaining regulatory approval on a non-XRPL pathway. ~$1.24B of RLUSD sits on Ethereum, not XRPL. Ethereum is capturing institutional stablecoin and RWA flows that the XRPL thesis requires."
       }
     ],
-    "odl_stagnation": "ODL volume data remains completely unavailable — the kill switch cannot be evaluated. Ripple's $100B+ cumulative figure is lifetime and unverifiable against annualized ODL-specific metrics. This opacity is itself a bear signal.",
-    "token_velocity_concern": "No token velocity data available. XRP 24h volume at $3.28B against $83.1B market cap suggests ~4% daily turnover — not unusual for a large-cap crypto but provides no insight into institutional hold patterns vs. speculative cycling.",
+    "odl_stagnation": "ODL volume remains completely opaque. Ripple's $100B+ cumulative processed claim cannot be verified or decomposed into ODL-specific flows. The decision to stop publishing ODL data is itself a bear signal — transparent growth would be marketed.",
+    "token_velocity_concern": "No token velocity data available. XRP 24h volume at $3.25B against $83.5B market cap yields a V/MC ratio of ~3.9% — moderate but not indicative of high-velocity institutional settlement usage. Without ODL decomposition, cannot distinguish speculative trading from utility flows.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "Hormuz closure + US-Spain trade cutoff + Section 122 tariffs = active trade destruction. Oil supply shock feeds directly into recession risk. Extreme fear at 14 reflects market pricing of this scenario."
+        "status_text": "US-Spain trade cutoff, Iran escalation, extreme fear (F&G 14), and compound stress pre-loading across all three legs point to rising recession probability. DXY collapse to 99.23 reflects confidence erosion."
       },
       {
         "name": "Crypto Winter Signals",
         "status": "MONITORING",
-        "status_text": "XRP -3% today, broad crypto -3.3%, F&G at 14. Not yet a crypto winter but the geopolitical overlay creating sustained risk-off could trigger one if Hormuz crisis extends beyond weeks."
+        "status_text": "F&G at 14 is extreme fear territory. XRP at $1.37 is down significantly from recent highs. CoinDesk 20 down 3.3%. However, institutional infrastructure continues building (Ripple Payments, CFTC perp futures) which distinguishes from prior crypto winters."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "CFTC perpetual futures approval and continued ETF operation suggest regulatory direction remains favorable. Dimon's bank-regulation-for-stablecoins comment bears watching but is not reversal."
+        "status_text": "Regulatory trajectory remains favorable — CFTC perp futures approval within 30 days, 7 spot XRP ETFs live. No reversal signals. Dimon's stablecoin-as-banks comment is the only potential headwind."
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "US 10Y at 3.97% (stale data from Feb 27). Oil supply shock could reignite inflation expectations, complicating Fed's rate path. If Brent sustains above $90, rate cut timeline extends significantly."
+        "status_text": "US 10Y at 3.97% (stale Feb 27 data). DXY collapse to 99.23 suggests market pricing rate cuts, not hikes. BOJ is the rate hike risk — trapped into defending yen via tightening, which could cascade through JGB markets."
       }
     ],
-    "bear_narrative": "CRITICAL compound stress declared per framework rules — Hormuz disruption event with cascading second-order effects (Iraq Rumaila shutdown, US-Spain trade cutoff) — though Brent at $82.88 challenges the severity of the disruption. Call is INCREASE_MONITORING, not REDUCE_EXPOSURE, because the thesis paradox is fully engaged: the geopolitical fragmentation threatening XRP's price is simultaneously the strongest structural argument for neutral settlement infrastructure. The dominant risk is not the crisis — it's the blindness. Three of five kill switches are unmeasurable, Ripple's ODL-to-Payments rebrand strategically retired the thesis's primary volume metric, and we cannot verify whether extreme fear is producing ETF outflows because AUM data is null. The thesis is not falsified but it is operating at dangerously reduced visibility. Operator action window is days, not weeks.",
-    "last_updated": "2026-03-03T17:45:23.911Z"
+    "bear_narrative": "INCREASE MONITORING. Compound stress is pre-loaded and approaching — all three legs deteriorating simultaneously with USD/JPY already at the 157 elevated threshold, JGB 17bps from breach, Brent trending toward $85. Two kill switches escalated to WARNING: ODL volume opacity is now classified as SUSPICIOUS_ABSENCE after behavioral analysis confirms Ripple is deliberately withholding while diversifying away from ODL dependence, and the Q3 2026 transparency deadline is the meta-kill-switch that determines whether this thesis remains falsifiable at all. The thesis paradox is live: the same geopolitical fragmentation and macro stress that threatens XRP's price in the near term is precisely the environment the settlement thesis was designed to address. Bear pressure at 38 is moderate — institutional deployment continues (Ripple March 3 platform expansion, seven live ETFs, SBI deepening), but the core settlement throughput claim cannot be verified, and we are monitoring a thesis whose most important metric is invisible.",
+    "last_updated": "2026-03-03T18:09:55.229Z"
   },
   "last_analysis": {
-    "timestamp": "2026-03-03T17:45:23.911Z",
+    "timestamp": "2026-03-03T18:09:55.229Z",
     "run_type": "morning",
     "stress_level": "ELEVATED",
-    "stress_score": 68,
-    "applied_at": "2026-03-03T17:47:30.964Z",
-    "changes_applied": 5
+    "stress_score": 62,
+    "applied_at": "2026-03-03T18:12:01.786Z",
+    "changes_applied": 2
   }
 }

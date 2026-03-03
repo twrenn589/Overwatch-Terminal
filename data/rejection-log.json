@@ -88,5 +88,14 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-03T17:45:23.902Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Layer 1 framing of 'JoelKatz Social Signal: Zero Business-Relevant Content' — original characterization that entered the pipeline",
+    "rejection_reason": "Layer 2 and Layer 3 both correctly identified that the characterization was inaccurate. JoelKatz posts contain cryptic business-relevant signals (acquisition development hints, regulatory strategy commentary, 'Seems important' retweet with 424K impressions). XRPL had record February transactions. The original Layer 1 framing was misleading and should not have reached Layer 4 without correction.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-03T18:09:55.219Z",
+    "source": "layer4_reconcile"
   }
 ]
