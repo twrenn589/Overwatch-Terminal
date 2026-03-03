@@ -30,6 +30,7 @@ const fs   = require('fs');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const Anthropic = require('@anthropic-ai/sdk');
+const promoteRejections = require('./promote-rejections');
 
 const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
 const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
@@ -1268,6 +1269,14 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
     } catch (e) {
       err('analysis', `Rejection log write failed (non-fatal): ${e.message}`);
     }
+  }
+
+  // Promote auto_commit rejections to corrections ledger
+  try {
+    const promoted = promoteRejections();
+    if (promoted > 0) log('analysis', `Corrections ledger: ${promoted} new entries from rejection log`);
+  } catch (e) {
+    err('analysis', `Corrections ledger promotion failed (non-fatal): ${e.message}`);
   }
 
   return result;

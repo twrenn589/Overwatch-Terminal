@@ -6,7 +6,9 @@
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-02T23:45:04.100Z",
-    "source": "layer4_reconcile"
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-03T21:55:29.494Z"
   },
   {
     "layer3_inference": "XRP +3.1% during F&G=10 indicates non-speculative holding base (Layer 3 behavioral pattern, 'low' significance)",
@@ -33,7 +35,9 @@
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-03T01:15:21.975Z",
-    "source": "layer4_reconcile"
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-03T21:55:29.494Z"
   },
   {
     "layer3_inference": "Ripple's Locked XRP Escrow Is Permanent Overhang — Layer 3 correctly identified null hypothesis holds",
@@ -42,7 +46,9 @@
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-03T01:15:21.975Z",
-    "source": "layer4_reconcile"
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-03T21:55:29.494Z"
   },
   {
     "layer3_inference": "De-Dollarization Corridors Route Around USD-Denominated Bridge Assets — treated as independent threat",
@@ -51,7 +57,9 @@
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-03T02:38:20.316Z",
-    "source": "layer4_reconcile"
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-03T21:55:29.494Z"
   },
   {
     "layer3_inference": "Ripple Payments Pivot — alternative explanation that 'XRP remains primary settlement mechanism but Ripple downplays it for enterprise sales optics'",
@@ -78,7 +86,9 @@
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-03T17:45:23.902Z",
-    "source": "layer4_reconcile"
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-03T21:55:29.494Z"
   },
   {
     "layer3_inference": "SBI Holdings likely evaluating accelerated XRPL deployment due to yen stress",
@@ -96,6 +106,8 @@
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-03T18:09:55.219Z",
-    "source": "layer4_reconcile"
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-03T21:55:29.494Z"
   }
 ]
