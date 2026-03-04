@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-04T06:25:21.098Z",
+  "updated": "2026-03-04T13:15:54.829Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.35,
-    "change_24h": -0.8393105865500992,
-    "volume_24h": 2687169312.2539487,
-    "market_cap": 82949323098.56758,
+    "price": 1.4,
+    "change_24h": 3.554835337687593,
+    "volume_24h": 3713971714.834661,
+    "market_cap": 85201053712.99847,
     "data_date": "2026-03-04",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1583542213.3456392,
+    "market_cap": 1583768027.5108051,
     "data_date": "2026-03-04",
     "source": "coingecko"
   },
@@ -31,12 +31,12 @@
       "source": "fred"
     },
     "brent_crude": {
-      "value": 83.56,
+      "value": 81.081,
       "data_date": "2026-03-04",
       "source": "financeflow"
     },
     "dxy": {
-      "value": 99.1615,
+      "value": 98.7512,
       "data_date": "2026-03-04",
       "source": "financeflow"
     },
@@ -53,8 +53,8 @@
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 102635249,
-    "rlusd_supply": 345005078.2918871,
+    "ledger_index": 102641636,
+    "rlusd_supply": 345005078.291886,
     "data_date": "2026-03-04",
     "source": "xrpl"
   },
@@ -62,16 +62,64 @@
     "tier1_posts": [
       {
         "username": "JoelKatz",
+        "text": "@thefrozenfire @jimmy_wales @prestonjbyrne I know this is weird, but whether something is speech for First Amendment purposes does not depend on what it is but on what it is doing. If, and to the extent that, it is part of the process of humans exchanging thoughts and emotions, it's speech.\n\nIf I \"distribute a Bible\" by",
+        "created_at": "2026-03-04T07:34:08.000Z",
+        "tweet_id": "2029098048832274657",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 263
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@thefrozenfire @jimmy_wales @prestonjbyrne I know this is weird, but whether something is speech for First Amendment purposes does not depend on what it is but on what it is doing. If, and to the extent that, it is part of the process of humans exchanging thoughts and emotions, it's speech.\n\nIf I \"distribute a Bible\" by",
+        "created_at": "2026-03-04T07:34:02.000Z",
+        "tweet_id": "2029098022576243066",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 217
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@benrayfield You don't need any of the rights the licence grants you to use the software, only to distribute it or create derivative works.",
+        "created_at": "2026-03-04T06:47:00.000Z",
+        "tweet_id": "2029086189064732846",
+        "metrics": {
+          "retweet_count": 9,
+          "reply_count": 8,
+          "like_count": 172,
+          "quote_count": 0,
+          "bookmark_count": 5,
+          "impression_count": 11540
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
         "text": "@Eve777M Close, it's a mango daiquiri.\n\nIt reminds me of the smoky daiquiris that I used to make for my father. He'd ask me what kind of daiquiri it was and I'd say, \"It's a hickory daiquiri, Doc!\".",
         "created_at": "2026-03-04T04:50:43.000Z",
         "tweet_id": "2029056926215225600",
         "metrics": {
-          "retweet_count": 1,
-          "reply_count": 8,
-          "like_count": 44,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 1239
+          "retweet_count": 2,
+          "reply_count": 17,
+          "like_count": 147,
+          "quote_count": 4,
+          "bookmark_count": 2,
+          "impression_count": 6202
         },
         "tier": 1,
         "weight": 3
@@ -83,11 +131,11 @@
         "tweet_id": "2029047052714254427",
         "metrics": {
           "retweet_count": 1,
-          "reply_count": 0,
-          "like_count": 3,
+          "reply_count": 2,
+          "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 246
+          "impression_count": 481
         },
         "tier": 1,
         "weight": 3
@@ -100,10 +148,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 2,
+          "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 202
+          "impression_count": 333
         },
         "tier": 1,
         "weight": 3
@@ -114,12 +162,12 @@
         "created_at": "2026-03-04T03:51:12.000Z",
         "tweet_id": "2029041946782552187",
         "metrics": {
-          "retweet_count": 6,
-          "reply_count": 8,
-          "like_count": 124,
+          "retweet_count": 8,
+          "reply_count": 10,
+          "like_count": 151,
           "quote_count": 0,
-          "bookmark_count": 7,
-          "impression_count": 8929
+          "bookmark_count": 10,
+          "impression_count": 16646
         },
         "tier": 1,
         "weight": 3
@@ -132,10 +180,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 2,
+          "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 199
+          "impression_count": 309
         },
         "tier": 1,
         "weight": 3
@@ -148,10 +196,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 5,
+          "like_count": 6,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 318
+          "impression_count": 459
         },
         "tier": 1,
         "weight": 3
@@ -164,10 +212,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 1,
+          "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 203
+          "impression_count": 309
         },
         "tier": 1,
         "weight": 3
@@ -180,10 +228,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 3,
+          "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 756
+          "impression_count": 917
         },
         "tier": 1,
         "weight": 3
@@ -196,10 +244,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 7,
+          "like_count": 8,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 686
+          "impression_count": 810
         },
         "tier": 1,
         "weight": 3
@@ -212,10 +260,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 2,
-          "like_count": 8,
+          "like_count": 9,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 1272
+          "impression_count": 1523
         },
         "tier": 1,
         "weight": 3
@@ -226,12 +274,12 @@
         "created_at": "2026-03-04T01:42:14.000Z",
         "tweet_id": "2029009492336050587",
         "metrics": {
-          "retweet_count": 10,
-          "reply_count": 6,
-          "like_count": 237,
+          "retweet_count": 12,
+          "reply_count": 8,
+          "like_count": 258,
           "quote_count": 0,
-          "bookmark_count": 6,
-          "impression_count": 14079
+          "bookmark_count": 7,
+          "impression_count": 17802
         },
         "tier": 1,
         "weight": 3
@@ -242,12 +290,12 @@
         "created_at": "2026-03-04T01:37:17.000Z",
         "tweet_id": "2029008247055679584",
         "metrics": {
-          "retweet_count": 312,
-          "reply_count": 589,
-          "like_count": 5366,
-          "quote_count": 51,
-          "bookmark_count": 155,
-          "impression_count": 128937
+          "retweet_count": 415,
+          "reply_count": 703,
+          "like_count": 7008,
+          "quote_count": 65,
+          "bookmark_count": 210,
+          "impression_count": 207444
         },
         "tier": 1,
         "weight": 3
@@ -259,11 +307,11 @@
         "tweet_id": "2029004337565880699",
         "metrics": {
           "retweet_count": 5,
-          "reply_count": 15,
-          "like_count": 71,
+          "reply_count": 16,
+          "like_count": 75,
           "quote_count": 1,
           "bookmark_count": 4,
-          "impression_count": 3694
+          "impression_count": 4351
         },
         "tier": 1,
         "weight": 3
@@ -275,11 +323,11 @@
         "tweet_id": "2028993774043419121",
         "metrics": {
           "retweet_count": 1,
-          "reply_count": 5,
-          "like_count": 21,
+          "reply_count": 7,
+          "like_count": 24,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 1024
+          "impression_count": 1175
         },
         "tier": 1,
         "weight": 3
@@ -294,8 +342,8 @@
           "reply_count": 4,
           "like_count": 37,
           "quote_count": 2,
-          "bookmark_count": 12,
-          "impression_count": 1018
+          "bookmark_count": 13,
+          "impression_count": 1153
         },
         "tier": 1,
         "weight": 3
@@ -306,76 +354,12 @@
         "created_at": "2026-03-03T23:38:05.000Z",
         "tweet_id": "2028978245719203901",
         "metrics": {
-          "retweet_count": 3082,
-          "reply_count": 683,
-          "like_count": 12962,
-          "quote_count": 222,
-          "bookmark_count": 793,
-          "impression_count": 328140
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "RippleXDev",
-        "text": "RT @ja_akinyele: https://t.co/jK4TG4OAS4",
-        "created_at": "2026-03-03T20:15:11.000Z",
-        "tweet_id": "2028927184526819487",
-        "metrics": {
-          "retweet_count": 32,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 2
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "Ripple",
-        "text": "Ripple Payments now gives businesses everything they need to move money globally across fiat and digital rails in one place: collect, hold, exchange, and pay out in both fiat and stablecoins: https://t.co/pbDNA3Nq9Y\n\n➡️ Managed Custody\n➡️ Unified Collections\n➡️ Advanced Liquidity",
-        "created_at": "2026-03-03T14:02:36.000Z",
-        "tweet_id": "2028833421816987709",
-        "metrics": {
-          "retweet_count": 1322,
-          "reply_count": 166,
-          "like_count": 4749,
-          "quote_count": 125,
-          "bookmark_count": 315,
-          "impression_count": 350424
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@Tiozaka @sciencegirl Then the man would have to be both 170 (first picture) and 200 (second picture), which is impossible.",
-        "created_at": "2026-03-03T08:09:33.000Z",
-        "tweet_id": "2028744574072700970",
-        "metrics": {
-          "retweet_count": 2,
-          "reply_count": 9,
-          "like_count": 12,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 1605
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@grok @aquariusflux @sciencegirl The man alone is not 170. Look at the second picture again.",
-        "created_at": "2026-03-03T08:07:02.000Z",
-        "tweet_id": "2028743939872657777",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 2,
-          "like_count": 15,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 1224
+          "retweet_count": 3661,
+          "reply_count": 779,
+          "like_count": 15540,
+          "quote_count": 256,
+          "bookmark_count": 956,
+          "impression_count": 476639
         },
         "tier": 1,
         "weight": 3
@@ -383,17 +367,289 @@
     ],
     "tier2_posts": [
       {
+        "username": "CoinDesk",
+        "text": "UPDATE: The White House Crypto Council Executive Director fired back at @JPMorgan CEO Jamie Dimon, saying stablecoin issuers aren't banks because they can't lend out your money. https://t.co/HUBFXdfXJ2",
+        "created_at": "2026-03-04T13:13:46.000Z",
+        "tweet_id": "2029183522229903759",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 4,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1077
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "@btcjvs reports:\nhttps://t.co/natFYwafe6",
+        "created_at": "2026-03-04T12:33:07.000Z",
+        "tweet_id": "2029173291986853914",
+        "metrics": {
+          "retweet_count": 2,
+          "reply_count": 2,
+          "like_count": 12,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4316
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "@FranciscoMemor reports:\nhttps://t.co/FrsMoODSZ7",
+        "created_at": "2026-03-04T12:23:05.000Z",
+        "tweet_id": "2029170765514305962",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 15,
+          "quote_count": 0,
+          "bookmark_count": 2,
+          "impression_count": 5549
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "LATEST: @MorganStanley has filed for a Bitcoin ETF, tapping @Coinbase for crypto custody and BNY Mellon as administrator, with daily valuations set using the CoinDesk Bitcoin Benchmark 4PM New York Settlement Rate. https://t.co/fffUZfwlVK",
+        "created_at": "2026-03-04T12:13:21.000Z",
+        "tweet_id": "2029168315961147483",
+        "metrics": {
+          "retweet_count": 46,
+          "reply_count": 53,
+          "like_count": 221,
+          "quote_count": 3,
+          "bookmark_count": 11,
+          "impression_count": 14108
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "JP Morgan Chase is one of the most corrupt institutions on the planet. They have been fined over $40B dollars for illicit activities in the last 25 years alone. They knowingly financed the largest child-sex-trafficking operation in American history. Every time Jamie Dimon opens https://t.co/9FuHdN0Z9w",
+        "created_at": "2026-03-04T12:04:15.000Z",
+        "tweet_id": "2029166025569116531",
+        "metrics": {
+          "retweet_count": 67,
+          "reply_count": 15,
+          "like_count": 242,
+          "quote_count": 3,
+          "bookmark_count": 6,
+          "impression_count": 6354
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇺🇸 Kraken becomes the first crypto exchange to gain access to the Federal Reserve's core payments system. https://t.co/tSpJbXLE0z",
+        "created_at": "2026-03-04T12:02:29.000Z",
+        "tweet_id": "2029165583997034779",
+        "metrics": {
+          "retweet_count": 848,
+          "reply_count": 453,
+          "like_count": 5864,
+          "quote_count": 95,
+          "bookmark_count": 274,
+          "impression_count": 174313
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "🚨NEW: @krakenfx, the U.S.’s second-largest crypto exchange, has just done something no other crypto firm has done before: secured coveted access to the Federal Reserve.\n\nAccording to a report by the @WSJ released this morning, the exchange’s banking arm, Kraken Financial, has",
+        "created_at": "2026-03-04T11:09:51.000Z",
+        "tweet_id": "2029152336031948855",
+        "metrics": {
+          "retweet_count": 394,
+          "reply_count": 85,
+          "like_count": 1855,
+          "quote_count": 63,
+          "bookmark_count": 239,
+          "impression_count": 74466
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "BREAKING: @krakenfx just became the first crypto firm to gain access to the Federal Reserve's core payments system, putting it on the same payment rails as thousands of U.S. banks and credit unions. https://t.co/xqZX6OFh3x",
+        "created_at": "2026-03-04T11:00:02.000Z",
+        "tweet_id": "2029149865888886917",
+        "metrics": {
+          "retweet_count": 242,
+          "reply_count": 92,
+          "like_count": 1438,
+          "quote_count": 31,
+          "bookmark_count": 100,
+          "impression_count": 60841
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "JUST IN: South Korea to cap crypto exchange ownership stakes at 20%, with a three-year grace period for @official_Upbit and @BithumbOfficial. https://t.co/s0496fufar",
+        "created_at": "2026-03-04T10:37:15.000Z",
+        "tweet_id": "2029144133604966806",
+        "metrics": {
+          "retweet_count": 31,
+          "reply_count": 26,
+          "like_count": 142,
+          "quote_count": 7,
+          "bookmark_count": 7,
+          "impression_count": 23003
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "@CM_stay_Blessed @coinbase @brian_armstrong Why? That was nearly two months ago after they held up the markup.",
+        "created_at": "2026-03-04T10:20:12.000Z",
+        "tweet_id": "2029139840592122209",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 484
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: Coinbase CEO Brian Armstrong says \"the foundations for crypto have never been stronger.\"",
+        "created_at": "2026-03-04T09:57:50.000Z",
+        "tweet_id": "2029134213723664762",
+        "metrics": {
+          "retweet_count": 347,
+          "reply_count": 315,
+          "like_count": 3881,
+          "quote_count": 22,
+          "bookmark_count": 54,
+          "impression_count": 138741
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "@thesamreynolds reports:\nhttps://t.co/9Ol74SaTM4",
+        "created_at": "2026-03-04T09:39:26.000Z",
+        "tweet_id": "2029129583572693260",
+        "metrics": {
+          "retweet_count": 2,
+          "reply_count": 1,
+          "like_count": 2,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5956
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "MARKETS: $BTC rebounds past $70,000 as spot Bitcoin ETFs pull in $1.45B over five days, the strongest weekly inflow in months as institutional demand continues to provide support. https://t.co/zLPrcD8iaL",
+        "created_at": "2026-03-04T09:28:22.000Z",
+        "tweet_id": "2029126796864626968",
+        "metrics": {
+          "retweet_count": 32,
+          "reply_count": 26,
+          "like_count": 124,
+          "quote_count": 4,
+          "bookmark_count": 2,
+          "impression_count": 11116
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "@shauryamalwa reports:\nhttps://t.co/0v2jBMkZ13",
+        "created_at": "2026-03-04T09:03:39.000Z",
+        "tweet_id": "2029120578758570016",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 7,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 6139
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: $71,000 Bitcoin https://t.co/k6XYgf3MY3",
+        "created_at": "2026-03-04T08:59:08.000Z",
+        "tweet_id": "2029119438536999255",
+        "metrics": {
+          "retweet_count": 1091,
+          "reply_count": 617,
+          "like_count": 8822,
+          "quote_count": 201,
+          "bookmark_count": 102,
+          "impression_count": 308271
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: Goldman Sachs says oil could rise 30% to $100 a barrel if Strait of Hormuz remains closed. https://t.co/mwBlWYvz8J",
+        "created_at": "2026-03-04T07:01:20.000Z",
+        "tweet_id": "2029089796631437767",
+        "metrics": {
+          "retweet_count": 463,
+          "reply_count": 321,
+          "like_count": 3911,
+          "quote_count": 49,
+          "bookmark_count": 88,
+          "impression_count": 193221
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇦🇪 Dubai stock market crashes 4.6% at open. https://t.co/3nHHJ0ZDgE",
+        "created_at": "2026-03-04T06:28:54.000Z",
+        "tweet_id": "2029081631475081562",
+        "metrics": {
+          "retweet_count": 1006,
+          "reply_count": 501,
+          "like_count": 8148,
+          "quote_count": 158,
+          "bookmark_count": 299,
+          "impression_count": 681744
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
         "username": "WatcherGuru",
         "text": "https://t.co/FW2rSUG1rR",
         "created_at": "2026-03-04T06:17:56.000Z",
         "tweet_id": "2029078874856829280",
         "metrics": {
-          "retweet_count": 0,
-          "reply_count": 3,
-          "like_count": 24,
+          "retweet_count": 3,
+          "reply_count": 10,
+          "like_count": 120,
           "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 4192
+          "bookmark_count": 3,
+          "impression_count": 45522
         },
         "tier": 2,
         "weight": 2
@@ -404,12 +660,12 @@
         "created_at": "2026-03-04T04:08:41.000Z",
         "tweet_id": "2029046346590642627",
         "metrics": {
-          "retweet_count": 173,
-          "reply_count": 44,
-          "like_count": 1333,
-          "quote_count": 16,
-          "bookmark_count": 89,
-          "impression_count": 112661
+          "retweet_count": 309,
+          "reply_count": 71,
+          "like_count": 2239,
+          "quote_count": 19,
+          "bookmark_count": 136,
+          "impression_count": 196049
         },
         "tier": 2,
         "weight": 2
@@ -422,289 +678,17 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 2,
+          "like_count": 7,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 442
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "President Trump @realDonaldTrump is 💯 on 🎯 here. The banks can offer stable coins and offer yield along with any other company. Americans are hurting because of high inflation through excessive money printing and they’re experiencing the devaluation of the dollar along with https://t.co/tEfWpQfZnb",
-        "created_at": "2026-03-04T02:58:27.000Z",
-        "tweet_id": "2029028671810379876",
-        "metrics": {
-          "retweet_count": 78,
-          "reply_count": 13,
-          "like_count": 456,
-          "quote_count": 1,
-          "bookmark_count": 15,
-          "impression_count": 11253
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "The banks are NOT the good guys. Never have been. They created a cartel by meeting in secret, forming the @federalreserve. They created the perfect business model: socialize risk while privatizing profits. When they make greedy and bad decisions - the government bails them out. https://t.co/7qLjAKiKhK",
-        "created_at": "2026-03-04T02:25:46.000Z",
-        "tweet_id": "2029020446235017427",
-        "metrics": {
-          "retweet_count": 228,
-          "reply_count": 39,
-          "like_count": 1326,
-          "quote_count": 6,
-          "bookmark_count": 34,
-          "impression_count": 31841
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇰🇷 South Korean stock market halted after 8% crash, triggering circuit breaker. https://t.co/kCT7pCwKJz",
-        "created_at": "2026-03-04T02:22:37.000Z",
-        "tweet_id": "2029019653880545707",
-        "metrics": {
-          "retweet_count": 2151,
-          "reply_count": 713,
-          "like_count": 14875,
-          "quote_count": 458,
-          "bookmark_count": 892,
-          "impression_count": 1308258
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "President Trump blasts banks on Truth Social for holding the Clarity Act “hostage” — warning that delays could hand crypto’s future to China. “The U.S. needs to get Market Structure done, ASAP.” \n\nhttps://t.co/0BHFK91GA4",
-        "created_at": "2026-03-03T23:53:01.000Z",
-        "tweet_id": "2028982006294438139",
-        "metrics": {
-          "retweet_count": 49,
-          "reply_count": 61,
-          "like_count": 330,
-          "quote_count": 8,
-          "bookmark_count": 13,
-          "impression_count": 15654
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "Earlier at the @MilkenInstitute Future of Finance event, some execs were betting President Trump wouldn’t pick a side in the stablecoin yield fight (crypto vs. banks) until further down the line after he was “done fundraising off both.”\n\nSpoke too soon! https://t.co/XqiVVvS2xy",
-        "created_at": "2026-03-03T23:40:24.000Z",
-        "tweet_id": "2028978829927072228",
-        "metrics": {
-          "retweet_count": 225,
-          "reply_count": 81,
-          "like_count": 1753,
-          "quote_count": 6,
-          "bookmark_count": 62,
-          "impression_count": 62740
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 CFTC Chair Mike Selig says crypto market structure legislation \"must pass.\" \n\n\"It's critical we have a future-proof digital asset market structure in place.\" https://t.co/wXhDwdEhmK",
-        "created_at": "2026-03-03T22:55:57.000Z",
-        "tweet_id": "2028967643391091029",
-        "metrics": {
-          "retweet_count": 320,
-          "reply_count": 220,
-          "like_count": 2723,
-          "quote_count": 26,
-          "bookmark_count": 54,
-          "impression_count": 116336
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "RT @consensus2026: What if your crypto curated feed came to life for 72 hours straight?\n\nBuilders.\nInvestors.\nProtocols.\nAgentic commerce.…",
-        "created_at": "2026-03-03T22:23:58.000Z",
-        "tweet_id": "2028959597407473773",
-        "metrics": {
-          "retweet_count": 4,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 13
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸🇨🇳 President Trump warns the crypto industry \"will end up going to China\" if banks don't stop undermining crypto market structure bill.",
-        "created_at": "2026-03-03T22:18:46.000Z",
-        "tweet_id": "2028958288323198993",
-        "metrics": {
-          "retweet_count": 774,
-          "reply_count": 454,
-          "like_count": 8458,
-          "quote_count": 91,
-          "bookmark_count": 237,
-          "impression_count": 428595
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 President Trump says \"we are not going to allow\" banks to undermine \"our powerful crypto agenda.\"",
-        "created_at": "2026-03-03T22:12:34.000Z",
-        "tweet_id": "2028956726469263831",
-        "metrics": {
-          "retweet_count": 1094,
-          "reply_count": 414,
-          "like_count": 10764,
-          "quote_count": 119,
-          "bookmark_count": 293,
-          "impression_count": 485930
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 President Trump calls for Congress to pass crypto market structure legislation.",
-        "created_at": "2026-03-03T22:06:22.000Z",
-        "tweet_id": "2028955167207637414",
-        "metrics": {
-          "retweet_count": 1227,
-          "reply_count": 512,
-          "like_count": 11631,
-          "quote_count": 149,
-          "bookmark_count": 292,
-          "impression_count": 471668
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "RT @scottmelker: Lawmakers aim to write crypto legislation that lasts ten years, and the banks are worried.\n\nWith @EleanorTerrett! https://…",
-        "created_at": "2026-03-03T22:05:34.000Z",
-        "tweet_id": "2028954966719651923",
-        "metrics": {
-          "retweet_count": 19,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 0
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "OndoFinance",
-        "text": "https://t.co/RSSHU3xzJs",
-        "created_at": "2026-03-03T22:03:11.000Z",
-        "tweet_id": "2028954367362052241",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 0,
-          "like_count": 30,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 4575
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "OndoFinance",
-        "text": "Other tokenized stock platforms have a hidden cost.\n\nWhen liquidity comes from shallow onchain pools, the price you see isn't the price you get.\n\nOn a $50K buy, that gap can cost thousands.\n\nOndo tokenized stocks inherit liquidity directly from NYSE and Nasdaq. The result is https://t.co/PbnUqAjkNr",
-        "created_at": "2026-03-03T22:03:11.000Z",
-        "tweet_id": "2028954364077859128",
-        "metrics": {
-          "retweet_count": 56,
-          "reply_count": 25,
-          "like_count": 370,
-          "quote_count": 5,
-          "bookmark_count": 13,
-          "impression_count": 10333
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "BlackRock",
-        "text": "In 2026, fixed income investors can refocus on something more durable: income.\n\nRead our perspective in the Q1 Fixed Income Outlook: https://t.co/rWSmaX6jpD https://t.co/TqPuUFO7DM",
-        "created_at": "2026-03-03T21:40:00.000Z",
-        "tweet_id": "2028948531763945893",
-        "metrics": {
-          "retweet_count": 7,
-          "reply_count": 7,
-          "like_count": 24,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 5660
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "RT @CryptoAmerica_: “The idea that these two sides that have a difference of opinion on this are going to, you know, hold hands and jump of…",
-        "created_at": "2026-03-03T21:11:16.000Z",
-        "tweet_id": "2028941298019738094",
-        "metrics": {
-          "retweet_count": 8,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 2
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "LATEST: Chairman Mike Selig claims the CFTC is focused on \"setting very clear standards\" for prediction markets. https://t.co/rAiFGKn5A5",
-        "created_at": "2026-03-03T20:57:53.000Z",
-        "tweet_id": "2028937932619333784",
-        "metrics": {
-          "retweet_count": 15,
-          "reply_count": 27,
-          "like_count": 107,
-          "quote_count": 2,
-          "bookmark_count": 4,
-          "impression_count": 21572
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "@GregPate12 They are such wonderful little terrors! 🥰 Enjoy him/her!",
-        "created_at": "2026-03-03T20:19:31.000Z",
-        "tweet_id": "2028928277453160722",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 1,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 129
+          "impression_count": 1030
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-04T06:25:20.634Z",
-    "post_count": 40,
+    "fetched_at": "2026-03-04T13:15:54.384Z",
+    "post_count": 39,
     "errors": []
   },
   "manual": {
@@ -725,7 +709,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1583542213.3456392,
+      "current": 1583768027.5108051,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
@@ -789,72 +773,72 @@
     "base": 42,
     "mid": 35,
     "bull": 11,
-    "last_updated": "2026-03-04T06:36:26.894Z",
-    "last_reasoning": "Bear case increased from 10% to 12% due to South Korea crash, Fear & Greed at 10, and compound stress approaching ELEVATED on multiple legs simultaneously. Base case slightly increased at expense of mid, reflecting that extreme macro stress makes the $8-20 range harder to reach even with strong institutional fundamentals. Regulatory tailwinds (Trump/CFTC pressure) prevent further bear expansion but cannot fully offset global risk-off conditions. Bull case trimmed 1% — macro headwinds make $20+ harder absent a dramatic catalyst."
+    "last_updated": "2026-03-04T13:27:04.677Z",
+    "last_reasoning": "Bear case increased from 10% to 12% due to Hormuz escalation (oil shock potential), extreme fear at 10, and USD/JPY deepening past 157. If $100 oil materializes, it triggers the full Japan stress feedback loop and could cascade to CRITICAL compound stress. Base case narrowed slightly from 40% to 42% as institutional momentum (Kraken Fed access, Morgan Stanley ETF, White House engagement) provides floor. Mid case reduced slightly from 38% to 35% reflecting increased macro uncertainty. Bull case trimmed from 12% to 11% — the geopolitical environment is less conducive to exponential adoption acceleration."
   },
   "bear_case": {
-    "counter_thesis_score": 38,
-    "score_reasoning": "Counter-thesis pressure has increased from macro deterioration. XRP at $1.35 in extreme fear environment while institutional signals strengthen creates a disconnect that could resolve in either direction. ODL data opacity remains the largest credibility gap. Competing infrastructure continues building in parallel.",
+    "counter_thesis_score": 34,
+    "score_reasoning": "Elevated from prior assessment. The Hormuz escalation adds genuine macro tail risk that could suppress institutional risk appetite for 2-3 quarters. ODL data opacity remains the single largest evidentiary gap. RLUSD's Ethereum concentration undermines the XRPL-specific utility argument. Permissioned DEX at zero adoption after 12 days is early but not encouraging.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "SWIFT continues upgrading gpi with pre-validation and case resolution APIs. 11,500 bank network effects remain XRPL's hardest competitor — no institution needs to switch infrastructure to use SWIFT improvements."
+        "status_text": "SWIFT continues incremental upgrades serving 11,500+ banks. No dramatic improvement but network effects remain formidable — institutional inertia is SWIFT's greatest asset."
       },
       {
         "name": "Visa B2B Connect",
-        "status": "LOW_RISK",
-        "status_text": "No significant new adoption announcements. Visa's focus appears more on consumer stablecoin settlement than institutional cross-border competition with Ripple's corridor approach."
+        "status": "MONITORING",
+        "status_text": "Visa's blockchain-based B2B settlement network expanding quietly. Direct competition for the same cross-border corridors XRPL targets."
       },
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "Kinexys (formerly Onyx) continues processing billions in daily institutional transfers. JPMorgan's captive network serves its own clients effectively — a real competitor for large-bank corridors Ripple targets."
+        "status_text": "Kinexys (formerly Onyx) processes significant daily volumes on a private chain. JPMorgan actively fighting stablecoin regulatory framework per today's Dimon pushback — they want to own settlement, not cede it."
       },
       {
         "name": "BIS Project Nexus",
         "status": "MONITORING",
-        "status_text": "Nexus aims to connect instant payment systems across jurisdictions without private bridge tokens. If central banks adopt Nexus for real-time cross-border settlement, it directly competes with ODL's value proposition. Timeline remains 2027+ for live operation."
+        "status_text": "Multi-CBDC bridge project represents sovereign alternative to private settlement tokens. Kill switch 9 (Competitive Displacement) remains active — no evidence Nexus has chosen to operate independently of XRPL, but no evidence of integration either."
       },
       {
         "name": "Ethereum Institutional",
-        "status": "MONITORING",
-        "status_text": "RLUSD's $1.584B market cap appears to be ~78% on Ethereum vs 22% on XRPL ($345M). Ethereum remains the default institutional stablecoin rails. Ondo's tokenized stocks inheriting NYSE/Nasdaq liquidity on Ethereum is a competitive data point for RWA settlement."
+        "status": "ELEVATED_RISK",
+        "status_text": "RLUSD's own data shows ~78% of supply on Ethereum ($1.24B) vs XRPL ($345M). If Ripple's own stablecoin prefers Ethereum for institutional deployment, this undermines the XRPL-as-settlement-layer narrative directly."
       }
     ],
-    "odl_stagnation": "ODL volume remains completely opaque — Ripple stopped publishing data, no third-party verification exists, and the kill switch is unfalsifiable. This is the single largest credibility risk to the institutional adoption thesis.",
-    "token_velocity_concern": "No token velocity data available. If XRP is used purely as a bridge currency with sub-second hold times, price appreciation requires volume growth that outpaces velocity — and we cannot verify volume is growing.",
+    "odl_stagnation": "No ODL volume data for 12+ months. The thesis's central utility mechanism remains completely unverifiable. Ripple's decision to stop publishing this data is itself a bearish signal that hasn't been adequately explained.",
+    "token_velocity_concern": "Token velocity data unavailable (Kill Switch 8: UNKNOWN). Without hold-time data, we cannot assess whether XRP functions as a settlement asset or a speculative pass-through — this distinction is fundamental to price thesis.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "South Korea circuit breaker, Fear & Greed at 10, global trade war via tariffs — recession indicators are flashing. A global recession would compress institutional adoption timelines and reduce cross-border payment volumes."
+        "status_text": "Hormuz closure → $100 oil → global stagflation risk. Fear & Greed at 10. Dubai crashing. Energy shock is classically recessionary and would freeze institutional adoption timelines."
       },
       {
         "name": "Crypto Winter Signals",
         "status": "MONITORING",
-        "status_text": "XRP down from cycle highs, extreme fear sentiment, but ETFs still live and institutional infrastructure still building. Not yet a crypto winter but the macro environment could trigger one if equity contagion deepens."
+        "status_text": "XRP at $1.40 is well off highs. Extreme Fear at 10. However, BTC ETF inflows ($1.45B/week) and institutional milestones (Kraken Fed access) argue against full winter — this looks like a macro-driven correction, not a structural unwind."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "Risk is at lowest point in thesis history. Presidential backing, CFTC support, bipartisan momentum on market structure. A reversal would require a dramatic political shift that current evidence does not support."
+        "status_text": "Executive branch actively defending crypto policy. White House engagement with Coinbase and Ripple. No signals of reversal. Risk is stagnation (Clarity Act stuck in pending), not reversal."
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "US 10Y at 4.05% remains elevated. BOJ under pressure to hike. If global central banks extend tightening cycles due to persistent inflation (partly from tariffs and energy costs), liquidity conditions worsen for all risk assets including crypto."
+        "status_text": "US 10Y at 4.05% stable. If oil shock materializes, Fed faces inflation/recession dilemma. Rate cuts may be delayed or reversed, tightening liquidity for risk assets including crypto."
       }
     ],
-    "bear_narrative": "HOLD POSITION. Bear pressure 38/100 — moderate, driven by two structural concerns that are real but not yet thesis-breaking: stablecoin corridor competition is the most evidence-backed threat at final composite 8 (GCash/Bitso directly overlap Ripple corridors, $15B/month USDC production volume, AND Ripple's own multi-rail pivot confirms the competitive pressure), while the ODL data void is now WARNING-level with convergent evidence of XRP-specific underperformance. The strongest counter-signal is XRP's remarkable resilience during today's extreme stress — declining only 0.84% while KOSPI crashed 8% with F&G at 10, suggesting a structural institutional floor that is new to this cycle. The core paradox I hold without resolution: Ripple may be succeeding as a payments platform while the XRP-as-exclusive-bridge-asset thesis quietly narrows — RLUSD growing 78% on Ethereum, ODL rebranded to multi-rail 'Ripple Payments,' stablecoin corridors expanding in Ripple's own markets. What I don't know: whether Ripple's platform pivot makes XRP more valuable (orchestration hub for all rails) or less valuable (one interchangeable rail among many). That question is the thesis itself, and the answer isn't in yet.",
-    "last_updated": "2026-03-04T06:36:26.894Z"
+    "bear_narrative": "HOLD POSITION. Bear pressure 34/100 — moderate, driven almost entirely by one structural vulnerability: three years without verifiable ODL settlement data, with the Q3 2026 transparency kill switch now six months away. Everything else resolved favorably: Hormuz is a risk, not a crisis (oil at $81 says so); CBDC interop is real but years from production; 7 of 10 Layer 3 null hypotheses held, meaning most headline threats don't survive scrutiny. The core paradox: XRP shows relative strength (+3.55% during Extreme Fear at 10) with genuine institutional momentum (7 ETFs, $1.45B BTC weekly inflows, Coinbase at the White House) — yet the primary use case that justifies the entire thesis remains a black box. The thesis is holding, but it's holding on institutional credibility and regulatory momentum, not on verified settlement utility. That distinction matters, and the clock is running.",
+    "last_updated": "2026-03-04T13:27:04.677Z"
   },
   "last_analysis": {
-    "timestamp": "2026-03-04T06:36:26.894Z",
+    "timestamp": "2026-03-04T13:27:04.677Z",
     "run_type": "morning",
     "stress_level": "ELEVATED",
-    "stress_score": 62,
-    "applied_at": "2026-03-04T06:38:16.624Z",
+    "stress_score": 72,
+    "applied_at": "2026-03-04T13:28:57.448Z",
     "changes_applied": 2
   }
 }
