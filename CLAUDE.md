@@ -15,14 +15,17 @@ Autonomous AI intelligence system monitoring an institutional adoption thesis. F
 
 ## File Map
 - scripts/fetch-data.js — Data pipeline, 7 active API sources, writes dashboard-data.json, runs data contract validation
-- scripts/analyze-thesis.js — Claude API analyst (currently 2-layer: SWEEP + ASSESS), writes 360-report.json + 360-history.json, sends Telegram briefing with pipeline health line
+- scripts/analyze-thesis.js — Four-layer Claude API pipeline (SWEEP → CONTEXTUALIZE → INFER → RECONCILE), writes 360-report.json + 360-history.json, sends Telegram briefing with pipeline health line
 - scripts/apply-analysis.js — Merges analysis results into dashboard-data.json (etf, supply, xrpl_metrics, bear_case, probability, stress fields)
 - scripts/x402-agent.js — XRPL mainnet payment agent (manual trigger only)
+- scripts/promote-rejections.js — Transforms Layer 4 auto_commit rejections into corrections ledger entries, runs after every Layer 4 pass
 - scripts/thesis-context.md — Thesis context fed to Claude API analyst. Lives in scripts/, NOT repo root.
 - scripts/pipeline-health.json — Written by fetch-data.js validation, read by analyze-thesis.js for Telegram heartbeat
 - data-contract.json — Lists every field index.html expects from dashboard-data.json. Source of truth for validation.
 - data/360-report.json — Latest analysis output
 - data/360-history.json — Archive of all assessments (last 60 entries)
+- data/corrections-ledger.json — 8 active corrections (CL-001 through CL-008), read by Layers 2 and 3 during live analysis
+- data/rejection-log.json — Layer 4 rejection log, 11 entries all resolved
 - index.html — Dashboard frontend, reads dashboard-data.json on load
 
 ## Data Flow
@@ -38,44 +41,63 @@ fetch-data.js writes dashboard-data.json (partial: macro, rlusd, xrp, thesis_sco
 - fetch-data.js owns 18 fields. analyze-thesis.js/apply-analysis.js own 73 fields. x402-agent.js owns 23 fields. See data-contract.json for full list.
 - kill_switches in dashboard-data.json is written by fetch-data.js but NOT read by index.html. Kill switch display comes from data/360-report.json.
 
+## Corrections Ledger — Valid Enum Values
+
+When Layer 4 writes entries to data/rejection-log.json, and when any code writes to data/corrections-ledger.json, use only these valid enum values:
+
+corrections_ledger_action: auto_commit | flag_for_review | discard
+
+root_cause_type: KNOWLEDGE_GAP | DATA_GAP | ASSUMPTION_FAILURE | APOPHENIA | BIAS | STALE_BELIEF | NARRATIVE_WEIGHT_BIAS | TEMPORAL_ILLUSION | OVERCORRECTION | SOURCE_CREDIBILITY_ERROR | CONTRADICTED_BY_DATA | INSUFFICIENT_EVIDENCE
+
+lesson_type: FALSE_THREAT | MISSED_THREAT | MISSED_OPPORTUNITY | FALSE_CONFIDENCE | UNDER_CONFIDENCE | OVERCORRECTION | STALE_ANCHOR
+
+status (corrections ledger): ACTIVE | SUPERSEDED | RETIRED
+
+lesson_type definitions:
+- FALSE_THREAT: System flagged a threat that was not a threat. Bear case inflated by noise.
+- MISSED_THREAT: System failed to identify a genuine threat. Bear case understated.
+- MISSED_OPPORTUNITY: System dismissed a positive signal. Bull case understated.
+- FALSE_CONFIDENCE: System expressed high confidence in a conclusion that did not hold. Bidirectional.
+- UNDER_CONFIDENCE: System assigned low severity to a signal that proved materially significant in a positive direction. Systematic UNDER_CONFIDENCE indicates bearish suppression bias.
+- OVERCORRECTION: A previous lesson caused the system to overweight or dismiss a signal category, creating a new error. Bidirectional.
+- STALE_ANCHOR: System anchored on outdated framing or status from a prior cycle without verifying against current data. Bidirectional.
+
 ## What's Built and Running
-- Layer 1 SWEEP + Layer 2 ASSESS (current two-layer system)
+- Four-layer pipeline LIVE: SWEEP → CONTEXTUALIZE → INFER → RECONCILE (analyze-thesis.js)
 - Automated twice-daily analysis via GitHub Actions
-- Telegram briefing with pipeline health heartbeat
-- Data contract validation (18 fetch fields checked every run)
+- Telegram briefing with pipeline health heartbeat and chunking for 4K limit
+- Data contract validation (21 fetch fields checked every run)
+- Corrections ledger LIVE: data/corrections-ledger.json (8 active entries, CL-001 through CL-008)
+- Rejection log LIVE: data/rejection-log.json (11 entries, all resolved)
+- promote-rejections.js LIVE: auto-promotes Layer 4 high-confidence rejections to corrections ledger
 - Dashboard on GitHub Pages
 - x402 agent (12 mainnet transactions, 9,000 drops lifetime spend)
 
-## Build State (as of March 3, 2026 — end of session)
+## Build State (as of March 4, 2026)
 
-### Completed Today
-- thesis-context.md updated: March 3 market data, compound stress matrix, key players section
-- Dashboard bug fixed: d.thesis → d.thesis_scores in index.html
-- Data contract: data-contract.json created, validation wired into fetch-data.js (18 fields checked)
-- Pipeline heartbeat: data contract status appended to Telegram briefing via pipeline-health.json
-- CLAUDE.md rewritten with current build state
-- Empty corrections ledger files created: data/corrections-ledger.json, data/rejection-log.json
-- Layer 2 CONTEXTUALIZE function written and tested: 12/12 validation checks passed
+### Completed (Sessions through March 4, 2026)
+- Four-layer pipeline built and live: SWEEP → CONTEXTUALIZE → INFER → RECONCILE
+- Corrections ledger live with 8 active entries (CL-001 through CL-008)
+- Rejection log live with 11 entries, all resolved
+- promote-rejections.js live: auto-promotes high-confidence Layer 4 rejections
+- thesis-context.md updated with March 2026 market data and compound stress matrix
+- Data contract validation wired into fetch-data.js
+- Pipeline heartbeat appended to Telegram briefings
+- Architecture Decision #9 documented: bidirectional lesson_type taxonomy
 
-### In Progress — Stashed
-- scripts/analyze-thesis.js has Layer 2 CONTEXTUALIZE replacing runAssessment(). Changes are in git stash:
-  `git stash pop` to restore
-- The stashed version includes: new runContextualize() function (lines 538-749), updated call site (line 869), updated overlay bridge (lines 967-971)
-- Layer 2 was tested with Sonnet locally (Opus timed out on local network — works fine in GitHub Actions)
-- Test fixtures: scripts/test-layer2.js and scripts/test-layer2-output.json are committed to main
+### Current State (as of March 4, 2026)
+Four-layer pipeline is live and running in production. The git stash from the Layer 2 session has been popped and committed. All four layers (runSweep, runContextualize, runInfer, runReconcile) are wired and running. Pipeline version: 4-layer-v1.
 
 ### Still To Build
-- Layer 3 INFER: write runInfer(), test in isolation against test-layer2-output.json
-- Layer 4 RECONCILE: write runReconcile(), test in isolation against Layer 3 output
-- Wire full pipeline: runSweep() → runContextualize() → runInfer() → runReconcile()
-- Update render360Report() in index.html to read Layer 4 output schema
-- Update Telegram formatting to use Layer 4 final_report field
-- Update caller overlay (lines 967-971) for Layer 4 field names
-- Full end-to-end test before committing to main
-- Production system (current 2-layer) keeps running untouched until all 4 layers are verified
+- Layer Zero definition (layer-zero.json) — immutable epistemological foundation
+- Output schemas: schema-layer2-output.json, schema-layer3-output.json, schema-layer4-output.json
+- Validation functions: validateLayer2Output(), validateLayer3Output(), validateLayer4Output() wired into analyze-thesis.js
+- Compound kill switch indices (5 designed, pending schema enforcement foundation)
+- Evolution Library Phase 1 (first synthetic scenario)
+- Verified Facts Ledger
 
-### Key Decision: Option C3
-All four layers are built and tested before any dashboard changes. The 360 tab reads Layer 4 output. One coordinated commit, not incremental pushes. Each layer tested in isolation first (progressive isolation testing).
+### Key Decision: Option C3 — COMPLETED
+All four layers were built and tested before dashboard changes. One coordinated commit. Progressive isolation testing was used — each layer tested against the previous layer's output before integration.
 
 ### Test Approach
 - Local test scripts call the API with real pipeline data as fixtures
@@ -88,4 +110,9 @@ If code contradicts an architectural decision document, the document wins. The c
 - OVERWATCH-CIRCUIT-BREAKERS.md
 - ARCHITECTURE-DECISION-CORRECTIONS-LEDGER.md
 - ARCHITECTURE-DECISION-LAYER2-CONTEXTUALIZE.md
+- ARCHITECTURE-DECISIONS-7-AND-8.docx
+- ARCHITECTURE-DECISION-X402-DUAL-CHANNEL-ACQUISITION.docx
+- ARCHITECTURE-DECISION-DOMAIN-SELF-CALIBRATION.docx
+- ARCHITECTURE-DECISION-GUIDED-THESIS-CONSTRUCTION.docx
+- ARCHITECTURE-DECISION-9-LESSON-TYPE-TAXONOMY.docx
 - LAYER-2-3-4-PROMPTS-DRAFT.md (PRIVATE — never commit to public repo)
