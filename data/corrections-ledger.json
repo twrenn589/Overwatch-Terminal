@@ -124,5 +124,41 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-008",
+    "date_of_error": "2026-03-04",
+    "date_identified": "2026-03-04",
+    "identified_by": "layer_4_override",
+    "belief": "Fear & Greed at 10 signals structural capitulation for XRP specifically",
+    "reality": "XRP is +7.07% in 24h during F&G at 10, directly contradicting the capitulation framing. Layer 3 correctly identified this as null hypothesis holds, but the original Layer 2 threat framing of 'structural capitulation' was overwrought. Rejecting the specific claim of XRP capitulation, not the general observation of macro stress.",
+    "root_cause": "XRP is +7.07% in 24h during F&G at 10, directly contradicting the capitulation framing. Layer 3 correctly identified this as null hypothesis holds, but the original Layer 2 threat framing of 'structural capitulation' was overwrought. Rejecting the specific claim of XRP capitulation, not the general observation of macro stress.",
+    "root_cause_type": "CONTRADICTED_BY_DATA",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "CL-009",
+    "date_of_error": "2026-03-04",
+    "date_identified": "2026-03-04",
+    "identified_by": "layer_4_override",
+    "belief": "Kraken Fed Master Account enables competitors to bypass XRP for cross-border settlement",
+    "reality": "Fed master accounts provide domestic US payment access (Fedwire, FedNow). XRP thesis targets cross-border corridors. The mechanism requires 3+ assumptions to connect domestic payment access to cross-border settlement competition. Layer 3 correctly identified null hypothesis holds.",
+    "root_cause": "Fed master accounts provide domestic US payment access (Fedwire, FedNow). XRP thesis targets cross-border corridors. The mechanism requires 3+ assumptions to connect domestic payment access to cross-border settlement competition. Layer 3 correctly identified null hypothesis holds.",
+    "root_cause_type": "ASSUMPTION_FAILURE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

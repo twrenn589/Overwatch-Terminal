@@ -1364,5 +1364,36 @@
     "events_drafted_count": 7,
     "thesis_pulse": "RLUSD market cap reads $1.584B on CoinGecko — a recovery from the $1.494B contraction reported last week, though XRPL on-chain supply shows only $345M, confirming the cross-chain discrepancy persists.",
     "counter_thesis_score": 34
+  },
+  {
+    "timestamp": "2026-03-04T20:14:04.765Z",
+    "run_type": "evening",
+    "stress_score": 42,
+    "stress_level": "MONITORING",
+    "xrp_price": 1.46,
+    "fear_greed": 10,
+    "usd_jpy": 157.11,
+    "jpn_10y": 2.118,
+    "brent_crude": 81.295,
+    "dxy": 98.7588,
+    "sp500": 6884.11,
+    "etf_daily_flow": null,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1583408422.6410403,
+    "probability_framework": {
+      "bear": 12,
+      "base": 42,
+      "mid": 34,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 3,
+      "TRACKING": 1,
+      "PENDING": 1
+    },
+    "alerts_count": 6,
+    "events_drafted_count": 6,
+    "thesis_pulse": "RLUSD market cap reads $1.583B via CoinGecko — a notable recovery from the $1.494B contraction noted Feb 27, representing ~$89M of inbound growth. However, XRPL on-chain RLUSD supply reads only $345M,",
+    "counter_thesis_score": 42
   }
 ]

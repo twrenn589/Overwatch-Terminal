@@ -156,5 +156,27 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-04T13:27:04.666Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Fear & Greed at 10 signals structural capitulation for XRP specifically",
+    "rejection_reason": "XRP is +7.07% in 24h during F&G at 10, directly contradicting the capitulation framing. Layer 3 correctly identified this as null hypothesis holds, but the original Layer 2 threat framing of 'structural capitulation' was overwrought. Rejecting the specific claim of XRP capitulation, not the general observation of macro stress.",
+    "root_cause": "CONTRADICTED_BY_DATA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-04T20:14:04.754Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-04T20:14:04.755Z"
+  },
+  {
+    "layer3_inference": "Kraken Fed Master Account enables competitors to bypass XRP for cross-border settlement",
+    "rejection_reason": "Fed master accounts provide domestic US payment access (Fedwire, FedNow). XRP thesis targets cross-border corridors. The mechanism requires 3+ assumptions to connect domestic payment access to cross-border settlement competition. Layer 3 correctly identified null hypothesis holds.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-04T20:14:04.754Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-04T20:14:04.755Z"
   }
 ]
