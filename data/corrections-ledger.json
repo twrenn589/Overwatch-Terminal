@@ -106,5 +106,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-007",
+    "date_of_error": "2026-03-04",
+    "date_identified": "2026-03-04",
+    "identified_by": "layer_4_override",
+    "belief": "JoelKatz tweets reveal key-person or centralization risk signals",
+    "reality": "CL-006 is directly applicable. JoelKatz discussing Microsoft antitrust analogies, AI speech rights, logic puzzles, and Australian tourism is consistent with years of personal intellectual engagement. This is not a business signal. The original threat was identified as APOPHENIA in the corrections ledger.",
+    "root_cause": "CL-006 is directly applicable. JoelKatz discussing Microsoft antitrust analogies, AI speech rights, logic puzzles, and Australian tourism is consistent with years of personal intellectual engagement. This is not a business signal. The original threat was identified as APOPHENIA in the corrections ledger.",
+    "root_cause_type": "APOPHENIA",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

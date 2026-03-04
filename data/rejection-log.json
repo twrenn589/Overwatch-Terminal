@@ -118,5 +118,25 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-03T22:30:25.742Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Fear & Greed at 10 indicates institutional distribution rather than accumulation",
+    "rejection_reason": "Layer 3 correctly rejected this via null hypothesis, and I confirm the rejection. The interpretation of a sentiment index as institutional flow data requires multiple unsupported assumptions. No ETF flow data exists to verify. CL-002 directly applicable — market sentiment readings are cyclical. Institutional investors historically accumulate during extreme fear, contradicting the premise.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-04T02:32:48.014Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "JoelKatz tweets reveal key-person or centralization risk signals",
+    "rejection_reason": "CL-006 is directly applicable. JoelKatz discussing Microsoft antitrust analogies, AI speech rights, logic puzzles, and Australian tourism is consistent with years of personal intellectual engagement. This is not a business signal. The original threat was identified as APOPHENIA in the corrections ledger.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-04T02:32:48.014Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-04T02:32:48.015Z"
   }
 ]
