@@ -32,6 +32,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 const Anthropic = require('@anthropic-ai/sdk');
 const promoteRejections = require('./promote-rejections');
 const { runTier1Checks } = require('./tier1-validators');
+const { runLayerZeroGate } = require('./layer-zero-gate');
 
 const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
 const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
@@ -1711,6 +1712,17 @@ async function main() {
         } catch (e) {
           warn('tier1', `Layer 3 validator failed (non-fatal): ${e.message}`);
           tier1Layer3 = { flags: [{ rule_id: 'VALIDATOR_FAILURE', finding: 'Layer 3 Tier 1 checks', detail: e.message, severity: 'FLAG', timestamp: new Date().toISOString() }], hard_fails: 0, total_flags: 1, layer: 3 };
+        }
+      }
+
+      // Layer Zero Gate — Layer 3
+      let gateLayer3 = { violations: [], compliance: 'GATE_NOT_RUN', gate_failed: false };
+      if (inferenceResult) {
+        try {
+          gateLayer3 = await runLayerZeroGate(3, inferenceResult, tier1Layer3, process.env.ANTHROPIC_API_KEY);
+        } catch (e) {
+          warn('gate', `Layer 3 gate failed (non-fatal): ${e.message}`);
+          gateLayer3 = { violations: [], compliance: 'GATE_UNAVAILABLE', gate_failed: true, failure_reason: e.message };
         }
       }
 
