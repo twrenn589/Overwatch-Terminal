@@ -767,6 +767,12 @@ For each threat from Layer 1:
    - Trajectory (improving, stable, deteriorating)
    - Whether the structure is pre-loaded (one or more legs already elevated, reducing the force needed from others)
 
+CRITICAL OUTPUT REQUIREMENT:
+Your JSON output MUST include the "corrections_referenced" array. This is not optional.
+- If you applied corrections from the ledger, list each one with correction_id, trigger_matched, and influence_on_assessment.
+- If no corrections were relevant, return an empty array: "corrections_referenced": []
+- Omitting this field is a structural compliance failure.
+
 Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
 {
   "knowledge_audit": [
@@ -994,6 +1000,12 @@ D) HIDDEN MOVES — What are players most likely doing that they're NOT talking 
 E) SCENARIO PROBABILITIES — Based on behavioral evidence (not speculation): thesis CONFIRMED, MODIFIED, or FALSIFIED with probability, key evidence, and timeline.
 
 F) x402 PAPER TRADES — Identify data gaps that, if filled, would most change the assessment. Document the reasoning. Do NOT attempt to acquire data.
+
+CRITICAL OUTPUT REQUIREMENT:
+Your JSON output MUST include the "corrections_referenced" array. This is not optional.
+- If you applied corrections from the ledger, list each one with correction_id, trigger_matched, and influence_on_assessment.
+- If no corrections were relevant, return an empty array: "corrections_referenced": []
+- Omitting this field is a structural compliance failure.
 
 Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
 {
