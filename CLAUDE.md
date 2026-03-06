@@ -3,6 +3,8 @@
 ## What This Is
 Autonomous AI intelligence system monitoring an institutional adoption thesis. Four-layer cognitive architecture (SWEEP → CONTEXTUALIZE → INFER → RECONCILE) with epistemological guardrails, circuit breakers, and a corrections ledger. Running in production on GitHub Actions, twice daily. Built entirely by directing AI tools — the builder has zero coding background.
 
+The deeper IP is The Integrity Protocol — a cognitive transfer methodology for decomposing expert human judgment into layered AI systems with epistemological guardrails. Overwatch Terminal is TIP's first proof of concept. Patent Pending — filed March 5, 2026.
+
 ## Critical Build Rules
 - NEVER modify a file without stating: what changes, what it affects downstream, what could break
 - One change at a time. Verify before moving to next.
@@ -14,27 +16,36 @@ Autonomous AI intelligence system monitoring an institutional adoption thesis. F
 - Comments explain WHY, not WHAT. Reference architectural decision documents.
 
 ## File Map
-- scripts/fetch-data.js — Data pipeline, 7 active API sources, writes dashboard-data.json, runs data contract validation
-- scripts/analyze-thesis.js — Four-layer Claude API pipeline (SWEEP → CONTEXTUALIZE → INFER → RECONCILE), writes 360-report.json + 360-history.json, sends Telegram briefing with pipeline health line
+- scripts/fetch-data.js — Data pipeline, 12+ active API sources, writes dashboard-data.json, runs data contract validation
+- scripts/analyze-thesis.js — Four-layer Claude API pipeline (SWEEP → CONTEXTUALIZE → INFER → RECONCILE), LAYER_ZERO_RULES constant (17 rules injected into L2-L4 prompts), enforceCorrectionsReferenced() helper, writes 360-report.json + 360-history.json + rejection-log.json, sends Telegram briefing with pipeline health line
 - scripts/apply-analysis.js — Merges analysis results into dashboard-data.json (etf, supply, xrpl_metrics, bear_case, probability, stress fields)
 - scripts/x402-agent.js — XRPL mainnet payment agent (manual trigger only)
 - scripts/promote-rejections.js — Transforms Layer 4 auto_commit rejections into corrections ledger entries, runs after every Layer 4 pass
+- scripts/ab-test-overledger.js — Isolated A/B test script proving Overledger causal impact on Layer 2 output. Does NOT import from or modify production code.
 - scripts/thesis-context.md — Thesis context fed to Claude API analyst. Lives in scripts/, NOT repo root.
 - scripts/pipeline-health.json — Written by fetch-data.js validation, read by analyze-thesis.js for Telegram heartbeat
 - data-contract.json — Lists every field index.html expects from dashboard-data.json. Source of truth for validation.
-- data/360-report.json — Latest analysis output
+- data/360-report.json — Latest analysis output (includes _layer2_raw, _layer3_raw, _layer4_raw)
 - data/360-history.json — Archive of all assessments (last 60 entries)
-- data/corrections-ledger.json — 8 active corrections (CL-001 through CL-008), read by Layers 2 and 3 during live analysis
-- data/rejection-log.json — Layer 4 rejection log, 11 entries all resolved
+- data/layer-zero.json — 17 immutable epistemological rules across 5 categories. Canonical reference for gate function. Commit b61a69b.
+- data/corrections-ledger.json — 19 active corrections, read by Layers 2 and 3 during live analysis
+- data/rejection-log.json — Layer 4 rejection log, feeds corrections ledger pipeline
+- data/ab-test-results.json — Results of Level 2 causal impact A/B test
+- data/schema-layer2-output.json — Layer 2 CONTEXTUALIZE output schema (verified against production)
+- data/schema-layer3-output.json — Layer 3 INFER output schema (10 required fields, circuit breaker enums)
+- data/schema-layer4-output.json — Layer 4 RECONCILE output schema (17 required fields, strict)
 - index.html — Dashboard frontend, reads dashboard-data.json on load
+- .github/workflows/analyze-thesis.yml — Production pipeline (cron 2x daily)
+- .github/workflows/ab-test.yml — Manual-trigger A/B test workflow (isolated from production)
 
 ## Data Flow
-fetch-data.js writes dashboard-data.json (partial: macro, rlusd, xrp, thesis_scores) → validates against data-contract.json → writes pipeline-health.json → analyze-thesis.js runs Claude API → writes 360-report.json + 360-history.json → sends Telegram with pipeline health appended → apply-analysis.js merges analysis into dashboard-data.json (etf, supply, xrpl_metrics, bear_case, probability, stress) → git commit + push
+fetch-data.js writes dashboard-data.json (partial: macro, rlusd, xrp, thesis_scores) → validates against data-contract.json → writes pipeline-health.json → analyze-thesis.js runs four-layer pipeline → writes 360-report.json + 360-history.json + rejection-log.json → promote-rejections.js auto-promotes high-confidence rejections to corrections-ledger.json → sends Telegram with pipeline health appended → apply-analysis.js merges analysis into dashboard-data.json (etf, supply, xrpl_metrics, bear_case, probability, stress) → git commit + push
 
 ## GitHub Actions
 - Cron: 12:00 UTC and 00:00 UTC daily
-- Workflow: .github/workflows/analyze-thesis.yml
-- Steps: checkout → setup node → npm install → fetch-data.js → analyze-thesis.js → apply-analysis.js → git commit/push
+- Production workflow: .github/workflows/analyze-thesis.yml
+- A/B test workflow: .github/workflows/ab-test.yml (manual trigger only, requires YES confirmation)
+- Steps (production): checkout → setup node → cd scripts && npm install → fetch-data.js → analyze-thesis.js → apply-analysis.js → git commit/push
 
 ## Key Field Names
 - index.html reads thesis_scores (NOT thesis). Bug fixed March 3, 2026.
@@ -64,45 +75,51 @@ lesson_type definitions:
 
 ## What's Built and Running
 - Four-layer pipeline LIVE: SWEEP → CONTEXTUALIZE → INFER → RECONCILE (analyze-thesis.js)
+- Layer Zero LIVE: 17 immutable rules in data/layer-zero.json, injected into L2-L4 prompts via LAYER_ZERO_RULES constant
+- corrections_referenced field ENFORCED in Layer 2 and Layer 3 output (enforceCorrectionsReferenced helper with one-shot Sonnet retry)
 - Automated twice-daily analysis via GitHub Actions
 - Telegram briefing with pipeline health heartbeat and chunking for 4K limit
-- Data contract validation (21 fetch fields checked every run)
-- Corrections ledger LIVE: data/corrections-ledger.json (8 active entries, CL-001 through CL-008)
-- Rejection log LIVE: data/rejection-log.json (11 entries, all resolved)
+- Data contract validation (18 fetch fields checked every run)
+- Corrections ledger LIVE: data/corrections-ledger.json (19 active entries)
+- Rejection log LIVE: data/rejection-log.json, feeds corrections ledger pipeline
 - promote-rejections.js LIVE: auto-promotes Layer 4 high-confidence rejections to corrections ledger
+- Output schemas committed: Layer 2, Layer 3, Layer 4
 - Dashboard on GitHub Pages
 - x402 agent (12 mainnet transactions, 9,000 drops lifetime spend)
 
-## Build State (as of March 4, 2026)
+## Recursive Learning — Proof Status
+- Level 1 — Loop Closure: ACHIEVED (2026-03-06T03:13:59Z). Error → lesson → application cycle completed. Layer 2 natively produced 10 corrections_referenced entries. Documented in MILESTONE-FIRST-LESSON-APPLIED.docx.
+- Level 2 — Causal Impact: ACHIEVED (2026-03-06, A/B test). Bear pressure 57 (with ledger) vs 62 (without). RLUSD Cannibalization moved from scored (7) to unscored — ledger prevented confident answer to unanswerable question. Results in data/ab-test-results.json. Documented in MILESTONE-LEVEL2-CAUSAL-IMPACT.docx.
+- Level 3 — Accuracy Improvement Over Time: REQUIRES WEEKS. Sunday audit tracks error rate vs Overledger size.
 
-### Completed (Sessions through March 4, 2026)
-- Four-layer pipeline built and live: SWEEP → CONTEXTUALIZE → INFER → RECONCILE
-- Corrections ledger live with 8 active entries (CL-001 through CL-008)
-- Rejection log live with 11 entries, all resolved
-- promote-rejections.js live: auto-promotes high-confidence Layer 4 rejections
-- thesis-context.md updated with March 2026 market data and compound stress matrix
-- Data contract validation wired into fetch-data.js
-- Pipeline heartbeat appended to Telegram briefings
-- Architecture Decision #9 documented: bidirectional lesson_type taxonomy
+## Build State (as of March 6, 2026)
 
-### Current State (as of March 4, 2026)
-Four-layer pipeline is live and running in production. The git stash from the Layer 2 session has been popped and committed. All four layers (runSweep, runContextualize, runInfer, runReconcile) are wired and running. Pipeline version: 4-layer-v1.
+### Completed
+- Four-layer pipeline built and live (4-layer-v1)
+- Layer Zero committed (17 immutable rules, 5 categories, commit b61a69b)
+- LAYER_ZERO_RULES constant wired into analyze-thesis.js (L2-L4 prompts, commit d45c455)
+- corrections_referenced field enforced in Layer 2 and Layer 3
+- Output schemas committed: Layer 2, Layer 3, Layer 4
+- Corrections ledger live with 19 active entries
+- promote-rejections.js live
+- Level 1 recursive learning proof (loop closure)
+- Level 2 recursive learning proof (causal impact via A/B test)
+- Architecture Decision #11 documented (Layer Zero Epistemological Gate)
+- Layer 2 max_tokens increased to 12000, Layer 3 and Layer 4 to 16000
+- Patent filed (Patent Pending, March 5, 2026)
 
-### Still To Build
-- Layer Zero definition (layer-zero.json) — immutable epistemological foundation
-- Output schemas: schema-layer2-output.json, schema-layer3-output.json, schema-layer4-output.json
-- Validation functions: validateLayer2Output(), validateLayer3Output(), validateLayer4Output() wired into analyze-thesis.js
-- Compound kill switch indices (5 designed, pending schema enforcement foundation)
-- Evolution Library Phase 1 (first synthetic scenario)
-- Verified Facts Ledger
+### Still To Build (in order)
+1. Code validators (Tier 1) — deterministic checks for 8 Layer Zero rules with code-enforceable aspects
+2. Gate function — runLayerZeroGate() in analyze-thesis.js, Sonnet default / Opus when code flags present
+3. Gate review ledger — data/gate-review-ledger.json, Sunday audit classifies VALID_FLAG vs FALSE_FLAG
+4. Wire full pipeline — Layer → code validator → gate → next layer, tags stored in orchestrator
+5. Sunday audit expansion — gate flag review (HOW loop), corrections_referenced verification, hit counter updates
+6. Compound indices — built on validated, gate-enforced foundation
+7. Evolution Library — synthetic scenarios testing gates and validators
 
-### Key Decision: Option C3 — COMPLETED
-All four layers were built and tested before dashboard changes. One coordinated commit. Progressive isolation testing was used — each layer tested against the previous layer's output before integration.
-
-### Test Approach
-- Local test scripts call the API with real pipeline data as fixtures
-- Opus times out locally (SDK default timeout) — add timeout: 300000 to Anthropic client, or test with Sonnet locally and let GitHub Actions validate Opus
-- Each layer's test output becomes the next layer's test input
+### Domain-Agnostic Audit Flags
+- Layer 4 schema: tactical_recommendation (investment-specific enum values) and final_bear_pressure (investment terminology) should be moved to domain config file in future refactor
+- All other schema fields are domain-agnostic
 
 ## Architectural Authority
 If code contradicts an architectural decision document, the document wins. The code has a bug. Architectural documents live in the Claude.ai project files, not in this repo. Key documents:
@@ -110,9 +127,13 @@ If code contradicts an architectural decision document, the document wins. The c
 - OVERWATCH-CIRCUIT-BREAKERS.md
 - ARCHITECTURE-DECISION-CORRECTIONS-LEDGER.md
 - ARCHITECTURE-DECISION-LAYER2-CONTEXTUALIZE.md
-- ARCHITECTURE-DECISIONS-7-AND-8.docx
+- ARCHITECTURE-DECISIONS-7-AND-8.docx (Layer Zero + Structural Enforcement)
+- ARCHITECTURE-DECISION-9-LESSON-TYPE-TAXONOMY.docx
+- ARCHITECTURE-DECISION-10-HIT-TRACKING.docx (Recursive learning verification)
+- ARCHITECTURE-DECISION-11-LAYER-ZERO-GATE.docx (Epistemological gate — DESIGNED, NOT YET BUILT)
 - ARCHITECTURE-DECISION-X402-DUAL-CHANNEL-ACQUISITION.docx
 - ARCHITECTURE-DECISION-DOMAIN-SELF-CALIBRATION.docx
 - ARCHITECTURE-DECISION-GUIDED-THESIS-CONSTRUCTION.docx
-- ARCHITECTURE-DECISION-9-LESSON-TYPE-TAXONOMY.docx
+- MILESTONE-FIRST-LESSON-APPLIED.docx (Level 1 proof)
+- MILESTONE-LEVEL2-CAUSAL-IMPACT.docx (Level 2 proof)
 - LAYER-2-3-4-PROMPTS-DRAFT.md (PRIVATE — never commit to public repo)
