@@ -912,7 +912,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       log('analysis', `Layer 2 API call (attempt ${attempt})...`);
       const response = await client.messages.create({
         model: 'claude-opus-4-6',
-        max_tokens: 8000,
+        max_tokens: 12000,
         messages: [{ role: 'user', content: prompt }]
       });
       const raw = response.content[0].text;
