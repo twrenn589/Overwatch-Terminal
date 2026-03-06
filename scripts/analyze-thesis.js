@@ -1998,7 +1998,30 @@ IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete
     : '🔴 OFFLINE';
   const fourLayerLine = `🏗️ Pipeline: ${pipelineStatus} (${pipelineVersion})`;
 
-  const message = formatTelegramMessage(analysis, dashboardData) + '\n' + pipelineHealthLine + '\n' + fourLayerLine;
+  // Overledger status for Telegram
+  let overledgerLine = '';
+  try {
+    const rejLogPath = path.join(__dirname, '..', 'data', 'rejection-log.json');
+    const ledgerPath = path.join(__dirname, '..', 'data', 'corrections-ledger.json');
+    let pendingReview = 0;
+    let ledgerCount = 0;
+    if (fs.existsSync(rejLogPath)) {
+      const rejections = JSON.parse(fs.readFileSync(rejLogPath, 'utf8'));
+      pendingReview = rejections.filter(r => r.corrections_ledger_action === 'flag_for_review').length;
+    }
+    if (fs.existsSync(ledgerPath)) {
+      const ledger = JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
+      ledgerCount = ledger.length;
+    }
+    overledgerLine = `\n📋 Overledger: ${ledgerCount} active lessons | ${pendingReview} pending review`;
+    if (pendingReview >= 5) {
+      overledgerLine += ' ⚠️ REVIEW RECOMMENDED';
+    }
+  } catch (_) {
+    overledgerLine = '\n📋 Overledger: status unavailable';
+  }
+
+  const message = formatTelegramMessage(analysis, dashboardData) + '\n' + pipelineHealthLine + '\n' + fourLayerLine + overledgerLine;
   await sendTelegram(message);
 
   console.log('\n─── Analysis Summary ───────────────────────────');
