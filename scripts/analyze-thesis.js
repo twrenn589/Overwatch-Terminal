@@ -31,6 +31,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const Anthropic = require('@anthropic-ai/sdk');
 const promoteRejections = require('./promote-rejections');
+const { runTier1Checks } = require('./tier1-validators');
 
 const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
 const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
@@ -1654,6 +1655,15 @@ async function main() {
   // ── Layer 1: SWEEP ──────────────────────────────────────────────────────
   console.log('\n═══ LAYER 1: SWEEP ═══');
   const sweepResults = await runSweep(dashboardData);
+
+  // Tier 1 validators — Layer 1
+  let tier1Layer1 = { flags: [], hard_fails: 0, total_flags: 0, layer: 1 };
+  try {
+    tier1Layer1 = runTier1Checks(1, sweepResults, dashboardData);
+  } catch (e) {
+    warn('tier1', `Layer 1 validator failed (non-fatal): ${e.message}`);
+    tier1Layer1 = { flags: [{ rule_id: 'VALIDATOR_FAILURE', finding: 'Layer 1 Tier 1 checks', detail: e.message, severity: 'FLAG', timestamp: new Date().toISOString() }], hard_fails: 0, total_flags: 1, layer: 1 };
+  }
 
   if (sweepResults.length === 0) {
     warn('pipeline', 'Layer 1 SWEEP returned empty — four-layer pipeline cannot run');
