@@ -1175,7 +1175,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       log('analysis', `Layer 3 API call (attempt ${attempt})...`);
       const response = await client.messages.create({
         model: 'claude-opus-4-6',
-        max_tokens: 10000, // Layer 3 is the heaviest output — player analysis + inferences + feedback loops
+        max_tokens: 16000, // Layer 3 is the heaviest output — player analysis + inferences + feedback loops
         messages: [{ role: 'user', content: prompt }]
       });
       const raw = response.content[0].text;
@@ -1388,7 +1388,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       log('analysis', `Layer 4 API call (attempt ${attempt})...`);
       const response = await client.messages.create({
         model: 'claude-opus-4-6',
-        max_tokens: 10000, // Layer 4 receives both L2 and L3, produces comprehensive output
+        max_tokens: 16000, // Layer 4 receives both L2 and L3, produces comprehensive output
         messages: [{ role: 'user', content: prompt }]
       });
       const raw = response.content[0].text;
