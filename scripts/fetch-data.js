@@ -96,7 +96,6 @@ async function fetchRLUSD(fallback) {
       const search = await fetchJSON(ENDPOINTS.rlusd_search);
       const coin = search?.coins?.find(c => c.symbol?.toUpperCase() === 'RLUSD');
       if (!coin) throw new Error('RLUSD not found in search results');
-      // Fetch by the discovered id
       await sleep(COINGECKO_DELAY_MS);
       const data2 = await fetchJSON(
         `https://api.coingecko.com/api/v3/simple/price?ids=${coin.id}&vs_currencies=usd&include_market_cap=true`
@@ -117,7 +116,6 @@ async function fetchFearGreed(fallback) {
     const data = await fetchJSON(ENDPOINTS.fear_greed);
     const entry = data?.data?.[0];
     if (!entry) throw new Error('Unexpected response shape');
-    // alternative.me returns unix timestamp; convert to YYYY-MM-DD
     const dataDate = entry.timestamp
       ? new Date(Number(entry.timestamp) * 1000).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10);
@@ -136,12 +134,12 @@ async function fetchFearGreed(fallback) {
 }
 
 async function fetchUSDJPY(fallback) {
-  const fetchedAt = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const fetchedAt = new Date().toISOString().slice(0, 10);
   try {
     const data = await fetchJSON(ENDPOINTS.usd_jpy);
     const rate = data?.rates?.JPY;
     if (!rate) throw new Error('Unexpected response shape');
-    const dataDate = data?.date || fetchedAt; // Frankfurter returns a date field
+    const dataDate = data?.date || fetchedAt;
     log('USD/JPY', `${rate} (date: ${dataDate})`);
     return { value: rate, data_date: dataDate, source: 'frankfurter' };
   } catch (e) {
@@ -150,9 +148,6 @@ async function fetchUSDJPY(fallback) {
   }
 }
 
-/**
- * Fetch a single FRED series. Returns the most recent non-null observation value.
- */
 async function fetchFRED(seriesLabel, url, fallbackValue) {
   const key = process.env.FRED_API_KEY;
   if (!key) {
@@ -162,7 +157,6 @@ async function fetchFRED(seriesLabel, url, fallbackValue) {
   try {
     const fullUrl = `${url}&api_key=${encodeURIComponent(key)}`;
     const data = await fetchJSON(fullUrl);
-    // FRED returns observations newest-first; find the first with a real value
     const obs = data?.observations?.find(o => o.value !== '.' && o.value !== '');
     if (!obs) throw new Error('No valid observation in response');
     const value = parseFloat(obs.value);
@@ -188,10 +182,9 @@ async function fetchStooq(label, url, fallbackValue) {
     const lines = text.trim().split('\n');
     if (lines.length < 2) throw new Error('No data rows in CSV');
     const values = lines[1].split(',');
-    // Stooq CSV columns: Symbol,Date,Time,Open,High,Low,Close,Volume
     const close = parseFloat(values[6]);
     if (isNaN(close)) throw new Error('Could not parse close price');
-    const dataDate = values[1] || null; // YYYY-MM-DD from Stooq CSV
+    const dataDate = values[1] || null;
     log('Stooq', `${label} = ${close} (date: ${dataDate})`);
     return { value: close, data_date: dataDate, source: 'stooq' };
   } catch (e) {
@@ -294,45 +287,77 @@ async function fetchFinanceFlowCurrency(label, url, fallbackValue) {
   }
 }
 
-// ─── XRPL fetcher ────────────────────────────────────────────────────────────
+// ─── XRPL fetcher (expanded) ────────────────────────────────────────────────
+//
+// Five calls to rippled JSON-RPC:
+//   1. server_info       → ledger_index, base_fee_xrp, current_ledger
+//   2. gateway_balances  → rlusd_supply
+//   3. ledger            → last_ledger_txns, fee_burn_per_ledger_xrp
+//   4. book_offers (asks) → order book ask side (XRP selling for USD)
+//   5. book_offers (bids) → order book bid side (USD selling for XRP)
+//
+// NOT fetched (known gaps, documented in data-contract.json currently_null):
+//   - dex_volume_24h_usd/xrp, dex_exchanges_24h, dex_takers_24h (need aggregator)
+//   - avg_tx_per_ledger (needs multi-ledger sampling)
 
 async function fetchXRPL(fallback) {
   const url = ENDPOINTS.xrpl.server_info;
   const issuer = ENDPOINTS.xrpl.rlusd_issuer;
   const fetchedAt = new Date().toISOString().slice(0, 10);
+  const BITSTAMP_USD = 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B';
+
   const result = {
+    // Existing fields (from server_info + gateway_balances)
     ledger_index: null,
     rlusd_supply: null,
     data_date: fetchedAt,
     source: 'xrpl',
+    // New fields (from ledger + book_offers)
+    current_ledger: null,
+    last_ledger_txns: null,
+    avg_tx_per_ledger: null,
+    fee_burn_per_ledger_xrp: null,
+    dex_volume_24h_usd: null,
+    dex_volume_24h_xrp: null,
+    dex_exchanges_24h: null,
+    dex_takers_24h: null,
+    book_depth_xrp_usd: null,
   };
-  // server_info — ledger index
+
+  let baseFeeXrp = null;
+
+  // ── Call 1: server_info — ledger index + base fee ──
   try {
     const controller1 = new AbortController();
     const timer1 = setTimeout(() => controller1.abort(), 15000);
     const r1 = await fetch(url, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ method: 'server_info', params: [{}] }),
       signal: controller1.signal,
     });
     clearTimeout(timer1);
     const d1 = await r1.json();
-    const seq = d1?.result?.info?.validated_ledger?.seq;
-    if (seq) {
-      result.ledger_index = seq;
-      log('XRPL', `ledger_index = ${seq}`);
+    const vl = d1?.result?.info?.validated_ledger;
+    if (vl?.seq) {
+      result.ledger_index = vl.seq;
+      result.current_ledger = vl.seq;
+      baseFeeXrp = vl.base_fee_xrp ?? null;
+      log('XRPL', `ledger_index = ${vl.seq}, base_fee = ${baseFeeXrp} XRP`);
     } else {
       warn('XRPL', 'No validated_ledger in server_info response');
     }
   } catch (e) {
     err('XRPL', `server_info: ${e.message}`);
   }
-  // gateway_balances — RLUSD supply
+
+  // ── Call 2: gateway_balances — RLUSD supply ──
   try {
     const controller2 = new AbortController();
     const timer2 = setTimeout(() => controller2.abort(), 15000);
     const r2 = await fetch(url, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         method: 'gateway_balances',
         params: [{ account: issuer, hotwallet: [], strict: true }],
@@ -356,8 +381,133 @@ async function fetchXRPL(fallback) {
   } catch (e) {
     err('XRPL', `gateway_balances: ${e.message}`);
   }
+
+  // ── Call 3: ledger — transaction count + fee burn ──
+  try {
+    const controller3 = new AbortController();
+    const timer3 = setTimeout(() => controller3.abort(), 15000);
+    const r3 = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        method: 'ledger',
+        params: [{ ledger_index: 'validated', transactions: true, expand: false }],
+      }),
+      signal: controller3.signal,
+    });
+    clearTimeout(timer3);
+    const d3 = await r3.json();
+    const ledger = d3?.result?.ledger;
+    if (ledger) {
+      const txnCount = ledger.transactions?.length ?? 0;
+      result.last_ledger_txns = txnCount;
+      if (ledger.ledger_index && !result.current_ledger) {
+        result.current_ledger = parseInt(ledger.ledger_index, 10);
+      }
+      if (baseFeeXrp != null && txnCount > 0) {
+        result.fee_burn_per_ledger_xrp = parseFloat((txnCount * baseFeeXrp).toFixed(8));
+      }
+      log('XRPL', `last_ledger_txns = ${txnCount}, fee_burn = ${result.fee_burn_per_ledger_xrp ?? 'N/A'} XRP`);
+    } else {
+      warn('XRPL', 'No ledger data in ledger response');
+    }
+  } catch (e) {
+    err('XRPL', `ledger: ${e.message}`);
+  }
+
+  // ── Call 4: book_offers — XRP/USD order book (asks: selling XRP for USD) ──
+  let asks = [];
+  try {
+    const controller4 = new AbortController();
+    const timer4 = setTimeout(() => controller4.abort(), 15000);
+    const r4 = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        method: 'book_offers',
+        params: [{
+          taker_gets: { currency: 'USD', issuer: BITSTAMP_USD },
+          taker_pays: { currency: 'XRP' },
+          limit: 10,
+        }],
+      }),
+      signal: controller4.signal,
+    });
+    clearTimeout(timer4);
+    const d4 = await r4.json();
+    asks = d4?.result?.offers ?? [];
+    log('XRPL', `book_offers asks: ${asks.length} offers`);
+  } catch (e) {
+    err('XRPL', `book_offers (asks): ${e.message}`);
+  }
+
+  // ── Call 5: book_offers — XRP/USD order book (bids: selling USD for XRP) ──
+  let bids = [];
+  try {
+    const controller5 = new AbortController();
+    const timer5 = setTimeout(() => controller5.abort(), 15000);
+    const r5 = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        method: 'book_offers',
+        params: [{
+          taker_gets: { currency: 'XRP' },
+          taker_pays: { currency: 'USD', issuer: BITSTAMP_USD },
+          limit: 10,
+        }],
+      }),
+      signal: controller5.signal,
+    });
+    clearTimeout(timer5);
+    const d5 = await r5.json();
+    bids = d5?.result?.offers ?? [];
+    log('XRPL', `book_offers bids: ${bids.length} offers`);
+  } catch (e) {
+    err('XRPL', `book_offers (bids): ${e.message}`);
+  }
+
+  // ── Build book_depth_xrp_usd from asks + bids ──
+  if (asks.length > 0 || bids.length > 0) {
+    let totalAskXrp = 0;
+    let bestAsk = null;
+    for (const offer of asks) {
+      const xrpDrops = typeof offer.TakerPays === 'string' ? parseInt(offer.TakerPays, 10) : 0;
+      const xrpAmount = xrpDrops / 1_000_000;
+      const usdAmount = typeof offer.TakerGets === 'object' ? parseFloat(offer.TakerGets.value) : 0;
+      totalAskXrp += xrpAmount;
+      if (bestAsk === null && xrpAmount > 0 && usdAmount > 0) {
+        bestAsk = parseFloat((usdAmount / xrpAmount).toFixed(6));
+      }
+    }
+
+    let totalBidXrp = 0;
+    let bestBid = null;
+    for (const offer of bids) {
+      const xrpDrops = typeof offer.TakerGets === 'string' ? parseInt(offer.TakerGets, 10) : 0;
+      const xrpAmount = xrpDrops / 1_000_000;
+      const usdAmount = typeof offer.TakerPays === 'object' ? parseFloat(offer.TakerPays.value) : 0;
+      totalBidXrp += xrpAmount;
+      if (bestBid === null && xrpAmount > 0 && usdAmount > 0) {
+        bestBid = parseFloat((usdAmount / xrpAmount).toFixed(6));
+      }
+    }
+
+    result.book_depth_xrp_usd = {
+      pair: 'XRP/USD',
+      bids: bids.length,
+      asks: asks.length,
+      total_bid_xrp: parseFloat(totalBidXrp.toFixed(6)),
+      total_ask_xrp: parseFloat(totalAskXrp.toFixed(6)),
+      best_bid: bestBid,
+      best_ask: bestAsk,
+    };
+    log('XRPL', `book_depth: ${bids.length} bids (${totalBidXrp.toFixed(2)} XRP), ${asks.length} asks (${totalAskXrp.toFixed(2)} XRP), best_bid=${bestBid}, best_ask=${bestAsk}`);
+  }
+
+  // ── Fallback check ──
   if (result.ledger_index === null && result.rlusd_supply === null) {
-    warn('XRPL', 'Both calls failed, using fallback');
+    warn('XRPL', 'Both primary calls failed, using fallback');
     return fallback?.xrpl_metrics ?? result;
   }
   return result;
@@ -452,7 +602,6 @@ async function fetchX402Agent(fallback) {
     const txs = d2?.result?.transactions;
 
     if (txs && Array.isArray(txs)) {
-      // Filter to Payment transactions sent FROM agent TO merchant
       const payments = txs
         .filter(t => {
           const tx = t.tx || t.tx_json || {};
@@ -466,7 +615,6 @@ async function fetchX402Agent(fallback) {
           const amountDrops = typeof tx.Amount === 'string' ? parseInt(tx.Amount, 10) : 0;
           const amountXrp = parseFloat((amountDrops / 1_000_000).toFixed(6));
 
-          // Try to extract invoice ID from memos
           let invoiceId = null;
           if (tx.Memos && Array.isArray(tx.Memos)) {
             for (const m of tx.Memos) {
@@ -482,7 +630,6 @@ async function fetchX402Agent(fallback) {
             }
           }
 
-          // Determine endpoint label from invoice or memo
           let endpoint = null;
           let label = 'x402 payment';
           if (invoiceId) {
@@ -501,10 +648,8 @@ async function fetchX402Agent(fallback) {
             }
           }
 
-          // Convert ripple epoch to ISO timestamp
           let timestamp = null;
           if (tx.date) {
-            // XRPL epoch starts 2000-01-01T00:00:00Z = 946684800 unix
             timestamp = new Date((tx.date + 946684800) * 1000).toISOString();
           }
 
@@ -524,16 +669,13 @@ async function fetchX402Agent(fallback) {
       result.payments_sent = payments.length;
       result.transactions = payments;
 
-      // Calculate lifetime spent
       const totalDrops = payments.reduce((sum, p) => sum + (p.amount_drops || 0), 0);
       result.lifetime_xrp_spent = parseFloat((totalDrops / 1_000_000).toFixed(6));
 
-      // Last payment
       if (payments.length > 0) {
-        result.last_payment = payments[0]; // already sorted newest-first by account_tx
+        result.last_payment = payments[0];
       }
 
-      // x402 flow description
       if (payments.length > 0) {
         result.x402_flow = `${payments.length} mainnet payments • ${totalDrops.toLocaleString()} drops lifetime (${result.lifetime_xrp_spent} XRP)`;
       } else {
@@ -548,7 +690,6 @@ async function fetchX402Agent(fallback) {
     err('x402', `account_tx: ${e.message}`);
   }
 
-  // If both calls failed completely, fall back to existing data
   if (result.balance_xrp === null && result.payments_sent === null) {
     warn('x402', 'Both calls failed, using fallback');
     return fallback?.x402_agent ?? result;
@@ -618,7 +759,6 @@ async function main() {
 
   const existing = loadExisting();
 
-  // Fetch all live data. Each fetcher is self-contained and falls back gracefully.
   const [xrp, rlusd, fearGreed, usdJpy] = await Promise.all([
     fetchXRP(existing),
     fetchRLUSD(existing),
@@ -626,8 +766,6 @@ async function main() {
     fetchUSDJPY(existing),
   ]);
 
-  // FRED calls are sequential to avoid hammering the API
-  // Brent crude: FinanceFlowAPI primary, FRED fallback (FRED structurally days stale)
   let brent = await fetchFinanceFlowCommodity('BRENT', ENDPOINTS.financeflow.brent, null);
   if (brent.value === null) {
     warn('BRENT', 'FinanceFlow failed, trying FRED fallback');
@@ -635,20 +773,18 @@ async function main() {
   }
   const us10y  = await fetchFRED('US_10Y',  ENDPOINTS.fred.us_10y,  existing?.macro?.us_10y_yield);
 
-  // JPN 10Y: FinanceFlowAPI primary, Stooq fallback (Stooq returning N/D as of March 2026)
   let jpn10y = await fetchFinanceFlowBond('JPN_10Y', ENDPOINTS.financeflow.jpn_10y, null);
   if (jpn10y.value === null) {
     warn('JPN_10Y', 'FinanceFlow failed, trying Stooq fallback');
     jpn10y = await fetchStooq('JPN_10Y', ENDPOINTS.stooq.jpn_10y, existing?.macro?.jpn_10y);
   }
 
-  // DXY: FinanceFlowAPI primary, Twelve Data fallback (Twelve Data returning errors as of March 2026)
   let dxy = await fetchFinanceFlowCurrency('DXY', ENDPOINTS.financeflow.dxy, null);
   if (dxy.value === null) {
     warn('DXY', 'FinanceFlow failed, trying Twelve Data fallback');
     dxy = await fetchTwelveData('DXY', ENDPOINTS.twelve_data.dxy, existing?.macro?.dxy);
   }
-  // S&P 500: Stooq primary, Twelve Data fallback (Twelve Data returning bad values as of March 2026)
+
   let sp500 = await fetchStooq('SP500', ENDPOINTS.stooq.sp500, null);
   if (sp500.value === null) {
     warn('SP500', 'Stooq failed, trying Twelve Data fallback');
@@ -659,7 +795,6 @@ async function main() {
   const xIntelligence = await fetchXIntelligence(existing?.x_intelligence);
   const x402Agent = await fetchX402Agent(existing);
 
-  // Preserve manually-managed fields from existing JSON (never overwrite with null)
   const manual = {
     odl_volume_annualized:          existing?.manual?.odl_volume_annualized          ?? null,
     xrp_etf_aum:                    existing?.manual?.xrp_etf_aum                    ?? null,
@@ -669,7 +804,6 @@ async function main() {
     _last_manual_update:            existing?.manual?._last_manual_update            ?? null,
   };
 
-  // Preserve thesis scores — these are editorially managed
   const thesis_scores = existing?.thesis_scores ?? {
     regulatory:             { status: 'CONFIRMED',     confidence: 'high'   },
     institutional_custody:  { status: 'STRONG',        confidence: 'high'   },
@@ -687,13 +821,13 @@ async function main() {
     xrp,
     rlusd,
     macro: {
-      usd_jpy:       usdJpy,     // { value, data_date, source }
-      jpn_10y:       jpn10y,     // { value, data_date, source }
-      us_10y_yield:  us10y,      // { value, data_date, source }
-      brent_crude:   brent,      // { value, data_date, source }
-      dxy:           dxy,        // { value, data_date, source }
-      sp500:         sp500,      // { value, data_date, source }
-      fear_greed:    fearGreed,  // { value, label, data_date, source }
+      usd_jpy:       usdJpy,
+      jpn_10y:       jpn10y,
+      us_10y_yield:  us10y,
+      brent_crude:   brent,
+      dxy:           dxy,
+      sp500:         sp500,
+      fear_greed:    fearGreed,
     },
     xrpl_metrics: xrplMetrics,
     x_intelligence: xIntelligence,
@@ -717,6 +851,8 @@ async function main() {
   console.log(`DXY:             ${dxy.value ?? 'N/A'} (${dxy.data_date ?? 'no date'})`);
   console.log(`S&P 500:         ${sp500.value ?? 'N/A'} (${sp500.data_date ?? 'no date'})`);
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'}) (${fearGreed.data_date ?? 'no date'})`);
+  console.log(`XRPL ledger:     #${xrplMetrics.current_ledger ?? 'N/A'}, ${xrplMetrics.last_ledger_txns ?? 'N/A'} txns, fee_burn=${xrplMetrics.fee_burn_per_ledger_xrp ?? 'N/A'} XRP`);
+  console.log(`XRPL book:       ${xrplMetrics.book_depth_xrp_usd ? `${xrplMetrics.book_depth_xrp_usd.bids}b/${xrplMetrics.book_depth_xrp_usd.asks}a, best_bid=${xrplMetrics.book_depth_xrp_usd.best_bid}, best_ask=${xrplMetrics.book_depth_xrp_usd.best_ask}` : 'N/A'}`);
   console.log(`x402 agent:      ${x402Agent.payments_sent ?? 0} payments, ${x402Agent.balance_xrp ?? 'N/A'} XRP balance`);
   console.log('───────────────────────────────────────────────\n');
 
@@ -732,19 +868,6 @@ main().catch(e => {
 
 // ─── Data Contract Validation ─────────────────────────────────────────────────
 
-/**
- * Validates the freshly-written dashboard-data.json against data-contract.json.
- *
- * WHY: fetch-data.js owns a specific subset of dashboard-data.json fields (listed
- * under "required_from_fetch" in data-contract.json). Silent failures — API timeouts,
- * shape changes, rate-limit fallbacks — can leave fields null without crashing the
- * pipeline. This validation makes those failures visible in the run log so they can
- * be caught before the next analysis cycle reads stale or missing data.
- *
- * data-contract.json is the source of truth for what this script is responsible for.
- * Validation runs after the write so it reflects exactly what landed on disk.
- * Wrapped in try/catch: validation MUST NOT crash the pipeline under any circumstance.
- */
 async function validateDataContract() {
   try {
     const contractPath = path.join(__dirname, '..', 'data-contract.json');
@@ -773,9 +896,6 @@ async function validateDataContract() {
       warn('contract', `missing field: ${f}`);
     }
 
-    // Write pipeline health snapshot for downstream consumers (e.g. analyze-thesis.js).
-    // WHY: downstream scripts shouldn't re-run validation themselves — they just need
-    // a cheap status read to append one line to Telegram without slowing the pipeline.
     try {
       const health = {
         fetch_timestamp:  new Date().toISOString(),
