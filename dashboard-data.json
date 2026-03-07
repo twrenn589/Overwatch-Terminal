@@ -840,5 +840,92 @@
     "stress_score": 72,
     "applied_at": "2026-03-07T02:29:07.962Z",
     "changes_applied": 2
+  },
+  "x402_agent": {
+    "network": "XRPL MAINNET",
+    "merchant_address": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+    "protocol": "x402 v2",
+    "facilitator": "https://xrpl-facilitator-mainnet.t54.ai",
+    "facilitator_ok": true,
+    "agent_address": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
+    "merchant_base": "http://127.0.0.1:4403",
+    "balance_xrp": 14.986845,
+    "payments_sent": 3,
+    "session_drops_spent": 3000,
+    "session_xrp_spent": 0.003,
+    "lifetime_drops_spent": 3000,
+    "lifetime_xrp_spent": 0.003,
+    "guardrails": {
+      "balance_floor_xrp": 11,
+      "session_cap_drops": 10000,
+      "max_single_drops": 5000
+    },
+    "transactions": [
+      {
+        "endpoint": "/api/v1/premium-analysis",
+        "label": "Premium Analysis",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": "1000",
+        "amount_xrp": 0.001,
+        "invoice_id": "D8F100B3441541CDAB7BFF212BFC16BA",
+        "tx_hash": "DA877C438F64AC082ED276D227821FAAD486DA1783927F81DCDEFE5EC8678726",
+        "status": "SUCCESS",
+        "timestamp": "2026-03-07T03:23:46.124Z"
+      },
+      {
+        "endpoint": "/api/v1/bear-case",
+        "label": "Bear Case",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": "1500",
+        "amount_xrp": 0.0015,
+        "invoice_id": "02F1C38BAC754011A6F5F9162D8454F2",
+        "tx_hash": "4B3DEE2AB1FCBBF6C16E07F81CE98F81A414883E3451FD411E24CA938624B758",
+        "status": "SUCCESS",
+        "timestamp": "2026-03-07T03:23:55.299Z"
+      },
+      {
+        "endpoint": "/api/v1/stress-report",
+        "label": "Stress Report",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": "500",
+        "amount_xrp": 0.0005,
+        "invoice_id": "B04146A4B726463FA8A88977B70651E8",
+        "tx_hash": "BB7B0D62FE635573B591CCD8DE344341D9770F3156D8CEC24EEEFB40451E8943",
+        "status": "SUCCESS",
+        "timestamp": "2026-03-07T03:24:05.211Z"
+      }
+    ],
+    "last_payment": {
+      "endpoint": "/api/v1/stress-report",
+      "label": "Stress Report",
+      "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+      "amount_drops": "500",
+      "amount_xrp": 0.0005,
+      "invoice_id": "B04146A4B726463FA8A88977B70651E8",
+      "tx_hash": "BB7B0D62FE635573B591CCD8DE344341D9770F3156D8CEC24EEEFB40451E8943",
+      "status": "SUCCESS",
+      "timestamp": "2026-03-07T03:24:05.211Z"
+    },
+    "x402_flow": [
+      "── Premium Analysis ──",
+      "→ GET http://127.0.0.1:4403/api/v1/premium-analysis  →  HTTP 402",
+      "← 402  amount=1000 drops  invoiceId=D8F100B34415…",
+      "→ Signed Payment  hash=DA877C438F64…  drops=1000",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=DA877C438F64…  payer=rPiok45Qs8…",
+      "── Bear Case ──",
+      "→ GET http://127.0.0.1:4403/api/v1/bear-case  →  HTTP 402",
+      "← 402  amount=1500 drops  invoiceId=02F1C38BAC75…",
+      "→ Signed Payment  hash=4B3DEE2AB1FC…  drops=1500",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=4B3DEE2AB1FC…  payer=rPiok45Qs8…",
+      "── Stress Report ──",
+      "→ GET http://127.0.0.1:4403/api/v1/stress-report  →  HTTP 402",
+      "← 402  amount=500 drops  invoiceId=B04146A4B726…",
+      "→ Signed Payment  hash=BB7B0D62FE63…  drops=500",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=BB7B0D62FE63…  payer=rPiok45Qs8…"
+    ],
+    "last_updated": "2026-03-07T03:24:05.506Z"
   }
 }
