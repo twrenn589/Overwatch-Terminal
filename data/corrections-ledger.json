@@ -412,5 +412,41 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-022",
+    "date_of_error": "2026-03-07",
+    "date_identified": "2026-03-07",
+    "identified_by": "layer_4_override",
+    "belief": "Institutional Asset Managers accumulating XRP during extreme fear via ETF vehicles",
+    "reality": "Zero ETF flow data exists. This inference was classified as FLAGGED with no supporting data. Per burden of proof Step 2, no supporting data = stripped from scoring entirely. XRP -2.9% relative resilience is consistent with multiple explanations including low volume drift, not only institutional accumulation.",
+    "root_cause": "Zero ETF flow data exists. This inference was classified as FLAGGED with no supporting data. Per burden of proof Step 2, no supporting data = stripped from scoring entirely. XRP -2.9% relative resilience is consistent with multiple explanations including low volume drift, not only institutional accumulation.",
+    "root_cause_type": "INSUFFICIENT_EVIDENCE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "CL-023",
+    "date_of_error": "2026-03-07",
+    "date_identified": "2026-03-07",
+    "identified_by": "layer_4_override",
+    "belief": "CoinDesk RT '$3T clearing platform' as potential evidence of ODL activity",
+    "reality": "Per CL-005, media characterization in a podcast RT carries low evidentiary weight. Layer 3 correctly flagged this but the inference still appeared in the player analysis. Fully stripped from any positive evidence scoring.",
+    "root_cause": "Per CL-005, media characterization in a podcast RT carries low evidentiary weight. Layer 3 correctly flagged this but the inference still appeared in the player analysis. Fully stripped from any positive evidence scoring.",
+    "root_cause_type": "INSUFFICIENT_EVIDENCE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

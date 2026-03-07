@@ -61,5 +61,335 @@
     "violations_count": 7,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-07T00:08:07.285Z",
+    "layer": 1,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "CBDC Interop Layers Bypass XRP Bridge Asset",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding treats the architectural design choice (BIS systems not requiring XRP) as causally determining that XRP's value proposition 'evaporates.' Correlation between CBDC architecture and XRP value proposition is presented as causation without evidence that the architectures will actually capture the settlement market or that they exclude interoperability with XRP-based systems.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "CBDC Interop Layers Bypass XRP Bridge Asset",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The finding rests on at least three unproven assumptions: (1) BIS architectures will achieve full deployment, (2) all cross-border settlement will migrate to these systems, (3) no hybrid models will emerge where XRP serves as bridge between CBDC systems and non-CBDC corridors. This makes it speculative by the three-assumption threshold.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Circle/USDC Institutional Rails Capture Settlement Market",
+          "rule_violated": "LZ-EH-005",
+          "violation": "The finding cites both '$1.6B market cap' and '$355M on-chain supply' for RLUSD without flagging this as a contradiction requiring resolution. Instead, it uses the higher figure to make a comparison with USDC's $35B. The discrepancy is mentioned in a different threat but not treated as a data integrity problem here where it affects the evidentiary basis.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Circle/USDC Institutional Rails Capture Settlement Market",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding treats USDC's current circulation size as causing future market capture ('Banks choosing USDC rails get...') without establishing causal mechanism. Larger circulation correlates with current adoption but doesn't establish that this causes future institutional settlement choice.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "ODL Volume Data Vacuum Masks Potential Stagnation",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The finding states 'if Ripple isn't publicly reporting ODL volumes, it may indicate volumes are disappointing.' This treats absence of evidence (no public reporting) as evidence of presence (disappointing volumes). The absence is informationally neutral per the rule.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "AI-Native Payment Orchestration Eliminates Corridor Inefficiency",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding assigns 'medium' confidence while citing a single unverified report ('reportedly reduced cross-border settlement costs 40%') as primary evidence. The confidence level exceeds the evidentiary weight provided.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "AI-Native Payment Orchestration Eliminates Corridor Inefficiency",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding treats deployment of AI treasury management as causing elimination of corridor inefficiency ('The problem shrinks before the solution scales') without establishing causal link between AI deployment and whether blockchain-based settlement becomes unnecessary.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Extreme Fear at 12 Signals Structural Risk-Off Cascade",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding treats correlation between Fear & Greed index at 12 and XRP price decline as evidence that 'institutional capital allocators are de-risking' specifically from XRP. Multiple causal paths could explain simultaneous market fear and XRP decline without one causing the other.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Permissioned Domains Create Institutional Walled Gardens That Reduce XRP Demand",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The finding builds on multiple unproven assumptions: (1) institutions will adopt Permissioned Domains, (2) they will use RLUSD/tokenized assets instead of XRP, (3) this usage pattern reduces rather than complements XRP demand, (4) infrastructure adoption doesn't drive token demand through secondary mechanisms. Exceeds three-assumption threshold.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "Permissioned Domains Create Institutional Walled Gardens That Reduce XRP Demand",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding assigns 'medium' confidence to a highly speculative chain of assumptions with zero adoption data (explicitly cited as 'null data'). Confidence is disproportionate to evidence.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "RLUSD On-Chain vs Market Cap Discrepancy Signals Fragility",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding treats the location of RLUSD holdings (off-XRPL) as causing reduced XRPL ecosystem activity without establishing that off-chain RLUSD doesn't support on-chain activity through other mechanisms (redemption flows, backing reserves, etc.).",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Stablecoin Legislation May Commoditize Issuance and Erode RLUSD Moat",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The finding treats forward-looking prediction ('could enable dozens of bank-issued stablecoins') with same evidentiary weight as current measurements. The entire threat is built on a hypothetical future regulatory outcome, yet confidence is rated 'medium' as if predicting future legislative and market outcomes.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "USD/JPY at 157.92 Threatens Japanese Institutional Thesis",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The finding chains at least four unproven assumptions: (1) extreme yen weakness will persist, (2) BOJ will continue tightening aggressively, (3) this will force capital repatriation, (4) SBI's XRP holdings become a liability rather than a hedge. Exceeds three-assumption threshold.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "USD/JPY at 157.92 Threatens Japanese Institutional Thesis",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding treats correlation between yen weakness and 'Japanese institutional thesis threat' as causal without establishing mechanism. Yen weakness could equally drive Japanese institutions toward dollar-denominated crypto assets as a hedge.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Ripple Leadership Disengagement Signal",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The finding treats a single data point (18 posts analyzed from one time window) as establishing a pattern ('This pattern may indicate...'). One snapshot of social media activity does not constitute a trend of disengagement.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Ripple Leadership Disengagement Signal",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding treats correlation between leadership posting about non-technical topics and potential 'lull in meaningful development activity' as causal, without establishing that social media activity reflects actual development work or that technical leaders post about all active projects.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Ripple Leadership Disengagement Signal",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding assigns 'medium' confidence to a speculative inference based on social media posting patterns from a single brief time window, without any direct evidence of actual development activity levels. Confidence exceeds evidentiary basis.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Clarity Act Stagnation Leaves Regulatory Certainty Incomplete",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The finding treats absence of evidence (no Clarity Act advancement data) as evidence that 'institutional compliance departments remain cautious.' Absence of legislative movement is informationally neutral regarding institutional behavior.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 12,
+      "clean_findings": 2,
+      "reviewer_notes": "Multiple findings demonstrate systematic issues: (1) Correlation-causation conflation appears in 7 of 12 findings, suggesting possible template or reasoning pattern problem. (2) Three findings violate the three-assumption threshold, with assumption chains not explicitly counted. (3) Several findings assign medium-to-high confidence to speculative forward-looking scenarios, violating proportionality principle. (4) The 'Ripple Leadership Disengagement' finding commits three distinct violations including single-data-point-as-trend error. Two findings passed cleanly: 'Circle/USDC' (except for noted violations) and 'Ethereum L2s' which had proportional evidence-to-confidence and avoided causal overreach. Recommend review of assumption-counting methodology and correlation-causation training."
+    },
+    "violations_count": 18,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-07T00:12:52.411Z",
+    "layer": 2,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "CBDC Interop Layers Bypass XRP Bridge Asset - corridor overlap question marked as unresolved gap but then used to reduce severity from critical-immediate to critical-structural without independent evidence that corridors differ",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The analysis identifies a critical knowledge gap (whether mBridge/Agorá target the same corridors as XRP) but then resolves it implicitly in XRP's favor by reducing severity. The honest answer is 'I don't know whether these compete directly' — but instead of maintaining uncertainty, the analysis assumes corridor differentiation to justify lower severity. This is 'I assumed' rather than 'I don't know'.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Circle/USDC Institutional Rails - claim that USDC and XRP are 'complementary, not competing functions' and that threat requires 'additional assumption that stablecoin rails eliminate the need for a bridge asset entirely'",
+          "rule_violated": "LZ-RC-004",
+          "violation": "The null hypothesis is that established, large-scale infrastructure (USDC with $35B circulation and institutional partnerships) does compete with nascent infrastructure (RLUSD at $1.588B). The analysis invokes architectural distinctions (stablecoin vs bridge asset) to argue they are complementary, but this is a complex explanation that has not been tested against the simpler explanation: institutions will use the infrastructure that already works at scale. The architectural complementarity argument skips the null test.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "AI-Native Payment Orchestration - claim that AI optimization and XRP 'may be complementary rather than competing' because AI optimizes existing infrastructure while XRP addresses corridors where infrastructure is insufficient",
+          "rule_violated": "LZ-RC-004",
+          "violation": "Same pattern as USDC threat. The null hypothesis is that cost reduction technology competes with alternative cost reduction technology. The 'complementary' framing is a complex explanation invoked without testing whether the simple competitive explanation is insufficient. The analysis even notes the JPMorgan 40% claim is unverified, yet still constructs a complementarity narrative.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "USD/JPY at 157.92 Threatens Japanese Institutional Thesis - claim that 'yen weakness makes SBI's existing XRP holdings worth MORE in yen terms (paper gain), but makes new accumulation more expensive'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "This inference chain rests on multiple unproven assumptions: (1) SBI measures XRP position value in yen terms rather than strategic/USD terms, (2) SBI is primarily a holder rather than accumulator, (3) paper gains in yen terms affect institutional strategy decisions, (4) yen weakness affects SBI's capital allocation to XRP. Four unproven assumptions. The analysis explicitly states 'I don't know SBI Holdings' net position' yet proceeds with a multi-branch inference about favorable vs unfavorable impacts.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Permissioned Domains threat - scored at severity 4 with reasoning that it 'represents the most intellectually honest critique of the XRP token-value thesis' and 'the single most important structural question'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence must be proportional to evidence. The analysis correctly applies CL-011 (zero users after 15 days = cannot assess) but then scores severity at 4 based on theoretical importance rather than evidence of materialization. The reasoning explicitly states 'zero users' and 'cannot assess demand reduction from infrastructure nobody is using' yet assigns medium severity. Theoretical importance is not evidence. This should be severity 1-2 (watch item) or explicitly unscored until evidence exists.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Compound stress analysis - claim that 'any oil shock (Hormuz), BOJ surprise, or yen flash move could cascade' and 'The Hormuz situation is the highest-probability catalyst'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "These are forward-looking predictions about potential future events (Hormuz disruption, BOJ surprise, yen flash crash) being weighted as if they are measurements. The Brent price of $92.87 is a measurement. The claim about what 'could' happen or which catalyst has 'highest probability' is prediction. The analysis does not clearly distinguish the evidentiary weight difference between 'Brent is at $92.87' (measurement, high weight) and 'Hormuz disruption is likely' (prediction, lower weight).",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "RLUSD On-Chain vs Market Cap Discrepancy - single snapshot of 78% off-chain used to identify a 'thesis specificity concern' without trend data",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The analysis correctly invokes LZ-RC-002 to note that 'a single snapshot doesn't establish whether the XRPL share is growing or shrinking' but then proceeds to score this as severity 6 based on that single snapshot. The '22% on-chain is a material fact' is true, but without trend data, it establishes a state, not a trajectory. The 'concern' framing implies deterioration, which one data point cannot establish.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Bear pressure increase from 50 to 62 - reasoning cites compound stress escalation as 'the most significant change' and 'driven primarily by the compound stress escalation'",
+          "rule_violated": "LZ-MR-002",
+          "violation": "Recency affects relevance but not accuracy. The Brent surge to $92.87 is recent and therefore highly relevant to current conditions, but the reasoning conflates this recency with increased evidentiary weight for the overall thesis threat. The compound stress escalation is one measurement at one point in time. The persistent data vacuums (ODL, Permissioned DEX) are described as 'persistent rather than worsening, but their persistence itself compounds risk as time passes' — this is treating the age of the gap as increasing its evidentiary weight, which violates the principle that age affects relevance, not accuracy.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 39,
+      "reviewer_notes": "The output demonstrates strong correction ledger discipline (7 corrections entries properly applied, including permanent retirement of JoelKatz pattern) and excellent knowledge gap identification. However, there is a systematic pattern of violating LZ-RC-004 (null hypothesis testing) when encountering competitive threats — the analysis repeatedly constructs 'complementary rather than competing' narratives (USDC, AI optimization) without testing the simpler competitive explanation first. There is also tension between correctly identifying knowledge gaps ('I don't know') and then proceeding with severity scoring that implicitly resolves those gaps. The LZ-EPH-003 violation (SBI/yen inference with 4+ assumptions) is the most serious — the analysis explicitly acknowledges not knowing SBI's position yet builds a multi-branch causal story. Overall: the epistemological hygiene is above average, but the 'complementarity' pattern and assumption-chain issues need systemic correction."
+    },
+    "violations_count": 8,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-07T00:18:51.126Z",
+    "layer": 3,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Strategic Inference: ODL Volume Data Vacuum Masks Potential Stagnation - Primary explanation confidence assessment",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The primary explanation (competitive sensitivity during sales cycles) is assigned 'medium' confidence and stated as 'more likely' than the alternative (stagnation), but the reasoning explicitly acknowledges both explanations are consistent with observable data and cannot be distinguished without the actual ODL data. Per LZ-EPH-002, confidence must be proportional to evidence. If two explanations are equally consistent with the data and cannot be distinguished, confidence should be 'low' or the finding should invoke LZ-EH-005 (equal-weight contradiction is the finding). The system states 'I give the competitive-sensitivity explanation slightly more weight' based on institutional resource commitments, but those commitments are consistent with BOTH explanations (institutions could be betting on future growth despite current stagnation, or reacting to actual current volumes). The confidence level overstates the available evidence.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Strategic Inference: CBDC Interop Layers Bypass XRP Bridge Asset - Assumption about corridor targeting",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The inference is classified as 'VALID' with 'medium' confidence despite being built on an explicit assumption that 'BIS projects target G7 corridors rather than thin-liquidity emerging markets where XRP is strongest.' This assumption is flagged with assumption_count=1, but the confidence level does not adequately reflect that the entire competitive threat assessment depends on an unverified corridor distinction. The reasoning states 'This is a COMPETITIVE_KNOWLEDGE_GAP that materially affects severity but cannot be resolved with current data,' yet assigns medium confidence to a conclusion that requires this gap to be resolved. If the gap is unresolvable with current data and materially affects the conclusion, confidence should be 'low' per LZ-EPH-002.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Hidden Move: Institutional Asset Managers accumulating XRP during extreme fear",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "This hidden move is classified as 'FLAGGED' with assumption_count=2 and correctly given 'low' confidence, but the reasoning explicitly states 'per CL-008/CL-010, we have NO ETF flow data to verify this.' This is a case where 'I don't know' is the high-quality output per LZ-EPH-001. Instead of stating a likely hidden move with low confidence, the correct output is to flag that institutional accumulation cannot be assessed without ETF flow data. The finding presents a speculative inference where a data gap should be declared. The low confidence partially mitigates this, but the structure should be 'cannot assess' rather than 'low confidence in this specific action.'",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Behavioral Pattern: Institutional actors committing expensive resources while data remains opaque - significance assessment",
+          "rule_violated": "LZ-RC-002",
+          "violation": "This pattern is marked 'high' significance and includes 'SBI Holdings (equity stake, token bonds)' as one of four players involved. However, earlier player analysis explicitly states 'SBI is alone in the Japanese XRP ecosystem after years of advocacy. Per [LZ-RC-002], SBI alone is a single data point, not a trend.' The pattern analysis correctly identifies multiple players (Ripple, 7 ETF issuers, SBI, Franklin Templeton) but fails to distinguish between independent confirmations and a single outlier. SBI's isolation in the Japanese market should reduce the weight given to this data point in the broader pattern, but the 'high' significance rating does not reflect this caveat. The pattern is real across the other players, but including SBI at equal weight with players showing multiple institutional adoption violates the single-data-point principle.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Feedback Loop: Tariff escalation - thesis implication causation claim",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The thesis_implication states 'If anything, trade friction increases demand for efficient cross-border settlement infrastructure.' This is presented as a positive implication, but the reasoning section correctly notes 'per [LZ-RC-001], correlation between trade friction and settlement demand does not establish causation — the demand increase requires trade participants to actually adopt new settlement infrastructure, which is an unproven assumption.' The implication section makes a causal claim ('friction increases demand') that the reasoning section properly identifies as unproven correlation. These two sections contradict each other. The implication should be marked 'neutral' or 'uncertain' rather than implying a positive thesis impact, or the reasoning section's caveat should be elevated to the implication section.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Scenario Probabilities: Thesis Confirmed at 22% - confidence proportionality",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The 'thesis_confirmed' scenario assigns 22% probability with timeline Q3-Q4 2026, requiring 'ODL volume data to emerge, RLUSD to accelerate dramatically, and at least one PermissionedDEX institutional participant.' However, the entire output emphasizes that ODL volume data is completely unavailable, RLUSD pace is 'mathematically insufficient for $5B without discontinuous event,' and PermissionedDEX has 'zero institutional adoption after 15 days.' Assigning 22% probability to an outcome that requires three specific events (data emergence, dramatic acceleration, institutional adoption) when current evidence shows zero progress toward any of them represents confidence disproportionate to evidence. The output correctly identifies these as kill switch criteria under threat, yet assigns nearly 1-in-4 odds to their achievement. This probability should be lower (10-15%) or the supporting evidence should acknowledge what specific indicators suggest 22% rather than lower odds.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Player Analysis: Ripple say-do gap assessment - both explanations plausible contradiction",
+          "rule_violated": "LZ-EH-005",
+          "violation": "The Ripple say-do gap analysis states 'Both explanations are plausible; we cannot distinguish between them with current data' regarding ODL transparency halt (competitive sensitivity vs. bad numbers). This is a textbook LZ-EH-005 situation: equal-weight explanations that cannot be resolved with available evidence. Per the rule, 'the contradiction itself is the finding' and resolving it without independent tie-breaking evidence is a structural error. However, the analysis then proceeds to make a choice: 'The ODL data suppression is most rationally explained as competitive sensitivity during active enterprise sales negotiations.' This resolves the contradiction by selecting one explanation over the other. While the analysis acknowledges this is 'FLAGGED inference,' the structure should present the unresolvable contradiction as the primary finding rather than selecting an explanation, even tentatively. The subsequent strategic inference section handles this better by maintaining both explanations, but the player analysis section violates LZ-EH-005 by making a selection.",
+          "severity": "MODERATE"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 40,
+      "reviewer_notes": "This output demonstrates sophisticated application of most epistemological rules, particularly in correction-learning integration and null hypothesis testing. The violations cluster around confidence calibration (LZ-EPH-002) in situations where explicit uncertainty exists, and one instance of contradiction resolution without tie-breaking evidence (LZ-EH-005). The system correctly identifies most of its own uncertainty (flagged inferences, assumption counts, data gaps) but occasionally assigns confidence levels or makes selections that are inconsistent with the acknowledged uncertainty. The 22% thesis confirmation probability appears high given the three sequential requirements with zero current progress indicators. The ODL data vacuum handling is particularly challenging — the system correctly identifies it as the central uncertainty but struggles with whether to make probabilistic assessments or declare insufficient data. Overall: strong rule adherence with systematic confidence calibration issues in high-uncertainty domains."
+    },
+    "violations_count": 7,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-07T00:23:20.341Z",
+    "layer": 4,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Ripple Hidden Move — Sharing ODL Data Under NDA: 'fiduciary-obligated managers wouldn't launch without due diligence data' inference given 50% weight",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence is not proportional to evidence. The inference that ETF launches prove private ODL data sharing occurred is given 50% weight, but the actual evidence chain has zero verification: no confirmation that private data was shared, no verification of what the data contained if shared, and no independent source confirming the causal link between data sharing and launch decisions. The reasoning assumes 'fiduciary duty requires data, therefore data must exist and must have been positive' — but fiduciary managers could also rely on public financials, institutional relationships, regulatory clarity improvements, or other non-ODL factors. 50% confidence on an unverifiable inference with multiple unproven causal assumptions violates proportionality.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "ODL Volume Data Vacuum final classification as SUSPICIOUS_ABSENCE with statement 'Companies suppress their strongest metric for strategic reasons (competitive sensitivity) or because the metric weakened. Both explanations are plausible per [LZ-EH-005]'",
+          "rule_violated": "LZ-EH-005",
+          "violation": "The rule states that equal-weight contradictions must be flagged as unresolvable, and the output correctly does this in the contradictions_resolved section. However, in the final classification reasoning, the output states 'both explanations are plausible' but then classifies the absence as 'SUSPICIOUS' rather than maintaining the contradiction as the finding. The classification label implies a lean toward the negative explanation (stagnation) rather than holding the paradox. The output should have classified this as 'UNRESOLVABLE_ABSENCE' or similar to match the LZ-EH-005 treatment elsewhere.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress 'thesis paradox' statement: 'A compound stress cascade to CRITICAL simultaneously threatens XRP price through global liquidity withdrawal and carry trade unwind AND validates the institutional settlement thesis because broken traditional settlement systems create demand for resilient cross-border infrastructure'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "This presents a correlation-to-causation inference without verification. The statement assumes that 'broken traditional settlement systems create demand for resilient cross-border infrastructure' — but this causal mechanism is unverified. Stress in traditional markets could equally lead to (a) capital flight to safety rather than experimentation, (b) regulatory tightening that slows crypto adoption, or (c) institutional focus on protecting existing positions rather than building new infrastructure. The output presents one causal pathway as if it were established when it is merely one possibility among several.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Kill switch review for 'ODL Volume ($25B annualized by EOY 2026)' escalated from NEEDS_DATA to WARNING with reasoning 'every assessment cycle without data compounds the uncertainty'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "This appears to treat the persistence of a data gap across multiple assessment cycles as if it were a deteriorating trend. The reasoning 'every assessment cycle without data compounds the uncertainty' implies accumulation of negative signal, but per LZ-RC-002, absence of evidence is not evidence of absence (LZ-RC-003 also relevant). The data gap on Day 1 and Day N are the same epistemic state — the gap does not worsen merely by persisting unless there is independent evidence of deterioration. The escalation should be justified by time remaining (299 days) and the metric's load-bearing status, not by the number of cycles the gap has persisted.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Final bear pressure reasoning states 'The Bessent counter-catalyst introduces a potential de-escalation path that Layer 2 did not weight' — used to justify -2 pressure reduction",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The Bessent statement is a forward-looking policy possibility, not a measurement of action taken. The output correctly identifies Bessent's statement as a 'trial balloon' and notes that policy action (not just statement) would be needed, but then reduces bear pressure based on the statement's existence. Per LZ-RC-005, predictions and measurements carry fundamentally different evidentiary weight. A Treasury Secretary floating an idea is not the same as sanctions being lifted. The bear pressure adjustment should weight this as 'potential future catalyst under monitoring' rather than giving it present impact on the pressure score.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "RLUSD Kill Switch escalated to WARNING based on 'pace arithmetic is brutal: $3.412B needed in 299 days = $11.41M/day. Current trajectory shows recovery but not acceleration toward this pace'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The output calculates required daily pace but then states 'no evidence of that trajectory' when the data shows RLUSD recovered from $1.494B to $1.588B (+$94M) — this is evidence of positive trajectory, just not at the required pace. The reasoning conflates 'insufficient pace' with 'no evidence of trajectory.' The escalation is justified, but the supporting reasoning incorrectly characterizes the data. RLUSD is growing (verified trend), just not fast enough (pace insufficiency). These are different findings.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "What would change assessment: 'If annualized volumes are tracking toward $15-25B, bear pressure drops to ~40... If volumes are stagnant at <$5B, bear pressure rises to ~75'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The output provides specific bear pressure scores (40 vs 75) for hypothetical future data scenarios with high precision, but these are predictions about how the system would react, not measurements. The confidence implied by specific numeric scores (not ranges, not directional statements, but exact numbers) is disproportionate to the speculative nature of the exercise. This should be expressed as directional ranges (e.g., 'materially lower, likely 35-45 range' vs 'materially higher, likely 70-80 range') to match the epistemic status of hypothetical reasoning.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Institutional Accumulation During Extreme Fear inference stripped from scoring but logged 'for monitoring only' — rejection reasoning states 'XRP -2.9% is consistent with both accumulation and low-volume drift'",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The output correctly strips the inference from scoring due to lack of supporting data, which is proper application of LZ-EPH-001. However, it then keeps the inference in the 'monitoring' category, which creates ambiguity about its epistemic status. If there is zero evidence for the inference, it should not be monitored as a possibility — monitoring implies there is a weak signal worth tracking. The output should either (a) identify what specific future data point would provide evidence for this inference, or (b) fully retire the inference rather than leaving it in a monitoring limbo. This is a minor process ambiguity rather than a clear violation.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 87,
+      "clean_findings": 79,
+      "reviewer_notes": "The output demonstrates strong overall epistemological discipline with extensive self-correction and appropriate uncertainty acknowledgment. The violations identified are primarily MODERATE issues around proportionality of confidence to evidence (LZ-EPH-002) and the treatment of forward-looking statements as if they carried present evidentiary weight (LZ-RC-005). The most significant concern is the Bessent counter-catalyst being weighted in the bear pressure score despite being correctly identified as a prediction rather than an action. The ODL/ETF inference receiving 50% weight despite zero verification is also questionable. No SERIOUS violations detected — the output does not hallucinate data, invent sources, or present coherent narratives without anchoring. The system is correctly uncomfortable with its own uncertainty, which is the intended behavior. Recommend Sunday audit focus on the boundary between 'plausible inference that informs context' and 'inference with sufficient evidence to move scores.'"
+    },
+    "violations_count": 8,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
   }
 ]

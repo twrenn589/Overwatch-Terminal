@@ -328,5 +328,27 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-06T23:50:49.716Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Institutional Asset Managers accumulating XRP during extreme fear via ETF vehicles",
+    "rejection_reason": "Zero ETF flow data exists. This inference was classified as FLAGGED with no supporting data. Per burden of proof Step 2, no supporting data = stripped from scoring entirely. XRP -2.9% relative resilience is consistent with multiple explanations including low volume drift, not only institutional accumulation.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-07T00:22:30.065Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-07T00:22:30.066Z"
+  },
+  {
+    "layer3_inference": "CoinDesk RT '$3T clearing platform' as potential evidence of ODL activity",
+    "rejection_reason": "Per CL-005, media characterization in a podcast RT carries low evidentiary weight. Layer 3 correctly flagged this but the inference still appeared in the player analysis. Fully stripped from any positive evidence scoring.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-07T00:22:30.065Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-07T00:22:30.066Z"
   }
 ]

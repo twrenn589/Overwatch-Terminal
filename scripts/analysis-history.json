@@ -1736,5 +1736,36 @@
     "events_drafted_count": 7,
     "thesis_pulse": "RLUSD market cap jumped to $1.589B from the $1.494B contraction low — a $95M recovery that reverses the first decline and sets a new high, though on-chain XRPL supply reads only $355M (cross-chain gap",
     "counter_thesis_score": 62
+  },
+  {
+    "timestamp": "2026-03-07T00:23:20.357Z",
+    "run_type": "evening",
+    "stress_score": 72,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.36,
+    "fear_greed": 12,
+    "usd_jpy": 157.92,
+    "jpn_10y": 2.166,
+    "brent_crude": 92.87,
+    "dxy": 98.9617,
+    "sp500": 6740.02,
+    "etf_daily_flow": null,
+    "dex_volume_24h": null,
+    "rlusd_market_cap": 1588354332.0830848,
+    "probability_framework": {
+      "bear": 14,
+      "base": 42,
+      "mid": 33,
+      "bull": 11
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 3,
+      "TRACKING": 1,
+      "PENDING": 1
+    },
+    "alerts_count": 6,
+    "events_drafted_count": 7,
+    "thesis_pulse": "Compound stress has escalated materially since last reading. Brent crude jumped from $79.01 to $92.87 — now firmly past the $85 elevated threshold and closing on the $95 critical level. USD/JPY at 157",
+    "counter_thesis_score": 60
   }
 ]
