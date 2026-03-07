@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-07T02:08:59.822Z",
+  "updated": "2026-03-07T03:25:15.550Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.37,
-    "change_24h": -3.0549569728809383,
-    "volume_24h": 2296410808.701209,
-    "market_cap": 83728519123.11124,
+    "change_24h": -2.38741986129455,
+    "volume_24h": 2313450760.9978485,
+    "market_cap": 83969532546.50465,
     "data_date": "2026-03-07",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1588544838.787716,
+    "market_cap": 1588629647.1134543,
     "data_date": "2026-03-07",
     "source": "coingecko"
   },
@@ -31,7 +31,7 @@
       "source": "fred"
     },
     "brent_crude": {
-      "value": 92.87,
+      "value": 92.69,
       "data_date": "2026-03-06",
       "source": "financeflow"
     },
@@ -53,8 +53,8 @@
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 102698221,
-    "rlusd_supply": 355005078.2917853,
+    "ledger_index": 102699407,
+    "rlusd_supply": 355005078.2917857,
     "data_date": "2026-03-07",
     "source": "xrpl"
   },
@@ -62,16 +62,32 @@
     "tier1_posts": [
       {
         "username": "JoelKatz",
+        "text": "@MitraHispana @nypost AIs are also (usually) random. And a magic 8 ball that wasn't random could also answer questions just the same as a random one could. I don't see any relevant difference between AI and any other inanimate tool humans use that have no judgement or reasoning capacity.",
+        "created_at": "2026-03-07T02:21:41.000Z",
+        "tweet_id": "2030106582277836953",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 1,
+          "quote_count": 1,
+          "bookmark_count": 0,
+          "impression_count": 99
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
         "text": "@grok @Yehye395943 @Pirat_Nation Hey, @grok, how is this like Danny DeVito trying to ride a rollercoaster after the park has closed?",
         "created_at": "2026-03-07T02:08:47.000Z",
         "tweet_id": "2030103337518125214",
         "metrics": {
           "retweet_count": 0,
-          "reply_count": 0,
+          "reply_count": 2,
           "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 0
+          "impression_count": 118
         },
         "tier": 1,
         "weight": 3
@@ -87,7 +103,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 46
+          "impression_count": 116
         },
         "tier": 1,
         "weight": 3
@@ -103,7 +119,7 @@
           "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 95
+          "impression_count": 159
         },
         "tier": 1,
         "weight": 3
@@ -119,7 +135,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 165
+          "impression_count": 206
         },
         "tier": 1,
         "weight": 3
@@ -135,7 +151,7 @@
           "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 162
+          "impression_count": 196
         },
         "tier": 1,
         "weight": 3
@@ -151,7 +167,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 267
+          "impression_count": 288
         },
         "tier": 1,
         "weight": 3
@@ -163,11 +179,11 @@
         "tweet_id": "2030021926224269767",
         "metrics": {
           "retweet_count": 12,
-          "reply_count": 16,
-          "like_count": 159,
+          "reply_count": 17,
+          "like_count": 165,
           "quote_count": 1,
           "bookmark_count": 3,
-          "impression_count": 10254
+          "impression_count": 11037
         },
         "tier": 1,
         "weight": 3
@@ -180,10 +196,10 @@
         "metrics": {
           "retweet_count": 25,
           "reply_count": 45,
-          "like_count": 727,
+          "like_count": 742,
           "quote_count": 5,
           "bookmark_count": 19,
-          "impression_count": 35653
+          "impression_count": 37225
         },
         "tier": 1,
         "weight": 3
@@ -199,7 +215,7 @@
           "like_count": 32,
           "quote_count": 1,
           "bookmark_count": 3,
-          "impression_count": 9460
+          "impression_count": 9668
         },
         "tier": 1,
         "weight": 3
@@ -210,12 +226,12 @@
         "created_at": "2026-03-06T16:49:23.000Z",
         "tweet_id": "2029962560355569787",
         "metrics": {
-          "retweet_count": 270,
-          "reply_count": 34,
-          "like_count": 1245,
-          "quote_count": 10,
+          "retweet_count": 273,
+          "reply_count": 36,
+          "like_count": 1275,
+          "quote_count": 11,
           "bookmark_count": 37,
-          "impression_count": 71638
+          "impression_count": 73837
         },
         "tier": 1,
         "weight": 3
@@ -231,7 +247,7 @@
           "like_count": 19,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 866
+          "impression_count": 880
         },
         "tier": 1,
         "weight": 3
@@ -243,11 +259,11 @@
         "tweet_id": "2029814923107434546",
         "metrics": {
           "retweet_count": 3,
-          "reply_count": 16,
-          "like_count": 211,
+          "reply_count": 17,
+          "like_count": 213,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 11560
+          "impression_count": 11689
         },
         "tier": 1,
         "weight": 3
@@ -260,10 +276,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 2,
-          "like_count": 24,
+          "like_count": 25,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 615
+          "impression_count": 622
         },
         "tier": 1,
         "weight": 3
@@ -274,12 +290,12 @@
         "created_at": "2026-03-06T02:47:43.000Z",
         "tweet_id": "2029750748125483414",
         "metrics": {
-          "retweet_count": 51,
-          "reply_count": 62,
-          "like_count": 499,
+          "retweet_count": 52,
+          "reply_count": 63,
+          "like_count": 503,
           "quote_count": 9,
           "bookmark_count": 40,
-          "impression_count": 38572
+          "impression_count": 39271
         },
         "tier": 1,
         "weight": 3
@@ -295,7 +311,7 @@
           "like_count": 9,
           "quote_count": 1,
           "bookmark_count": 1,
-          "impression_count": 601
+          "impression_count": 605
         },
         "tier": 1,
         "weight": 3
@@ -311,7 +327,7 @@
           "like_count": 131,
           "quote_count": 3,
           "bookmark_count": 16,
-          "impression_count": 7797
+          "impression_count": 7844
         },
         "tier": 1,
         "weight": 3
@@ -327,7 +343,7 @@
           "like_count": 15,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 815
+          "impression_count": 816
         },
         "tier": 1,
         "weight": 3
@@ -343,23 +359,7 @@
           "like_count": 27,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 651
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "This is awesome! https://t.co/qIoG0DanLp",
-        "created_at": "2026-03-06T02:14:54.000Z",
-        "tweet_id": "2029742487540269094",
-        "metrics": {
-          "retweet_count": 54,
-          "reply_count": 122,
-          "like_count": 968,
-          "quote_count": 11,
-          "bookmark_count": 41,
-          "impression_count": 83717
+          "impression_count": 652
         },
         "tier": 1,
         "weight": 3
@@ -367,17 +367,49 @@
     ],
     "tier2_posts": [
       {
+        "username": "WatcherGuru",
+        "text": "RT @WatcherGuru: JUST IN: 🇺🇸 Nintendo sues US government over President Trump's tariffs, demanding a \"prompt refund, with interest.\" https:…",
+        "created_at": "2026-03-07T02:48:39.000Z",
+        "tweet_id": "2030113369705853279",
+        "metrics": {
+          "retweet_count": 1459,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "Gaslighting 101. https://t.co/lwy2YLZgpq",
+        "created_at": "2026-03-07T02:29:37.000Z",
+        "tweet_id": "2030108578535583826",
+        "metrics": {
+          "retweet_count": 6,
+          "reply_count": 3,
+          "like_count": 33,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 3040
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
         "username": "EleanorTerrett",
         "text": "@sheila_warren Macbeth 😁",
         "created_at": "2026-03-07T02:04:32.000Z",
         "tweet_id": "2030102265537741272",
         "metrics": {
-          "retweet_count": 0,
+          "retweet_count": 1,
           "reply_count": 0,
-          "like_count": 2,
+          "like_count": 10,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 189
+          "impression_count": 1644
         },
         "tier": 2,
         "weight": 2
@@ -388,12 +420,12 @@
         "created_at": "2026-03-07T01:46:41.000Z",
         "tweet_id": "2030097775975669826",
         "metrics": {
-          "retweet_count": 8,
-          "reply_count": 2,
-          "like_count": 21,
+          "retweet_count": 26,
+          "reply_count": 11,
+          "like_count": 95,
           "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 1699
+          "bookmark_count": 2,
+          "impression_count": 4389
         },
         "tier": 2,
         "weight": 2
@@ -404,12 +436,12 @@
         "created_at": "2026-03-07T01:23:39.000Z",
         "tweet_id": "2030091975983067345",
         "metrics": {
-          "retweet_count": 2,
-          "reply_count": 12,
-          "like_count": 27,
+          "retweet_count": 4,
+          "reply_count": 14,
+          "like_count": 51,
           "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 5130
+          "bookmark_count": 2,
+          "impression_count": 10144
         },
         "tier": 2,
         "weight": 2
@@ -420,7 +452,7 @@
         "created_at": "2026-03-07T00:12:12.000Z",
         "tweet_id": "2030073998827041223",
         "metrics": {
-          "retweet_count": 12,
+          "retweet_count": 13,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -452,12 +484,12 @@
         "created_at": "2026-03-06T22:19:06.000Z",
         "tweet_id": "2030045532635152443",
         "metrics": {
-          "retweet_count": 145,
-          "reply_count": 35,
-          "like_count": 687,
+          "retweet_count": 158,
+          "reply_count": 38,
+          "like_count": 740,
           "quote_count": 9,
-          "bookmark_count": 45,
-          "impression_count": 87428
+          "bookmark_count": 50,
+          "impression_count": 95206
         },
         "tier": 2,
         "weight": 2
@@ -484,12 +516,12 @@
         "created_at": "2026-03-06T21:50:02.000Z",
         "tweet_id": "2030038219031552422",
         "metrics": {
-          "retweet_count": 597,
-          "reply_count": 444,
-          "like_count": 4632,
-          "quote_count": 192,
-          "bookmark_count": 221,
-          "impression_count": 560215
+          "retweet_count": 642,
+          "reply_count": 465,
+          "like_count": 4929,
+          "quote_count": 200,
+          "bookmark_count": 234,
+          "impression_count": 650880
         },
         "tier": 2,
         "weight": 2
@@ -500,12 +532,12 @@
         "created_at": "2026-03-06T21:39:35.000Z",
         "tweet_id": "2030035590675075161",
         "metrics": {
-          "retweet_count": 1685,
-          "reply_count": 736,
-          "like_count": 8842,
-          "quote_count": 261,
-          "bookmark_count": 332,
-          "impression_count": 360788
+          "retweet_count": 1739,
+          "reply_count": 754,
+          "like_count": 9182,
+          "quote_count": 271,
+          "bookmark_count": 341,
+          "impression_count": 394137
         },
         "tier": 2,
         "weight": 2
@@ -516,12 +548,12 @@
         "created_at": "2026-03-06T21:21:26.000Z",
         "tweet_id": "2030031022088220953",
         "metrics": {
-          "retweet_count": 50,
-          "reply_count": 38,
-          "like_count": 411,
+          "retweet_count": 51,
+          "reply_count": 39,
+          "like_count": 439,
           "quote_count": 5,
-          "bookmark_count": 9,
-          "impression_count": 11963
+          "bookmark_count": 11,
+          "impression_count": 13053
         },
         "tier": 2,
         "weight": 2
@@ -532,12 +564,12 @@
         "created_at": "2026-03-06T21:13:15.000Z",
         "tweet_id": "2030028960797462573",
         "metrics": {
-          "retweet_count": 31,
-          "reply_count": 57,
-          "like_count": 269,
-          "quote_count": 22,
-          "bookmark_count": 41,
-          "impression_count": 55308
+          "retweet_count": 34,
+          "reply_count": 58,
+          "like_count": 291,
+          "quote_count": 21,
+          "bookmark_count": 44,
+          "impression_count": 62669
         },
         "tier": 2,
         "weight": 2
@@ -548,12 +580,12 @@
         "created_at": "2026-03-06T20:49:57.000Z",
         "tweet_id": "2030023100721516738",
         "metrics": {
-          "retweet_count": 61,
+          "retweet_count": 68,
           "reply_count": 15,
-          "like_count": 259,
+          "like_count": 282,
           "quote_count": 0,
           "bookmark_count": 3,
-          "impression_count": 8844
+          "impression_count": 9517
         },
         "tier": 2,
         "weight": 2
@@ -569,7 +601,7 @@
           "like_count": 6,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 7245
+          "impression_count": 7498
         },
         "tier": 2,
         "weight": 2
@@ -580,12 +612,12 @@
         "created_at": "2026-03-06T20:40:54.000Z",
         "tweet_id": "2030020823474450919",
         "metrics": {
-          "retweet_count": 16,
-          "reply_count": 46,
-          "like_count": 111,
-          "quote_count": 0,
+          "retweet_count": 17,
+          "reply_count": 50,
+          "like_count": 119,
+          "quote_count": 1,
           "bookmark_count": 6,
-          "impression_count": 11461
+          "impression_count": 12151
         },
         "tier": 2,
         "weight": 2
@@ -596,12 +628,12 @@
         "created_at": "2026-03-06T20:39:52.000Z",
         "tweet_id": "2030020561108131986",
         "metrics": {
-          "retweet_count": 164,
-          "reply_count": 34,
-          "like_count": 855,
+          "retweet_count": 172,
+          "reply_count": 35,
+          "like_count": 897,
           "quote_count": 6,
-          "bookmark_count": 44,
-          "impression_count": 53923
+          "bookmark_count": 46,
+          "impression_count": 56858
         },
         "tier": 2,
         "weight": 2
@@ -612,7 +644,7 @@
         "created_at": "2026-03-06T20:33:22.000Z",
         "tweet_id": "2030018924339773675",
         "metrics": {
-          "retweet_count": 20,
+          "retweet_count": 23,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -628,12 +660,12 @@
         "created_at": "2026-03-06T20:27:21.000Z",
         "tweet_id": "2030017412796387432",
         "metrics": {
-          "retweet_count": 11,
+          "retweet_count": 12,
           "reply_count": 0,
-          "like_count": 81,
+          "like_count": 89,
           "quote_count": 1,
           "bookmark_count": 4,
-          "impression_count": 5522
+          "impression_count": 6074
         },
         "tier": 2,
         "weight": 2
@@ -653,43 +685,186 @@
         },
         "tier": 2,
         "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "RT @CoinDeskPodcast: Today on CoinDesk Daily: @Ripple expands its $3T clearing platform with @coinbase futures, @justinsuntron reaches a se…",
-        "created_at": "2026-03-06T19:50:35.000Z",
-        "tweet_id": "2030008160551911919",
-        "metrics": {
-          "retweet_count": 7,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 6
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 Nintendo sues US government over President Trump's tariffs, demanding a \"prompt refund, with interest.\" https://t.co/rnhwf8DZh2",
-        "created_at": "2026-03-06T19:50:31.000Z",
-        "tweet_id": "2030008144022168056",
-        "metrics": {
-          "retweet_count": 1329,
-          "reply_count": 546,
-          "like_count": 8949,
-          "quote_count": 265,
-          "bookmark_count": 375,
-          "impression_count": 874269
-        },
-        "tier": 2,
-        "weight": 2
       }
     ],
-    "fetched_at": "2026-03-07T02:08:59.345Z",
+    "fetched_at": "2026-03-07T03:25:12.159Z",
     "post_count": 39,
     "errors": []
+  },
+  "x402_agent": {
+    "network": "XRPL MAINNET",
+    "protocol": "x402 v2",
+    "facilitator": "T54 mainnet",
+    "agent_address": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
+    "merchant_address": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+    "merchant_base": "https://t54.ai",
+    "balance_xrp": 14.986845,
+    "payments_sent": 13,
+    "session_xrp_spent": 0,
+    "lifetime_xrp_spent": 0.013,
+    "guardrails": {
+      "balance_floor_xrp": 11,
+      "session_cap_drops": 10000,
+      "max_single_drops": 5000
+    },
+    "transactions": [
+      {
+        "endpoint": "B04146A4B726463FA8A88977B70651E8",
+        "label": "B04146A4B726463FA8A88977B70651E8",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 500,
+        "amount_xrp": 0.0005,
+        "invoice_id": "B04146A4B726463FA8A88977B70651E8",
+        "tx_hash": "BB7B0D62FE635573B591CCD8DE344341D9770F3156D8CEC24EEEFB40451E8943",
+        "status": "confirmed",
+        "timestamp": "2026-03-07T03:24:01.000Z"
+      },
+      {
+        "endpoint": "02F1C38BAC754011A6F5F9162D8454F2",
+        "label": "02F1C38BAC754011A6F5F9162D8454F2",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1500,
+        "amount_xrp": 0.0015,
+        "invoice_id": "02F1C38BAC754011A6F5F9162D8454F2",
+        "tx_hash": "4B3DEE2AB1FCBBF6C16E07F81CE98F81A414883E3451FD411E24CA938624B758",
+        "status": "confirmed",
+        "timestamp": "2026-03-07T03:23:51.000Z"
+      },
+      {
+        "endpoint": "D8F100B3441541CDAB7BFF212BFC16BA",
+        "label": "D8F100B3441541CDAB7BFF212BFC16BA",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1000,
+        "amount_xrp": 0.001,
+        "invoice_id": "D8F100B3441541CDAB7BFF212BFC16BA",
+        "tx_hash": "DA877C438F64AC082ED276D227821FAAD486DA1783927F81DCDEFE5EC8678726",
+        "status": "confirmed",
+        "timestamp": "2026-03-07T03:23:41.000Z"
+      },
+      {
+        "endpoint": "3F63F1CABF9C4547B804B87CA39EFF19",
+        "label": "3F63F1CABF9C4547B804B87CA39EFF19",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 500,
+        "amount_xrp": 0.0005,
+        "invoice_id": "3F63F1CABF9C4547B804B87CA39EFF19",
+        "tx_hash": "55A572A9A798D24BF334EA557FD237314D6B0788F604DFFDAC845F51BAEFABBD",
+        "status": "confirmed",
+        "timestamp": "2026-02-26T04:22:51.000Z"
+      },
+      {
+        "endpoint": "2A57B55394C045B3A63353DE2EFC05E2",
+        "label": "2A57B55394C045B3A63353DE2EFC05E2",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1500,
+        "amount_xrp": 0.0015,
+        "invoice_id": "2A57B55394C045B3A63353DE2EFC05E2",
+        "tx_hash": "A2320F4CB41368ED1EB41C8B0BA00CD39E183456CFE8D5A0DD894DCB447A0C3D",
+        "status": "confirmed",
+        "timestamp": "2026-02-26T04:22:42.000Z"
+      },
+      {
+        "endpoint": "A29A532176B6411D932462C1064A0BCF",
+        "label": "A29A532176B6411D932462C1064A0BCF",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1000,
+        "amount_xrp": 0.001,
+        "invoice_id": "A29A532176B6411D932462C1064A0BCF",
+        "tx_hash": "4CE4764648385E29244FF27662B7B8EC56A1EC5B68A36560F0C2A6A6FD368AA3",
+        "status": "confirmed",
+        "timestamp": "2026-02-26T04:22:40.000Z"
+      },
+      {
+        "endpoint": "47FF0ADFEE494D3187949F3944E5EB53",
+        "label": "47FF0ADFEE494D3187949F3944E5EB53",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 500,
+        "amount_xrp": 0.0005,
+        "invoice_id": "47FF0ADFEE494D3187949F3944E5EB53",
+        "tx_hash": "307340511901488A87DC7AC07A83FAAF3274DD0DD1D0B3CB717515CC7626F423",
+        "status": "confirmed",
+        "timestamp": "2026-02-25T16:40:32.000Z"
+      },
+      {
+        "endpoint": "8FAF4ECC30B74AB4AC7A693401978F36",
+        "label": "8FAF4ECC30B74AB4AC7A693401978F36",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1500,
+        "amount_xrp": 0.0015,
+        "invoice_id": "8FAF4ECC30B74AB4AC7A693401978F36",
+        "tx_hash": "E0145699EF5C2359EDC68EABE52BC24C657B755D23BEBE7AA9FE1F423A9DD053",
+        "status": "confirmed",
+        "timestamp": "2026-02-25T16:40:30.000Z"
+      },
+      {
+        "endpoint": "BA32A9D5E1244E688AC8BDD38026563F",
+        "label": "BA32A9D5E1244E688AC8BDD38026563F",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1000,
+        "amount_xrp": 0.001,
+        "invoice_id": "BA32A9D5E1244E688AC8BDD38026563F",
+        "tx_hash": "F05D4EEFD82F66C34E22277C4606BBBA239CA41A3CE60894641811F4EC042E8B",
+        "status": "confirmed",
+        "timestamp": "2026-02-25T16:40:20.000Z"
+      },
+      {
+        "endpoint": "5FE5DCC2B9EC468EA08EA4C4BF5629C0",
+        "label": "5FE5DCC2B9EC468EA08EA4C4BF5629C0",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 500,
+        "amount_xrp": 0.0005,
+        "invoice_id": "5FE5DCC2B9EC468EA08EA4C4BF5629C0",
+        "tx_hash": "CAA3181388F82547C6C0CE5B9004413BEB3AAAB0A27A0C7893369F44850C0AB4",
+        "status": "confirmed",
+        "timestamp": "2026-02-25T16:30:40.000Z"
+      },
+      {
+        "endpoint": "5CBC1D9314E24FFEB53E55585F7EEB45",
+        "label": "5CBC1D9314E24FFEB53E55585F7EEB45",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1500,
+        "amount_xrp": 0.0015,
+        "invoice_id": "5CBC1D9314E24FFEB53E55585F7EEB45",
+        "tx_hash": "CD215E92336D0FA679955D2226CC1D5FEB8784F241135F49E73AA084F09D52E3",
+        "status": "confirmed",
+        "timestamp": "2026-02-25T16:30:31.000Z"
+      },
+      {
+        "endpoint": "9F346DE4FEC9438D9438D86654739CD0",
+        "label": "9F346DE4FEC9438D9438D86654739CD0",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1000,
+        "amount_xrp": 0.001,
+        "invoice_id": "9F346DE4FEC9438D9438D86654739CD0",
+        "tx_hash": "B1172098B7321B1B16C76924946F3A119E62BFED04F8075BE46C9CE1058C7C29",
+        "status": "confirmed",
+        "timestamp": "2026-02-25T16:30:21.000Z"
+      },
+      {
+        "endpoint": "51A069BF4B994134918FCEE482CA9E0E",
+        "label": "51A069BF4B994134918FCEE482CA9E0E",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": 1000,
+        "amount_xrp": 0.001,
+        "invoice_id": "51A069BF4B994134918FCEE482CA9E0E",
+        "tx_hash": "A7A027C5FAEFBF02C0C02AD26FCCD400384F4184CACF8AEFA8925B259C0F9919",
+        "status": "confirmed",
+        "timestamp": "2026-02-25T09:28:51.000Z"
+      }
+    ],
+    "last_payment": {
+      "endpoint": "B04146A4B726463FA8A88977B70651E8",
+      "label": "B04146A4B726463FA8A88977B70651E8",
+      "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+      "amount_drops": 500,
+      "amount_xrp": 0.0005,
+      "invoice_id": "B04146A4B726463FA8A88977B70651E8",
+      "tx_hash": "BB7B0D62FE635573B591CCD8DE344341D9770F3156D8CEC24EEEFB40451E8943",
+      "status": "confirmed",
+      "timestamp": "2026-03-07T03:24:01.000Z"
+    },
+    "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
+    "last_updated": "2026-03-07T03:25:15.386Z"
   },
   "manual": {
     "odl_volume_annualized": null,
@@ -709,7 +884,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1588544838.787716,
+      "current": 1588629647.1134543,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
@@ -767,165 +942,5 @@
       "status": "STRESSED — ELEVATED",
       "confidence": "medium"
     }
-  },
-  "probability": {
-    "bear": 12,
-    "base": 42,
-    "mid": 34,
-    "bull": 12,
-    "last_updated": "2026-03-07T02:27:24.980Z",
-    "last_reasoning": "Upgrading bear probability from 10% to 12% due to compound stress now at ELEVATED with Brent approaching critical. The energy shock compresses the probability distribution toward binary outcomes — either macro stress validates the settlement infrastructure thesis (mid/bull) or it triggers a broader crypto winter that suppresses all adoption metrics (bear). Shifting 2% from base to mid reflects that the oil shock simultaneously threatens and validates — Brent at $93 makes Japan's need for efficient settlement infrastructure more acute even as it pressures risk assets. Bull case unchanged — requires resolution of multiple unknowns."
-  },
-  "bear_case": {
-    "counter_thesis_score": 62,
-    "score_reasoning": "Score elevated from baseline due to three converging pressures: (1) ODL data opacity persists with no resolution timeline, (2) RLUSD on-chain XRPL supply ($355M) vastly underperforms total market cap ($1.589B), suggesting Ethereum is capturing most stablecoin utility, and (3) extreme fear environment (F&G 12) with $805B equity destruction suggests institutional risk appetite is collapsing — difficult environment for new settlement infrastructure commitments.",
-    "competing_infrastructure": [
-      {
-        "name": "SWIFT GPI",
-        "status": "MONITORING",
-        "status_text": "SWIFT continues incremental upgrades serving 11,500+ banks; no public evidence of XRPL replacing any SWIFT corridor in production — the incumbent advantage remains formidable."
-      },
-      {
-        "name": "Visa B2B Connect",
-        "status": "MONITORING",
-        "status_text": "Visa's enterprise cross-border network continues expanding without requiring bridge tokens; direct bank-to-bank settlement via existing relationships remains the path of least resistance for most institutions."
-      },
-      {
-        "name": "JPMorgan Kinexys",
-        "status": "ELEVATED_RISK",
-        "status_text": "Kinexys (formerly Onyx) processes $2B+ daily on permissioned infrastructure — this is real institutional volume that XRP/ODL has not demonstrably matched with public data."
-      },
-      {
-        "name": "BIS Project Nexus",
-        "status": "MONITORING",
-        "status_text": "Nexus interlinking national payment systems could provide sovereign-controlled cross-border settlement without any crypto bridge — the central bank preferred path if it achieves scale."
-      },
-      {
-        "name": "Ethereum Institutional",
-        "status": "MONITORING",
-        "status_text": "RLUSD's own issuance pattern reveals the problem — $1.23B of $1.589B total appears to be on Ethereum, not XRPL, suggesting even Ripple's own stablecoin finds more utility on competing infrastructure."
-      }
-    ],
-    "odl_stagnation": "ODL volume data has been opaque for over a year with no public reporting; the '$3T clearing platform' reference is media narrative without verifiable on-chain confirmation — this is the single largest data gap threatening the entire thesis.",
-    "token_velocity_concern": "No token velocity or hold-time data available; if XRP is used purely as a bridge with sub-second hold times, price appreciation mechanics are structurally limited regardless of volume growth.",
-    "macro_headwinds": [
-      {
-        "name": "Global Recession Risk",
-        "status": "ELEVATED_RISK",
-        "status_text": "$805B single-day equity wipeout, F&G at 12, Brent at $93 creating stagflationary pressure — recession risk is the highest it has been in this monitoring cycle."
-      },
-      {
-        "name": "Crypto Winter Signals",
-        "status": "MONITORING",
-        "status_text": "BTC lost $110B this week despite strong institutional headlines — when fundamentals can't support price, it signals potential sentiment regime change; not yet winter but the temperature is dropping."
-      },
-      {
-        "name": "Regulatory Reversal Risk",
-        "status": "LOW_RISK",
-        "status_text": "Pro-crypto regulatory posture appears durable with ETFs live and CBDC ban advancing; reversal risk remains low despite administration political volatility."
-      },
-      {
-        "name": "Rate Hike Extension",
-        "status": "MONITORING",
-        "status_text": "Brent at $93 creates inflationary pressure that could delay rate cuts or even reopen hike discussions; US 10Y at 4.13% suggests the market hasn't fully priced this in yet."
-      }
-    ],
-    "bear_narrative": "INCREASE MONITORING. Bear pressure at 62, up from ~54, driven by three kill switches now at WARNING status — ODL Volume, Competitive Displacement (mBridge), and ODL Transparency — an unprecedented concentration of yellow flags. The most important finding is the convergence of behavioral evidence: Ripple withholds settlement volume data for 2+ years while pivoting toward institutional brokerage, deploys 78% of its own stablecoin on Ethereum rather than XRPL, and major institutions are building settlement infrastructure on platforms they control (Kinexys $2B/day, BUIDL $500M+) with zero deploying on XRPL Permissioned Domains. The thesis paradox remains active: compound stress is ELEVATED with Brent $2.13 from CRITICAL, and a cascade event would simultaneously destroy position value and validate the need for the exact infrastructure the thesis describes. The single biggest unknown — actual ODL settlement volume — is the difference between a thesis being quietly validated and one that is structurally failing. Per [LZ-EPH-001]: I don't know that number, and until it's known, this assessment carries that irreducible uncertainty.",
-    "last_updated": "2026-03-07T02:27:24.980Z"
-  },
-  "last_analysis": {
-    "timestamp": "2026-03-07T02:27:24.980Z",
-    "run_type": "evening",
-    "stress_level": "ELEVATED",
-    "stress_score": 72,
-    "applied_at": "2026-03-07T02:29:07.962Z",
-    "changes_applied": 2
-  },
-  "x402_agent": {
-    "network": "XRPL MAINNET",
-    "merchant_address": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
-    "protocol": "x402 v2",
-    "facilitator": "https://xrpl-facilitator-mainnet.t54.ai",
-    "facilitator_ok": true,
-    "agent_address": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
-    "merchant_base": "http://127.0.0.1:4403",
-    "balance_xrp": 14.986845,
-    "payments_sent": 3,
-    "session_drops_spent": 3000,
-    "session_xrp_spent": 0.003,
-    "lifetime_drops_spent": 3000,
-    "lifetime_xrp_spent": 0.003,
-    "guardrails": {
-      "balance_floor_xrp": 11,
-      "session_cap_drops": 10000,
-      "max_single_drops": 5000
-    },
-    "transactions": [
-      {
-        "endpoint": "/api/v1/premium-analysis",
-        "label": "Premium Analysis",
-        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
-        "amount_drops": "1000",
-        "amount_xrp": 0.001,
-        "invoice_id": "D8F100B3441541CDAB7BFF212BFC16BA",
-        "tx_hash": "DA877C438F64AC082ED276D227821FAAD486DA1783927F81DCDEFE5EC8678726",
-        "status": "SUCCESS",
-        "timestamp": "2026-03-07T03:23:46.124Z"
-      },
-      {
-        "endpoint": "/api/v1/bear-case",
-        "label": "Bear Case",
-        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
-        "amount_drops": "1500",
-        "amount_xrp": 0.0015,
-        "invoice_id": "02F1C38BAC754011A6F5F9162D8454F2",
-        "tx_hash": "4B3DEE2AB1FCBBF6C16E07F81CE98F81A414883E3451FD411E24CA938624B758",
-        "status": "SUCCESS",
-        "timestamp": "2026-03-07T03:23:55.299Z"
-      },
-      {
-        "endpoint": "/api/v1/stress-report",
-        "label": "Stress Report",
-        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
-        "amount_drops": "500",
-        "amount_xrp": 0.0005,
-        "invoice_id": "B04146A4B726463FA8A88977B70651E8",
-        "tx_hash": "BB7B0D62FE635573B591CCD8DE344341D9770F3156D8CEC24EEEFB40451E8943",
-        "status": "SUCCESS",
-        "timestamp": "2026-03-07T03:24:05.211Z"
-      }
-    ],
-    "last_payment": {
-      "endpoint": "/api/v1/stress-report",
-      "label": "Stress Report",
-      "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
-      "amount_drops": "500",
-      "amount_xrp": 0.0005,
-      "invoice_id": "B04146A4B726463FA8A88977B70651E8",
-      "tx_hash": "BB7B0D62FE635573B591CCD8DE344341D9770F3156D8CEC24EEEFB40451E8943",
-      "status": "SUCCESS",
-      "timestamp": "2026-03-07T03:24:05.211Z"
-    },
-    "x402_flow": [
-      "── Premium Analysis ──",
-      "→ GET http://127.0.0.1:4403/api/v1/premium-analysis  →  HTTP 402",
-      "← 402  amount=1000 drops  invoiceId=D8F100B34415…",
-      "→ Signed Payment  hash=DA877C438F64…  drops=1000",
-      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
-      "← 200  tx=DA877C438F64…  payer=rPiok45Qs8…",
-      "── Bear Case ──",
-      "→ GET http://127.0.0.1:4403/api/v1/bear-case  →  HTTP 402",
-      "← 402  amount=1500 drops  invoiceId=02F1C38BAC75…",
-      "→ Signed Payment  hash=4B3DEE2AB1FC…  drops=1500",
-      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
-      "← 200  tx=4B3DEE2AB1FC…  payer=rPiok45Qs8…",
-      "── Stress Report ──",
-      "→ GET http://127.0.0.1:4403/api/v1/stress-report  →  HTTP 402",
-      "← 402  amount=500 drops  invoiceId=B04146A4B726…",
-      "→ Signed Payment  hash=BB7B0D62FE63…  drops=500",
-      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
-      "← 200  tx=BB7B0D62FE63…  payer=rPiok45Qs8…"
-    ],
-    "last_updated": "2026-03-07T03:24:05.506Z"
   }
 }
