@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-07T04:33:00.555Z",
+  "updated": "2026-03-07T04:47:30.014Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.36,
-    "change_24h": -2.738923758209004,
-    "volume_24h": 2281896272.663119,
-    "market_cap": 83506112498.9347,
+    "change_24h": -2.363593227798552,
+    "volume_24h": 2276273026.350414,
+    "market_cap": 83515547405.41577,
     "data_date": "2026-03-07",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1588526686.0939624,
+    "market_cap": 1588420217.7697845,
     "data_date": "2026-03-07",
     "source": "coingecko"
   },
@@ -53,25 +53,25 @@
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 102700464,
-    "rlusd_supply": 355005078.291785,
+    "ledger_index": 102700691,
+    "rlusd_supply": 355005078.2917851,
     "data_date": "2026-03-07",
     "source": "xrpl",
-    "current_ledger": 102700464,
-    "last_ledger_txns": 48,
+    "current_ledger": 102700691,
+    "last_ledger_txns": 55,
     "avg_tx_per_ledger": null,
-    "fee_burn_per_ledger_xrp": 0.00048,
-    "dex_volume_24h_usd": null,
-    "dex_volume_24h_xrp": null,
+    "fee_burn_per_ledger_xrp": 0.00055,
+    "dex_volume_24h_usd": 5434174,
+    "dex_volume_24h_xrp": 3995716,
     "dex_exchanges_24h": null,
     "dex_takers_24h": null,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 346899.949051,
-      "total_ask_xrp": 1000029.027913,
-      "best_bid": 1.387587,
+      "total_bid_xrp": 347052.337798,
+      "total_ask_xrp": 1000094.269363,
+      "best_bid": 1.376951,
       "best_ask": 1.3616
     }
   },
@@ -88,7 +88,7 @@
           "like_count": 2,
           "quote_count": 1,
           "bookmark_count": 0,
-          "impression_count": 134
+          "impression_count": 138
         },
         "tier": 1,
         "weight": 3
@@ -104,7 +104,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 154
+          "impression_count": 156
         },
         "tier": 1,
         "weight": 3
@@ -120,7 +120,7 @@
           "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 136
+          "impression_count": 139
         },
         "tier": 1,
         "weight": 3
@@ -136,7 +136,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 177
+          "impression_count": 180
         },
         "tier": 1,
         "weight": 3
@@ -152,7 +152,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 222
+          "impression_count": 225
         },
         "tier": 1,
         "weight": 3
@@ -165,10 +165,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 0,
-          "like_count": 3,
+          "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 210
+          "impression_count": 213
         },
         "tier": 1,
         "weight": 3
@@ -200,7 +200,7 @@
           "like_count": 167,
           "quote_count": 1,
           "bookmark_count": 3,
-          "impression_count": 11352
+          "impression_count": 11411
         },
         "tier": 1,
         "weight": 3
@@ -213,10 +213,10 @@
         "metrics": {
           "retweet_count": 25,
           "reply_count": 45,
-          "like_count": 754,
+          "like_count": 762,
           "quote_count": 5,
           "bookmark_count": 19,
-          "impression_count": 38578
+          "impression_count": 38816
         },
         "tier": 1,
         "weight": 3
@@ -228,11 +228,11 @@
         "tweet_id": "2030000524322275388",
         "metrics": {
           "retweet_count": 10,
-          "reply_count": 16,
-          "like_count": 32,
+          "reply_count": 17,
+          "like_count": 33,
           "quote_count": 1,
           "bookmark_count": 3,
-          "impression_count": 9826
+          "impression_count": 9869
         },
         "tier": 1,
         "weight": 3
@@ -243,12 +243,12 @@
         "created_at": "2026-03-06T16:49:23.000Z",
         "tweet_id": "2029962560355569787",
         "metrics": {
-          "retweet_count": 274,
+          "retweet_count": 275,
           "reply_count": 37,
-          "like_count": 1291,
+          "like_count": 1298,
           "quote_count": 11,
           "bookmark_count": 37,
-          "impression_count": 75336
+          "impression_count": 75632
         },
         "tier": 1,
         "weight": 3
@@ -264,7 +264,7 @@
           "like_count": 19,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 893
+          "impression_count": 898
         },
         "tier": 1,
         "weight": 3
@@ -280,7 +280,7 @@
           "like_count": 215,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 11831
+          "impression_count": 11874
         },
         "tier": 1,
         "weight": 3
@@ -309,10 +309,10 @@
         "metrics": {
           "retweet_count": 53,
           "reply_count": 63,
-          "like_count": 504,
+          "like_count": 505,
           "quote_count": 9,
-          "bookmark_count": 40,
-          "impression_count": 39806
+          "bookmark_count": 41,
+          "impression_count": 39913
         },
         "tier": 1,
         "weight": 3
@@ -328,7 +328,7 @@
           "like_count": 9,
           "quote_count": 1,
           "bookmark_count": 1,
-          "impression_count": 608
+          "impression_count": 609
         },
         "tier": 1,
         "weight": 3
@@ -344,7 +344,7 @@
           "like_count": 131,
           "quote_count": 3,
           "bookmark_count": 16,
-          "impression_count": 7880
+          "impression_count": 7893
         },
         "tier": 1,
         "weight": 3
@@ -360,7 +360,7 @@
           "like_count": 15,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 819
+          "impression_count": 820
         },
         "tier": 1,
         "weight": 3
@@ -385,11 +385,27 @@
     "tier2_posts": [
       {
         "username": "WatcherGuru",
+        "text": "JUST IN: 🇺🇸🇮🇷 White House official says the US will seize \"all the oil\" from Iran. https://t.co/SXHqEif4c3",
+        "created_at": "2026-03-07T04:43:03.000Z",
+        "tweet_id": "2030142159056187546",
+        "metrics": {
+          "retweet_count": 42,
+          "reply_count": 127,
+          "like_count": 243,
+          "quote_count": 12,
+          "bookmark_count": 24,
+          "impression_count": 10001
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
         "text": "RT @WatcherGuru: JUST IN: 🇺🇸 Nintendo sues US government over President Trump's tariffs, demanding a \"prompt refund, with interest.\" https:…",
         "created_at": "2026-03-07T02:48:39.000Z",
         "tweet_id": "2030113369705853279",
         "metrics": {
-          "retweet_count": 1564,
+          "retweet_count": 1573,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -405,12 +421,12 @@
         "created_at": "2026-03-07T02:29:37.000Z",
         "tweet_id": "2030108578535583826",
         "metrics": {
-          "retweet_count": 9,
+          "retweet_count": 10,
           "reply_count": 3,
-          "like_count": 52,
+          "like_count": 56,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 4693
+          "impression_count": 4955
         },
         "tier": 2,
         "weight": 2
@@ -426,7 +442,7 @@
           "like_count": 14,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 2052
+          "impression_count": 2113
         },
         "tier": 2,
         "weight": 2
@@ -439,10 +455,10 @@
         "metrics": {
           "retweet_count": 40,
           "reply_count": 18,
-          "like_count": 133,
+          "like_count": 138,
           "quote_count": 0,
-          "bookmark_count": 2,
-          "impression_count": 5663
+          "bookmark_count": 4,
+          "impression_count": 5842
         },
         "tier": 2,
         "weight": 2
@@ -455,10 +471,10 @@
         "metrics": {
           "retweet_count": 6,
           "reply_count": 16,
-          "like_count": 59,
+          "like_count": 63,
           "quote_count": 1,
           "bookmark_count": 3,
-          "impression_count": 12469
+          "impression_count": 13053
         },
         "tier": 2,
         "weight": 2
@@ -501,12 +517,12 @@
         "created_at": "2026-03-06T22:19:06.000Z",
         "tweet_id": "2030045532635152443",
         "metrics": {
-          "retweet_count": 162,
-          "reply_count": 38,
-          "like_count": 766,
+          "retweet_count": 163,
+          "reply_count": 39,
+          "like_count": 773,
           "quote_count": 12,
           "bookmark_count": 52,
-          "impression_count": 99185
+          "impression_count": 100237
         },
         "tier": 2,
         "weight": 2
@@ -533,12 +549,12 @@
         "created_at": "2026-03-06T21:50:02.000Z",
         "tweet_id": "2030038219031552422",
         "metrics": {
-          "retweet_count": 668,
-          "reply_count": 475,
-          "like_count": 5136,
-          "quote_count": 206,
-          "bookmark_count": 245,
-          "impression_count": 701769
+          "retweet_count": 683,
+          "reply_count": 477,
+          "like_count": 5221,
+          "quote_count": 208,
+          "bookmark_count": 246,
+          "impression_count": 714582
         },
         "tier": 2,
         "weight": 2
@@ -549,12 +565,12 @@
         "created_at": "2026-03-06T21:39:35.000Z",
         "tweet_id": "2030035590675075161",
         "metrics": {
-          "retweet_count": 1766,
-          "reply_count": 764,
-          "like_count": 9444,
-          "quote_count": 277,
-          "bookmark_count": 347,
-          "impression_count": 421050
+          "retweet_count": 1772,
+          "reply_count": 766,
+          "like_count": 9498,
+          "quote_count": 280,
+          "bookmark_count": 349,
+          "impression_count": 429866
         },
         "tier": 2,
         "weight": 2
@@ -567,10 +583,10 @@
         "metrics": {
           "retweet_count": 54,
           "reply_count": 40,
-          "like_count": 454,
+          "like_count": 456,
           "quote_count": 5,
           "bookmark_count": 11,
-          "impression_count": 13736
+          "impression_count": 13868
         },
         "tier": 2,
         "weight": 2
@@ -581,12 +597,12 @@
         "created_at": "2026-03-06T21:13:15.000Z",
         "tweet_id": "2030028960797462573",
         "metrics": {
-          "retweet_count": 36,
-          "reply_count": 60,
-          "like_count": 329,
+          "retweet_count": 38,
+          "reply_count": 61,
+          "like_count": 335,
           "quote_count": 21,
           "bookmark_count": 48,
-          "impression_count": 69371
+          "impression_count": 70932
         },
         "tier": 2,
         "weight": 2
@@ -599,10 +615,10 @@
         "metrics": {
           "retweet_count": 73,
           "reply_count": 16,
-          "like_count": 292,
+          "like_count": 293,
           "quote_count": 0,
           "bookmark_count": 3,
-          "impression_count": 9882
+          "impression_count": 9933
         },
         "tier": 2,
         "weight": 2
@@ -618,7 +634,7 @@
           "like_count": 7,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 7679
+          "impression_count": 7713
         },
         "tier": 2,
         "weight": 2
@@ -629,12 +645,12 @@
         "created_at": "2026-03-06T20:40:54.000Z",
         "tweet_id": "2030020823474450919",
         "metrics": {
-          "retweet_count": 21,
-          "reply_count": 53,
-          "like_count": 129,
-          "quote_count": 2,
+          "retweet_count": 22,
+          "reply_count": 54,
+          "like_count": 130,
+          "quote_count": 3,
           "bookmark_count": 6,
-          "impression_count": 12517
+          "impression_count": 12603
         },
         "tier": 2,
         "weight": 2
@@ -647,10 +663,10 @@
         "metrics": {
           "retweet_count": 175,
           "reply_count": 35,
-          "like_count": 926,
+          "like_count": 933,
           "quote_count": 6,
-          "bookmark_count": 46,
-          "impression_count": 58666
+          "bookmark_count": 47,
+          "impression_count": 59163
         },
         "tier": 2,
         "weight": 2
@@ -679,32 +695,16 @@
         "metrics": {
           "retweet_count": 13,
           "reply_count": 0,
-          "like_count": 96,
+          "like_count": 99,
           "quote_count": 1,
           "bookmark_count": 4,
-          "impression_count": 6456
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "RT @DeatonforSenate: Enough jokes, Andrea. We want our audit.\n\n#Massachusetts #mapoli #politics #news #campaign #Election #Republicans #Dem…",
-        "created_at": "2026-03-06T20:11:27.000Z",
-        "tweet_id": "2030013409668841872",
-        "metrics": {
-          "retweet_count": 29,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 0
+          "impression_count": 6574
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-07T04:32:59.947Z",
+    "fetched_at": "2026-03-07T04:47:27.899Z",
     "post_count": 39,
     "errors": []
   },
@@ -881,7 +881,7 @@
       "timestamp": "2026-03-07T03:24:01.000Z"
     },
     "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
-    "last_updated": "2026-03-07T04:33:00.388Z"
+    "last_updated": "2026-03-07T04:47:29.847Z"
   },
   "manual": {
     "odl_volume_annualized": null,
@@ -901,7 +901,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1588526686.0939624,
+      "current": 1588420217.7697845,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
