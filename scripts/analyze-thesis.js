@@ -1666,6 +1666,17 @@ async function main() {
     tier1Layer1 = { flags: [{ rule_id: 'VALIDATOR_FAILURE', finding: 'Layer 1 Tier 1 checks', detail: e.message, severity: 'FLAG', timestamp: new Date().toISOString() }], hard_fails: 0, total_flags: 1, layer: 1 };
   }
 
+  // Layer Zero Gate — Layer 1
+  let gateLayer1 = { violations: [], compliance: 'GATE_NOT_RUN', gate_failed: false };
+  if (sweepResults.length > 0) {
+    try {
+      gateLayer1 = await runLayerZeroGate(1, sweepResults, tier1Layer1, process.env.ANTHROPIC_API_KEY);
+    } catch (e) {
+      warn('gate', `Layer 1 gate failed (non-fatal): ${e.message}`);
+      gateLayer1 = { violations: [], compliance: 'GATE_UNAVAILABLE', gate_failed: true, failure_reason: e.message };
+    }
+  }
+
   if (sweepResults.length === 0) {
     warn('pipeline', 'Layer 1 SWEEP returned empty — four-layer pipeline cannot run');
   }
@@ -1698,6 +1709,17 @@ async function main() {
         tier1Layer2 = { flags: [{ rule_id: 'VALIDATOR_FAILURE', finding: 'Layer 2 Tier 1 checks', detail: e.message, severity: 'FLAG', timestamp: new Date().toISOString() }], hard_fails: 0, total_flags: 1, layer: 2 };
       }
     }
+
+      // Layer Zero Gate — Layer 2
+      let gateLayer2 = { violations: [], compliance: 'GATE_NOT_RUN', gate_failed: false };
+      if (contextualizeResult) {
+        try {
+          gateLayer2 = await runLayerZeroGate(2, contextualizeResult, tier1Layer2, process.env.ANTHROPIC_API_KEY);
+        } catch (e) {
+          warn('gate', `Layer 2 gate failed (non-fatal): ${e.message}`);
+          gateLayer2 = { violations: [], compliance: 'GATE_UNAVAILABLE', gate_failed: true, failure_reason: e.message };
+        }
+      }
 
     if (contextualizeResult) {
       // ── Layer 3: INFER ──────────────────────────────────────────────────
@@ -1739,6 +1761,17 @@ async function main() {
           } catch (e) {
             warn('tier1', `Layer 4 validator failed (non-fatal): ${e.message}`);
             tier1Layer4 = { flags: [{ rule_id: 'VALIDATOR_FAILURE', finding: 'Layer 4 Tier 1 checks', detail: e.message, severity: 'FLAG', timestamp: new Date().toISOString() }], hard_fails: 0, total_flags: 1, layer: 4 };
+          }
+        }
+
+        // Layer Zero Gate — Layer 4
+        let gateLayer4 = { violations: [], compliance: 'GATE_NOT_RUN', gate_failed: false };
+        if (reconcileResult) {
+          try {
+            gateLayer4 = await runLayerZeroGate(4, reconcileResult, tier1Layer4, process.env.ANTHROPIC_API_KEY);
+          } catch (e) {
+            warn('gate', `Layer 4 gate failed (non-fatal): ${e.message}`);
+            gateLayer4 = { violations: [], compliance: 'GATE_UNAVAILABLE', gate_failed: true, failure_reason: e.message };
           }
         }
 
