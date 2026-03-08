@@ -393,7 +393,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-023",
@@ -465,7 +465,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-027",
@@ -501,7 +501,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-029",
@@ -519,7 +519,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-030",
