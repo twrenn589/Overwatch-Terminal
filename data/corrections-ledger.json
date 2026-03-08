@@ -213,7 +213,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-013",
@@ -231,7 +231,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-014",
@@ -267,7 +267,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-016",
@@ -357,7 +357,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-021",
@@ -483,7 +483,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-028",
@@ -516,6 +516,24 @@
     "lesson": "NEEDS_ENRICHMENT",
     "trigger": "NEEDS_ENRICHMENT",
     "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "CL-030",
+    "date_of_error": "2026-03-04",
+    "date_identified": "2026-03-08",
+    "identified_by": "sunday_audit",
+    "belief": "Personal social media content from thesis-relevant executives indicates pessimism, disengagement, or strategic intent",
+    "reality": "Personal intellectual interests, vacation content, and general commentary from individuals are not proxies for organizational development activity. Verified by 7 occurrences across 4 days where personal content was interpreted as a thesis signal while the underlying network posted record activity.",
+    "root_cause": "System treated personal social media content as a proxy for organizational strategy without verifying any thesis-relevant content existed in the posts.",
+    "root_cause_type": "APOPHENIA",
+    "prevention": "Require verifiable thesis-relevant content before interpreting social media from thesis-relevant individuals as a signal. Personal interests, humor, travel, and general intellectual commentary are not thesis signals.",
+    "lesson": "Personal social media activity from thesis-relevant individuals is not a proxy for organizational strategy or development activity. Require specific thesis-relevant content before treating individual communications as signals.",
+    "trigger": "Any inference that interprets personal, non-thesis-relevant social media content from a thesis-relevant individual as evidence of organizational strategy, internal sentiment, engagement level, or development priorities.",
+    "lesson_type": "FALSE_THREAT",
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
