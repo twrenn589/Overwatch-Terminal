@@ -29,8 +29,10 @@ function promoteRejections() {
     if (Array.isArray(raw)) ledger = raw;
   }
 
-  const existingIds = ledger.map(e => parseInt(e.id?.replace('CL-', ''), 10) || 0);
-  let nextId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
+  const existingNums = ledger
+    .map(e => { const m = e.id?.match(/^CL-(\d+)$/); return m ? parseInt(m[1], 10) : NaN; })
+    .filter(n => !isNaN(n));
+  let nextId = existingNums.length > 0 ? Math.max(...existingNums) + 1 : 1;
 
   const newCorrections = promotable.map(r => {
     const entry = {
