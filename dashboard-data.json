@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-08T02:26:41.760Z",
+  "updated": "2026-03-08T13:06:13.033Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.36,
-    "change_24h": -0.6987499002441893,
-    "volume_24h": 1134368644.9703727,
-    "market_cap": 83033230939.1843,
+    "price": 1.35,
+    "change_24h": -0.9152621305213554,
+    "volume_24h": 1334062601.2364423,
+    "market_cap": 82784128145.66089,
     "data_date": "2026-03-08",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1588628977.7635005,
+    "market_cap": 1588636417.3443484,
     "data_date": "2026-03-08",
     "source": "coingecko"
   },
@@ -53,30 +53,142 @@
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 102720877,
-    "rlusd_supply": 355005078.2917315,
+    "ledger_index": 102730841,
+    "rlusd_supply": 355005078.2916718,
     "data_date": "2026-03-08",
     "source": "xrpl",
-    "current_ledger": 102720877,
-    "last_ledger_txns": 114,
+    "current_ledger": 102730841,
+    "last_ledger_txns": null,
     "avg_tx_per_ledger": null,
-    "fee_burn_per_ledger_xrp": 0.00114,
+    "fee_burn_per_ledger_xrp": null,
     "dex_volume_24h_usd": 5258893,
-    "dex_volume_24h_xrp": 3866833,
+    "dex_volume_24h_xrp": 3895476,
     "dex_exchanges_24h": null,
     "dex_takers_24h": null,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 347148.905502,
-      "total_ask_xrp": 99.102624,
-      "best_bid": 1.369051,
-      "best_ask": 1.3555
+      "total_bid_xrp": 347099.54365,
+      "total_ask_xrp": 1000096.424576,
+      "best_bid": 1.364151,
+      "best_ask": 1.3515
     }
   },
   "x_intelligence": {
     "tier1_posts": [
+      {
+        "username": "JoelKatz",
+        "text": "@thePartyPartyUS I honestly cannot figure out you are imagining. Are you imagining that somehow the information will be so perfect and complete that people will never draw the wrong conclusions in harmful ways? Do you understand why our legal system treats as fundamental the right to confront",
+        "created_at": "2026-03-08T08:15:31.000Z",
+        "tweet_id": "2030558016014262493",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 3,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 152
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@thePartyPartyUS If I'm going to murder my neighbor, I know I need to keep that secret. But I probably wouldn't realize that googling information about suicide for a night course or showing my grandson some shiny motorcycles was something I needed to hide.",
+        "created_at": "2026-03-08T04:42:17.000Z",
+        "tweet_id": "2030504352767758834",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 7,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 278
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@thePartyPartyUS Are you arguing that there will be this huge benefit to offset the dystopian harm because people will no longer be able to do evil in secret? Because I think people will still be able to hide the big, outright evil stuff because they'll know they have to.",
+        "created_at": "2026-03-08T04:40:54.000Z",
+        "tweet_id": "2030504007547129901",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 5,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 387
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@thePartyPartyUS Say one of my coworkers decides not to go to a social event with me because they found out that I searched for a lot of information about suicide, not realizing that I did so for a paper I was writing for a course I was taking. Are you imagining I'd somehow be entitled to find",
+        "created_at": "2026-03-08T04:24:47.000Z",
+        "tweet_id": "2030499948194595134",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 238
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@thePartyPartyUS I suspect you are imagining a world different from the one we currently live in and asking what would be so bad about that world. I don't see how anyone can answer that without understanding how you imagine that world. But it sounds like its legal system is nothing like ours.",
+        "created_at": "2026-03-08T04:19:41.000Z",
+        "tweet_id": "2030498665585054114",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 11,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 423
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@thePartyPartyUS I don't think you understand what I'm saying at all becase your response is insane. On what basis would I ever seek, or be entitled to, recourse? Are you imagining some world where it is legally wrongful to draw reasonable inferences that happen to be false?",
+        "created_at": "2026-03-08T04:13:55.000Z",
+        "tweet_id": "2030497215916249344",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 17,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 756
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@thePartyPartyUS It really comes down to what kind of world you want to live in and how much dystopia you think is acceptable.\n\nMuch of the internet's revenue model is based on advertisements and the value of an ad showing depends heavily on how much the platform knows about you. And because we",
+        "created_at": "2026-03-08T04:01:23.000Z",
+        "tweet_id": "2030494059853496591",
+        "metrics": {
+          "retweet_count": 42,
+          "reply_count": 28,
+          "like_count": 444,
+          "quote_count": 1,
+          "bookmark_count": 34,
+          "impression_count": 13136
+        },
+        "tier": 1,
+        "weight": 3
+      },
       {
         "username": "JoelKatz",
         "text": "@MitraHispana @nypost Your argument is that the substance (what it's actually doing) doesn't matter and only the form (what it seems to be doing) matters. But I don't see how you can square that with how we look at everything other than AI.\n\nAlso, I'd argue that practicing law is actually interpreted",
@@ -85,10 +197,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 1,
+          "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 77
+          "impression_count": 225
         },
         "tier": 1,
         "weight": 3
@@ -101,10 +213,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 1,
+          "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 89
+          "impression_count": 190
         },
         "tier": 1,
         "weight": 3
@@ -117,10 +229,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 2,
+          "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 92
+          "impression_count": 188
         },
         "tier": 1,
         "weight": 3
@@ -136,7 +248,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 104
+          "impression_count": 196
         },
         "tier": 1,
         "weight": 3
@@ -149,10 +261,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 3,
-          "like_count": 4,
+          "like_count": 5,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 157
+          "impression_count": 287
         },
         "tier": 1,
         "weight": 3
@@ -165,10 +277,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 3,
+          "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 126
+          "impression_count": 239
         },
         "tier": 1,
         "weight": 3
@@ -184,7 +296,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 125
+          "impression_count": 201
         },
         "tier": 1,
         "weight": 3
@@ -200,7 +312,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 147
+          "impression_count": 238
         },
         "tier": 1,
         "weight": 3
@@ -216,7 +328,7 @@
           "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 110
+          "impression_count": 172
         },
         "tier": 1,
         "weight": 3
@@ -232,7 +344,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 118
+          "impression_count": 183
         },
         "tier": 1,
         "weight": 3
@@ -248,7 +360,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 129
+          "impression_count": 157
         },
         "tier": 1,
         "weight": 3
@@ -264,7 +376,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 126
+          "impression_count": 176
         },
         "tier": 1,
         "weight": 3
@@ -280,119 +392,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 193
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@NodrogIce @TheCinesthetic \"Why does this keep happening to us?\"",
-        "created_at": "2026-03-07T19:35:43.000Z",
-        "tweet_id": "2030366803894178096",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 1,
-          "like_count": 11,
-          "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 398
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@MitraHispana @nypost This is \"a gun can commit murder\". It's just a category error. AI is an inanimate tool humans use that does precisely what deterministic laws of physics require.",
-        "created_at": "2026-03-07T16:32:01.000Z",
-        "tweet_id": "2030320573977612372",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 1,
-          "like_count": 9,
-          "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 312
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@LundukeJournal The method by which the code is generated only matters if your defense to infringement is lack of access to the original work. Here, their defense would be that insufficient protected expression from the original work appears in theirs. That they used AI to do it is irrelevant.",
-        "created_at": "2026-03-07T16:29:34.000Z",
-        "tweet_id": "2030319957679251892",
-        "metrics": {
-          "retweet_count": 5,
-          "reply_count": 4,
-          "like_count": 132,
-          "quote_count": 0,
-          "bookmark_count": 8,
-          "impression_count": 7534
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@MitraHispana @nypost It's not about whether they're \"allowed\" to, it's about whether they are capable of it. A gun is not capable of murder, so whether it's allowed to murder is a meaningless question. \n\nAnd yes, I think AI is an inanimate tool to which concepts like \"advice\" and \"practicing\" do not",
-        "created_at": "2026-03-07T16:20:35.000Z",
-        "tweet_id": "2030317696865456386",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 3,
-          "like_count": 9,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 268
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@Tzn747 @RileeDHarrison California? See my link.",
-        "created_at": "2026-03-07T16:15:52.000Z",
-        "tweet_id": "2030316510892429427",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 6,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 293
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "RT @JoelKatz: @grok @Yehye395943 @Pirat_Nation Hey, @grok, how is this like Danny DeVito trying to ride a rollercoaster after the park has…",
-        "created_at": "2026-03-07T16:13:21.000Z",
-        "tweet_id": "2030315876663308763",
-        "metrics": {
-          "retweet_count": 18,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 2
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@RileeDHarrison At least if your attorney messes it up, you can sue them.\nhttps://t.co/cuAzmQJSO3",
-        "created_at": "2026-03-07T15:29:40.000Z",
-        "tweet_id": "2030304887062581572",
-        "metrics": {
-          "retweet_count": 6,
-          "reply_count": 10,
-          "like_count": 138,
-          "quote_count": 0,
-          "bookmark_count": 7,
-          "impression_count": 8711
+          "impression_count": 229
         },
         "tier": 1,
         "weight": 3
@@ -405,12 +405,12 @@
         "created_at": "2026-03-08T02:19:17.000Z",
         "tweet_id": "2030468365983035747",
         "metrics": {
-          "retweet_count": 0,
-          "reply_count": 0,
-          "like_count": 7,
+          "retweet_count": 42,
+          "reply_count": 3,
+          "like_count": 194,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 709
+          "impression_count": 9924
         },
         "tier": 2,
         "weight": 2
@@ -421,12 +421,12 @@
         "created_at": "2026-03-08T02:07:03.000Z",
         "tweet_id": "2030465288974819695",
         "metrics": {
-          "retweet_count": 0,
-          "reply_count": 0,
-          "like_count": 9,
+          "retweet_count": 4,
+          "reply_count": 1,
+          "like_count": 28,
           "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 2430
+          "bookmark_count": 3,
+          "impression_count": 10308
         },
         "tier": 2,
         "weight": 2
@@ -437,12 +437,12 @@
         "created_at": "2026-03-08T01:52:08.000Z",
         "tweet_id": "2030461534967873828",
         "metrics": {
-          "retweet_count": 16,
-          "reply_count": 19,
-          "like_count": 95,
-          "quote_count": 2,
-          "bookmark_count": 12,
-          "impression_count": 6826
+          "retweet_count": 88,
+          "reply_count": 42,
+          "like_count": 403,
+          "quote_count": 15,
+          "bookmark_count": 34,
+          "impression_count": 29288
         },
         "tier": 2,
         "weight": 2
@@ -453,12 +453,12 @@
         "created_at": "2026-03-07T23:28:44.000Z",
         "tweet_id": "2030425447226397009",
         "metrics": {
-          "retweet_count": 258,
-          "reply_count": 309,
-          "like_count": 2477,
-          "quote_count": 40,
-          "bookmark_count": 61,
-          "impression_count": 115396
+          "retweet_count": 461,
+          "reply_count": 381,
+          "like_count": 4132,
+          "quote_count": 49,
+          "bookmark_count": 91,
+          "impression_count": 209302
         },
         "tier": 2,
         "weight": 2
@@ -474,7 +474,7 @@
           "like_count": 8,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 9269
+          "impression_count": 9986
         },
         "tier": 2,
         "weight": 2
@@ -485,12 +485,12 @@
         "created_at": "2026-03-07T14:04:03.000Z",
         "tweet_id": "2030283338876146175",
         "metrics": {
-          "retweet_count": 11,
+          "retweet_count": 13,
           "reply_count": 25,
-          "like_count": 43,
-          "quote_count": 0,
+          "like_count": 49,
+          "quote_count": 1,
           "bookmark_count": 1,
-          "impression_count": 12663
+          "impression_count": 13821
         },
         "tier": 2,
         "weight": 2
@@ -501,12 +501,12 @@
         "created_at": "2026-03-07T04:54:19.000Z",
         "tweet_id": "2030144992774111435",
         "metrics": {
-          "retweet_count": 53,
+          "retweet_count": 58,
           "reply_count": 35,
-          "like_count": 377,
+          "like_count": 417,
           "quote_count": 9,
-          "bookmark_count": 47,
-          "impression_count": 324949
+          "bookmark_count": 52,
+          "impression_count": 355714
         },
         "tier": 2,
         "weight": 2
@@ -517,12 +517,12 @@
         "created_at": "2026-03-07T04:43:03.000Z",
         "tweet_id": "2030142159056187546",
         "metrics": {
-          "retweet_count": 5763,
-          "reply_count": 2768,
-          "like_count": 22821,
-          "quote_count": 2366,
-          "bookmark_count": 3273,
-          "impression_count": 5244882
+          "retweet_count": 6089,
+          "reply_count": 2865,
+          "like_count": 24031,
+          "quote_count": 2556,
+          "bookmark_count": 3543,
+          "impression_count": 6216274
         },
         "tier": 2,
         "weight": 2
@@ -535,10 +535,10 @@
         "metrics": {
           "retweet_count": 21,
           "reply_count": 6,
-          "like_count": 170,
+          "like_count": 172,
           "quote_count": 0,
           "bookmark_count": 2,
-          "impression_count": 11551
+          "impression_count": 11892
         },
         "tier": 2,
         "weight": 2
@@ -554,7 +554,7 @@
           "like_count": 25,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 5951
+          "impression_count": 6574
         },
         "tier": 2,
         "weight": 2
@@ -565,12 +565,12 @@
         "created_at": "2026-03-07T01:46:41.000Z",
         "tweet_id": "2030097775975669826",
         "metrics": {
-          "retweet_count": 97,
+          "retweet_count": 103,
           "reply_count": 42,
-          "like_count": 355,
-          "quote_count": 0,
+          "like_count": 366,
+          "quote_count": 1,
           "bookmark_count": 8,
-          "impression_count": 11931
+          "impression_count": 12343
         },
         "tier": 2,
         "weight": 2
@@ -582,11 +582,11 @@
         "tweet_id": "2030091975983067345",
         "metrics": {
           "retweet_count": 11,
-          "reply_count": 22,
-          "like_count": 149,
+          "reply_count": 21,
+          "like_count": 150,
           "quote_count": 1,
           "bookmark_count": 5,
-          "impression_count": 27396
+          "impression_count": 28029
         },
         "tier": 2,
         "weight": 2
@@ -613,12 +613,12 @@
         "created_at": "2026-03-06T22:21:31.000Z",
         "tweet_id": "2030046143971766695",
         "metrics": {
-          "retweet_count": 5,
+          "retweet_count": 6,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 16
+          "impression_count": 17
         },
         "tier": 2,
         "weight": 2
@@ -629,12 +629,12 @@
         "created_at": "2026-03-06T22:19:06.000Z",
         "tweet_id": "2030045532635152443",
         "metrics": {
-          "retweet_count": 206,
-          "reply_count": 61,
-          "like_count": 979,
+          "retweet_count": 207,
+          "reply_count": 67,
+          "like_count": 993,
           "quote_count": 19,
-          "bookmark_count": 60,
-          "impression_count": 136547
+          "bookmark_count": 59,
+          "impression_count": 140310
         },
         "tier": 2,
         "weight": 2
@@ -645,7 +645,7 @@
         "created_at": "2026-03-06T21:57:05.000Z",
         "tweet_id": "2030039993238831535",
         "metrics": {
-          "retweet_count": 22,
+          "retweet_count": 23,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -661,12 +661,12 @@
         "created_at": "2026-03-06T21:50:02.000Z",
         "tweet_id": "2030038219031552422",
         "metrics": {
-          "retweet_count": 898,
-          "reply_count": 558,
-          "like_count": 7163,
-          "quote_count": 248,
-          "bookmark_count": 306,
-          "impression_count": 1103513
+          "retweet_count": 920,
+          "reply_count": 562,
+          "like_count": 7392,
+          "quote_count": 251,
+          "bookmark_count": 314,
+          "impression_count": 1128119
         },
         "tier": 2,
         "weight": 2
@@ -677,12 +677,12 @@
         "created_at": "2026-03-06T21:39:35.000Z",
         "tweet_id": "2030035590675075161",
         "metrics": {
-          "retweet_count": 2134,
-          "reply_count": 866,
-          "like_count": 11632,
-          "quote_count": 313,
-          "bookmark_count": 414,
-          "impression_count": 724865
+          "retweet_count": 2169,
+          "reply_count": 878,
+          "like_count": 11876,
+          "quote_count": 316,
+          "bookmark_count": 421,
+          "impression_count": 749523
         },
         "tier": 2,
         "weight": 2
@@ -693,12 +693,12 @@
         "created_at": "2026-03-06T21:21:26.000Z",
         "tweet_id": "2030031022088220953",
         "metrics": {
-          "retweet_count": 70,
-          "reply_count": 54,
-          "like_count": 604,
+          "retweet_count": 72,
+          "reply_count": 61,
+          "like_count": 629,
           "quote_count": 5,
-          "bookmark_count": 13,
-          "impression_count": 21703
+          "bookmark_count": 15,
+          "impression_count": 23075
         },
         "tier": 2,
         "weight": 2
@@ -709,18 +709,18 @@
         "created_at": "2026-03-06T21:13:15.000Z",
         "tweet_id": "2030028960797462573",
         "metrics": {
-          "retweet_count": 59,
-          "reply_count": 87,
-          "like_count": 541,
-          "quote_count": 22,
-          "bookmark_count": 67,
-          "impression_count": 113759
+          "retweet_count": 65,
+          "reply_count": 89,
+          "like_count": 550,
+          "quote_count": 25,
+          "bookmark_count": 69,
+          "impression_count": 115936
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-08T02:26:41.316Z",
+    "fetched_at": "2026-03-08T13:06:12.423Z",
     "post_count": 40,
     "errors": []
   },
@@ -897,7 +897,7 @@
       "timestamp": "2026-03-07T03:24:01.000Z"
     },
     "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
-    "last_updated": "2026-03-08T02:26:41.686Z"
+    "last_updated": "2026-03-08T13:06:12.887Z"
   },
   "manual": {
     "odl_volume_annualized": null,
@@ -917,7 +917,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1588628977.7635005,
+      "current": 1588636417.3443484,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
@@ -981,72 +981,72 @@
     "base": 45,
     "mid": 30,
     "bull": 11,
-    "last_updated": "2026-03-08T02:43:28.855Z",
-    "last_reasoning": "Bear case probability increased from 10% to 14%: Brent surge to $92.69, two compound stress legs breached, $805B equity wipeout, Fear & Greed at 12 all increase near-term downside risk. XRP at $1.36 is already approaching the <$1 bear threshold. Base case narrowed from 40% to 45% — the $2-8 range remains most likely but the floor is softer. Mid case increased from 38% to 30% — the institutional thesis infrastructure is intact but macro headwinds are stronger. Bull case trimmed slightly from 12% to 11%. The key variable: if oil pushes through $95 and Hormuz escalates, bear case could expand rapidly. Conversely, if Bessent Russia sanctions relief materializes, oil pressure could reverse quickly."
+    "last_updated": "2026-03-08T13:23:31.492Z",
+    "last_reasoning": "Bear case increased from 10% to 14%: compound stress now at ELEVATED with two legs breached and approaching CRITICAL. $805B equity wipeout, F&G at 12, and Brent surge to $92.69 materially increase downside risk. Base case narrowed from 40% to 45% as $1-8 range becomes most probable in a stressed environment. Mid case adjusted from 38% to 30% — the macro headwinds (rising energy costs, equity destruction, potential rate hike extension) compress the probability of reaching $8-20 in 2026. Bull case ticked down from 12% to 11% — tail risk scenario less likely when macro environment is actively deteriorating. Note: institutional infrastructure thesis remains intact (regulatory, ETF, RLUSD recovery) but macro overhang is the dominant near-term force."
   },
   "bear_case": {
-    "counter_thesis_score": 58,
-    "score_reasoning": "Counter-thesis pressure has increased meaningfully. Macro stress is the primary driver — oil shock, equity selloff, extreme fear — but the fundamental institutional adoption gaps (no ODL data, zero permissioned DEX adoption, ETF AUM data stale) remain unresolved. XRP at $1.36 is 36% above the $1 bear threshold, but a sustained macro deterioration could compress that margin quickly.",
+    "counter_thesis_score": 57,
+    "score_reasoning": "Counter-thesis pressure is materially elevated. Macro environment is the primary driver — compound stress at ELEVATED, $805B equity wipeout, F&G at 12, energy costs surging. Combined with 16-day zero PermissionedDEX adoption, RLUSD heavily concentrated on Ethereum not XRPL, and persistent ODL data opacity, the bear case has strengthened since last assessment.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "SWIFT continues upgrading GPI with pre-validation and tracking. No evidence of XRPL integration or displacement. The 11,500-bank network effect remains SWIFT's strongest moat."
+        "status_text": "SWIFT continues incremental upgrades to its 11,500-bank network. No breaking competitive threat but persistent baseline alternative that reduces urgency for institutional migration to XRPL."
       },
       {
         "name": "Visa B2B Connect",
         "status": "LOW_RISK",
-        "status_text": "Visa B2B Connect operates in a parallel lane — focused on card-network-adjacent corridors rather than large-value institutional settlement. Not directly competing for XRPL's target use case."
+        "status_text": "Operating in parallel corridors. No new data suggesting competitive displacement of XRPL use cases."
       },
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "Kinexys (formerly Onyx/JPM Coin) processes significant daily volumes for JPMorgan clients. It represents a walled-garden approach that could scale without public blockchain infrastructure."
+        "status_text": "JPMorgan's proprietary blockchain settlement continues expanding within its institutional client base. Closed-ecosystem advantage vs XRPL open-network approach remains a valid competitive concern."
       },
       {
         "name": "BIS Project Nexus",
-        "status": "ELEVATED_RISK",
-        "status_text": "Nexus remains the highest-credibility competitor — central bank-backed, designed to interlink domestic instant payment systems without private tokens. If Nexus achieves broad adoption, it could eliminate the bridge currency use case entirely."
+        "status": "MONITORING",
+        "status_text": "Multi-central-bank coordination remains the most credible institutional-grade alternative to private blockchain settlement. If Nexus achieves operational status without needing bridge currencies, it directly undermines XRP's settlement utility thesis."
       },
       {
         "name": "Ethereum Institutional",
-        "status": "MONITORING",
-        "status_text": "Ondo Finance pushing tokenized stocks narrative ($100T+ market). Ethereum's institutional DeFi ecosystem is broader than XRPL's. The 'universal liquidity layer' positioning could go to either chain."
+        "status": "ELEVATED_RISK",
+        "status_text": "77% of RLUSD lives on Ethereum, not XRPL. Ripple's own stablecoin choosing Ethereum as the primary chain is a material signal. Ethereum's institutional DeFi ecosystem continues to attract the majority of tokenized asset volume."
       }
     ],
-    "odl_stagnation": "ODL volume remains the most critical data gap — Ripple stopped publishing data, and without it the $20-30B annualized kill switch is completely unevaluable. This is not neutral; opacity from the primary data source is a bearish signal.",
-    "token_velocity_concern": "No token velocity or average hold time data available. If XRP is being used purely as a bridge with sub-second hold times, price appreciation from utility alone is structurally limited regardless of volume.",
+    "odl_stagnation": "ODL volume data has been opaque for an extended period with no public reporting. The kill switch cannot be evaluated. If Ripple had strong ODL numbers, the incentive to publish them would be high — the silence itself is a bearish signal.",
+    "token_velocity_concern": "No token velocity data available. XRPL DEX volume at $5.26M/day is modest relative to an $82.8B market cap, suggesting limited on-chain utility relative to speculative holding. The utility-to-market-cap ratio remains a fundamental concern.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "Oil at $92.69, $805B equity wipeout, gas at $3.45, tariffs active — stagflationary signals are accumulating. A recession would reduce cross-border payment volumes, directly undermining the ODL growth thesis."
+        "status_text": "$805B single-day equity wipeout, F&G at 12, surging energy costs ($92.69 Brent, $3.45 gas), and compound stress at ELEVATED create a realistic recession pathway that would crush institutional crypto allocation appetite."
       },
       {
         "name": "Crypto Winter Signals",
         "status": "MONITORING",
-        "status_text": "Fear & Greed at 12 is extreme but not unprecedented. XRP volume at $1.13B suggests orderly markets, not capitulation. However, sustained macro stress could trigger a broader risk-asset retracement."
+        "status_text": "XRP at $1.35 is well off highs. Extreme Fear at 12. Sustained equity downturn could trigger institutional crypto rotation out. Not yet winter-level but trajectory is deteriorating."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "Current administration is actively pro-crypto (cyber strategy, CBDC ban push, SEC/CFTC co-location). Regulatory reversal risk is low in the near term but remains a tail risk under future administrations."
+        "status_text": "Current administration is actively pro-crypto (cyber strategy, CBDC ban, SEC/CFTC co-location). Regulatory reversal risk is at its lowest point in the thesis timeline."
       },
       {
         "name": "Rate Hike Extension",
-        "status": "MONITORING",
-        "status_text": "US 10Y at 4.13% with oil surging to $92.69 creates inflationary pressure that could delay rate cuts or force Fed to hold longer. Higher-for-longer rates reduce speculative capital flows into crypto."
+        "status": "ELEVATED_RISK",
+        "status_text": "Surging energy costs (Brent $92.69, gas $3.45) feed directly into inflation expectations. If CPI re-accelerates, rate cuts get pushed further out or reversed. US 10Y at 4.13% already elevated. This is a direct headwind to risk asset allocation."
       }
     ],
-    "bear_narrative": "INCREASE MONITORING. Compound stress has escalated to ELEVATED — Brent surged 17.3% to $92.69, now $2.31 from the $95 CRITICAL threshold, while USD/JPY holds at 157.92. The oil leg could breach CRITICAL on a single Iran/Hormuz headline. Three kill-switches escalated to WARNING this cycle: ODL volume is a suspicious absence after three consecutive null cycles, RLUSD tracking is unreliable with a 4.5x discrepancy between aggregate ($1.589B) and XRPL-specific ($355M) supply, and ETF flow monitoring is non-functional. The monitoring framework is losing resolution — the system expresses high confidence across categories while core metrics return null, which per LZ-EPH-002 is a structural error that must be corrected. The thesis paradox holds: a compound stress cascade would simultaneously crush the position and provide the strongest evidence for the use case. I don't know whether the settlement layer is being built behind NDAs or whether it doesn't exist at meaningful scale — and the operator cannot know either until the data opacity resolves or a kill-switch definitively triggers.",
-    "last_updated": "2026-03-08T02:43:28.855Z"
+    "bear_narrative": "INCREASE MONITORING. Compound stress has escalated to ELEVATED for the first time — Brent at $92.69 and USD/JPY at 157.92 simultaneously breaching elevated thresholds, with Brent only $2.31 from triggering CRITICAL. Iran escalation is the proximate catalyst, and the oil leg moved 17.3% in five days. The core thesis mechanism (ODL settlement volume) remains a suspicious absence after months of monitoring — Ripple is building institutional infrastructure while withholding the one metric that would prove it works. Four kill switches are now at WARNING status, not because they've been triggered, but because the monitoring system is losing the ability to evaluate them. The thesis paradox is live and closer to materializing than at any point in the monitoring period: the same Hormuz disruption that would validate XRPL's settlement thesis would likely trigger forced liquidation of the XRP position. Bear pressure at 57 — moderately elevated, driven more by what we cannot see than by what we can.",
+    "last_updated": "2026-03-08T13:23:31.492Z"
   },
   "last_analysis": {
-    "timestamp": "2026-03-08T02:43:28.855Z",
-    "run_type": "evening",
+    "timestamp": "2026-03-08T13:23:31.492Z",
+    "run_type": "morning",
     "stress_level": "ELEVATED",
-    "stress_score": 68,
-    "applied_at": "2026-03-08T02:45:13.004Z",
+    "stress_score": 72,
+    "applied_at": "2026-03-08T13:25:21.931Z",
     "changes_applied": 2
   }
 }

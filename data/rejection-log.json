@@ -434,5 +434,14 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-08T02:42:43.290Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "RLUSD discrepancy fully explained by multi-chain deployment (null hypothesis holds)",
+    "rejection_reason": "Layer 3 classified this as 'null holds' but the evidence does not support full resolution. Per LZ-EH-005, the contradiction between XRPL on-chain ($355M, Tier 1 primary source) and CoinGecko ($1.589B, Tier 2 aggregator) cannot be resolved without independent Ethereum-chain verification. Layer 3's null hypothesis requires one unverifiable assumption about CoinGecko's methodology. I am overruling the 'null holds' classification to 'FLAGGED — paradox held.' The multi-chain explanation is plausible but not proven.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-08T13:22:46.130Z",
+    "source": "layer4_reconcile"
   }
 ]
