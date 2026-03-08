@@ -177,7 +177,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-011",
@@ -249,7 +249,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-015",
@@ -285,7 +285,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-017",
@@ -321,7 +321,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-019",
@@ -339,7 +339,7 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "SUPERSEDED"
   },
   {
     "id": "CL-020",
@@ -533,6 +533,24 @@
     "prevention": "Require verifiable thesis-relevant content before interpreting social media from thesis-relevant individuals as a signal. Personal interests, humor, travel, and general intellectual commentary are not thesis signals.",
     "lesson": "Personal social media activity from thesis-relevant individuals is not a proxy for organizational strategy or development activity. Require specific thesis-relevant content before treating individual communications as signals.",
     "trigger": "Any inference that interprets personal, non-thesis-relevant social media content from a thesis-relevant individual as evidence of organizational strategy, internal sentiment, engagement level, or development priorities.",
+    "lesson_type": "FALSE_THREAT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "CL-031",
+    "date_of_error": "2026-03-04",
+    "date_identified": "2026-03-08",
+    "identified_by": "sunday_audit",
+    "belief": "Retail sentiment index readings indicate institutional distribution, capitulation, or outflow behavior",
+    "reality": "Retail sentiment indices measure public mood, not institutional activity. Inferring institutional behavior (accumulation, distribution, capitulation) from sentiment data requires independent flow evidence that was never available. Verified by 5 occurrences across 3 days, each rejected by Layer 3/4 null hypothesis. Price action during extreme sentiment readings repeatedly contradicted the inferred institutional behavior.",
+    "root_cause": "System treated a retail sentiment indicator as a proxy for institutional flow data without verifying that any institutional flow data existed.",
+    "root_cause_type": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Require independent institutional flow data (fund flows, custody movements, filing disclosures) before inferring institutional behavior. Retail sentiment indices are not a substitute for flow evidence regardless of how extreme the reading.",
+    "lesson": "Retail sentiment indices measure public mood, not institutional behavior. Do not infer institutional activity from sentiment data without independent flow evidence.",
+    "trigger": "Any inference that uses a retail sentiment index reading to conclude institutional accumulation, distribution, capitulation, or changes in institutional positioning without independent flow data.",
     "lesson_type": "FALSE_THREAT",
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
