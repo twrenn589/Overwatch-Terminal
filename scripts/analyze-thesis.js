@@ -1843,6 +1843,11 @@ async function main() {
 
   // ── Write 360 report and history ──────────────────────────────────────────
   if (assessment360) {
+    // Persist Layer 1 sweep output for audit and cognitive trace assembly
+    // Attached here (not in bridge) so it persists in all pipeline paths including fallbacks
+    if (sweepResults && sweepResults.length > 0) {
+      assessment360._layer1_raw = sweepResults;
+    }
     try {
       const reportPath = path.join(__dirname, '..', 'data', '360-report.json');
       fs.writeFileSync(reportPath, JSON.stringify(assessment360, null, 2));
@@ -1870,6 +1875,7 @@ async function main() {
       delete historyEntry._layer4_raw;
       delete historyEntry._layer3_raw;
       delete historyEntry._layer2_raw;
+      delete historyEntry._layer1_raw;
       history.push(historyEntry);
       if (history.length > 60) {
         history = history.slice(-60);
