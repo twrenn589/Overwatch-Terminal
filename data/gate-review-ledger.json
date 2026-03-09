@@ -2575,5 +2575,463 @@
     "violations_count": 11,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-09T03:16:24.204Z",
+    "layer": 1,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-004"
+          ],
+          "finding": "DXY weakness supporting non-USD settlement narratives",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding asserts that DXY weakness 'could accelerate institutional interest in non-USD-denominated or USD-stablecoin-bridged settlement rails like XRPL/RLUSD' and claims 'a weakening dollar historically supports narratives around alternative settlement infrastructure.' This presents correlation (DXY down, alternative settlement interest) as having causal relationship without establishing the causal mechanism or providing evidence that DXY movements actually drive institutional XRPL adoption. The word 'supports' implies causation.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-007"
+          ],
+          "finding": "Tokenization momentum accelerating across competitors",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The finding cites a single Ondo Finance post about tokenization developments and labels this as 'momentum accelerating.' One data point (one post citing several developments) does not establish a trend or 'acceleration.' To demonstrate acceleration would require multiple observations across time showing increasing velocity of adoption.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-010"
+          ],
+          "finding": "Japanese yield environment pressuring SBI/institutional capacity",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding states 'BOJ tightening reduces risk appetite for SBI Holdings and Japanese institutions to allocate to speculative digital asset infrastructure' without evidence that JPN 10Y yield level causally drives SBI's digital asset allocation decisions. This is correlation (yields up, risk appetite theoretically down) presented as causal mechanism without verification that SBI's behavior actually responds to yield levels in this manner.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-013"
+          ],
+          "finding": "S&P 500 elevated but oil shock not yet priced",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The finding states 'Monday open likely brings significant equity drawdown' and 'This creates a multi-day cascade risk.' These are forward-looking predictions treated with high confidence in the severity and proximity assessment (high/immediate). Predictions are inherently uncertain and should not carry the same evidentiary weight as the historical measurements (S&P 500 at 6740, oil surge occurred). The future market reaction is prediction, not measurement.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-014"
+          ],
+          "finding": "Clarity Act still pending with no advancement signal",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The finding concludes 'Geopolitical crisis and energy shock will likely consume Congressional attention, further delaying legislative action' based on: (1) assumption that geopolitical crisis will consume attention, (2) assumption this will delay crypto legislation specifically, (3) assumption that no advancement will occur by deadline. This chains three unproven assumptions to reach the conclusion of deterioration. The baseline observation (pending status, no new signals) is factual, but the directional assessment relies on speculative assumption chain.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-015"
+          ],
+          "finding": "Silver crash signals broad risk-off including precious metals",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding states 'This suggests margin calls and forced liquidation across asset classes' and concludes this 'indicates systemic deleveraging that historically compresses all non-cash asset prices for weeks.' The causal chain from silver price movement to margin calls to multi-week asset compression is presented without evidence. Silver dropping could have multiple explanations; asserting it 'signals' and 'indicates' specific causal mechanisms (margin calls, systemic deleveraging) treats correlation as causation.",
+          "severity": "MODERATE"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 15,
+      "clean_findings": 9,
+      "reviewer_notes": "Six violations detected, all MODERATE or MINOR severity. Primary pattern: correlation-to-causation reasoning (4 instances) and prediction-as-measurement (1 instance). No SERIOUS violations found. Findings 1, 2, 3, 5, 6, 8, 9, 11, 12 passed epistemological review. The analyst correctly used 'AMBIGUOUS' direction and acknowledged data gaps in several findings, demonstrating appropriate epistemic humility in those cases. The violations occur where market dynamics are inferred from price movements without establishing causal mechanisms."
+    },
+    "violations_count": 6,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-09T03:21:15.422Z",
+    "layer": 2,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001"
+          ],
+          "finding": "Oil shock duration uncertainty assessment",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The knowledge audit identifies a gap ('Cannot verify whether Strait of Hormuz shipping is actually disrupted vs. fear-premium pricing') and correctly notes this matters for duration assessment. However, the scored threat then assigns HIGH confidence and severity 9/10 without resolving this gap. The reasoning states 'Duration uncertainty (fear-premium vs actual supply disruption) is the main unresolved variable' but does not reduce confidence proportionally. If the distinction between fear-premium and actual disruption 'matters for duration assessment' per the audit, then confidence should be MEDIUM, not HIGH. The audit correctly identified 'I don't know' regarding the mechanism, but the scored output avoided acknowledging this uncertainty in its confidence rating.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-003"
+          ],
+          "finding": "RLUSD supply discrepancy treated as equal-weight contradiction requiring kill switch clarification",
+          "rule_violated": "LZ-EH-002",
+          "violation": "The finding treats CoinGecko data ($1.579B) and XRPL on-chain data ($355M) as sources of 'roughly equal evidentiary weight' and invokes LZ-EH-005 to declare the contradiction itself as the finding. However, LZ-EH-002 establishes that data obtained directly from the originating source (XRPL on-chain ledger data) outweighs data reported by intermediaries (CoinGecko aggregation). XRPL on-chain data is primary-source, direct observation. CoinGecko is a secondary aggregator that may be capturing multi-chain supply. These are NOT equal-weight sources. The contradiction should be resolved by prioritizing the primary source (XRPL on-chain $355M) unless there is specific evidence that the thesis requires multi-chain measurement, in which case the thesis definition gap should be stated clearly rather than treating the sources as equivalent.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-004"
+          ],
+          "finding": "DXY weakness supporting non-USD settlement narratives with LOW confidence",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding assigns LOW confidence but does not honestly count the unproven assumptions required to connect DXY weakness to XRPL adoption acceleration. The reasoning chain requires at minimum: (1) assumption that institutions monitor DXY for settlement infrastructure decisions, (2) assumption that DXY weakness triggers evaluation of non-USD alternatives, (3) assumption that XRPL would be among considered alternatives, (4) assumption that consideration translates to adoption within thesis-relevant timeframe. This is four unproven assumptions. Per LZ-EPH-003, three or more unproven assumptions makes an inference speculative regardless of individual plausibility. The finding should either declare this speculative or reduce the severity below 3/10 to reflect that it is purely theoretical with no evidentiary anchors beyond the DXY measurement itself.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-007"
+          ],
+          "finding": "Tokenization momentum assessment with MEDIUM confidence despite competitive knowledge gap",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The knowledge audit explicitly identifies a 'COMPETITIVE_KNOWLEDGE_GAP' stating 'I don't know which platforms are being used for the tokenized stocks or institutional tokenization referenced. Without knowing the infrastructure choices, I cannot assess competitive displacement.' This is a clear 'I don't know' regarding the core question (is this competitive with XRPL or complementary?). The scored threat then assigns MEDIUM confidence to a competitive threat assessment despite admitting it cannot determine the competitive relationship. Per LZ-EPH-001, 'I don't know' is a high-quality output. The confidence rating should be LOW or the threat should be reframed as 'tokenization momentum exists but competitive implications unknown.'",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-008"
+          ],
+          "finding": "Fed guidance treated as 'plausible' with LOW confidence based on secondary source",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding states 'The existence of Fed guidance on bank capital treatment for tokenized assets would be significant' and scores this at severity 4/10 with reasoning that 'existence of guidance is plausible and directionally positive.' The evidence is a Tier 2 social media post with no primary source verification. Per the finding's own reasoning, the content 'cannot be verified from current data' and 'specifics, scope, or implications' are unknown. Assigning any positive severity score (4/10) to an unverified, unconfirmed regulatory development is disproportionate to the evidence. The only honest assessment is 'alleged guidance mentioned in secondary source; cannot verify existence or content; no assessment possible.' Confidence is LOW but severity should be 0-1 (monitoring note only) or the finding should be unscored pending verification.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-013"
+          ],
+          "finding": "S&P 500 oil shock pricing assessment with MEDIUM confidence on forward prediction",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The finding explicitly acknowledges per LZ-RC-005 that 'predictions carry different weight than measurements' and correctly notes that equity response 'will be visible Monday' and 'actual magnitude is unknown.' However, it then assigns severity 6/10 with MEDIUM confidence to a prediction about future equity behavior. The reasoning states 'high confidence that equity drawdown is coming' but this is a prediction, not a measurement. Per LZ-RC-005, predictions are inherently uncertain and carry fundamentally different evidentiary weight than measurements. The confidence should be LOW for any forward-looking assessment, or the finding should be reframed as 'equity response unmeasured; likely negative but magnitude unknown; severity to be determined after Monday open.' The current framing assigns moderate severity to something that has not happened yet.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-015"
+          ],
+          "finding": "Silver crash interpreted as systemic deleveraging with MEDIUM confidence",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding states 'Silver 5%+ decline during geopolitical crisis (when safe havens typically rally) is anomalous... but corroborated by simultaneous movements in oil, BTC, and crypto markets suggesting systemic deleveraging.' This reasoning uses correlation (simultaneous movement of silver, oil, BTC) to infer causation (systemic deleveraging/margin calls). The finding then concludes 'margin calls and forced liquidation are occurring across asset classes' based on the co-occurrence of price movements. Per LZ-RC-001, correlation does not establish causation. Multiple assets moving simultaneously is consistent with systemic deleveraging but also consistent with other explanations (coordinated algo trading, macro factor repricing, etc.). The finding should state 'simultaneous violent moves across uncorrelated asset classes; consistent with systemic deleveraging but causation not established' rather than asserting deleveraging as the explanation.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001"
+          ],
+          "finding": "Brent crude price verification via 'financeflow source'",
+          "rule_violated": "LZ-EH-001",
+          "violation": "The knowledge audit states 'Verified: Brent crude at $114.11 from financeflow source' and later notes 'Source is Tier 2 (WatcherGuru) but corroborated by Brent price data from financeflow primary source.' This presents 'financeflow' as a primary source providing independent corroboration of the WatcherGuru report. However, there is no evidence in the provided output that 'financeflow' is independent of WatcherGuru or that it represents multiple independent verification. If financeflow and WatcherGuru are drawing from the same underlying data feed or market source, this is not independent verification per LZ-EH-001. The finding should either demonstrate that financeflow represents truly independent verification (different market data provider, different methodology) or acknowledge that the $114.11 figure has single-source verification with unknown independence.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 39,
+      "reviewer_notes": "The output demonstrates strong epistemological discipline in most areas, particularly in applying graduated corrections (CL-030, CL-031, CL-033) and honestly flagging data gaps. However, there is a recurring pattern of identifying uncertainty correctly in knowledge_audit sections but then not fully carrying that uncertainty through to confidence ratings in scored_threats. The most significant violations involve: (1) treating predictions as measurements with moderate confidence (SIG-013), (2) failing to apply LZ-EH-002 hierarchy to resolve the RLUSD data conflict (SIG-003), and (3) correlation-to-causation inference in the deleveraging narrative (SIG-015). The assessment would benefit from stricter application of LZ-EPH-001 ('I don't know' as output) and LZ-EPH-002 (confidence proportional to evidence) in cases where knowledge audits identify fundamental gaps."
+    },
+    "violations_count": 8,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-09T03:26:48.084Z",
+    "layer": 3,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-003"
+          ],
+          "finding": "Strategic inference: RLUSD chain distribution reveals infrastructure preference",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference builds on multiple unverified assumptions: (1) that Ripple's chain allocation reflects demand-driven decisions rather than temporary technical constraints, (2) that the 78/22 split represents settled allocation rather than initial deployment pattern, (3) that institutional preference for Ethereum RLUSD reflects settlement infrastructure preference rather than custody/exchange integration preferences. While only one assumption is explicitly counted, the reasoning chain contains at least three unproven links. The alternative explanation acknowledges a different use-case theory but dismisses it as 'less likely' without independent evidence to break the tie.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001",
+            "20260309-0315-SIG-002",
+            "20260309-0315-SIG-013",
+            "20260309-0315-SIG-015"
+          ],
+          "finding": "Strategic inference: Oil shock triggering compound stress cascade",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The finding conflates verified measurements (oil at $114.11, BTC crash, F&G at 8) with forward-looking predictions about Monday equity open and multi-week impact. The statement 'The equity market response is pending but historically predictable given the magnitude' treats a prediction as having similar evidentiary weight to the verified measurements. The 'expected_timeline: days' and detailed cascade predictions are presented with 'confidence: high' despite being about future events.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-010"
+          ],
+          "finding": "Player analysis: Japanese institutions - BOJ trap mechanism",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The statement 'Japan imports ~90% of its oil — a 25% oil price surge mechanically worsens Japan's trade deficit by ~$40-60B annualized, directly pressuring yen' presents a correlation (oil price → trade deficit → yen pressure) as a mechanical causal chain. While the correlation is strong and economically rational, the characterization as 'mechanical' and 'arithmetic' overstates certainty. Multiple intervening variables affect this relationship (yen depreciation partially offsets import costs, demand elasticity, strategic reserves drawdown, etc.). The feedback loop description 'This is not a prediction; it's arithmetic' incorrectly categorizes a probabilistic economic relationship as deterministic.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-002",
+            "20260309-0315-SIG-009"
+          ],
+          "finding": "Hidden move: ETF issuers tracking internal flow data",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The inference that 'ETF issuers have real-time flow data that isn't publicly available' is logically coherent and plausible but lacks direct evidence. This is presented as 'classification: VALID' with 'confidence: high' despite being entirely unverified. The reasoning is: ETF issuers must have internal data → they have incentive not to publish it → therefore they are tracking it privately. This is a coherent narrative without real-world anchoring. The assumption count of 1 undercounts the inference chain.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001",
+            "20260309-0315-SIG-010"
+          ],
+          "finding": "Hidden move: BOJ preparing intervention tools",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding assigns 'confidence: medium' to a speculative hidden move (BOJ preparing intervention) based on: historical precedent from 2022, current USD/JPY level, and oil shock pressure. However, there is zero direct evidence of current BOJ preparation. The confidence level is disproportionate to the evidence, which is entirely circumstantial and historical. Per the rule, confidence must be proportional to evidence for the specific claim being made, not to the plausibility of the scenario.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-003",
+            "20260309-0315-SIG-009"
+          ],
+          "finding": "Hidden move: Ripple restructuring ODL into Ripple Prime",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference contains at least three unproven assumptions: (1) that ODL data cessation is related to Ripple Prime launch rather than other causes, (2) that the temporal alignment is causal rather than coincidental, (3) that corporate behavior patterns around product transitions apply to this specific case. The assumption count lists 2, but the reasoning chain requires more. Additionally, this is classified as 'FLAGGED' but presented with narrative certainty ('Ripple stopped publishing ODL data while simultaneously launching Ripple Prime') that exceeds the acknowledged speculation.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-003"
+          ],
+          "finding": "Feedback loop: RLUSD chain distribution → revealed preference",
+          "rule_violated": "LZ-MR-002",
+          "violation": "The feedback loop states 'If XRPL-native RLUSD continues to lag Ethereum RLUSD in issuance growth rate...' and sets a trigger at 'if XRPL-native RLUSD share of total RLUSD declines below 20% (currently ~22%)'. This conflates a single measurement (current 22% share) with a trend without establishing that a trend exists per LZ-RC-002. The current state is a snapshot; whether this represents a declining trend, stable split, or temporary deployment pattern is unknown. The trigger mechanism assumes continuation of an unverified trend.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001",
+            "20260309-0315-SIG-002"
+          ],
+          "finding": "Behavioral pattern: XRP price relative stability during BTC crash",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The finding identifies 'XRP price relative stability (+0.74%) during severe BTC crash' as an 'anomalous divergence' with 'significance: medium'. However, it correctly notes 'This divergence could be noise (per LZ-RC-002, single data point)' but then assigns medium significance anyway. A single data point that is acknowledged as potentially noise should not be assigned medium significance. The significance rating contradicts the acknowledged limitation.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-002"
+          ],
+          "finding": "Compound stress inference: Silver crash interpretation",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The statement 'Silver crash during a geopolitical crisis confirms this is margin-call-driven (safe havens selling = forced liquidation, not voluntary risk-off)' presents correlation as confirmation of causation. Silver declining during a crisis is correlated with margin calls, but other explanations exist (position rebalancing, industrial demand concerns, deflation fears in recession scenario). The word 'confirms' overstates what correlation can establish.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-003"
+          ],
+          "finding": "Player analysis: Ripple say-do gap on RLUSD chain distribution",
+          "rule_violated": "LZ-EH-005",
+          "violation": "The finding presents two competing explanations for RLUSD chain distribution: (1) institutional demand exists primarily on Ethereum, or (2) different chains serve different use cases. It then states 'Both explanations are consistent with the evidence; neither can be resolved without primary data. Per LZ-EH-005, this is a genuine ambiguity.' However, it then proceeds to select the first explanation as 'primary' in the strategic inference section with medium confidence, calling it 'more likely' without independent tie-breaking evidence. This is exactly what LZ-EH-005 prohibits: resolving an equal-weight contradiction arbitrarily.",
+          "severity": "SERIOUS"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001",
+            "20260309-0315-SIG-002",
+            "20260309-0315-SIG-010"
+          ],
+          "finding": "Compound stress inference: Orderly vs disorderly state assessment",
+          "rule_violated": "LZ-MR-003",
+          "violation": "The assessment explicitly acknowledges 'The staggered measurement issue (per LZ-MR-003) means we're seeing a temporally distorted snapshot where crypto has repriced but equities haven't' but then proceeds to make definitive characterizations: 'Transitioning from orderly to disorderly' and assigns 'current_chain_state: critical'. The characterization of system state is based on non-simultaneous measurements across asset classes, which the rule identifies as producing 'the illusion of a single state that never existed.' The finding acknowledges the violation but proceeds anyway.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001"
+          ],
+          "finding": "Scenario probabilities: Thesis confirmed at 15%",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The scenario assigns a specific probability (15%) to thesis confirmation based on multiple unmeasurable variables (ODL volume 'unmeasurable', ETF AUM 'unmeasurable', Permissioned DEX adoption at 0 with 'unmeasurable' institutional evaluation status). Assigning a precise probability to a scenario that depends primarily on unmeasurable inputs represents confidence disproportionate to available evidence. The probability figure implies quantitative precision that the evidence structure cannot support.",
+          "severity": "MODERATE"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 35,
+      "reviewer_notes": "The output demonstrates strong epistemological awareness with extensive rule citations and correction references, but contains several moderate violations where acknowledged limitations are not fully carried through to conclusions. Most serious issue: LZ-EH-005 violation on RLUSD chain distribution where equal-weight explanations are acknowledged but then one is selected as 'more likely' without independent evidence. Multiple instances of LZ-RC-005 violations mixing measurements with predictions. The analyst is clearly familiar with the rules and attempting compliance, but several findings push beyond what the evidence supports, particularly in hidden moves and scenario probabilities. The compound stress inference acknowledges LZ-MR-003 staggered measurement issues but proceeds to characterize system state anyway. Overall: competent analysis with systematic overconfidence in several key inferences."
+    },
+    "violations_count": 12,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-09T03:32:08.321Z",
+    "layer": 4,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001"
+          ],
+          "finding": "Oil shock / geopolitical crisis threat elevation from 6.3 to 8.5",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence is stated as 'high' for an adjustment that includes behavioral interpretation ('transitioning from orderly to disorderly') and forward-looking cascade assessment ('self-reinforcing feedback loop'). The data points supporting the severity are verifiable (Brent $114.11, liquidations, etc.), but the characterization of the cascade as 'self-reinforcing' and the interpretation of behavior patterns involves predictive elements and multi-link assumptions about how oil → yen → BOJ → JGB will cascade. High confidence is disproportionate given the predictive components in the reasoning.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-002"
+          ],
+          "finding": "Extreme Fear regime adjustment from 7 to 7.5 based on pending equity cascade",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The adjustment reasoning explicitly states 'The pending equity cascade (Monday open) means the worst of the fear regime may not yet be reflected' and 'F&G at 8 with equity markets not yet repriced = situation likely gets worse before it gets better.' This is treating a forward-looking prediction (Monday's equity response) as having evidentiary weight comparable to current measurements. The rule states predictions and measurements carry fundamentally different weight. The current F&G reading of 8 is a measurement; the Monday cascade is a prediction and should not contribute to the current threat score.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-009"
+          ],
+          "finding": "ETF issuers tracking internal flow data during extreme fear (hidden move)",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The inference is classified as VALID with the assumption 'issuers have real-time flow data' which is stated as 'trivially true.' However, the reasoning then acknowledges 'the USEFUL part — what those flows show — remains unknown.' The inference that issuers are tracking data is logically coherent and trivially true, but it provides zero real-world anchoring about the actual state of flows. This is a coherent narrative without verifiable real-world impact. The inference itself doesn't tell us anything actionable or falsifiable — it's definitionally true but informationally empty. While the reasoning acknowledges this limitation, classifying it as VALID and giving it 50% weight (reduced for partial data support) implies it has analytical value when it has none.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-003",
+            "20260309-0315-SIG-009"
+          ],
+          "finding": "Ripple restructuring ODL into Ripple Prime product framework",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Classified as FLAGGED with '2 assumptions' but the reasoning chain actually contains at least 3 unproven assumptions: (1) ODL cessation reflects a product transition (not data suppression or product failure), (2) Ripple Prime is the successor framework to ODL, and (3) the transition explains the data void rather than other explanations. Per LZ-EPH-003, an inference built on three or more unproven assumptions is speculative regardless of plausibility. The finding should be classified as speculative, not FLAGGED at 50% weight.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001",
+            "20260309-0315-SIG-010"
+          ],
+          "finding": "BOJ preparing intervention tools for USD/JPY defense at 160",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Classified as FLAGGED with '2 assumptions' but the reasoning contains at least 3 unproven assumptions: (1) BOJ will use the same intervention threshold (160) as in 2022 despite different economic conditions, (2) BOJ is 'preparing tools' right now (unverifiable), and (3) oil shock will persist long enough to drive USD/JPY to 160 in the first place. The historical precedent at 160 is verifiable, but applying it to the current situation requires multiple unproven links. Should be classified as speculative.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-013"
+          ],
+          "finding": "S&P 500 threat elevation from 6 to 6.5 based on sequential cascade logic",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The adjustment reasoning states 'the equity response is the next state-change event and will produce a second wave of cross-asset deleveraging' and acknowledges 'Per LZ-RC-005, this is a prediction, but it is grounded in the verified data pattern.' The reasoning correctly identifies the prediction but then justifies giving it weight anyway. The rule does not have an exception for 'well-grounded predictions' — predictions and measurements are categorically different. The current threat score should reflect current measurements only; the prediction of Monday's response should be noted as a monitoring trigger but not incorporated into the score.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-003"
+          ],
+          "finding": "RLUSD chain distribution inference classified as VALID with 1 assumption",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The reasoning states 'The assumption that Ripple's allocation reflects demand-driven decisions rather than temporary technical constraints is reasonable — RLUSD has been live for months, not days.' This is actually at least 2 assumptions: (1) the allocation reflects completed strategic decisions (not ongoing/incomplete rollout), and (2) the allocation reflects demand-driven decisions rather than technical, regulatory, or partnership constraints. The finding is likely still valid, but the assumption count is understated.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001",
+            "20260309-0315-SIG-002",
+            "20260309-0315-SIG-013",
+            "20260309-0315-SIG-015"
+          ],
+          "finding": "Compound stress event is genuine and actively cascading, not a fear-premium flash",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Classified as VALID with '1 assumption: oil price reflects persistent risk, not flash spike.' However, the inference that this is 'actively cascading' (present continuous) versus 'has potential to cascade' (predictive) involves additional unproven assumptions about duration, contagion mechanics, and the pending equity response. The data verifies that multiple assets repriced simultaneously (past tense), but the characterization as 'actively cascading' (ongoing process) includes forward-looking elements. The assumption count should be at least 2: (1) duration assumption and (2) cascading-in-progress assumption.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "20260309-0315-SIG-001"
+          ],
+          "finding": "Japan's 90% oil import dependency makes yen pressure 'arithmetic, not speculative'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The reasoning establishes a causal chain: oil price increase → Japan trade deficit worsens → yen weakens. While Japan's oil import dependency is verifiable (structural fact), the characterization of the yen pressure as 'arithmetic' implies deterministic causation. The yen's response to oil shocks involves multiple variables including capital flows, BOJ policy response, safe-haven dynamics, and market positioning — it is not purely arithmetic. This overstates the certainty of the causal relationship. The finding is likely directionally correct but the confidence in the mechanical causation is overstated.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "compound_stress_final"
+          ],
+          "finding": "Compound stress velocity note stating 'the next level transition (CRITICAL → EMERGENCY) could also occur faster than the matrix's implied gradual progression'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "This is a forward-looking prediction about transition velocity being treated as a quasi-finding. The statement 'could also occur faster' is speculative and should be clearly marked as such rather than included in the velocity assessment as if it has evidentiary weight. The historical velocity (MONITORING to CRITICAL in one cycle) is a measurement; the future velocity is a prediction.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "final_bear_pressure"
+          ],
+          "finding": "Final bear pressure score of 68 includes +5 for 'sequential cascade (crypto crashed → equities haven't yet → second wave incoming) means the worst is likely ahead'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The reasoning adds 5 points to the bear pressure score based on a prediction about what will happen Monday when equity markets open. This is explicitly treating a forward-looking prediction as having weight comparable to current measurements. The rule is categorical: predictions are inherently uncertain, measurements are verifiable, and they carry fundamentally different evidentiary weight. The +5 should not be included in the current score; Monday's response should be a monitoring trigger that may change the score at the next assessment.",
+          "severity": "SERIOUS"
+        },
+        {
+          "signal_ids": [
+            "tactical_recommendation"
+          ],
+          "finding": "REDUCE_EXPOSURE recommendation states 'a pending equity market response that will likely produce a second deleveraging wave'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The tactical recommendation is partly based on a prediction ('will likely produce') about Monday's equity response. While the recommendation must be forward-looking by nature, the reasoning should clearly distinguish between current verified conditions justifying the recommendation versus predictions about future conditions. The recommendation states the operator's action window is 'days, not weeks' based on an event that has not yet occurred. A more epistemologically sound framing would be: current conditions justify REDUCE_EXPOSURE, and Monday's equity response will be the key validation or invalidation of this decision.",
+          "severity": "MODERATE"
+        },
+        {
+          "signal_ids": [
+            "kill_switch_review - RLUSD Circulation"
+          ],
+          "finding": "RLUSD kill switch upgraded to WARNING with reasoning 'RLUSD needs ~$11.5-15.7M/day depending on which baseline is used, and the geopolitical crisis likely slows institutional stablecoin growth'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The upgrade reasoning includes a prediction ('geopolitical crisis likely slows institutional stablecoin growth') as part of the justification for the WARNING status. The current status should be based on current measurements and the structural ambiguity problem (which baseline to use). The prediction about growth slowing should be noted as a risk factor but not incorporated into the status determination itself.",
+          "severity": "MINOR"
+        },
+        {
+          "signal_ids": [
+            "kill_switch_review - XRP ETF AUM"
+          ],
+          "finding": "ETF kill switch upgraded to WARNING because 'During F&G = 8 with compound stress CRITICAL, the inability to see whether institutional vehicles are experiencing inflows or outflows is a decision-critical gap'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The reasoning for the WARNING upgrade treats the absence of flow data as having increased significance during extreme fear. However, LZ-RC-003 states that absence of evidence is informationally neutral — it does not prove presence or absence of flows. The gap was always decision-critical; the extreme fear environment makes the analyst want the data more urgently, but it does not change the evidentiary weight of the absence. The upgrade conflates the analyst's need for information with the information content of the absence.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 33,
+      "reviewer_notes": "Most violations involve treating predictions as measurements (LZ-RC-005) or understating assumption counts (LZ-EPH-003). The SERIOUS violation is the +5 adjustment to final bear pressure based on predicted Monday equity cascade — this directly incorporates a forward-looking prediction into a current threat score. The output is otherwise methodologically sound with strong data verification and honest acknowledgment of data gaps. The RLUSD chain distribution finding and ODL SUSPICIOUS_ABSENCE classification are examples of correct application of LZ-EH-003 (actions over statements). The compound stress assessment correctly identifies pre-loaded conditions but overstates confidence in cascade mechanics. Recommendation: final bear pressure should be 63 (removing the +5 for predicted equity cascade), with Monday's response tracked as a validation event that may justify increasing the score at the next assessment."
+    },
+    "violations_count": 14,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
   }
 ]
