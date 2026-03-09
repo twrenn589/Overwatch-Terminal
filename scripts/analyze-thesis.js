@@ -33,6 +33,7 @@ const Anthropic = require('@anthropic-ai/sdk');
 const promoteRejections = require('./promote-rejections');
 const { runTier1Checks } = require('./tier1-validators');
 const { runLayerZeroGate } = require('./layer-zero-gate');
+const { assembleTrace } = require('./assemble-trace');
 
 const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
 const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
@@ -1901,6 +1902,13 @@ async function main() {
       log('io', '360-report.json updated');
     } catch (e) {
       err('io', `Failed to write 360-report.json: ${e.message}`);
+    }
+
+    // Cognitive Trace — assemble after 360-report.json is written
+    try {
+      assembleTrace();
+    } catch (e) {
+      warn('trace', `Cognitive Trace assembly failed (non-fatal): ${e.message}`);
     }
 
     try {
