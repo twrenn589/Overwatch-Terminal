@@ -1106,6 +1106,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "corrections_referenced": [
     {
       "correction_id": "CL-XXX",
+      "signal_id": "which signal triggered this correction",
       "trigger_matched": "what specific trigger condition matched this analysis",
       "influence_on_assessment": "how the stored lesson changed this assessment"
     }
@@ -1139,6 +1140,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "strategic_inferences": [
     {
+      "source_signals": ["signal_id(s) from Layer 2 input that produced this inference"],
       "finding_from_layer2": "signal name",
       "null_hypothesis": "simplest non-strategic explanation",
       "null_holds": true,
@@ -1157,6 +1159,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "hidden_moves": [
     {
+      "source_signals": ["signal_id(s) from Layer 2 input that support this hidden move"],
       "player": "name",
       "likely_action": "what they're probably doing privately",
       "incentive_basis": "why this would be rational",
