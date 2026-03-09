@@ -421,10 +421,6 @@ function assembleTrace() {
   return traceOutput;
 }
 
-// ─── Export & Run ─────────────────────────────────────────────────────────────
+// ─── Run ──────────────────────────────────────────────────────────────────────
 
-module.exports = { assembleTrace };
-
-if (require.main === module) {
-  assembleTrace();
-}
+assembleTrace();

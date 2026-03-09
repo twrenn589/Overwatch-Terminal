@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>◉ COGNITIVE TRACE — The Integrity Protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #060a11;
+  --bg-secondary: #0c1220;
+  --bg-card: #101826;
+  --border: #1a2740;
+  --border-active: #2a3f60;
+  --text-primary: #dfe6f0;
+  --text-secondary: #8a9bba;
+  --text-muted: #44556e;
+  --accent-cyan: #00c8c8;
+  --accent-cyan-dim: rgba(0,200,200,0.08);
+  --accent-green: #00e599;
+  --accent-green-dim: rgba(0,229,153,0.08);
+  --accent-red: #ff4757;
+  --accent-red-dim: rgba(255,71,87,0.08);
+  --accent-amber: #ffb347;
+  --accent-amber-dim: rgba(255,179,71,0.08);
+  --accent-blue: #4d9fff;
+  --accent-blue-dim: rgba(77,159,255,0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family: var(--sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ─── */
+.header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(0,200,200,0.03) 0%, transparent 100%);
+  flex-shrink: 0;
+}
+.header-row { display:flex; justify-content:space-between; align-items:center; }
+.brand-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.brand-title {
+  font-size: 20px;
+  font-weight: 300;
+  color: #fff;
+  margin-top: 2px;
+}
+.view-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.03);
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.view-toggle button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 6px 16px;
+  font-size: 11px;
+  font-family: var(--sans);
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 400;
+  transition: all 0.15s;
+}
+.view-toggle button.active {
+  background: rgba(255,255,255,0.08);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ─── Run info bar ─── */
+.run-info {
+  padding: 8px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.run-info .val { color: var(--text-secondary); }
+.run-selector {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.run-selector:focus { outline: 1px solid var(--accent-cyan); }
+
+/* ─── Main layout ─── */
+.main { flex:1; overflow:hidden; display:flex; }
+.view-panel { display:none; flex:1; overflow:hidden; }
+.view-panel.active { display:flex; }
+
+/* ─── Outcome filter bar ─── */
+.outcome-bar {
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.outcome-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.outcome-btn.active { border-color: currentColor; }
+.outcome-count {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 300;
+}
+.outcome-label {
+  font-size: 9px;
+  font-family: var(--mono);
+  letter-spacing: 0.5px;
+}
+.sort-controls {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+.sort-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-muted);
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-family: var(--mono);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.sort-btn.active {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+}
+
+/* ─── Signal list ─── */
+.signal-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 20px;
+}
+.signal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.signal-card {
+  position: relative;
+  cursor: pointer;
+  padding: 13px 15px;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid rgba(255,255,255,0.05);
+  flex: 1 1 200px;
+  max-width: 280px;
+  min-width: 200px;
+  transition: all 0.15s;
+}
+.signal-card:hover { border-color: rgba(255,255,255,0.1); }
+.signal-card.selected { border-color: rgba(255,255,255,0.2); }
+.signal-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  align-items: center;
+}
+.signal-id {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+.outcome-badge {
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: var(--mono);
+}
+.signal-threat {
+  font-size: 12px;
+  color: #ccc;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+.signal-meta {
+  display: flex;
+  gap: 5px;
+}
+.signal-meta-tag {
+  font-size: 9px;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.03);
+  padding: 1px 5px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.event-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--mono);
+  color: #0a0a0f;
+}
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px;
+  font-size: 12px;
+}
+
+/* ─── Detail panel ─── */
+.detail-panel {
+  flex: 0 0 45%;
+  border-left: 1px solid rgba(255,255,255,0.05);
+  overflow-y: auto;
+  padding: 16px 20px;
+  background: rgba(0,0,0,0.15);
+  display: none;
+}
+.detail-panel.open { display: block; }
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.detail-close {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-muted);
+  padding: 2px 7px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+/* Layer flow */
+.layer-flow {
+  display: flex;
+  gap: 3px;
+  margin: 14px 0;
+}
+.layer-box {
+  flex: 1;
+  text-align: center;
+}
+.layer-name-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 8px 3px;
+  margin-bottom: 2px;
+}
+.layer-name-box.empty {
+  background: rgba(255,255,255,0.01);
+  border-color: rgba(255,255,255,0.03);
+}
+.layer-name {
+  font-size: 8px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-family: var(--mono);
+}
+.layer-gate {
+  font-size: 8px;
+  font-family: var(--mono);
+  font-weight: 600;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+/* Events */
+.event-count-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.event-item {
+  background: rgba(255,255,255,0.02);
+  border-radius: 4px;
+  padding: 9px 13px;
+  margin-bottom: 5px;
+}
+.event-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.event-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-family: var(--mono);
+}
+.event-layer {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+.event-body {
+  font-size: 11px;
+  color: #bbb;
+  line-height: 1.4;
+}
+.event-rule {
+  font-family: var(--mono);
+}
+.event-severity {
+  color: var(--text-muted);
+}
+.event-detail {
+  color: #888;
+}
+.clean-passage {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 14px;
+  text-align: center;
+  background: rgba(0,255,136,0.02);
+  border-radius: 4px;
+}
+
+/* ─── Detail sections ─── */
+.detail-section {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.detail-section-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.detail-field {
+  margin-bottom: 8px;
+}
+.detail-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.detail-value {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.detail-value.highlight {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ─── Patterns view ─── */
+.patterns-container {
+  flex: 1;
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+.patterns-header {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.patterns-count {
+  font-size: 10px;
+  color: #444;
+  margin-bottom: 20px;
+}
+.pattern-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  max-width: 700px;
+}
+.pattern-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.pattern-type {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-family: var(--mono);
+}
+.pattern-severity {
+  font-size: 9px;
+  font-weight: 600;
+  font-family: var(--mono);
+}
+.pattern-title {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.pattern-detail {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.pattern-action {
+  font-size: 11px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+.pattern-examples {
+  margin-top: 10px;
+}
+.pattern-examples-label {
+  font-size: 9px;
+  color: #444;
+  font-family: var(--mono);
+  margin-bottom: 4px;
+}
+.pattern-example {
+  font-size: 10px;
+  color: #666;
+  padding: 2px 0;
+}
+.pattern-example-date {
+  color: #444;
+  font-family: var(--mono);
+}
+
+/* ─── Loading / Error ─── */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-row">
+    <div>
+      <div class="brand-label">THE INTEGRITY PROTOCOL</div>
+      <div class="brand-title">Cognitive Trace</div>
+    </div>
+    <div class="view-toggle" id="viewToggle">
+      <button class="active" data-view="signals">Signals</button>
+      <button data-view="patterns">Patterns</button>
+    </div>
+  </div>
+</div>
+
+<!-- Run info -->
+<div class="run-info" id="runInfo">
+  <span>RUN <span class="val" id="runTimestamp">—</span></span>
+  <span>SIGNALS <span class="val" id="signalCount">—</span></span>
+  <span id="traceSelectWrap" style="display:none;">
+    TRACE <select class="run-selector" id="traceSelect"></select>
+  </span>
+</div>
+
+<!-- ═══ SIGNALS VIEW ═══ -->
+<div class="view-panel active" id="viewSignals" style="flex-direction:column;">
+
+  <!-- Outcome filters -->
+  <div class="outcome-bar" id="outcomeBar"></div>
+
+  <!-- Content: list + detail -->
+  <div style="flex:1;overflow:hidden;display:flex;">
+    <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+      <div class="signal-list" id="signalList">
+        <div class="loading-state">Loading trace data…</div>
+      </div>
+    </div>
+    <div class="detail-panel" id="detailPanel"></div>
+  </div>
+</div>
+
+<!-- ═══ PATTERNS VIEW ═══ -->
+<div class="view-panel" id="viewPatterns">
+  <div class="patterns-container" id="patternsContainer">
+    <div class="loading-state">Patterns require multiple trace files. Let traces accumulate for a few days.</div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+// COGNITIVE TRACE VIEWER — Pure JS, no dependencies
+// The Integrity Protocol (Patent Pending) — Timothy Joseph Wrenn
+// ═══════════════════════════════════════════════════════════════════════════════
+
+'use strict';
+
+// ─── Outcome config ───
+const OC = {
+  SURVIVED: { c:'#00ff88', bg:'rgba(0,255,136,0.06)', b:'rgba(0,255,136,0.15)', i:'✓' },
+  FLAGGED:  { c:'#ffaa00', bg:'rgba(255,170,0,0.06)',  b:'rgba(255,170,0,0.15)',  i:'⚑' },
+  STRIPPED: { c:'#ff6b35', bg:'rgba(255,107,53,0.06)', b:'rgba(255,107,53,0.15)', i:'◇' },
+  REJECTED: { c:'#ff3355', bg:'rgba(255,51,85,0.06)',  b:'rgba(255,51,85,0.15)',  i:'✕' },
+  PRUNED:   { c:'#555',    bg:'rgba(85,85,85,0.06)',   b:'rgba(85,85,85,0.15)',   i:'—' }
+};
+
+// ─── Pattern type config ───
+const PS = {
+  recurring_violation:  { c:'#ffaa00', i:'⚡', l:'RECURRING VIOLATION' },
+  recurring_correction: { c:'#00aaff', i:'↻',  l:'RECURRING CORRECTION' },
+  category_bias:        { c:'#ff6b35', i:'◉',  l:'CATEGORY BIAS' },
+  recurring_merge:      { c:'#aa77ff', i:'⟁',  l:'RECURRING MERGE' },
+  trend:                { c:'#00ff88', i:'→',  l:'TREND' }
+};
+
+const SEV_COLORS = { high:'#ff3355', medium:'#ffaa00', positive:'#00ff88', low:'#00aaff' };
+
+// ─── State ───
+let allTraces = [];      // all loaded trace files
+let currentTrace = null; // the currently displayed trace
+let selectedSignal = null;
+let outcomeFilter = null;
+let sortBy = 'events';
+let currentView = 'signals';
+
+// ─── Helpers ───
+function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+function sigShort(id) { return id ? id.split('-').pop() : '?'; }
+
+function getEventCount(sig) {
+  let n = 0;
+  for (const k of ['perception_gate','contextualization_gate','inference_gate','judgment_gate']) {
+    n += (sig[k]?.violations || []).length;
+  }
+  n += (sig.corrections_applied || []).length;
+  if (sig.judgment?.rejection) n++;
+  if (sig.judgment?.burden_of_proof?.final_weight && sig.judgment.burden_of_proof.final_weight !== 'full') n++;
+  if (sig.inference?.strategic_inferences) {
+    n += sig.inference.strategic_inferences.filter(i => (i.connected_signals || []).length > 1).length;
+  }
+  return n;
+}
+
+function getSignalEvents(sig) {
+  const ev = [];
+  const gates = [
+    ['perception_gate','L1'],['contextualization_gate','L2'],
+    ['inference_gate','L3'],['judgment_gate','L4']
+  ];
+  for (const [key, label] of gates) {
+    for (const v of (sig[key]?.violations || [])) {
+      ev.push({ type:'gate_violation', layer:label, rule:v.rule_violated, severity:v.severity, detail:v.violation || v.finding });
+    }
+  }
+  for (const c of (sig.corrections_applied || [])) {
+    ev.push({ type:'correction', layer:'L'+c.layer, correction_id:c.correction_id, trigger:c.trigger_matched, influence:c.influence });
+  }
+  if (sig.judgment?.rejection) {
+    const r = sig.judgment.rejection;
+    ev.push({ type:'rejection', layer:'L4', reason:r.rejection_reason, root_cause:r.root_cause });
+  }
+  if (sig.judgment?.burden_of_proof?.final_weight && sig.judgment.burden_of_proof.final_weight !== 'full') {
+    const b = sig.judgment.burden_of_proof;
+    ev.push({ type:'weight_reduction', layer:'L4', inference:b.inference, weight:b.final_weight, reasoning:b.reasoning });
+  }
+  if (sig.inference?.strategic_inferences) {
+    for (const inf of sig.inference.strategic_inferences) {
+      if ((inf.connected_signals || []).length > 1) {
+        ev.push({ type:'signal_merge', layer:'L3', finding:inf.finding, signals:inf.connected_signals, classification:inf.classification, assumptions:inf.assumption_count });
+      }
+    }
+  }
+  return ev;
+}
+
+function eventBadgeColor(n) {
+  return n <= 1 ? '#ffaa00' : n <= 3 ? '#ff6b35' : '#ff3355';
+}
+
+const EVENT_COLORS = {
+  gate_violation:'#ffaa00', correction:'#00aaff', rejection:'#ff3355',
+  weight_reduction:'#ff6b35', signal_merge:'#aa77ff'
+};
+const EVENT_LABELS = {
+  gate_violation:'GATE VIOLATION', correction:'CORRECTION', rejection:'REJECTED',
+  weight_reduction:'WEIGHT REDUCED', signal_merge:'MERGE'
+};
+
+// ─── Data loading ───
+async function loadTraceFiles() {
+  // Try loading the trace index first, then fall back to discovery
+  // GitHub Pages: fetch the list of trace files from data/ directory
+  // Strategy: try fetching data/trace-index.json (a simple JSON array of filenames)
+  // If that doesn't exist, try to load any known trace files
+
+  const traceFiles = [];
+
+  // Approach: fetch trace-index.json which the pipeline can generate
+  try {
+    const resp = await fetch('data/trace-index.json');
+    if (resp.ok) {
+      const index = await resp.json();
+      for (const filename of index) {
+        try {
+          const r = await fetch('data/' + filename);
+          if (r.ok) traceFiles.push(await r.json());
+        } catch(_) {}
+      }
+    }
+  } catch(_) {}
+
+  // Fallback: if no index, try loading the most recent trace from 360-report
+  if (traceFiles.length === 0) {
+    // Try fetching 360-report.json to get the run timestamp, then construct trace filename
+    try {
+      const r360 = await fetch('data/360-report.json');
+      if (r360.ok) {
+        const report = await r360.json();
+        if (report._generated_at) {
+          const ts = report._generated_at.replace(/[:.]/g, '-');
+          const traceName = 'cognitive-trace-' + ts + '.json';
+          try {
+            const rt = await fetch('data/' + traceName);
+            if (rt.ok) traceFiles.push(await rt.json());
+          } catch(_) {}
+        }
+      }
+    } catch(_) {}
+  }
+
+  // Last resort: if still nothing, try a direct known file (for local dev)
+  if (traceFiles.length === 0) {
+    const knownFiles = [
+      'cognitive-trace-2026-03-09T04-40-39-055Z.json'
+    ];
+    for (const f of knownFiles) {
+      try {
+        const r = await fetch('data/' + f);
+        if (r.ok) traceFiles.push(await r.json());
+      } catch(_) {}
+    }
+  }
+
+  return traceFiles.sort((a, b) => (a._run_timestamp || '').localeCompare(b._run_timestamp || ''));
+}
+
+// ─── Render: Run info ───
+function renderRunInfo() {
+  if (!currentTrace) return;
+  const ts = currentTrace._run_timestamp || '—';
+  document.getElementById('runTimestamp').textContent = ts.replace('T', ' ').substring(0, 19) + ' UTC';
+  document.getElementById('signalCount').textContent = currentTrace._signal_count || 0;
+
+  // Trace selector (if multiple traces)
+  const wrap = document.getElementById('traceSelectWrap');
+  if (allTraces.length > 1) {
+    wrap.style.display = '';
+    const sel = document.getElementById('traceSelect');
+    sel.innerHTML = '';
+    for (let i = allTraces.length - 1; i >= 0; i--) {
+      const opt = document.createElement('option');
+      opt.value = i;
+      const t = allTraces[i]._run_timestamp || '';
+      opt.textContent = t.replace('T', ' ').substring(0, 16);
+      if (allTraces[i] === currentTrace) opt.selected = true;
+      sel.appendChild(opt);
+    }
+  } else {
+    wrap.style.display = 'none';
+  }
+}
+
+// ─── Render: Outcome bar ───
+function renderOutcomeBar() {
+  if (!currentTrace) return;
+  const bar = document.getElementById('outcomeBar');
+  const outcomes = currentTrace._outcomes || {};
+  let html = '';
+
+  for (const [outcome, count] of Object.entries(outcomes)) {
+    if (count === 0) continue;
+    const o = OC[outcome] || OC.SURVIVED;
+    const active = outcomeFilter === outcome;
+    html += `<button class="outcome-btn${active ? ' active' : ''}" data-outcome="${outcome}"
+      style="color:${o.c};${active ? 'background:'+o.bg+';border-color:'+o.c+'66;' : ''}">
+      <span class="outcome-count">${count}</span>
+      <span class="outcome-label">${outcome}</span>
+    </button>`;
+  }
+
+  html += `<div class="sort-controls">
+    <button class="sort-btn${sortBy==='events'?' active':''}" data-sort="events">Events</button>
+    <button class="sort-btn${sortBy==='outcome'?' active':''}" data-sort="outcome">Outcome</button>
+  </div>`;
+
+  bar.innerHTML = html;
+}
+
+// ─── Render: Signal list ───
+function renderSignalList() {
+  if (!currentTrace) return;
+  const container = document.getElementById('signalList');
+  let signals = [...currentTrace.signals];
+
+  if (outcomeFilter) {
+    signals = signals.filter(s => s.outcome === outcomeFilter);
+  }
+
+  if (sortBy === 'events') {
+    signals.sort((a, b) => getEventCount(b) - getEventCount(a));
+  } else {
+    const order = { REJECTED:0, STRIPPED:1, FLAGGED:2, SURVIVED:3, PRUNED:4 };
+    signals.sort((a, b) => (order[a.outcome] ?? 5) - (order[b.outcome] ?? 5));
+  }
+
+  if (signals.length === 0) {
+    container.innerHTML = '<div class="empty-state">No signals match</div>';
+    return;
+  }
+
+  let html = '<div class="signal-grid">';
+  for (const sig of signals) {
+    const id = sig.signal_ids[0];
+    const o = OC[sig.outcome] || OC.SURVIVED;
+    const n = getEventCount(sig);
+    const sel = selectedSignal === id;
+    const dir = sig.perception?.direction;
+    const dirColor = dir === 'ACCELERATION' ? 'rgba(0,255,136,0.44)' : dir === 'DETERIORATION' ? 'rgba(255,107,53,0.44)' : 'rgba(255,255,255,0.2)';
+
+    html += `<div class="signal-card${sel ? ' selected' : ''}" data-sig="${esc(id)}"
+      style="${sel ? 'background:'+o.bg+';border-color:rgba(255,255,255,0.2);' : ''}">
+      ${n > 0 ? `<div class="event-badge" style="background:${eventBadgeColor(n)};">${n}</div>` : ''}
+      <div class="signal-card-header">
+        <span class="signal-id" style="color:${o.c};">${sigShort(id)}</span>
+        <span class="outcome-badge" style="color:${o.c};background:${o.bg};border:1px solid ${o.b};">${o.i} ${sig.outcome}</span>
+      </div>
+      <div class="signal-threat">${esc(sig.perception?.threat || '—')}</div>
+      <div class="signal-meta">
+        <span class="signal-meta-tag">${esc(sig.perception?.category || '')}</span>
+        <span style="font-size:9px;color:${dirColor};font-family:var(--mono);">${esc(dir || '')}</span>
+      </div>
+    </div>`;
+  }
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ─── Render: Detail panel ───
+function renderDetailPanel() {
+  const panel = document.getElementById('detailPanel');
+  if (!selectedSignal || !currentTrace) {
+    panel.classList.remove('open');
+    // Restore list width
+    return;
+  }
+
+  const sig = currentTrace.signals.find(s => s.signal_ids[0] === selectedSignal);
+  if (!sig) { panel.classList.remove('open'); return; }
+
+  panel.classList.add('open');
+  const o = OC[sig.outcome] || OC.SURVIVED;
+  const events = getSignalEvents(sig);
+
+  // Layer flow
+  const layers = [
+    ['SWEEP', sig.perception, sig.perception_gate],
+    ['CONTEXT', sig.contextualization, sig.contextualization_gate],
+    ['INFER', sig.inference, sig.inference_gate],
+    ['RECONCILE', sig.judgment?.final_threat_matrix || sig.judgment?.rejection || sig.judgment?.burden_of_proof, sig.judgment_gate]
+  ];
+
+  let layerHtml = '<div class="layer-flow">';
+  for (const [name, data, gate] of layers) {
+    const v = gate?.violations?.length || 0;
+    const gc = v > 0 ? '#ffaa00' : '#00ff88';
+    layerHtml += `<div class="layer-box">
+      <div class="layer-name-box${data ? '' : ' empty'}">
+        <div class="layer-name">${name}</div>
+      </div>
+      <div class="layer-gate" style="color:${gc};background:${gc}08;">${v > 0 ? v+'⚑' : '✓'}</div>
+    </div>`;
+  }
+  layerHtml += '</div>';
+
+  // Events
+  let eventsHtml = `<div class="event-count-label">${events.length} EVENT${events.length !== 1 ? 'S' : ''}</div>`;
+
+  if (events.length === 0) {
+    eventsHtml += '<div class="clean-passage">Clean passage — no events</div>';
+  } else {
+    for (const ev of events) {
+      const ec = EVENT_COLORS[ev.type] || '#888';
+      const el = EVENT_LABELS[ev.type] || ev.type;
+      let body = '';
+
+      if (ev.type === 'gate_violation') {
+        body = `<span class="event-rule" style="color:${ec};">${esc(ev.rule)}</span> <span class="event-severity">(${esc(ev.severity)})</span><br><span class="event-detail">${esc(ev.detail)}</span>`;
+      } else if (ev.type === 'correction') {
+        body = `<span style="color:${ec};font-family:var(--mono);">${esc(ev.correction_id)}</span><br><span class="event-detail">${esc(ev.influence)}</span>`;
+      } else if (ev.type === 'rejection') {
+        body = `<span style="color:${ec};">${esc(ev.root_cause)}</span><br><span class="event-detail">${esc(ev.reason)}</span>`;
+      } else if (ev.type === 'weight_reduction') {
+        body = `${esc(ev.inference)} → <span style="color:${ec};">${esc(ev.weight)}</span><br><span class="event-detail">${esc(ev.reasoning)}</span>`;
+      } else if (ev.type === 'signal_merge') {
+        body = `${esc(ev.finding)}<br><span class="event-detail">${(ev.signals||[]).map(sigShort).join(' + ')} → ${esc(ev.classification)}</span>`;
+      }
+
+      eventsHtml += `<div class="event-item" style="border-left:3px solid ${ec};">
+        <div class="event-head">
+          <span class="event-type" style="color:${ec};">${el}</span>
+          <span class="event-layer">${ev.layer}</span>
+        </div>
+        <div class="event-body">${body}</div>
+      </div>`;
+    }
+  }
+
+  // Detail sections — perception, contextualization, inference, judgment
+  let sectionsHtml = '';
+
+  // Perception
+  if (sig.perception) {
+    const p = sig.perception;
+    sectionsHtml += `<div class="detail-section">
+      <div class="detail-section-title">LAYER 1 — PERCEPTION</div>
+      <div class="detail-field"><div class="detail-label">DESCRIPTION</div><div class="detail-value">${esc(p.description)}</div></div>
+      <div class="detail-field"><div class="detail-label">EVIDENCE</div><div class="detail-value">${esc(p.evidence)}</div></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div class="detail-field"><div class="detail-label">SEVERITY</div><div class="detail-value highlight">${esc(p.severity)}</div></div>
+        <div class="detail-field"><div class="detail-label">PROXIMITY</div><div class="detail-value">${esc(p.proximity)}</div></div>
+        <div class="detail-field"><div class="detail-label">CONFIDENCE</div><div class="detail-value">${esc(p.confidence)}</div></div>
+        ${p.blind_spot ? '<div class="detail-field"><div class="detail-label">BLIND SPOT</div><div class="detail-value" style="color:#a855f7;">YES</div></div>' : ''}
+      </div>
+    </div>`;
+  }
+
+  // Contextualization
+  if (sig.contextualization) {
+    const ctx = sig.contextualization;
+    sectionsHtml += '<div class="detail-section"><div class="detail-section-title">LAYER 2 — CONTEXTUALIZATION</div>';
+
+    if (ctx.knowledge_audit) {
+      const ka = ctx.knowledge_audit;
+      sectionsHtml += `<div class="detail-field"><div class="detail-label">KNOWLEDGE CHECK</div><div class="detail-value">${esc(ka.knowledge_check)}</div></div>`;
+      if (ka.gap_identified) {
+        sectionsHtml += `<div class="detail-field"><div class="detail-label">GAP IDENTIFIED</div><div class="detail-value" style="color:var(--accent-amber);">${esc(ka.gap_identified)}</div></div>`;
+        sectionsHtml += `<div class="detail-field"><div class="detail-label">GAP TYPE</div><div class="detail-value">${esc(ka.gap_type)}</div></div>`;
+      }
+      if (ka.pre_audit_assessment && ka.post_audit_assessment) {
+        sectionsHtml += `<div class="detail-field"><div class="detail-label">AUDIT IMPACT</div><div class="detail-value">${esc(ka.pre_audit_assessment)} → ${esc(ka.post_audit_assessment)}</div></div>`;
+      }
+      if (ka.audit_impact) {
+        sectionsHtml += `<div class="detail-field"><div class="detail-label">REASONING</div><div class="detail-value">${esc(ka.audit_impact)}</div></div>`;
+      }
+    }
+
+    if (ctx.scored) {
+      const sc = ctx.scored;
+      sectionsHtml += `<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+        <div class="detail-field"><div class="detail-label">SEVERITY</div><div class="detail-value highlight">${sc.severity}</div></div>
+        <div class="detail-field"><div class="detail-label">WEIGHTED</div><div class="detail-value">${sc.weighted_severity}</div></div>
+        <div class="detail-field"><div class="detail-label">CONFIDENCE</div><div class="detail-value">${esc(sc.confidence)}</div></div>
+        <div class="detail-field"><div class="detail-label">RELEVANCE</div><div class="detail-value">${esc(sc.thesis_relevance)}</div></div>
+      </div>`;
+    }
+
+    if (ctx.unscored) {
+      sectionsHtml += `<div class="detail-field" style="margin-top:8px;"><div class="detail-label">UNSCORED</div><div class="detail-value" style="color:var(--accent-amber);">Reason: ${esc(ctx.unscored.reason)}</div></div>`;
+    }
+
+    sectionsHtml += '</div>';
+  }
+
+  // Inference
+  if (sig.inference) {
+    sectionsHtml += '<div class="detail-section"><div class="detail-section-title">LAYER 3 — INFERENCE</div>';
+
+    for (const inf of (sig.inference.strategic_inferences || [])) {
+      const classBadge = inf.classification === 'VALID' ? 'color:#00ff88;' :
+        inf.classification === 'SPECULATIVE' ? 'color:#ffaa00;' :
+        inf.classification === 'INSUFFICIENT_EVIDENCE' ? 'color:#ff6b35;' :
+        inf.classification === 'NULL_HYPOTHESIS_HOLDS' ? 'color:#ff3355;' : '';
+
+      sectionsHtml += `<div style="background:rgba(255,255,255,0.02);border-radius:4px;padding:10px;margin-bottom:8px;">
+        <div class="detail-field"><div class="detail-label">FINDING</div><div class="detail-value">${esc(inf.finding)}</div></div>
+        <div class="detail-field"><div class="detail-label">NULL HYPOTHESIS</div><div class="detail-value">${esc(inf.null_hypothesis)}</div></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div class="detail-field"><div class="detail-label">CLASSIFICATION</div><div class="detail-value" style="${classBadge}font-family:var(--mono);font-weight:600;">${esc(inf.classification)}</div></div>
+          <div class="detail-field"><div class="detail-label">ASSUMPTIONS</div><div class="detail-value">${inf.assumption_count}</div></div>
+          <div class="detail-field"><div class="detail-label">CONFIDENCE</div><div class="detail-value">${esc(inf.confidence)}</div></div>
+          <div class="detail-field"><div class="detail-label">TIMELINE</div><div class="detail-value">${esc(inf.expected_timeline)}</div></div>
+        </div>
+        ${(inf.connected_signals||[]).length > 1 ? `<div class="detail-field"><div class="detail-label">CONNECTED SIGNALS</div><div class="detail-value" style="font-family:var(--mono);font-size:10px;">${(inf.connected_signals||[]).map(sigShort).join(' + ')}</div></div>` : ''}
+        ${inf.materialization_signal ? `<div class="detail-field"><div class="detail-label">MATERIALIZATION SIGNAL</div><div class="detail-value">${esc(inf.materialization_signal)}</div></div>` : ''}
+      </div>`;
+    }
+
+    for (const hm of (sig.inference.hidden_moves || [])) {
+      sectionsHtml += `<div style="background:rgba(170,119,255,0.04);border-radius:4px;padding:10px;margin-bottom:8px;border-left:2px solid #aa77ff;">
+        <div class="detail-field"><div class="detail-label">HIDDEN MOVE — ${esc(hm.player)}</div><div class="detail-value">${esc(hm.likely_action)}</div></div>
+        <div style="display:flex;gap:12px;">
+          <div class="detail-field"><div class="detail-label">CLASSIFICATION</div><div class="detail-value">${esc(hm.classification)}</div></div>
+          <div class="detail-field"><div class="detail-label">ASSUMPTIONS</div><div class="detail-value">${hm.assumption_count}</div></div>
+        </div>
+      </div>`;
+    }
+
+    sectionsHtml += '</div>';
+  }
+
+  // Judgment
+  if (sig.judgment) {
+    sectionsHtml += '<div class="detail-section"><div class="detail-section-title">LAYER 4 — JUDGMENT</div>';
+
+    if (sig.judgment.final_threat_matrix) {
+      const m = sig.judgment.final_threat_matrix;
+      sectionsHtml += `<div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div class="detail-field"><div class="detail-label">FINAL COMPOSITE</div><div class="detail-value highlight" style="font-size:18px;font-family:var(--mono);">${m.final_composite}</div></div>
+        <div class="detail-field"><div class="detail-label">L2 COMPOSITE</div><div class="detail-value">${m.layer2_composite}</div></div>
+        <div class="detail-field"><div class="detail-label">L3 ADJUSTMENT</div><div class="detail-value">${m.layer3_adjustment} (${esc(m.adjustment_direction)})</div></div>
+        <div class="detail-field"><div class="detail-label">CONFIDENCE</div><div class="detail-value">${esc(m.confidence)}</div></div>
+      </div>`;
+    }
+
+    if (sig.judgment.burden_of_proof) {
+      const b = sig.judgment.burden_of_proof;
+      const wColor = b.final_weight === 'stripped' ? '#ff6b35' :
+        b.final_weight === 'rejected' ? '#ff3355' :
+        (b.final_weight || '').includes('reduced') ? '#ffaa00' : 'var(--text-secondary)';
+      sectionsHtml += `<div style="margin-top:8px;">
+        <div class="detail-field"><div class="detail-label">BURDEN OF PROOF</div><div class="detail-value" style="color:${wColor};font-family:var(--mono);font-weight:600;">${esc(b.final_weight)}</div></div>
+        <div class="detail-field"><div class="detail-label">REASONING</div><div class="detail-value">${esc(b.reasoning)}</div></div>
+      </div>`;
+    }
+
+    if (sig.judgment.rejection) {
+      const r = sig.judgment.rejection;
+      sectionsHtml += `<div style="margin-top:8px;background:rgba(255,51,85,0.04);border-radius:4px;padding:10px;border-left:2px solid #ff3355;">
+        <div class="detail-field"><div class="detail-label">REJECTED</div><div class="detail-value" style="color:#ff3355;">${esc(r.rejection_reason)}</div></div>
+        <div class="detail-field"><div class="detail-label">ROOT CAUSE</div><div class="detail-value">${esc(r.root_cause)}</div></div>
+        <div class="detail-field"><div class="detail-label">CONFIDENCE</div><div class="detail-value">${esc(r.confidence_in_rejection)}</div></div>
+      </div>`;
+    }
+
+    sectionsHtml += '</div>';
+  }
+
+  // Corrections applied
+  if (sig.corrections_applied && sig.corrections_applied.length > 0) {
+    sectionsHtml += '<div class="detail-section"><div class="detail-section-title">CORRECTIONS APPLIED</div>';
+    for (const c of sig.corrections_applied) {
+      sectionsHtml += `<div style="background:rgba(0,170,255,0.04);border-radius:4px;padding:8px 10px;margin-bottom:4px;border-left:2px solid #00aaff;">
+        <span style="font-family:var(--mono);font-size:10px;color:#00aaff;font-weight:600;">${esc(c.correction_id)}</span>
+        <span style="color:var(--text-muted);font-size:10px;"> — L${c.layer}</span>
+        <div style="font-size:11px;color:var(--text-secondary);margin-top:3px;">${esc(c.influence)}</div>
+      </div>`;
+    }
+    sectionsHtml += '</div>';
+  }
+
+  panel.innerHTML = `
+    <div class="detail-header">
+      <div>
+        <span class="signal-id" style="color:${o.c};font-size:13px;">${sigShort(selectedSignal)}</span>
+        <span style="color:var(--text-muted);margin:0 8px;">—</span>
+        <span style="font-size:13px;">${esc(sig.perception?.threat)}</span>
+      </div>
+      <button class="detail-close" id="detailClose">✕</button>
+    </div>
+    <span class="outcome-badge" style="color:${o.c};background:${o.bg};border:1px solid ${o.b};">${o.i} ${sig.outcome}</span>
+    ${layerHtml}
+    ${eventsHtml}
+    ${sectionsHtml}
+  `;
+}
+
+// ─── Pattern Detection Engine ───
+function detectPatterns(runs) {
+  const patterns = [];
+  const totalRuns = runs.length;
+  if (totalRuns < 2) return patterns;
+
+  // 1. Gate violations by rule
+  const ruleCounts = {};
+  const ruleByLayer = {};
+  const ruleExamples = {};
+  for (const run of runs) {
+    const runRules = new Set();
+    for (const sig of run.signals) {
+      for (const [gate, layer] of [[sig.perception_gate,'L1'],[sig.contextualization_gate,'L2'],[sig.inference_gate,'L3'],[sig.judgment_gate,'L4']]) {
+        for (const v of (gate?.violations || [])) {
+          const key = v.rule_violated;
+          if (!key) continue;
+          if (!runRules.has(key)) { ruleCounts[key] = (ruleCounts[key]||0) + 1; runRules.add(key); }
+          ruleByLayer[key] = ruleByLayer[key] || {};
+          ruleByLayer[key][layer] = (ruleByLayer[key][layer]||0) + 1;
+          if (!ruleExamples[key]) ruleExamples[key] = [];
+          ruleExamples[key].push({ run:run._run_timestamp, finding:v.finding||v.violation, layer, severity:v.severity });
+        }
+      }
+    }
+  }
+  for (const [rule, count] of Object.entries(ruleCounts)) {
+    if (count >= Math.min(3, totalRuns)) {
+      const layers = Object.entries(ruleByLayer[rule]).sort((a,b) => b[1]-a[1]);
+      patterns.push({
+        type:'recurring_violation', severity:count >= Math.ceil(totalRuns*0.7) ? 'high' : 'medium',
+        title:`${rule} fires in ${count}/${totalRuns} runs`,
+        detail:`Most common in ${layers[0][0]} (${layers[0][1]} occurrences). This is a model tendency — the prompt should explicitly guard against this reasoning error.`,
+        frequency:count, total:totalRuns, rule,
+        examples:(ruleExamples[rule]||[]).slice(0,5),
+        action:'Tighten the layer prompt to address this specific reasoning pattern'
+      });
+    }
+  }
+
+  // 2. Corrections that fire repeatedly
+  const corrCounts = {};
+  const corrExamples = {};
+  for (const run of runs) {
+    const runCorrs = new Set();
+    for (const sig of run.signals) {
+      for (const c of (sig.corrections_applied || [])) {
+        if (!c.correction_id) continue;
+        if (!runCorrs.has(c.correction_id)) { corrCounts[c.correction_id] = (corrCounts[c.correction_id]||0) + 1; runCorrs.add(c.correction_id); }
+        if (!corrExamples[c.correction_id]) corrExamples[c.correction_id] = [];
+        corrExamples[c.correction_id].push({ run:run._run_timestamp, trigger:c.trigger_matched, signal:sig.perception?.threat });
+      }
+    }
+  }
+  for (const [corr, count] of Object.entries(corrCounts)) {
+    if (count >= Math.min(3, totalRuns)) {
+      patterns.push({
+        type:'recurring_correction',
+        severity:count >= totalRuns - 1 ? 'high' : 'medium',
+        title:`${corr} fires in ${count}/${totalRuns} runs`,
+        detail:count >= totalRuns - 1
+          ? "Fires almost every run — the model hasn't internalized this lesson. Consider graduating to a prompt-level instruction."
+          : "Fires frequently. Monitor whether the correction's influence is decreasing over time (learning) or static (not learning).",
+        frequency:count, total:totalRuns, correction_id:corr,
+        examples:(corrExamples[corr]||[]).slice(0,5),
+        action:count >= totalRuns - 1 ? 'Graduate this correction into the layer prompt as a permanent instruction' : 'Track influence magnitude across runs'
+      });
+    }
+  }
+
+  // 3. Category + outcome bias
+  const catOutcome = {};
+  for (const run of runs) {
+    for (const sig of run.signals) {
+      const cat = sig.perception?.category || 'unknown';
+      catOutcome[cat] = catOutcome[cat] || {};
+      catOutcome[cat][sig.outcome] = (catOutcome[cat][sig.outcome]||0) + 1;
+    }
+  }
+  for (const [cat, outcomes] of Object.entries(catOutcome)) {
+    const total = Object.values(outcomes).reduce((a,b) => a+b, 0);
+    for (const [outcome, count] of Object.entries(outcomes)) {
+      const pct = Math.round((count/total)*100);
+      if (pct >= 60 && total >= 4 && outcome !== 'SURVIVED') {
+        patterns.push({
+          type:'category_bias', severity:pct >= 80 ? 'high' : 'medium',
+          title:`${cat} signals → ${outcome} ${pct}% of the time`,
+          detail:`${count} of ${total} ${cat} signals across ${totalRuns} runs ended as ${outcome}. Systematic bias in how this category is processed.`,
+          frequency:count, total, category:cat, outcome,
+          action:outcome === 'STRIPPED' ? 'Layer 2 may be overscoring — tighten scoring guidance for this category' :
+            outcome === 'REJECTED' ? 'Verify the model is correctly rejecting, not reflexively dismissing' :
+            'Review the reasoning chain for this category across runs'
+        });
+      }
+    }
+  }
+
+  // 4. Recurring merge patterns
+  const mergePatterns = {};
+  for (const run of runs) {
+    const runMerges = new Set();
+    for (const sig of run.signals) {
+      if (sig.inference?.strategic_inferences) {
+        for (const inf of sig.inference.strategic_inferences) {
+          const sigs = (inf.connected_signals || []).map(s => s.split('-').pop()).sort();
+          if (sigs.length > 1) {
+            const key = sigs.join('+');
+            if (!runMerges.has(key)) {
+              if (!mergePatterns[key]) mergePatterns[key] = { runCount:0, finding:inf.finding, weights:[] };
+              mergePatterns[key].runCount++;
+              runMerges.add(key);
+            }
+            if (sig.judgment?.burden_of_proof?.final_weight) mergePatterns[key].weights.push(sig.judgment.burden_of_proof.final_weight);
+          }
+        }
+      }
+    }
+  }
+  for (const [key, data] of Object.entries(mergePatterns)) {
+    if (data.runCount >= Math.min(3, totalRuns)) {
+      const alwaysReduced = data.weights.length > 0 && data.weights.every(w => w !== 'full');
+      patterns.push({
+        type:'recurring_merge', severity:alwaysReduced ? 'high' : 'medium',
+        title:`Signals ${key.replace(/\+/g,' + ')} merged ${data.runCount}/${totalRuns} runs`,
+        detail:alwaysReduced
+          ? 'This merge recurs AND Layer 4 always reduces the weight. The model keeps making this connection but the judge keeps discounting it.'
+          : 'Recurring merge — the model consistently sees a connection between these signals.',
+        signals:key.split('+'), finding:data.finding, weights:[...new Set(data.weights)],
+        action:alwaysReduced ? 'Consider whether Layer 3 should stop making this connection, or whether Layer 4\'s discount is wrong' : 'Monitor whether this merge produces useful inferences or noise'
+      });
+    }
+  }
+
+  // 5. Trend detection
+  const firstHalf = runs.slice(0, Math.floor(totalRuns/2));
+  const secondHalf = runs.slice(Math.floor(totalRuns/2));
+  const avg = (arr, key) => arr.reduce((s,r) => s + (r._outcomes?.[key]||0), 0) / arr.length;
+  const earlyClean = avg(firstHalf, 'SURVIVED');
+  const lateClean = avg(secondHalf, 'SURVIVED');
+  if (lateClean > earlyClean + 0.5) {
+    patterns.push({
+      type:'trend', severity:'positive',
+      title:'System is getting cleaner',
+      detail:`SURVIVED signals increased from avg ${earlyClean.toFixed(1)} to ${lateClean.toFixed(1)} across recent runs.`,
+      action:'Good trajectory — continue current approach'
+    });
+  }
+
+  const sevOrder = { high:0, medium:1, positive:2, low:3 };
+  patterns.sort((a,b) => (sevOrder[a.severity]??4) - (sevOrder[b.severity]??4));
+  return patterns;
+}
+
+// ─── Render: Patterns view ───
+function renderPatterns() {
+  const container = document.getElementById('patternsContainer');
+
+  if (allTraces.length < 2) {
+    container.innerHTML = `<div style="padding:40px;text-align:center;">
+      <div style="font-family:var(--mono);font-size:12px;color:var(--text-muted);margin-bottom:8px;">PATTERNS REQUIRE MULTIPLE TRACES</div>
+      <div style="font-size:12px;color:#444;max-width:400px;margin:0 auto;line-height:1.6;">
+        The pattern detection engine analyzes signal behavior across multiple pipeline runs. With ${allTraces.length} trace${allTraces.length === 1 ? '' : 's'} available, patterns will emerge after a few more runs accumulate (2x daily).
+      </div>
+    </div>`;
+    return;
+  }
+
+  const patterns = detectPatterns(allTraces);
+
+  let html = `<div class="patterns-header">${allTraces.length} RUNS ANALYZED — ${(allTraces[0]._run_timestamp||'').substring(5,10)} to ${(allTraces[allTraces.length-1]._run_timestamp||'').substring(5,10)}</div>`;
+  html += `<div class="patterns-count">${patterns.length} patterns detected</div>`;
+
+  if (patterns.length === 0) {
+    html += '<div style="color:#444;font-size:12px;padding:20px 0;">No patterns detected yet. More data needed.</div>';
+  }
+
+  for (const p of patterns) {
+    const ps = PS[p.type] || { c:'#888', i:'•', l:'PATTERN' };
+    const sc = SEV_COLORS[p.severity] || '#888';
+
+    html += `<div class="pattern-card" style="border-left:3px solid ${ps.c};">
+      <div class="pattern-head">
+        <div>
+          <span class="pattern-type" style="color:${ps.c};">${ps.i} ${ps.l}</span>
+          <span style="margin-left:10px;" class="pattern-severity" style="color:${sc};">● ${(p.severity||'').toUpperCase()}</span>
+        </div>
+        ${p.frequency ? `<span style="font-size:11px;color:#666;font-family:var(--mono);">${p.frequency}/${p.total}</span>` : ''}
+      </div>
+      <div class="pattern-title">${esc(p.title)}</div>
+      <div class="pattern-detail">${esc(p.detail)}</div>
+      <div class="pattern-action" style="color:${ps.c};background:${ps.c}10;">
+        <span style="font-weight:600;">Action:</span> ${esc(p.action)}
+      </div>`;
+
+    if (p.examples && p.examples.length > 0) {
+      html += '<div class="pattern-examples"><div class="pattern-examples-label">EXAMPLES</div>';
+      for (const ex of p.examples.slice(0, 3)) {
+        html += `<div class="pattern-example">
+          <span class="pattern-example-date">${(ex.run||'').substring(5,10)}</span>
+          <span style="margin:0 6px;color:#333;">|</span>
+          ${esc(ex.finding || ex.signal || ex.trigger || '—')}
+        </div>`;
+      }
+      html += '</div>';
+    }
+
+    html += '</div>';
+  }
+
+  container.innerHTML = html;
+}
+
+// ─── Event handlers ───
+function initEvents() {
+  // View toggle
+  document.getElementById('viewToggle').addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const view = btn.dataset.view;
+    if (view === currentView) return;
+    currentView = view;
+    selectedSignal = null;
+    outcomeFilter = null;
+
+    document.querySelectorAll('#viewToggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.getElementById('viewSignals').classList.toggle('active', view === 'signals');
+    document.getElementById('viewPatterns').classList.toggle('active', view === 'patterns');
+
+    if (view === 'signals') { renderOutcomeBar(); renderSignalList(); renderDetailPanel(); }
+    if (view === 'patterns') { renderPatterns(); }
+  });
+
+  // Outcome filter
+  document.getElementById('outcomeBar').addEventListener('click', e => {
+    const btn = e.target.closest('.outcome-btn');
+    const sortBtn = e.target.closest('.sort-btn');
+
+    if (btn) {
+      const outcome = btn.dataset.outcome;
+      outcomeFilter = outcomeFilter === outcome ? null : outcome;
+      renderOutcomeBar();
+      renderSignalList();
+      renderDetailPanel();
+    }
+    if (sortBtn) {
+      sortBy = sortBtn.dataset.sort;
+      renderOutcomeBar();
+      renderSignalList();
+    }
+  });
+
+  // Signal click
+  document.getElementById('signalList').addEventListener('click', e => {
+    const card = e.target.closest('.signal-card');
+    if (!card) return;
+    const sig = card.dataset.sig;
+    selectedSignal = selectedSignal === sig ? null : sig;
+    renderSignalList();
+    renderDetailPanel();
+  });
+
+  // Detail close
+  document.getElementById('detailPanel').addEventListener('click', e => {
+    if (e.target.id === 'detailClose' || e.target.closest('#detailClose')) {
+      selectedSignal = null;
+      renderSignalList();
+      renderDetailPanel();
+    }
+  });
+
+  // Trace selector
+  document.getElementById('traceSelect').addEventListener('change', e => {
+    const idx = parseInt(e.target.value);
+    if (!isNaN(idx) && allTraces[idx]) {
+      currentTrace = allTraces[idx];
+      selectedSignal = null;
+      outcomeFilter = null;
+      renderRunInfo();
+      renderOutcomeBar();
+      renderSignalList();
+      renderDetailPanel();
+    }
+  });
+}
+
+// ─── Init ───
+async function init() {
+  initEvents();
+
+  allTraces = await loadTraceFiles();
+
+  if (allTraces.length === 0) {
+    document.getElementById('signalList').innerHTML = `<div class="loading-state">
+      No trace files found. Traces are generated automatically after each pipeline run.<br>
+      Check that cognitive-trace-*.json files exist in data/.
+    </div>`;
+    return;
+  }
+
+  // Default to most recent trace
+  currentTrace = allTraces[allTraces.length - 1];
+
+  renderRunInfo();
+  renderOutcomeBar();
+  renderSignalList();
+}
+
+init();
+</script>
+</body>
+</html>
