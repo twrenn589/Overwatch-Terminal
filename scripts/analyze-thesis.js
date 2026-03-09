@@ -858,12 +858,14 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "corrections_referenced": [
     {
       "correction_id": "CL-XXX",
+      "signal_id": "which signal triggered this correction",
       "trigger_matched": "what specific trigger condition matched this analysis",
       "influence_on_assessment": "how the stored lesson changed this assessment"
     }
   ],
   "knowledge_audit": [
     {
+      "signal_id": "from Layer 1 input",
       "threat": "name from Layer 1",
       "knowledge_check": "what I verified before scoring",
       "gap_identified": "description of gap, or NONE",
@@ -877,6 +879,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "scored_threats": [
     {
+      "signal_id": "from Layer 1 input",
       "threat": "name",
       "severity": 0,
       "source_tier": "1 | 2 | 3",
@@ -889,6 +892,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "unscored_threats": [
     {
+      "signal_id": "from Layer 1 input",
       "threat": "name",
       "reason": "description of why it cannot be scored",
       "knowledge_needed": "what would be needed to score this",
