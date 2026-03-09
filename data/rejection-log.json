@@ -483,5 +483,33 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-09T13:38:58.282Z"
+  },
+  {
+    "signal_ids": [
+      "20260309-2109-SIG-005",
+      "20260309-2109-SIG-015"
+    ],
+    "layer3_inference": "The thesis paradox means the crisis 'validates demand for efficient cross-border settlement' at medium-term",
+    "rejection_reason": "Partial rejection. The demand validation pathway is theoretically sound but requires an assumption chain: (1) crisis disrupts SWIFT corridors, (2) disrupted corridors seek alternatives, (3) alternatives include XRP/XRPL specifically, (4) institutions adopt during crisis rather than defaulting to known infrastructure. Per LZ-EPH-003, this is at the boundary of speculative (3+ assumptions). The near-term damage pathway requires zero assumptions — it is directly measurable in ETF flows, price, and liquidity. I accept the paradox exists but reject scoring the positive pathway at equal weight to the negative pathway. The negative pathway is measured; the positive pathway is inferred.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-09T21:26:45.123Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "signal_ids": [
+      "20260309-2130-SIG-001",
+      "20260309-2130-SIG-002"
+    ],
+    "layer3_inference": "Coordinated central bank intervention (SPR release, G7 statement) is likely if oil sustains above $100",
+    "rejection_reason": "SPECULATIVE at 3 assumptions with no supporting data. No intervention signals observed. Forward-looking prediction about central bank behavior per LZ-RC-005. Does not meet burden of proof for thesis status influence.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-09T21:48:27.962Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-09T21:48:27.981Z"
   }
 ]

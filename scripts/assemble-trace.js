@@ -423,4 +423,5 @@ function assembleTrace() {
 
 // ─── Run ──────────────────────────────────────────────────────────────────────
 
-assembleTrace();
+if (require.main === module) assembleTrace();
+module.exports = { assembleTrace };

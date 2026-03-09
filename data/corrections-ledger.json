@@ -612,5 +612,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-035",
+    "date_of_error": "2026-03-09",
+    "date_identified": "2026-03-09",
+    "identified_by": "layer_4_override",
+    "belief": "Coordinated central bank intervention (SPR release, G7 statement) is likely if oil sustains above $100",
+    "reality": "SPECULATIVE at 3 assumptions with no supporting data. No intervention signals observed. Forward-looking prediction about central bank behavior per LZ-RC-005. Does not meet burden of proof for thesis status influence.",
+    "root_cause": "SPECULATIVE at 3 assumptions with no supporting data. No intervention signals observed. Forward-looking prediction about central bank behavior per LZ-RC-005. Does not meet burden of proof for thesis status influence.",
+    "root_cause_type": "INSUFFICIENT_EVIDENCE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

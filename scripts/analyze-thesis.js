@@ -40,6 +40,8 @@ const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
 const THESIS_CONTEXT_PATH = path.join(__dirname, 'thesis-context.md');
 const DEBUG_RESPONSE_PATH = path.join(__dirname, 'debug-claude-response.txt');
 const HISTORY_PATH        = path.join(__dirname, 'analysis-history.json');
+const DOMAIN_CONFIG_PATH  = path.join(__dirname, '..', 'config', 'domain.json');
+const DOMAIN_CONFIG       = JSON.parse(fs.readFileSync(DOMAIN_CONFIG_PATH, 'utf8'));
 
 const HISTORY_MAX_RECORDS = 180; // 90 days × 2 runs/day
 
@@ -1259,7 +1261,7 @@ async function runReconcile(contextualizeResult, inferenceResult, marketData, th
   // Layer 4 receives BOTH Layer 2 and Layer 3 output — it has the most complete picture.
   const prompt = `${LAYER_ZERO_RULES}
 
-You are the final decision-maker in a four-layer investment thesis monitoring system. You have the most complete picture of any layer: scored data from Layer 2 AND strategic reasoning from Layer 3. Your job is not to add more analysis. Your job is to DECIDE what everything means and what to do about it.
+You are the final decision-maker in a four-layer ${DOMAIN_CONFIG.system_framing}. You have the most complete picture of any layer: scored data from Layer 2 AND strategic reasoning from Layer 3. Your job is not to add more analysis. Your job is to DECIDE what everything means and what to do about it.
 
 You are the judge, not the detective. The detective (Layer 3) proposed theories. You decide which ones hold up. Where data and behavior tell different stories, you determine which deserves more weight. Where paradoxes exist, you name them honestly — you do not force false resolution.
 
@@ -1282,7 +1284,7 @@ For every inference Layer 3 produced, apply judicial skepticism:
 STEP 1: Check classification tag.
 - VALID (0-1 assumptions): Full weight. Proceed to Step 2.
 - FLAGGED (2 assumptions): 50% weight. Caution note in output.
-- SPECULATIVE (3+ assumptions): 75% weight DISCOUNT. It appears in the report as context but does NOT move the bear pressure score or influence the tactical recommendation.
+- SPECULATIVE (3+ assumptions): 75% weight DISCOUNT. It appears in the report as context but does NOT move the thesis status assessment or influence the action recommendation.
 - INSUFFICIENT_EVIDENCE: Strip entirely from scoring. Log it.
 - NULL_HYPOTHESIS_HOLDS: Accept the null. Do not override with speculation. The simplest explanation was sufficient.
 
@@ -1290,7 +1292,7 @@ STEP 2: Check data support.
 - Does hard data from Layer 2 support this inference?
   * YES with multiple data points → full weight (after Step 1)
   * PARTIALLY (one data point) → 50% weight (stacks with Step 1)
-  * NO supporting data → Strip from bear pressure score entirely. Log for Sunday audit but do NOT let it influence the tactical recommendation.
+  * NO supporting data → Strip from thesis status assessment entirely. Log for Sunday audit but do NOT let it influence the action recommendation.
 
 STEP 3: Check for contradiction with verified data.
 - Does this inference require believing something that contradicts verified data from Layer 2?
@@ -1304,7 +1306,7 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 
 2. DATA CLASSIFICATION — For each null or missing data point, make the final call: TRUE_NEGATIVE | DATA_GAP | SUSPICIOUS_ABSENCE | STRATEGICALLY_EXPLAINED.
 
-3. FINAL THREAT MATRIX — For each threat that passed through Layers 2 and 3: Layer 2 composite score, Layer 3 adjustment (after burden of proof), final composite score.
+3. FINAL SIGNAL MATRIX — For each signal that passed through Layers 2 and 3: Layer 2 composite score, Layer 3 adjustment (after burden of proof), final composite score.
 
 4. COMPOUND STRESS FINAL ASSESSMENT — Confirm or override Layer 2's level. State one observation that SUPPORTS and one that CHALLENGES your assessment. Report delta, velocity, pre-load status, cascade proximity.
    - If compound stress is CRITICAL or EMERGENCY: estimate the operator's action window — hours, days, or weeks.
@@ -1312,13 +1314,21 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 
 5. KILL SWITCH REVIEW — Review all 10 falsification criteria. If any kill switch is TRIGGERED, state this FIRST. Everything else is secondary.
 
-6. FINAL BEAR PRESSURE SCORE (0-100) — The definitive number. State how it moved from Layer 2's score and why.
+6. THESIS STATUS ASSESSMENT — Assess the overall direction of evidence:
+   - STRENGTHENING: Evidence increasingly supports the thesis
+   - STABLE: No meaningful movement in either direction
+   - WEAKENING: Evidence increasingly challenges the thesis
+   - CONTESTED: Evidence is pulling in both directions simultaneously — genuine tension exists
+   - INSUFFICIENT_EVIDENCE: Not enough evidence to determine direction
+   State your confidence in this assessment (high/medium/low) and explain your reasoning. CONTESTED and INSUFFICIENT_EVIDENCE are honest, high-quality outputs — not failures. Do not force resolution when the evidence does not support it.
 
-7. TACTICAL RECOMMENDATION — One of: HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL. No ambiguity.
+7. ACTION RECOMMENDATION — One of: ${DOMAIN_CONFIG.action_recommendations.map(a => a.id).join(' | ')}. No ambiguity.
 
-8. REJECTION LOG — If Layer 4 overruled any Layer 3 inference, document it with root cause and corrections ledger trigger.
+8. UNRESOLVED TENSIONS — If any signals are genuinely pulling in opposing directions and cannot be resolved with current evidence, document them. For each tension, state what you are watching for that would resolve it. Tensions that persist across runs are data for the pattern engine. An empty array is valid if all signals resolved cleanly.
 
-9. FINAL REPORT — 3-4 sentences. The 6 AM briefing. Lead with what matters most. State the call. Name the paradox if it exists. Honest about what you don't know.
+9. REJECTION LOG — If Layer 4 overruled any Layer 3 inference, document it with root cause and corrections ledger trigger.
+
+10. FINAL REPORT — 3-4 sentences. The 6 AM briefing. Lead with what matters most. State the call. Name the paradox if it exists. Honest about what you don't know.
 
 Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
 {
@@ -1353,10 +1363,10 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "reasoning": "why this classification"
     }
   ],
-  "final_threat_matrix": [
+  "final_signal_matrix": [
     {
       "signal_ids": ["from Layer 2 input"],
-      "threat": "name",
+      "signal": "name",
       "layer2_composite": 0,
       "layer3_adjustment": "description of behavioral evidence applied",
       "adjustment_direction": "up | down | unchanged",
@@ -1400,11 +1410,21 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "corrections_ledger_action": "auto_commit | flag_for_review"
     }
   ],
-  "final_bear_pressure": 0,
-  "pressure_vs_layer2": 0,
-  "pressure_reasoning": "1-2 sentences explaining the final number",
-  "tactical_recommendation": "HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL",
-  "recommendation_reasoning": "2-3 sentences. What drives the call.",
+  "thesis_status": "STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE",
+  "thesis_status_reasoning": "2-3 sentences. What evidence drives this assessment. Address both supporting and challenging signals.",
+  "confidence_in_status": "high | medium | low",
+  "action_recommendation": "${DOMAIN_CONFIG.action_recommendations.map(a => a.id).join(' | ')}",
+  "action_reasoning": "2-3 sentences. What drives the call.",
+  "unresolved_tensions": [
+    {
+      "tension": "what is pulling in opposing directions",
+      "positive_force": "evidence or reasoning supporting the thesis",
+      "negative_force": "evidence or reasoning challenging the thesis",
+      "why_unresolved": "why this cannot be resolved with current evidence",
+      "watch_for": "specific observable event or data point that would resolve this",
+      "expected_resolution_window": "hours | days | weeks | months"
+    }
+  ],
   "monitoring_triggers": [],
   "overall_confidence": "high | medium | low",
   "biggest_uncertainty": "the single thing that most affects confidence",
@@ -1423,7 +1443,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       });
       const raw = response.content[0].text;
       result = parseClaudeJSON(raw, 'layer4');
-      log('analysis', `Layer 4 complete: bear pressure ${result.final_bear_pressure}, recommendation: ${result.tactical_recommendation}, rejections: ${result.rejection_log?.length || 0}`);
+      log('analysis', `Layer 4 complete: status=${result.thesis_status} (${result.confidence_in_status}), recommendation: ${result.action_recommendation}, rejections: ${result.rejection_log?.length || 0}`);
       break;
     } catch (e) {
       err('analysis', `Layer 4 attempt ${attempt} failed: ${e.message}`);
@@ -1501,13 +1521,13 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
   //   final_composite, confidence
   // Fields without natural mapping (impact, probability, time_weight, is_new) → null
   // The dashboard renders ?? '—' for nulls.
-  const threatMatrix = (reconcileResult.final_threat_matrix || []).map(t => {
+  const threatMatrix = (reconcileResult.final_signal_matrix || []).map(t => {
     // Try to find the original sweep threat data via Layer 2's scored_threats
     const l2Match = (contextualizeResult.scored_threats || []).find(
-      s => s.threat === t.threat
+      s => s.threat === t.signal
     );
     return {
-      threat:      t.threat,
+      threat:      t.signal,
       description: t.layer3_adjustment || '',
       impact:      null, // no natural mapping — dashboard handles null
       probability: null, // no natural mapping
@@ -1587,7 +1607,7 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     bull_indicators:      bullCount,
     bear_indicators:      bearCount,
     ratio:                `${bullCount}:${bearCount}`,
-    assessment:           reconcileResult.pressure_reasoning || '',
+    assessment:           reconcileResult.thesis_status_reasoning || '',
     recommended_additions: null
   };
 
@@ -1607,7 +1627,10 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
   });
 
   // 6. Top-level scalar fields
-  const bearPressure = reconcileResult.final_bear_pressure ?? 0;
+  // Map thesis_status to synthetic score for backward-compatible dashboard rendering
+  // Dashboard will be updated to render thesis_status directly in a later step
+  const statusScoreMap = { STRENGTHENING: 15, STABLE: 30, CONTESTED: 50, INSUFFICIENT_EVIDENCE: 50, WEAKENING: 60 };
+  const bearPressure = statusScoreMap[reconcileResult.thesis_status] ?? 50;
   const scoreDelta = bearPressure - (previousScore || 0);
 
   const dashCompat = {
@@ -1615,9 +1638,9 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     commander_summary:          reconcileResult.final_report || '',
     bear_pressure_score:        bearPressure,
     score_delta:                scoreDelta,
-    score_reasoning:            reconcileResult.pressure_reasoning || '',
-    tactical_recommendation:    reconcileResult.tactical_recommendation || 'INCREASE_MONITORING',
-    recommendation_reasoning:   reconcileResult.recommendation_reasoning || '',
+    score_reasoning:            reconcileResult.thesis_status_reasoning || '',
+    tactical_recommendation:    reconcileResult.action_recommendation || 'INCREASE_MONITORING',
+    recommendation_reasoning:   reconcileResult.action_reasoning || '',
     threat_matrix:              threatMatrix,
     compounding_risks:          compoundingRisks,
     blind_spots:                blindSpots,
@@ -1634,7 +1657,7 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     _generated_at: new Date().toISOString()
   };
 
-  log('bridge', `Bridge complete: score=${bearPressure}, delta=${scoreDelta}, rec=${dashCompat.tactical_recommendation}, threats=${threatMatrix.length}`);
+  log('bridge', `Bridge complete: status=${reconcileResult.thesis_status}, rec=${dashCompat.tactical_recommendation}, signals=${threatMatrix.length}`);
   return dashCompat;
 }
 

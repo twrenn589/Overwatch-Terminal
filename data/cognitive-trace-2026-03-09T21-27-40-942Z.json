@@ -1,0 +1,1963 @@
+{
+  "_trace_version": "1.0",
+  "_assembled_at": "2026-03-09T21:29:20.388Z",
+  "_run_timestamp": "2026-03-09T21:27:40.942Z",
+  "_signal_count": 15,
+  "_outcomes": {
+    "SURVIVED": 4,
+    "REJECTED": 2,
+    "STRIPPED": 0,
+    "FLAGGED": 9,
+    "PRUNED": 0
+  },
+  "signals": [
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-001"
+      ],
+      "perception": {
+        "threat": "Oil shock compound stress chain",
+        "description": "Brent crude surged to $102-$115 range with Saudi Aramco cutting production and US-Iran tensions escalating. This is directly inflationary, threatens Fed rate path, weakens risk assets, and specifically pressures Japan through trade deficit expansion. Oil at these levels is a macro regime change that compresses institutional deployment timelines and forces risk-off positioning across crypto.",
+        "direction": "DETERIORATION",
+        "severity": "critical",
+        "proximity": "immediate",
+        "confidence": "high",
+        "evidence": "Brent crude at $102.28 in data feed, WatcherGuru reporting surges to $110-$115, Saudi Aramco production cuts confirmed by Reuters, Trump referencing Iran nuclear threat",
+        "blind_spot": false,
+        "category": "macro"
+      },
+      "perception_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001"
+            ],
+            "finding": "Oil shock compound stress chain",
+            "rule_violated": "LZ-EH-004",
+            "violation": "WatcherGuru reporting $110-$115 is anomalous compared to the data feed showing $102.28. The anomaly was not flagged or treated as potential source failure before being incorporated into the assessment. The finding treats both values as equally valid without independent verification of the higher range.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001"
+            ],
+            "finding": "Oil shock compound stress chain - causal chain claims",
+            "rule_violated": "LZ-EPH-003",
+            "violation": "The inference chain 'oil spike → Fed rate path change → risk asset weakness → Japan trade deficit → institutional crypto timeline compression' contains at least four unproven causal assumptions presented as established fact. Each link is plausible but unverified, violating the three-assumption threshold for speculative inference.",
+            "severity": "SERIOUS"
+          }
+        ],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: Brent crude data from financeflow shows $102.28. WatcherGuru reports $110-$115 surges. Saudi Aramco production cuts reported by Reuters (via WatcherGuru). Two sources confirm oil above $100 — one primary data feed, one secondary reporting higher figures. Per LZ-EH-005, the $102 vs $110-$115 discrepancy requires flagging: data feed timestamp (Mar 9) vs WatcherGuru reporting (Mar 8-9) may reflect temporal difference rather than contradiction. Oil above $95 = critical threshold per compound stress matrix. Verified thesis impact: Japan is 4th largest oil importer — trade deficit expansion is a documented macro mechanism.",
+          "gap_identified": "The $102 data point and $110-$115 WatcherGuru reports may reflect different measurement times. Post-weekend market data (Mar 9 being Sunday) may not reflect live trading. Need to verify whether the $102 figure is Friday close or live Sunday futures.",
+          "gap_type": "DATA_AVAILABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 9/10 on headline impact alone",
+          "post_audit_assessment": "Score 8/10 — oil above $100 confirmed by data feed, compound stress chain mechanically valid, but exact current price has temporal uncertainty between $102 and $115",
+          "audit_impact": "Reduced from 9 to 8 due to measurement timing uncertainty per LZ-MR-003. The range matters for whether we're at CRITICAL ($95+) or deep CRITICAL ($110+), but both exceed the threshold. Core assessment unchanged: oil shock is real and mechanically impacts thesis.",
+          "lesson_applied": "CL-017",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 8,
+          "source_tier": "2",
+          "weighted_severity": 5.6,
+          "thesis_relevance": "INDIRECT",
+          "confidence": "HIGH",
+          "reasoning": "Brent at $102.28 confirmed by data feed, with WatcherGuru reporting surges to $110-$115. Oil above $95 triggers CRITICAL compound stress threshold. Mechanically impacts thesis through: (1) Japan trade deficit expansion as 4th largest oil importer, (2) BOJ policy trap intensification, (3) global risk-off pressuring crypto allocations, (4) potential Fed rate path disruption via energy-driven inflation. The oil shock is the catalyst that pushed the compound stress matrix from MONITORING to CRITICAL. Source tier 2 (WatcherGuru) corroborated by primary data feed.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001"
+            ],
+            "finding": "Oil shock compound stress chain - data contradiction handling",
+            "rule_violated": "LZ-EH-005",
+            "violation": "The knowledge_audit identifies '$102 data point and $110-$115 WatcherGuru reports may reflect different measurement times' and notes 'Per LZ-EH-005, the $102 vs $110-$115 discrepancy requires flagging.' However, the scored_threat resolves this by stating 'Brent at $102.28 confirmed by data feed, with WatcherGuru reporting surges to $110-$115' without independent tie-breaking evidence about which figure represents current state. The reasoning assumes temporal difference explains the gap, but this is not verified - both could be contemporaneous measurements from different markets or instruments. Per LZ-EH-005, when primary sources of equal weight contradict, the contradiction must be flagged rather than resolved. The finding should state 'Brent oil between $102-$115 per conflicting sources' rather than treating $102 as base case with $110-$115 as 'surges.'",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "Oil shock compound stress chain activation",
+            "null_hypothesis": "Oil price spikes are historically common and typically reverse within weeks. Saudi Aramco production cuts may be negotiating posture, not sustained policy. Market stress is cyclical and self-correcting.",
+            "null_holds": false,
+            "which_is_more_likely": "primary",
+            "assumptions": [
+              "Saudi Aramco production cuts reflect intentional supply constraint rather than temporary operational adjustment"
+            ],
+            "assumption_count": 1,
+            "classification": "VALID",
+            "expected_timeline": "weeks",
+            "materialization_signal": "If Brent sustained above $95 for 2+ weeks AND USD/JPY breaches 160: compound stress chain is fully active. If Brent retreats below $90 within 1 week: alternative explanation (spike not floor) confirmed.",
+            "confidence": "high",
+            "connected_signals": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ]
+          }
+        ],
+        "hidden_moves": [
+          {
+            "player": "BOJ",
+            "likely_action": "BOJ conducting private stress tests of intervention scenarios for USD/JPY at 160-165 range, including coordination with Fed on dollar swap line capacity",
+            "assumption_count": 2,
+            "classification": "FLAGGED",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-001"
+            ]
+          }
+        ]
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Strategic inference: Oil shock compound stress chain activation",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The reasoning treats the compound stress chain (oil → Japan trade deficit → yen weakness → BOJ trap → carry trade stress → global liquidity contraction → crypto risk-off) as mechanically causal ('Each link is a documented macro mechanism, not a speculative chain'). While each individual correlation may be historically observed, the chain as presented conflates correlation with causation across multiple steps. The finding does not test whether alternative pathways could produce the same outcomes or whether the historical correlations hold under current structural conditions. The assumption count is listed as 1 (Saudi production cuts are intentional), but the causal chain itself embeds multiple untested causal assumptions.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-001"
+            ],
+            "finding": "Hidden move: BOJ conducting private stress tests for USD/JPY intervention",
+            "rule_violated": "LZ-CC-001",
+            "violation": "Similar to the previous hidden move - this is a logically coherent inference (BOJ is trapped, historically intervenes at 160, therefore likely preparing) but has zero verifiable evidence that stress tests are actually being conducted. The evidence_hints cite only public conditions (USD/JPY level, oil shock, historical precedent) not observable BOJ actions. The materialization signals (MoF verbal warnings, emergency meetings) are future events, not current evidence. Classification is 'FLAGGED' with 'low' confidence, which is appropriate, but the inference constructs a specific institutional action from general conditions without empirical anchor.",
+            "severity": "MINOR"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Feedback loop: Oil → Yen → BOJ → JGB → Carry Trade → Global Liquidity",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The feedback loop is described as 'active_accelerating' and the trigger states 'Any one of these could trigger forced BOJ response, which cascades through carry trade unwind to global liquidity.' This presents a multi-step cascade as mechanistically causal without testing whether the steps are genuinely causal or merely correlated. The historical observation that these variables move together does not establish that movement in one causes movement in the next under current conditions. The reasoning treats documented correlation as established causation.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "Oil shock compound stress chain activation",
+          "layer3_classification": "VALID",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "VALID classification (1 assumption: Saudi production cuts are intentional, not temporary operational adjustment). Full data support: Brent $102.28 from data feed, WatcherGuru $110-$115, Saudi Aramco cuts from Reuters via WatcherGuru, USD/JPY 157.92, JGB 2.186%. Each link in the chain is a documented macro mechanism verified by data. Per LZ-EH-005, the $102 vs $110-115 discrepancy is flagged as temporal difference (Mar 9 data feed vs Mar 8-9 reporting), not a contradiction — both exceed the $95 CRITICAL threshold. Full weight."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001"
+            ],
+            "finding": "Oil shock compound stress chain activation",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "The finding assigns 'high' confidence despite explicitly noting that one assumption (Saudi production cuts are intentional, not temporary operational adjustment) is required. While the inference is well-supported by Reuters reporting via WatcherGuru, the finding acknowledges this as an assumption, meaning there is an unverified causal link. High confidence should be reserved for findings with zero unverified assumptions. Confidence should be 'medium'.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005"
+            ],
+            "finding": "Brent price discrepancy — $102.28 vs $110-115 resolved as temporal difference",
+            "rule_violated": "LZ-EH-005",
+            "violation": "The finding states the $102 vs $110-115 discrepancy is 'flagged as temporal difference (Mar 9 data feed vs Mar 8-9 reporting), not a contradiction.' However, per LZ-EH-005, when primary sources of equal weight contradict, the contradiction must be flagged rather than resolved without independent tie-breaking evidence. The finding resolves this by assuming temporal offset explains the gap, but does not provide independent verification of the timestamp difference or of oil price movement between the two measurement windows. If both measurements claim to be current as of similar timeframes, this is a genuine contradiction that should be held, not explained away. The finding may be correct that it's temporal, but without verification of the timestamp claim, this violates the prohibition on arbitrary resolution.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-002"
+      ],
+      "perception": {
+        "threat": "XRP ETF cumulative flows near zero",
+        "description": "XRP ETF cumulative net flow stands at just $9.5M across 4 funds with $1.145B AUM. Daily outflows of $16.6M on March 6 and weekly net outflows of $4.1M. TOXR lost $10.6M and GXRP lost $2.4M in a single day. Post-oil-shock flows (Mar 8-9) not yet captured — likely worse. Sustained outflows approaching the 30-day kill switch trigger.",
+        "direction": "DETERIORATION",
+        "severity": "high",
+        "proximity": "immediate",
+        "confidence": "high",
+        "evidence": "ETF data: cum_net_flow $9.5M, daily_net_flow -$16.6M, weekly_net_flow -$4.1M, zero inflows on Mar 6",
+        "blind_spot": false,
+        "category": "structure"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: ETF data shows cum_net_flow $9.5M, daily_net_flow -$16.6M, weekly_net_flow -$4.1M, as of Mar 6. This is the first time we have actual XRP ETF flow data showing outflows. Prior cycles lacked this data entirely (see CL-031, CL-022, CL-026). The data is now a measurement, not an inference. $9.5M cumulative on $1.145B AUM = 0.83% net retention. One more day of $10M+ outflows pushes cumulative negative. Kill switch target: $5B AUM by EOY. Current: $1.145B = 23% of target.",
+          "gap_identified": "Post-oil-shock flows (Mar 8-9) not captured — data is as of Mar 6. The oil shock occurred Mar 8-9. The next flow data will be the most critical data point for this signal.",
+          "gap_type": "DATA_AVAILABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 8/10",
+          "post_audit_assessment": "Score 8/10 — the measured data is genuinely concerning but we're missing the most critical 2-3 days of flow data post-shock",
+          "audit_impact": "No change in score, but confidence reduced to MEDIUM because the most relevant data (post-oil-shock flows) is missing. What we have is bad; what we don't have is likely worse but we cannot confirm per LZ-RC-003.",
+          "lesson_applied": "CL-002",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 8,
+          "source_tier": "1",
+          "weighted_severity": 8,
+          "thesis_relevance": "DIRECT",
+          "confidence": "MEDIUM",
+          "reasoning": "Kill switch target: $5B AUM by EOY. Current: $1.145B (23%). Cumulative net flow at $9.5M on $1.145B AUM = 0.83% net retention. Daily outflows of $16.6M on Mar 6 with ZERO inflows. One more day of $10M+ outflows pushes cumulative negative. THIS IS THE FIRST TIME we have actual XRP ETF flow data — prior cycles lacked this entirely. The data is a measurement, not an inference. Confidence MEDIUM because post-oil-shock flows (Mar 8-9) are missing and these are likely the most negative data points. Per LZ-RC-002, one day of $16.6M outflows doesn't establish a trend, but the cumulative approaching zero across 4 weeks IS a trajectory.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-002"
+            ],
+            "finding": "XRP ETF cumulative flows near zero - confidence assessment",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "Confidence marked as MEDIUM despite having actual measured flow data from a Tier 1 source. The reasoning cites 'post-oil-shock flows (Mar 8-9) are missing' as justification for MEDIUM confidence, but the finding is about cumulative flows approaching zero and daily outflows of $16.6M on Mar 6 - both of which are measured facts. The missing future data affects forward projection, not the accuracy of the current measurement. Confidence should be HIGH for the measured state, with separate acknowledgment that trajectory after Mar 6 is unknown.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "XRP ETF cumulative flows near zero",
+            "null_hypothesis": "ETF flows are responding to broad crypto risk-off (BTC -$348.9M, ETH -$82.9M same day). XRP-specific outflows are proportional to asset class movement. Product is working as designed; market environment is hostile.",
+            "null_holds": true,
+            "which_is_more_likely": "null",
+            "assumptions": [],
+            "assumption_count": 0,
+            "classification": "NULL_HYPOTHESIS_HOLDS",
+            "expected_timeline": "weeks",
+            "materialization_signal": "Post-oil-shock flow data (Mar 8-9 and following week). If XRP outflows accelerate disproportionately to BTC/ETH, that contradicts the null hypothesis and indicates XRP-specific rejection. If outflows are proportional, null hypothesis is confirmed.",
+            "confidence": "medium",
+            "connected_signals": [
+              "20260309-2109-SIG-002"
+            ]
+          }
+        ],
+        "hidden_moves": [
+          {
+            "player": "Institutional Asset Managers",
+            "likely_action": "Fund managers with XRP ETF products are in private discussions with Ripple requesting access to ODL/settlement volume data to support institutional sales and satisfy compliance requirements for marketing materials",
+            "assumption_count": 2,
+            "classification": "FLAGGED",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-002",
+              "20260309-2109-SIG-003"
+            ]
+          }
+        ]
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-002",
+              "20260309-2109-SIG-003"
+            ],
+            "finding": "Hidden move: ETF managers requesting ODL data from Ripple",
+            "rule_violated": "LZ-CC-001",
+            "violation": "This hidden move is internally coherent (fund managers need data for marketing, Ripple has the data, therefore private discussions are likely) but lacks any verifiable real-world anchor. The evidence_hints section cites only general conditions (seven funds launched, former CFTC statement about data needs, poor ETF flows) but provides zero evidence that private discussions are actually occurring or have occurred. The reasoning is logical but entirely constructed from plausibility rather than anchored to observable behavior. The classification is 'FLAGGED' and confidence is 'low', which shows appropriate epistemic humility, but the inference itself is a coherent narrative without empirical grounding.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "XRP ETF flows — null holds, macro risk-off not XRP-specific rejection",
+          "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "Null hypothesis accepted. Cross-asset outflows (BTC -$348.9M, ETH -$82.9M on same day) confirm macro driver. Layer 3 correctly noted the null explains the daily outflow but NOT the 2-month tepid cumulative. This nuance is supported by data — $9.5M cumulative on $1.145B AUM is a measurement, not an inference. Full weight on both the null explanation for daily data AND the pre-existing weakness observation."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-002",
+              "20260309-2109-SIG-003"
+            ],
+            "finding": "Paradox held — ETF launches represent conviction vs flows show rejection",
+            "rule_violated": "LZ-RC-005",
+            "violation": "The finding correctly holds the paradox and acknowledges the time difference between launch decisions (past) and flows (present). However, the unresolved_tensions section states 'Per LZ-RC-002, 2 months of tepid flows in a hostile macro environment may not be a definitive trend' — this is correct re: LZ-RC-002. But then it conflates this with uncertainty about what the fund managers knew during due diligence. The launches are historical actions (verifiable measurements of past decisions). The flows are current measurements. Per LZ-RC-005, these carry fundamentally different evidentiary weight. The finding treats them as equally uncertain ('may not be a definitive trend' applied to both), when in fact the launches are definitively known actions and the flows are definitively known measurements — what's uncertain is the predictive power of the flows, not the measurements themselves. This is a subtle misapplication but affects the weighting of the paradox arms.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-002",
+          "trigger_matched": "Historical analogy involving ETF flow comparisons — verify structural equivalence",
+          "influence": "The ETF outflow data is NOW real flow data, not analogical reasoning. We have actual daily/weekly/cumulative flow numbers for XRP, BTC, and ETH ETFs. CL-002 prevents using GBTC analogies but does NOT prevent using actual measured flow data. The flows are measurements, not predictions (per LZ-RC-005). Scored on actual data."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-002",
+          "trigger_matched": "ETF flow comparisons — historical analogy check",
+          "influence": "No historical analogy applied. These are actual measured flows ($16.6M XRP outflow, $348.9M BTC outflow, $82.9M ETH outflow on Mar 6). CL-002 prevents GBTC-style analogies but does not prevent using actual data."
+        }
+      ],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-003"
+      ],
+      "perception": {
+        "threat": "Broad crypto ETF outflows across all products",
+        "description": "BTC ETFs saw $348.9M daily outflows, ETH ETFs saw $82.9M daily outflows — all on the same day (Mar 6). ETH ETFs have gone cumulative net negative at -$19.3M. This is a cross-asset institutional retreat from crypto, not XRP-specific. Bitcoin fell below $66K with $120M liquidated in 60 minutes. Structural risk-off across digital assets.",
+        "direction": "DETERIORATION",
+        "severity": "high",
+        "proximity": "immediate",
+        "confidence": "high",
+        "evidence": "BTC ETF daily flow -$348.9M, ETH ETF daily flow -$82.9M, ETH cumulative -$19.3M, BTC crash to sub-$66K reported by WatcherGuru",
+        "blind_spot": false,
+        "category": "narrative"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: BTC ETF daily flow -$348.9M, ETH ETF daily flow -$82.9M, ETH cumulative -$19.3M. All as of Mar 6 — same day as XRP outflows. This is cross-asset institutional retreat. BTC sub-$66K reported by WatcherGuru with $120M liquidations. The fact that outflows are broad-based (BTC, ETH, AND XRP all on same day) means this is a macro risk-off signal, not XRP-specific. This actually slightly mitigates the XRP-specific concern — it's not that institutions are fleeing XRP specifically, it's that they're fleeing crypto as an asset class.",
+          "gap_identified": "Same as SIG-002: post-oil-shock flows (Mar 8-9) not available. BTC weekly flows are actually positive (+$568.5M weekly) despite the daily outflow, suggesting the daily was a spike rather than sustained trend per LZ-RC-002.",
+          "gap_type": "DATA_AVAILABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 7/10",
+          "post_audit_assessment": "Score 7/10 — confirmed cross-asset institutional retreat on Mar 6, but weekly BTC data shows one-day spike, not sustained trend yet",
+          "audit_impact": "Applied LZ-RC-002 (single data point doesn't establish trend). The daily outflows are real measurements but one day of outflows does not establish sustained institutional retreat. Need multiple days to confirm trend.",
+          "lesson_applied": "NONE",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 7,
+          "source_tier": "1",
+          "weighted_severity": 7,
+          "thesis_relevance": "INDIRECT",
+          "confidence": "MEDIUM",
+          "reasoning": "BTC -$348.9M, ETH -$82.9M daily outflows on Mar 6. ETH cumulative now -$19.3M. Cross-asset institutional retreat confirmed by data. However, BTC weekly flows are +$568.5M, meaning the daily was a spike within a positive weekly context — per LZ-RC-002, single data point caution applies. The broad-based nature actually slightly mitigates XRP-specific concern: this is macro risk-off, not XRP rejection. BTC sub-$66K with $120M liquidations in 60 minutes shows genuine market stress.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-003"
+            ],
+            "finding": "Broad crypto ETF outflows - trend assessment",
+            "rule_violated": "LZ-RC-002",
+            "violation": "The knowledge_audit correctly applies LZ-RC-002 noting 'one day of outflows does not establish sustained institutional retreat,' but then the scored_threat reasoning states 'Cross-asset institutional retreat confirmed by data.' The word 'confirmed' implies an established pattern, but per LZ-RC-002, a single data point (Mar 6 outflows) does not establish a trend. The finding should state 'single-day cross-asset outflows observed' rather than 'retreat confirmed.'",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [],
+        "hidden_moves": [
+          {
+            "player": "Institutional Asset Managers",
+            "likely_action": "Fund managers with XRP ETF products are in private discussions with Ripple requesting access to ODL/settlement volume data to support institutional sales and satisfy compliance requirements for marketing materials",
+            "assumption_count": 2,
+            "classification": "FLAGGED",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-002",
+              "20260309-2109-SIG-003"
+            ]
+          }
+        ]
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-002",
+              "20260309-2109-SIG-003"
+            ],
+            "finding": "Hidden move: ETF managers requesting ODL data from Ripple",
+            "rule_violated": "LZ-CC-001",
+            "violation": "This hidden move is internally coherent (fund managers need data for marketing, Ripple has the data, therefore private discussions are likely) but lacks any verifiable real-world anchor. The evidence_hints section cites only general conditions (seven funds launched, former CFTC statement about data needs, poor ETF flows) but provides zero evidence that private discussions are actually occurring or have occurred. The reasoning is logical but entirely constructed from plausibility rather than anchored to observable behavior. The classification is 'FLAGGED' and confidence is 'low', which shows appropriate epistemic humility, but the inference itself is a coherent narrative without empirical grounding.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "Hidden move — ETF managers requesting ODL data from Ripple",
+          "layer3_classification": "FLAGGED",
+          "data_support": "partial",
+          "contradicts_data": false,
+          "final_weight": "reduced_50",
+          "reasoning": "FLAGGED (2 assumptions). The logic is plausible — fund managers need data for marketing and compliance — but there is zero direct evidence this is occurring. Partial data support at best (ETF launches are verified, the request inference is not). Context only."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-002",
+              "20260309-2109-SIG-003"
+            ],
+            "finding": "Paradox held — ETF launches represent conviction vs flows show rejection",
+            "rule_violated": "LZ-RC-005",
+            "violation": "The finding correctly holds the paradox and acknowledges the time difference between launch decisions (past) and flows (present). However, the unresolved_tensions section states 'Per LZ-RC-002, 2 months of tepid flows in a hostile macro environment may not be a definitive trend' — this is correct re: LZ-RC-002. But then it conflates this with uncertainty about what the fund managers knew during due diligence. The launches are historical actions (verifiable measurements of past decisions). The flows are current measurements. Per LZ-RC-005, these carry fundamentally different evidentiary weight. The finding treats them as equally uncertain ('may not be a definitive trend' applied to both), when in fact the launches are definitively known actions and the flows are definitively known measurements — what's uncertain is the predictive power of the flows, not the measurements themselves. This is a subtle misapplication but affects the weighting of the paradox arms.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-002",
+          "trigger_matched": "Historical analogy involving ETF flow comparisons — verify structural equivalence",
+          "influence": "The ETF outflow data is NOW real flow data, not analogical reasoning. We have actual daily/weekly/cumulative flow numbers for XRP, BTC, and ETH ETFs. CL-002 prevents using GBTC analogies but does NOT prevent using actual measured flow data. The flows are measurements, not predictions (per LZ-RC-005). Scored on actual data."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-002",
+          "trigger_matched": "ETF flow comparisons — historical analogy check",
+          "influence": "No historical analogy applied. These are actual measured flows ($16.6M XRP outflow, $348.9M BTC outflow, $82.9M ETH outflow on Mar 6). CL-002 prevents GBTC-style analogies but does not prevent using actual data."
+        }
+      ],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-004"
+      ],
+      "perception": {
+        "threat": "Fear & Greed at 8 — Extreme Fear",
+        "description": "Crypto Fear & Greed Index at 8, the lowest reading in the dataset and deep into 'Extreme Fear' territory. While this is a retail sentiment gauge (per graduated lesson CL-031), it contextualizes the environment in which institutional decisions are being made. Extended periods below 20 trigger a falsification criterion review.",
+        "direction": "DETERIORATION",
+        "severity": "high",
+        "proximity": "immediate",
+        "confidence": "medium",
+        "evidence": "Fear & Greed value 8, label 'Extreme Fear' as of 2026-03-09. Kill switch threshold: extended period below 20.",
+        "blind_spot": false,
+        "category": "narrative"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: F&G value 8 from alternative.me as of Mar 9. This is the lowest reading in the dataset. CL-031 graduated: retail sentiment indices measure public mood, not institutional behavior. However, CL-031 was created when we had NO ETF flow data. Now we have flow data that independently confirms risk-off behavior. The F&G reading contextualizes but does not drive the assessment.",
+          "gap_identified": "NONE — the lesson from CL-031 is well-established. F&G at 8 is an environmental indicator, not an actionable signal on its own.",
+          "gap_type": "NONE",
+          "pre_audit_assessment": "Would have scored 6/10 as a sentiment capitulation signal",
+          "post_audit_assessment": "Score 4/10 — environmental context only, not an independent signal. The ETF flow data is the actionable signal; F&G confirms the environment.",
+          "audit_impact": "CL-031 reduced score from 6 to 4. The signal is contextualized, not actionable on its own. It matters for kill switch monitoring (threshold: extended period below 20) but not for scoring.",
+          "lesson_applied": "CL-031",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 4,
+          "source_tier": "2",
+          "weighted_severity": 2.8,
+          "thesis_relevance": "CONTEXTUAL",
+          "confidence": "HIGH",
+          "reasoning": "Per CL-031 (graduated), F&G measures retail mood, not institutional behavior. At 8 this is the lowest reading in the dataset and contextualizes the environment. Kill switch threshold: extended period below 20. We are now in that extended period. The F&G reading matters for kill switch monitoring but is NOT an independent actionable signal. The ETF flow data now available is the actual institutional signal.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": null,
+      "inference_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": null,
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-031",
+          "trigger_matched": "Using retail sentiment index reading to conclude institutional behavior without independent flow data",
+          "influence": "Fear & Greed at 8 is contextualized as environment indicator, NOT as evidence of institutional capitulation or distribution. Layer 1 already correctly applied CL-031 by noting it's a retail sentiment gauge. CRITICAL DIFFERENCE THIS CYCLE: We now HAVE ETF flow data showing actual institutional outflows ($16.6M daily XRP, $348.9M BTC, $82.9M ETH). The ETF flow data is the independent evidence CL-031 demanded. Fear & Greed at 8 CONTEXTUALIZES but does not DRIVE the institutional assessment — the ETF flow data does."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-031",
+          "trigger_matched": "Using Fear & Greed at 8 to conclude institutional behavior",
+          "influence": "F&G at 8 contextualized as environmental indicator only. CRITICAL UPDATE: We now HAVE ETF flow data showing actual outflows. CL-031 was created when no flow data existed. The ETF data is the independent evidence CL-031 demanded — F&G contextualizes but flow data drives institutional assessment."
+        }
+      ],
+      "outcome": "SURVIVED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-005"
+      ],
+      "perception": {
+        "threat": "Japan stress chain intensifying",
+        "description": "USD/JPY at 157.92 with JPN 10Y at 2.186% — BOJ trapped between defending yen (requiring rate hikes) and protecting JGB market (requiring accommodation). Oil shock directly worsens Japan's trade deficit as a net energy importer. SBI Holdings institutional adoption thesis depends on a stable Japanese macro environment. BOJ intervention risk rising.",
+        "direction": "DETERIORATION",
+        "severity": "high",
+        "proximity": "near-term",
+        "confidence": "medium",
+        "evidence": "USD/JPY 157.92, JPN 10Y 2.186%, Brent $102+, Japan is world's 4th largest oil importer",
+        "blind_spot": false,
+        "category": "geopolitical"
+      },
+      "perception_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-005"
+            ],
+            "finding": "Japan stress chain intensifying",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The finding presents correlation between USD/JPY level, JPN 10Y rate, oil prices, and institutional adoption risk as if causal relationships are established. 'Oil shock directly worsens Japan's trade deficit' may be economically sound but 'depends on a stable Japanese macro environment' implies causation between macro conditions and SBI adoption thesis without evidence of that specific link.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: USD/JPY 157.92 (Mar 6 data), JPN 10Y 2.186% (Mar 9 data). Per CL-017, verify each leg independently. USD/JPY: 157.92 > 157 threshold = elevated. JGB 10Y: 2.186% < 2.3% threshold = below elevated, but UP from 2.166% (Mar 6) — trajectory reversed from improvement to deterioration. Brent: $102.28 > $95 = critical. Japan is world's 4th largest oil importer — trade deficit expansion is mechanically valid. BOJ trapped: rate hikes defend yen but pressure JGBs; accommodation protects JGBs but weakens yen.",
+          "gap_identified": "USD/JPY data is from Mar 6, not Mar 9. With Brent surging Mar 8-9, the yen likely weakened further but we don't have the measurement. Per LZ-MR-003, staggered measurement introduces temporal distortion.",
+          "gap_type": "DATA_AVAILABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 7/10",
+          "post_audit_assessment": "Score 7/10 — the Japan stress chain is mechanically sound and the data supports it, but USD/JPY measurement is stale by 3 days during the most volatile period",
+          "audit_impact": "CL-017 verified each component independently. CL-033 prevents inferring that Japan stress accelerates SBI adoption. Score maintained but with temporal uncertainty noted.",
+          "lesson_applied": "CL-017, CL-033",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 7,
+          "source_tier": "1",
+          "weighted_severity": 7,
+          "thesis_relevance": "INDIRECT",
+          "confidence": "MEDIUM",
+          "reasoning": "USD/JPY 157.92 (elevated, >157 threshold), JGB 10Y 2.186% (below elevated but trajectory reversed to deteriorating after CL-017 identified prior improvement), Brent $102+ (critical, >$95). The BOJ trap is mechanically valid: defending yen requires hikes that pressure JGBs; accommodating JGBs weakens yen further. Oil shock directly worsens Japan's trade balance. Per CL-033, this does NOT mean SBI will accelerate XRPL adoption. Confidence MEDIUM due to stale USD/JPY data (Mar 6) during volatile period.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-005"
+            ],
+            "finding": "Japan stress chain - confidence assessment",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "Confidence marked MEDIUM citing 'stale USD/JPY data (Mar 6) during volatile period,' but the finding is about whether the Japan stress chain is 'intensifying' - a directional claim. The data shows: USD/JPY at 157.92 (elevated), JGB yields reversing to deterioration, and Brent at $102+ (critical). All three measurements are verified and support the 'intensifying' assessment at the time measured. The staleness affects current-state knowledge, not the accuracy of the Mar 6 state measurement. Either the confidence should be HIGH with a caveat about current state being unknown, or the finding should be restated as 'Japan stress chain was intensifying as of Mar 6.'",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "Oil shock compound stress chain activation",
+            "null_hypothesis": "Oil price spikes are historically common and typically reverse within weeks. Saudi Aramco production cuts may be negotiating posture, not sustained policy. Market stress is cyclical and self-correcting.",
+            "null_holds": false,
+            "which_is_more_likely": "primary",
+            "assumptions": [
+              "Saudi Aramco production cuts reflect intentional supply constraint rather than temporary operational adjustment"
+            ],
+            "assumption_count": 1,
+            "classification": "VALID",
+            "expected_timeline": "weeks",
+            "materialization_signal": "If Brent sustained above $95 for 2+ weeks AND USD/JPY breaches 160: compound stress chain is fully active. If Brent retreats below $90 within 1 week: alternative explanation (spike not floor) confirmed.",
+            "confidence": "high",
+            "connected_signals": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ]
+          }
+        ],
+        "hidden_moves": [
+          {
+            "player": "BOJ",
+            "likely_action": "BOJ conducting private stress tests of intervention scenarios for USD/JPY at 160-165 range, including coordination with Fed on dollar swap line capacity",
+            "assumption_count": 2,
+            "classification": "FLAGGED",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-001"
+            ]
+          }
+        ]
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Strategic inference: Oil shock compound stress chain activation",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The reasoning treats the compound stress chain (oil → Japan trade deficit → yen weakness → BOJ trap → carry trade stress → global liquidity contraction → crypto risk-off) as mechanically causal ('Each link is a documented macro mechanism, not a speculative chain'). While each individual correlation may be historically observed, the chain as presented conflates correlation with causation across multiple steps. The finding does not test whether alternative pathways could produce the same outcomes or whether the historical correlations hold under current structural conditions. The assumption count is listed as 1 (Saudi production cuts are intentional), but the causal chain itself embeds multiple untested causal assumptions.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-001"
+            ],
+            "finding": "Hidden move: BOJ conducting private stress tests for USD/JPY intervention",
+            "rule_violated": "LZ-CC-001",
+            "violation": "Similar to the previous hidden move - this is a logically coherent inference (BOJ is trapped, historically intervenes at 160, therefore likely preparing) but has zero verifiable evidence that stress tests are actually being conducted. The evidence_hints cite only public conditions (USD/JPY level, oil shock, historical precedent) not observable BOJ actions. The materialization signals (MoF verbal warnings, emergency meetings) are future events, not current evidence. Classification is 'FLAGGED' with 'low' confidence, which is appropriate, but the inference constructs a specific institutional action from general conditions without empirical anchor.",
+            "severity": "MINOR"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Feedback loop: Oil → Yen → BOJ → JGB → Carry Trade → Global Liquidity",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The feedback loop is described as 'active_accelerating' and the trigger states 'Any one of these could trigger forced BOJ response, which cascades through carry trade unwind to global liquidity.' This presents a multi-step cascade as mechanistically causal without testing whether the steps are genuinely causal or merely correlated. The historical observation that these variables move together does not establish that movement in one causes movement in the next under current conditions. The reasoning treats documented correlation as established causation.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "Oil shock compound stress chain activation",
+          "layer3_classification": "VALID",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "VALID classification (1 assumption: Saudi production cuts are intentional, not temporary operational adjustment). Full data support: Brent $102.28 from data feed, WatcherGuru $110-$115, Saudi Aramco cuts from Reuters via WatcherGuru, USD/JPY 157.92, JGB 2.186%. Each link in the chain is a documented macro mechanism verified by data. Per LZ-EH-005, the $102 vs $110-115 discrepancy is flagged as temporal difference (Mar 9 data feed vs Mar 8-9 reporting), not a contradiction — both exceed the $95 CRITICAL threshold. Full weight."
+        },
+        "rejection": {
+          "layer3_inference": "The thesis paradox means the crisis 'validates demand for efficient cross-border settlement' at medium-term",
+          "rejection_reason": "Partial rejection. The demand validation pathway is theoretically sound but requires an assumption chain: (1) crisis disrupts SWIFT corridors, (2) disrupted corridors seek alternatives, (3) alternatives include XRP/XRPL specifically, (4) institutions adopt during crisis rather than defaulting to known infrastructure. Per LZ-EPH-003, this is at the boundary of speculative (3+ assumptions). The near-term damage pathway requires zero assumptions — it is directly measurable in ETF flows, price, and liquidity. I accept the paradox exists but reject scoring the positive pathway at equal weight to the negative pathway. The negative pathway is measured; the positive pathway is inferred.",
+          "root_cause": "ASSUMPTION_FAILURE",
+          "confidence_in_rejection": "medium"
+        }
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Thesis paradox — crisis simultaneously damages position and validates infrastructure demand",
+            "rule_violated": "LZ-EPH-003",
+            "violation": "The rejection_log correctly identifies that the 'validation pathway' requires an assumption chain of at least 4 links: (1) crisis disrupts SWIFT, (2) disrupted corridors seek alternatives, (3) alternatives include XRP specifically, (4) institutions adopt during crisis. This exceeds the 3-assumption threshold for speculation per LZ-EPH-003. However, the compound_stress_final section and unresolved_tensions section continue to present the validation pathway as having evidentiary weight comparable to the damage pathway, which is directly measured. The system correctly flagged this in rejection_log but then did not fully propagate that constraint through the rest of the assessment. The validation pathway should be classified as speculative and given minimal weight, not held as an equal tension.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005"
+            ],
+            "finding": "Brent price discrepancy — $102.28 vs $110-115 resolved as temporal difference",
+            "rule_violated": "LZ-EH-005",
+            "violation": "The finding states the $102 vs $110-115 discrepancy is 'flagged as temporal difference (Mar 9 data feed vs Mar 8-9 reporting), not a contradiction.' However, per LZ-EH-005, when primary sources of equal weight contradict, the contradiction must be flagged rather than resolved without independent tie-breaking evidence. The finding resolves this by assuming temporal offset explains the gap, but does not provide independent verification of the timestamp difference or of oil price movement between the two measurement windows. If both measurements claim to be current as of similar timeframes, this is a genuine contradiction that should be held, not explained away. The finding may be correct that it's temporal, but without verification of the timestamp claim, this violates the prohibition on arbitrary resolution.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-017",
+          "trigger_matched": "Collective directional claim about compound stress legs — must verify each component independently against its own data",
+          "influence": "Verified each compound stress leg independently. JGB 10Y at 2.186% is UP from 2.166% (March 6) — now deteriorating again, reversing the improvement CL-017 identified. USD/JPY at 157.92, Brent at $102.28. Two of three legs now independently verified as deteriorating. CL-017's lesson applied correctly: each component checked against its own data before making collective claim."
+        },
+        {
+          "layer": 2,
+          "correction_id": "CL-033",
+          "trigger_matched": "External stress on a thesis-relevant entity does not imply acceleration of that entity's plans without direct evidence",
+          "influence": "Oil shock pressuring Japan does NOT mean SBI/BOJ will accelerate XRPL adoption. External stress could cause pause, retrench, or redirect. No evidence of changed timelines from Japanese institutions. The thesis paradox (crisis validates settlement demand but damages near-term price) is acknowledged without resolving toward either direction."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-033",
+          "trigger_matched": "Inference that external macro stress on Japan would accelerate SBI/BOJ adoption of XRPL infrastructure",
+          "influence": "Prevented scoring any 'crisis accelerates adoption' pathway for Japanese institutions. Oil shock worsening Japan's position is verified, but the behavioral response (accelerate, pause, retrench) cannot be inferred without direct evidence of changed plans."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-017",
+          "trigger_matched": "Collective directional claim about compound stress legs — verified each independently",
+          "influence": "JGB 10Y at 2.186% is UP from 2.166% (Mar 6), reversing the improvement CL-017 caught. Two of three legs now verified as deteriorating (oil critical, USD/JPY elevated). JGB moving away from improvement. Each leg verified independently before collective assessment."
+        }
+      ],
+      "outcome": "REJECTED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-006"
+      ],
+      "perception": {
+        "threat": "RLUSD supply discrepancy — two different figures",
+        "description": "CoinGecko reports RLUSD market cap at $1.579B while XRPL on-ledger supply reads 355M tokens. A ~$1.2B gap suggests most RLUSD exists on Ethereum or off-ledger, meaning XRPL itself is not the primary venue for RLUSD activity. At 32% of the $5B target, growth has plateaued or is opaque in distribution.",
+        "direction": "AMBIGUOUS",
+        "severity": "moderate",
+        "proximity": "near-term",
+        "confidence": "medium",
+        "evidence": "RLUSD CoinGecko market_cap $1.579B vs XRPL rlusd_supply 355M. Multi-chain distribution unclear.",
+        "blind_spot": true,
+        "category": "integration"
+      },
+      "perception_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-006"
+            ],
+            "finding": "RLUSD supply discrepancy",
+            "rule_violated": "LZ-EPH-003",
+            "violation": "The inference 'A ~$1.2B gap suggests most RLUSD exists on Ethereum or off-ledger, meaning XRPL itself is not the primary venue' is built on three unproven assumptions: (1) CoinGecko figure is accurate total supply, (2) the gap represents Ethereum holdings rather than measurement error, (3) distribution location indicates primary venue activity. This crosses the speculation threshold.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: CoinGecko $1.579B vs XRPL on-ledger 355M tokens. If RLUSD is $1/token (stablecoin), 355M tokens = $355M on XRPL. The ~$1.2B gap likely represents RLUSD on Ethereum. This is architecturally expected — RLUSD was launched as multi-chain. The question is whether XRPL is the PRIMARY venue. At 22.5% of total supply on XRPL, the native ledger is NOT the majority venue. This matters because the thesis positions XRPL as the institutional settlement layer — if RLUSD activity is primarily on Ethereum, it undermines the XRPL-centric thesis.",
+          "gap_identified": "I don't have Ethereum RLUSD supply data to confirm the gap explanation. The $1.2B gap is inferred, not measured. I also don't know if multi-chain distribution was always Ripple's stated strategy or if XRPL was supposed to be the primary venue.",
+          "gap_type": "THESIS_CAPABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 5/10 as data discrepancy",
+          "post_audit_assessment": "Score 5/10 — genuine blind spot about RLUSD distribution model and what it implies for XRPL centrality",
+          "audit_impact": "Knowledge audit surfaced that I don't have enough context about Ripple's intended RLUSD distribution strategy to assess whether 22.5% on XRPL is expected or problematic. Flagged for Layer 3.",
+          "lesson_applied": "CL-001",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 5,
+          "source_tier": "1",
+          "weighted_severity": 5,
+          "thesis_relevance": "DIRECT",
+          "confidence": "LOW",
+          "reasoning": "CoinGecko $1.579B total vs 355M tokens on XRPL (~$355M at $1/token). This implies ~77.5% of RLUSD exists outside XRPL, likely on Ethereum. If the thesis positions XRPL as the institutional settlement layer and RLUSD as its native stablecoin, the fact that most RLUSD exists elsewhere is structurally significant. Kill switch: $5B target by Q3 2026, currently at 32%. RLUSD needs $11.52M/day in new issuance to reach target. Confidence LOW because I don't know if multi-chain distribution was intended or if XRPL was supposed to be the primary venue.",
+          "knowledge_verified": false
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-006"
+            ],
+            "finding": "RLUSD supply discrepancy - architectural significance inference",
+            "rule_violated": "LZ-EPH-003",
+            "violation": "The reasoning chain contains multiple unproven assumptions: (1) the $1.2B gap represents RLUSD on Ethereum (inferred, not measured), (2) XRPL was intended to be the primary venue (unknown per knowledge_audit), (3) 22.5% on XRPL is problematic rather than expected (unknown per knowledge_audit), (4) multi-chain distribution undermines the XRPL-centric thesis (depends on whether the thesis requires XRPL exclusivity or just significant usage). The knowledge_audit correctly identifies 'I don't have enough context about Ripple's intended RLUSD distribution strategy to assess whether 22.5% on XRPL is expected or problematic,' yet the scored_threat states 'the fact that most RLUSD exists elsewhere is structurally significant.' This conclusion rests on at least 3 unproven assumptions and should be flagged as speculative per LZ-EPH-003.",
+            "severity": "SERIOUS"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "RLUSD supply discrepancy — 77.5% off-XRPL",
+            "null_hypothesis": "RLUSD was always designed as a multi-chain stablecoin. Ethereum deployment is standard for stablecoin liquidity (USDC and USDT are both multi-chain). The distribution is expected and does not indicate XRPL weakness.",
+            "null_holds": false,
+            "which_is_more_likely": "primary",
+            "assumptions": [
+              "Ripple's RLUSD deployment distribution reflects a genuine assessment of where liquidity utility is highest, not a temporary launch strategy"
+            ],
+            "assumption_count": 1,
+            "classification": "VALID",
+            "expected_timeline": "months",
+            "materialization_signal": "Monitor XRPL share of RLUSD supply over time. If XRPL share increases toward 50%+, the alternative explanation (deliberate multi-chain strategy with XRPL growing) gains support. If XRPL share stagnates at ~22%, the primary inference (XRPL liquidity limitation) is confirmed.",
+            "confidence": "medium",
+            "connected_signals": [
+              "20260309-2109-SIG-006"
+            ]
+          }
+        ],
+        "hidden_moves": [
+          {
+            "player": "Ripple",
+            "likely_action": "Preparing a rebranded/restructured volume reporting framework that combines RLUSD, Ripple Payments, and institutional custody metrics into a single 'Ripple ecosystem' narrative — timing release for a period when cumulative metrics look strong enough to support the narrative",
+            "assumption_count": 2,
+            "classification": "FLAGGED",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-008",
+              "20260309-2109-SIG-006"
+            ]
+          }
+        ]
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-006"
+            ],
+            "finding": "Strategic inference: RLUSD supply distribution as signal of XRPL liquidity limitations",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "Confidence is 'medium' with 1 assumption, but the alternative explanation (deliberate multi-chain strategy with different chains serving different purposes) is not eliminated. The finding states 'both are plausible' but then assigns medium confidence to the primary interpretation without independent evidence that distinguishes between the two. The materialization signal (monitor XRPL share over time) acknowledges this is unresolved, yet confidence is stated as medium rather than low.",
+            "severity": "MINOR"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-008",
+              "20260309-2109-SIG-006"
+            ],
+            "finding": "Hidden move: Ripple preparing rebranded volume reporting framework",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "Confidence is listed as 'low' with assumption_count of 2, which is appropriate proportionality. However, the classification is 'FLAGGED' rather than 'SPECULATIVE' despite two unproven assumptions and zero direct evidence. The evidence_hints section cites only tangential signals (Prime white paper positioning, Hidden Road registrations) that do not directly support the specific predicted action (rebranded combined metric). This is appropriately marked low confidence, but the reasoning process generates a specific predicted action from weak indirect signals, which pushes toward speculation. This is a borderline case - the low confidence rating partially mitigates, but the specificity of the prediction (combined metric that does NOT break out ODL separately) exceeds what the cited evidence supports.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "RLUSD 77.5% off-XRPL reveals Ripple's private assessment of XRPL liquidity limitations",
+          "layer3_classification": "VALID",
+          "data_support": "partial",
+          "contradicts_data": false,
+          "final_weight": "reduced_50",
+          "reasoning": "VALID classification (1 assumption: distribution reflects genuine assessment of liquidity utility, not temporary launch strategy). However, data support is PARTIAL — we have XRPL on-chain supply (355M, verified) and CoinGecko total ($1.579B, verified), but we do NOT have confirmed Ethereum supply. The $1.2B gap is inferred, not measured. Per LZ-EH-002, direct originating data outweighs intermediary reporting, and we lack the Ethereum chain data. 50% weight: the signal is directionally informative but the magnitude (77.5%) is estimated, not confirmed."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-006"
+            ],
+            "finding": "RLUSD 77.5% off-XRPL reveals Ripple's private assessment",
+            "rule_violated": "LZ-EH-004",
+            "violation": "The finding correctly reduces weight to 50% because the Ethereum supply figure is inferred rather than directly measured, and correctly notes per LZ-EH-002 that we lack direct chain data. However, it does not explicitly test the anomalous data against measurement failure first, per LZ-EH-004. The $1.2B gap between CoinGecko total and XRPL on-chain could represent: (1) actual Ethereum deployment, (2) CoinGecko aggregation error, (3) XRPL on-chain measurement error, (4) tokens in custodial wallets not visible on public explorers. The finding jumps to interpretation (1) without explicitly ruling out (2), (3), or (4) as measurement artifacts. While the 50% weight reduction implicitly acknowledges uncertainty, the explicit LZ-EH-004 protocol (test measurement failure first) is not followed in the reasoning narrative.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-007"
+      ],
+      "perception": {
+        "threat": "Digital Asset Market Clarity Act — banks waiting",
+        "description": "Former CFTC Chair explicitly states banks need the Clarity Act more than crypto does — without regulatory certainty they won't build digital payment rails. This directly validates the thesis dependency on regulatory infrastructure while confirming banks are NOT building yet. Status remains 'Pending' with no advancement signal.",
+        "direction": "CONTRADICTORY",
+        "severity": "high",
+        "proximity": "near-term",
+        "confidence": "high",
+        "evidence": "CoinDesk reporting former CFTC chair statement on Mar 9. Kill switch clarity_act status: 'pending'.",
+        "blind_spot": false,
+        "category": "regulatory"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: CoinDesk reporting former CFTC Chair statement. Per CL-005, source credibility matters — former CFTC Chair is a high-credibility regulatory expert, not a marketing tweet. The statement is CONTRADICTORY per Layer 1: it validates that regulatory infrastructure matters (thesis dependency confirmed) while confirming banks won't build yet (progress stalled). Kill switch: Clarity Act status 'Pending' with no advancement signal.",
+          "gap_identified": "I don't know the legislative calendar or committee status for the Clarity Act. 'Pending' is static — I need to know if there are scheduled hearings, committee votes, or sponsor activity to assess trajectory.",
+          "gap_type": "DATA_AVAILABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 7/10",
+          "post_audit_assessment": "Score 7/10 — high-credibility source confirming both thesis dependency and current stall. The contradictory nature is itself the finding per LZ-EH-005.",
+          "audit_impact": "CL-005 confirmed this is NOT a marketing tweet and deserves full evidentiary weight. Score maintained.",
+          "lesson_applied": "CL-005",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 7,
+          "source_tier": "2",
+          "weighted_severity": 4.9,
+          "thesis_relevance": "DIRECT",
+          "confidence": "HIGH",
+          "reasoning": "Former CFTC Chair (high-credibility source per CL-005) explicitly confirms: banks need regulatory clarity AND they are NOT building without it. This is a CONTRADICTORY signal per LZ-EH-005 — it validates the thesis dependency on regulation while confirming progress is stalled. Kill switch: Clarity Act 'Pending' with no advancement signal. The contradiction is the finding: the regulatory dependency is real AND unfulfilled.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "Digital Asset Market Clarity Act — banks waiting",
+            "null_hypothesis": "Legislative processes are slow. Pending status is the normal state for financial legislation. Banks always cite regulatory uncertainty as a reason for delayed adoption of new technologies.",
+            "null_holds": true,
+            "which_is_more_likely": "null",
+            "assumptions": [],
+            "assumption_count": 0,
+            "classification": "NULL_HYPOTHESIS_HOLDS",
+            "expected_timeline": "quarters",
+            "materialization_signal": "Committee hearing schedule, sponsor statements, lobbying disclosure filings. The absence of ANY of these is itself the signal that progress is stalled.",
+            "confidence": "high",
+            "connected_signals": [
+              "20260309-2109-SIG-007"
+            ]
+          }
+        ],
+        "hidden_moves": []
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-007"
+            ],
+            "finding": "Player analysis: SWIFT inferred strategy - 'SWIFT has no incentive to develop settlement infrastructure that would disintermediate its own messaging fees'",
+            "rule_violated": "LZ-EPH-003",
+            "violation": "This inference about SWIFT's incentive structure is presented with 'medium' confidence but rests on at least three unproven assumptions: (1) SWIFT's revenue model is primarily messaging fees rather than other services, (2) settlement infrastructure would necessarily disintermediate messaging rather than complement it, (3) SWIFT's decision-making is purely rational profit-maximization rather than influenced by shareholder banks' strategic preferences. The assumption count is not explicitly stated for this player analysis section, but the chain of reasoning crosses the three-assumption threshold that triggers the 'speculative' classification per LZ-EPH-003.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "Clarity Act — null holds, legislative slowness is normal",
+          "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "Null accepted. Former CFTC Chair statement verified via CoinDesk (high-credibility source per CL-005). The contradictory nature — validates dependency AND confirms blockage — is itself the finding per LZ-EH-005. Full weight on the contradiction as the output."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-005",
+          "trigger_matched": "Source credibility and track record must be factored into severity scoring",
+          "influence": "Former CFTC Chair statement reported by CoinDesk is a high-credibility source with direct regulatory expertise. This is NOT a marketing tweet — it's a policy statement from a former regulator. Full evidentiary weight applied. The statement confirms banks are NOT building without regulatory clarity, which is both a validation of the regulatory dependency thesis and a confirmation that progress is stalled."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-005",
+          "trigger_matched": "Source credibility and track record check for former CFTC Chair statement",
+          "influence": "Former CFTC Chair is a high-credibility regulatory expert. Full evidentiary weight applied. Not a marketing tweet. The statement confirms both thesis dependency validation AND current stall."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-034",
+          "trigger_matched": "Inference about US banks building proprietary settlement prototypes",
+          "influence": "CL-034 prevents assuming banks are prototyping proprietary settlement systems without direct evidence. The former CFTC Chair statement confirms banks are WAITING, not building. If anything, CL-034's lesson is reinforced: the absence of building activity is the default, not a hidden move."
+        }
+      ],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-008"
+      ],
+      "perception": {
+        "threat": "ODL volume data — 15+ month blackout",
+        "description": "Ripple has not published ODL corridor volume data for over 15 months. This is the single most important metric for validating the core thesis — that XRP is being used for institutional cross-border settlement — and it remains completely unavailable. The absence itself is an increasingly negative signal about the underlying data.",
+        "direction": "DETERIORATION",
+        "severity": "critical",
+        "proximity": "immediate",
+        "confidence": "high",
+        "evidence": "odl_volume kill switch: status 'NEEDS_DATA', current null, no data source available. Last known publication >15 months ago.",
+        "blind_spot": false,
+        "category": "assumption_decay"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: ODL volume kill switch status NEEDS_DATA, current null. No data source available. Per LZ-EH-003, Ripple's ACTION of ceasing publication carries more evidentiary weight than any statement about ODL growth. Per CL-007, infrastructure existence doesn't imply deployment. The inverse: publishing cessation is an action that implies the data may not support the narrative. This is the single most important metric for the core thesis — that XRP is being used for institutional cross-border settlement.",
+          "gap_identified": "The ODL data gap is itself the most critical finding. Without this data, the CORE thesis cannot be confirmed or falsified. This is a DATA_AVAILABILITY_GAP of maximum severity.",
+          "gap_type": "DATA_AVAILABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 9/10",
+          "post_audit_assessment": "Score 9/10 — the absence of data for the single most important thesis metric, combined with the action of ceasing publication, is the highest-severity structural concern",
+          "audit_impact": "CL-007 reinforced: the cessation of publishing is an action. LZ-EH-003 applied: actions outweigh statements. No reduction possible.",
+          "lesson_applied": "CL-007",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 9,
+          "source_tier": "1",
+          "weighted_severity": 9,
+          "thesis_relevance": "DIRECT",
+          "confidence": "HIGH",
+          "reasoning": "This is the single most important metric for the core thesis — that XRP is being used for institutional cross-border settlement. Ripple's decision to STOP publishing is an action (LZ-EH-003: actions outweigh statements). Companies that have good data publish good data. The 15+ month blackout, when they previously published this data, is an increasingly negative signal about the underlying metric. Kill switch status: NEEDS_DATA. The thesis CANNOT be confirmed or falsified at its core without this data. Per CL-007, infrastructure existence doesn't imply deployment — and the corollary is that publishing cessation implies the data may not support the narrative.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "ODL volume data — 15+ month blackout",
+            "null_hypothesis": "Ripple restructured ODL into 'Ripple Payments' and the old metric is no longer meaningful. Corporate reorganization created a reporting gap that has not been filled. This is bureaucratic, not strategic.",
+            "null_holds": false,
+            "which_is_more_likely": "primary",
+            "assumptions": [
+              "Ripple's decision to stop publishing is primarily motivated by data quality rather than corporate restructuring or legal strategy"
+            ],
+            "assumption_count": 1,
+            "classification": "VALID",
+            "expected_timeline": "quarters",
+            "materialization_signal": "Either (a) Ripple resumes publishing volume data showing strong growth, which would falsify this inference, or (b) Ripple continues the blackout through Q3 2026, at which point the ODL Transparency kill switch should trigger. The absence of publication IS the ongoing signal.",
+            "confidence": "high",
+            "connected_signals": [
+              "20260309-2109-SIG-008"
+            ]
+          }
+        ],
+        "hidden_moves": [
+          {
+            "player": "Ripple",
+            "likely_action": "Preparing a rebranded/restructured volume reporting framework that combines RLUSD, Ripple Payments, and institutional custody metrics into a single 'Ripple ecosystem' narrative — timing release for a period when cumulative metrics look strong enough to support the narrative",
+            "assumption_count": 2,
+            "classification": "FLAGGED",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-008",
+              "20260309-2109-SIG-006"
+            ]
+          }
+        ]
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-008"
+            ],
+            "finding": "Strategic inference: ODL volume data blackout interpretation",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "Confidence is 'high' but the reasoning rests on one unproven assumption ('Ripple's decision to stop publishing is primarily motivated by data quality rather than corporate restructuring or legal strategy'). The finding itself acknowledges two alternative explanations (corporate reorganization, legal risk management) that are plausible and unresolved. High confidence requires the alternatives to be eliminated with evidence, not assumed away. The assumption count is honestly reported as 1, but the confidence rating does not reflect the residual uncertainty from the unresolved alternatives.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-008",
+              "20260309-2109-SIG-006"
+            ],
+            "finding": "Hidden move: Ripple preparing rebranded volume reporting framework",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "Confidence is listed as 'low' with assumption_count of 2, which is appropriate proportionality. However, the classification is 'FLAGGED' rather than 'SPECULATIVE' despite two unproven assumptions and zero direct evidence. The evidence_hints section cites only tangential signals (Prime white paper positioning, Hidden Road registrations) that do not directly support the specific predicted action (rebranded combined metric). This is appropriately marked low confidence, but the reasoning process generates a specific predicted action from weak indirect signals, which pushes toward speculation. This is a borderline case - the low confidence rating partially mitigates, but the specificity of the prediction (combined metric that does NOT break out ODL separately) exceeds what the cited evidence supports.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "ODL blackout — companies with good data publish good data",
+          "layer3_classification": "VALID",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "VALID classification (1 assumption: cessation is data-quality motivated). Full data support: 15+ month blackout is a verified measurement, prior publication is verified, cessation is a verified action per LZ-EH-003. Layer 3 correctly kept both explanations live (data quality vs competitive secrecy) without resolving. The asymmetric information logic — organizations publish metrics that support their narrative — is sound and does not require the single assumption to hold absolutely. Even the competitive-secrecy explanation is mildly negative (implies the data landscape is such that sharing it is disadvantageous). Full weight."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-008"
+            ],
+            "finding": "ODL blackout — companies with good data publish good data",
+            "rule_violated": "LZ-EPH-002",
+            "violation": "The finding assigns 'high' confidence to an inference based on one unverified assumption (cessation is data-quality motivated). The asymmetric information logic is sound as a heuristic, but it is not a verified causal mechanism. High confidence requires the assumption itself to be verified, not merely plausible. The alternative explanation (competitive secrecy, corporate restructuring) is acknowledged but not ruled out with evidence. Confidence should be 'medium' — the behavioral signal is strong, but the specific motivation remains unverified.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-007",
+          "trigger_matched": "Infrastructure existence does not imply deployment intent — and conversely, absence of transparency data is increasingly a negative signal about the underlying data",
+          "influence": "CL-007 warns against inferring deployment from infrastructure existence. The inverse applies here: Ripple's 15+ month refusal to publish ODL data, when they previously did publish it, is an action per LZ-EH-003 (actions carry more weight than statements). The decision to STOP publishing is itself an action that carries evidentiary weight about the underlying data quality."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-007",
+          "trigger_matched": "Inference following the pattern 'X exists therefore X is planned' — applied inversely: cessation of data publication is an action that reveals more than the infrastructure itself",
+          "influence": "Ripple's ODL data blackout is treated as an action per LZ-EH-003. The inference that 'companies with good data publish good data' passes with 1 assumption (that Ripple's decision to stop publishing is data-quality motivated rather than competitive-secrecy motivated). Both explanations are kept live; neither resolved without evidence."
+        }
+      ],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-009"
+      ],
+      "perception": {
+        "threat": "Permissioned DEX — zero confirmed institutional adoption",
+        "description": "Permissioned Domains have been live for approximately 17 days with no confirmed institutional participant. The kill switch target is 5 institutions by Q3 2026 (September 30) and current count is null. No public announcements from any institution joining. This feature was positioned as a key catalyst for compliant institutional access.",
+        "direction": "AMBIGUOUS",
+        "severity": "moderate",
+        "proximity": "near-term",
+        "confidence": "medium",
+        "evidence": "permissioned_dex_adoption kill switch: target 5 institutions, current null, deadline 2026-09-30. No tier 1 or tier 2 posts mention institutional onboarding.",
+        "blind_spot": false,
+        "category": "integration"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: Kill switch target 5 institutions by Q3 2026 (Sep 30). Current: null. Live for ~17 days. CL-011 applies: theoretical failure modes of unused infrastructure are not current signals. However, the signal here is adoption pace, not theoretical failure. 17 days with zero adoption is notable but the deadline is 204 days away. The question is whether zero adoption at day 17 is informative about eventual adoption by day 221.",
+          "gap_identified": "I don't know if there are institutional onboarding processes underway that haven't been publicly announced. Institutional compliance and onboarding timelines are typically months, not days. Zero public announcements at day 17 may be normal for institutional product cycles.",
+          "gap_type": "THESIS_CAPABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 5/10",
+          "post_audit_assessment": "Score 4/10 — too early to score as a meaningful negative signal. Institutional onboarding takes months. 17 days is within normal corporate decision-making timelines.",
+          "audit_impact": "CL-011 reduced from 5 to 4. The timeframe is too short to draw conclusions about adoption trajectory. Monitor, don't score.",
+          "lesson_applied": "CL-011",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 4,
+          "source_tier": "1",
+          "weighted_severity": 4,
+          "thesis_relevance": "DIRECT",
+          "confidence": "LOW",
+          "reasoning": "Kill switch: 5 institutions by Sep 30, 2026 (204 days remaining). Current: null. Live for 17 days. Per CL-011, theoretical failure modes of unused infrastructure are not current signals, BUT this is an adoption pace measurement, not a theoretical failure mode. Institutional compliance and onboarding typically takes months — zero public announcements at day 17 may be within normal corporate timelines. Confidence LOW because I cannot assess whether zero announcements at day 17 is expected or problematic without institutional onboarding benchmarks.",
+          "knowledge_verified": false
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-009"
+            ],
+            "finding": "Permissioned DEX adoption pace - insufficient evidence for scoring",
+            "rule_violated": "LZ-EPH-001",
+            "violation": "The knowledge_audit states 'I don't know if there are institutional onboarding processes underway that haven't been publicly announced. Institutional compliance and onboarding timelines are typically months, not days. Zero public announcements at day 17 may be normal for institutional product cycles.' Despite this, the finding scores severity at 4 with the reasoning 'Institutional compliance and onboarding typically takes months — zero public announcements at day 17 may be within normal corporate timelines. Confidence LOW because I cannot assess whether zero announcements at day 17 is expected or problematic.' If the analyst cannot assess whether the observation is expected or problematic, and has LOW confidence, the correct output per LZ-EPH-001 is UNSCORED with explanation of insufficient evidence, not scored at 4/10.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "Permissioned DEX — zero confirmed institutional adoption at day 17",
+            "null_hypothesis": "Institutional compliance, legal review, and onboarding processes take months. Zero public announcements at day 17 is within normal corporate decision-making timelines. The amendment went live February 20; expecting visible adoption by March 9 is unrealistic.",
+            "null_holds": true,
+            "which_is_more_likely": "null",
+            "assumptions": [],
+            "assumption_count": 0,
+            "classification": "NULL_HYPOTHESIS_HOLDS",
+            "expected_timeline": "months",
+            "materialization_signal": "First institutional announcement of permissioned DEX participation. If no announcements by June 2026 (120 days, halfway to deadline), re-assess as increasingly negative.",
+            "confidence": "medium",
+            "connected_signals": [
+              "20260309-2109-SIG-009"
+            ]
+          }
+        ],
+        "hidden_moves": []
+      },
+      "inference_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "Permissioned DEX — null holds, 17 days too early",
+          "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "Null accepted. Institutional onboarding timelines of 3-12 months are well-documented. 17 days with zero public announcements is within normal parameters. Full weight on the null — this is not yet a signal."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-011",
+          "trigger_matched": "Scoring theoretical failure modes of infrastructure with zero or negligible usage as current signals",
+          "influence": "Permissioned DEX at 17 days with zero confirmed adoption. CL-011 applies for theoretical fragmentation concerns, but the signal here is different: it's measuring adoption pace against a kill switch target (5 institutions by Q3 2026). At 17 days/0 institutions, the PACE concern is valid, but the deadline is still 6+ months away. Scored as moderate, not critical. The absence of adoption after 17 days is too early to be a falsification signal but warrants monitoring."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-011",
+          "trigger_matched": "Scoring theoretical failure modes of infrastructure with zero usage",
+          "influence": "Permissioned DEX at 17 days/0 adoption — CL-011 prevents treating theoretical fragmentation as current signal. Adoption pace is a valid monitoring metric but 17 days is within normal institutional onboarding timelines. Scored as monitoring, not active threat."
+        }
+      ],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-010"
+      ],
+      "perception": {
+        "threat": "XRPL DEX volume extremely low",
+        "description": "XRPL DEX 24h volume at $1.63M is negligible for a network positioned as institutional settlement infrastructure. Book depth shows only ~264K XRP in bids vs ~1M XRP in asks — an asymmetric order book skewed toward selling. This suggests the native DEX is not attracting meaningful trading or settlement activity.",
+        "direction": "DETERIORATION",
+        "severity": "moderate",
+        "proximity": "immediate",
+        "confidence": "high",
+        "evidence": "dex_volume_24h_usd $1.63M, total_bid_xrp 263,865 vs total_ask_xrp 1,000,136 — 3.8:1 sell-side skew",
+        "blind_spot": true,
+        "category": "structure"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: DEX 24h volume $1.63M, book depth 264K XRP bids vs 1M XRP asks (3.8:1 sell skew). For a network positioned as institutional settlement infrastructure, $1.63M daily DEX volume is negligible. However, the thesis is about cross-border settlement (ODL corridors), not DEX trading activity. DEX volume may not be the right metric for the thesis — ODL uses liquidity pathways that may not show up in standard DEX volume figures. But we DON'T HAVE ODL data, so DEX volume is the closest available proxy.",
+          "gap_identified": "I don't know whether ODL/settlement activity would appear in DEX volume metrics or if it uses different liquidity pathways. If ODL activity bypasses the native DEX, then DEX volume is not a valid proxy for the core thesis metric.",
+          "gap_type": "THESIS_CAPABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 6/10",
+          "post_audit_assessment": "Score 5/10 — the low volume is real but I'm uncertain whether DEX volume is the right metric for the settlement thesis. The sell-side skew is independently concerning.",
+          "audit_impact": "Knowledge gap reduced severity. The sell-side skew (3.8:1) is a measurable structural signal regardless of whether DEX volume is the right proxy.",
+          "lesson_applied": "NONE",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 5,
+          "source_tier": "1",
+          "weighted_severity": 5,
+          "thesis_relevance": "INDIRECT",
+          "confidence": "LOW",
+          "reasoning": "$1.63M 24h DEX volume is negligible for institutional settlement infrastructure. The 3.8:1 sell-side skew (1M XRP asks vs 264K XRP bids) is independently concerning as a structural imbalance. However, I have a THESIS_CAPABILITY_GAP: I don't know whether ODL/settlement activity would appear in DEX volume figures or if it uses different liquidity pathways. If ODL bypasses the native DEX, this metric is not a valid proxy for the core thesis. Confidence LOW due to this gap.",
+          "knowledge_verified": false
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-010"
+            ],
+            "finding": "XRPL DEX volume - proxy validity assumption",
+            "rule_violated": "LZ-EPH-001",
+            "violation": "The knowledge_audit identifies a critical gap: 'I don't know whether ODL/settlement activity would appear in DEX volume metrics or if it uses different liquidity pathways. If ODL activity bypasses the native DEX, then DEX volume is not a valid proxy for the settlement thesis.' Despite this acknowledged gap, the finding scores DEX volume at severity 5 as 'XRPL DEX volume extremely low' with thesis_relevance INDIRECT. If the analyst does not know whether DEX volume is a valid proxy for the thesis metric, the honest output per LZ-EPH-001 is 'I don't know whether low DEX volume is thesis-relevant' rather than scoring it at 5/10. The sell-side skew is independently valid, but the overall severity assessment assumes DEX volume relevance without knowing if that assumption holds.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "XRPL DEX volume extremely low — $1.63M daily",
+            "null_hypothesis": "XRPL's native DEX is not the venue where institutional settlement occurs. ODL corridors may use different liquidity pathways (AMM pools, market makers, off-DEX). Low DEX volume does not indicate low settlement utility.",
+            "null_holds": false,
+            "which_is_more_likely": "null",
+            "assumptions": [],
+            "assumption_count": 0,
+            "classification": "FLAGGED",
+            "expected_timeline": "months",
+            "materialization_signal": "If ODL volume data is ever published and shows strong corridor activity alongside low DEX volume, the null hypothesis would be confirmed (different pathways). If ODL data shows low activity, the DEX volume becomes a corroborating signal.",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-010"
+            ]
+          }
+        ],
+        "hidden_moves": []
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-010"
+            ],
+            "finding": "Strategic inference: XRPL DEX volume - flagged as thesis capability gap",
+            "rule_violated": "LZ-EPH-001",
+            "violation": "This finding correctly identifies uncertainty and flags the metric rather than forcing resolution - this is exemplary use of LZ-EPH-001. However, it then proceeds to draw an inference from the sell-side skew (3.8:1 indicates net selling pressure) while simultaneously stating the metric's relevance to the thesis is unclear. The finding violates the spirit of 'I don't know' by extracting a directional signal (net selling pressure consistent with risk-off) from data whose thesis-relevance is acknowledged as unknown. The classification 'FLAGGED' with 'low' confidence is appropriate, but the reasoning should have stopped at 'cannot assess thesis relevance' rather than extracting a partial signal.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "XRPL DEX volume — flagged, cannot determine if DEX volume proxies settlement",
+          "layer3_classification": "FLAGGED",
+          "data_support": "partial",
+          "contradicts_data": false,
+          "final_weight": "reduced_50",
+          "reasoning": "FLAGGED classification (Layer 3 could not evaluate null hypothesis due to thesis capability gap). Partial data support: DEX volume ($1.63M) and sell-side skew (3.8:1) are verified on-chain measurements, but their relevance to the settlement thesis is unknown. FLAGGED × PARTIAL = 50% × 50% = 25% effective weight, but I round to reduced_50 because the sell-side skew is independently informative regardless of the settlement proxy question."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-011"
+      ],
+      "perception": {
+        "threat": "DXY weakening below 100",
+        "description": "Dollar index at 99.22, below the psychologically significant 100 level. A weakening dollar is generally favorable for non-dollar settlement alternatives and could increase demand for alternative bridge currencies in cross-border payments. However, this may reflect flight from USD to safe havens rather than structural dollar weakness.",
+        "direction": "ACCELERATION",
+        "severity": "moderate",
+        "proximity": "near-term",
+        "confidence": "medium",
+        "evidence": "DXY at 99.2159 as of Mar 9. Context: oil shock typically drives dollar strength via safe haven, but DXY declining suggests other forces at work.",
+        "blind_spot": true,
+        "category": "macro"
+      },
+      "perception_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-011"
+            ],
+            "finding": "DXY weakening below 100",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The finding states 'A weakening dollar is generally favorable for non-dollar settlement alternatives and could increase demand for alternative bridge currencies' as if this is causal, then immediately contradicts itself by noting this may reflect safe haven flows. The first statement presents correlation (weak dollar / alt currency demand) as causation without evidence.",
+            "severity": "MINOR"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-011"
+            ],
+            "finding": "DXY weakening below 100 - contradictory interpretation",
+            "rule_violated": "LZ-EH-005",
+            "violation": "The finding presents two contradictory explanations for DXY weakness: (1) structurally favorable for XRP settlement demand, (2) flight from USD to safe havens (which would be risk-off, unfavorable). These are mutually exclusive interpretations with equal evidentiary basis, yet the contradiction is embedded within the finding rather than being flagged as the primary observation requiring independent resolution.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: DXY at 99.22 as of Mar 9. A weakening dollar is mechanically favorable for non-dollar settlement alternatives. However, Layer 1 correctly flags that DXY declining during an oil shock is anomalous — oil shocks typically drive dollar strength via safe haven demand. The DXY decline during a risk-off event suggests other forces at work (potential loss of confidence in US fiscal position, or capital flows to non-US safe havens). Per LZ-EH-004, anomalous data should be treated as potential measurement or source failure first. However, DXY is from financeflow, a verified data source.",
+          "gap_identified": "I don't know why DXY is declining during a risk-off event. The anomaly is real but the explanation requires macro analysis beyond my current data. Multiple explanations exist and I cannot discriminate between them.",
+          "gap_type": "COMPETITIVE_KNOWLEDGE_GAP",
+          "pre_audit_assessment": "Would have scored 3/10 as mild positive",
+          "post_audit_assessment": "Score 3/10 — mild positive for thesis but the anomaly raises questions I cannot answer",
+          "audit_impact": "The anomaly flag is the most valuable output. DXY declining during oil shock + risk-off is unusual and may indicate a macro regime change that affects the thesis differently than a standard risk-off.",
+          "lesson_applied": "NONE",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 3,
+          "source_tier": "1",
+          "weighted_severity": 3,
+          "thesis_relevance": "INDIRECT",
+          "confidence": "LOW",
+          "reasoning": "DXY at 99.22 is mechanically favorable for non-dollar settlement alternatives. However, the decline during an oil shock + risk-off event is anomalous (per LZ-EH-004, treat anomaly as potential measurement issue first). The data source (financeflow) is verified but the underlying dynamic is unclear — multiple explanations exist (fiscal confidence loss, non-US safe haven flows, etc.). The anomaly is the most valuable finding: something unusual is happening in dollar markets that I cannot explain from available data.",
+          "knowledge_verified": false
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-011"
+            ],
+            "finding": "DXY weakening - anomaly treatment",
+            "rule_violated": "LZ-EH-004",
+            "violation": "The reasoning acknowledges 'DXY declining during an oil shock is anomalous' and correctly cites LZ-EH-004 'treat anomaly as potential measurement issue first.' However, the finding then proceeds to score DXY decline as a mild positive (severity 3, thesis_relevance INDIRECT) without first verifying whether the anomaly is a measurement issue. The finding states 'The data source (financeflow) is verified but the underlying dynamic is unclear' - this confirms the data point but does not rule out measurement artifact (e.g., stale weekend data, futures vs. spot, timing mismatch). Per LZ-EH-004, anomalous data should not be scored as a real-world event until verified by independent source. The finding should either obtain independent DXY verification or mark this as UNSCORED pending verification.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "DXY weakening below 100 during risk-off",
+            "null_hypothesis": "DXY movements reflect complex multi-factor dynamics (relative rate expectations, trade flows, positioning). A decline to 99.22 may reflect expected US rate cuts being priced in, not fundamental dollar weakness.",
+            "null_holds": true,
+            "which_is_more_likely": "null",
+            "assumptions": [],
+            "assumption_count": 0,
+            "classification": "NULL_HYPOTHESIS_HOLDS",
+            "expected_timeline": "weeks",
+            "materialization_signal": "If DXY continues declining while oil rises AND gold rises simultaneously, this would confirm dollar confidence erosion rather than rate expectations. Monitor gold/DXY/oil correlation over next 2 weeks.",
+            "confidence": "low",
+            "connected_signals": [
+              "20260309-2109-SIG-011"
+            ]
+          }
+        ],
+        "hidden_moves": []
+      },
+      "inference_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "DXY anomaly — null holds, multiple benign explanations",
+          "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "Null accepted. DXY at 99.22 is a verified measurement but the underlying dynamic is unexplained. Per LZ-EPH-001, 'I don't know' is the correct output. The anomaly is logged but does not drive the assessment."
+        },
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-011"
+            ],
+            "finding": "DXY anomaly — null holds, multiple benign explanations",
+            "rule_violated": "LZ-RC-003",
+            "violation": "The finding treats the absence of an explanation for the DXY weakening as informationally neutral and correctly outputs 'I don't know'. However, it then assigns this unexplained anomaly a composite score of 3.0 with 'low' confidence, implying it has mild directional meaning ('mild thesis positive on surface'). Per LZ-RC-003, absence of evidence is informationally neutral — it should carry no directional weight. The correct treatment is either (a) score of 0 with notation as monitoring context only, or (b) acknowledge the surface reading but flag that without a causal explanation, the directional interpretation is speculative. The finding leans toward the latter but doesn't explicitly constraint the score.",
+            "severity": "MINOR"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [],
+      "outcome": "FLAGGED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-012"
+      ],
+      "perception": {
+        "threat": "Ethereum institutional accumulation signal",
+        "description": "BitMine purchased 60,976 ETH ($122M) — a significant institutional commitment to Ethereum as competing settlement/smart contract infrastructure. This represents institutional capital being directed toward Ethereum rather than XRP/XRPL for blockchain-based financial infrastructure. Strategy also bought 17,994 BTC ($1.28B), reinforcing institutional preference for BTC/ETH.",
+        "direction": "DETERIORATION",
+        "severity": "moderate",
+        "proximity": "near-term",
+        "confidence": "high",
+        "evidence": "WatcherGuru: BitMine buys 60,976 ETH ($122M), Strategy buys 17,994 BTC ($1.28B). No comparable XRP treasury purchases reported.",
+        "blind_spot": false,
+        "category": "competitive"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: WatcherGuru (Tier 2) reports BitMine 60,976 ETH ($122M) and Strategy 17,994 BTC ($1.28B). Per CL-023, verify these are specific verifiable claims, not vague characterizations — they are specific (amount, entity, value). The inference that this demonstrates 'institutional preference for BTC/ETH over XRP' requires caution: different entities make different investment decisions for different reasons. BitMine and Strategy are crypto-native treasury firms, not cross-border settlement institutions. Their purchases reflect crypto-asset conviction, not settlement infrastructure preference.",
+          "gap_identified": "I don't know if any comparable entity has made XRP treasury purchases. The absence of a comparable XRP purchase is noted but per LZ-RC-003, absence of evidence is not evidence of absence.",
+          "gap_type": "DATA_AVAILABILITY_GAP",
+          "pre_audit_assessment": "Would have scored 5/10 as competitive threat",
+          "post_audit_assessment": "Score 4/10 — the purchases are real but the competitive inference is weaker than it appears. These are treasury plays, not settlement infrastructure decisions.",
+          "audit_impact": "CL-023 and careful source analysis reduced severity. The inference from treasury purchases to settlement infrastructure preference requires assumptions about different entity types making comparable decisions.",
+          "lesson_applied": "CL-023",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 4,
+          "source_tier": "2",
+          "weighted_severity": 2.8,
+          "thesis_relevance": "CONTEXTUAL",
+          "confidence": "MEDIUM",
+          "reasoning": "BitMine ($122M ETH) and Strategy ($1.28B BTC) are crypto-native treasury firms making asset allocation decisions, not cross-border settlement infrastructure decisions. The inference that these purchases represent 'institutional preference for BTC/ETH over XRP for settlement' conflates treasury management with infrastructure adoption. Per CL-023, these are specific verifiable claims from Tier 2 source with appropriate weight. The competitive signal is real but weaker than headline suggests — different entities, different strategies, different use cases.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": null,
+      "inference_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": null,
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-023",
+          "trigger_matched": "Secondary source characterizations as evidence of operational activity",
+          "influence": "BitMine ETH purchase and Strategy BTC purchase are reported by WatcherGuru (Tier 2). These are specific, verifiable claims about corporate treasury actions — higher evidentiary weight than media characterizations of vague activity. However, the inference that this represents 'institutional preference for BTC/ETH over XRP' requires caution — different entities making different investment decisions doesn't prove preference hierarchy. Scored the purchases as verified but the preference inference as moderate."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-023",
+          "trigger_matched": "Secondary source characterizations as evidence of operational activity",
+          "influence": "BitMine and Strategy purchases reported by WatcherGuru (Tier 2) are specific verifiable claims — acceptable. But the inference that these represent 'institutional preference for BTC/ETH over XRP for settlement' conflates treasury management with infrastructure decisions. Different entities, different motives."
+        }
+      ],
+      "outcome": "SURVIVED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-013"
+      ],
+      "perception": {
+        "threat": "x402 protocol operational but minimal activity",
+        "description": "The x402 agent has completed 13 confirmed mainnet payments totaling 0.013 XRP over ~12 days, with last payment on Mar 7. While proving XRPL machine-to-machine payment capability works, the scale is trivial. No evidence of third-party adoption or expansion beyond this single agent. Technology works but lacks adoption signal.",
+        "direction": "AMBIGUOUS",
+        "severity": "low",
+        "proximity": "medium-term",
+        "confidence": "medium",
+        "evidence": "13 payments, 0.013 XRP lifetime spend, single merchant address, no activity after Mar 7",
+        "blind_spot": false,
+        "category": "technology"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: 13 confirmed mainnet payments, 0.013 XRP lifetime, single merchant. Technology proof-of-concept works but scale is trivial. This is consistent with early-stage protocol deployment. The question is whether this is expected pace or evidence of failure to achieve adoption.",
+          "gap_identified": "I don't know what expected adoption pace looks like for a machine-to-machine payment protocol at 12 days. No benchmark exists in the data.",
+          "gap_type": "THRESHOLD_CALIBRATION_GAP",
+          "pre_audit_assessment": "Would have scored 2/10",
+          "post_audit_assessment": "Score 2/10 — operational proof-of-concept with trivial scale. Too early and too small to be thesis-relevant.",
+          "audit_impact": "No change. This is genuinely low-relevance at current scale.",
+          "lesson_applied": "NONE",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 2,
+          "source_tier": "1",
+          "weighted_severity": 2,
+          "thesis_relevance": "CONTEXTUAL",
+          "confidence": "MEDIUM",
+          "reasoning": "13 payments, 0.013 XRP lifetime, single merchant, 12 days. Technology proof-of-concept works but scale is trivial. Too early and too small to be thesis-relevant. No evidence of third-party adoption. The gap between 'technology works' and 'technology is adopted' is where CL-007 applies: infrastructure existence doesn't imply deployment.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": null,
+      "inference_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": null,
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [],
+      "outcome": "SURVIVED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-014"
+      ],
+      "perception": {
+        "threat": "JoelKatz (David Schwartz) social content — no thesis signals",
+        "description": "Ripple CTO's recent posts are entirely focused on privacy philosophy, AI/copyright debates, and epistemology. Zero posts about XRPL development, Permissioned Domains, RLUSD, institutional partnerships, or technical roadmap. Per CL-030 these are not business signals, but the absence of any business-related communication from the CTO during a critical deployment period is itself notable.",
+        "direction": "AMBIGUOUS",
+        "severity": "low",
+        "proximity": "near-term",
+        "confidence": "medium",
+        "evidence": "20 JoelKatz posts captured, all on privacy/AI/copyright topics, none referencing XRPL infrastructure or business developments",
+        "blind_spot": true,
+        "category": "agent_capacity"
+      },
+      "perception_gate": {
+        "violations": [],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "CL-030 GRADUATED: Personal social media from thesis-relevant individuals is not a proxy for organizational strategy. This is the 8th occurrence of this signal type. JoelKatz discussing privacy/AI/copyright is personal intellectual content. XRPL had record February transactions while JoelKatz discussed unrelated topics in prior cycles.",
+          "gap_identified": "NONE — this signal type has been definitively resolved by 7+ corrections.",
+          "gap_type": "NONE",
+          "pre_audit_assessment": "Would have scored 3/10 as CTO disengagement concern",
+          "post_audit_assessment": "Score 1/10 — contextual noise only. Per CL-030, personal content is not a thesis signal.",
+          "audit_impact": "CL-030 reduced from 3 to 1. This should not be generating signals at all.",
+          "lesson_applied": "CL-030",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 1,
+          "source_tier": "1",
+          "weighted_severity": 1,
+          "thesis_relevance": "CONTEXTUAL",
+          "confidence": "HIGH",
+          "reasoning": "CL-030 GRADUATED and RETIRED. 8th occurrence. Personal social media from thesis-relevant individuals is NOT a proxy for organizational strategy. JoelKatz discussing privacy/AI/copyright on Twitter has zero evidentiary bearing on XRPL development activity, institutional partnerships, or business strategy. Scored at minimum as contextual noise.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": null,
+      "inference_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": null,
+        "rejection": null
+      },
+      "judgment_gate": {
+        "violations": [],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-030",
+          "trigger_matched": "Interpreting personal, non-thesis-relevant social media content from a thesis-relevant individual as evidence of organizational strategy or development priorities",
+          "influence": "CL-030 graduated to Layer 1 SWEEP prompt. Layer 1 correctly noted the signal as AMBIGUOUS/low severity and acknowledged CL-030 applies. JoelKatz discussing privacy/AI/copyright is personal intellectual content, not a thesis signal. Scored as contextual noise. The absence of business content during a deployment period is noted but NOT scored as a threat per 7+ prior corrections."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-030",
+          "trigger_matched": "Interpreting personal social media content from JoelKatz as evidence of organizational strategy",
+          "influence": "JoelKatz privacy/AI/copyright discussion scored as contextual noise. No thesis signal generated. No behavioral inference drawn."
+        }
+      ],
+      "outcome": "SURVIVED"
+    },
+    {
+      "signal_ids": [
+        "20260309-2109-SIG-015"
+      ],
+      "perception": {
+        "threat": "US-Iran escalation as geopolitical tail risk",
+        "description": "Trump stating oil will 'drop rapidly when destruction of Iran nuclear threat is over' signals active military consideration. Jim Cramer sees no 'path to de-escalation.' A kinetic conflict would spike oil further, crash risk assets, and potentially disrupt SWIFT corridors in the Middle East — simultaneously destroying near-term price and creating medium-term settlement infrastructure demand.",
+        "direction": "CONTRADICTORY",
+        "severity": "critical",
+        "proximity": "immediate",
+        "confidence": "medium",
+        "evidence": "Trump quote on Iran, Cramer de-escalation comment, Brent already at $102+, silver crashing 5% (risk-off signal)",
+        "blind_spot": false,
+        "category": "geopolitical"
+      },
+      "perception_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "US-Iran escalation as geopolitical tail risk",
+            "rule_violated": "LZ-RC-005",
+            "violation": "The finding treats Trump's forward-looking statement about oil 'dropping rapidly' after Iran threat resolution as having equivalent evidentiary weight to current Brent price measurements. The prediction is used to construct a scenario ('kinetic conflict would spike oil further, crash risk assets') that is presented with 'medium' confidence despite being entirely forward-looking and conditional.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "US-Iran escalation - contradictory directional assessment",
+            "rule_violated": "LZ-EH-005",
+            "violation": "The finding is marked direction 'CONTRADICTORY' and states conflict would 'simultaneously destroy near-term price and create medium-term settlement infrastructure demand' — two opposing thesis impacts. However, rather than flagging this as an unresolvable contradiction requiring independent evidence, the finding presents both as co-existing assessments with shared medium confidence, which is arbitrary resolution disguised as nuance.",
+            "severity": "SERIOUS"
+          }
+        ],
+        "compliance": "SERIOUS_ISSUES",
+        "findings_reviewed": 15
+      },
+      "contextualization": {
+        "knowledge_audit": {
+          "knowledge_check": "Verified: Trump quote on Iran nuclear threat, Cramer de-escalation comment, Brent $102+, silver -5%. Layer 1 correctly identifies the CONTRADICTORY nature: kinetic conflict would spike oil further (damaging near-term price) while potentially disrupting SWIFT corridors (creating medium-term settlement infrastructure demand). This is the thesis paradox at maximum expression. Per CL-033, external stress does NOT imply acceleration of thesis-relevant entity plans.",
+          "gap_identified": "I cannot assess probability of kinetic conflict from available data. This is a geopolitical intelligence question, not a knowledge question. Military escalation probability is outside the system's analytical scope.",
+          "gap_type": "COMPETITIVE_KNOWLEDGE_GAP",
+          "pre_audit_assessment": "Would have scored 8/10",
+          "post_audit_assessment": "Score 7/10 — the contradictory nature per LZ-EH-005 is the finding. Cannot resolve toward bearish or bullish. The near-term damage path is faster than the medium-term benefit path.",
+          "audit_impact": "CL-033 prevents scoring the 'settlement demand acceleration' pathway. Reduced from 8 to 7 because the contradictory nature means neither the pure-bearish nor pure-bullish interpretation is supported.",
+          "lesson_applied": "CL-033",
+          "status": "SCORED"
+        },
+        "scored": {
+          "severity": 7,
+          "source_tier": "2",
+          "weighted_severity": 4.9,
+          "thesis_relevance": "INDIRECT",
+          "confidence": "MEDIUM",
+          "reasoning": "Trump's Iran nuclear threat statement, Cramer's 'no path to de-escalation,' Brent $102+, silver -5%. Per LZ-EH-005, the CONTRADICTORY nature is the finding: kinetic conflict would simultaneously destroy near-term price (oil spike, risk-off cascade) and validate medium-term settlement infrastructure demand (SWIFT disruption, corridor stress). Per CL-033, external stress does NOT imply acceleration of thesis-relevant entity plans. The near-term damage pathway (days) is faster than the benefit pathway (quarters), creating asymmetric time risk for the position. Military escalation probability is outside analytical scope.",
+          "knowledge_verified": true
+        },
+        "unscored": null
+      },
+      "contextualization_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "US-Iran escalation - contradictory impact resolution",
+            "rule_violated": "LZ-EH-005",
+            "violation": "The reasoning correctly identifies the CONTRADICTORY nature: 'kinetic conflict would simultaneously destroy near-term price (oil spike, risk-off cascade) and validate medium-term settlement infrastructure demand (SWIFT disruption, corridor stress).' This is an explicit equal-weight contradiction - the same event has opposite implications on different timeframes. However, the scored_threat then resolves this by stating 'The near-term damage pathway (days) is faster than the benefit pathway (quarters), creating asymmetric time risk for the position' and scores it at severity 7. Per LZ-EH-005, contradictions should be flagged rather than resolved without independent tie-breaking evidence. The 'faster pathway wins' logic is a judgment call, not evidence. The honest output is 'Iran escalation has contradictory implications that cannot be resolved from available data - severity depends on time horizon and position structure, which are outside analytical scope.'",
+            "severity": "SERIOUS"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "inference": {
+        "strategic_inferences": [
+          {
+            "finding": "Oil shock compound stress chain activation",
+            "null_hypothesis": "Oil price spikes are historically common and typically reverse within weeks. Saudi Aramco production cuts may be negotiating posture, not sustained policy. Market stress is cyclical and self-correcting.",
+            "null_holds": false,
+            "which_is_more_likely": "primary",
+            "assumptions": [
+              "Saudi Aramco production cuts reflect intentional supply constraint rather than temporary operational adjustment"
+            ],
+            "assumption_count": 1,
+            "classification": "VALID",
+            "expected_timeline": "weeks",
+            "materialization_signal": "If Brent sustained above $95 for 2+ weeks AND USD/JPY breaches 160: compound stress chain is fully active. If Brent retreats below $90 within 1 week: alternative explanation (spike not floor) confirmed.",
+            "confidence": "high",
+            "connected_signals": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ]
+          }
+        ],
+        "hidden_moves": []
+      },
+      "inference_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Strategic inference: Oil shock compound stress chain activation",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The reasoning treats the compound stress chain (oil → Japan trade deficit → yen weakness → BOJ trap → carry trade stress → global liquidity contraction → crypto risk-off) as mechanically causal ('Each link is a documented macro mechanism, not a speculative chain'). While each individual correlation may be historically observed, the chain as presented conflates correlation with causation across multiple steps. The finding does not test whether alternative pathways could produce the same outcomes or whether the historical correlations hold under current structural conditions. The assumption count is listed as 1 (Saudi production cuts are intentional), but the causal chain itself embeds multiple untested causal assumptions.",
+            "severity": "MODERATE"
+          },
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-001",
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Feedback loop: Oil → Yen → BOJ → JGB → Carry Trade → Global Liquidity",
+            "rule_violated": "LZ-RC-001",
+            "violation": "The feedback loop is described as 'active_accelerating' and the trigger states 'Any one of these could trigger forced BOJ response, which cascades through carry trade unwind to global liquidity.' This presents a multi-step cascade as mechanistically causal without testing whether the steps are genuinely causal or merely correlated. The historical observation that these variables move together does not establish that movement in one causes movement in the next under current conditions. The reasoning treats documented correlation as established causation.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "judgment": {
+        "final_threat_matrix": null,
+        "burden_of_proof": {
+          "inference": "Oil shock compound stress chain activation",
+          "layer3_classification": "VALID",
+          "data_support": "full",
+          "contradicts_data": false,
+          "final_weight": "full",
+          "reasoning": "VALID classification (1 assumption: Saudi production cuts are intentional, not temporary operational adjustment). Full data support: Brent $102.28 from data feed, WatcherGuru $110-$115, Saudi Aramco cuts from Reuters via WatcherGuru, USD/JPY 157.92, JGB 2.186%. Each link in the chain is a documented macro mechanism verified by data. Per LZ-EH-005, the $102 vs $110-115 discrepancy is flagged as temporal difference (Mar 9 data feed vs Mar 8-9 reporting), not a contradiction — both exceed the $95 CRITICAL threshold. Full weight."
+        },
+        "rejection": {
+          "layer3_inference": "The thesis paradox means the crisis 'validates demand for efficient cross-border settlement' at medium-term",
+          "rejection_reason": "Partial rejection. The demand validation pathway is theoretically sound but requires an assumption chain: (1) crisis disrupts SWIFT corridors, (2) disrupted corridors seek alternatives, (3) alternatives include XRP/XRPL specifically, (4) institutions adopt during crisis rather than defaulting to known infrastructure. Per LZ-EPH-003, this is at the boundary of speculative (3+ assumptions). The near-term damage pathway requires zero assumptions — it is directly measurable in ETF flows, price, and liquidity. I accept the paradox exists but reject scoring the positive pathway at equal weight to the negative pathway. The negative pathway is measured; the positive pathway is inferred.",
+          "root_cause": "ASSUMPTION_FAILURE",
+          "confidence_in_rejection": "medium"
+        }
+      },
+      "judgment_gate": {
+        "violations": [
+          {
+            "signal_ids": [
+              "20260309-2109-SIG-005",
+              "20260309-2109-SIG-015"
+            ],
+            "finding": "Thesis paradox — crisis simultaneously damages position and validates infrastructure demand",
+            "rule_violated": "LZ-EPH-003",
+            "violation": "The rejection_log correctly identifies that the 'validation pathway' requires an assumption chain of at least 4 links: (1) crisis disrupts SWIFT, (2) disrupted corridors seek alternatives, (3) alternatives include XRP specifically, (4) institutions adopt during crisis. This exceeds the 3-assumption threshold for speculation per LZ-EPH-003. However, the compound_stress_final section and unresolved_tensions section continue to present the validation pathway as having evidentiary weight comparable to the damage pathway, which is directly measured. The system correctly flagged this in rejection_log but then did not fully propagate that constraint through the rest of the assessment. The validation pathway should be classified as speculative and given minimal weight, not held as an equal tension.",
+            "severity": "MODERATE"
+          }
+        ],
+        "compliance": "MODERATE_ISSUES",
+        "findings_reviewed": 47
+      },
+      "corrections_applied": [
+        {
+          "layer": 2,
+          "correction_id": "CL-033",
+          "trigger_matched": "External stress on a thesis-relevant entity does not imply acceleration of that entity's plans without direct evidence",
+          "influence": "Oil shock pressuring Japan does NOT mean SBI/BOJ will accelerate XRPL adoption. External stress could cause pause, retrench, or redirect. No evidence of changed timelines from Japanese institutions. The thesis paradox (crisis validates settlement demand but damages near-term price) is acknowledged without resolving toward either direction."
+        },
+        {
+          "layer": 3,
+          "correction_id": "CL-033",
+          "trigger_matched": "Inference that external macro stress on Japan would accelerate SBI/BOJ adoption of XRPL infrastructure",
+          "influence": "Prevented scoring any 'crisis accelerates adoption' pathway for Japanese institutions. Oil shock worsening Japan's position is verified, but the behavioral response (accelerate, pause, retrench) cannot be inferred without direct evidence of changed plans."
+        }
+      ],
+      "outcome": "REJECTED"
+    }
+  ]
+}

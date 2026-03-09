@@ -1,0 +1,39 @@
+{
+  "domain_name": "XRP Institutional Settlement Thesis",
+  "system_framing": "investment thesis monitoring system",
+  "system_role_description": "You are monitoring an investment thesis about institutional adoption of XRP/XRPL for cross-border settlement infrastructure.",
+
+  "thesis_status_labels": {
+    "STRENGTHENING": "Evidence increasingly supports the thesis",
+    "STABLE": "Evidence picture is unchanged — no meaningful movement in either direction",
+    "WEAKENING": "Evidence increasingly challenges the thesis",
+    "CONTESTED": "Evidence is pulling in both directions simultaneously — genuine tension exists",
+    "INSUFFICIENT_EVIDENCE": "Not enough evidence to determine direction"
+  },
+
+  "action_recommendations": [
+    {
+      "id": "HOLD_POSITION",
+      "description": "Maintain current position and monitoring cadence",
+      "when": "Thesis status is STABLE or STRENGTHENING with high confidence"
+    },
+    {
+      "id": "INCREASE_MONITORING",
+      "description": "Increase monitoring frequency and attention to emerging signals",
+      "when": "Thesis status is CONTESTED, WEAKENING with low confidence, or significant unresolved tensions exist"
+    },
+    {
+      "id": "REDUCE_EXPOSURE",
+      "description": "Reduce position size or hedge against identified risks",
+      "when": "Thesis status is WEAKENING with medium-high confidence"
+    },
+    {
+      "id": "EXIT_SIGNAL",
+      "description": "Evidence warrants full position exit — thesis falsification criteria approaching or met",
+      "when": "Kill switch TRIGGERED or thesis status is WEAKENING with high confidence and multiple confirming signals"
+    }
+  ],
+
+  "scoring_label": "Thesis Status",
+  "scoring_description": "Directional assessment of thesis viability based on current evidence"
+}
