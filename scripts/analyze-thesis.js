@@ -841,12 +841,14 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "corrections_referenced": [
     {
       "correction_id": "CL-XXX",
+      "signal_ids": ["from Layer 1"],
       "trigger_matched": "what specific trigger condition matched this analysis",
       "influence_on_assessment": "how the stored lesson changed this assessment"
     }
   ],
   "knowledge_audit": [
     {
+      "signal_ids": ["from Layer 1"],
       "threat": "name from Layer 1",
       "knowledge_check": "what I verified before scoring",
       "gap_identified": "description of gap, or NONE",
@@ -860,6 +862,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "scored_threats": [
     {
+      "signal_ids": ["from Layer 1"],
       "threat": "name",
       "severity": 0,
       "source_tier": "1 | 2 | 3",
@@ -872,6 +875,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "unscored_threats": [
     {
+      "signal_ids": ["from Layer 1"],
       "threat": "name",
       "reason": "description of why it cannot be scored",
       "knowledge_needed": "what would be needed to score this",
@@ -1078,6 +1082,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "corrections_referenced": [
     {
       "correction_id": "CL-XXX",
+      "signal_ids": ["from source signals"],
       "trigger_matched": "what specific trigger condition matched this analysis",
       "influence_on_assessment": "how the stored lesson changed this assessment"
     }
@@ -1112,6 +1117,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "strategic_inferences": [
     {
       "finding_from_layer2": "signal name",
+      "signal_ids": ["from source signals"],
       "null_hypothesis": "simplest non-strategic explanation",
       "null_holds": true,
       "rational_explanation": "most likely explanation if strategic",
@@ -1130,6 +1136,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "hidden_moves": [
     {
       "player": "name",
+      "signal_ids": ["from source signals"],
       "likely_action": "what they're probably doing privately",
       "incentive_basis": "why this would be rational",
       "evidence_hints": "observable signals that support this",
@@ -1295,6 +1302,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "burden_of_proof_applied": [
     {
       "inference": "name from Layer 3",
+      "signal_ids": ["from source signals"],
       "layer3_classification": "VALID | FLAGGED | SPECULATIVE | INSUFFICIENT_EVIDENCE | NULL_HYPOTHESIS_HOLDS",
       "data_support": "full | partial | none",
       "contradicts_data": false,
@@ -1325,6 +1333,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "final_threat_matrix": [
     {
       "threat": "name",
+      "signal_ids": ["from source signals"],
       "layer2_composite": 0,
       "layer3_adjustment": "description of behavioral evidence applied",
       "adjustment_direction": "up | down | unchanged",
@@ -1361,6 +1370,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "rejection_log": [
     {
       "layer3_inference": "what Layer 3 believed",
+      "signal_ids": ["from source signals"],
       "rejection_reason": "why Layer 4 rejected it",
       "root_cause": "ASSUMPTION_FAILURE | APOPHENIA | INSUFFICIENT_EVIDENCE | CONTRADICTED_BY_DATA",
       "confidence_in_rejection": "high | medium",
@@ -1678,18 +1688,29 @@ async function main() {
     warn('pipeline', 'Layer 1 SWEEP returned empty — four-layer pipeline cannot run');
   }
 
+  // ── Signal ID assignment (deterministic, code-assigned — AD #8)
+  let prunedSignals = [];
+  const runTs = new Date().toISOString().replace(/[-:]/g, '').slice(0, 13).replace('T', '-');
+  if (Array.isArray(sweepResults)) {
+    for (let i = 0; i < sweepResults.length; i++) {
+      sweepResults[i].signal_ids = [`${runTs}-SIG-${String(i + 1).padStart(3, '0')}`];
+    }
+  }
+
   if (sweepResults.length > 0) {
     // Prune to top 15 threats: critical → high → moderate → low
     const SEVERITY_RANK = { critical: 0, high: 1, moderate: 2, low: 3 };
     let threatsToAssess = sweepResults;
     if (sweepResults.length > 15) {
-      threatsToAssess = sweepResults
+      const sorted = sweepResults
         .map((t, i) => ({ t, i }))
-        .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i)
-        .slice(0, 15)
-        .sort((a, b) => a.i - b.i)
-        .map(({ t }) => t);
-      log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 threats`);
+        .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i);
+      threatsToAssess = sorted.slice(0, 15).sort((a, b) => a.i - b.i).map(({ t }) => t);
+      prunedSignals = sorted.slice(15).map(({ t }) => ({
+        signal_ids: t.signal_ids, threat: t.threat, severity: t.severity,
+        direction: t.direction, category: t.category, pruning_reason: 'severity_rank_cutoff'
+      }));
+      log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 threats (${prunedSignals.length} pruned)`);
     }
 
     // ── Layer 2: CONTEXTUALIZE ────────────────────────────────────────────
@@ -1827,6 +1848,9 @@ async function main() {
     // Attached here (not in bridge) so it persists in all pipeline paths including fallbacks
     if (sweepResults && sweepResults.length > 0) {
       assessment360._layer1_raw = sweepResults;
+    }
+    if (prunedSignals.length > 0) {
+      assessment360._pruned_signals = prunedSignals;
     }
     try {
       const reportPath = path.join(__dirname, '..', 'data', '360-report.json');

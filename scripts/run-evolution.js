@@ -348,17 +348,28 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
       return stepResult;
     }
 
+    // ── Signal ID assignment (deterministic, code-assigned — AD #8)
+    let prunedSignals = [];
+    const runTs = new Date().toISOString().replace(/[-:]/g, '').slice(0, 13).replace('T', '-');
+    if (Array.isArray(sweepResults)) {
+      for (let i = 0; i < sweepResults.length; i++) {
+        sweepResults[i].signal_ids = [`${runTs}-SIG-${String(i + 1).padStart(3, '0')}`];
+      }
+    }
+
     // Prune to top 15 (same as production)
     const SEVERITY_RANK = { critical: 0, high: 1, moderate: 2, low: 3 };
     let threatsToAssess = sweepResults;
     if (sweepResults.length > 15) {
-      threatsToAssess = sweepResults
+      const sorted = sweepResults
         .map((t, i) => ({ t, i }))
-        .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i)
-        .slice(0, 15)
-        .sort((a, b) => a.i - b.i)
-        .map(({ t }) => t);
-      log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 signals`);
+        .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i);
+      threatsToAssess = sorted.slice(0, 15).sort((a, b) => a.i - b.i).map(({ t }) => t);
+      prunedSignals = sorted.slice(15).map(({ t }) => ({
+        signal_ids: t.signal_ids, threat: t.threat, severity: t.severity,
+        direction: t.direction, category: t.category, pruning_reason: 'severity_rank_cutoff'
+      }));
+      log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 signals (${prunedSignals.length} pruned)`);
     }
 
     // ── Layer 2: CONTEXTUALIZE ──────────────────────────────────────
@@ -461,6 +472,9 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
       reconcileResult, contextualizeResult, inferenceResult, previousScore
     );
     report360._layer1_raw = sweepResults;
+    if (prunedSignals.length > 0) {
+      report360._pruned_signals = prunedSignals;
+    }
     fs.writeFileSync(
       path.join(runDir, '360-report.json'),
       JSON.stringify(report360, null, 2)
