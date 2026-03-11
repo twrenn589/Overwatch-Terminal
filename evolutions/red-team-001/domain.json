@@ -19,6 +19,8 @@
       "description": "Evidence warrants immediate controlled depressurization. Issue system-wide boil water advisories and alert emergency services of total fire flow loss."
     }
   ],
+  "action_severe": "EMERGENCY_SHUTDOWN",
+  "action_monitor": "INCREASE_MONITORING",
   "scoring_label": "Hydraulic Grid Integrity",
   "scoring_description": "Assessment of water network pressure stability, mechanical redundancy, and catastrophic failure risk."
 }

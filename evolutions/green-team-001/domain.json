@@ -19,6 +19,8 @@
       "description": "Evidence of uncontained structural failure or critical contamination risk. Immediately isolate affected sectors and initiate boil water protocols."
     }
   ],
+  "action_severe": "EMERGENCY_SHUTDOWN",
+  "action_monitor": "INCREASE_MONITORING",
   "scoring_label": "Grid Viability Status",
   "scoring_description": "Assessment of distribution network integrity, pressure maintenance, and failover capacity."
 }

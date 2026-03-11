@@ -1,12 +1,14 @@
 {
   "domain": "structured_finance",
   "thesis_name": "Project Atlas Fixed-Rate Architecture",
-  "action_recommendations": {
-    "HOLD_POSITION": "Maintain current assessment. No structural changes detected that alter thesis viability.",
-    "INCREASE_MONITORING": "Elevated signals detected. Increase monitoring frequency. Watch for compound stress indicators crossing elevated thresholds.",
-    "REDUCE_EXPOSURE": "Material structural stress detected. Recommend reducing position sizing or hedging. One or more kill switches approaching WARNING status.",
-    "EXIT_SIGNAL": "Fundamental thesis falsification detected. One or more kill switches TRIGGERED. Architecture is failing or has failed."
-  },
+  "action_recommendations": [
+    { "id": "HOLD_POSITION", "description": "Maintain current assessment. No structural changes detected that alter thesis viability." },
+    { "id": "INCREASE_MONITORING", "description": "Elevated signals detected. Increase monitoring frequency. Watch for compound stress indicators crossing elevated thresholds." },
+    { "id": "REDUCE_EXPOSURE", "description": "Material structural stress detected. Recommend reducing position sizing or hedging. One or more kill switches approaching WARNING status." },
+    { "id": "EXIT_SIGNAL", "description": "Fundamental thesis falsification detected. One or more kill switches TRIGGERED. Architecture is failing or has failed." }
+  ],
+  "action_severe": "EXIT_SIGNAL",
+  "action_monitor": "INCREASE_MONITORING",
   "scoring_terminology": {
     "scale_description": "0-100 scale measuring structural stress on the Atlas Fixed-Rate Architecture thesis",
     "low_range": "0-25: Thesis operating normally. Minor deviations within expected parameters.",
