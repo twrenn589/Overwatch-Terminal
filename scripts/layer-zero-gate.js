@@ -8,7 +8,7 @@
  * this gate reviews the output against all 17 immutable Layer Zero rules.
  * It asks one question: did this layer follow the rules?
  *
- * The gate does NOT re-analyze data. It does NOT score threats. It does NOT
+ * The gate does NOT re-analyze data. It does NOT score signals. It does NOT
  * perform game theory. It reviews reasoning quality against epistemological
  * standards.
  *
@@ -105,7 +105,7 @@ ${JSON.stringify(tier1Flags, null, 2)}
 These flags indicate specific areas where the code detected potential rule violations. Focus your review on these findings first, then review the rest of the output.`
     : `CODE-LEVEL FLAGS: None. Tier 1 structural checks passed. Perform standard epistemological review.`;
 
-  return `You are an epistemological compliance reviewer. You are NOT an analyst. You do NOT evaluate whether conclusions are correct, whether threats are real, or whether the thesis is valid. You review whether the reasoning process followed the rules.
+  return `You are an epistemological compliance reviewer. You are NOT an analyst. You do NOT evaluate whether conclusions are correct, whether signals are real, or whether the thesis is valid. You review whether the reasoning process followed the rules.
 
 You have one job: review the following analytical output against 17 immutable epistemological rules and identify any violations.
 

@@ -119,9 +119,9 @@ function assembleTrace(options) {
   if (!layer4) { warn('init', '_layer4_raw missing — trace will have gaps'); }
 
   log('init', `Layer 1: ${layer1.length} signals`);
-  if (layer2) log('init', `Layer 2: scored=${(layer2.scored_threats || []).length}, audit=${(layer2.knowledge_audit || []).length}`);
+  if (layer2) log('init', `Layer 2: scored=${(layer2.scored_signals || []).length}, audit=${(layer2.knowledge_audit || []).length}`);
   if (layer3) log('init', `Layer 3: inferences=${(layer3.strategic_inferences || []).length}, hidden=${(layer3.hidden_moves || []).length}`);
-  if (layer4) log('init', `Layer 4: matrix=${(layer4.final_threat_matrix || []).length}, rejections=${(layer4.rejection_log || []).length}`);
+  if (layer4) log('init', `Layer 4: matrix=${(layer4.final_signal_matrix || []).length}, rejections=${(layer4.rejection_log || []).length}`);
 
   // ── Load gate ledger ──
   let gates = {};
@@ -175,7 +175,7 @@ function assembleTrace(options) {
       trace.push({
         signal_ids: [sigId],
         perception: {
-          threat: prunedEntry.threat,
+          signal: prunedEntry.signal,
           severity: prunedEntry.severity,
           direction: prunedEntry.direction,
           category: prunedEntry.category,
@@ -197,7 +197,7 @@ function assembleTrace(options) {
     // — Layer 1: Perception —
     const l1Signal = layer1.find(s => entryContainsSignal(s, sigId));
     const perception = l1Signal ? {
-      threat: l1Signal.threat,
+      signal: l1Signal.signal,
       description: l1Signal.description,
       direction: l1Signal.direction,
       severity: l1Signal.severity,
@@ -217,8 +217,8 @@ function assembleTrace(options) {
 
     if (layer2) {
       const auditEntry = (layer2.knowledge_audit || []).find(e => entryContainsSignal(e, sigId));
-      const scoredEntry = (layer2.scored_threats || []).find(e => entryContainsSignal(e, sigId));
-      const unscoredEntry = (layer2.unscored_threats || []).find(e => entryContainsSignal(e, sigId));
+      const scoredEntry = (layer2.scored_signals || []).find(e => entryContainsSignal(e, sigId));
+      const unscoredEntry = (layer2.unscored_signals || []).find(e => entryContainsSignal(e, sigId));
 
       contextualization = {
         knowledge_audit: auditEntry ? {
@@ -316,8 +316,8 @@ function assembleTrace(options) {
     let outcome = 'SURVIVED';  // default, may be overridden
 
     if (layer4) {
-      // Check final threat matrix
-      const matrixEntry = (layer4.final_threat_matrix || []).find(e => entryContainsSignal(e, sigId));
+      // Check final signal matrix
+      const matrixEntry = (layer4.final_signal_matrix || []).find(e => entryContainsSignal(e, sigId));
 
       // Check burden of proof
       const bopEntry = (layer4.burden_of_proof_applied || []).find(e => entryContainsSignal(e, sigId));
@@ -326,8 +326,8 @@ function assembleTrace(options) {
       const rejectionEntry = (layer4.rejection_log || []).find(e => entryContainsSignal(e, sigId));
 
       judgment = {
-        final_threat_matrix: matrixEntry ? {
-          threat: matrixEntry.threat,
+        final_signal_matrix: matrixEntry ? {
+          signal: matrixEntry.signal,
           layer2_composite: matrixEntry.layer2_composite,
           layer3_adjustment: matrixEntry.layer3_adjustment,
           adjustment_direction: matrixEntry.adjustment_direction,

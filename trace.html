@@ -214,7 +214,7 @@ body {
   font-weight: 700;
   font-family: var(--mono);
 }
-.signal-threat {
+.signal-name {
   font-size: 12px;
   color: #ccc;
   font-weight: 500;
@@ -859,7 +859,7 @@ function renderSignalList() {
         <span class="signal-id" style="color:${o.c};">${sigShort(id)}</span>
         <span class="outcome-badge" style="color:${o.c};background:${o.bg};border:1px solid ${o.b};">${o.i} ${sig.outcome}</span>
       </div>
-      <div class="signal-threat">${esc(sig.perception?.threat || '—')}</div>
+      <div class="signal-name">${esc(sig.perception?.signal || '—')}</div>
       <div class="signal-meta">
         <span class="signal-meta-tag">${esc(sig.perception?.category || '')}</span>
         <span style="font-size:9px;color:${dirColor};font-family:var(--mono);">${esc(dir || '')}</span>
@@ -893,7 +893,7 @@ function renderDetailPanel() {
     ['SWEEP', sig.perception, sig.perception_gate],
     ['CONTEXT', sig.contextualization, sig.contextualization_gate],
     ['INFER', sig.inference, sig.inference_gate],
-    ['RECONCILE', sig.judgment?.final_threat_matrix || sig.judgment?.rejection || sig.judgment?.burden_of_proof, sig.judgment_gate]
+    ['RECONCILE', sig.judgment?.final_signal_matrix || sig.judgment?.rejection || sig.judgment?.burden_of_proof, sig.judgment_gate]
   ];
 
   let layerHtml = '<div class="layer-flow">';
@@ -1043,8 +1043,8 @@ function renderDetailPanel() {
   if (sig.judgment) {
     sectionsHtml += '<div class="detail-section"><div class="detail-section-title">LAYER 4 — JUDGMENT</div>';
 
-    if (sig.judgment.final_threat_matrix) {
-      const m = sig.judgment.final_threat_matrix;
+    if (sig.judgment.final_signal_matrix) {
+      const m = sig.judgment.final_signal_matrix;
       sectionsHtml += `<div style="display:flex;gap:12px;flex-wrap:wrap;">
         <div class="detail-field"><div class="detail-label">FINAL COMPOSITE</div><div class="detail-value highlight" style="font-size:18px;font-family:var(--mono);">${m.final_composite}</div></div>
         <div class="detail-field"><div class="detail-label">L2 COMPOSITE</div><div class="detail-value">${m.layer2_composite}</div></div>
@@ -1082,7 +1082,7 @@ function renderDetailPanel() {
       <div>
         <span class="signal-id" style="color:${o.c};font-size:13px;">${sigShort(selectedSignal)}</span>
         <span style="color:var(--text-muted);margin:0 8px;">—</span>
-        <span style="font-size:13px;">${esc(sig.perception?.threat)}</span>
+        <span style="font-size:13px;">${esc(sig.perception?.signal)}</span>
       </div>
       <button class="detail-close" id="detailClose">✕</button>
     </div>
@@ -1143,7 +1143,7 @@ function detectPatterns(runs) {
         if (!c.correction_id) continue;
         if (!runCorrs.has(c.correction_id)) { corrCounts[c.correction_id] = (corrCounts[c.correction_id]||0) + 1; runCorrs.add(c.correction_id); }
         if (!corrExamples[c.correction_id]) corrExamples[c.correction_id] = [];
-        corrExamples[c.correction_id].push({ run:run._run_timestamp, trigger:c.trigger_matched, signal:sig.perception?.threat });
+        corrExamples[c.correction_id].push({ run:run._run_timestamp, trigger:c.trigger_matched, signal:sig.perception?.signal });
       }
     }
   }
