@@ -1292,9 +1292,9 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 
 5. KILL SWITCH REVIEW — Review all 10 falsification criteria. If any kill switch is TRIGGERED, state this FIRST. Everything else is secondary.
 
-6. FINAL BEAR PRESSURE SCORE (0-100) — The definitive number. State how it moved from Layer 2's score and why.
+6. THESIS STATUS — Declare thesis_status as one of: STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE. Then declare confidence_in_status as: high | medium | low. Write thesis_status_reasoning (2-3 sentences explaining why this status, not just describing the data). CONTESTED means evidence is pulling in both directions simultaneously — hold the paradox, do not force resolution. INSUFFICIENT_EVIDENCE means the data does not support a determination — say so.
 
-7. TACTICAL RECOMMENDATION — One of: HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL. No ambiguity.
+7. ACTION RECOMMENDATION — Select action_recommendation from: HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL. Write action_reasoning (2-3 sentences). The action must be consistent with thesis_status: STRENGTHENING cannot produce EXIT_SIGNAL. INSUFFICIENT_EVIDENCE cannot produce EXIT_SIGNAL. If thesis_status is CONTESTED, action must be INCREASE_MONITORING or REDUCE_EXPOSURE — never EXIT_SIGNAL on contested evidence alone.
 
 8. REJECTION LOG — If Layer 4 overruled any Layer 3 inference, document it with root cause and corrections ledger trigger.
 
