@@ -1237,6 +1237,18 @@ async function runReconcile(contextualizeResult, inferenceResult, marketData, th
   const client = new Anthropic({ apiKey });
 
   // Layer 4 receives BOTH Layer 2 and Layer 3 output — it has the most complete picture.
+  const domainActions = (opts.domainConfig && opts.domainConfig.action_recommendations)
+    ? opts.domainConfig.action_recommendations
+    : [
+        { id: 'HOLD_POSITION' },
+        { id: 'INCREASE_MONITORING' },
+        { id: 'REDUCE_EXPOSURE' },
+        { id: 'EXIT_SIGNAL' }
+      ];
+  const actionEnumValues = domainActions.map(a => a.id).join(' | ');
+  const actionSevere = (opts.domainConfig && opts.domainConfig.action_severe) || 'EXIT_SIGNAL';
+  const actionMonitor = (opts.domainConfig && opts.domainConfig.action_monitor) || 'INCREASE_MONITORING';
+
   const prompt = `${LAYER_ZERO_RULES}
 
 You are the final decision-maker in a four-layer investment thesis monitoring system. You have the most complete picture of any layer: scored data from Layer 2 AND strategic reasoning from Layer 3. Your job is not to add more analysis. Your job is to DECIDE what everything means and what to do about it.
@@ -1294,7 +1306,7 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 
 6. THESIS STATUS — Declare thesis_status as one of: STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE. Then declare confidence_in_status as: high | medium | low. Write thesis_status_reasoning (2-3 sentences explaining why this status, not just describing the data). CONTESTED means evidence is pulling in both directions simultaneously — hold the paradox, do not force resolution. INSUFFICIENT_EVIDENCE means the data does not support a determination — say so.
 
-7. ACTION RECOMMENDATION — Select action_recommendation from: HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL. Write action_reasoning (2-3 sentences). The action must be consistent with thesis_status: STRENGTHENING cannot produce EXIT_SIGNAL. INSUFFICIENT_EVIDENCE cannot produce EXIT_SIGNAL. If thesis_status is CONTESTED, action must be INCREASE_MONITORING or REDUCE_EXPOSURE — never EXIT_SIGNAL on contested evidence alone.
+7. ACTION RECOMMENDATION — Select action_recommendation from: ${actionEnumValues}. Write action_reasoning (2-3 sentences). The action must be consistent with thesis_status: STRENGTHENING cannot produce ${actionSevere}. INSUFFICIENT_EVIDENCE cannot produce ${actionSevere}. If thesis_status is CONTESTED, action must be ${actionMonitor} or an intermediate option — never ${actionSevere} on contested evidence alone.
 
 8. REJECTION LOG — If Layer 4 overruled any Layer 3 inference, document it with root cause and corrections ledger trigger.
 
