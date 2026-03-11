@@ -1,4 +1,18 @@
 [
-  "cognitive-trace-2026-03-09T04-40-39-055Z.json",
-  "cognitive-trace-2026-03-09T13-39-45-853Z.json"
+  {
+    "filename": "cognitive-trace-2026-03-09T21-49-10-418Z.json",
+    "timestamp": "2026-03-09T21-49-10-418Z"
+  },
+  {
+    "filename": "cognitive-trace-2026-03-09T21-27-40-942Z.json",
+    "timestamp": "2026-03-09T21-27-40-942Z"
+  },
+  {
+    "filename": "cognitive-trace-2026-03-09T13-39-45-853Z.json",
+    "timestamp": "2026-03-09T13-39-45-853Z"
+  },
+  {
+    "filename": "cognitive-trace-2026-03-09T04-40-39-055Z.json",
+    "timestamp": "2026-03-09T04-40-39-055Z"
+  }
 ]
