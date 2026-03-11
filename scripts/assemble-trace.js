@@ -429,11 +429,7 @@ function assembleTrace(options) {
       .filter(f => f.startsWith('cognitive-trace-') && f.endsWith('.json'))
       .sort()
       .reverse();
-    const index = traceFiles.map(f => {
-      // Extract timestamp from filename: cognitive-trace-2026-03-09T21-49-10-418Z.json
-      const ts = f.replace('cognitive-trace-', '').replace('.json', '');
-      return { filename: f, timestamp: ts };
-    });
+    const index = traceFiles;
     fs.writeFileSync(path.join(outputDir, 'trace-index.json'), JSON.stringify(index, null, 2));
     log('io', `Updated trace-index.json: ${index.length} entries`);
   } catch (indexErr) {
