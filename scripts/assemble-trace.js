@@ -217,8 +217,8 @@ function assembleTrace(options) {
 
     if (layer2) {
       const auditEntry = (layer2.knowledge_audit || []).find(e => entryContainsSignal(e, sigId));
-      const scoredEntry = (layer2.scored_signals || []).find(e => entryContainsSignal(e, sigId));
-      const unscoredEntry = (layer2.unscored_signals || []).find(e => entryContainsSignal(e, sigId));
+      const scoredEntry = (layer2.scored_signals || layer2.scored_threats || []).find(e => entryContainsSignal(e, sigId));
+      const unscoredEntry = (layer2.unscored_signals || layer2.unscored_threats || []).find(e => entryContainsSignal(e, sigId));
 
       contextualization = {
         knowledge_audit: auditEntry ? {
@@ -317,7 +317,7 @@ function assembleTrace(options) {
 
     if (layer4) {
       // Check final signal matrix
-      const matrixEntry = (layer4.final_signal_matrix || []).find(e => entryContainsSignal(e, sigId));
+      const matrixEntry = (layer4.final_signal_matrix || layer4.final_threat_matrix || []).find(e => entryContainsSignal(e, sigId));
 
       // Check burden of proof
       const bopEntry = (layer4.burden_of_proof_applied || []).find(e => entryContainsSignal(e, sigId));
