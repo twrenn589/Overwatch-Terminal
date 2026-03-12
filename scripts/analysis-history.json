@@ -2170,5 +2170,36 @@
     "events_drafted_count": 6,
     "thesis_pulse": "The compound stress matrix is now firmly in ELEVATED territory with two of three legs breached: Brent at $92.33 (above $85 elevated, approaching $95 critical) and USD/JPY at 158.56 (above $157 elevate",
     "counter_thesis_score": 62
+  },
+  {
+    "timestamp": "2026-03-12T02:42:36.492Z",
+    "run_type": "evening",
+    "stress_score": 82,
+    "stress_level": "CRITICAL",
+    "xrp_price": 1.38,
+    "fear_greed": 18,
+    "usd_jpy": 158.56,
+    "jpn_10y": 2.183,
+    "brent_crude": 98.64,
+    "dxy": 99.4148,
+    "sp500": 6775.8,
+    "etf_daily_flow": -3880261,
+    "dex_volume_24h": 5436583,
+    "rlusd_market_cap": 1578270211.4383938,
+    "probability_framework": {
+      "bear": 18,
+      "base": 44,
+      "mid": 28,
+      "bull": 10
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 6,
+    "events_drafted_count": 4,
+    "thesis_pulse": "The macro environment has deteriorated materially since last assessment. Brent crude at $98.64 has breached the $95 critical threshold and is $1.36 from the $100 emergency level. USD/JPY at 158.56 sit",
+    "counter_thesis_score": 62
   }
 ]

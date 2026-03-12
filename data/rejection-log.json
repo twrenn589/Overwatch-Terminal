@@ -511,5 +511,34 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-09T21:48:27.981Z"
+  },
+  {
+    "layer3_inference": "Ripple actively working to migrate RLUSD liquidity from Ethereum to XRPL (hidden move)",
+    "signal_ids": [
+      "20260312-0227-SIG-007",
+      "20260312-0227-SIG-009"
+    ],
+    "rejection_reason": "Three unproven assumptions with no supporting data. Garlinghouse emoji post is not evidence of RLUSD migration strategy. Hidden Road/DTCC routing through XRPL is not evidenced. Per LZ-EPH-003, inference built on 3+ unproven assumptions is speculative regardless of plausibility.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-12T02:41:45.420Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-12T02:41:45.422Z"
+  },
+  {
+    "layer3_inference": "US Government coordinating multilateral energy response (hidden move)",
+    "signal_ids": [
+      "20260312-0227-SIG-003"
+    ],
+    "rejection_reason": "Three assumptions built on a single-source unverified claim (the SPR release itself). Historical precedent of coordinated IEA releases is real, but the inference chain starts from an unverified premise. Per LZ-EH-004, the base claim requires verification before building inferences on top of it.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-12T02:41:45.420Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-12T02:41:45.422Z"
   }
 ]
