@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-13T12:27:07.695Z",
+  "updated": "2026-03-13T13:18:15.047Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.43,
-    "change_24h": 2.534040062182139,
-    "volume_24h": 2958773769.6696587,
-    "market_cap": 87294938834.59885,
+    "change_24h": 3.333414787680563,
+    "volume_24h": 2919725788.1825814,
+    "market_cap": 87868245646.19946,
     "data_date": "2026-03-13",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1563249618.2452025,
+    "market_cap": 1562282613.3635654,
     "data_date": "2026-03-13",
     "source": "coingecko"
   },
@@ -31,12 +31,12 @@
       "source": "fred"
     },
     "brent_crude": {
-      "value": 99.261,
+      "value": 99.144,
       "data_date": "2026-03-13",
       "source": "financeflow"
     },
     "dxy": {
-      "value": 100.0676,
+      "value": 100.038,
       "data_date": "2026-03-13",
       "source": "financeflow"
     },
@@ -53,14 +53,14 @@
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 102841943,
-    "rlusd_supply": 315003078.2916719,
+    "ledger_index": 102842733,
+    "rlusd_supply": 315003078.2916721,
     "data_date": "2026-03-13",
     "source": "xrpl",
-    "current_ledger": 102841943,
-    "last_ledger_txns": 128,
+    "current_ledger": 102842733,
+    "last_ledger_txns": 115,
     "avg_tx_per_ledger": null,
-    "fee_burn_per_ledger_xrp": 0.00128,
+    "fee_burn_per_ledger_xrp": 0.00115,
     "dex_volume_24h_usd": 3672699,
     "dex_volume_24h_xrp": 2568321,
     "dex_exchanges_24h": null,
@@ -69,14 +69,30 @@
       "pair": "XRP/USD",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 198243.190859,
-      "total_ask_xrp": 1000045.934131,
-      "best_bid": 1.4282,
+      "total_bid_xrp": 450.917627,
+      "total_ask_xrp": 1000034.855703,
+      "best_bid": 1.43,
       "best_ask": 1.42121
     }
   },
   "x_intelligence": {
     "tier1_posts": [
+      {
+        "username": "RippleXDev",
+        "text": "RT @XRPLF: XRP Ledger Software version 3.1.2 is available.\n\nThis version is fixing an edge case that can cause outages on public facing nod…",
+        "created_at": "2026-03-13T12:34:29.000Z",
+        "tweet_id": "2032435126479528176",
+        "metrics": {
+          "retweet_count": 20,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "tier": 1,
+        "weight": 3
+      },
       {
         "username": "JoelKatz",
         "text": "@TmosMonstrocity @99og_grey @TheLegalMindset @celestiumart I wonder if you actually read what I wrote?\n\nIf you think for just a few seconds, it's very clear that the government taking away a corporation's freedom of the press would destroy an individual's freedom of speech.\n\nCorporations have protection from individual liability. This",
@@ -88,7 +104,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 178
+          "impression_count": 197
         },
         "tier": 1,
         "weight": 3
@@ -104,7 +120,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 211
+          "impression_count": 233
         },
         "tier": 1,
         "weight": 3
@@ -117,10 +133,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 2,
+          "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 134
+          "impression_count": 150
         },
         "tier": 1,
         "weight": 3
@@ -136,7 +152,7 @@
           "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 131
+          "impression_count": 135
         },
         "tier": 1,
         "weight": 3
@@ -152,7 +168,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 114
+          "impression_count": 117
         },
         "tier": 1,
         "weight": 3
@@ -168,7 +184,7 @@
           "like_count": 10,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 172
+          "impression_count": 183
         },
         "tier": 1,
         "weight": 3
@@ -184,7 +200,7 @@
           "like_count": 6,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 294
+          "impression_count": 320
         },
         "tier": 1,
         "weight": 3
@@ -195,12 +211,12 @@
         "created_at": "2026-03-13T06:14:31.000Z",
         "tweet_id": "2032339504305226047",
         "metrics": {
-          "retweet_count": 10,
-          "reply_count": 29,
-          "like_count": 247,
+          "retweet_count": 12,
+          "reply_count": 30,
+          "like_count": 259,
           "quote_count": 6,
-          "bookmark_count": 19,
-          "impression_count": 43463
+          "bookmark_count": 20,
+          "impression_count": 50216
         },
         "tier": 1,
         "weight": 3
@@ -216,7 +232,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 99
+          "impression_count": 103
         },
         "tier": 1,
         "weight": 3
@@ -232,7 +248,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 90
+          "impression_count": 92
         },
         "tier": 1,
         "weight": 3
@@ -248,7 +264,7 @@
           "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 91
+          "impression_count": 93
         },
         "tier": 1,
         "weight": 3
@@ -261,10 +277,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 2,
+          "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 215
+          "impression_count": 233
         },
         "tier": 1,
         "weight": 3
@@ -277,10 +293,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 1,
-          "like_count": 6,
+          "like_count": 7,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 419
+          "impression_count": 453
         },
         "tier": 1,
         "weight": 3
@@ -296,7 +312,7 @@
           "like_count": 5,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 337
+          "impression_count": 361
         },
         "tier": 1,
         "weight": 3
@@ -312,7 +328,7 @@
           "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 119
+          "impression_count": 122
         },
         "tier": 1,
         "weight": 3
@@ -328,7 +344,7 @@
           "like_count": 6,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 297
+          "impression_count": 310
         },
         "tier": 1,
         "weight": 3
@@ -344,7 +360,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 373
+          "impression_count": 382
         },
         "tier": 1,
         "weight": 3
@@ -360,7 +376,7 @@
           "like_count": 7,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 368
+          "impression_count": 371
         },
         "tier": 1,
         "weight": 3
@@ -376,23 +392,7 @@
           "like_count": 7,
           "quote_count": 0,
           "bookmark_count": 2,
-          "impression_count": 439
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "I don't understand this ruling. Is the court really holding that the theory that can go forward is a failure to warn of the risk that the product could be used to commit suicide?! That completely defies logic. Seems like it would be negligent to *provide* such a warning. https://t.co/RJzXBDt96b",
-        "created_at": "2026-03-13T01:43:37.000Z",
-        "tweet_id": "2032271329471463686",
-        "metrics": {
-          "retweet_count": 37,
-          "reply_count": 31,
-          "like_count": 309,
-          "quote_count": 0,
-          "bookmark_count": 18,
-          "impression_count": 51868
+          "impression_count": 443
         },
         "tier": 1,
         "weight": 3
@@ -400,17 +400,49 @@
     ],
     "tier2_posts": [
       {
+        "username": "JohnEDeaton1",
+        "text": "@TomMillerNews @AustinAirport @avabrendgord_tv https://t.co/vEXYoVEUgx",
+        "created_at": "2026-03-13T13:09:47.000Z",
+        "tweet_id": "2032444011252703363",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 142
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "@BillMelugin_ @xrppositively https://t.co/vEXYoVEUgx",
+        "created_at": "2026-03-13T13:09:38.000Z",
+        "tweet_id": "2032443970840645749",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 1,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 56
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
         "username": "WatcherGuru",
         "text": "RT @WatcherGuru: JUST IN: Trader accidentally swaps $50 million $USDT for $36,000 $AAVE on Ethereum. https://t.co/8VXuECkVOV",
         "created_at": "2026-03-13T04:25:58.000Z",
         "tweet_id": "2032312187151061306",
         "metrics": {
-          "retweet_count": 960,
+          "retweet_count": 979,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 45
+          "impression_count": 46
         },
         "tier": 2,
         "weight": 2
@@ -421,12 +453,12 @@
         "created_at": "2026-03-13T04:13:07.000Z",
         "tweet_id": "2032308954798391693",
         "metrics": {
-          "retweet_count": 48,
-          "reply_count": 47,
-          "like_count": 236,
+          "retweet_count": 51,
+          "reply_count": 48,
+          "like_count": 242,
           "quote_count": 0,
           "bookmark_count": 10,
-          "impression_count": 17419
+          "impression_count": 18234
         },
         "tier": 2,
         "weight": 2
@@ -439,10 +471,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 2,
-          "like_count": 6,
+          "like_count": 7,
           "quote_count": 0,
           "bookmark_count": 2,
-          "impression_count": 9160
+          "impression_count": 9356
         },
         "tier": 2,
         "weight": 2
@@ -455,10 +487,10 @@
         "metrics": {
           "retweet_count": 27,
           "reply_count": 33,
-          "like_count": 108,
+          "like_count": 111,
           "quote_count": 4,
           "bookmark_count": 14,
-          "impression_count": 15815
+          "impression_count": 16198
         },
         "tier": 2,
         "weight": 2
@@ -474,7 +506,7 @@
           "like_count": 40,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 862
+          "impression_count": 922
         },
         "tier": 2,
         "weight": 2
@@ -490,7 +522,7 @@
           "like_count": 53,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 1219
+          "impression_count": 1314
         },
         "tier": 2,
         "weight": 2
@@ -503,10 +535,10 @@
         "metrics": {
           "retweet_count": 37,
           "reply_count": 26,
-          "like_count": 305,
+          "like_count": 313,
           "quote_count": 5,
           "bookmark_count": 0,
-          "impression_count": 6642
+          "impression_count": 7316
         },
         "tier": 2,
         "weight": 2
@@ -522,7 +554,7 @@
           "like_count": 33,
           "quote_count": 0,
           "bookmark_count": 2,
-          "impression_count": 11181
+          "impression_count": 11344
         },
         "tier": 2,
         "weight": 2
@@ -535,10 +567,10 @@
         "metrics": {
           "retweet_count": 36,
           "reply_count": 39,
-          "like_count": 125,
+          "like_count": 127,
           "quote_count": 7,
           "bookmark_count": 15,
-          "impression_count": 37003
+          "impression_count": 37738
         },
         "tier": 2,
         "weight": 2
@@ -549,12 +581,12 @@
         "created_at": "2026-03-13T00:35:49.000Z",
         "tweet_id": "2032254266698592260",
         "metrics": {
-          "retweet_count": 647,
-          "reply_count": 394,
-          "like_count": 4977,
-          "quote_count": 48,
+          "retweet_count": 666,
+          "reply_count": 400,
+          "like_count": 5054,
+          "quote_count": 49,
           "bookmark_count": 59,
-          "impression_count": 164923
+          "impression_count": 169306
         },
         "tier": 2,
         "weight": 2
@@ -567,10 +599,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 4,
-          "like_count": 13,
+          "like_count": 14,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 618
+          "impression_count": 640
         },
         "tier": 2,
         "weight": 2
@@ -581,7 +613,7 @@
         "created_at": "2026-03-12T23:45:40.000Z",
         "tweet_id": "2032241645572247622",
         "metrics": {
-          "retweet_count": 113,
+          "retweet_count": 115,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -615,10 +647,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 8,
+          "like_count": 9,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 936
+          "impression_count": 1065
         },
         "tier": 2,
         "weight": 2
@@ -629,7 +661,7 @@
         "created_at": "2026-03-12T22:32:15.000Z",
         "tweet_id": "2032223171617648976",
         "metrics": {
-          "retweet_count": 49,
+          "retweet_count": 50,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -679,48 +711,16 @@
         "metrics": {
           "retweet_count": 117,
           "reply_count": 13,
-          "like_count": 707,
+          "like_count": 714,
           "quote_count": 4,
           "bookmark_count": 41,
-          "impression_count": 55062
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "https://t.co/jRvBxZ2aYC https://t.co/jDyyNMBBNr",
-        "created_at": "2026-03-12T21:19:45.000Z",
-        "tweet_id": "2032204924549783993",
-        "metrics": {
-          "retweet_count": 21,
-          "reply_count": 34,
-          "like_count": 596,
-          "quote_count": 7,
-          "bookmark_count": 108,
-          "impression_count": 431537
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: Trader accidentally swaps $50 million $USDT for $36,000 $AAVE on Ethereum. https://t.co/8VXuECkVOV",
-        "created_at": "2026-03-12T21:18:31.000Z",
-        "tweet_id": "2032204615140221318",
-        "metrics": {
-          "retweet_count": 960,
-          "reply_count": 1428,
-          "like_count": 10176,
-          "quote_count": 734,
-          "bookmark_count": 1253,
-          "impression_count": 2997735
+          "impression_count": 55703
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-13T12:27:05.381Z",
+    "fetched_at": "2026-03-13T13:18:13.466Z",
     "post_count": 40,
     "errors": []
   },
@@ -897,7 +897,7 @@
       "timestamp": "2026-03-07T03:24:01.000Z"
     },
     "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
-    "last_updated": "2026-03-13T12:27:05.835Z"
+    "last_updated": "2026-03-13T13:18:13.977Z"
   },
   "etf": {
     "total_aum": 1117308619,
@@ -1131,7 +1131,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1563249618.2452025,
+      "current": 1562282613.3635654,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
@@ -1189,5 +1189,78 @@
       "status": "CRITICAL — OIL SHOCK ACTIVE, compound stress chain firing",
       "confidence": "medium"
     }
+  },
+  "probability": {
+    "bear": 18,
+    "base": 44,
+    "mid": 28,
+    "bull": 10,
+    "last_updated": "2026-03-13T13:34:42.208Z",
+    "last_reasoning": "Bear case increased from 14% to 18%: compound stress matrix at CRITICAL, XRP ETF cumulative flows now negative, RLUSD stalling, oil approaching $100 emergency. Base case reduced from 42% to 44% (marginal increase as stress may force faster institutional infrastructure adoption). Mid reduced from 32% to 28% — harder to reach mid targets with macro headwinds this severe and ETF outflows accelerating. Bull reduced from 12% to 10% — near-$100 oil and Fear & Greed 15 make explosive upside less likely in 2026 timeframe."
+  },
+  "bear_case": {
+    "counter_thesis_score": 72,
+    "score_reasoning": "Score elevated from prior readings due to three converging factors: ETF cumulative flows turning negative, RLUSD growth stalling well short of kill switch pace, and compound macro stress at CRITICAL. The infrastructure buildout is real but capital flow data is telling a different story than the partnership narrative.",
+    "competing_infrastructure": [
+      {
+        "name": "SWIFT GPI",
+        "status": "MONITORING",
+        "status_text": "SWIFT continues incremental upgrades; no dramatic go-live event but the incumbent network effect remains XRP's largest competitive barrier."
+      },
+      {
+        "name": "Visa B2B Connect",
+        "status": "LOW_RISK",
+        "status_text": "No new expansion signals; remains a corporate payments tool rather than a direct settlement layer competitor."
+      },
+      {
+        "name": "JPMorgan Kinexys",
+        "status": "MONITORING",
+        "status_text": "JPMorgan's blockchain infrastructure continues to serve as the default institutional DeFi platform; Ripple Prime positions against it directly but hasn't demonstrated competitive volume."
+      },
+      {
+        "name": "BIS Project Nexus",
+        "status": "ELEVATED_RISK",
+        "status_text": "BOJ blockchain settlement experiment (March 2026) demonstrates central banks building sovereign infrastructure that could bypass both SWIFT and XRP — the most credible competitive threat to the bridge currency thesis."
+      },
+      {
+        "name": "Ethereum Institutional",
+        "status": "ELEVATED_RISK",
+        "status_text": "BlackRock staked ETH ETF launched with solid volume; Ondo tokenized securities trading $163M on OKX; SEC tokenized securities exemption is chain-agnostic. Ethereum is capturing institutional RWA/tokenization mind share that the XRP thesis needs."
+      }
+    ],
+    "odl_stagnation": "ODL volume data has been unavailable for an extended period — the continued absence of publication is itself a bearish signal suggesting volumes may not support the $20-30B annualized target narrative.",
+    "token_velocity_concern": "No hold-time data available. XRPL DEX 24h volume of $3.67M is trivially small relative to $87.9B market cap, suggesting on-chain utility remains negligible compared to speculative holding.",
+    "macro_headwinds": [
+      {
+        "name": "Global Recession Risk",
+        "status": "ELEVATED_RISK",
+        "status_text": "Fear & Greed at 15 (Extreme Fear), Brent near $100 threatening stagflation, and S&P 500 holding at 6672 but vulnerable — recession risk is materially elevated."
+      },
+      {
+        "name": "Crypto Winter Signals",
+        "status": "MONITORING",
+        "status_text": "XRP down from higher levels, ETF outflows accelerating, BTC struggling at $72K — not a full crypto winter but risk-off rotation is evident across altcoins."
+      },
+      {
+        "name": "Regulatory Reversal Risk",
+        "status": "LOW_RISK",
+        "status_text": "SEC Crypto Task Force activity and tokenized securities exemption work suggest continued pro-crypto regulatory direction; reversal risk is low under current administration."
+      },
+      {
+        "name": "Rate Hike Extension",
+        "status": "MONITORING",
+        "status_text": "US 10Y at 4.21% reflects persistent inflation expectations; near-$100 oil could force Fed to delay cuts or consider hikes, which would further pressure risk assets including crypto."
+      }
+    ],
+    "bear_narrative": "REDUCE EXPOSURE. For the first time in this monitoring period, we have actual institutional flow data — and it shows institutions leaving XRP while choosing BTC and ETH. XRP ETF AUM at $1.117B is moving backward with zero inflows across all four funds, the RLUSD/XRPL transmission mechanism is challenged by 80% Ethereum concentration, and competitors are building real traction on non-XRPL rails while PermissionedDEX shows zero confirmed adoption at 21 days. Compound stress is ELEVATED approaching CRITICAL with Brent at $99.14 and USD/JPY at 158.86 — the thesis paradox holds but measurements beat predictions, and the measurements are negative. The single factor that could reverse this assessment — ODL volume data — remains voluntarily opaque, and an entity confident in its metrics publishes them. Hidden Road/DTCC is real but alone is insufficient to offset three independent negative measurement vectors. I do not know what ODL volumes are, and that is the honest answer that matters most.",
+    "last_updated": "2026-03-13T13:34:42.208Z"
+  },
+  "last_analysis": {
+    "timestamp": "2026-03-13T13:34:42.208Z",
+    "run_type": "morning",
+    "stress_level": "CRITICAL",
+    "stress_score": 82,
+    "applied_at": "2026-03-13T13:36:28.397Z",
+    "changes_applied": 2
   }
 }

@@ -6155,5 +6155,257 @@
     "violations_count": 10,
     "compliance": "SERIOUS_ISSUES",
     "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-13T13:19:57.786Z",
+    "layer": 1,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "RLUSD on-chain supply divergence from market cap",
+          "rule_violated": "LZ-EH-004",
+          "violation": "The 5x gap between CoinGecko market cap ($1.562B) and XRPL on-chain supply ($315M) is treated as a real-world distribution pattern ('majority of RLUSD exists on Ethereum or other chains') before treating it as a potential data integrity issue. The first hypothesis should be: data measurement failure, reporting lag, or methodological difference between CoinGecko's market cap calculation and on-chain queries. No independent verification of the gap is cited.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "USD/JPY breaches elevated into high-elevated range",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding states 'the Japan stress feedback loop is fully active: energy import costs → trade deficit → yen pressure → BOJ trapped between defending yen and managing JGB yields.' This presents a causal chain (energy costs CAUSE trade deficit CAUSES yen pressure CAUSES BOJ policy constraint) based on correlation of three simultaneously elevated metrics. The simultaneity of USD/JPY 158.86, Brent $99.14, and JGB 10Y 2.245% is correlation. The causal mechanism described is not evidenced by the data points cited.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "DXY collapse to 100 — dollar weakness signal",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence is rated 'medium' but the inference chain involves multiple unproven causal assumptions: (1) the DXY level represents 'dollar confidence erosion', (2) the divergence from normal fear/dollar correlation is caused by 'structural concerns about US fiscal/trade policy', (3) Section 122 tariffs and SCOTUS fallout are the drivers. The evidence cited (DXY 100.038, Fear & Greed 15, Section 122 tariffs active) does not support medium confidence in this multi-assumption causal interpretation. Confidence should be lower, or the finding should stick to the observable anomaly without causal speculation.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "DXY collapse to 100 — dollar weakness signal",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference relies on at least three unproven assumptions: (1) DXY 100.038 represents 'dollar confidence erosion' rather than other factors, (2) the lack of normal fear-driven dollar strength is caused by 'structural concerns about US fiscal/trade policy', (3) Section 122 tariffs and SCOTUS fallout are the specific drivers of this structural concern. None of these assumptions are independently verified. This exceeds the three-assumption threshold for speculation.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "BTC ETF flows positive while altcoin ETFs bleed",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding states 'institutional risk appetite is concentrating into BTC during stress, not distributing across altcoin exposure. Flight to quality within crypto...' This treats correlation (BTC inflows coinciding with XRP outflows during a fear regime) as causation (institutions are choosing BTC because it is 'quality' and avoiding XRP for that reason). The data shows divergent flows but does not prove the causal mechanism of 'flight to quality.'",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Ondo tokenized stocks gaining traction on competing rails",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The phrase 'AI agents beginning to trade Ondo tokenized stocks' is presented as a signal of emerging adoption. No count of agents, no volume attribution, no trend data is provided. If this is based on a single mention or anecdote in the Ondo tweet context, it would constitute treating a single data point as a trend. The evidence cited does not establish 'beginning to trade' as a pattern versus an isolated event.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 15,
+      "clean_findings": 9,
+      "reviewer_notes": "Four moderate and one serious violation, primarily in macro/causal inference sections. The DXY finding accumulates both an EPH-002 confidence mismatch and an EPH-003 assumption-chain violation, indicating a single finding with compounded reasoning errors. The RLUSD supply divergence appropriately flags the anomaly but skips the null hypothesis (data artifact). Most signals correctly anchor to hard data and proportional confidence. The violation density is concentrated in interpretive/causal findings rather than direct observational signals."
+    },
+    "violations_count": 6,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-13T13:24:26.460Z",
+    "layer": 2,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "SIG-003: SEC tokenized securities exemption scored at severity 5 with confidence MEDIUM, reasoning states 'chain-neutral: the exemption framework does not favor XRPL PermissionedDEX over competing chains' but lacks evidence that the exemption framework is definitively chain-neutral",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence MEDIUM is stated, but the reasoning makes a definitive claim ('this is chain-neutral') without cited evidence of the exemption framework's technical requirements. The knowledge_audit correctly identifies a COMPETITIVE_KNOWLEDGE_GAP on whether XRPL has structural advantages, but then the scored signal resolves this gap by asserting chain-neutrality without evidence. Should either be confidence LOW or explicitly state 'appears chain-neutral based on lack of XRPL-specific language' rather than asserting it as fact.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-005: RLUSD on-chain supply divergence reasoning states 'If RLUSD is primarily an Ethereum-based stablecoin, its growth may not translate to XRPL network effects' - this is presented as the basis for severity 6, but the causal chain requires assuming (1) Ethereum concentration is permanent, (2) cross-chain liquidity does not benefit XRPL, (3) Ripple has no migration strategy",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The severity score of 6 appears to be based on an inference chain requiring at least 3 unproven assumptions about the permanence and strategic implications of the Ethereum/XRPL split. The knowledge_audit correctly flags this as THESIS_CAPABILITY_GAP and states confidence MEDIUM, but per LZ-EPH-003, inference built on 3+ unproven assumptions is speculative regardless of plausibility. The signal should either have lower confidence or explicitly acknowledge it is speculative given the assumption count.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SIG-009: XRPL DEX volume scored at severity 6 with reasoning that '21 days may be too short for institutional products' and 'PermissionedDEX activity may not be visible in public DEX data' - these uncertainties are acknowledged but severity 6 is maintained",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence is stated as MEDIUM, but two major uncertainties are identified that directly affect whether the measurement (public DEX volume) is measuring the right thing (institutional PermissionedDEX adoption). The reasoning acknowledges the gap between what is measured and what matters for the thesis, yet assigns severity 6. Confidence proportionality requires either lower severity given these uncertainties, or explicit statement that severity reflects only the public market structure measurement, not institutional adoption inference.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SIG-011: USD/JPY reasoning states 'Japan stress feedback loop (energy imports → trade deficit → yen pressure → BOJ trapped) is structurally sound via known economic transmission mechanisms' and scores severity 7",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The reasoning describes a causal chain (oil price → trade deficit → yen pressure) as 'structurally sound' but does not test whether the current correlation is actually driven by this mechanism vs other factors. While the transmission mechanism is economically plausible, stating it as 'structurally sound' without verifying the current causation is treating correlation (oil up, yen weak) as established causation. Should be phrased as 'oil price pressure likely contributes to yen weakness via known transmission mechanisms' rather than asserting the chain as verified.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Kill switch status for 'Competitive Displacement' shows movement_since_last as 'deteriorated — competitive infrastructure gaining traction on non-XRPL rails' based on Ondo volume figure that the analysis itself acknowledges may be inflated by trading competition promotional incentives",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The kill switch status update treats Ondo's $163M volume as evidence of competitive deterioration, but SIG-007 explicitly states 'some volume inflation likely from promotional incentives' and assigns confidence MEDIUM for this reason. Using this promotional volume figure to declare kill switch deterioration overstates confidence in the competitive comparison. The movement assessment should acknowledge the promotional context or use qualified language.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-014: DXY reasoning states 'per LZ-EPH-003, the chain from DXY weakness → de-dollarization → XRP demand requires 3+ unproven assumptions and is therefore speculative' but does not count or list the specific assumptions",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "LZ-EPH-003 requires honest assumption counting. The reasoning correctly invokes the rule to avoid speculative inference, but does not actually enumerate the assumptions claimed to number 3+. While the rule application appears directionally correct (avoiding speculation), the assumption count is asserted rather than demonstrated. Should either list the assumptions or phrase as 'requires multiple unproven assumptions' without claiming a specific count.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MINOR_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 41,
+      "reviewer_notes": "Output shows strong epistemological discipline overall. Multiple graduated lessons correctly applied (CL-030, CL-031, CL-017, CL-001, CL-036, CL-004, CL-011, CL-002, CL-023). Violations are predominantly MINOR confidence calibration issues where uncertainties are acknowledged but not fully reflected in severity scores or definitive language. SIG-005 and SIG-009 show MODERATE issues where assumption chains or measurement gaps should reduce confidence/severity more substantially. No SERIOUS violations detected - reasoning process generally maps claims to evidence appropriately and flags gaps honestly. The knowledge_audit framework is functioning well to surface uncertainties; the gap is in consistently propagating those uncertainties into final severity/confidence scores."
+    },
+    "violations_count": 6,
+    "compliance": "MINOR_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-13T13:30:01.579Z",
+    "layer": 3,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Strategic Inference: XRP ETF weekly outflows accelerating while BTC/ETH attract flows - Primary rational explanation states 'institutional investors perceive a fundamental difference between BTC/ETH (which have demonstrated utility metrics — store of value, staking yield, DeFi ecosystem) and XRP (which lacks observable institutional adoption metrics since ODL data went dark)'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The reasoning establishes a causal relationship (ODL data blackout → lack of observable metrics → institutional outflows) from correlation. The temporal relationship between ODL data going dark and ETF outflows does not establish that one caused the other. Institutional investors may be divesting XRP for reasons entirely independent of ODL data availability.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Strategic Inference: RLUSD on-chain supply divergence - Materialization signal states 'If the alternative is correct, XRPL-side RLUSD should grow faster than total RLUSD market cap'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The inference creates a single-metric trend test. One future measurement of XRPL-side RLUSD growth rate vs total market cap growth rate would be a single data point, not a trend. The materialization signal should specify multiple observations across time to establish a trend pattern.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Hidden Move: Institutional Asset Managers - 'ETF issuers with flat flows (XRPC, GXRP at zero daily flow) are likely evaluating whether to continue marketing and distribution efforts'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The inference treats absence of evidence (no marketing signals observed) as evidence of a specific action (internal evaluation of product continuation). The absence of new marketing efforts is informationally neutral per LZ-RC-003 - it does not prove internal evaluation is occurring.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Hidden Move: Ripple RLUSD strategy - 'Ripple may be deliberately prioritizing RLUSD growth on Ethereum to build total market cap and institutional credibility before attempting to redirect flow to XRPL-native use cases'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference chain contains unproven assumptions: (1) The 80/20 split is deliberate strategy rather than market-driven outcome, (2) The strategy is specifically designed as a multi-phase approach, (3) Phase 2 involves redirecting to XRPL, (4) Building credibility on Ethereum first will facilitate later XRPL migration. This is 4 unproven assumptions. The inference is correctly classified as FLAGGED, but it exceeds the 3-assumption threshold for speculation and should have been rejected entirely rather than included.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Behavioral Pattern: 'Institutional capital is actively differentiating within crypto — BTC and ETH are absorbing flows while XRP is being divested. This is not a broad crypto exodus but a within-asset-class quality sorting.'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The pattern describes correlation (BTC/ETH inflows concurrent with XRP outflows) and labels it as causally-driven 'quality sorting' without establishing the causal mechanism. The correlation could reflect dozens of alternative mechanisms (portfolio rebalancing rules, tax-loss harvesting timing, fund-specific mandate changes, etc.). The 'quality sorting' explanation is one possible cause among many, presented as the established cause.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Player Analysis: RIPPLE - Say-do gap assessment includes 'The strongest concrete action (Hidden Road/DTCC) occurred 11 days ago with no follow-through announcements'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The reasoning treats an 11-day absence of announcements as meaningful evidence of a pattern. LZ-RC-002 requires multiple observations across time to establish a trend. A single 11-day period is a single observation, not a trend. This is particularly problematic for B2B enterprise announcements which often occur on quarterly cycles.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound Stress Inference: Pre-load assessment states 'The system may reach critical through internal dynamics alone, without requiring a new external catalyst'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "This is a forward-looking prediction presented with the same evidentiary weight as historical measurements. The statement 'may reach critical through internal dynamics' is inherently uncertain and speculative. While the reasoning appropriately uses conditional language ('may'), the inclusion in the factual assessment section alongside measurements conflates prediction with measurement.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Strategic Inference: Ondo tokenized stocks - Primary rational explanation states 'the remaining organic activity ($33M-$82M) still dwarfs XRPL DEX total volume'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The inference expresses high confidence in a volume range derived from assuming promotional volume accounts for 50-80% of total, when no evidence is cited for what percentage is promotional vs organic. The confidence level should be reduced to medium or low given this substantial uncertainty in the underlying calculation.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "X402 Paper Trade: 'What are the actual ODL/Ripple Payments cross-border settlement volumes?' - Impact assessment states 'This one data point could move thesis confirmation probability by ±15%'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The precise quantification (±15%) of how an unknown data point would change probability implies unreasonably high confidence in a counterfactual scenario. The analyst cannot know with precision how data they don't have would change their assessment. This should be expressed qualitatively (e.g., 'substantially', 'significantly') rather than with false precision.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 38,
+      "reviewer_notes": "The output shows strong epistemological discipline in most areas, particularly in corrections application, null hypothesis testing, and 'I don't know' declarations. The violations cluster around two patterns: (1) correlation-causation conflation when interpreting institutional behavior, and (2) single-observation-as-trend in temporal assessments. The Hidden Move on Ripple RLUSD strategy correctly self-flagged but should have been rejected entirely under LZ-EPH-003. The analyst is properly cautious about assumption chains in Strategic Inferences but the same discipline didn't fully apply to Hidden Moves. Most violations are in interpretive overlay rather than core factual assessment, suggesting the reasoning engine is sound but interpretive layers need tightening."
+    },
+    "violations_count": 9,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-13T13:34:42.152Z",
+    "layer": 4,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Compound stress final assessment: 'pre_loaded' classification and 'pre-loaded structure means less additional force is needed to reach critical'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The 'pre-loaded' inference treats correlation (two legs elevated simultaneously) as evidence of causal relationship (one leg will trigger another). The finding states the system is 'pre-loaded' and will cascade with 'less force needed' but provides no evidence that the elevated state of Brent crude causally influences JGB yields or vice versa beyond temporal correlation. The economic transmission mechanism is described but not verified as operational in this specific instance.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Kill Switch Review: ODL Volume escalated to WARNING with reasoning 'the action of stopping publication carries more weight than statements about traction. At minimum, this warrants WARNING status.'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The confidence level expressed ('WARNING status' with 'escalate' action) is not proportional to the evidence. The reasoning correctly applies LZ-EH-003 (actions > statements) to note that cessation of publication is behavioral evidence, and correctly identifies alternative explanations (regulatory counsel, competitive sensitivity, merger integration). However, it then assigns WARNING status despite acknowledging these alternatives exist and are plausible. The evidence supports 'SUSPICIOUS_ABSENCE' classification but not definitive escalation to WARNING without ruling out the alternative explanations. The finding itself acknowledges 'The absence is not neutral — it is a deliberate action' but then treats deliberate opacity as equivalent to negative data, which it is not.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Kill Switch Review: RLUSD escalated to WARNING with reasoning '(2) The 80/20 Ethereum/XRPL split introduces a qualitative concern that the quantity metric ($5B) may not capture — reaching $5B on Ethereum does not satisfy the thesis'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The escalation to WARNING based on the qualitative transmission mechanism concern requires multiple unproven assumptions: (1) that the 80/20 split is permanent rather than temporary bootstrapping, (2) that Ethereum dominance will persist to $5B scale, (3) that RLUSD success on Ethereum provides zero XRPL benefit, and (4) that the kill switch criterion intended to measure XRPL-specific adoption rather than total RLUSD adoption. The finding acknowledges the null hypothesis holds (Ethereum concentration is rational market behavior for liquidity) but then builds a WARNING-level inference on assumptions about future state and original intent that are untested. This is 3+ unproven assumptions making the inference speculative per LZ-EPH-003.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Kill Switch Review: Competitive Displacement escalated to WARNING based on 'Ondo has demonstrated volume ($163M even if promotional) and partnerships (OKX, Stellar, AI agents) on non-XRPL rails'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The escalation to WARNING treats Ondo's demonstrated activity as evidence of a competitive displacement trend, but per LZ-RC-002, trend establishment requires multiple observations across time. The finding has one data sweep showing Ondo activity. The reasoning states 'the competitive landscape is forming' and 'competitive window is narrowing' but these are forward-looking predictions about trend continuation, not measurements of an established trend. A single observation of competitive activity (even if real) does not establish that XRPL is being systematically displaced.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Thesis Status reasoning: 'negative signals are verified measurements from primary sources, while positive signals are either stale (prior announcements) or structural (infrastructure exists but is unused)'",
+          "rule_violated": "LZ-MR-002",
+          "violation": "The reasoning dismisses prior announcements as 'stale' based on recency, conflating relevance with accuracy. Per LZ-MR-002, 'recency affects relevance but not accuracy. A recent data point is more relevant than an older one, but neither is more accurate because of its age.' Hidden Road/DTCC participant status announced 11 days ago is described as producing 'no observable downstream effects' — but the absence of downstream effects does not make the original data point less accurate. The participant status either exists or does not; its age does not change its truth value. The reasoning correctly weights recent negative flow data but incorrectly deweights prior positive institutional announcements based on age rather than on independent evidence of reversal.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Layer 3 inference: 'ETF issuers may redirect resources from XRP to ETH staking products' classified as FLAGGED with 50% weight",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The finding assigns 50% weight to an inference about internal resource allocation decisions that are explicitly stated as 'unobserved.' The reasoning acknowledges 'we see the flow divergence but do not see internal resource allocation decisions' and correctly flags it as having only partial data support. However, assigning 50% weight to an unobserved internal decision is arbitrary. Per LZ-EPH-001, when evidence is insufficient, 'I don't know' is the correct output, not a percentage-weighted guess. The finding should either be stripped entirely or held at zero weight with a qualitative note, not given numerical weight based on plausibility.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Contradiction resolution #3: PermissionedDEX paradox resolved as 'paradox_held' with reasoning 'We cannot declare failure (21 days is too short for B2B) and we cannot declare success (zero visible adoption)'",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "This is actually CORRECT application of LZ-EPH-001 ('I don't know' is valid output) and should be marked PASS. However, the finding then assigns 'score_impact: 0' while simultaneously using the public DEX data (2,200:1 asymmetry, $3.67M/24h) as scored evidence elsewhere in the signal matrix. The internal inconsistency is the issue: if the paradox genuinely cannot be resolved, the public DEX data should not contribute to bear pressure scoring. If the public DEX data is scored (as it is in signal 20260313-1319-SIG-009 at composite 6), then the paradox has been implicitly resolved in favor of the measurable data. The finding correctly applies LZ-EPH-001 in the contradictions section but violates it by scoring the same data elsewhere.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 40,
+      "reviewer_notes": "This output demonstrates significantly stronger epistemological discipline than prior runs, with most inferences correctly applying null hypothesis testing, assumption counting, and evidence-to-confidence proportionality. The violations found are moderate-severity issues in escalation reasoning and edge cases, not systematic structural failures. The most significant finding: the output correctly identifies when it lacks data (ODL volume, PermissionedDEX institutional adoption) and resists the temptation to fill gaps with plausible narratives in most cases. However, the kill switch escalations (ODL, RLUSD, Competitive Displacement) show a pattern of converting 'concerning but unresolved' into 'WARNING-level' without sufficient evidentiary basis. The distinction between 'data suggests X is possible' and 'data confirms X is happening' needs sharper enforcement in escalation decisions. The thesis status downgrade to WEAKENING is supported by the evidence cited, but several of the kill switch escalations that contribute to that status rest on moderate violations. Recommend focused review of escalation criteria: what evidentiary standard must be met to move from MONITORING → WARNING vs. NEEDS_DATA → WARNING."
+    },
+    "violations_count": 7,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
   }
 ]

@@ -595,5 +595,19 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-13T02:40:45.499Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Ripple is likely conducting private institutional demonstrations of PermissionedDEX capabilities",
+    "signal_ids": [
+      "20260313-1319-SIG-009"
+    ],
+    "rejection_reason": "Layer 3 correctly self-flagged and stripped this per CL-038. Layer 4 confirms the rejection. Zero data supports this inference. Plausibility is not evidence. Per LZ-CC-001, a logically coherent narrative without verifiable anchoring is not evidence.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-13T13:33:51.564Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-13T13:33:51.566Z"
   }
 ]
