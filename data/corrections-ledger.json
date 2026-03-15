@@ -738,5 +738,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-042",
+    "date_of_error": "2026-03-15",
+    "date_identified": "2026-03-15",
+    "identified_by": "layer_4_override",
+    "belief": "Ripple engaging potential PermDEX institutional partners through private channels",
+    "reality": "FLAGGED classification (2 assumptions) combined with zero supporting data from Layer 2 results in strip per burden of proof Step 2. The inference is plausible — private institutional engagement before public announcement is standard practice — but plausibility alone is not evidence per CL-038 and CL-041. Layer 3 itself assigned 'low' confidence. No observable data supports this inference; it is entirely based on what would be rational behavior.",
+    "root_cause": "FLAGGED classification (2 assumptions) combined with zero supporting data from Layer 2 results in strip per burden of proof Step 2. The inference is plausible — private institutional engagement before public announcement is standard practice — but plausibility alone is not evidence per CL-038 and CL-041. Layer 3 itself assigned 'low' confidence. No observable data supports this inference; it is entirely based on what would be rational behavior.",
+    "root_cause_type": "INSUFFICIENT_EVIDENCE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

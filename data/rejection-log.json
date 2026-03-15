@@ -638,5 +638,20 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-14T13:26:39.910Z"
+  },
+  {
+    "layer3_inference": "Ripple engaging potential PermDEX institutional partners through private channels",
+    "signal_ids": [
+      "20260315-0242-SIG-008",
+      "20260315-0242-SIG-015"
+    ],
+    "rejection_reason": "FLAGGED classification (2 assumptions) combined with zero supporting data from Layer 2 results in strip per burden of proof Step 2. The inference is plausible — private institutional engagement before public announcement is standard practice — but plausibility alone is not evidence per CL-038 and CL-041. Layer 3 itself assigned 'low' confidence. No observable data supports this inference; it is entirely based on what would be rational behavior.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-15T02:55:29.109Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-15T02:55:29.111Z"
   }
 ]
