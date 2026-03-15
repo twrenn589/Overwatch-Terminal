@@ -5043,7 +5043,7 @@ function render360Report(r) {
   set('s360-rec-reasoning', r.recommendation_reasoning);
 
   // 4. Threat Matrix
-  const threats = (r.threat_matrix ?? []).slice().sort((a, b) => (b.composite ?? 0) - (a.composite ?? 0));
+  const threats = (r.signal_matrix ?? []).slice().sort((a, b) => (b.composite ?? 0) - (a.composite ?? 0));
   const sevColors = { critical:'#ef4444', high:'#f97316', moderate:'#eab308', low:'#22c55e' };
   setHtml('s360-threats', threats.length === 0 ? '<div style="color:var(--text-muted);font-size:10px;padding:8px 0;">No threats in report.</div>' :
     threats.map(t => {
