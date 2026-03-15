@@ -756,5 +756,41 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-043",
+    "date_of_error": "2026-03-15",
+    "date_identified": "2026-03-15",
+    "identified_by": "layer_4_override",
+    "belief": "BOJ conducting quiet FX intervention through state banks",
+    "reality": "FLAGGED classification (2 assumptions) combined with zero data support. The observation that JPY hasn't breached 160 is not evidence of intervention — it could reflect natural resistance, time delay, or data staleness (March 13 reading predates March 15 Hormuz event). The inference is plausible but unfalsifiable and unsupported per LZ-CC-001.",
+    "root_cause": "FLAGGED classification (2 assumptions) combined with zero data support. The observation that JPY hasn't breached 160 is not evidence of intervention — it could reflect natural resistance, time delay, or data staleness (March 13 reading predates March 15 Hormuz event). The inference is plausible but unfalsifiable and unsupported per LZ-CC-001.",
+    "root_cause_type": "INSUFFICIENT_EVIDENCE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
+  },
+  {
+    "id": "CL-044",
+    "date_of_error": "2026-03-15",
+    "date_identified": "2026-03-15",
+    "identified_by": "layer_4_override",
+    "belief": "Ripple prioritizing RLUSD on Ethereum as bridge strategy with planned XRPL migration",
+    "reality": "FLAGGED classification (2 assumptions) and the inference about a PLANNED migration to XRPL is pure speculation about Ripple's internal strategy. Per CL-036, no inference about Ripple's internal RLUSD strategy is drawn from external supply distribution data. The observable data (80/20 chain distribution) stands on its own and is fully weighted — but the narrative about Ripple's intentions is stripped.",
+    "root_cause": "FLAGGED classification (2 assumptions) and the inference about a PLANNED migration to XRPL is pure speculation about Ripple's internal strategy. Per CL-036, no inference about Ripple's internal RLUSD strategy is drawn from external supply distribution data. The observable data (80/20 chain distribution) stands on its own and is fully weighted — but the narrative about Ripple's intentions is stripped.",
+    "root_cause_type": "ASSUMPTION_FAILURE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

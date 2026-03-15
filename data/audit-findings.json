@@ -90,5 +90,66 @@
     "override_reasoning": "BLIND AUDITOR PHASE 2 OVERRIDE (deterministic fallback). AI audit unavailable. Previous advisory (2026-03-13T02:41:39.233Z) was not resolved. Persistent mismatch: HIGH_IMPACT_UNRESOLVED_TENSIONS. Direction: escalate. Action overridden to: EXIT_SIGNAL. Unresolved tension impact scores: 15 → 15 → 15 → 15 → 20 (threshold: 8). High-materiality questions remain unanswered.",
     "prior_advisory_timestamp": "2026-03-13T02:41:39.233Z",
     "deterministic_fallback": true
+  },
+  {
+    "phase": 1,
+    "status": "UNRESOLVED",
+    "timestamp": "2026-03-15T13:28:35.444Z",
+    "run_index": 60,
+    "mismatches": [
+      {
+        "type": "HIGH_IMPACT_UNRESOLVED_TENSIONS",
+        "detail": "Unresolved tension impact scores: 15 → 20 → 19 → 21 → 23 (threshold: 8). High-materiality questions remain unanswered.",
+        "severity": "HIGH",
+        "tension_trajectory": [
+          5,
+          5,
+          5,
+          6,
+          6
+        ],
+        "score_trajectory": [
+          15,
+          20,
+          19,
+          21,
+          23
+        ]
+      }
+    ],
+    "advisory_text": "The Blind Auditor has flagged a mismatch between your evidence trajectory and your action trajectory. Address this finding: either commit to acting on your assessment or justify the hold with specific, verifiable evidence that warrants continued restraint. A justification must name what specific new information you are waiting for and what observable outcome would resolve the question.",
+    "trajectory_summary": [
+      {
+        "status": "WEAKENING",
+        "action": "INCREASE_MONITORING",
+        "tensions": 5,
+        "pressure": 6.8
+      },
+      {
+        "status": "WEAKENING",
+        "action": "REDUCE_EXPOSURE",
+        "tensions": 5,
+        "pressure": 72
+      },
+      {
+        "status": "WEAKENING",
+        "action": "EXIT_SIGNAL",
+        "tensions": 5,
+        "pressure": 68
+      },
+      {
+        "status": "WEAKENING",
+        "action": "EXIT_SIGNAL",
+        "tensions": 6,
+        "pressure": 7.2
+      },
+      {
+        "status": "WEAKENING",
+        "action": "EXIT_SIGNAL",
+        "tensions": 6,
+        "pressure": 72
+      }
+    ],
+    "deterministic_fallback": true
   }
 ]
