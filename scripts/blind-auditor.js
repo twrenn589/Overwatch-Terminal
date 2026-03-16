@@ -31,6 +31,7 @@ const path = require('path');
 const fs   = require('fs');
 const { runAIAudit } = require('./ai-auditor');
 const { loadLayerZeroRules, formatRulesForPrompt } = require('./layer-zero-gate');
+const { detectSpendingBehavior } = require('./x402-spending-detectors');
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 
@@ -730,6 +731,32 @@ async function runBlindAuditor(options) {
     return result;
   }
 
+  // ── Load x402 paper trade log and latest trace for spending detectors ──
+  let paperTradeLog = null;
+  let latestTrace = null;
+  try {
+    const ptPath = path.join(__dirname, '..', 'data', 'x402-paper-trades.json');
+    if (fs.existsSync(ptPath)) {
+      paperTradeLog = JSON.parse(fs.readFileSync(ptPath, 'utf8'));
+    }
+  } catch (e) {
+    warn(`x402 paper trade log load failed (non-fatal): ${e.message}`);
+  }
+  try {
+    const traceIndexPath = path.join(__dirname, '..', 'data', 'trace-index.json');
+    if (fs.existsSync(traceIndexPath)) {
+      const traceIndex = JSON.parse(fs.readFileSync(traceIndexPath, 'utf8'));
+      if (traceIndex.length > 0) {
+        const latestTracePath = path.join(__dirname, '..', 'data', traceIndex[0]);
+        if (fs.existsSync(latestTracePath)) {
+          latestTrace = JSON.parse(fs.readFileSync(latestTracePath, 'utf8'));
+        }
+      }
+    }
+  } catch (e) {
+    warn(`Cognitive trace load failed (non-fatal): ${e.message}`);
+  }
+
   // ── Run all three detection types ─────────────────────────────────────
   const mismatches = [];
 
@@ -741,6 +768,14 @@ async function runBlindAuditor(options) {
 
   const trend = detectTrajectoryTrend(trajectory);
   if (trend) mismatches.push(trend);
+
+  // x402: Spending behavioral pattern detection
+  if (paperTradeLog) {
+    const currentTensions = trajectory.length > 0 ? trajectory[trajectory.length - 1].tensions : [];
+    const currentStatus = trajectory.length > 0 ? trajectory[trajectory.length - 1].thesis_status : null;
+    const spendingFindings = detectSpendingBehavior(paperTradeLog, latestTrace, currentTensions, currentStatus, domainConfig);
+    mismatches.push(...spendingFindings);
+  }
 
   if (mismatches.length === 0) {
     log('No trajectory mismatch detected. Evidence trend and action trend are aligned.');

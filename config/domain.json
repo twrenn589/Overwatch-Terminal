@@ -80,6 +80,18 @@
 
   "x402_paper_trade_retention": 200,
 
+  "x402_spending_thresholds": {
+    "reactive_min_requests": 5,
+    "reactive_survival_rate_floor": 0.3,
+    "avoidance_denial_rate_ceiling": 0.7,
+    "confirmation_vector_imbalance": 0.75,
+    "budget_exhaustion_unfilled_critical": 2,
+    "stale_repeat_min_occurrences": 3,
+    "bleeding_impact_ratio_floor": 0.3,
+    "hoarding_min_unspent_pct": 0.5,
+    "hoarding_min_critical_tensions": 1
+  },
+
   "x402_epistemic_vectors": ["STRENGTHEN", "WEAKEN", "INFORM"],
 
   "x402_urgency_levels": ["IMMEDIATE", "NEXT_CYCLE", "DENIED"],
