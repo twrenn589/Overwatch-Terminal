@@ -695,5 +695,19 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-16T02:57:45.246Z"
+  },
+  {
+    "layer3_inference": "Layer 2 signal title 'Brent crude at $94.35 — CRITICAL threshold breached' — Layer 1 headline claimed critical breach",
+    "signal_ids": [
+      "20260316-1348-SIG-001"
+    ],
+    "rejection_reason": "Layer 2 correctly identified and corrected this in the knowledge audit: $94.35 < $95 critical threshold. The title said 'CRITICAL threshold breached' but the data shows elevated, not critical. Layer 2's correction is confirmed. The signal is scored at elevated (8/10) not critical.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-16T14:02:33.273Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-16T14:02:33.276Z"
   }
 ]

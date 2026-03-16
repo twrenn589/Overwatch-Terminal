@@ -828,5 +828,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-047",
+    "date_of_error": "2026-03-16",
+    "date_identified": "2026-03-16",
+    "identified_by": "layer_4_override",
+    "belief": "Layer 2 signal title 'Brent crude at $94.35 — CRITICAL threshold breached' — Layer 1 headline claimed critical breach",
+    "reality": "Layer 2 correctly identified and corrected this in the knowledge audit: $94.35 < $95 critical threshold. The title said 'CRITICAL threshold breached' but the data shows elevated, not critical. Layer 2's correction is confirmed. The signal is scored at elevated (8/10) not critical.",
+    "root_cause": "Layer 2 correctly identified and corrected this in the knowledge audit: $94.35 < $95 critical threshold. The title said 'CRITICAL threshold breached' but the data shows elevated, not critical. Layer 2's correction is confirmed. The signal is scored at elevated (8/10) not critical.",
+    "root_cause_type": "ASSUMPTION_FAILURE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

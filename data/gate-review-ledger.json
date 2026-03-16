@@ -8081,5 +8081,293 @@
     "violations_count": 13,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-16T13:48:17.970Z",
+    "layer": 1,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Brent crude at $94.35 — CRITICAL threshold breached - uses March 9 oil price data compared against March 13 USD/JPY and JGB data to claim 'compound stress matrix now has oil near-critical and yen in elevated range. Two legs are actively firing.'",
+          "rule_violated": "LZ-MR-003",
+          "violation": "Comparing March 9 oil data with March 13 currency and bond data creates a composite snapshot that never existed. The analysis states 'One-week-old oil data likely understates current price' but then uses the stale data to calculate compound stress matrix status. The temporal misalignment distorts the claimed simultaneous compound stress.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Brent crude at $94.35 — confidence level 'high' despite acknowledged data staleness",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding states 'One-week-old oil data likely understates current price' but maintains 'high' confidence in the specific compound stress assessment. The acknowledged uncertainty about current oil price should reduce confidence in claims about current threshold status. High confidence is not proportional to evidence that is explicitly flagged as stale.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "USD/JPY at 159.33 — 'This accelerates the Japan stress feedback loop: weaker yen → higher energy import costs (amplified by $94+ oil) → wider trade deficit → BOJ pressure to intervene or hike → JGB yield stress'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "This causal chain contains at least four unproven assumptions: (1) weaker yen will lead to higher energy import costs in practice, (2) this will widen trade deficit sufficiently to matter, (3) BOJ will experience pressure to intervene or hike specifically due to this, (4) this pressure will create JGB yield stress. Each link is plausible but unproven. The chain exceeds the three-assumption threshold for speculation.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "XRP ETF weekly outflows - 'Zero daily flow on March 13 suggests liquidity drought, not just rotation'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "A single day of zero flows (March 13) is being used to establish a pattern ('liquidity drought'). One data point does not establish a trend. The finding correctly notes weekly outflows but then treats the single zero-flow day as evidence of a distinct phenomenon.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "RLUSD contraction - 'This ~$1.24B gap implies most RLUSD exists on Ethereum or off-chain venues, not on XRPL'",
+          "rule_violated": "LZ-RC-004",
+          "violation": "The simpler explanation—data source inconsistency or measurement error between CoinGecko aggregation and XRPL on-chain query—is not tested before concluding multi-chain distribution. The finding jumps to 'implies most RLUSD exists on Ethereum or off-chain' without ruling out the null hypothesis that one of the data sources is incorrect or measuring different things.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Crypto tax roundtable - 'These are the specific legislative actors who would advance the Clarity Act. Direct proximity signal for kill switch #5' with confidence 'medium'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The same senators hosting a crypto tax roundtable is being treated as evidence they will advance the Clarity Act. Correlation (same actors, related topic) is presented as causal connection (this event signals Clarity Act advancement). The evidence shows they are discussing crypto tax issues, not that they are advancing the specific legislation.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "XRP breaks resistance - 'suggesting the buying is coming from non-ETF channels. The $3.33B 24h volume is substantial. However, this coincides with $308M in short liquidations across crypto, suggesting the move may be partly mechanical rather than fundamental'",
+          "rule_violated": "LZ-EH-005",
+          "violation": "Two contradictory explanations are presented (non-ETF fundamental buying vs. mechanical short liquidations) without independent tie-breaking evidence to resolve which is dominant. The finding correctly flags the contradiction as 'AMBIGUOUS' in direction but still presents both explanations rather than flagging the contradiction itself as the finding.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Tom Lee crypto strength amid Iran war - 'Crypto-as-hedge-during-conflict narrative gaining traction' based on one analyst's public statement and one company's ETH purchase",
+          "rule_violated": "LZ-RC-002",
+          "violation": "Tom Lee's single statement plus BitMNR's purchase is treated as evidence of a 'narrative gaining traction' (a trend). Two data points from different actors do not establish that a narrative is gaining traction market-wide. This requires multiple observations of the same phenomenon.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "JoelKatz activity - 'the absence of any business signaling during a week with macro stress, ETF outflows, and a major technical breakout is itself notable. Ripple's CTO is not publicly addressing any thesis-relevant developments'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "Absence of JoelKatz business communication is being treated as evidence of something notable (implied as negative or concerning). Absence of evidence is not evidence of absence, nor is it evidence of presence. The lack of public commentary is informationally neutral regarding Ripple's business activities.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "DXY weakness - 'may reflect market pricing of US fiscal deterioration, Section 122 tariff regime damage, or Fed easing expectations' with confidence 'medium'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Three alternative explanations are offered (fiscal deterioration, tariff damage, Fed easing expectations) with no evidence provided for any of them. These are unproven assumptions about why DXY is at 100.50. Medium confidence is assigned to a finding built entirely on speculation about causation with zero supporting evidence.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "x402 agent dormant - 'Dormancy during a period of alleged XRPL infrastructure acceleration creates a minor contradiction'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding implies that XRPL infrastructure acceleration should correlate with x402 agent payment activity. No causal relationship is established between macro infrastructure adoption and a micro-payment demo agent's activity. The absence of correlation is being treated as meaningful ('minor contradiction') without evidence the two should be correlated.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 15,
+      "clean_findings": 4,
+      "reviewer_notes": "Multiple LZ-EPH-003 violations involving assumption chains that exceed three unproven links, particularly in causal inference about macro dynamics. LZ-RC-003 violation on absence-of-evidence reasoning is notable. LZ-MR-003 temporal distortion on the compound stress matrix is a structural issue affecting a critical-severity finding. Several findings correctly identify ambiguity/contradictions but then proceed to interpret them anyway rather than stopping at 'this is contradictory.' Pattern suggests the system may be optimizing for insight generation over epistemological discipline."
+    },
+    "violations_count": 11,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-16T13:52:37.215Z",
+    "layer": 2,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "SIG-001: Brent crude severity scored 8/10 with confidence MEDIUM despite 7-day data staleness during active supply disruption",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "High confidence (severity 8) assigned to 7-day-old data during rapidly evolving geopolitical event. The reasoning acknowledges the data is stale and 'current price is unknown' but assigns high severity anyway. Confidence should be lower given measurement is a week old during active disruption.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SIG-004: RLUSD chain distribution gap (~$1.24B) calculated as CoinGecko total minus XRPL on-chain, then used as evidence that 'XRPL is not the primary settlement venue'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Three unproven assumptions: (1) CoinGecko methodology accurately captures all RLUSD, (2) the gap represents Ethereum supply specifically, (3) off-chain/custodial holdings are not material. The reasoning acknowledges 'gap calculation depends on CoinGecko methodology which isn't verified' but still draws the inference that XRPL is not primary settlement layer. This conclusion requires three unverified assumptions.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SIG-007: 'The simplest explanation [LZ-RC-004] — this is substantially a mechanical short squeeze, not fundamental demand' — but then scored as severity 4 with thesis_relevance CONTEXTUAL",
+          "rule_violated": "LZ-RC-004",
+          "violation": "The reasoning correctly identifies short liquidation mechanics as the simplest explanation and states it 'does not establish a trend' [LZ-RC-002], yet still assigns severity 4. If the event is mechanical and not a trend, the severity should be lower or it should be unscored. The severity assignment conflicts with the reasoning's own conclusion.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-009: 'CoinDesk headline now explicitly uses Iran war' treated as evidence of geopolitical escalation",
+          "rule_violated": "LZ-EH-003",
+          "violation": "Media framing (what CoinDesk says) is being given evidentiary weight comparable to actual military events (what is happening). The reasoning states 'cannot verify actual military conflict status independently from this data' yet scores severity 5 based substantially on the headline framing. Actions (military events) should outweigh statements (media characterization).",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Kill switch #2 (RLUSD): 'Pace needed: $11.89M/day. Current pace: negative' — this compares a future requirement to a current measurement without accounting for non-linear growth patterns",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The reasoning treats current pace (a historical measurement) and required pace (a forward-looking target) as directly comparable for trajectory assessment. The statement 'current pace: negative' against a future daily requirement creates a false precision about future performance. Historical pace and required future pace are categorically different — one is measured, one is predicted.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress matrix: JGB at 2.2452% is 'below elevated threshold but rising from prior readings' and contributes to ELEVATED compound stress level despite being in 'normal' status",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The compound stress matrix is labeled ELEVATED based on two legs (Brent and USD/JPY) being elevated while explicitly acknowledging JGB is 'normal' status. The correction CL-017 states 'Did NOT claim all three deteriorating simultaneously' but then the compound matrix level is ELEVATED suggesting all three contribute. Either JGB contributes to ELEVATED status (in which case confidence should be lower since it's not actually elevated), or it doesn't contribute (in which case the matrix should explain it's 2-of-3, not a compound of all three).",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 41,
+      "reviewer_notes": "The output shows strong application of graduated lessons (CL-030, CL-031, CL-044, CL-046) and appropriate use of 'I don't know' / ambiguous flags (SIG-013 DXY). Most violations involve confidence calibration and assumption counting rather than fundamental logical errors. The SIG-009 media framing issue is the most significant — treating a CoinDesk headline as evidence of geopolitical state rather than evidence of media narrative shift. The RLUSD chain distribution inference (SIG-004) crosses the three-assumption threshold. Overall reasoning quality is high but confidence levels are occasionally misaligned with evidence limitations."
+    },
+    "violations_count": 6,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-16T13:58:14.324Z",
+    "layer": 3,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Compound Stress Inference - catalyst_proximity assessment stating 'A Hormuz escalation event (e.g., direct naval engagement, formal strait closure) would trigger CRITICAL independently regardless of measured levels'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "Forward-looking prediction about future event impact (Hormuz escalation triggering CRITICAL stress) treated with same certainty as historical measurements. The statement 'would trigger CRITICAL independently regardless of measured levels' is a predictive claim about unmeasured future conditions, not a verifiable measurement. This conflates prediction with measurement.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Compound Stress Inference - pre_load_assessment final sentence: 'The pre-load means the system's distance from cascade is measured in small moves, not large ones'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "Claims about what future movements will cause ('distance from cascade is measured in small moves') are predictions about system behavior, not measurements. The statement about marginal impact being amplified is inferential and forward-looking, not a verifiable past measurement.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Strategic Inference #3 (Brent/USD/JPY compound stress) - assumption count of 1 when reasoning contains multiple forward-looking assumptions",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference assumes: (1) Hormuz disruption remains active from March 9 to present, (2) the velocity of USD/JPY deterioration will continue at similar pace, (3) less additional shock is needed due to pre-load (itself an assumption about system dynamics). Only assumption #1 is counted. The reasoning contains at least 2-3 unproven assumptions but declares assumption_count:1.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Strategic Inference #1 (ETF institutional preference divergence) - confidence level 'high' with assumption_count:1",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "High confidence is assigned while acknowledging an unproven assumption ('Institutional allocators' ETF flow decisions reflect genuine asset preference rather than temporary tactical positioning'). This assumption is load-bearing for the entire inference. The presence of a significant unproven assumption should moderate confidence below 'high' per proportionality requirement.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Hidden Move #1 (Ripple ODL data withholding) - classified as 'FLAGGED' with assumption_count:1 but reasoning contains multiple assumptions",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The hidden move reasoning assumes: (1) Ripple previously published ODL data regularly (needs verification of publication frequency/consistency), (2) entities with favorable data always publish it (behavioral assumption), (3) the Ripple Payments rebrand was cover rather than legitimate business restructuring (motive assumption), (4) no alternative explanation for cessation exists (regulatory advice, competitive sensitivity, metric redefinition). At least 3-4 unproven assumptions support this inference but only 1 is counted.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "Player Analysis - Ripple - inferred_strategy section stating 'an entity that possesses favorable data publishes it. An entity that possesses unfavorable data or data that complicates its narrative withholds it'",
+          "rule_violated": "LZ-CC-001",
+          "violation": "This is a logically coherent behavioral principle presented as a general truth without verifiable real-world anchoring specific to Ripple or this situation. The principle sounds plausible but lacks empirical verification. Multiple alternative explanations exist for data withholding (regulatory advice, competitive sensitivity, metric redefinition, legal liability) that are not addressed. The coherent narrative about data publication incentives is treated as self-evident truth rather than one hypothesis among several.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Feedback Loop 'Oil-Yen-BOJ Compounding Loop' - trigger_to_next_state containing 'the probability that Brent has already crossed $95 is non-trivial but unverifiable'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "Assigns probability assessment ('non-trivial') to an unmeasured current state based on staleness of prior measurement. This treats a prediction about current reality (Brent crossing $95 between March 9 and March 16) with evidentiary language ('probability') rather than acknowledging it as unknowable without measurement. The honest statement per LZ-EPH-001 would be 'unknown whether Brent has crossed $95' rather than 'probability...non-trivial.'",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Strategic Inference #3 - 'rational_explanation' section stating 'The structural pre-load means less additional shock is needed to reach critical' and 'The velocity of deterioration...makes further deterioration the path of least resistance'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "Forward-looking prediction about system behavior ('less shock needed', 'path of least resistance') presented as if it were a measured property. These are inferences about future dynamics, not measurements of past states. The reasoning conflates 'two legs are currently elevated' (measurement) with 'therefore the third leg will elevate more easily' (prediction).",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "X402 Paper Trade #1 - 'If current Brent is above $95, compound stress is formally CRITICAL (two legs at critical)'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "Brent at $94.35 is a single data point from March 9. The assessment that Brent above $95 triggers 'CRITICAL' compound stress treats the $95 threshold as validated trend rather than what it is: a single measurement approaching an analytical threshold. Without multiple measurements confirming Brent sustained above $95, calling the stress 'formally CRITICAL' based on one reading would violate the trend requirement.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 38,
+      "reviewer_notes": "The output demonstrates strong correction awareness and generally sound primary reasoning, but shows systematic issues with: (1) assumption counting - complex inferences consistently undercount their assumptions, particularly Hidden Move #1 which appears to violate LZ-EPH-003's 3+ assumption threshold while claiming assumption_count:1; (2) forward-looking prediction language treated with measurement-level certainty, particularly in compound stress assessment sections; (3) one instance of plausible narrative (data publication incentives) presented without empirical anchoring per LZ-CC-001. The most serious violation is Hidden Move #1's assumption undercounting - this inference builds a behavioral model of Ripple's data publication strategy on multiple unverified assumptions while claiming only one. Most other violations are minor conflations of prediction/measurement that don't fundamentally undermine conclusions. The clean findings (38 of 47) demonstrate the output is mostly compliant, but the moderate issues are concentrated in strategically important inferences (compound stress, hidden moves, ETF preference) where assumption chain length and confidence calibration matter most."
+    },
+    "violations_count": 9,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-16T14:03:33.719Z",
+    "layer": 4,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Inference: 'Ripple's ODL data publication cessation is a hidden move — most rational explanation is unfavorable data' - classified as FLAGGED with 1 assumption, given 50% weight",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence is not proportional to evidence. The reasoning states 'the behavioral logic is sound' and applies LZ-EH-003 (actions over words), treating the cessation as a strong behavioral signal. But then applies only 50% weight due to 'one unverified assumption about Ripple's motivation.' The assumption about motivation is THE core inference - without it, there is only the fact of cessation. Calling the logic 'sound' while simultaneously acknowledging the conclusion requires an unverified assumption about internal motivation is internally inconsistent. Either the cessation is evidence of unfavorable data (requiring confidence in the motivational assumption) or it isn't (requiring 'I don't know why they stopped'). The 50% weight suggests uncertainty, but the language ('most rational explanation', 'behavioral logic is sound') suggests confidence. These are misaligned.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Data classification: ODL/Ripple Payments corridor volume classified as SUSPICIOUS_ABSENCE with reasoning 'Per LZ-EH-003, the behavioral interpretation (unfavorable data → withholding) is the simplest sufficient explanation per LZ-RC-004'",
+          "rule_violated": "LZ-RC-004",
+          "violation": "The simplest sufficient explanation is not being tested correctly. The simplest explanation for cessation of voluntary data publication is 'Ripple chose to stop publishing voluntary data.' This requires zero assumptions about favorability. The explanation 'Ripple stopped because the data is unfavorable' requires an assumption about the relationship between data favorability and publication decisions. Per LZ-RC-004, the simpler explanation (no assumption required) must be tested first. The reasoning inverts this - it treats the assumption-laden explanation as simpler. The finding may ultimately be correct, but the null hypothesis ('cessation for reasons unknown') was not properly established as insufficient before moving to the motivational inference.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Kill Switch Review: ODL Volume escalated from NEEDS_DATA to WARNING with reasoning 'the behavioral signal of non-publication is itself concerning' and 'The SUSPICIOUS_ABSENCE classification means the most rational explanation for Ripple's silence is that the data doesn't support the narrative'",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "'I don't know' is being avoided. The output acknowledges 'This is the thesis's primary metric and has been completely dark for the entire monitoring period' and 'zero data' - but then escalates to WARNING based on a behavioral inference about Ripple's motivation for not publishing. The honest output here is 'we don't know the ODL volume and we don't know why Ripple stopped publishing it.' Escalating a kill switch from NEEDS_DATA to WARNING based on an inference about why data is absent (rather than based on data showing the criterion is failing) converts uncertainty into a directional finding. Per LZ-EPH-001, declaring insufficient evidence (maintaining NEEDS_DATA) would be higher quality than escalating based on behavioral speculation.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "Compound stress assessment references 'previous cycle referenced Brent $106' and states 'I find no $106 measurement in the current data' but then proceeds to score without resolving whether this prior measurement should inform current assessment",
+          "rule_violated": "LZ-MR-002",
+          "violation": "Recency is being conflated with accuracy. The reasoning treats the absence of the $106 measurement in current data as reason to discount or ignore it ('I cannot score on it'). But per LZ-MR-002, a recent data point is more relevant than an older one, but neither is more accurate because of its age. If Brent was measured at $106 in a prior cycle and is now measured at $94.35, both measurements are accurate for their respective timestamps. The $106 measurement is less relevant for current state assessment but remains accurate historical data that could inform velocity or trend analysis. The output appears to treat the older measurement as invalid or unusable rather than as less relevant. The phrase 'it is not present in current Layer 2 data and I cannot score on it' suggests the measurement's absence from current input makes it non-scorable, which conflates data availability with data accuracy.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Tension T-2 disposition states 'Previous cycle referenced Brent $106 but current data shows Brent at $94.35... The tension description referencing $106 from prior cycle is not verified in current data — this may reflect data that was available in a prior cycle but is now superseded by the $94.35 FRED reading'",
+          "rule_violated": "LZ-MR-002",
+          "violation": "The language 'superseded by' implies the $94.35 measurement replaces or invalidates the $106 measurement. Per LZ-MR-002, newer data does not supersede older data in terms of accuracy - it supersedes it only in terms of relevance for current state. A measurement from March 9 does not make a measurement from a prior date inaccurate; it provides a more recent snapshot. This is a subtle but important epistemological distinction. The prior measurement should be acknowledged as 'less relevant for current assessment' not 'superseded' or 'not verified' - it was verified when it was measured.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "XRP ETF non-reporting funds inference: 'FLAGGED with 1 assumption (non-reporting indicates distress rather than data lag)' with 50% weight applied",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence is not proportional to evidence. The reasoning states 'the pattern (non-reporting during product category stress) is more consistent with fund closures, suspensions, or AUM decline' - this language indicates moderate-to-high confidence in the interpretation. But then applies 50% weight 'because the cause is inferred.' The assessment of what the pattern is 'more consistent with' IS a confidence judgment. If the evidence genuinely supports 'more consistent with distress than lag', the confidence should be higher than 50%. If the evidence is truly insufficient to distinguish between distress and lag, the language should be 'multiple explanations of similar weight' (as used correctly for the DXY signal). The output appears to hedge by using confident language ('more consistent with') while applying uncertain weighting (50%).",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Contradiction resolution: 'RLUSD declined from $1.583B to $1.552B' vs 'Ripple continues investing in institutional infrastructure' resolved as 'paradox_held' with reasoning 'Infrastructure investment and product supply contraction can coexist'",
+          "rule_violated": "PASS",
+          "violation": "No violation. The reasoning correctly identifies this is not a logical contradiction - both can be simultaneously true. The output appropriately classifies this as a tension (gap between capability and utilization) rather than a contradiction requiring resolution. This is correct application of epistemological principles.",
+          "severity": "PASS"
+        },
+        {
+          "finding": "Final thesis status: WEAKENING with action recommendation REDUCE_EXPOSURE based on 'three kill switch metrics trending adversely' with 'measured data'",
+          "rule_violated": "PASS",
+          "violation": "No violation. The recommendation is anchored to verifiable measurements (ETF flows negative, RLUSD contracting, ODL dark) rather than predictions or narratives. The confidence level (high) is proportional to the directness of the evidence. The reasoning explicitly avoids treating the absence of positive signals as evidence of negative outcomes (correctly noting zero utilization evidence rather than claiming negative utilization evidence).",
+          "severity": "PASS"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 87,
+      "clean_findings": 81,
+      "reviewer_notes": "Three MODERATE-level violations all center on the ODL data absence inference chain. The system correctly identifies data absence and correctly applies behavioral analysis principles (LZ-EH-003), but violates LZ-RC-004 (null hypothesis testing), LZ-EPH-001 ('I don't know' avoidance), and LZ-EPH-002 (confidence/evidence proportionality) when converting 'Ripple stopped publishing' into 'Ripple stopped because data is unfavorable' and then escalating a kill switch based on that inference. This is the analytical output's central epistemological weakness. The violation is particularly significant because the output itself identifies ODL volume as 'the thesis's primary metric' and 'the biggest uncertainty' - the most critical unknown is being handled with the least epistemologically rigorous reasoning. The two MINOR violations on recency vs accuracy (LZ-MR-002) are subtle distinctions about temporal data handling that don't materially affect conclusions. The two MINOR violations on confidence proportionality for secondary inferences (XRP ETF non-reporting, ODL inference weighting) show the system is attempting to calibrate confidence but is applying inconsistent language-to-weight mapping. Overall: 81 of 87 findings (93%) passed cleanly. The violations cluster around inference chains built on behavioral interpretation of data absence - the system's epistemological discipline weakens when moving from 'what we observe' to 'why we don't observe what we expected.'"
+    },
+    "violations_count": 8,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
   }
 ]
