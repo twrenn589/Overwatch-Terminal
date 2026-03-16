@@ -683,5 +683,17 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-15T13:27:30.932Z"
+  },
+  {
+    "layer3_inference": "Layer 3 correctly prevented all previously corrected inference patterns (CL-033 stress-driven adoption, CL-038/041/042 private PermDEX activity, CL-044/036 RLUSD migration strategy, CL-043 BOJ intervention, CL-035 coordinated energy intervention). No Layer 3 inferences require rejection this cycle.",
+    "signal_ids": [],
+    "rejection_reason": "N/A — Layer 3 applied corrections ledger correctly. No inferences to reject.",
+    "root_cause": "N/A",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-16T02:57:45.243Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-16T02:57:45.246Z"
   }
 ]

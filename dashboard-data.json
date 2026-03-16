@@ -1,17 +1,17 @@
 {
-  "updated": "2026-03-15T13:11:18.748Z",
+  "updated": "2026-03-16T02:41:07.010Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.43,
-    "change_24h": 2.7036517141486605,
-    "volume_24h": 1317183063.3886116,
-    "market_cap": 87359370510.81682,
-    "data_date": "2026-03-15",
+    "price": 1.44,
+    "change_24h": 1.671635212953695,
+    "volume_24h": 2097555625.537181,
+    "market_cap": 87998463163.05888,
+    "data_date": "2026-03-16",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1553141950.5873668,
-    "data_date": "2026-03-15",
+    "market_cap": 1552670699.3999465,
+    "data_date": "2026-03-16",
     "source": "coingecko"
   },
   "macro": {
@@ -31,9 +31,9 @@
       "source": "fred"
     },
     "brent_crude": {
-      "value": 103.14,
-      "data_date": "2026-03-13",
-      "source": "financeflow"
+      "value": 94.35,
+      "data_date": "2026-03-09",
+      "source": "fred"
     },
     "dxy": {
       "value": 100.4998,
@@ -46,37 +46,229 @@
       "source": "stooq"
     },
     "fear_greed": {
-      "value": 15,
+      "value": 23,
       "label": "Extreme Fear",
-      "data_date": "2026-03-15",
+      "data_date": "2026-03-16",
       "source": "alternative.me"
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 102887120,
-    "rlusd_supply": 315003078.2916713,
-    "data_date": "2026-03-15",
+    "ledger_index": 102899587,
+    "rlusd_supply": 315003078.2916725,
+    "data_date": "2026-03-16",
     "source": "xrpl",
-    "current_ledger": 102887120,
-    "last_ledger_txns": 187,
+    "current_ledger": 102899587,
+    "last_ledger_txns": 184,
     "avg_tx_per_ledger": null,
-    "fee_burn_per_ledger_xrp": 0.00187,
-    "dex_volume_24h_usd": 6066442,
-    "dex_volume_24h_xrp": 4242267,
+    "fee_burn_per_ledger_xrp": 0.00184,
+    "dex_volume_24h_usd": 2190333,
+    "dex_volume_24h_xrp": 1521065,
     "dex_exchanges_24h": null,
     "dex_takers_24h": null,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 390480.879353,
-      "total_ask_xrp": 1000034.381884,
-      "best_bid": 1.43,
-      "best_ask": 1.4141
+      "total_bid_xrp": 373222.914156,
+      "total_ask_xrp": 1000026.283739,
+      "best_bid": 1.4444,
+      "best_ask": 1.42121
     }
   },
   "x_intelligence": {
     "tier1_posts": [
+      {
+        "username": "JoelKatz",
+        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset There are so many obvious reasons this is nonsense.\n\nThe New York Times said it would include \"all the news that's fit to print\". Fox said it would be \"fair and balanced\". Do you think the government could use this as an excuse to punish editorial decisions they didn't like?",
+        "created_at": "2026-03-16T00:39:02.000Z",
+        "tweet_id": "2033342240710660307",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 1,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 154
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset Yes. For two reasons. \n\nFirst, the contour of the right is that a person making an editorial decision should never have to reasonably worry that the government will deem their decision \"wrong\" so they are actually free to make the decision as they think best.\n\nSecond, attribution",
+        "created_at": "2026-03-16T00:01:47.000Z",
+        "tweet_id": "2033332866013352199",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 1,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 156
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset The First Amendment's guarantee of freedom of the press deprives the government of the power to punish a media company for wrongly deciding what content is appropriate for its media content. That deprivation is independent of the theory of liability and substantively protects the",
+        "created_at": "2026-03-15T23:49:27.000Z",
+        "tweet_id": "2033329761486094351",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 1,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 127
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset \"So are you suggesting that whatever printed terms of service a company publishes, they don't need to stick to it themselves?\"\n\nYes when, as here, the gov't attempting to enforce them would require the government to decide the company exercise its freedom of the press \"wrong\".",
+        "created_at": "2026-03-15T23:42:38.000Z",
+        "tweet_id": "2033328046019903828",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 2,
+          "like_count": 1,
+          "quote_count": 1,
+          "bookmark_count": 0,
+          "impression_count": 147
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I believe that media companies are the arbiters of what content is appropriate for their media products. I belive that is the core right that freedom of the press exists to protect.\n\n\"Why do you believe that unequal censorship is a good thing?\"\n\nBecause you can't have as Star",
+        "created_at": "2026-03-15T19:42:55.000Z",
+        "tweet_id": "2033267720628891917",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 326
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset You think it goes against their own terms, but your opinion doesn't matter at all. The crux of freedom of the press is that neither you nor the government have any say in what content a media company things is appropriate for their media products.",
+        "created_at": "2026-03-15T19:41:07.000Z",
+        "tweet_id": "2033267265412776235",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 254
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@BumpkinEsq @ProSeSelfHelp @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset This is silly nonsense. Every commercial media product would like everyone who might enjoy using that product to use it.",
+        "created_at": "2026-03-15T19:40:21.000Z",
+        "tweet_id": "2033267073368150420",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 2,
+          "like_count": 3,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 258
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@BumpkinEsq @ProSeSelfHelp @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset Fox News is popular *because* of its viewpoint. If you wanted to kill Fox News, the best way to do it would be to use government power to make it harder for a network to express that viewpoint.",
+        "created_at": "2026-03-15T17:41:32.000Z",
+        "tweet_id": "2033237173164732463",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 3,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 259
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@BumpkinEsq @ProSeSelfHelp @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I agree. But I think it's largely because those are the moderation practices that tend to lead to popular platforms. (For complex reasons. It's not just that that's the content more people want to consume.)",
+        "created_at": "2026-03-15T17:39:41.000Z",
+        "tweet_id": "2033236707718648203",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 248
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@BumpkinEsq @ProSeSelfHelp @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I hope they don't see it that way. And I will say that, in my experience on X at least, they don't. Half of them think liberals still control X and nearly all of them think Elon would never use X that way.\n\nI use Elon as an example for two reasons. First, we are on X, so it makes",
+        "created_at": "2026-03-15T17:27:55.000Z",
+        "tweet_id": "2033233746741317903",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 207
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I'm fairly confident that you're trolling at this point. But I will admit that there is one other possibility and that's that you're just making absurdly low effort responses without ever stopping for even a second to think or do even a quick search to make sure you're not",
+        "created_at": "2026-03-15T17:23:27.000Z",
+        "tweet_id": "2033232624018411541",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 258
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "JoelKatz",
+        "text": "@ChainLinkGod @unb0rnsupremacy One could equally well (actually, equally wrongly) make the argument that all of this is great for people trying to make a profit by holding XRP because it means that they can buy at a much lower price than they would have to otherwise.",
+        "created_at": "2026-03-15T17:08:46.000Z",
+        "tweet_id": "2033228927892918725",
+        "metrics": {
+          "retweet_count": 43,
+          "reply_count": 26,
+          "like_count": 357,
+          "quote_count": 0,
+          "bookmark_count": 30,
+          "impression_count": 17125
+        },
+        "tier": 1,
+        "weight": 3
+      },
       {
         "username": "JoelKatz",
         "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I'm going to be very, very blunt here. I do not believe that you have a considered position on Section 230. Your constant ignorance and factual inaccuracies about the most basic aspects of it, in my honest opinion, makes that impossible. I'm not trying to be rude, just direct.",
@@ -84,11 +276,11 @@
         "tweet_id": "2033030306194993424",
         "metrics": {
           "retweet_count": 3,
-          "reply_count": 2,
-          "like_count": 4,
+          "reply_count": 3,
+          "like_count": 7,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 268
+          "impression_count": 517
         },
         "tier": 1,
         "weight": 3
@@ -101,10 +293,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 1,
-          "like_count": 2,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 257
+          "like_count": 4,
+          "quote_count": 1,
+          "bookmark_count": 1,
+          "impression_count": 511
         },
         "tier": 1,
         "weight": 3
@@ -117,10 +309,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 1,
-          "like_count": 2,
+          "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 161
+          "impression_count": 256
         },
         "tier": 1,
         "weight": 3
@@ -136,7 +328,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 153
+          "impression_count": 265
         },
         "tier": 1,
         "weight": 3
@@ -149,10 +341,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 3,
-          "like_count": 3,
+          "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 160
+          "impression_count": 260
         },
         "tier": 1,
         "weight": 3
@@ -168,231 +360,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 155
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset Are you reading what I'm writing? Seriously.\nhttps://t.co/IX4lG1nNNI",
-        "created_at": "2026-03-15T03:11:11.000Z",
-        "tweet_id": "2033018142948208994",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 1,
-          "like_count": 2,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 249
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I mean, it's right in the one sentence that everyone would quote if you were going to quote just one sentence of 230.\n\n\"No provider or user of an interactive computer service shall be treated as the publisher or speaker of any information provided by another information content",
-        "created_at": "2026-03-15T02:08:53.000Z",
-        "tweet_id": "2033002465373876505",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 2,
-          "like_count": 3,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 157
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset Serious question: Have you never actually read all of section 230?",
-        "created_at": "2026-03-15T02:07:56.000Z",
-        "tweet_id": "2033002223597400299",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 3,
-          "like_count": 3,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 182
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I remember people closing their moderated comment sections after Stratton Oakmont and refraining from speaking through curation due to the fear or expensive litigation. These weren't just small companies but individuals operating blogs.",
-        "created_at": "2026-03-15T02:07:19.000Z",
-        "tweet_id": "2033002071218335816",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 3,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 158
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I rely on 230 every time I repost something that would be defamatory if false. The benefit comes not from invoking it but from never having to because a suit or a threat of suit would fail.\n\nImagine the chilling effects on everyone who participated in the MeToo movement by",
-        "created_at": "2026-03-15T02:06:02.000Z",
-        "tweet_id": "2033001745459376495",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 2,
-          "like_count": 3,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 402
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset I think individuals probably benefit the most. Large companies have legal teams that can make it extremely expensive to sue them. For an individual who, for example, retweets something that is claimed to be defamatory, they would almost certainly have to cave should a suit be",
-        "created_at": "2026-03-15T02:02:07.000Z",
-        "tweet_id": "2033000763237237053",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 2,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 136
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset To be clear, I'm not saying that everything 230 protects is unarguably already protected by the First Amendment.",
-        "created_at": "2026-03-15T01:57:25.000Z",
-        "tweet_id": "2032999579965444445",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 1,
-          "like_count": 2,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 173
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset That's one of the good things 230 does. It's very similar to state anti-SLAPP laws that reduce the incentive to file and cost to defend nuisance lawsuits. But it's not quite all 230 does.",
-        "created_at": "2026-03-15T01:56:52.000Z",
-        "tweet_id": "2032999438533480528",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 2,
-          "like_count": 1,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 201
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@ProSeSelfHelp @BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset \"Notice how you started out with this being some sort of Elon Musk thing?\"\n\nYeah. What's your point? If you'd prefer some other example, feel free to change it.\n\n\"Are you ignoring the Twitter files?\"\n\nAt the moment, yes, since this isn't about that at all. But since you mention",
-        "created_at": "2026-03-15T01:53:02.000Z",
-        "tweet_id": "2032998474049053131",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 1,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 176
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset There are five problems with this, all fatal:\n\n1) It's not true. Elon Musk using X's editorial policy to push a narrative is not in any meaningful way different from the New York Times using its editorial policy to do the same thing.\n\n2) The only thing we could do with this is",
-        "created_at": "2026-03-15T00:56:23.000Z",
-        "tweet_id": "2032984219987882219",
-        "metrics": {
-          "retweet_count": 2,
-          "reply_count": 2,
-          "like_count": 4,
-          "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 203
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@IrieVibes79 @thewatcher1960 @mazzenilsson https://t.co/QQI6fE918Z",
-        "created_at": "2026-03-14T23:35:09.000Z",
-        "tweet_id": "2032963774618239343",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 10,
-          "like_count": 38,
-          "quote_count": 3,
-          "bookmark_count": 3,
-          "impression_count": 2532
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset That some problems are easy does not mean that none are hard. If you're advocating a change in law that could use liability to silence some of the most powerful and effective protected speech currently in existence, I think you have a pretty strong burden to show it won't.",
-        "created_at": "2026-03-14T23:31:51.000Z",
-        "tweet_id": "2032962947128111325",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 2,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 197
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@BumpkinEsq @ThinkingSapien @TmosMonstrocity @SergioVengeance @99og_grey @TheLegalMindset Certainly reasonable people could disagree on the appropriate scope of liability. Congress couldn't trust courts to get it right, so passed 230.",
-        "created_at": "2026-03-14T23:04:18.000Z",
-        "tweet_id": "2032956011544449156",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 2,
-          "like_count": 3,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 214
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@TmosMonstrocity @99og_grey @ProSeSelfHelp @BumpkinEsq @ThinkingSapien @SergioVengeance @TheLegalMindset The whole point of the 1A right to freedom of the press is to ensure the government cannot compel a media company to include in its media product speech that it does not think appropriate. A 1A \"right to inclusion\" is incoherent.",
-        "created_at": "2026-03-14T22:33:13.000Z",
-        "tweet_id": "2032948190010613947",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 3,
-          "like_count": 3,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 202
+          "impression_count": 240
         },
         "tier": 1,
         "weight": 3
@@ -400,92 +368,108 @@
     ],
     "tier2_posts": [
       {
-        "username": "WatcherGuru",
-        "text": "JUST IN: Elon Musk says AI will make jobs \"optional\" in the future due to \"universal high income.\" https://t.co/4GY6lTH2gN",
-        "created_at": "2026-03-15T06:34:45.000Z",
-        "tweet_id": "2033069370881003631",
-        "metrics": {
-          "retweet_count": 447,
-          "reply_count": 834,
-          "like_count": 3874,
-          "quote_count": 170,
-          "bookmark_count": 208,
-          "impression_count": 345982
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇮🇷 Iran says the Strait of Hormuz is open to all countries except the United States and Israel. https://t.co/XmUaqsCJm9",
-        "created_at": "2026-03-15T02:11:46.000Z",
-        "tweet_id": "2033003190367527128",
-        "metrics": {
-          "retweet_count": 1270,
-          "reply_count": 721,
-          "like_count": 12906,
-          "quote_count": 155,
-          "bookmark_count": 325,
-          "impression_count": 772710
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
         "username": "JohnEDeaton1",
-        "text": "Check out johndeatonforUSSenate2026's video! #TikTok https://t.co/kjQhnU7scX",
-        "created_at": "2026-03-15T00:51:08.000Z",
-        "tweet_id": "2032982896978383095",
-        "metrics": {
-          "retweet_count": 5,
-          "reply_count": 2,
-          "like_count": 20,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 4357
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "I’m John Deaton and I approve this post.\n\n#mapoli #MASen #Deaton https://t.co/YjgqY3kGKA",
-        "created_at": "2026-03-14T22:23:08.000Z",
-        "tweet_id": "2032945652297019699",
-        "metrics": {
-          "retweet_count": 12,
-          "reply_count": 1,
-          "like_count": 58,
-          "quote_count": 1,
-          "bookmark_count": 2,
-          "impression_count": 8351
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "@DuncanBurnsMA @EdMarkey https://t.co/B2mhSm4q1y",
-        "created_at": "2026-03-14T21:42:02.000Z",
-        "tweet_id": "2032935307784397275",
+        "text": "@VoteDionneMA Always",
+        "created_at": "2026-03-16T02:36:24.000Z",
+        "tweet_id": "2033371777594691769",
         "metrics": {
           "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 202
+          "impression_count": 12
         },
         "tier": 2,
         "weight": 2
       },
       {
         "username": "JohnEDeaton1",
-        "text": "RT @DeatonforSenate: Come join us tomorrow at noon in Worcester to see the Deaton Mobile and celebrate St. Paddy’s Day with us. https://t.c…",
-        "created_at": "2026-03-14T20:18:40.000Z",
-        "tweet_id": "2032914327288590826",
+        "text": "RT @DeatonforSenate: Massachusetts has too much talent, too much grit, and too much potential to be this unaffordable and this stagnant. If…",
+        "created_at": "2026-03-15T23:42:23.000Z",
+        "tweet_id": "2033327982828265903",
         "metrics": {
-          "retweet_count": 40,
+          "retweet_count": 28,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "@RepLuna @xrpcoupe74 This is why she wanted to ban the self custody of Bitcoin and other crypto assets. She told @chucktodd America was ready for a Federal Reserve issued CBDC. One of the reasons I ran agaisnt her in 2024 was because I viewed her statement and intent as the single biggest threat to",
+        "created_at": "2026-03-15T23:25:35.000Z",
+        "tweet_id": "2033323755041071282",
+        "metrics": {
+          "retweet_count": 63,
+          "reply_count": 7,
+          "like_count": 415,
+          "quote_count": 1,
+          "bookmark_count": 5,
+          "impression_count": 7093
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: $73,000 Bitcoin https://t.co/s3X4v7gyxR",
+        "created_at": "2026-03-15T23:15:09.000Z",
+        "tweet_id": "2033321130845454828",
+        "metrics": {
+          "retweet_count": 436,
+          "reply_count": 351,
+          "like_count": 4142,
+          "quote_count": 36,
+          "bookmark_count": 42,
+          "impression_count": 107984
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: Brent crude oil rises above $106 at open. https://t.co/uuLxnTBlrV",
+        "created_at": "2026-03-15T22:05:37.000Z",
+        "tweet_id": "2033303633018692037",
+        "metrics": {
+          "retweet_count": 421,
+          "reply_count": 313,
+          "like_count": 3698,
+          "quote_count": 47,
+          "bookmark_count": 69,
+          "impression_count": 157718
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇺🇸 US Energy Secretary says there are \"no guarantees\" oil prices will drop anytime soon, NYT reports.",
+        "created_at": "2026-03-15T21:34:33.000Z",
+        "tweet_id": "2033295815792353326",
+        "metrics": {
+          "retweet_count": 742,
+          "reply_count": 442,
+          "like_count": 5218,
+          "quote_count": 102,
+          "bookmark_count": 157,
+          "impression_count": 341051
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "RT @VoteDionneMA: St. Patrick’s Day parade in the Heart of the Commonwealth, Worcester with my friend, @DeatonforSenate for US Senate! 🇺🇸🇮🇪…",
+        "created_at": "2026-03-15T21:21:38.000Z",
+        "tweet_id": "2033292565202567398",
+        "metrics": {
+          "retweet_count": 6,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -496,232 +480,216 @@
         "weight": 2
       },
       {
-        "username": "CoinDesk",
-        "text": "WATCH: @ricedelman gives @jennsanasie his Bitcoin prediction if the CLARITY Act passes:\n\n“I’m still on record that Bitcoin will be $500,000 by the end of the decade.” https://t.co/CVmWjzwpLm",
-        "created_at": "2026-03-14T19:35:21.000Z",
-        "tweet_id": "2032903428930732440",
-        "metrics": {
-          "retweet_count": 26,
-          "reply_count": 32,
-          "like_count": 165,
-          "quote_count": 3,
-          "bookmark_count": 14,
-          "impression_count": 36655
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "BitMEX co-founder @CryptoHayes explains what could push HYPE to $150 by August 2026. https://t.co/ceQtLW77GK",
-        "created_at": "2026-03-14T19:07:26.000Z",
-        "tweet_id": "2032896403471524111",
+        "username": "JohnEDeaton1",
+        "text": "The link👇 is my Washington Clean Hands Act - getting rid of the corruption that permeates D.C. \n\nAdd one additional Act to it: I will write legislation that makes it the law that Members of Congress do NOT get paid during any government shutdown - whether it’s a full or partial https://t.co/tAZCeICti5",
+        "created_at": "2026-03-15T21:08:24.000Z",
+        "tweet_id": "2033289233947844934",
         "metrics": {
           "retweet_count": 23,
-          "reply_count": 53,
-          "like_count": 225,
-          "quote_count": 4,
-          "bookmark_count": 50,
-          "impression_count": 43493
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "The Bank Lobby has way too much power in Washington. They have bought career politicians for far too long. Why did my political opponent @EdMarkey vote against the Genius Act? Would it surprise you that Bankers/Wall Street are in the top 3 donors his entire career? \n\nThe banking https://t.co/nFcP76cQ0J",
-        "created_at": "2026-03-14T17:50:50.000Z",
-        "tweet_id": "2032877125338816754",
-        "metrics": {
-          "retweet_count": 194,
-          "reply_count": 36,
-          "like_count": 819,
-          "quote_count": 4,
-          "bookmark_count": 25,
-          "impression_count": 36681
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "The criticism that U.S. defense spending is stuck in a legacy mindset isn't just a budget argument - it’s a math problem we’re currently losing on the battlefield of economics.\n\nThe war in Ukraine has served as a brutal, real-time classroom, yet the U.S. military-industrial https://t.co/WxSIcfYRKu",
-        "created_at": "2026-03-14T17:26:31.000Z",
-        "tweet_id": "2032871005346050436",
-        "metrics": {
-          "retweet_count": 12,
-          "reply_count": 10,
-          "like_count": 52,
+          "reply_count": 8,
+          "like_count": 123,
           "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 9295
+          "bookmark_count": 0,
+          "impression_count": 8518
         },
         "tier": 2,
         "weight": 2
       },
       {
-        "username": "CoinDesk",
-        "text": "Happy Pi Day. 🥧 https://t.co/jwJEJliJJy",
-        "created_at": "2026-03-14T16:10:44.000Z",
-        "tweet_id": "2032851935443955777",
+        "username": "EleanorTerrett",
+        "text": "RT @CryptoAmerica_: “Crypto rewards should continue to exist. The rewards are a positive use, for consumers.”\n\n@CodyCarboneDC, CEO of @Digi…",
+        "created_at": "2026-03-15T19:31:44.000Z",
+        "tweet_id": "2033264904908546218",
+        "metrics": {
+          "retweet_count": 15,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "RT @CryptoAmerica_: “The prosecutors had asked us about dates for a retrial sometime ago, but then did not proceed with a request.”\n\nKeri C…",
+        "created_at": "2026-03-15T19:31:39.000Z",
+        "tweet_id": "2033264884847104207",
         "metrics": {
           "retweet_count": 4,
-          "reply_count": 20,
-          "like_count": 79,
+          "reply_count": 0,
+          "like_count": 0,
           "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 11528
+          "bookmark_count": 0,
+          "impression_count": 0
         },
         "tier": 2,
         "weight": 2
       },
       {
-        "username": "CoinDesk",
-        "text": "Alleged Ponzi scheme victims are suing @JPMorgan for banking a $328M crypto fraud — despite what they call obvious red flags.\nhttps://t.co/TKrMKplkkh",
-        "created_at": "2026-03-14T16:10:39.000Z",
-        "tweet_id": "2032851915999162658",
+        "username": "EleanorTerrett",
+        "text": "RT @CryptoAmerica_: “I think a lot of new money experiences will be created with stablecoins in this agentic world.”\n\n@zcabrams, Co-Founder…",
+        "created_at": "2026-03-15T19:31:33.000Z",
+        "tweet_id": "2033264861212201006",
         "metrics": {
-          "retweet_count": 2,
-          "reply_count": 18,
-          "like_count": 19,
+          "retweet_count": 12,
+          "reply_count": 0,
+          "like_count": 0,
           "quote_count": 0,
-          "bookmark_count": 3,
-          "impression_count": 11838
+          "bookmark_count": 0,
+          "impression_count": 0
         },
         "tier": 2,
         "weight": 2
       },
       {
-        "username": "CoinDesk",
-        "text": "A dormant wallet woke up, dropped $7M on $TRUMP tokens hours after the Mar-a-Lago gala announcement, and walked away up $2.5M. https://t.co/64S1PI6Z2g",
-        "created_at": "2026-03-14T16:10:37.000Z",
-        "tweet_id": "2032851904041202135",
+        "username": "JohnEDeaton1",
+        "text": "RT @DeatonforSenate: This election is not a moment for stale leadership. The challenges facing Massachusetts are getting more complex, movi…",
+        "created_at": "2026-03-15T19:14:05.000Z",
+        "tweet_id": "2033260462972731807",
         "metrics": {
-          "retweet_count": 1,
-          "reply_count": 1,
-          "like_count": 24,
+          "retweet_count": 19,
+          "reply_count": 0,
+          "like_count": 0,
           "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 6535
+          "bookmark_count": 0,
+          "impression_count": 0
         },
         "tier": 2,
         "weight": 2
       },
       {
-        "username": "CoinDesk",
-        "text": "Kraken lists $PI as Bybit's CEO continues to call it a scam.\nhttps://t.co/yh20pROu4A",
-        "created_at": "2026-03-14T16:10:34.000Z",
-        "tweet_id": "2032851892200681980",
+        "username": "WatcherGuru",
+        "text": "JUST IN: Tether CEO Paolo Ardoino says his AI team \"will release a true breakthrough this coming week.\" https://t.co/hEysnjD1Lg",
+        "created_at": "2026-03-15T17:51:20.000Z",
+        "tweet_id": "2033239639910125973",
         "metrics": {
-          "retweet_count": 9,
+          "retweet_count": 384,
+          "reply_count": 423,
+          "like_count": 3914,
+          "quote_count": 53,
+          "bookmark_count": 212,
+          "impression_count": 251262
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "RT @WatcherGuru: JUST IN: Elon Musk says AI will make jobs \"optional\" in the future due to \"universal high income.\" https://t.co/4GY6lTH2gN",
+        "created_at": "2026-03-15T17:42:40.000Z",
+        "tweet_id": "2033237458473664819",
+        "metrics": {
+          "retweet_count": 823,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 17
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "https://t.co/zMiyVsSgrP",
+        "created_at": "2026-03-15T16:48:56.000Z",
+        "tweet_id": "2033223934590451837",
+        "metrics": {
+          "retweet_count": 7,
           "reply_count": 6,
-          "like_count": 83,
-          "quote_count": 1,
-          "bookmark_count": 2,
-          "impression_count": 10181
+          "like_count": 51,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4541
         },
         "tier": 2,
         "weight": 2
       },
       {
-        "username": "CoinDesk",
-        "text": "Pi Day only comes once a year. $PI didn't waste it — up 30% after @Kraken announced its listing.\n\nHere are 3.14 stories to round out your day:",
-        "created_at": "2026-03-14T16:10:31.000Z",
-        "tweet_id": "2032851880364356057",
+        "username": "OndoFinance",
+        "text": "Another big week for tokenization.\n\nNasdaq, HSBC, Standard Chartered, and the SEC all moved RWAs another step closer to mainstream global adoption.\n\nLatest tokenization news ↓\n\n1️⃣ Nasdaq Moves a Step Closer to Tokenized Stocks\n\nNasdaq’s design involves issuers sponsoring tokens, https://t.co/wcgW58MMjp",
+        "created_at": "2026-03-15T16:35:28.000Z",
+        "tweet_id": "2033220545031160108",
         "metrics": {
-          "retweet_count": 158,
-          "reply_count": 80,
-          "like_count": 946,
-          "quote_count": 8,
+          "retweet_count": 104,
+          "reply_count": 51,
+          "like_count": 514,
+          "quote_count": 11,
           "bookmark_count": 23,
-          "impression_count": 53802
+          "impression_count": 17153
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "Enthusiastic youth ready to pass out treats 🍭 during the Worcester Saint Patrick’s Day Parade. \n\n#MASen #Deaton https://t.co/sfMxS1HGqI",
+        "created_at": "2026-03-15T16:07:08.000Z",
+        "tweet_id": "2033213416412754027",
+        "metrics": {
+          "retweet_count": 18,
+          "reply_count": 5,
+          "like_count": 93,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 6046
         },
         "tier": 2,
         "weight": 2
       },
       {
         "username": "CoinDesk",
-        "text": "RT @CoinDeskPodcast: 🎧 Catch the latest episode of 'Blockspace,’ in partnership with @blockspace!\n\nArk Labs Raises $5.2M, CleanSpark's on B…",
-        "created_at": "2026-03-14T16:01:36.000Z",
-        "tweet_id": "2032849635283263973",
+        "text": "The crypto industry is going through its \"teenager puberty moment.\"\n\n@JohnNahas84 joins #GenC to discuss why @AvaLabs is moving past the phase of building tech for tech’s sake. We dive into the shift from speculative \"Las Vegas\" ecosystems to the sovereign, custom-built cities https://t.co/UhFGg2phIW",
+        "created_at": "2026-03-15T16:00:01.000Z",
+        "tweet_id": "2033211627521413301",
         "metrics": {
-          "retweet_count": 3,
+          "retweet_count": 17,
+          "reply_count": 24,
+          "like_count": 72,
+          "quote_count": 1,
+          "bookmark_count": 4,
+          "impression_count": 20770
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "RT @DeatonforSenate: See you at noon, Worcester 🍀 The Common Sense Bus is rolling in for the St. Patrick’s Day Parade. Come say hi, snap a…",
+        "created_at": "2026-03-15T15:05:41.000Z",
+        "tweet_id": "2033197950872994267",
+        "metrics": {
+          "retweet_count": 48,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 13
+          "impression_count": 0
         },
         "tier": 2,
         "weight": 2
       },
       {
         "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 President Trump says the US and \"many countries\" are sending warships to the Strait of Hormuz to keep it \"open and safe.\"\n\n20% of the world's oil supply passes through this strategic waterway. https://t.co/jDe8xJhQ3n",
-        "created_at": "2026-03-14T14:25:49.000Z",
-        "tweet_id": "2032825530488103310",
+        "text": "JUST IN: 🇺🇸 Average US gas prices rise to $3.70 for the first time since April 2024. https://t.co/H3poOpRQHk",
+        "created_at": "2026-03-15T14:28:39.000Z",
+        "tweet_id": "2033188634283647294",
         "metrics": {
-          "retweet_count": 505,
-          "reply_count": 527,
-          "like_count": 4382,
-          "quote_count": 59,
-          "bookmark_count": 78,
-          "impression_count": 812618
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "Explaining Bitcoin to an empty room in 2013 when it was worth $100. https://t.co/MH7W4jRznu",
-        "created_at": "2026-03-14T14:07:23.000Z",
-        "tweet_id": "2032820893701865531",
-        "metrics": {
-          "retweet_count": 935,
-          "reply_count": 548,
-          "like_count": 8842,
-          "quote_count": 111,
-          "bookmark_count": 1018,
-          "impression_count": 482534
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "The agenda for Consensus Miami has arrived ✨\n\nCrypto at scale. Agentic Commerce. Institutional integration. Join the White House, Wall Street, and Web3 at the most important event in global finance. \n\nRegister now.",
-        "created_at": "2026-03-14T10:04:13.000Z",
-        "tweet_id": "2032759699670774134",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 0,
-          "like_count": 4,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 21495
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "The agenda for Consensus Miami has arrived ✨\n\nCrypto at scale. Agentic Commerce. Institutional integration. Join the White House, Wall Street, and Web3 at the most important event in global finance. \n\nRegister now.",
-        "created_at": "2026-03-14T10:03:20.000Z",
-        "tweet_id": "2032759476818956485",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 456
+          "retweet_count": 555,
+          "reply_count": 486,
+          "like_count": 4995,
+          "quote_count": 65,
+          "bookmark_count": 112,
+          "impression_count": 227540
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-15T13:11:17.089Z",
-    "post_count": 40,
+    "fetched_at": "2026-03-16T02:41:05.114Z",
+    "post_count": 38,
     "errors": []
   },
   "x402_agent": {
@@ -897,7 +865,7 @@
       "timestamp": "2026-03-07T03:24:01.000Z"
     },
     "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
-    "last_updated": "2026-03-15T13:11:17.526Z"
+    "last_updated": "2026-03-16T02:41:05.599Z"
   },
   "etf": {
     "total_aum": 1117308619,
@@ -916,20 +884,6 @@
     "pct_supply": null,
     "funds": [
       {
-        "ticker": "GXRP",
-        "issuer": "Grayscale",
-        "aum": null,
-        "xrp_locked": null,
-        "daily_flow": 0
-      },
-      {
-        "ticker": "TOXR",
-        "issuer": "TOXR",
-        "aum": null,
-        "xrp_locked": null,
-        "daily_flow": 0
-      },
-      {
         "ticker": "XRPZ",
         "issuer": "XRPZ",
         "aum": null,
@@ -937,8 +891,22 @@
         "daily_flow": 0
       },
       {
+        "ticker": "GXRP",
+        "issuer": "Grayscale",
+        "aum": null,
+        "xrp_locked": null,
+        "daily_flow": 0
+      },
+      {
         "ticker": "XRPC",
         "issuer": "XRPC",
+        "aum": null,
+        "xrp_locked": null,
+        "daily_flow": 0
+      },
+      {
+        "ticker": "TOXR",
+        "issuer": "TOXR",
         "aum": null,
         "xrp_locked": null,
         "daily_flow": 0
@@ -1131,7 +1099,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1553141950.5873668,
+      "current": 1552670699.3999465,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
@@ -1192,75 +1160,75 @@
   },
   "probability": {
     "bear": 18,
-    "base": 48,
-    "mid": 24,
+    "base": 45,
+    "mid": 27,
     "bull": 10,
-    "last_updated": "2026-03-15T13:28:35.465Z",
-    "last_reasoning": "Bear case probability increased from 14% to 18% based on: (1) compound stress matrix now at CRITICAL with confirmed oil shock, (2) XRP ETF cumulative flows turned negative, (3) RLUSD on-chain supply far below headline figures, (4) Fear & Greed at extreme levels. Base case narrowed from 42% to 48% as the most likely outcome remains range-bound but tilted lower. Mid and bull trimmed to reflect that institutional catalysts are not materializing at the pace needed — ETF AUM declining, ODL data still dark, PermDEX adoption at zero. The oil shock simultaneously creates conditions that could validate settlement demand (thesis paradox) but near-term destruction of risk appetite dominates."
+    "last_updated": "2026-03-16T02:58:26.040Z",
+    "last_reasoning": "Bear case probability increased from 14% to 18%. The compound stress matrix is now in full CRITICAL with all three legs at or approaching critical thresholds simultaneously. XRP ETF flows turned cumulative negative. RLUSD growth has stalled. BTC drawdown to $73K drags all crypto. Oil above $106 is an active macro shock — not a risk scenario. The base case absorbs some of the mid/bull probability mass because the required institutional catalysts (ETF demand reversal, RLUSD acceleration, ODL data emergence) are not materializing while headwinds compound. Bull case trimmed to 10% — the stress environment would need to resolve quickly AND institutional adoption would need to accelerate sharply, an increasingly unlikely combination."
   },
   "bear_case": {
-    "counter_thesis_score": 68,
-    "score_reasoning": "Score elevated from prior assessment. ETF cumulative flows have turned negative — the institutional demand signal has inverted. RLUSD on-chain supply at $315M is 94% below the headline figure, undermining the stablecoin adoption pillar. ODL data remains dark 15 months into the timeline. Compound stress at CRITICAL. Multiple kill switch trajectories are off-pace.",
+    "counter_thesis_score": 7.2,
+    "score_reasoning": "Counter-thesis pressure is elevated and rising. Three simultaneous headwinds: macro stress matrix in CRITICAL (active, not theoretical), XRP-specific institutional demand failing (ETF flows negative, RLUSD stalled), and competing infrastructure advancing (Ondo/Nasdaq/HSBC tokenization, BOJ sovereign blockchain). The absence of ODL data for 9+ months remains the single most damaging bear signal.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "SWIFT continues iterating on GPI with blockchain integration experiments. No killer upgrade announced but the incumbent advantage of existing network effects remains the primary competitive threat."
+        "status_text": "SWIFT continues incremental upgrades. No dramatic acceleration but no need for one — incumbency advantage means they only need to be 'good enough' to prevent switching costs from being worthwhile."
       },
       {
         "name": "Visa B2B Connect",
         "status": "LOW_RISK",
-        "status_text": "No significant new deployment announcements. Enterprise blockchain payments remain a secondary product for Visa."
+        "status_text": "No new competitive signals. Visa focused on consumer stablecoin/crypto integrations rather than institutional settlement."
       },
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "JPMorgan sued for banking $328M crypto fraud. Reputational noise but Kinexys (Onyx successor) continues operating with institutional bank clients. JPM's infrastructure reach with existing bank relationships is a legitimate competitive vector."
+        "status_text": "Kinexys (formerly Onyx) continues private blockchain settlement for institutional clients. Closed ecosystem but serves exactly the institutional corridor XRP targets."
       },
       {
         "name": "BIS Project Nexus",
         "status": "ELEVATED_RISK",
-        "status_text": "Central bank fast-payment system interconnection advancing. If Nexus achieves cross-border instant settlement through linked domestic systems, it reduces the addressable market for XRP as a bridge currency. BOJ blockchain experiment adds to sovereign alternative infrastructure momentum."
+        "status_text": "Nexus connecting national fast payment systems is a direct threat to bridge currency thesis. Central bank-backed, multilateral, and does not require XRP. No new data this cycle but structural competitive threat persists."
       },
       {
         "name": "Ethereum Institutional",
-        "status": "MONITORING",
-        "status_text": "Ondo/ADGM/Binance MTF for digital securities trading shows RWA tokenization advancing on Ethereum. ETH ETFs pulling +$117M weekly vs XRP ETFs losing -$28M weekly — institutional capital clearly prefers ETH over XRP for crypto exposure after BTC."
+        "status": "ELEVATED_RISK",
+        "status_text": "Ondo/ADGM/Binance MTF trading tokenized securities on non-XRPL rails. Nasdaq designing tokenized stocks. HSBC and Standard Chartered advancing on Ethereum-adjacent infrastructure. Most RLUSD (1.24B of 1.55B) lives on Ethereum, not XRPL."
       }
     ],
-    "odl_stagnation": "ODL volume data remains completely dark for 15+ months. Ripple's continued refusal to publish volume data when the kill switch target is $25B annualized is itself a negative signal — if volumes were strong, there would be incentive to disclose.",
-    "token_velocity_concern": "Token velocity data remains unknown. XRPL DEX volume at ~$6M/24h is modest relative to an $87B market cap asset. If XRP usage is primarily speculative holding rather than settlement velocity, the utility thesis weakens significantly.",
+    "odl_stagnation": "Ripple has not published ODL volume data in over 9 months; continued opacity is inconsistent with strong growth — companies publish metrics that make them look good.",
+    "token_velocity_concern": "No token velocity data available. With XRP price at $1.44 and XRPL DEX volume at only $2.19M/24h, on-chain utility activity remains minimal relative to the $88B market cap.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "Oil shock at $103 Brent + tariff regime + extreme fear (F&G 15) create significant recession risk. Energy-importing economies (Japan, Europe) face the worst of it."
+        "status_text": "Oil above $106 is a direct growth tax. US gas at $3.70 compresses consumer spending. BTC at $73K and Fear & Greed at 23 signal broad risk-off. S&P 500 resilience may not survive Monday's oil-open repricing."
       },
       {
         "name": "Crypto Winter Signals",
         "status": "MONITORING",
-        "status_text": "Fear & Greed at 15, XRP ETF outflows accelerating, but BTC ETFs still attracting capital. Not a uniform crypto winter — more of an altcoin winter with BTC dominance rising."
+        "status_text": "BTC at $73K (down significantly from highs), Fear & Greed at 23 (Extreme Fear), XRP ETF outflows accelerating. Not yet a full crypto winter but the early warning indicators are flashing."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "ECB stablecoin warning and Dimon's push for bank-like regulation are headwinds but not reversals. US regulatory clarity trajectory remains favorable under current administration."
+        "status_text": "Pro-crypto US administration remains in place. Deaton running for Senate on crypto-friendly platform. ECB stablecoin warnings are a headwind but not a reversal of the core US regulatory clarity thesis."
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "US 10Y at 4.27% suggests rates staying higher for longer. Oil shock could be inflationary, pushing rate cut expectations further out. Higher rates extend the opportunity cost of holding non-yielding crypto assets."
+        "status_text": "Oil shock is inflationary — reduces probability of Fed rate cuts. Higher-for-longer rates compress risk asset valuations and reduce institutional appetite for crypto allocation."
       }
     ],
-    "bear_narrative": "Compound stress is CRITICAL via Hormuz trigger with the structure one shock from full cascade — Brent at $103 emergency, JPY at 159.33 and accelerating toward 160, all three legs converging. Three kill switches escalated to WARNING in a single cycle: ODL volume remains a 2+ year suspicious absence, XRP ETF flows have turned negative cumulative (-$23.4M lifetime), and the RLUSD chain distribution discovery suggests XRPL-native stablecoin adoption may be 6.3% of target, not the headline 31% — a potential 5x overstatement that is now the highest-priority data gap in the entire framework. The thesis paradox is at its starkest: the geopolitical stress that most validates demand for alternative settlement infrastructure is simultaneously consuming the Japanese institutional bandwidth needed to deploy it and destroying the risk appetite needed to sustain the position. Call is INCREASE_MONITORING with an action window of days on compound stress and weeks on kill switch trajectory. I don't know if ODL volume would support this thesis, and Ripple's sustained decision not to tell us is, at this point, the loudest signal in the system.",
-    "last_updated": "2026-03-15T13:28:35.465Z"
+    "bear_narrative": "REDUCE EXPOSURE. Compound stress at CRITICAL with an operator action window of days — Brent above $106 with confirmed Hormuz disruptions, USD/JPY 67 bps from the 160 trigger that forces BOJ's hand, and the cascade structure is pre-loaded. The first direct measurement of institutional XRP ETF flows shows net rejection: cumulative flows are negative, zero weekly inflows, capital moving to BTC. Five of ten kill switches are at WARNING — ODL volume is suspiciously absent, RLUSD trajectory is negative against its target, ETF AUM is deteriorating, competing infrastructure is accumulating institutional interest on non-XRPL rails, and Ripple's transparency kill switch is failing by their own choice. The thesis paradox is real and unresolvable: a cascade that breaks Japan's settlement infrastructure simultaneously validates the thesis and destroys the position. But the evidence doesn't require the paradox to resolve — every measurable metric is pointing the same direction, and that direction is not favorable. The honest assessment: the infrastructure-first-volume-later argument buys time through the May PermDEX checkpoint, but the macro environment is consuming that time at an accelerating rate.",
+    "last_updated": "2026-03-16T02:58:26.040Z"
   },
   "last_analysis": {
-    "timestamp": "2026-03-15T13:28:35.465Z",
-    "run_type": "morning",
+    "timestamp": "2026-03-16T02:58:26.040Z",
+    "run_type": "evening",
     "stress_level": "CRITICAL",
     "stress_score": 82,
-    "applied_at": "2026-03-15T13:30:14.209Z",
+    "applied_at": "2026-03-16T03:00:10.179Z",
     "changes_applied": 2
   }
 }
