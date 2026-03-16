@@ -50,6 +50,15 @@
   "tension_score_threshold": 8,
   "tension_score_threshold_description": "Cumulative impact score across unresolved tensions that triggers the Blind Auditor. A single tension at 5 + any other tension at 3 or higher fires the trigger.",
 
+  "active_tension_cap": 8,
+  "active_tension_cap_description": "Maximum active tensions Layer 4 can carry. Forces prioritization. When at cap, new tensions must displace lowest-ranked existing tension with justification.",
+
+  "critical_persistence_threshold": 3,
+  "critical_persistence_threshold_description": "Number of consecutive runs a score 4-5 tension can persist without action escalation before the Blind Auditor flags it.",
+
+  "gap_review_cadence": "sunday_audit",
+  "gap_review_cadence_description": "When structural data gaps are reviewed for potential promotion to active tensions. Gaps do not carry time pressure.",
+
   "auditor_model_provider": "gemini",
   "auditor_model_name": "gemini-2.5-pro",
 

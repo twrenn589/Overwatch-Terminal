@@ -1249,6 +1249,7 @@ async function runReconcile(contextualizeResult, inferenceResult, marketData, th
   const actionEnumValues = domainActions.map(a => a.id).join(' | ');
   const actionSevere = (opts.domainConfig && opts.domainConfig.action_severe) || 'EXIT_SIGNAL';
   const actionMonitor = (opts.domainConfig && opts.domainConfig.action_monitor) || 'INCREASE_MONITORING';
+  const activeTensionCap = (opts.domainConfig && opts.domainConfig.active_tension_cap) || 8;
 
   // AD #14: Load active Blind Auditor advisory (if any) for Layer 4 to address
   let advisorySection = '';
@@ -1266,6 +1267,13 @@ async function runReconcile(contextualizeResult, inferenceResult, marketData, th
     }
   } catch (e) {
     warn('analysis', `Blind Auditor advisory load failed (non-fatal): ${e.message}`);
+  }
+
+  // AD #15: Build previous tensions section for lifecycle management
+  let previousTensionsSection = '';
+  const previousTensions = (opts && opts.previousTensions) || [];
+  if (previousTensions.length > 0) {
+    previousTensionsSection = `\n=== PREVIOUS RUN'S UNRESOLVED TENSIONS — YOU MUST DISPOSITION EACH ===\n\nThese are YOUR tensions from the previous run. For each one, you MUST assign a disposition:\n- RESOLVE: The question has been answered. Cite what specific evidence resolved it.\n- MAINTAIN: Still open. Provide current impact_score (rescore with justification if changed).\n- ESCALATE: More critical now. Score increases with justification.\n- DISPLACE: Removed for a higher-priority new tension. Justify the priority comparison.\n\nDo NOT silently drop a tension. Every previous tension must appear in your output with a disposition.\n\n${JSON.stringify(previousTensions, null, 2)}\n`;
   }
 
   const prompt = `${LAYER_ZERO_RULES}
@@ -1286,6 +1294,7 @@ ${JSON.stringify(marketData)}
 THESIS CONTEXT:
 ${thesisContext}
 ${advisorySection}
+${previousTensionsSection}
 === BURDEN OF PROOF — APPLY BEFORE ALL ELSE ===
 
 For every inference Layer 3 produced, apply judicial skepticism:
@@ -1326,13 +1335,27 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 6. THESIS STATUS — Declare thesis_status as one of: STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE | FALSIFIED. Then declare confidence_in_status as: high | medium | low. Write thesis_status_reasoning (2-3 sentences explaining why this status, not just describing the data). CONTESTED means evidence is pulling in both directions simultaneously — hold the paradox, do not force resolution. INSUFFICIENT_EVIDENCE means the data does not support a determination — say so.
 FALSIFIED means the thesis has been disproven — falsification criteria have been met. FALSIFIED is terminal. If you declare FALSIFIED, action_recommendation MUST be ${actionSevere}. No exceptions. Do not declare FALSIFIED unless specific falsification criteria have been triggered with confirming evidence.
 
-6b. UNRESOLVED TENSIONS — For each unresolved tension, assign an impact_score (integer 1-5):
+6b. UNRESOLVED TENSIONS — LIFECYCLE MANAGEMENT
+
+PREVIOUS TENSIONS: If previous tensions were provided above, you MUST disposition every one. No silent drops.
+
+NEW TENSIONS: Classify each as ACTIVE (has a resolution path, will resolve) or STRUCTURAL_GAP (data is not publicly available, may never resolve). Structural gaps are observability limitations, not analytical failures. Absence of data is not evidence of absence.
+
+RANKING: Rank all active tensions T-1 (highest priority) through T-N (lowest). Rank reflects urgency-weighted impact: both the consequence of the answer (impact_score 1-5) and how soon the answer arrives (resolution window proximity). A tension approaching its window MUST rise in rank. A high-impact tension with distant resolution may be outranked by a moderate-impact tension about to resolve. The ranking is a judgment — the Auditor reviews whether your ordering is honest.
+
+ACTIVE TENSION CAP: Maximum ${activeTensionCap} active tensions. If at cap and a new tension arises, it must displace the lowest-ranked tension with explicit priority justification. Structural gaps do not count against the cap.
+
+IMPACT SCORES (1-5):
    1 = Informational: Resolution would not change the action recommendation.
    2 = Minor: Could shift confidence but not the action.
    3 = Moderate: Resolution could change the action by one level.
    4 = Significant: Resolution would likely change the action.
    5 = Critical: This tension alone could flip the entire assessment.
 Score honestly. Do not downplay a critical tension to avoid acting on it. Do not inflate a minor tension to justify holding position. The scores are auditable.
+
+RESOLUTION WINDOWS: Each active tension carries expected_resolution_window (hours | days | weeks | months). This is your estimate of when the question will be answered by events. If a tension has exceeded its window, you must either resolve it, extend with justification, or escalate the score. Maintaining past the window without acknowledgment is a violation.
+
+FALSIFIED: If thesis_status is FALSIFIED, all active tensions are auto-resolved — the thesis question has been answered.
 
 7. ACTION RECOMMENDATION — Select action_recommendation from: ${actionEnumValues}. Write action_reasoning (2-3 sentences). The action must be consistent with thesis_status: STRENGTHENING cannot produce ${actionSevere}. INSUFFICIENT_EVIDENCE cannot produce ${actionSevere}. If thesis_status is CONTESTED, action must be ${actionMonitor} or an intermediate option — never ${actionSevere} on contested evidence alone.
 
@@ -1425,11 +1448,34 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "thesis_status_reasoning": "2-3 sentences explaining why this status based on reconciled evidence",
   "action_recommendation": "HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL",
   "action_reasoning": "2-3 sentences explaining the action and its consistency with thesis_status",
-  "unresolved_tensions": [
+  "previous_tension_dispositions": [
     {
+      "tension_id": "T-N from previous run",
+      "disposition": "RESOLVE | MAINTAIN | ESCALATE | DISPLACE",
+      "disposition_reason": "what evidence or reasoning supports this disposition",
+      "new_impact_score": 3,
+      "displaced_by": "T-N of new tension that displaced this, if DISPLACE"
+    }
+  ],
+  "active_tensions": [
+    {
+      "tension_id": "T-1",
       "description": "what remains unresolved",
       "watch_for": "what observable event would resolve this tension",
-      "impact_score": 3
+      "impact_score": 3,
+      "expected_resolution_window": "hours | days | weeks | months",
+      "window_status": "within | approaching | expired | extended",
+      "classification": "ACTIVE",
+      "is_new": true
+    }
+  ],
+  "structural_gaps": [
+    {
+      "gap_id": "SG-1",
+      "description": "what data is unavailable",
+      "gap_reason": "why this data cannot be observed",
+      "promotable_if": "what would make this gap resolvable",
+      "classification": "STRUCTURAL_GAP"
     }
   ],
   "final_bear_pressure": 0,
@@ -1669,7 +1715,12 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     confidence_in_status:   reconcileResult.confidence_in_status || null,
     action_recommendation:  reconcileResult.action_recommendation || null,
     action_reasoning:       reconcileResult.action_reasoning || null,
-    unresolved_tensions:    reconcileResult.unresolved_tensions || null
+    // AD #15: Tension lifecycle fields
+    active_tensions:                reconcileResult.active_tensions || [],
+    structural_gaps:                reconcileResult.structural_gaps || [],
+    previous_tension_dispositions:  reconcileResult.previous_tension_dispositions || [],
+    // Backward compatibility: unresolved_tensions computed from active_tensions for dashboard/auditor
+    unresolved_tensions:            reconcileResult.active_tensions || [],
   };
 
   log('bridge', `Bridge complete: thesis_status=${dashCompat.thesis_status}, confidence=${dashCompat.confidence_in_status}, action=${dashCompat.action_recommendation}, signals=${signalMatrix.length}`);
@@ -1836,7 +1887,26 @@ async function main() {
       if (inferenceResult) {
         // ── Layer 4: RECONCILE ────────────────────────────────────────────
         console.log('\n═══ LAYER 4: RECONCILE ═══');
-        const reconcileResult = await runReconcile(contextualizeResult, inferenceResult, dashboardData, thesisContext);
+
+        // AD #15: Load previous tensions for lifecycle management
+        let previousTensions = [];
+        try {
+          const histPath = path.join(__dirname, '..', 'data', '360-history.json');
+          if (fs.existsSync(histPath)) {
+            const hist = JSON.parse(fs.readFileSync(histPath, 'utf8'));
+            if (hist.length > 0) {
+              const lastEntry = hist[hist.length - 1];
+              previousTensions = lastEntry.unresolved_tensions || [];
+            }
+          }
+          if (previousTensions.length > 0) {
+            log('analysis', `AD #15: Loaded ${previousTensions.length} previous tensions for lifecycle management`);
+          }
+        } catch (e) {
+          warn('analysis', `Previous tensions load failed (non-fatal): ${e.message}`);
+        }
+
+        const reconcileResult = await runReconcile(contextualizeResult, inferenceResult, dashboardData, thesisContext, { previousTensions, domainConfig: domainConfigMain });
 
         // Tier 1 validators — Layer 4
         let tier1Layer4 = { flags: [], hard_fails: 0, total_flags: 0, layer: 4 };
