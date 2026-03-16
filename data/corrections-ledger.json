@@ -810,5 +810,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-046",
+    "date_of_error": "2026-03-15",
+    "date_identified": "2026-03-15",
+    "identified_by": "human_operator",
+    "belief": "When data for a signal category is unavailable, absent, or stale beyond its refresh window, the absence constitutes negative evidence against the thesis. Missing data was scored and weighted as deterioration.",
+    "reality": "Absence of data is absence of observability. The system cannot distinguish between a metric that deteriorated invisibly and one that improved invisibly. Treating missing data as bearish introduces directional bias from a non-directional condition. The honest assessment is UNOBSERVABLE.",
+    "root_cause": "The system assumed that if data supporting the thesis is not visible, the thesis is weaker. This conflates evidence is absent with evidence is negative. These are epistemologically distinct states.",
+    "root_cause_type": "ASSUMPTION_FAILURE",
+    "prevention": "Layer 2 must classify signals where underlying data is unavailable as STRUCTURAL_DATA_GAP rather than scoring them directionally. Layer 4 must not include structural data gaps in directional thesis pressure calculations. A structural data gap contributes zero directional weight — it narrows the observable field, it does not tilt it.",
+    "lesson": "Absence of data is not evidence of absence. Missing data narrows observability, it does not indicate direction. Score only what is observable. Tag what is not.",
+    "trigger": "Any signal where the primary data source returns no data, stale data beyond the expected refresh window, or data insufficient to determine direction.",
+    "lesson_type": "EPISTEMOLOGICAL_DISCIPLINE",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]
