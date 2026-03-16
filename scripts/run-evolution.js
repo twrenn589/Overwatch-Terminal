@@ -283,7 +283,7 @@ function setupResultsDir(scenarioDir, stepNumber) {
  * @param {number} previousScore    — previous bear pressure score (0 for first step)
  * @returns {Promise<object>}       — step result summary
  */
-async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPath, previousScore, domainConfig) {
+async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPath, previousScore, domainConfig, previousTensions) {
   const stepNum = step.step;
   const label = step.label || `Step ${stepNum}`;
   const marketData = step.market_data;
@@ -314,6 +314,7 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
     enablePromoteRejections: false,  // We handle promotion ourselves between steps
     domainConfig: domainConfig || null,
     findingsPath: auditFindingsPath,  // AD #14: Layer 4 reads advisory from isolated path
+    previousTensions: previousTensions || [],
   };
 
   const gateOptions = {
@@ -771,9 +772,22 @@ async function main() {
   // Create results directory
   fs.mkdirSync(path.join(resultsBaseDir, 'results'), { recursive: true });
 
+  // ── AD #14: Clean auditor state before each evolution run ──────────────
+  // Stale state-locks from previous runs carry over and taint all subsequent steps.
+  // Each evolution run starts clean. The lock is scenario-specific.
+  const auditStateLockPath = path.join(resultsBaseDir, 'auditor-state-lock.json');
+  const auditFindingsCleanupPath = path.join(resultsBaseDir, 'audit-findings.json');
+  for (const staleFile of [auditStateLockPath, auditFindingsCleanupPath]) {
+    if (fs.existsSync(staleFile)) {
+      log('init', `Cleaning stale auditor file: ${path.basename(staleFile)}`);
+      fs.unlinkSync(staleFile);
+    }
+  }
+
   // Run each time step sequentially
   const stepResults = [];
   let previousScore = 0;
+  let previousTensions = [];  // AD #15: Tension lifecycle across evolution steps
 
   for (const step of scenario.time_steps) {
     let result;
@@ -784,7 +798,7 @@ async function main() {
     } else {
       // ── Full or no-corrections: full four-layer pipeline ─────────
       result = await runTimeStep(
-        step, thesisContext, resultsBaseDir, correctionsLedgerPath, previousScore, domainConfig
+        step, thesisContext, resultsBaseDir, correctionsLedgerPath, previousScore, domainConfig, previousTensions
       );
     }
 
@@ -794,6 +808,9 @@ async function main() {
     if (result.final_bear_pressure != null) {
       previousScore = result.final_bear_pressure;
     }
+
+    // AD #15: Pass this step's tensions to the next step
+    previousTensions = result.unresolved_tensions || [];
 
     // Promote rejections between steps — ONLY in full mode (the learning loop)
     if (mode === 'full') {

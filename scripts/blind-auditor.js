@@ -197,6 +197,8 @@ function extractTrajectory(history, lookback) {
     tensions_score_sum: Array.isArray(entry.unresolved_tensions)
       ? entry.unresolved_tensions.reduce((sum, t) => sum + (Number.isInteger(t.impact_score) ? t.impact_score : 3), 0)
       : 0,
+    tensions:         Array.isArray(entry.unresolved_tensions) ? entry.unresolved_tensions : [],
+    dispositions:     Array.isArray(entry.previous_tension_dispositions) ? entry.previous_tension_dispositions : [],
     bear_pressure:    entry.bear_pressure_score ?? null,
     kill_switches:    entry.kill_switches || [],
     timestamp:        entry.timestamp || entry._generated_at || null,
@@ -261,71 +263,223 @@ function detectSustainedMismatch(trajectory, domainConfig) {
 }
 
 /**
- * Detect Evidence Type 2: Accumulating unresolved tensions.
+ * AD #15: Behavioral pattern detectors for tension lifecycle.
+ * Replaces the blunt cumulative score-sum trigger with six specific
+ * patterns that understand tension identity, persistence, and lifecycle gaming.
  *
- * Tensions that persist across runs without resolving. If the system can't
- * explain what's happening, that inability is itself evidence for acting.
- *
- * @param {Array} trajectory
- * @returns {object|null}
+ * Each detector returns a mismatch finding or null.
+ * The Integrity Protocol — Patent Pending — Timothy Joseph Wrenn
  */
-function detectAccumulatingTensions(trajectory, domainConfig) {
+
+/**
+ * Detect critical tension persistence.
+ * A score 4-5 tension persists N+ runs without the action escalating.
+ */
+function detectCriticalPersistence(trajectory, domainConfig) {
   if (trajectory.length < 3) return null;
+  const threshold = (domainConfig && domainConfig.critical_persistence_threshold) || 3;
 
-  const tensionCounts = trajectory.map(t => t.tensions_count);
-  const scoreSums = trajectory.map(t => t.tensions_score_sum);
-  const latestCount = tensionCounts[tensionCounts.length - 1];
-  const latestScore = scoreSums[scoreSums.length - 1];
-  const scoreThreshold = (domainConfig && domainConfig.tension_score_threshold) || 8;
-
-  // Check if tensions are declining — if so, the system is resolving, not stagnating
-  let declining = true;
-  for (let i = 1; i < tensionCounts.length; i++) {
-    if (tensionCounts[i] >= tensionCounts[i - 1]) {
-      declining = false;
-      break;
+  const criticalIds = {};
+  for (const entry of trajectory) {
+    const currentCritical = new Set();
+    for (const t of entry.tensions) {
+      if (t.tension_id && t.impact_score >= 4) {
+        currentCritical.add(t.tension_id);
+        criticalIds[t.tension_id] = (criticalIds[t.tension_id] || 0) + 1;
+      }
+    }
+    for (const id of Object.keys(criticalIds)) {
+      if (!currentCritical.has(id)) {
+        criticalIds[id] = 0;
+      }
     }
   }
-  if (declining) return null;
 
-  // Score-based detection: a single critical tension (score 5) or cumulative high-impact
-  // tensions can fire the trigger even if count is low
-  if (latestScore >= scoreThreshold) {
+  const persistent = Object.entries(criticalIds)
+    .filter(([, count]) => count >= threshold);
+
+  if (persistent.length > 0) {
     return {
-      type: 'HIGH_IMPACT_UNRESOLVED_TENSIONS',
-      detail: `Unresolved tension impact scores: ${scoreSums.join(' → ')} (threshold: ${scoreThreshold}). High-materiality questions remain unanswered.`,
-      severity: latestScore >= scoreThreshold + 4 ? 'HIGH' : 'MEDIUM',
-      tension_trajectory: tensionCounts,
-      score_trajectory: scoreSums,
+      type: 'CRITICAL_TENSION_PERSISTENCE',
+      detail: `Critical tension(s) persisting ${threshold}+ runs without action escalation: ${persistent.map(([id, n]) => `${id} (${n} runs)`).join(', ')}.`,
+      severity: 'HIGH',
+      persistent_tensions: persistent.map(([id, count]) => ({ tension_id: id, runs: count })),
     };
   }
-
-  // Count-based fallback: persistent high count even if individual scores are moderate
-  const allHigh = tensionCounts.every(c => c >= 3);
-  const growing = tensionCounts.length >= 3 &&
-    tensionCounts[tensionCounts.length - 1] > tensionCounts[0];
-
-  if (allHigh) {
-    return {
-      type: 'PERSISTENT_UNRESOLVED_TENSIONS',
-      detail: `Unresolved tensions at ${tensionCounts.join(' → ')} (scores: ${scoreSums.join(' → ')}) across ${trajectory.length} entries. Persistent inability to resolve questions is itself evidence for acting.`,
-      severity: latestCount >= 5 ? 'HIGH' : 'MEDIUM',
-      tension_trajectory: tensionCounts,
-      score_trajectory: scoreSums,
-    };
-  }
-
-  if (growing && latestCount >= 4) {
-    return {
-      type: 'GROWING_UNRESOLVED_TENSIONS',
-      detail: `Unresolved tensions growing: ${tensionCounts.join(' → ')} (scores: ${scoreSums.join(' → ')}). Accumulating questions faster than resolving them.`,
-      severity: 'MEDIUM',
-      tension_trajectory: tensionCounts,
-      score_trajectory: scoreSums,
-    };
-  }
-
   return null;
+}
+
+/**
+ * Detect score-language mismatch.
+ */
+function detectScoreLanguageMismatch(trajectory) {
+  if (trajectory.length < 1) return null;
+  const latest = trajectory[trajectory.length - 1];
+  const mismatches = [];
+
+  const criticalWords = ['flip', 'fundamentally', 'critical', 'collapse', 'existential', 'terminal', 'entire assessment'];
+  const minorWords = ['informational', 'minor', 'negligible', 'no impact', 'marginal'];
+
+  for (const t of latest.tensions) {
+    if (!t.description) continue;
+    const desc = t.description.toLowerCase();
+    const score = t.impact_score || 3;
+
+    if (criticalWords.some(w => desc.includes(w)) && score <= 2) {
+      mismatches.push({ tension_id: t.tension_id, score, issue: 'critical language, low score' });
+    }
+    if (minorWords.some(w => desc.includes(w)) && score >= 4) {
+      mismatches.push({ tension_id: t.tension_id, score, issue: 'minor language, high score' });
+    }
+  }
+
+  if (mismatches.length > 0) {
+    return {
+      type: 'SCORE_LANGUAGE_MISMATCH',
+      detail: `Tension language contradicts impact score: ${mismatches.map(m => `${m.tension_id} — ${m.issue} (score ${m.score})`).join('; ')}.`,
+      severity: 'MEDIUM',
+      mismatches,
+    };
+  }
+  return null;
+}
+
+/**
+ * Detect tension churn — created and resolved within one cycle, repeatedly.
+ */
+function detectTensionChurn(trajectory) {
+  if (trajectory.length < 3) return null;
+
+  let churnCount = 0;
+  for (let i = 1; i < trajectory.length; i++) {
+    const curr = trajectory[i];
+    const prev = trajectory[i - 1];
+    for (const d of curr.dispositions) {
+      if (d.disposition === 'RESOLVE') {
+        const wasNew = prev.tensions.some(t => t.tension_id === d.tension_id && t.is_new);
+        if (wasNew) churnCount++;
+      }
+    }
+  }
+
+  if (churnCount >= 3) {
+    return {
+      type: 'TENSION_CHURN',
+      detail: `${churnCount} tensions created and resolved within one cycle. Performative uncertainty.`,
+      severity: 'MEDIUM',
+      churn_count: churnCount,
+    };
+  }
+  return null;
+}
+
+/**
+ * Detect avoidance displacement — tensions displaced near window expiration.
+ */
+function detectAvoidanceDisplacement(trajectory) {
+  if (trajectory.length < 2) return null;
+
+  let avoidanceCount = 0;
+  for (let i = 1; i < trajectory.length; i++) {
+    const curr = trajectory[i];
+    const prev = trajectory[i - 1];
+    for (const d of curr.dispositions) {
+      if (d.disposition === 'DISPLACE') {
+        const displaced = prev.tensions.find(t => t.tension_id === d.tension_id);
+        if (displaced && (displaced.window_status === 'approaching' || displaced.window_status === 'expired')) {
+          avoidanceCount++;
+        }
+      }
+    }
+  }
+
+  if (avoidanceCount >= 2) {
+    return {
+      type: 'AVOIDANCE_DISPLACEMENT',
+      detail: `${avoidanceCount} tensions displaced near or past their resolution window. Possible avoidance behavior.`,
+      severity: 'HIGH',
+      avoidance_count: avoidanceCount,
+    };
+  }
+  return null;
+}
+
+/**
+ * Detect gap parking — tensions vanish without disposition.
+ */
+function detectGapParking(trajectory) {
+  if (trajectory.length < 2) return null;
+
+  let parkingCount = 0;
+  for (let i = 1; i < trajectory.length; i++) {
+    const prev = trajectory[i - 1];
+    const curr = trajectory[i];
+    for (const prevTension of prev.tensions) {
+      if (!prevTension.tension_id) continue;
+      const stillActive = curr.tensions.some(t => t.tension_id === prevTension.tension_id);
+      const wasDispositioned = curr.dispositions.some(d => d.tension_id === prevTension.tension_id);
+      if (!stillActive && !wasDispositioned) {
+        parkingCount++;
+      }
+    }
+  }
+
+  if (parkingCount >= 2) {
+    return {
+      type: 'GAP_PARKING',
+      detail: `${parkingCount} tensions disappeared without disposition. Possible reclassification to avoid cap or clock.`,
+      severity: 'MEDIUM',
+      parking_count: parkingCount,
+    };
+  }
+  return null;
+}
+
+/**
+ * Detect window gaming — repeated extensions without conditions changing.
+ */
+function detectWindowGaming(trajectory) {
+  if (trajectory.length < 3) return null;
+
+  let extensionCount = 0;
+  for (const entry of trajectory) {
+    for (const t of entry.tensions) {
+      if (t.window_status === 'extended') {
+        extensionCount++;
+      }
+    }
+  }
+
+  if (extensionCount >= 3) {
+    return {
+      type: 'WINDOW_GAMING',
+      detail: `${extensionCount} window extensions across ${trajectory.length} runs. Tensions extended at expiration rather than resolved or escalated.`,
+      severity: 'MEDIUM',
+      extension_count: extensionCount,
+    };
+  }
+  return null;
+}
+
+/**
+ * AD #15: Run all behavioral tension detectors.
+ * Returns array of all triggered findings (may be empty).
+ */
+function detectTensionBehavior(trajectory, domainConfig) {
+  const findings = [];
+  const detectors = [
+    detectCriticalPersistence,
+    detectScoreLanguageMismatch,
+    detectTensionChurn,
+    detectAvoidanceDisplacement,
+    detectGapParking,
+    detectWindowGaming,
+  ];
+  for (const detector of detectors) {
+    const result = detector(trajectory, domainConfig);
+    if (result) findings.push(result);
+  }
+  return findings;
 }
 
 /**
@@ -582,8 +736,8 @@ async function runBlindAuditor(options) {
   const sustained = detectSustainedMismatch(trajectory, domainConfig);
   if (sustained) mismatches.push(sustained);
 
-  const tensions = detectAccumulatingTensions(trajectory, domainConfig);
-  if (tensions) mismatches.push(tensions);
+  const tensionFindings = detectTensionBehavior(trajectory, domainConfig);
+  mismatches.push(...tensionFindings);
 
   const trend = detectTrajectoryTrend(trajectory);
   if (trend) mismatches.push(trend);
@@ -919,7 +1073,13 @@ module.exports = {
   // Exported for testing / evolution runner
   extractTrajectory,
   detectSustainedMismatch,
-  detectAccumulatingTensions,
+  detectTensionBehavior,
+  detectCriticalPersistence,
+  detectScoreLanguageMismatch,
+  detectTensionChurn,
+  detectAvoidanceDisplacement,
+  detectGapParking,
+  detectWindowGaming,
   detectTrajectoryTrend,
   checkAnomalyTriggers,
   loadFindings,

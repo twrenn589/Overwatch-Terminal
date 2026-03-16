@@ -550,8 +550,8 @@ function validateLayer4(output, inputData, domainConfig) {
   }
 
   // AD #14: Tension impact_score validation
-  if (Array.isArray(output.unresolved_tensions)) {
-    for (const tension of output.unresolved_tensions) {
+  if (Array.isArray(output.active_tensions)) {
+    for (const tension of output.active_tensions) {
       if (tension.impact_score === undefined || tension.impact_score === null) {
         flags.push(createFlag(
           'AD14-TENSION-NO-SCORE',
@@ -563,6 +563,99 @@ function validateLayer4(output, inputData, domainConfig) {
           'AD14-TENSION-INVALID-SCORE',
           `Tension: ${(tension.description || 'unnamed').substring(0, 80)}`,
           `impact_score is ${tension.impact_score} — must be an integer 1-5.`
+        ));
+      }
+    }
+  }
+
+  // AD #15: Tension lifecycle structural checks
+  const tensionCap = (domainConfig && domainConfig.active_tension_cap) || 8;
+
+  // Cap enforcement
+  if (Array.isArray(output.active_tensions) && output.active_tensions.length > tensionCap) {
+    flags.push(createFlag(
+      'AD15-TENSION-CAP-EXCEEDED',
+      'Tension Lifecycle',
+      `${output.active_tensions.length} active tensions exceeds cap of ${tensionCap}. Layer 4 must prioritize and displace.`,
+      'HARD_FAIL'
+    ));
+  }
+
+  // Tension ID format and uniqueness
+  if (Array.isArray(output.active_tensions)) {
+    const ids = output.active_tensions.map(t => t.tension_id);
+    const dupes = ids.filter((id, i) => ids.indexOf(id) !== i);
+    if (dupes.length > 0) {
+      flags.push(createFlag(
+        'AD15-TENSION-ID-COLLISION',
+        'Tension Lifecycle',
+        `Duplicate tension_id(s): ${dupes.join(', ')}. Each active tension must have a unique ID.`,
+        'HARD_FAIL'
+      ));
+    }
+  }
+
+  // Classification validation
+  if (Array.isArray(output.active_tensions)) {
+    for (const t of output.active_tensions) {
+      if (t.classification && t.classification !== 'ACTIVE') {
+        flags.push(createFlag(
+          'AD15-WRONG-CLASSIFICATION',
+          `Tension ${t.tension_id || 'unknown'}`,
+          `Active tension has classification "${t.classification}" — must be "ACTIVE". Structural gaps belong in structural_gaps array.`,
+          'HARD_FAIL'
+        ));
+      }
+    }
+  }
+
+  // Disposition validation for previous tensions
+  if (Array.isArray(output.previous_tension_dispositions)) {
+    const validDispositions = ['RESOLVE', 'MAINTAIN', 'ESCALATE', 'DISPLACE'];
+    for (const d of output.previous_tension_dispositions) {
+      if (!d.disposition || !validDispositions.includes(d.disposition)) {
+        flags.push(createFlag(
+          'AD15-INVALID-DISPOSITION',
+          `Tension ${d.tension_id || 'unknown'}`,
+          `Disposition "${d.disposition}" is invalid. Must be one of: ${validDispositions.join(', ')}.`,
+          'HARD_FAIL'
+        ));
+      }
+      if (!d.disposition_reason || d.disposition_reason.trim() === '') {
+        flags.push(createFlag(
+          'AD15-DISPOSITION-NO-REASONING',
+          `Tension ${d.tension_id || 'unknown'}`,
+          'Disposition has no reasoning. Every disposition is a judgment that must be justified.'
+        ));
+      }
+      if (d.disposition === 'DISPLACE' && !d.displaced_by) {
+        flags.push(createFlag(
+          'AD15-DISPLACE-NO-REFERENCE',
+          `Tension ${d.tension_id || 'unknown'}`,
+          'DISPLACE disposition must reference displaced_by with the tension_id of the new tension that replaced it.',
+          'HARD_FAIL'
+        ));
+      }
+    }
+  }
+
+  // Resolution window validation
+  if (Array.isArray(output.active_tensions)) {
+    const validWindows = ['hours', 'days', 'weeks', 'months'];
+    const validWindowStatus = ['within', 'approaching', 'expired', 'extended'];
+    for (const t of output.active_tensions) {
+      if (t.expected_resolution_window && !validWindows.includes(t.expected_resolution_window)) {
+        flags.push(createFlag(
+          'AD15-INVALID-WINDOW',
+          `Tension ${t.tension_id || 'unknown'}`,
+          `expected_resolution_window "${t.expected_resolution_window}" is invalid. Must be: ${validWindows.join(', ')}.`
+        ));
+      }
+      if (t.window_status && !validWindowStatus.includes(t.window_status)) {
+        flags.push(createFlag(
+          'AD15-INVALID-WINDOW-STATUS',
+          `Tension ${t.tension_id || 'unknown'}`,
+          `window_status "${t.window_status}" is invalid. Must be: ${validWindowStatus.join(', ')}.`
         ));
       }
     }
