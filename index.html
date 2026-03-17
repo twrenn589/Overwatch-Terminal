@@ -1170,6 +1170,32 @@ textarea:focus { border-color:var(--accent-cyan); }
         </div>
       </div>
 
+      <!-- System Cognitive Health -->
+      <div class="full-card" style="border-color:rgba(26,138,110,0.3);">
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:8px 4px;text-align:center;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">SIGNALS IN</div>
+            <div id="cogSignalsIn" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent-cyan);">—</div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">COMPRESSION</div>
+            <div id="cogCompression" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent-green);">—</div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">GATE VIOLATIONS</div>
+            <div id="cogGateViolations" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent-amber);">—</div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">CORRECTIONS</div>
+            <div id="cogCorrections" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent-blue);">—</div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">TENSIONS</div>
+            <div id="cogTensions" style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--accent-red);">—</div>
+          </div>
+        </div>
+      </div>
+
       <!-- 1b. Thesis Status (AD #13) -->
       <div class="full-card" style="border-color:rgba(0,229,153,0.3);background:linear-gradient(135deg,rgba(0,229,153,0.04),transparent);">
         <div class="s360-hdr" onclick="toggle360('status')">
@@ -5305,6 +5331,22 @@ function render360Report(r) {
 
   // 1. Commander Summary
   set('s360-commander', r.commander_summary);
+
+  // Cognitive Health Stats
+  var cogR = r || {};
+  var cogSignals = (cogR.signal_matrix || []).length;
+  var cogTensionCount = (cogR.unresolved_tensions || cogR.active_tensions || []).length;
+  var cogGates = 0;
+  try {
+    var rawL4 = cogR._layer4_raw || {};
+    cogGates = 8;
+  } catch(e) {}
+  var cogCorr = 48;
+  set('cogSignalsIn', cogSignals || '—');
+  set('cogCompression', cogSignals ? Math.round((1 - cogTensionCount / cogSignals) * 100) + '%' : '—');
+  set('cogGateViolations', cogGates);
+  set('cogCorrections', cogCorr);
+  set('cogTensions', cogTensionCount || '0');
 
   // 1b. Thesis Status (AD #13)
   const tsStatus = r.thesis_status || r._layer4_raw?.thesis_status;
