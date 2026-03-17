@@ -1393,6 +1393,8 @@ FALSIFIED: If thesis_status is FALSIFIED, all active tensions are auto-resolved 
 
 9. FINAL REPORT — 3-4 sentences. The 6 AM briefing. Lead with what matters most. State the call. Name the paradox if it exists. Honest about what you don't know.
 
+10. ACQUISITION DISPOSITIONS — For each pending acquisition request shown above, declare a disposition in the acquisition_dispositions array. APPROVED: the gap justifies acquisition cost, link to tension_id or structural_gap_id if applicable. DENIED: cost exceeds expected impact or similar data was previously wasted. DEFERRED: important but the assessment can proceed without it this cycle. If no pending requests were provided, return an empty array.
+
 Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
 {
   "burden_of_proof_applied": [
