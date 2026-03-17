@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-17T01:44:38.380Z",
+  "updated": "2026-03-17T02:26:02.335Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.56,
-    "change_24h": 8.49747179802551,
-    "volume_24h": 5028619973.5922575,
-    "market_cap": 95938409799.04312,
+    "price": 1.57,
+    "change_24h": 9.32342827688624,
+    "volume_24h": 5010108774.1030445,
+    "market_cap": 96301437362.4913,
     "data_date": "2026-03-17",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1549463378.6121964,
+    "market_cap": 1549562189.417933,
     "data_date": "2026-03-17",
     "source": "coingecko"
   },
@@ -53,30 +53,46 @@
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 102920957,
-    "rlusd_supply": 315446078.2916727,
+    "ledger_index": 102921591,
+    "rlusd_supply": 315446078.2916741,
     "data_date": "2026-03-17",
     "source": "xrpl",
-    "current_ledger": 102920957,
-    "last_ledger_txns": null,
+    "current_ledger": 102921591,
+    "last_ledger_txns": 112,
     "avg_tx_per_ledger": null,
-    "fee_burn_per_ledger_xrp": null,
+    "fee_burn_per_ledger_xrp": 0.00112,
     "dex_volume_24h_usd": 4232391,
-    "dex_volume_24h_xrp": 2713071,
+    "dex_volume_24h_xrp": 2695790,
     "dex_exchanges_24h": null,
     "dex_takers_24h": null,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 372671.794253,
+      "total_bid_xrp": 372694.406031,
       "total_ask_xrp": 1000030.118286,
-      "best_bid": 1.591301,
-      "best_ask": 1.53469
+      "best_bid": 1.5989,
+      "best_ask": 1.54693
     }
   },
   "x_intelligence": {
     "tier1_posts": [
+      {
+        "username": "JoelKatz",
+        "text": "@3YearLetterman https://t.co/12zS3x4cYr",
+        "created_at": "2026-03-17T01:57:07.000Z",
+        "tweet_id": "2033724278475297049",
+        "metrics": {
+          "retweet_count": 2,
+          "reply_count": 5,
+          "like_count": 57,
+          "quote_count": 0,
+          "bookmark_count": 2,
+          "impression_count": 2173
+        },
+        "tier": 1,
+        "weight": 3
+      },
       {
         "username": "JoelKatz",
         "text": "@fehndrich @soigomaa Again, Marilyn thoroughly demonstrated that she had absolutely no idea *why* you should switch and poorly understood the problem.",
@@ -85,10 +101,10 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 0,
-          "like_count": 1,
+          "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 53
+          "impression_count": 114
         },
         "tier": 1,
         "weight": 3
@@ -104,7 +120,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 59
+          "impression_count": 119
         },
         "tier": 1,
         "weight": 3
@@ -120,7 +136,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 124
+          "impression_count": 193
         },
         "tier": 1,
         "weight": 3
@@ -136,7 +152,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 188
+          "impression_count": 214
         },
         "tier": 1,
         "weight": 3
@@ -152,7 +168,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 183
+          "impression_count": 211
         },
         "tier": 1,
         "weight": 3
@@ -168,7 +184,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 133
+          "impression_count": 151
         },
         "tier": 1,
         "weight": 3
@@ -184,7 +200,7 @@
           "like_count": 3,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 179
+          "impression_count": 204
         },
         "tier": 1,
         "weight": 3
@@ -200,7 +216,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 126
+          "impression_count": 134
         },
         "tier": 1,
         "weight": 3
@@ -216,7 +232,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 156
+          "impression_count": 169
         },
         "tier": 1,
         "weight": 3
@@ -232,7 +248,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 155
+          "impression_count": 173
         },
         "tier": 1,
         "weight": 3
@@ -248,7 +264,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 179
+          "impression_count": 201
         },
         "tier": 1,
         "weight": 3
@@ -264,7 +280,7 @@
           "like_count": 2,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 172
+          "impression_count": 201
         },
         "tier": 1,
         "weight": 3
@@ -280,7 +296,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 173
+          "impression_count": 210
         },
         "tier": 1,
         "weight": 3
@@ -296,7 +312,7 @@
           "like_count": 4,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 283
+          "impression_count": 296
         },
         "tier": 1,
         "weight": 3
@@ -307,12 +323,12 @@
         "created_at": "2026-03-16T16:24:58.000Z",
         "tweet_id": "2033580290942067014",
         "metrics": {
-          "retweet_count": 1180,
-          "reply_count": 148,
-          "like_count": 4472,
-          "quote_count": 121,
-          "bookmark_count": 301,
-          "impression_count": 413729
+          "retweet_count": 1198,
+          "reply_count": 149,
+          "like_count": 4538,
+          "quote_count": 123,
+          "bookmark_count": 307,
+          "impression_count": 425137
         },
         "tier": 1,
         "weight": 3
@@ -328,7 +344,7 @@
           "like_count": 49,
           "quote_count": 1,
           "bookmark_count": 5,
-          "impression_count": 4310
+          "impression_count": 4357
         },
         "tier": 1,
         "weight": 3
@@ -341,10 +357,10 @@
         "metrics": {
           "retweet_count": 3,
           "reply_count": 2,
-          "like_count": 50,
+          "like_count": 51,
           "quote_count": 2,
           "bookmark_count": 7,
-          "impression_count": 13351
+          "impression_count": 13442
         },
         "tier": 1,
         "weight": 3
@@ -360,7 +376,7 @@
           "like_count": 60,
           "quote_count": 1,
           "bookmark_count": 10,
-          "impression_count": 5853
+          "impression_count": 5888
         },
         "tier": 1,
         "weight": 3
@@ -376,23 +392,7 @@
           "like_count": 150,
           "quote_count": 3,
           "bookmark_count": 22,
-          "impression_count": 32404
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "JoelKatz",
-        "text": "@TriviumBiser @DigPerspectives @Eko18228519 @Matthew50056132 @TmosMonstrocity @BumpkinEsq @ProSeSelfHelp @ThinkingSapien @SergioVengeance @99og_grey @TheLegalMindset @grok It went up to $3 and then down to $0.20, so you can't really say that's not possible. I'd say that's unlikely, but I'd say that all the things that have actually happened to the price are unlikely too.",
-        "created_at": "2026-03-16T09:23:29.000Z",
-        "tweet_id": "2033474222908121280",
-        "metrics": {
-          "retweet_count": 8,
-          "reply_count": 10,
-          "like_count": 112,
-          "quote_count": 3,
-          "bookmark_count": 11,
-          "impression_count": 8810
+          "impression_count": 32707
         },
         "tier": 1,
         "weight": 3
@@ -400,17 +400,81 @@
     ],
     "tier2_posts": [
       {
+        "username": "CoinDesk",
+        "text": "⏰ Less than 2 months to go \n\nAre you ready for our return stateside in May? Join the builders who are reprogramming the future of finance and AI through every deal and decision.\n\nUp until 20 March, save $800 to join us in The Sunshine State",
+        "created_at": "2026-03-17T01:52:01.000Z",
+        "tweet_id": "2033722994175230351",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "⏰ Less than 2 months to go \n\nAre you ready for our return stateside in May? Join the builders who are reprogramming the future of finance and AI through every deal and decision.\n\nUp until 20 March, save $800 to join us in The Sunshine State",
+        "created_at": "2026-03-17T01:51:46.000Z",
+        "tweet_id": "2033722934091538931",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "⏰ Less than 2 months to go \n\nAre you ready for our return stateside in May? Join the builders who are reprogramming the future of finance and AI through every deal and decision.\n\nUp until 20 March, save $800 to join us in The Sunshine State",
+        "created_at": "2026-03-17T01:50:55.000Z",
+        "tweet_id": "2033722718022210019",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 9
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "⏰ Less than 2 months to go \n\nAre you ready for our return stateside in May? Join the builders who are reprogramming the future of finance and AI through every deal and decision.\n\nUp until 20 March, save $800 to join us in The Sunshine State",
+        "created_at": "2026-03-17T01:50:33.000Z",
+        "tweet_id": "2033722627270053932",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 8
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
         "username": "JohnEDeaton1",
         "text": "I wish the comment👇 was isolated and rare. Unfortunately, I’m hearing the same comment almost everywhere I go. This election year is the most important election in MA modern history.\n\n#mapoli #MAGov \n#MASen #Deaton https://t.co/OfcJBX20oy",
         "created_at": "2026-03-17T01:27:23.000Z",
         "tweet_id": "2033716794557342177",
         "metrics": {
           "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 5,
+          "reply_count": 2,
+          "like_count": 9,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 1484
+          "impression_count": 3218
         },
         "tier": 2,
         "weight": 2
@@ -421,12 +485,12 @@
         "created_at": "2026-03-17T00:53:02.000Z",
         "tweet_id": "2033708150885421221",
         "metrics": {
-          "retweet_count": 167,
-          "reply_count": 275,
-          "like_count": 1831,
-          "quote_count": 35,
-          "bookmark_count": 23,
-          "impression_count": 69708
+          "retweet_count": 243,
+          "reply_count": 319,
+          "like_count": 2698,
+          "quote_count": 46,
+          "bookmark_count": 33,
+          "impression_count": 111140
         },
         "tier": 2,
         "weight": 2
@@ -437,12 +501,12 @@
         "created_at": "2026-03-17T00:35:25.000Z",
         "tweet_id": "2033703718844039352",
         "metrics": {
-          "retweet_count": 187,
-          "reply_count": 246,
-          "like_count": 1869,
-          "quote_count": 17,
-          "bookmark_count": 23,
-          "impression_count": 73521
+          "retweet_count": 217,
+          "reply_count": 259,
+          "like_count": 2198,
+          "quote_count": 21,
+          "bookmark_count": 26,
+          "impression_count": 91811
         },
         "tier": 2,
         "weight": 2
@@ -453,12 +517,12 @@
         "created_at": "2026-03-17T00:11:15.000Z",
         "tweet_id": "2033697637715632449",
         "metrics": {
-          "retweet_count": 715,
-          "reply_count": 476,
-          "like_count": 5791,
-          "quote_count": 122,
-          "bookmark_count": 65,
-          "impression_count": 173938
+          "retweet_count": 804,
+          "reply_count": 516,
+          "like_count": 6542,
+          "quote_count": 129,
+          "bookmark_count": 69,
+          "impression_count": 253432
         },
         "tier": 2,
         "weight": 2
@@ -471,10 +535,10 @@
         "metrics": {
           "retweet_count": 1,
           "reply_count": 0,
-          "like_count": 19,
+          "like_count": 23,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 778
+          "impression_count": 968
         },
         "tier": 2,
         "weight": 2
@@ -485,12 +549,12 @@
         "created_at": "2026-03-16T23:28:54.000Z",
         "tweet_id": "2033686978089112017",
         "metrics": {
-          "retweet_count": 3,
+          "retweet_count": 5,
           "reply_count": 10,
-          "like_count": 33,
+          "like_count": 43,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 9805
+          "impression_count": 11002
         },
         "tier": 2,
         "weight": 2
@@ -501,7 +565,7 @@
         "created_at": "2026-03-16T23:16:24.000Z",
         "tweet_id": "2033683831388000726",
         "metrics": {
-          "retweet_count": 23,
+          "retweet_count": 24,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -522,7 +586,7 @@
           "like_count": 27,
           "quote_count": 0,
           "bookmark_count": 3,
-          "impression_count": 9213
+          "impression_count": 9463
         },
         "tier": 2,
         "weight": 2
@@ -533,7 +597,7 @@
         "created_at": "2026-03-16T22:53:36.000Z",
         "tweet_id": "2033678094830047470",
         "metrics": {
-          "retweet_count": 2,
+          "retweet_count": 3,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -567,10 +631,10 @@
         "metrics": {
           "retweet_count": 2,
           "reply_count": 0,
-          "like_count": 28,
+          "like_count": 30,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 3681
+          "impression_count": 3813
         },
         "tier": 2,
         "weight": 2
@@ -583,10 +647,10 @@
         "metrics": {
           "retweet_count": 6,
           "reply_count": 1,
-          "like_count": 44,
+          "like_count": 50,
           "quote_count": 0,
           "bookmark_count": 1,
-          "impression_count": 6821
+          "impression_count": 7074
         },
         "tier": 2,
         "weight": 2
@@ -597,12 +661,12 @@
         "created_at": "2026-03-16T21:07:48.000Z",
         "tweet_id": "2033651469346394238",
         "metrics": {
-          "retweet_count": 59,
-          "reply_count": 28,
-          "like_count": 281,
-          "quote_count": 6,
+          "retweet_count": 63,
+          "reply_count": 29,
+          "like_count": 308,
+          "quote_count": 7,
           "bookmark_count": 7,
-          "impression_count": 8218
+          "impression_count": 8770
         },
         "tier": 2,
         "weight": 2
@@ -613,12 +677,12 @@
         "created_at": "2026-03-16T21:05:17.000Z",
         "tweet_id": "2033650835494748578",
         "metrics": {
-          "retweet_count": 619,
-          "reply_count": 549,
-          "like_count": 5509,
-          "quote_count": 77,
-          "bookmark_count": 57,
-          "impression_count": 222369
+          "retweet_count": 629,
+          "reply_count": 552,
+          "like_count": 5592,
+          "quote_count": 76,
+          "bookmark_count": 58,
+          "impression_count": 228909
         },
         "tier": 2,
         "weight": 2
@@ -629,12 +693,12 @@
         "created_at": "2026-03-16T20:47:28.000Z",
         "tweet_id": "2033646352056389962",
         "metrics": {
-          "retweet_count": 16,
+          "retweet_count": 17,
           "reply_count": 21,
-          "like_count": 122,
-          "quote_count": 2,
+          "like_count": 128,
+          "quote_count": 5,
           "bookmark_count": 11,
-          "impression_count": 14532
+          "impression_count": 14995
         },
         "tier": 2,
         "weight": 2
@@ -647,80 +711,16 @@
         "metrics": {
           "retweet_count": 0,
           "reply_count": 3,
-          "like_count": 18,
+          "like_count": 19,
           "quote_count": 0,
           "bookmark_count": 3,
-          "impression_count": 7952
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "RT @johnfgately: If you are delegate to the @massgop convention today is the early bird deadline to pay your delegate fee and save $50 (unl…",
-        "created_at": "2026-03-16T20:09:06.000Z",
-        "tweet_id": "2033636695522869753",
-        "metrics": {
-          "retweet_count": 3,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 7
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 SEC prepares proposal to eliminate quarterly reporting requirements for companies, WSJ reports.",
-        "created_at": "2026-03-16T19:58:46.000Z",
-        "tweet_id": "2033634096602321081",
-        "metrics": {
-          "retweet_count": 274,
-          "reply_count": 298,
-          "like_count": 2634,
-          "quote_count": 75,
-          "bookmark_count": 115,
-          "impression_count": 260746
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "RT @consensus2026: 🌴 BitMEX co-founder @CryptoHayes says he’s excited for Consensus in Miami and he has his sights set on all opportunities…",
-        "created_at": "2026-03-16T19:40:11.000Z",
-        "tweet_id": "2033629421735665710",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 11
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: Nvidia $NVDA CEO Jensen Huang expects revenue to surpass $1 trillion by 2027.",
-        "created_at": "2026-03-16T19:20:00.000Z",
-        "tweet_id": "2033624340760039445",
-        "metrics": {
-          "retweet_count": 352,
-          "reply_count": 340,
-          "like_count": 3749,
-          "quote_count": 100,
-          "bookmark_count": 135,
-          "impression_count": 1501500
+          "impression_count": 8151
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-17T01:44:36.855Z",
+    "fetched_at": "2026-03-17T02:26:00.299Z",
     "post_count": 40,
     "errors": []
   },
@@ -897,7 +897,7 @@
       "timestamp": "2026-03-07T03:24:01.000Z"
     },
     "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
-    "last_updated": "2026-03-17T01:44:37.361Z"
+    "last_updated": "2026-03-17T02:26:00.689Z"
   },
   "etf": {
     "total_aum": 1117308619,
@@ -916,6 +916,13 @@
     "pct_supply": null,
     "funds": [
       {
+        "ticker": "XRPZ",
+        "issuer": "XRPZ",
+        "aum": null,
+        "xrp_locked": null,
+        "daily_flow": 0
+      },
+      {
         "ticker": "GXRP",
         "issuer": "Grayscale",
         "aum": null,
@@ -932,13 +939,6 @@
       {
         "ticker": "XRPC",
         "issuer": "XRPC",
-        "aum": null,
-        "xrp_locked": null,
-        "daily_flow": 0
-      },
-      {
-        "ticker": "XRPZ",
-        "issuer": "XRPZ",
         "aum": null,
         "xrp_locked": null,
         "daily_flow": 0
@@ -1138,7 +1138,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1549463378.6121964,
+      "current": 1549562189.417933,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
@@ -1202,72 +1202,72 @@
     "base": 44,
     "mid": 28,
     "bull": 12,
-    "last_updated": "2026-03-17T02:02:04.416Z",
-    "last_reasoning": "Upgrading bear probability from 14% to 16% and shifting 2% from base to mid. Rationale: XRP ETF outflows persistent, RLUSD stalling at $1.549B (not accelerating), compound stress near CRITICAL, and oil data gap obscures what is likely already a critical energy situation. However, the mid case gets a slight bump because institutional infrastructure (Hidden Road/DTCC, Ripple Payments/i-payout operational) continues to build underneath. Bull case unchanged — no new evidence supports or denies the extreme scenario."
+    "last_updated": "2026-03-17T02:42:53.290Z",
+    "last_reasoning": "Bear case probability increased from 14% to 16%: XRP ETF outflows are persistent and worsening cumulatively (-$26.5M), the compound stress matrix is approaching CRITICAL with USD/JPY at 159.14 and stale Brent data likely above $95, and XRP's 9.3% bounce is a market-wide short squeeze rather than thesis-specific catalyst. Base case reduced slightly to 44% as the ETF trajectory creates growing doubt about the $5B AUM target. Mid case trimmed to 28%. Bull case held at 12% — no new catalysts justify adjustment. The macro stress environment is the primary driver of the bear shift."
   },
   "bear_case": {
-    "counter_thesis_score": 7.2,
-    "score_reasoning": "XRP ETF persistent outflows (-$26.5M cumulative) diverging from BTC/ETH inflows is a credible institutional rejection signal. RLUSD stalling at $1.549B with 80% off-XRPL undermines on-chain utility narrative. ODL data blackout now 12+ months. Competing infrastructure advancing on multiple fronts.",
+    "counter_thesis_score": 68,
+    "score_reasoning": "XRP ETF outflows are persistent (-$26.5M cumulative, -$9.96M weekly) while competing ETFs absorb capital. ODL volume data remains absent after 6+ months of opacity. Compound macro stress is approaching CRITICAL thresholds. PermDEX has zero confirmed institutional deployments with 6.5 months to Q3 deadline. Competing infrastructure continues advancing.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "SWIFT continues to upgrade messaging layer; no evidence of XRPL integration or displacement. GPI handles majority of cross-border messaging — incumbent advantage persistent."
+        "status_text": "SWIFT continues incremental upgrades. No kill shot but network effects of 11,000+ member institutions remain the strongest moat in payments."
       },
       {
         "name": "Visa B2B Connect",
         "status": "LOW_RISK",
-        "status_text": "Limited expansion signals but Visa's existing network effects in B2B remain a viable alternative to blockchain settlement for mid-tier corridors."
+        "status_text": "Limited expansion signals. Not currently threatening XRPL corridors but retains optionality to scale through existing merchant relationships."
       },
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "Kinexys (formerly Onyx) continues to operate proprietary blockchain settlement for JPMorgan clients. Internal flows may exceed ODL volume but data is opaque on both sides."
+        "status_text": "Kinexys (fka Onyx) continues processing ~$2B daily in institutional transfers. Proven at scale, bank-native, no regulatory ambiguity. Direct competitor for institutional settlement flows."
       },
       {
         "name": "BIS Project Nexus",
         "status": "ELEVATED_RISK",
-        "status_text": "Project Nexus connecting domestic fast payment systems directly — could bypass bridge currency need entirely. BOJ blockchain settlement experiment aligns with sovereign infrastructure path that excludes XRPL."
+        "status_text": "Nexus aims to connect domestic instant payment systems globally without bridge currencies. If central banks adopt Nexus at scale, it directly displaces the XRP bridge asset thesis. BOJ blockchain experiment aligns with this vector."
       },
       {
         "name": "Ethereum Institutional",
         "status": "MONITORING",
-        "status_text": "ETH ETF inflows of +$188M weekly vs XRP outflows. Ondo tokenized stocks on non-XRPL rails. Ethereum institutional RWA ecosystem continues to build competitive presence in tokenized securities and settlement."
+        "status_text": "Ondo/ADGM/Binance MTF tokenized securities trading live on Ethereum-adjacent infrastructure. ETH ETFs pulling $188M weekly. Institutional RWA tokenization advancing on competing chains."
       }
     ],
-    "odl_stagnation": "ODL volume data has been unavailable for 12+ months — Ripple's decision to stop publishing this metric is itself a bearish signal, as companies typically suppress data that shows weakness, not strength.",
-    "token_velocity_concern": "No hold-time data available. If institutional use cases primarily involve rapid settlement (buy XRP → transfer → sell XRP in seconds), token velocity could be too high to support price appreciation even with volume growth.",
+    "odl_stagnation": "Ripple has not published ODL volume data in over 6 months. The silence is itself a signal — if volumes were growing impressively, disclosure would be a marketing asset, not a liability.",
+    "token_velocity_concern": "No public data on XRP average hold times or velocity metrics. If institutional ODL usage treats XRP as a pure transit asset with sub-second hold times, price appreciation requires proportionally massive volume growth that remains undemonstrated.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "Oil shock, tariff uncertainty, and compound stress on Japan's economy create recession transmission channels. Fear & Greed at 28 reflects risk-off positioning."
+        "status_text": "Oil shock + tariffs + yen crisis creating synchronized global drag. S&P 500 resilient at 6,699 but Fear & Greed at 28 signals deteriorating confidence beneath the surface."
       },
       {
         "name": "Crypto Winter Signals",
         "status": "MONITORING",
-        "status_text": "BTC reclaiming $75K and $450M short liquidations suggest bounce, not bottom confirmation. XRP at $1.56 is 50%+ below ATH. Sustained below $2 through Q2 would pressure base case timeline."
+        "status_text": "BTC reclaimed $75K but is well below prior cycle highs. XRP at $1.57 is down significantly from its ETF-launch highs. Fear & Greed at 28 (Fear) is not winter territory but trending in the wrong direction."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "Trump/Atkins SEC continues deregulatory posture. SEC quarterly reporting elimination proposal signals sustained crypto-friendly environment. ECB stablecoin warnings are a headwind but not a reversal."
+        "status_text": "Atkins SEC is actively deregulatory. Political risk minimal under current administration through 2028. ECB stablecoin warnings represent non-US regulatory headwind but not a reversal of the US framework."
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "Oil-driven inflation could delay or reverse Fed rate cut expectations. Higher-for-longer rates compress risk asset valuations and reduce institutional appetite for crypto allocation."
+        "status_text": "US 10Y at 4.28% with oil shock potentially feeding into core inflation. If energy-driven inflation forces the Fed to delay cuts or resume hikes, the entire risk asset framework deteriorates."
       }
     ],
-    "bear_narrative": "Institutional capital is entering crypto and explicitly bypassing XRP — BTC ETFs absorb $656M/week while XRP ETFs bleed $10M/week, a 65:1 revealed preference ratio measured simultaneously from the same source. This is the most damaging evidence against the institutional adoption thesis this system has produced. Three kill switches are now at WARNING (ODL volume, RLUSD circulation, XRP ETF AUM) with none trending favorably. The call is REDUCE_EXPOSURE — not because the thesis is falsified (kill switch deadlines remain ahead), but because every measurable institutional adoption metric is moving in the wrong direction while compound macro stress sits pre-loaded at ELEVATED with two legs approaching CRITICAL. The capacity-vs-utilization paradox persists: Ripple is building real institutional infrastructure, but zero evidence exists that institutions are using it for XRP settlement.",
-    "last_updated": "2026-03-17T02:02:04.416Z"
+    "bear_narrative": "REDUCE_EXPOSURE. Three kill switches have escalated to WARNING in a single cycle — XRP ETF (negative cumulative flows, 65:1 institutional preference for BTC), RLUSD (declining, 80% on Ethereum not XRPL), and ODL volume/transparency (invisible by design). The cleanest institutional demand signal available — $26.5M in net capital outflows from XRP ETFs since inception while BTC draws $2.1B — is the most damaging measured evidence against the institutional settlement thesis. Compound stress is ELEVATED approaching CRITICAL with all three legs converging for the first time, but Brent data staleness blocks formal upgrade. The thesis paradox is operational: if the macro cascade fires before institutional demand materializes, the thesis is destroyed before it can be validated. What I don't know — the current Brent crude price — could change the compound stress level and tighten the action window from days to hours.",
+    "last_updated": "2026-03-17T02:42:53.290Z"
   },
   "last_analysis": {
-    "timestamp": "2026-03-17T02:02:04.416Z",
+    "timestamp": "2026-03-17T02:42:53.290Z",
     "run_type": "evening",
-    "stress_level": "CRITICAL",
+    "stress_level": "HIGH",
     "stress_score": 78,
-    "applied_at": "2026-03-17T02:03:48.841Z",
+    "applied_at": "2026-03-17T02:44:36.998Z",
     "changes_applied": 2
   }
 }

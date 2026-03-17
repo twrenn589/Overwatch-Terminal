@@ -2573,5 +2573,36 @@
     "events_drafted_count": 4,
     "thesis_pulse": "XRP recovers to $1.56 but remains well below the $2+ range needed for base case trajectory. RLUSD market cap at $1.549B (31% of $5B kill switch target with ~9 months remaining) — on-chain RLUSD supply",
     "counter_thesis_score": 7.2
+  },
+  {
+    "timestamp": "2026-03-17T02:42:53.290Z",
+    "run_type": "evening",
+    "stress_score": 78,
+    "stress_level": "HIGH",
+    "xrp_price": 1.57,
+    "fear_greed": 28,
+    "usd_jpy": 159.14,
+    "jpn_10y": 2.2452,
+    "brent_crude": 94.35,
+    "dxy": 100.4998,
+    "sp500": 6699.38,
+    "etf_daily_flow": 0,
+    "dex_volume_24h": 4232391,
+    "rlusd_market_cap": 1549562189.417933,
+    "probability_framework": {
+      "bear": 16,
+      "base": 44,
+      "mid": 28,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 6,
+    "events_drafted_count": 4,
+    "thesis_pulse": "XRP ETF AUM sits at $1.117B (22% of $5B target) with weekly outflows of -$9.96M continuing, though the pace has moderated from prior weeks. RLUSD total market cap reads $1.55B on CoinGecko but on-chai",
+    "counter_thesis_score": 68
   }
 ]
