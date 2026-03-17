@@ -649,7 +649,7 @@ textarea:focus { border-color:var(--accent-cyan); }
   <div class="header-row">
     <div>
       <div class="brand">◉ OVERWATCH TERMINAL</div>
-      <div class="brand-sub">INSTITUTIONAL INFRASTRUCTURE MONITOR — v4.0</div>
+      <div class="brand-sub">AUTONOMOUS COGNITIVE ARCHITECTURE</div>
     </div>
     <button class="refresh-btn" onclick="refreshAll()">↻ SYNC</button>
   </div>
@@ -695,10 +695,57 @@ textarea:focus { border-color:var(--accent-cyan); }
 
   <!-- ==================== OVERVIEW ==================== -->
   <div class="tab-panel active" id="panel-summary">
-    <div class="hero-banner">
-      <div class="hero-title">OVERWATCH TERMINAL</div>
-      <div class="hero-subtitle">AUTONOMOUS INSTITUTIONAL INTELLIGENCE</div>
-      <div class="hero-status" id="heroStatus">SYSTEM ONLINE • LAST ANALYSIS: -- • NEXT: --</div>
+    <!-- Hero: What the system just decided -->
+    <div class="full-card" style="border-color:rgba(26,138,110,0.3);padding:20px;">
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:3px;margin-bottom:8px;">OVERWATCH TERMINAL — THE INTEGRITY PROTOCOL</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;">THE INTEGRITY PROTOCOL — PATENT PENDING</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0;">
+        <div style="text-align:center;padding:12px;border:1px solid rgba(255,255,255,0.06);border-radius:6px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:6px;">THESIS STATUS</div>
+          <div id="heroThesisStatus" style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--accent-amber);">—</div>
+          <div id="heroConfidence" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:4px;">—</div>
+        </div>
+        <div style="text-align:center;padding:12px;border:1px solid rgba(255,255,255,0.06);border-radius:6px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:6px;">ACTION</div>
+          <div id="heroAction" style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--accent-red);">—</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:4px;">recommendation</div>
+        </div>
+        <div style="text-align:center;padding:12px;border:1px solid rgba(255,255,255,0.06);border-radius:6px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-bottom:6px;">PIPELINE</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--accent-green);">4-LAYER</div>
+          <div id="heroLastRun" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:4px;">—</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:12px 0 8px;">
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--text-muted);letter-spacing:1px;">SIGNALS</div>
+          <div id="heroSignals" style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--accent-cyan);">—</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--text-muted);letter-spacing:1px;">GATES</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--accent-amber);">8/run</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--text-muted);letter-spacing:1px;">CORRECTIONS</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--accent-blue);">48+</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--text-muted);letter-spacing:1px;">x402 TXNs</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--accent-green);">13</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--text-muted);letter-spacing:1px;">TENSIONS</div>
+          <div id="heroTensions" style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--accent-red);">—</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
+        <p id="heroSummary" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-secondary);line-height:1.6;margin:0;text-align:left;">—</p>
+      </div>
     </div>
 
     <div class="summary-grid">
@@ -4696,14 +4743,30 @@ async function fetchDashboardData() {
       }
     }
 
-    // Hero status line
-    if (d.last_analysis?.timestamp) {
-      const dt = new Date(d.last_analysis.timestamp);
-      const lastStr = dt.toLocaleDateString('en-US', {month:'short', day:'numeric'}) + ' ' +
-        dt.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZone:'America/Chicago', timeZoneName:'short'});
-      const utcH = new Date().getUTCHours();
-      const nextLabel = utcH < 12 ? '6 AM CST' : '6 PM CST';
-      set('heroStatus', 'SYSTEM ONLINE \u2022 LAST ANALYSIS: ' + lastStr + ' \u2022 NEXT: ' + nextLabel);
+    // Hero section population
+    var hero360 = d.assessment_360 || {};
+    if (document.getElementById('heroThesisStatus')) {
+      var statusColors = {STRENGTHENING:'var(--accent-green)',STABLE:'var(--accent-blue)',WEAKENING:'var(--accent-amber)',CONTESTED:'var(--accent-amber)',INSUFFICIENT_EVIDENCE:'var(--text-muted)',FALSIFIED:'var(--accent-red)'};
+      var ts = hero360.thesis_status || '—';
+      document.getElementById('heroThesisStatus').textContent = ts;
+      document.getElementById('heroThesisStatus').style.color = statusColors[ts] || 'var(--accent-amber)';
+      document.getElementById('heroConfidence').textContent = hero360.confidence_in_status ? 'confidence: ' + hero360.confidence_in_status : '—';
+    }
+    if (document.getElementById('heroAction')) {
+      var act = hero360.action_recommendation || hero360.tactical_recommendation || '—';
+      document.getElementById('heroAction').textContent = act.replace(/_/g, ' ');
+    }
+    if (document.getElementById('heroLastRun')) {
+      document.getElementById('heroLastRun').textContent = hero360._generated_at ? new Date(hero360._generated_at).toLocaleString() : '—';
+    }
+    if (document.getElementById('heroSignals')) {
+      document.getElementById('heroSignals').textContent = (hero360.signal_matrix || []).length || '—';
+    }
+    if (document.getElementById('heroTensions')) {
+      document.getElementById('heroTensions').textContent = (hero360.unresolved_tensions || hero360.active_tensions || []).length || '—';
+    }
+    if (document.getElementById('heroSummary')) {
+      document.getElementById('heroSummary').textContent = hero360.commander_summary || '—';
     }
 
     // ETF data
