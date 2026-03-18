@@ -752,5 +752,19 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-17T14:00:46.351Z"
+  },
+  {
+    "layer3_inference": "Layer 1 claim that 'all three legs at or beyond elevated' in compound stress matrix",
+    "signal_ids": [
+      "20260318-1347-SIG-003"
+    ],
+    "rejection_reason": "JGB 10Y at 2.2452 is below the 2.3% elevated threshold. Layer 2 caught this via CL-017 per-component verification. Only one price-based leg (USD/JPY) has confirmed elevated breach. Layer 1 overclaimed.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-18T14:01:38.034Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-18T14:01:38.037Z"
   }
 ]

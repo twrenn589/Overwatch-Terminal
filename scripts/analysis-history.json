@@ -2664,5 +2664,35 @@
     "alerts_count": 6,
     "events_drafted_count": 3,
     "thesis_pulse": "SEC digital commodity classification for XRP is the single most consequential regulatory event since the Ripple case resolution — Alderoty's tweet at 101K impressions signals high-confidence confirmat"
+  },
+  {
+    "timestamp": "2026-03-18T14:02:30.121Z",
+    "run_type": "morning",
+    "stress_score": 72,
+    "stress_level": "ELEVATED",
+    "xrp_price": 1.47,
+    "fear_greed": 26,
+    "usd_jpy": 158.95,
+    "jpn_10y": 2.2452,
+    "brent_crude": 94.35,
+    "dxy": 100.4998,
+    "sp500": 6694.54,
+    "etf_daily_flow": 4636892,
+    "dex_volume_24h": 8159802,
+    "rlusd_market_cap": 1525436808.514148,
+    "probability_framework": {
+      "bear": 16,
+      "base": 44,
+      "mid": 28,
+      "bull": 12
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 6,
+    "events_drafted_count": 4,
+    "thesis_pulse": "RLUSD market cap at $1.525B (CoinGecko) while XRPL on-chain supply reads $305M — the gap suggests most RLUSD circulation lives off-XRPL (likely Ethereum), which complicates on-chain adoption measureme"
   }
 ]

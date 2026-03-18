@@ -900,5 +900,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-051",
+    "date_of_error": "2026-03-18",
+    "date_identified": "2026-03-18",
+    "identified_by": "layer_4_override",
+    "belief": "Layer 1 claim that 'all three legs at or beyond elevated' in compound stress matrix",
+    "reality": "JGB 10Y at 2.2452 is below the 2.3% elevated threshold. Layer 2 caught this via CL-017 per-component verification. Only one price-based leg (USD/JPY) has confirmed elevated breach. Layer 1 overclaimed.",
+    "root_cause": "JGB 10Y at 2.2452 is below the 2.3% elevated threshold. Layer 2 caught this via CL-017 per-component verification. Only one price-based leg (USD/JPY) has confirmed elevated breach. Layer 1 overclaimed.",
+    "root_cause_type": "ASSUMPTION_FAILURE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

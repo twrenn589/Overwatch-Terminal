@@ -1,272 +1,5 @@
 [
   {
-    "timestamp": "2026-03-02T01:53:43.624Z",
-    "threat_matrix": [
-      {
-        "threat": "Stablecoin Rails as Default Settlement Layer",
-        "description": "USDC/USDT at $200B+ vs RLUSD at $1.5B. Circle has MiCA license, JPMorgan partnership, Visa/Mastercard integrations. Stablecoins already settling $10T+ annually without XRP. RLUSD at 30% of target with 9 months left suggests structural ceiling, not slow growth. Network effects may be insurmountable — institutional corridors are being built on stablecoin rails right now.",
-        "impact": 9,
-        "probability": 8,
-        "time_weight": 10,
-        "composite": 72,
-        "severity": "critical",
-        "proximity": "immediate",
-        "blind_spot": false,
-        "is_new": false,
-        "category": "competing_infra"
-      },
-      {
-        "threat": "ODL Data Opacity Masks Potential Volume Collapse",
-        "description": "ODL kill switch showing null data isn't a gap — it's a signal. Ripple rebranded away from ODL, stopped public reporting. Partners MoneyGram and Tranglo have gone quiet on XRP usage. If volumes were strong, disclosure would be a marketing weapon. Core thesis pillar is unfalsifiable with current data, which is itself a critical risk. Annualized $25B target is unverifiable.",
-        "impact": 9,
-        "probability": 7,
-        "time_weight": 10,
-        "composite": 63,
-        "severity": "critical",
-        "proximity": "immediate",
-        "blind_spot": true,
-        "is_new": true,
-        "category": "assumption_decay"
-      },
-      {
-        "threat": "CBDC Interop Layers Bypass XRP Entirely",
-        "description": "BIS mBridge completed real-value transactions in 2024. Project Agorá includes Fed, ECB, BoJ — the exact institutions Ripple targets. Saudi Arabia joined mBridge. Direct CBDC-to-CBDC settlement eliminates bridge asset need for highest-value corridors. These are government-backed alternatives with sovereign mandate, not competing startups.",
-        "impact": 9,
-        "probability": 7,
-        "time_weight": 7,
-        "composite": 44.1,
-        "severity": "critical",
-        "proximity": "near-term",
-        "blind_spot": true,
-        "is_new": true,
-        "category": "competing_infra"
-      },
-      {
-        "threat": "SWIFT GPI + ISO 20022 Modernization Removes Pain Point",
-        "description": "ISO 20022 migration completed Nov 2025. SWIFT GPI already handles $150B+ daily with same-day settlement and tracking. SWIFT ran CBDC sandbox with 38 central banks. 11,000+ member institutions favor incremental improvement over platform migration. The urgency that justified XRP disruption narrative is materially diminished.",
-        "impact": 8,
-        "probability": 8,
-        "time_weight": 10,
-        "composite": 64,
-        "severity": "high",
-        "proximity": "immediate",
-        "blind_spot": false,
-        "is_new": false,
-        "category": "competing_infra"
-      },
-      {
-        "threat": "Ethereum L2s and Solana Capture Institutional Settlement First",
-        "description": "BlackRock BUIDL >$1B on Ethereum. Franklin Templeton on Solana. Deutsche Bank on Ethereum L2. Visa settling USDC on Solana/Ethereum. None choosing XRPL. If tokenized asset settlement standardizes on EVM/Solana, cross-border payments follow same rails. XRPL becomes orphaned from institutional DeFi composability.",
-        "impact": 8,
-        "probability": 7,
-        "time_weight": 7,
-        "composite": 39.2,
-        "severity": "high",
-        "proximity": "near-term",
-        "blind_spot": false,
-        "is_new": false,
-        "category": "competing_infra"
-      },
-      {
-        "threat": "Permissioned Domains Create Institutional Ghost Chain",
-        "description": "Compliance-enabling permissioned domains fragment XRPL liquidity. Institutional volume isolated in walled gardens doesn't contribute to public DEX depth or XRP price discovery. Token holders may never capture value from institutional activity. Zero verified institutions onboarded. The feature enabling compliance structurally decouples XRP price from institutional adoption.",
-        "impact": 8,
-        "probability": 6,
-        "time_weight": 7,
-        "composite": 33.6,
-        "severity": "high",
-        "proximity": "near-term",
-        "blind_spot": true,
-        "is_new": true,
-        "category": "market_structure"
-      },
-      {
-        "threat": "Ripple Equity Value Decoupled from XRP Token Value",
-        "description": "Ripple acquisitions (Metaco $250M, Hidden Road) build enterprise SaaS revenue independent of XRP. RLUSD generates float income without XRP. Ripple IPO could reveal revenue streams disconnected from on-chain usage. 4.5B XRP escrow = structural selling pressure. Enterprise success ≠ token value accretion. Token may be unnecessary intermediary in Ripple's business model.",
-        "impact": 8,
-        "probability": 6,
-        "time_weight": 7,
-        "composite": 33.6,
-        "severity": "high",
-        "proximity": "near-term",
-        "blind_spot": true,
-        "is_new": true,
-        "category": "narrative"
-      },
-      {
-        "threat": "Fear & Greed at 10 Signals Structural Crypto Deleveraging",
-        "description": "F&G at 10 with XRP declining suggests structural de-risking, not a dip. US 10Y at 4.02%, JPY at 155.98 reflect macro stress. If crypto beta stays correlated to risk-off, institutional settlement adoption gets deferred. ETF AUM data null — cannot confirm sustained inflows. BoJ tightening threatens SBI/Japan adoption pillar directly.",
-        "impact": 7,
-        "probability": 6,
-        "time_weight": 10,
-        "composite": 42,
-        "severity": "high",
-        "proximity": "immediate",
-        "blind_spot": false,
-        "is_new": false,
-        "category": "macro"
-      }
-    ],
-    "compounding_risks": [
-      {
-        "chain": [
-          "Stablecoin Rails as Default Settlement Layer",
-          "SWIFT GPI + ISO 20022 Modernization",
-          "CBDC Interop Layers Bypass XRP Entirely"
-        ],
-        "outcome": "Triple encirclement: institutions have three mature alternatives (stablecoins for speed, SWIFT for compatibility, CBDCs for sovereignty) that collectively eliminate every corridor where XRP could gain foothold. No remaining addressable market for bridge asset thesis. XRP becomes solution without a problem.",
-        "severity": "critical"
-      },
-      {
-        "chain": [
-          "ODL Data Opacity",
-          "Ripple Equity Decoupled from XRP",
-          "Ripple Escrow Selling Pressure"
-        ],
-        "outcome": "Hidden failure loop: ODL volumes may already be collapsing while Ripple pivots business model away from XRP dependency. Meanwhile programmatic escrow selling continues against unknown/stagnant demand. Price erosion becomes structural and self-reinforcing as declining price reduces XRP's utility for large-value settlement.",
-        "severity": "critical"
-      },
-      {
-        "chain": [
-          "Permissioned Domains Ghost Chain",
-          "Ethereum L2s Capture Institutional Settlement",
-          "Stablecoin Rails as Default"
-        ],
-        "outcome": "Institutional adoption paradox: XRPL's compliance solution fragments its own liquidity while competitors offer deeper, more composable institutional environments. Institutions that might use XRPL find better liquidity on EVM chains with stablecoin settlement. XRPL permissioned domains launch to empty rooms.",
-        "severity": "high"
-      },
-      {
-        "chain": [
-          "Fear & Greed at 10",
-          "Japan Thesis Vulnerable to BoJ Tightening",
-          "Macro Deleveraging"
-        ],
-        "outcome": "Macro contagion kills regional thesis: BoJ tightening contracts SBI risk appetite, JPY volatility disrupts corridor economics, extreme fear prevents ETF inflows needed to absorb escrow selling. Japan adoption pillar — the strongest regional thesis — collapses under macro weight.",
-        "severity": "high"
-      },
-      {
-        "chain": [
-          "AI-Native Payment Orchestration",
-          "Stablecoin Rails as Default",
-          "Ethereum L2s Capture Settlement"
-        ],
-        "outcome": "Commoditization death spiral: AI routing agents treat settlement as dynamic optimization, selecting cheapest/fastest rail per transaction. XRP competes on pure cost basis against stablecoins on L2s. Premium valuation based on network lock-in destroyed. XRP becomes a commodity utility with near-zero pricing power.",
-        "severity": "high"
-      }
-    ],
-    "blind_spots": [
-      {
-        "threat": "ODL Data Opacity Masks Potential Volume Collapse",
-        "importance": "critical",
-        "suggested_source": "On-chain XRP payment transaction analysis (exclude spam/DEX), Ripple partner quarterly reports, DTCC/SWIFT alternative volume data, Freedom of Information requests on Ripple regulatory filings",
-        "x402_opportunity": true,
-        "recommend_permanent_monitoring": true
-      },
-      {
-        "threat": "CBDC Interop Layers Bypass XRP Entirely",
-        "importance": "critical",
-        "suggested_source": "BIS Innovation Hub publications, mBridge quarterly updates, Project Agorá status reports, central bank digital currency trackers (Atlantic Council CBDC tracker)",
-        "x402_opportunity": true,
-        "recommend_permanent_monitoring": true
-      },
-      {
-        "threat": "Permissioned Domains Create Institutional Ghost Chain",
-        "importance": "high",
-        "suggested_source": "XRPL amendment voting data, Ripple enterprise announcements, permissioned validator node count monitoring, XRPL Foundation governance updates",
-        "x402_opportunity": true,
-        "recommend_permanent_monitoring": true
-      },
-      {
-        "threat": "Ripple Equity Value Decoupled from XRP Token Value",
-        "importance": "high",
-        "suggested_source": "Ripple quarterly markets reports, SEC/FINRA filings if IPO proceeds, Ripple escrow on-chain tracking, enterprise revenue estimates from partner disclosures",
-        "x402_opportunity": false,
-        "recommend_permanent_monitoring": true
-      },
-      {
-        "threat": "AI-Native Payment Orchestration Obsoletes Fixed Rails",
-        "importance": "high",
-        "suggested_source": "Visa/Mastercard AI routing pilot announcements, Stripe Bridge integration updates, agentic finance protocol TVL tracking, venture funding in AI x payments",
-        "x402_opportunity": true,
-        "recommend_permanent_monitoring": true
-      }
-    ],
-    "bias_check": {
-      "bull_indicators": 4,
-      "bear_indicators": 14,
-      "ratio": "4:14 (1:3.5 bull-to-bear)",
-      "assessment": "SEVERE BULL BIAS IN THESIS SCORES. The thesis_scores show 4 categories rated CONFIRMED/STRONG with HIGH confidence (regulatory, institutional custody, ETF adoption, XRPL infrastructure), but 3 of 5 kill switches show NEEDS_DATA or PENDING. High-confidence bullish ratings coexist with null data on the metrics that would actually validate them. This is confirmation bias — confidence is assigned to narrative milestones (SEC case resolved, ETF approved) while ignoring that adoption metrics (ODL volume, permissioned DEX, ETF AUM) are unmeasured. The system is structurally biased toward counting announcements as bullish while requiring hard evidence only from bear signals.",
-      "recommended_additions": [
-        "Track CBDC bridge project status as permanent bear indicator",
-        "Add stablecoin market share ratio (RLUSD / total stablecoin market) as competitive position metric",
-        "Monitor XRPL payment transaction count (excluding spam) as ODL proxy",
-        "Track institutional settlement announcements on competing chains (EVM, Solana) vs XRPL",
-        "Add Ripple escrow net monthly sales as structural supply pressure metric",
-        "Require ETF AUM data before maintaining HIGH confidence on ETF thesis score"
-      ]
-    },
-    "kill_switches": [
-      {
-        "name": "ODL Volume",
-        "status": "danger",
-        "detail": "NULL data for 3+ months. Target $25B annualized completely unverifiable. Ripple stopped public reporting, rebranded away from ODL. Partner silence (MoneyGram, Tranglo) compounds concern. Treating persistent null as danger, not merely no_data — absence of evidence after rebranding is evidence of absence."
-      },
-      {
-        "name": "RLUSD Circulation",
-        "status": "warning",
-        "detail": "$1.5B vs $5B target (30% with ~9 months remaining). Requires $11.49M/day growth to hit target. Against $200B+ stablecoin market, RLUSD has 0.75% share. Growth rate appears linear, not exponential. Structural ceiling risk flagged by sweep. Downgrading from TRACKING to WARNING."
-      },
-      {
-        "name": "Permissioned DEX Adoption",
-        "status": "danger",
-        "detail": "Zero verified institutions against target of 5 by Q3 2026 (6 months away). No public confirmation of any institutional onboarding. Ghost chain risk identified — even if institutions join, value may not flow to XRP token. Deadline proximity with zero progress warrants danger status."
-      },
-      {
-        "name": "XRP ETF AUM",
-        "status": "no_data",
-        "detail": "NULL current value. Cannot assess whether ETF inflows exist, let alone whether they offset $274-548M monthly escrow selling pressure. ETF approval was thesis milestone, but sustained AUM is the actual test. No data to evaluate."
-      },
-      {
-        "name": "Fear & Greed Extended Below 20",
-        "status": "warning",
-        "detail": "Currently at 10 (Extreme Fear). Existing kill switch triggers on extended period below 20. Duration unknown from single data point, but severity of reading (10 is near-floor) and macro context (US 10Y 4.02%, JPY 155.98) suggest this may persist. Requires time-series tracking to determine if extended threshold met."
-      },
-      {
-        "name": "CLARITY Act",
-        "status": "warning",
-        "detail": "Still Pending as of March 2026. No advancement signal. 2026 midterms could shift committee control. Basel III 1250% risk weight on unbacked crypto for banks remains in force. Regulatory win priced into thesis but not yet delivered."
-      }
-    ],
-    "new_kill_switches_recommended": [
-      {
-        "name": "CBDC Bridge Project Operational Status",
-        "trigger": "Any two of mBridge, Agorá, or SWIFT CBDC interlinking reach production deployment with >3 central banks in live settlement",
-        "reasoning": "Direct CBDC settlement eliminates bridge asset thesis at the sovereign level. mBridge already in MVP. If these go live, XRP's highest-value corridor addressable market vanishes. This is the single most damaging structural threat identified."
-      },
-      {
-        "name": "Competing Chain Institutional Settlement Count",
-        "trigger": "Institutional settlement deployments on EVM/Solana exceed XRPL by 10:1 ratio for 2 consecutive quarters",
-        "reasoning": "If institutional settlement standardizes on other chains, network effects become permanent. BlackRock, Franklin Templeton, Deutsche Bank already on EVM/Solana. Monitoring the gap prevents slow-boil blindness."
-      },
-      {
-        "name": "Ripple Escrow Net Sales vs ETF Inflows",
-        "trigger": "Monthly Ripple escrow XRP sales exceed XRP ETF net inflows for 3 consecutive months",
-        "reasoning": "Structural supply/demand imbalance. If programmatic selling consistently exceeds new institutional demand via ETFs, price degradation is mechanical regardless of narrative. This is the clearest quantitative test of whether institutional demand thesis is real."
-      },
-      {
-        "name": "Stablecoin Market Share Ceiling",
-        "trigger": "RLUSD fails to reach 1% of total stablecoin market cap by Q4 2026",
-        "reasoning": "At current $200B+ stablecoin market, 1% = $2B. If RLUSD can't even reach rounding error market share, the stablecoin strategy has failed structurally and XRP's on-ramp narrative collapses."
-      }
-    ],
-    "tactical_recommendation": "REDUCE_EXPOSURE",
-    "recommendation_reasoning": "Three critical-severity threats (stablecoins, ODL opacity, CBDC bridges) all score composite >44 with two scoring >63. Two kill switches at DANGER (ODL, Permissioned DEX), two at WARNING (RLUSD, F&G), one at NO_DATA (ETF). The system has 4 bull indicators vs 14 bear indicators — a 1:3.5 ratio indicating severe thesis deterioration. Critical compounding risk: the triple encirclement of stablecoins + SWIFT modernization + CBDC bridges collectively eliminates XRP's addressable market. Simultaneously, ODL opacity combined with Ripple equity decoupling and escrow selling creates a hidden failure loop. Five newly identified blind spots including two critical-severity threats (ODL collapse, CBDC bypass) were not being tracked. Fear & Greed at 10 with macro stress removes the near-term catalyst for recovery. The thesis has not been falsified but the evidence required to sustain it is either null or deteriorating across every measurable dimension. Partial de-risk is warranted while maintaining optionality if data gaps resolve favorably.",
-    "bear_pressure_score": 72,
-    "score_delta": 22,
-    "score_reasoning": "Previous score of 50 reflected balanced thesis with known risks. +22 driven by: (1) Five critical/high blind spots newly identified, indicating thesis monitoring was structurally incomplete (+8); (2) ODL data opacity reframed from data gap to active concealment risk — core thesis pillar may already be failing (+5); (3) CBDC interop projects at MVP stage with exact institutions Ripple targets (+4); (4) Compounding risk analysis reveals three independent pathways to thesis failure, any one of which is sufficient (+3); (5) Bias check reveals 1:3.5 bull-to-bear ratio with bull confidence assigned to narrative milestones while adoption metrics are null (+2). Score held below 80 because: regulatory clarity thesis intact (SEC case resolved), ETF structure exists even if AUM unknown, and CBDC/AI threats are near-term not immediate. Full thesis falsification requires ODL data confirming collapse or CBDC bridge production deployment.",
-    "commander_summary": "The XRPL institutional settlement thesis is under siege from three directions simultaneously: stablecoins are capturing institutional corridors now ($200B+ vs RLUSD's $1.5B), SWIFT has already modernized away the pain point XRP was designed to solve, and central banks are building their own bridges that eliminate the need for any third-party asset. Critically, the ODL volume data that would prove institutional adoption is working has gone completely dark — Ripple stopped reporting, partners went silent, and the core thesis pillar is now unfalsifiable, which is itself a red flag. REDUCE EXPOSURE immediately while maintaining a monitoring position; re-evaluate only when ODL volume data becomes available or RLUSD demonstrates breakout growth above $3B."
-  },
-  {
     "timestamp": "2026-03-02T02:04:41.278Z",
     "threat_matrix": [
       {
@@ -24350,6 +24083,766 @@
         "signal_ids": [],
         "trigger_matched": "CL-048 trigger: ODL volume has no resolution path, no expected publication date, no independent data source.",
         "influence_on_assessment": "ODL volume treated as structural data gap, not active tension. Not included in player behavioral analysis as an actionable question."
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-03-18T14:02:30.107Z",
+    "commander_summary": "REDUCE EXPOSURE. Three kill switches at WARNING (ODL, RLUSD, XRP ETF AUM) with observable metrics deteriorating across the board. The cycle's most significant finding: institutional capital is actively choosing BTC and ETH over XRP under identical macro conditions — BTC absorbed +$748M weekly and ETH +$330M while XRP bled -$7.4M. This eliminates macro as an explanation and isolates XRP-specific institutional demand weakness. Compound stress is at event-triggered CRITICAL via Hormuz disruption with USD/JPY accelerating at 150bps/cycle toward the 160 cascade threshold — operator action window is days, not weeks. The thesis paradox remains live: the macro stress that threatens the position is the same stress that would validate the settlement infrastructure thesis if it cascades. But validation through destruction is not a viable investment outcome. The thesis increasingly depends on unobservable private activity rather than verifiable public metrics, and epistemic honesty requires acknowledging that the data I can see is telling a story of weakening, not strength.",
+    "score_reasoning": "Three kill switches at WARNING with observable metrics deteriorating across the board. The Blind Auditor correctly identified that unresolved tension impact scores have been climbing (15→20→19→21→23) while the action recommendation has not matched the evidence trajectory. The BTC/ETH ETF flow divergence eliminates macro as an explanation for XRP's institutional weakness — this is the specific evidence that tips the balance from INCREASE_MONITORING to REDUCE_EXPOSURE. I am not waiting for specific new information that warrants continued restraint at current levels; the data I have is sufficient to act. REDUCE_EXPOSURE is appropriate because the thesis is not FALSIFIED — kill switch deadlines are December 2026 and observable deployment evidence (Hidden Road/DTCC) prevents that determination — but the accumulation of deteriorating metrics demands a position adjustment.",
+    "tactical_recommendation": "REDUCE_EXPOSURE",
+    "recommendation_reasoning": "Three kill switches at WARNING with observable metrics deteriorating across the board. The Blind Auditor correctly identified that unresolved tension impact scores have been climbing (15→20→19→21→23) while the action recommendation has not matched the evidence trajectory. The BTC/ETH ETF flow divergence eliminates macro as an explanation for XRP's institutional weakness — this is the specific evidence that tips the balance from INCREASE_MONITORING to REDUCE_EXPOSURE. I am not waiting for specific new information that warrants continued restraint at current levels; the data I have is sufficient to act. REDUCE_EXPOSURE is appropriate because the thesis is not FALSIFIED — kill switch deadlines are December 2026 and observable deployment evidence (Hidden Road/DTCC) prevents that determination — but the accumulation of deteriorating metrics demands a position adjustment.",
+    "signal_matrix": [
+      {
+        "signal": "USD/JPY breaches elevated threshold decisively",
+        "description": "Confirmed as most pre-loaded leg of compound stress chain. Layer 3 identified trapped central bank dynamic sustaining rate differential. No behavioral evidence to adjust score.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 8,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "Brent crude at $94.35 — approaching critical threshold",
+        "description": "Layer 3 confirmed directional trend with independently verified events (Iraq Rumaila, CMA CGM). Staleness prevents precision. No adjustment warranted.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 8,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "Compound stress matrix at CRITICAL threshold (event-triggered)",
+        "description": "Layer 3 correctly distinguished event-triggered from price-convergence CRITICAL. Reduces cascade proximity assessment. Slight downward adjustment for the distinction.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 7,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "US PPI rises to 3.4%",
+        "description": "Layer 3 identified well-established transmission mechanism (PPI → no Fed cuts → rate differential → JPY weakness). DXY-PPI anomaly flagged as likely temporal distortion per LZ-MR-003.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 5,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "XRP ETF AUM declining — cumulative net outflows",
+        "description": "Layer 3 elevated this with institutional asset-selection behavioral pattern. The XRP-specific weakness under same-conditions-as-BTC/ETH is the most thesis-relevant finding.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 9,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "RLUSD market cap declining — second contraction phase",
+        "description": "Layer 3 null hypothesis holds — 3.7% decline is within normal variance. The pace insufficiency is the real concern, not this specific decline. Slight downward adjustment.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 6,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "Senate stablecoin yield draft expected this week",
+        "description": "Null hypothesis holds per LZ-RC-005. Forward-looking prediction, directionally ambiguous. No adjustment.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 4,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "Moody's on-chain credit analysis on Canton Network",
+        "description": "Null hypothesis holds — relationship-driven choice. Competitive intelligence value remains but specific threat level uncertain. No adjustment.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 4,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "UK parliamentary committee crypto donation moratorium",
+        "description": "No behavioral analysis applicable. Single jurisdiction, contextual only.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 2,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "XRP options concentration at $1.40 strike",
+        "description": "Negligible relative to market cap (0.016%). Single-platform, short-dated. No behavioral pattern identified.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 3,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "XRPL DEX volume remains thin",
+        "description": "Layer 3 confirmed the gap between institutional settlement thesis narrative and actual on-chain activity. Data wins over positioning per contradiction resolution above. Slight upward adjustment.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 6,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "Fear & Greed at 26 — Fear territory",
+        "description": "CL-031 correctly applied. Contextual only. Substantive signal is in ETF flows.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 2,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "BTC and ETH ETFs attracting capital while XRP ETFs bleed",
+        "description": "Layer 3 VALID inference with full data support. Same source, same period, opposite directions. Eliminates macro as explanation. Behavioral pattern identified: institutional capital differentiating between crypto assets. This is the cycle's most important signal. Elevated.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 9,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "DXY weakening to 100.5",
+        "description": "Temporal mismatch null hypothesis holds per LZ-MR-003. Ambiguous directional impact on thesis. No adjustment.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 5,
+        "severity": "high",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      },
+      {
+        "signal": "Joel Katz social media — zero business signals",
+        "description": "CL-030 correctly applied. Non-signal confirmed.",
+        "impact": null,
+        "probability": null,
+        "time_weight": null,
+        "composite": 1,
+        "severity": "critical",
+        "proximity": null,
+        "blind_spot": false,
+        "is_new": null,
+        "category": null
+      }
+    ],
+    "compounding_risks": [
+      {
+        "chain": [
+          "USD/JPY at 158.95 (65% from elevated to critical)",
+          "Brent likely elevated but stale (9 days)",
+          "JGB NOT pre-loaded — below elevated threshold"
+        ],
+        "outcome": "A Hormuz-driven oil shock cascading through Japan's energy dependence simultaneously threatens XRP's institutional adoption timeline (risk-off → ETF outflows → capital flight from alternative assets) AND validates the thesis that traditional settlement infrastructure is fragile and alternatives are needed — because the very disruption demonstrating settlement fragility is the same disruption destroying short-term position value.",
+        "severity": "critical"
+      },
+      {
+        "chain": [
+          "Data",
+          "Behavior",
+          "Paradox"
+        ],
+        "outcome": "Both signals are verified by direct observation. ETF flows are real. Ripple's resource commitments are real. The paradox is that observable institutional CAPITAL is rejecting XRP while Ripple is building observable institutional INFRASTRUCTURE. These could be reconciled if Ripple's infrastructure play captures value at the plumbing level (clearing, custody) rather than at the asset-allocation level (ETF flows). But this reconciliation is a hypothesis, not a verified finding. Per LZ-EH-005, when sources of equal weight contradict, the contradiction IS the finding. I hold the paradox.",
+        "severity": "high"
+      }
+    ],
+    "blind_spots": [
+      {
+        "signal": "XRP ETF fund count discrepancy (4 reporting vs 7 previously)",
+        "importance": "high",
+        "suggested_source": "Confirmation of which 7 XRP ETF funds previously existed and current operational status of each. Did any funds delist, close, or simply stop reporting to Coinglass?",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": false
+      },
+      {
+        "signal": "Canton Network functional overlap with XRPL PermissionedDEX",
+        "importance": "high",
+        "suggested_source": "Functional comparison of Canton Network capabilities vs. XRPL PermissionedDEX. Does Canton offer settlement, or only data/analytics on-chain? What is the overlap in target institutional use cases?",
+        "x402_opportunity": false,
+        "recommend_permanent_monitoring": false
+      },
+      {
+        "signal": "Which 7 XRP ETF funds were previously reporting, and what is the current operational status of each? Did any funds close, delist, or merely stop reporting to Coinglass?",
+        "importance": "high",
+        "suggested_source": "SEC EDGAR filings, fund issuer websites, Coinglass data team, or direct query to each issuer",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": false
+      },
+      {
+        "signal": "What is the current real-time Brent crude price as of March 18, 2026?",
+        "importance": "high",
+        "suggested_source": "Any real-time commodities data feed (Bloomberg, Reuters, ICE)",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": false
+      },
+      {
+        "signal": "What is the functional overlap between Canton Network and XRPL PermissionedDEX? Does Canton offer settlement, or only data/analytics on-chain? What institutional use cases do they target?",
+        "importance": "high",
+        "suggested_source": "Canton Network technical documentation, Digital Asset whitepapers, comparative blockchain infrastructure analysis",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": false
+      },
+      {
+        "signal": "What is the current real-time USD/JPY rate and has BOJ made any public statements regarding FX intervention readiness since March 17?",
+        "importance": "high",
+        "suggested_source": "Real-time FX feed, BOJ official communications",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": false
+      }
+    ],
+    "bias_check": {
+      "bull_indicators": 6,
+      "bear_indicators": 6,
+      "ratio": "6:6",
+      "assessment": "The thesis is weakening on observable metrics while its structural infrastructure story remains intact but unverifiable. Two kill switches are at WARNING (ODL Volume, XRP ETF AUM) with RLUSD escalated to WARNING this cycle. The most damaging signal is the BTC/ETH ETF flow divergence — institutional capital is actively choosing BTC and ETH over XRP under identical conditions, which cannot be explained by macro and isolates XRP-specific demand weakness. The compound stress matrix at event-triggered CRITICAL adds time pressure. The thesis increasingly depends on unobservable private institutional activity (ODL volumes, PermDEX pipeline, Hidden Road routing) rather than publicly verifiable metrics, which is structurally unfalsifiable and therefore epistemically concerning.",
+      "recommended_additions": null
+    },
+    "kill_switches": [
+      {
+        "name": "ODL Volume ($20-30B annualized)",
+        "status": "danger",
+        "detail": "Escalated from NEEDS_DATA to WARNING. The thesis's primary metric has been invisible for the entire monitoring period. Ripple's deliberate withdrawal of previously-public data per LZ-EH-003 is an action carrying evidentiary weight. The Q3 2026 ODL Transparency kill switch deadline approaches with zero progress toward data availability. WARNING reflects that the absence is suspicious, not merely a gap."
+      },
+      {
+        "name": "RLUSD Circulation ($5B + 3 integrations)",
+        "status": "danger",
+        "detail": "Escalated from TRACKING to WARNING. While the single-cycle decline is within normal variance, the structural pace insufficiency is not. At $1.525B with 288 days remaining, needing ~$3.475B of net growth ($12.06M/day), the trajectory is moving away from target. The recovery-contraction oscillation pattern shows no organic growth momentum. 80% off-XRPL further undermines the XRPL settlement thesis even if headline circulation recovers."
+      },
+      {
+        "name": "Permissioned DEX (5+ institutions by Q3 2026)",
+        "status": "warning",
+        "detail": "Maintained at MONITORING. 26 days is too early for enterprise blockchain onboarding to produce visible results. The 90-day checkpoint (May 20, 2026) is the appropriate evaluation point. Escalation to WARNING at May 20 if still zero."
+      },
+      {
+        "name": "XRP ETF AUM ($5B by EOY 2026)",
+        "status": "danger",
+        "detail": "Maintained at WARNING — the evidence has strengthened since last cycle. The BTC/ETH flow divergence under identical conditions is the most thesis-challenging signal because it isolates XRP-specific institutional demand weakness. At $1.116B and declining, needing $5B by EOY, the gap is widening. However, WARNING (not TRIGGERED) because we are still early in the product lifecycle and the kill switch deadline is December 2026. The 4-of-7 fund discrepancy adds unresolved risk."
+      },
+      {
+        "name": "Clarity Act (meaningful advancement by Q4 2026)",
+        "status": "warning",
+        "detail": "Legislative progress signals are present but the actual content and impact are unknown. Multi-source corroboration of the draft increases confidence something is coming, but what it means for the thesis is genuinely ambiguous. MONITORING until actual text is available."
+      },
+      {
+        "name": "Japan Adoption (SBI expansion or new institution by Q3 2026)",
+        "status": "warning",
+        "detail": "No new data to change assessment. BOJ's choice of sovereign infrastructure is a single data point (LZ-RC-002) worth noting but not sufficient to establish a trend. The macro stress environment pressures Japan but per corrections ledger, stress does not predict institutional action. Maintained at MONITORING."
+      },
+      {
+        "name": "Announcement-to-Deployment (3 of 5 Tier 1 in production by Q4 2026)",
+        "status": "warning",
+        "detail": "Hidden Road/DTCC is confirmed deployment. One of five. No new signals this cycle. Timeline is Q4 2026 — monitoring remains appropriate."
+      },
+      {
+        "name": "Token Velocity (hold times)",
+        "status": "warning",
+        "detail": "Structural gap — no public data source for this metric. Cannot assess. Classified as structural gap rather than kill switch warning because the absence is an observability limitation, not evidence of deterioration."
+      },
+      {
+        "name": "ODL Transparency (reliable public data by Q3 2026)",
+        "status": "danger",
+        "detail": "Q3 2026 deadline approaching with zero progress. Maintained at WARNING. This kill switch is directly linked to the ODL Volume SUSPICIOUS_ABSENCE classification."
+      },
+      {
+        "name": "Competitive Displacement (BIS Nexus operating independently of XRPL)",
+        "status": "warning",
+        "detail": "No new data on BIS Nexus specifically. Canton and BOJ sovereign blockchain represent competitive infrastructure choices but are individual data points, not a trend (LZ-RC-002). Maintained at MONITORING."
+      }
+    ],
+    "new_kill_switches_recommended": [],
+    "_pipeline_version": "4-layer-v1",
+    "_generated_at": "2026-03-18T14:02:30.067Z",
+    "thesis_status": "WEAKENING",
+    "confidence_in_status": "medium",
+    "action_recommendation": "REDUCE_EXPOSURE",
+    "action_reasoning": "Three kill switches at WARNING with observable metrics deteriorating across the board. The Blind Auditor correctly identified that unresolved tension impact scores have been climbing (15→20→19→21→23) while the action recommendation has not matched the evidence trajectory. The BTC/ETH ETF flow divergence eliminates macro as an explanation for XRP's institutional weakness — this is the specific evidence that tips the balance from INCREASE_MONITORING to REDUCE_EXPOSURE. I am not waiting for specific new information that warrants continued restraint at current levels; the data I have is sufficient to act. REDUCE_EXPOSURE is appropriate because the thesis is not FALSIFIED — kill switch deadlines are December 2026 and observable deployment evidence (Hidden Road/DTCC) prevents that determination — but the accumulation of deteriorating metrics demands a position adjustment.",
+    "compound_stress_level": "CRITICAL",
+    "active_tensions": [
+      {
+        "tension_id": "T-1",
+        "description": "ODL volume completely unobservable. Ripple's $100B total volume disclosure without ODL breakdown is selective transparency. Kill switch at WARNING. ODL Transparency kill switch also at WARNING with Q3 2026 deadline and zero progress. The thesis's primary value-capture metric has been invisible for the entire monitoring period.",
+        "watch_for": "Ripple quarterly report, partner disclosures (SBI/Tranglo), independent on-chain payment channel analysis. Any Ripple communication about resuming data publication.",
+        "impact_score": 5,
+        "expected_resolution_window": "months",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-2",
+        "description": "Brent crude data stale for 5+ consecutive cycles during active Hormuz disruption. Cannot confirm whether $95 CRITICAL threshold has been breached. Compound stress cascade proximity assessment blocked. USD/JPY velocity makes the three-leg assessment time-critical — if Brent is already above $95, we have convergent price-triggered CRITICAL alongside event-triggered CRITICAL.",
+        "watch_for": "Fresh Brent crude price data from any reliable source confirming position relative to $95 CRITICAL threshold.",
+        "impact_score": 5,
+        "expected_resolution_window": "hours",
+        "window_status": "expired",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-3",
+        "description": "Thesis paradox at maximum tension. Compound stress at event-triggered CRITICAL with USD/JPY accelerating (150bps/cycle). Observable adoption metrics deteriorating simultaneously (ETF outflows, RLUSD contraction). If cascade fires before adoption inflects, paradox resolves to destruction-before-validation. Resolution window tightening as USD/JPY approaches 160.",
+        "watch_for": "Either: (a) USD/JPY ≥160, Brent confirmed ≥$95, or JGB 10Y ≥2.5% triggering cascade, or (b) observable adoption inflection (ETF inflow reversal, RLUSD growth, PermDEX institutional user) demonstrating thesis traction before stress resolves.",
+        "impact_score": 5,
+        "expected_resolution_window": "weeks",
+        "window_status": "approaching",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-5",
+        "description": "XRP ETF flow divergence from BTC/ETH confirmed under identical conditions. Cumulative net outflows -$29.08M. BTC +$748M weekly, ETH +$330M weekly, XRP -$7.4M weekly. Macro eliminated as explanation. XRP-specific institutional demand weakness isolated. Kill switch at WARNING. Only 4 of 7 funds reporting — fund attrition possible.",
+        "watch_for": "Any positive weekly inflow breaking the negative streak. Weekly outflows exceeding $15M sustained. Resolution of 4-vs-7 fund reporting discrepancy. Additional fund closures or delistings.",
+        "impact_score": 5,
+        "expected_resolution_window": "weeks",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-4",
+        "description": "RLUSD at $1.525B, in second contraction phase. Kill switch at WARNING. Pace to $5B requires $12.06M/day; trajectory negative. Recovery-contraction oscillation pattern with no organic growth momentum. 80% off-XRPL undermines XRPL settlement thesis.",
+        "watch_for": "RLUSD stabilizing above $1.5B and resuming growth. XRPL share trending above 25%. Evidence of institutional RLUSD integration. Further decline below $1.494B (prior contraction low) confirms sustained deterioration.",
+        "impact_score": 5,
+        "expected_resolution_window": "weeks",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-6",
+        "description": "Does Ripple's institutional infrastructure (Hidden Road/DTCC, Ripple Payments) route settlement through XRPL/XRP? If the infrastructure bypasses its own ledger, the on-chain thesis collapses regardless of regulatory wins. No Hidden Road transactions visible on XRPL. No institutional-sized DEX activity.",
+        "watch_for": "Hidden Road transactions visible on XRPL. Public disclosure of settlement technology routing. XRPL DEX volume increase from institutional-sized transactions. Any Ripple communication about XRPL settlement integration with Hidden Road.",
+        "impact_score": 5,
+        "expected_resolution_window": "months",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-7",
+        "description": "Incumbents building rather than buying settlement infrastructure. Mastercard $1.8B BVNK acquisition, PayPal 70-country PYUSD, Moody's on Canton Network. The addressable market for third-party settlement layers (Ripple's target) may be smaller than the thesis assumes if major financial institutions are internalizing stablecoin and on-chain capabilities.",
+        "watch_for": "BVNK corridor coverage overlapping Ripple markets. PYUSD cross-border volume data. Additional Tier 1 institution deployments on Canton vs. XRPL. Evidence of direct corridor-level competition.",
+        "impact_score": 4,
+        "expected_resolution_window": "months",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-8",
+        "description": "PermissionedDEX at 26 days with zero observable institutional adoption. 90-day checkpoint May 20, 2026. Q3 2026 kill switch requires 5+ institutions. Enterprise onboarding typically takes months — too early to alarm, but the clock is running.",
+        "watch_for": "First observable institutional transaction on PermDEX. Any PermDEX onboarding announcement. May 20 checkpoint: if still zero, escalate to WARNING.",
+        "impact_score": 3,
+        "expected_resolution_window": "weeks",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      }
+    ],
+    "structural_gaps": [
+      {
+        "gap_id": "SG-1",
+        "description": "Token velocity / average hold times for XRP — no public data source exists.",
+        "gap_reason": "No analytics provider has built this metric for XRP. On-chain analysis could theoretically derive hold time distributions but no available service provides this.",
+        "promotable_if": "An analytics provider (Nansen, Chainalysis, or similar) begins publishing XRP hold-time data, or the system integrates raw XRPL ledger analysis to derive this independently.",
+        "classification": "STRUCTURAL_GAP"
+      },
+      {
+        "gap_id": "SG-2",
+        "description": "Hidden Road / Ripple institutional settlement routing architecture — whether settlement flows through XRPL or bypasses it.",
+        "gap_reason": "Institutional settlement architecture details are proprietary. Public disclosures focus on regulatory status (DTCC participant) not technical routing. On-chain observation of XRPL would show institutional transactions if they exist, but their absence is not conclusive per LZ-RC-003.",
+        "promotable_if": "Ripple publishes technical architecture documentation, Hidden Road transactions appear on XRPL, or independent researchers identify institutional flow patterns on-chain.",
+        "classification": "STRUCTURAL_GAP"
+      }
+    ],
+    "previous_tension_dispositions": [
+      {
+        "tension_id": "T-1",
+        "disposition": "MAINTAIN",
+        "disposition_reason": "ODL volume remains completely unobservable with no progress toward resolution. Ripple's selective transparency ($100B total, no ODL breakdown) confirmed this cycle. SUSPICIOUS_ABSENCE classification unchanged. Kill switch escalated to WARNING. No new data or events have changed this tension's status.",
+        "new_impact_score": 5,
+        "displaced_by": null
+      },
+      {
+        "tension_id": "T-3",
+        "disposition": "MAINTAIN",
+        "disposition_reason": "Thesis paradox remains at maximum tension. Compound stress is at event-triggered CRITICAL with USD/JPY accelerating toward 160. The commodity classification catalyst has not produced observable usage inflection — ETF flows are negative, RLUSD is contracting, PermDEX has zero adoption. The 'destruction-before-validation' scenario is slightly more plausible this cycle than last. No resolution yet but the resolution window is tightening as USD/JPY accelerates.",
+        "new_impact_score": 5,
+        "displaced_by": null
+      },
+      {
+        "tension_id": "T-5",
+        "disposition": "ESCALATE",
+        "disposition_reason": "XRP ETF cumulative net flow improved slightly from -$39.7M to -$29.08M (note: different data snapshots may account for this), but the structural finding is worse — BTC/ETH flow divergence under identical conditions eliminates macro as explanation. This cycle provides the first contemporaneous comparative ETF flow data confirming XRP-specific institutional demand weakness. The null hypothesis (post-launch cooldown) is weakening as BTC and ETH demonstrate that institutional crypto demand exists — just not for XRP. Escalated because the BTC/ETH comparison is new evidence that strengthens the rejection case.",
+        "new_impact_score": 5,
+        "displaced_by": null
+      },
+      {
+        "tension_id": "T-4",
+        "disposition": "MAINTAIN",
+        "disposition_reason": "RLUSD at $1.525B, declined from $1.583B. Layer 3 null hypothesis holds for the specific decline (normal variance), but the pace insufficiency is the structural concern. $12.06M/day needed with trajectory negative. Kill switch escalated to WARNING. Window status remains within but the resolution path requires a fundamental change in RLUSD adoption dynamics.",
+        "new_impact_score": 5,
+        "displaced_by": null
+      },
+      {
+        "tension_id": "T-2",
+        "disposition": "ESCALATE",
+        "disposition_reason": "Brent data is now 9 days stale — fifth consecutive cycle with stale data during active supply disruption. Window has been expired for multiple cycles. Per extension friction rules, this is the second+ extension and the impact score must increase. The staleness is increasingly material as USD/JPY accelerates — the compound stress three-leg assessment requires current Brent data to determine whether we have convergent price-triggered CRITICAL or merely event-triggered CRITICAL. This distinction directly affects cascade proximity assessment and operator action window. IMMEDIATE acquisition recommended.",
+        "new_impact_score": 5,
+        "displaced_by": null
+      },
+      {
+        "tension_id": "T-NEW-1",
+        "disposition": "MAINTAIN",
+        "disposition_reason": "Renamed to standard ID. Incumbent settlement infrastructure competition (Mastercard BVNK, PayPal PYUSD) remains an active concern. No new data this cycle. Resolution window is months — maintained within window.",
+        "new_impact_score": 4,
+        "displaced_by": null
+      },
+      {
+        "tension_id": "T-6",
+        "disposition": "MAINTAIN",
+        "disposition_reason": "The infrastructure-demand gap question (does Ripple's institutional plumbing route through XRPL?) remains the thesis's most important structural question. No new evidence this cycle. Hidden Road transactions not visible on XRPL. XRPL DEX volume shows no institutional-sized transactions. Resolution requires observable evidence of XRPL routing from Hidden Road or other institutional channels.",
+        "new_impact_score": 5,
+        "displaced_by": null
+      },
+      {
+        "tension_id": "T-8",
+        "disposition": "MAINTAIN",
+        "disposition_reason": "PermissionedDEX at 26 days, zero institutional adoption. May 20 checkpoint approaching. Too early to escalate — enterprise onboarding takes months. Maintained at current score.",
+        "new_impact_score": 3,
+        "displaced_by": null
+      }
+    ],
+    "unresolved_tensions": [
+      {
+        "tension_id": "T-1",
+        "description": "ODL volume completely unobservable. Ripple's $100B total volume disclosure without ODL breakdown is selective transparency. Kill switch at WARNING. ODL Transparency kill switch also at WARNING with Q3 2026 deadline and zero progress. The thesis's primary value-capture metric has been invisible for the entire monitoring period.",
+        "watch_for": "Ripple quarterly report, partner disclosures (SBI/Tranglo), independent on-chain payment channel analysis. Any Ripple communication about resuming data publication.",
+        "impact_score": 5,
+        "expected_resolution_window": "months",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-2",
+        "description": "Brent crude data stale for 5+ consecutive cycles during active Hormuz disruption. Cannot confirm whether $95 CRITICAL threshold has been breached. Compound stress cascade proximity assessment blocked. USD/JPY velocity makes the three-leg assessment time-critical — if Brent is already above $95, we have convergent price-triggered CRITICAL alongside event-triggered CRITICAL.",
+        "watch_for": "Fresh Brent crude price data from any reliable source confirming position relative to $95 CRITICAL threshold.",
+        "impact_score": 5,
+        "expected_resolution_window": "hours",
+        "window_status": "expired",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-3",
+        "description": "Thesis paradox at maximum tension. Compound stress at event-triggered CRITICAL with USD/JPY accelerating (150bps/cycle). Observable adoption metrics deteriorating simultaneously (ETF outflows, RLUSD contraction). If cascade fires before adoption inflects, paradox resolves to destruction-before-validation. Resolution window tightening as USD/JPY approaches 160.",
+        "watch_for": "Either: (a) USD/JPY ≥160, Brent confirmed ≥$95, or JGB 10Y ≥2.5% triggering cascade, or (b) observable adoption inflection (ETF inflow reversal, RLUSD growth, PermDEX institutional user) demonstrating thesis traction before stress resolves.",
+        "impact_score": 5,
+        "expected_resolution_window": "weeks",
+        "window_status": "approaching",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-5",
+        "description": "XRP ETF flow divergence from BTC/ETH confirmed under identical conditions. Cumulative net outflows -$29.08M. BTC +$748M weekly, ETH +$330M weekly, XRP -$7.4M weekly. Macro eliminated as explanation. XRP-specific institutional demand weakness isolated. Kill switch at WARNING. Only 4 of 7 funds reporting — fund attrition possible.",
+        "watch_for": "Any positive weekly inflow breaking the negative streak. Weekly outflows exceeding $15M sustained. Resolution of 4-vs-7 fund reporting discrepancy. Additional fund closures or delistings.",
+        "impact_score": 5,
+        "expected_resolution_window": "weeks",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-4",
+        "description": "RLUSD at $1.525B, in second contraction phase. Kill switch at WARNING. Pace to $5B requires $12.06M/day; trajectory negative. Recovery-contraction oscillation pattern with no organic growth momentum. 80% off-XRPL undermines XRPL settlement thesis.",
+        "watch_for": "RLUSD stabilizing above $1.5B and resuming growth. XRPL share trending above 25%. Evidence of institutional RLUSD integration. Further decline below $1.494B (prior contraction low) confirms sustained deterioration.",
+        "impact_score": 5,
+        "expected_resolution_window": "weeks",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-6",
+        "description": "Does Ripple's institutional infrastructure (Hidden Road/DTCC, Ripple Payments) route settlement through XRPL/XRP? If the infrastructure bypasses its own ledger, the on-chain thesis collapses regardless of regulatory wins. No Hidden Road transactions visible on XRPL. No institutional-sized DEX activity.",
+        "watch_for": "Hidden Road transactions visible on XRPL. Public disclosure of settlement technology routing. XRPL DEX volume increase from institutional-sized transactions. Any Ripple communication about XRPL settlement integration with Hidden Road.",
+        "impact_score": 5,
+        "expected_resolution_window": "months",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-7",
+        "description": "Incumbents building rather than buying settlement infrastructure. Mastercard $1.8B BVNK acquisition, PayPal 70-country PYUSD, Moody's on Canton Network. The addressable market for third-party settlement layers (Ripple's target) may be smaller than the thesis assumes if major financial institutions are internalizing stablecoin and on-chain capabilities.",
+        "watch_for": "BVNK corridor coverage overlapping Ripple markets. PYUSD cross-border volume data. Additional Tier 1 institution deployments on Canton vs. XRPL. Evidence of direct corridor-level competition.",
+        "impact_score": 4,
+        "expected_resolution_window": "months",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      },
+      {
+        "tension_id": "T-8",
+        "description": "PermissionedDEX at 26 days with zero observable institutional adoption. 90-day checkpoint May 20, 2026. Q3 2026 kill switch requires 5+ institutions. Enterprise onboarding typically takes months — too early to alarm, but the clock is running.",
+        "watch_for": "First observable institutional transaction on PermDEX. Any PermDEX onboarding announcement. May 20 checkpoint: if still zero, escalate to WARNING.",
+        "impact_score": 3,
+        "expected_resolution_window": "weeks",
+        "window_status": "within",
+        "classification": "ACTIVE",
+        "is_new": false
+      }
+    ],
+    "auditor_advisory": null,
+    "auditor_override": false,
+    "auditor_override_reasoning": null,
+    "state_lock_active": false,
+    "_layer2_corrections_referenced": [
+      {
+        "correction_id": "CL-017",
+        "signal_ids": [
+          "20260318-1347-SIG-003"
+        ],
+        "trigger_matched": "Claim that all components of a compound indicator are moving in the same direction without per-component data verification",
+        "influence_on_assessment": "Layer 1 claims compound stress matrix at CRITICAL with all three legs at or beyond elevated. I must verify each leg independently. JGB 10Y at 2.2452 is BELOW the 2.3% elevated threshold — it is NOT 'at or beyond elevated' as Layer 1 claims. Two of three legs are elevated (USD/JPY, Brent), not all three. The matrix status is ELEVATED with active Hormuz disruption trigger complicating the assessment."
+      },
+      {
+        "correction_id": "CL-047",
+        "signal_ids": [
+          "20260318-1347-SIG-002",
+          "20260318-1347-SIG-003"
+        ],
+        "trigger_matched": "Layer 1 headline claims CRITICAL threshold breached but data shows $94.35 < $95 critical threshold",
+        "influence_on_assessment": "Brent at $94.35 is elevated (above $85) but NOT critical (below $95). Layer 1 signal title says 'approaching critical' which is accurate, but the compound stress signal claims 'functionally at CRITICAL' which overstates what the data shows. The Hormuz disruption automatic trigger is a separate question — addressed below."
+      },
+      {
+        "correction_id": "CL-030",
+        "signal_ids": [
+          "20260318-1347-SIG-015"
+        ],
+        "trigger_matched": "Any inference that interprets personal, non-thesis-relevant social media content from a thesis-relevant individual as evidence of organizational strategy",
+        "influence_on_assessment": "JoelKatz posts are entirely personal commentary on taxation, judicial accountability, Section 230, First Amendment. Per graduated lesson CL-030, these are not business signals. Layer 1 correctly identified this. I will not interpret the absence of business content as a negative signal — that would be the 8th occurrence of this apophenia pattern."
+      },
+      {
+        "correction_id": "CL-031",
+        "signal_ids": [
+          "20260318-1347-SIG-012"
+        ],
+        "trigger_matched": "Any inference that uses a retail sentiment index reading to conclude institutional accumulation, distribution, capitulation, or changes in institutional positioning without independent flow data",
+        "influence_on_assessment": "Fear & Greed at 26 measures retail mood, not institutional behavior. However, this cycle we DO have ETF flow data showing XRP ETF weekly outflows of -$7.4M while BTC/ETH ETFs have positive weekly flows. The F&G reading alone does not diagnose institutional behavior, but the ETF flow divergence IS independent flow evidence. I will score F&G as contextual but weight the actual ETF flow data as direct evidence."
+      },
+      {
+        "correction_id": "CL-001",
+        "signal_ids": [
+          "20260318-1347-SIG-006"
+        ],
+        "trigger_matched": "Any inference that uses a directional status word (contraction, decline) without verifying that label against the most recent data",
+        "influence_on_assessment": "Layer 1 describes RLUSD as in 'second contraction phase' at $1.525B down from $1.583B. Verified against current data: $1.525B is indeed below the $1.583B recovery reading, confirming the directional label is accurate this cycle. The contraction framing is data-supported, not stale."
+      },
+      {
+        "correction_id": "CL-046",
+        "signal_ids": [
+          "20260318-1347-SIG-002"
+        ],
+        "trigger_matched": "Any signal where the primary data source returns stale data beyond the expected refresh window",
+        "influence_on_assessment": "Brent crude data is from March 9 — 9 days stale. This is a structural data gap for the precise current price. However, the directional trend (massive move from $71.90 to $94.35 with active Hormuz disruption) is well-established across multiple data points and independent verification (CMA CGM suspension, Iraq Rumaila shutdown). The staleness affects precision but not the directional assessment. I flag the staleness but do not treat the gap as directional evidence either way per CL-046."
+      },
+      {
+        "correction_id": "CL-005",
+        "signal_ids": [
+          "20260318-1347-SIG-004"
+        ],
+        "trigger_matched": "High-severity score assigned to a marketing tweet or public statement from an entity without corroborating evidence",
+        "influence_on_assessment": "PPI at 3.4% is reported by WatcherGuru (Tier 2). PPI is a government-published statistic — WatcherGuru is relaying it, not generating it. The data point originates from BLS (primary source). CL-005 does not apply to relay of government data; it applies to marketing claims. PPI 3.4% scored at full relevant weight."
+      },
+      {
+        "correction_id": "CL-011",
+        "signal_ids": [
+          "20260318-1347-SIG-011"
+        ],
+        "trigger_matched": "Any inference that scores a theoretical operational failure mode of infrastructure with no measurable adoption as a current signal",
+        "influence_on_assessment": "XRPL DEX volume at $8.16M/24h is measurable adoption, not zero adoption. CL-011 does not fully apply because we have actual volume data. However, the data shows thin liquidity and an ask/bid imbalance, which are observable operational characteristics. The inverted spread noted in Layer 1 may be a data quality issue per LZ-EH-004 — treat as potential measurement failure before real-world event."
+      },
+      {
+        "correction_id": "CL-033",
+        "signal_ids": [
+          "20260318-1347-SIG-003"
+        ],
+        "trigger_matched": "Any inference that concludes a thesis-relevant entity is accelerating deployment based on external macro stress without direct evidence",
+        "influence_on_assessment": "The compound stress matrix deterioration does not automatically mean thesis entities will accelerate or decelerate. I will assess the stress data on its own terms without inferring behavioral responses from the actors."
+      }
+    ],
+    "_layer3_corrections_referenced": [
+      {
+        "correction_id": "CL-017",
+        "signal_ids": [
+          "20260318-1347-SIG-003"
+        ],
+        "trigger_matched": "Claim that all components of a compound indicator are moving in the same direction without per-component data verification",
+        "influence_on_assessment": "Layer 2 correctly caught that JGB 10Y at 2.2452 is BELOW the 2.3% elevated threshold. My compound stress inference must reflect that only one price-based leg (USD/JPY) has confirmed elevated breach. The matrix is CRITICAL via Hormuz event trigger, not price convergence. This distinction fundamentally changes the pre-load assessment — the structure is event-triggered, not price-convergence loaded."
+      },
+      {
+        "correction_id": "CL-047",
+        "signal_ids": [
+          "20260318-1347-SIG-002"
+        ],
+        "trigger_matched": "Layer 1 headline claims CRITICAL threshold breached but data shows $94.35 < $95 critical threshold",
+        "influence_on_assessment": "Brent at elevated, not critical. The 9-day data staleness during active supply disruption means the actual price is unknown. I cannot build strategic inferences that assume Brent is above $95 — it may or may not be. I treat it as elevated-approaching-critical with genuine uncertainty about the precise level."
+      },
+      {
+        "correction_id": "CL-030",
+        "signal_ids": [
+          "20260318-1347-SIG-015"
+        ],
+        "trigger_matched": "Any inference that interprets personal, non-thesis-relevant social media content from a thesis-relevant individual as evidence of organizational strategy",
+        "influence_on_assessment": "JoelKatz posts are entirely personal/political. I will not generate any strategic inference from his social media content this cycle. No behavioral signal extracted."
+      },
+      {
+        "correction_id": "CL-031",
+        "signal_ids": [
+          "20260318-1347-SIG-012"
+        ],
+        "trigger_matched": "Any inference that uses a retail sentiment index reading to conclude institutional accumulation, distribution, capitulation, or changes in institutional positioning without independent flow data",
+        "influence_on_assessment": "F&G at 26 is contextual only. However, this cycle we DO have ETF flow data showing XRP-specific outflows while BTC/ETH attract capital. The F&G reading does not drive my institutional behavioral analysis — the ETF flow divergence does. This is the first cycle where CL-031's exception condition (independent flow data exists) is met."
+      },
+      {
+        "correction_id": "CL-033",
+        "signal_ids": [
+          "20260318-1347-SIG-003"
+        ],
+        "trigger_matched": "Any inference that concludes a thesis-relevant entity is accelerating deployment based on external macro stress without direct evidence",
+        "influence_on_assessment": "I will not infer that Japan macro stress accelerates or decelerates SBI/BOJ thesis activity. The macro stress data stands on its own merits. Any behavioral inference about Japanese institutions requires direct evidence of changed plans."
+      },
+      {
+        "correction_id": "CL-046",
+        "signal_ids": [
+          "20260318-1347-SIG-002"
+        ],
+        "trigger_matched": "Any signal where the primary data source returns stale data beyond the expected refresh window",
+        "influence_on_assessment": "Brent crude 9 days stale. The directional trend is verified but the precise level is unobservable. I will not treat the staleness as bearish or bullish — it narrows observability without indicating direction."
+      },
+      {
+        "correction_id": "CL-001",
+        "signal_ids": [
+          "20260318-1347-SIG-006"
+        ],
+        "trigger_matched": "Any inference that uses a directional status word (contraction, decline) without verifying that label against the most recent data",
+        "influence_on_assessment": "RLUSD at $1.525B is confirmed below $1.583B — the 'second contraction' label is data-verified this cycle. I will use this label with confidence."
+      },
+      {
+        "correction_id": "CL-011",
+        "signal_ids": [
+          "20260318-1347-SIG-011"
+        ],
+        "trigger_matched": "Any inference that scores a theoretical operational failure mode of infrastructure with no measurable adoption as a current signal",
+        "influence_on_assessment": "XRPL DEX has measurable activity ($8.16M/24h). CL-011 does not fully block assessment. Thin liquidity is an observable operational characteristic, not a theoretical failure mode. However, the inverted spread is likely a data artifact per LZ-EH-004."
+      },
+      {
+        "correction_id": "CL-038",
+        "signal_ids": [],
+        "trigger_matched": "Any inference about Ripple conducting private institutional demonstrations of PermissionedDEX capabilities",
+        "influence_on_assessment": "I will not generate hidden move inferences about private PermDEX engagement. Five prior corrections (CL-038, CL-039, CL-041, CL-042, CL-044) establish that plausible private activity is not evidence of actual private activity. This constrains my hidden moves section."
+      },
+      {
+        "correction_id": "CL-043",
+        "signal_ids": [
+          "20260318-1347-SIG-001"
+        ],
+        "trigger_matched": "BOJ intervention inference from JPY not breaching a round number",
+        "influence_on_assessment": "I will not infer BOJ intervention from USD/JPY holding below 160. Multiple explanations exist for the current level. No intervention data is observable."
+      },
+      {
+        "correction_id": "CL-050",
+        "signal_ids": [],
+        "trigger_matched": "Absence of SBI signals interpreted as evidence of defensive positioning",
+        "influence_on_assessment": "I will not interpret SBI silence as evidence of any strategic posture. Absence of signals is absence of observability, not evidence of direction."
+      },
+      {
+        "correction_id": "CL-048",
+        "signal_ids": [],
+        "trigger_matched": "ODL volume classified as active tension despite being unobservable with no resolution path",
+        "influence_on_assessment": "ODL volume remains a structural data gap, not an active tension. I will not treat it as an open question that will resolve — it is an observability limitation."
+      },
+      {
+        "correction_id": "CL-005",
+        "signal_ids": [
+          "20260318-1347-SIG-008"
+        ],
+        "trigger_matched": "High-severity score assigned to a marketing tweet or public statement from an entity without corroborating evidence",
+        "influence_on_assessment": "Moody's Canton Network deployment is more than a marketing tweet — it is a product launch reported by CoinDesk. CL-005 does not apply to confirmed product launches. However, the competitive threat assessment requires understanding functional overlap between Canton and XRPL, which I lack."
+      },
+      {
+        "correction_id": "CL-044",
+        "signal_ids": [
+          "20260318-1347-SIG-006"
+        ],
+        "trigger_matched": "Inference about Ripple's internal RLUSD strategy drawn from external supply distribution data",
+        "influence_on_assessment": "The 80/20 XRPL/off-XRPL distribution is noted as observable data. I will not infer Ripple's strategy or intentions from it."
       }
     ]
   }
