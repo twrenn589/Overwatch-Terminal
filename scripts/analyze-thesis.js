@@ -1446,7 +1446,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "layer3_inference": "what Layer 3 believed",
       "signal_ids": ["from source signals"],
       "rejection_reason": "why Layer 4 rejected it",
-      "root_cause": "ASSUMPTION_FAILURE | APOPHENIA | INSUFFICIENT_EVIDENCE | CONTRADICTED_BY_DATA",
+      "root_cause": "KNOWLEDGE_GAP | DATA_GAP | ASSUMPTION_FAILURE | APOPHENIA | BIAS | STALE_BELIEF | NARRATIVE_WEIGHT_BIAS | TEMPORAL_ILLUSION | OVERCORRECTION | SOURCE_CREDIBILITY_ERROR | CONTRADICTED_BY_DATA | INSUFFICIENT_EVIDENCE",
       "confidence_in_rejection": "high | medium",
       "corrections_ledger_action": "auto_commit | flag_for_review"
     }
