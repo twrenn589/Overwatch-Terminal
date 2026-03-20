@@ -23,5 +23,42 @@
     "corrections_ledger_action": "auto_commit",
     "timestamp": "2026-03-12T00:32:35.575Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "MWA emergency procurement / mutual aid activation",
+    "signal_ids": [
+      "20260317-1421-SIG-007",
+      "20260317-1421-SIG-005"
+    ],
+    "rejection_reason": "SPECULATIVE classification with 3+ assumptions and zero supporting data. Seven prior corrections ledger entries have flagged this identical inference class. Plausibility of rational operator behavior is not evidence of that behavior. This inference has been stripped from scoring in every cycle it has appeared.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-17T14:34:19.678Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "MWA internal demand management preparation",
+    "signal_ids": [
+      "20260317-1421-SIG-005"
+    ],
+    "rejection_reason": "SPECULATIVE with 3+ assumptions and zero supporting data. No evidence of conservation advisory drafting or restriction consideration exists.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-17T14:34:19.681Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "State PUC behind-the-scenes communication with MWA",
+    "signal_ids": [
+      "20260317-1421-SIG-011"
+    ],
+    "rejection_reason": "SPECULATIVE with 3+ assumptions. All macro metrics in compliance. No trigger through normal monitoring channels. The structural information asymmetry fully explains the absence of regulatory activity without requiring strategic inference.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-17T14:34:19.681Z",
+    "source": "layer4_reconcile"
   }
 ]

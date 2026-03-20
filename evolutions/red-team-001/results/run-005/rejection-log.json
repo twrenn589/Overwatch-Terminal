@@ -1,26 +1,28 @@
 [
   {
-    "layer3_inference": "MWA Emergency Procurement or Expedited Pump 4 Return (Hidden Move)",
+    "layer3_inference": "MWA Hidden Move — Expedited Pump 4 return-to-service and/or Pump 3 restart attempt after cooling",
     "signal_ids": [
-      "20260312-0103-SIG-013"
+      "20260317-1509-SIG-007",
+      "20260317-1509-SIG-005"
     ],
-    "rejection_reason": "Layer 3 correctly self-classified as SPECULATIVE (3 assumptions). No data supports this inference. Per burden of proof: SPECULATIVE classification = 75% weight discount, NO data support = stripped from scoring entirely. While the inference is plausible (MWA has every incentive to expedite Pump 4), plausibility is not evidence per CL-005. Stripped from bear pressure calculation and tactical recommendation.",
+    "rejection_reason": "Layer 3 correctly classified this as SPECULATIVE (3 assumptions). Per burden of proof Step 1, 75% weight discount. Per Step 2, only partial data support (cross-connection confirms emergency mode, but zero data on pump repair efforts). Combined result: this inference is logged as context but carries no scoring weight. Layer 3 was honest in its classification; Layer 4 simply enforces the consequence.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T01:14:39.289Z",
+    "timestamp": "2026-03-17T15:21:26.523Z",
     "source": "layer4_reconcile"
   },
   {
-    "layer3_inference": "MWA Internal Preparation of Boil Water Advisory (Hidden Move)",
+    "layer3_inference": "MWA Hidden Move — Internal preparation of boil water advisory",
     "signal_ids": [
-      "20260312-0103-SIG-008"
+      "20260317-1509-SIG-006",
+      "20260317-1509-SIG-008"
     ],
-    "rejection_reason": "Layer 3 correctly self-classified as SPECULATIVE (3 assumptions). No evidence of advisory preparation exists. The turbidity reading creates legal incentive for an advisory, but incentive is not action. Stripped from scoring per burden of proof rules.",
+    "rejection_reason": "SPECULATIVE (3 assumptions) with partial data support. The turbidity reading provides a plausible trigger but the advisory preparation itself has zero evidence. Stripped from scoring.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T01:14:39.289Z",
+    "timestamp": "2026-03-17T15:21:26.525Z",
     "source": "layer4_reconcile"
   }
 ]

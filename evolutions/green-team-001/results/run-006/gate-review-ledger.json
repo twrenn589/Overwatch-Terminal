@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-03-12T04:17:24.835Z",
+    "timestamp": "2026-03-17T17:21:29.330Z",
     "layer": 1,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -9,51 +9,63 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "Vulnerability window during reserve replenishment",
+          "finding": "Gravity Reserve Depleted to 58%",
           "rule_violated": "LZ-EPH-003",
-          "violation": "The finding builds on at least three unproven assumptions: (1) replenishment will occur overnight as stated, (2) pumps will be diverted from supply to refill during this period, (3) a second demand event could occur during this specific window, (4) the pumps cannot handle both replenishment and unexpected demand simultaneously. This is a compound inference chain without verification of the underlying assumptions about system behavior during replenishment.",
+          "violation": "The finding assumes (1) reserves started at or near 100%, (2) the 42 percentage point drop occurred during this single incident, and (3) the drop represents material degradation requiring overnight replenishment. The evidence shows current state at 58% and operator note about replenishment, but does not provide the starting level. The 'dropped 42 percentage points from an assumed full or near-full state' is explicitly acknowledged as assumed but then treated as fact in the severity assessment.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Vulnerability window during reserve replenishment",
+          "finding": "Vulnerability Window During Reserve Replenishment",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "This finding chains multiple unproven assumptions: (1) replenishment will take 8-12 hours (no evidence provided for this timeframe), (2) reserves were at ~100% before the incident, (3) a second incident is plausible during the window, (4) the system would respond identically starting from 58%. While each assumption may be reasonable, the finding builds high-confidence severity assessment on at least three unproven assumptions without acknowledging the compounded uncertainty.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SCADA Automated Failover Thesis Validated",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding observes correlation (demand spike occurred, pumps now show NORMAL, reserves deployed, pressure maintained, system recovered) and infers causation (automated redundancy and passive reserves sustained viability). The evidence shows co-occurrence of recovery with expected system states, but does not prove the causal mechanism. The system could have recovered through manual intervention, different sequencing, or the incident may have self-resolved before failover was needed.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SCADA Automated Failover Thesis Validated",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The causal narrative assumes (1) there was a demand spike that triggered the cascade, (2) pump protection logic tripped pumps during peak demand, (3) gravity reserves were deployed automatically rather than manually, (4) the sequence followed the expected failure cascade rather than some other path. The finding acknowledges 'appears to have progressed' but then assigns medium confidence to a complex causal chain built on multiple unverified assumptions.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Unknown Incident Severity and Duration",
           "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence marked as 'medium' despite evidence consisting only of a general operator statement about overnight replenishment. The specific vulnerability scenario (compounded risk during replenishment) is not evidenced by any operational data, capacity calculations, or historical precedent. Medium confidence is too high for a speculative scenario.",
-          "severity": "MODERATE"
+          "violation": "The finding correctly identifies missing data (peak stress conditions, proximity to thresholds, cavitation warnings, reserve depletion rate) and correctly flags this as unknown. However, it assigns 'high' severity to this uncertainty itself while maintaining only 'medium' confidence. The severity rating appears to assess the potential consequences of not knowing, rather than the evidentiary weight of the gap itself, creating a mismatch between confidence level and the strength of evidence about the gap's materiality.",
+          "severity": "MINOR"
         },
         {
-          "finding": "SCADA automated logic validated through incident cycle",
-          "rule_violated": "LZ-EH-005",
-          "violation": "The finding presents a direct contradiction: 'successful navigation' versus 'no post-incident diagnostic data to confirm zero latent damage.' This is a genuine data conflict — observable recovery metrics versus absence of damage verification. The finding labels this CONTRADICTORY but then assigns it direction as 'ACCELERATION' in the signal classification (visible in context). The contradiction should remain unresolved, not partially resolved in favor of success narrative.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Regulatory compliance maintained — no boil advisory triggered",
+          "finding": "Replenishment Rate Assumption Untested",
           "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence marked as 'medium' but the evidence statement acknowledges 'peak-incident pressure data is not available to fully confirm.' The finding claims compliance was maintained, but admits the critical data point (whether pressure ever breached 20 PSI during the incident) is unavailable. This should be lower confidence or flagged as unknowable.",
-          "severity": "MODERATE"
+          "violation": "The finding identifies that the operator's overnight replenishment assumption is untested and lists several factors that could constrain it (source availability, pump capacity allocation, infrastructure stress, baseline demand). This correctly acknowledges uncertainty. However, it then assigns 'moderate' severity with 'medium' confidence to what is essentially a lack of information about whether a problem exists. The confidence level appears disproportionate to the speculative nature of the concern.",
+          "severity": "MINOR"
         },
         {
-          "finding": "Regulatory compliance maintained — no boil advisory triggered",
+          "finding": "External Demand Source Behavior Unknown",
           "rule_violated": "LZ-RC-003",
-          "violation": "The finding treats absence of evidence (no mention of advisory in operator log) as evidence of absence (no advisory was required). The lack of an advisory mention does not prove compliance was maintained, especially when peak-incident data is unavailable.",
-          "severity": "MODERATE"
+          "violation": "The finding correctly notes that absence of continued high flow is not evidence that the external emergency is resolved, and appropriately flags this as unknown. However, the phrase 'has presumably ceased operations, per flow normalization' treats the absence of evidence (no continued high flow) as weak evidence of absence (operations ceased), despite the finding later correctly identifying this inference as uncertain. The internal tension between the presumption and the acknowledged uncertainty creates ambiguity about whether LZ-RC-003 was followed.",
+          "severity": "MINOR"
         },
         {
-          "finding": "Seasonal or macro demand patterns unaccounted for",
+          "finding": "Operator Complacency Risk Post-Incident",
           "rule_violated": "LZ-EPH-003",
-          "violation": "The finding builds a scenario on multiple unproven assumptions: (1) this might be summer, (2) if summer, baseline consumption is elevated, (3) nighttime demand is also elevated in this scenario, (4) overnight replenishment assumptions may not hold. This is speculative chaining without any actual environmental or seasonal data.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "System demonstrated thesis-consistent resilience architecture",
-          "rule_violated": "LZ-CC-001",
-          "violation": "The finding constructs a coherent narrative ('incident-to-recovery arc visible in the data aligns with the core thesis') but the actual incident data is absent. The analyst is seeing current post-incident readings and inferring backward to construct a story about what happened during the incident. The narrative is logically consistent but lacks verifiable real-world anchoring to the actual incident timeline, severity, or system behavior during the event.",
+          "violation": "This finding chains assumptions that (1) routine tone indicates complacency, (2) successful failover reinforces passive monitoring, (3) casual framing indicates insufficient review rigor, (4) there were near-misses on kill switches (explicitly contradicted by available evidence showing 35 PSI buffer), and (5) the brevity of logging reveals inadequate post-event process. The narrative is internally coherent but built on at least three unproven behavioral and psychological assumptions with no direct evidence of actual complacency or inadequate review.",
           "severity": "SERIOUS"
         },
         {
-          "finding": "System demonstrated thesis-consistent resilience architecture",
+          "finding": "Operator Complacency Risk Post-Incident",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The finding constructs a psychologically plausible narrative about operator behavior, automation bias, and organizational learning from minimal evidence (log tone and brevity). The narrative is logically coherent but lacks verifiable anchoring to actual operator behavior, decision-making processes, or organizational procedures. The finding acknowledges low confidence but still presents the narrative as a signal rather than flagging insufficient evidence for assessment.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "Operator Complacency Risk Post-Incident",
           "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence marked as 'medium' but the severity is marked 'high' and the description claims this is 'a positive empirical data point for the thesis's structural claims.' The evidence consists only of post-incident steady-state readings with no actual incident telemetry. High-severity, thesis-validating claims require stronger evidence than medium confidence supports. Either confidence should be lower or the claim should be more cautious.",
+          "violation": "The finding assigns 'moderate' severity to operator complacency risk based on log tone and brevity alone, while simultaneously acknowledging 'low' confidence. The gap between moderate severity and low confidence suggests the severity assessment is based on the potential consequences of complacency if it exists, rather than the strength of evidence that complacency actually exists. This inverts the proportionality requirement.",
           "severity": "MODERATE"
         }
       ],
@@ -61,15 +73,15 @@
       "model_used": "claude-sonnet-4-5-20250929",
       "gate_failed": false,
       "findings_reviewed": 15,
-      "clean_findings": 7,
-      "reviewer_notes": "The output demonstrates strong epistemological awareness in many findings (explicitly flagging blind spots, acknowledging missing data, marking ambiguity appropriately). However, several findings fall into the Plausibility Trap (LZ-CC-001) by constructing coherent narratives from incomplete data. The most serious violation is the final finding, which validates the thesis based on a narrative reconstruction rather than verified incident data. The analyst correctly identifies many data gaps but occasionally draws conclusions despite those gaps rather than stopping at 'unknown.'"
+      "clean_findings": 5,
+      "reviewer_notes": "The 'Operator Complacency Risk Post-Incident' finding contains multiple serious violations and should be flagged for methodology review. It demonstrates how a plausible narrative can bypass evidentiary requirements when confidence is acknowledged as low but severity is still elevated. Several findings show appropriate uncertainty acknowledgment but then undermine it by building severity assessments on assumption chains. The output shows strong domain knowledge but inconsistent application of assumption-counting discipline, particularly when constructing behavioral or causal narratives."
     },
-    "violations_count": 8,
+    "violations_count": 10,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   },
   {
-    "timestamp": "2026-03-12T04:21:07.024Z",
+    "timestamp": "2026-03-17T17:24:43.556Z",
     "layer": 2,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -78,34 +90,34 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "SIG-007 severity assignment of 4 based on 'unresolved contradiction'",
+          "finding": "SIG-003 Gravity Reserve Depleted to 58% - severity scored as 7 with HIGH confidence despite explicitly stating 'the magnitude of depletion from pre-incident is uncertain (baseline unknown)'",
           "rule_violated": "LZ-EPH-002",
-          "violation": "The signal is assigned severity 4 as a numeric score for a CONTRADICTORY finding where the contradiction itself is declared the finding per LZ-EH-005. However, LZ-EH-005 requires that contradictions be flagged rather than resolved or scored. Assigning a numeric severity to 'unresolved contradiction' implies a quantified risk assessment when the correct output should be 'contradiction exists, cannot be scored until resolved with independent evidence.' The severity score implies confidence in a specific risk level when the epistemological stance should be 'insufficient basis to assign risk level.'",
+          "violation": "High confidence assigned despite acknowledged material uncertainty about the magnitude of the depletion (baseline unknown). The finding states 'Current reading is verified; the magnitude of depletion from pre-incident is uncertain' but then assigns HIGH confidence to a severity score (7) that implicitly depends on knowing the magnitude of depletion. If reserves started at 70%, the depletion would warrant lower severity than if they started at 100%. The confidence should be MEDIUM, not HIGH.",
           "severity": "MODERATE"
         },
         {
-          "finding": "SIG-004 reasoning that vulnerability window exists based on 'engineering logic' and 'physics of the described system'",
-          "rule_violated": "LZ-CC-001",
-          "violation": "The assessment states 'This is a real engineering constraint, not speculation — it follows from physics of the described system' and 'The inference that a second event during this window compounds risk is DEDUCTIVE from known system architecture, not speculative.' This reasoning treats logical deduction from system architecture description as equivalent to verified real-world measurement. The system architecture itself is described in the thesis, not independently verified. The reasoning constructs a coherent engineering narrative (pumps cannot simultaneously fill tanks and serve demand at maximum rate) but this is derived from the thesis description, not from telemetry showing actual pump capacity allocation during replenishment. This is precisely the plausibility trap LZ-CC-001 warns against: internally consistent logic that lacks independent real-world anchoring beyond the thesis's own architecture claims.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Bear pressure reduction from 5 to 4 with justification 'current-state evidence supports improvement'",
-          "rule_violated": "LZ-MR-002",
-          "violation": "The reasoning explicitly states 'The current snapshot is materially better than the previous assessment period' and reduces bear pressure based on current readings being improved. However, the output itself acknowledges peak-incident data is completely unknown (SIG-008). LZ-MR-002 states 'Recency affects relevance but not accuracy. A recent data point is more relevant than an older one, but neither is more accurate because of its age.' The bear pressure reduction treats recent post-incident readings as more significant than unknown incident-period readings, conflating temporal recency with evidentiary weight. The statement 'all immediate indicators have improved' assumes the previous assessment captured the incident peak, which is unverified. The reduction is based on comparing current state to an assumed previous state, not to verified previous measurements.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "SIG-015 assessment that system 'demonstrated thesis-consistent resilience architecture' with severity 4 ACCELERATION",
-          "rule_violated": "LZ-RC-002",
-          "violation": "The reasoning acknowledges 'Per LZ-RC-002, this is a single data point and does not establish a trend of validated resilience' but then assigns severity 4 with direction ACCELERATION and states 'This is a genuine positive empirical data point' for thesis validation. However, the signal is describing a single incident-recovery cycle. The acknowledgment of LZ-RC-002 is correct but the subsequent scoring as ACCELERATION (which implies movement in a direction) contradicts this acknowledgment. A single event cannot be 'acceleration' — it is an event. The severity score and directional classification imply a trend that the rule citation explicitly denies exists.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "SIG-003 confidence downgrade from HIGH to MEDIUM based on unknown replenishment rate and timeline",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The signal reports gravity reserves at 58% from two independent sources (telemetry + operator log) with operator log stating 'overnight replenishment required.' The finding downgrades confidence to MEDIUM because 'replenishment rate and timeline are unknown.' However, the signal itself is not about replenishment rate — it is about current reserve level, which is verified by two independent Tier 1 sources. The confidence should apply to what is being measured (current level = HIGH confidence, two sources), not to a derivative inference (replenishment timeline = different signal). The confidence rating conflates the reliability of the current measurement with the predictability of future state. Per LZ-EPH-002, confidence must be proportional to evidence for the specific claim being made. The claim 'reserves are at 58%' has HIGH confidence. The claim 'replenishment will complete overnight' is a separate inference addressed in SIG-004.",
+          "finding": "SIG-004 Vulnerability Window During Reserve Replenishment - assigned severity 7 with MEDIUM confidence based on an '8-12 hour' estimate that is explicitly noted as inference not measurement",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The 8-12 hour window is acknowledged as 'an estimate, not a measurement' yet the severity score appears to depend on this specific duration estimate. The finding correctly downgrades confidence to MEDIUM for this reason, but the severity score of 7 (equal to SIG-003) treats the duration estimate as if it has comparable evidentiary weight to the measured 58% reserve level. Forward-looking duration predictions should carry less weight in severity scoring than current measurements.",
           "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-008 SCADA Automated Failover Thesis Validated - scored as severity 6 ACCELERATION signal despite explicit acknowledgment that 'we cannot distinguish passed easily from barely survived without mid-incident telemetry'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence proportionality issue. The finding assigns a positive severity score of 6 (meaningful validation) while simultaneously acknowledging that the quality/margin of the validation is unknown. The reasoning states 'outcome validation is meaningful even without margin data' but then scores it at severity 6, which implies a quantified degree of validation strength. If the margin is unknown, the severity should reflect this uncertainty more significantly - either scored lower or confidence downgraded further. The gap between 'barely survived' and 'passed easily' is materially different for thesis validation strength.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SIG-009 Unknown Incident Severity and Duration - assigned HIGH confidence to a data gap assessment",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Assigning HIGH confidence to the claim that a data gap 'directly impacts kill switch proximity assessment' requires knowing what the missing data would show. The finding is highly confident that the gap is material, but the actual impact depends on what the missing peak-event telemetry would reveal. If peak stress was nowhere near kill switches, the gap's impact on kill switch proximity assessment would be minimal. The confidence that this gap is material (affects multiple signals) is reasonable, but HIGH confidence that it 'directly impacts kill switch proximity' overstates what can be known about data that doesn't exist.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Layer2_summary states 'The thesis architecture received a live-fire validation' while SIG-008 explicitly notes this validation's quality cannot be determined without peak-event data",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The summary presents 'live-fire validation' as an established finding when the detailed analysis correctly identifies this as uncertain. The summary statement 'automated failover, equipment protection, and gravity reserve deployment all functioned as designed' is confident language that contradicts the MEDIUM confidence and margin-unknown caveats in SIG-008. This is inconsistent confidence across the same finding between detailed analysis and summary.",
+          "severity": "MODERATE"
         }
       ],
       "compliance": "MODERATE_ISSUES",
@@ -113,14 +125,14 @@
       "gate_failed": false,
       "findings_reviewed": 47,
       "clean_findings": 42,
-      "reviewer_notes": "The output demonstrates strong epistemological discipline in most areas — extensive application of correction ledger, honest acknowledgment of data gaps, appropriate use of LZ-EPH-001 ('I don't know'), and careful sourcing. The violations are structural rather than careless: (1) attempting to numerically score a contradiction that should remain unscored per LZ-EH-005, (2) treating deductive logic from thesis architecture as equivalent to empirical verification (plausibility trap), (3) recency bias in bear pressure assessment, and (4) scoring a single event as directional movement. None of these appear to be thesis-motivated reasoning — they appear to be good-faith attempts to generate quantified outputs from data that may not support quantification. The analyst is caught between 'provide a score' and 'insufficient evidence to score' and chose to score with caveats rather than abstain. Sunday audit should review whether the scoring framework itself creates pressure to violate LZ-EPH-001 and LZ-EH-005 when the honest answer is 'cannot score.'"
+      "reviewer_notes": "The output demonstrates strong application of the corrections ledger (CL-014, CL-017, CL-019, CL-022 all correctly applied) and generally sound epistemological discipline. The violations are concentrated in confidence calibration for findings where material uncertainty exists but is not fully reflected in the confidence/severity scoring. The analyst correctly identifies uncertainties in the reasoning sections but then partially undermines this by assigning confidence levels or severity scores that depend on the uncertain elements. The most significant issue is the treatment of 'thesis validation' - the summary presents it more confidently than the detailed analysis supports. Otherwise, this is a relatively clean output with good 'I don't know' discipline on operator behavior, demand source trajectory, and structural inspection protocols."
     },
     "violations_count": 5,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   },
   {
-    "timestamp": "2026-03-12T04:25:08.020Z",
+    "timestamp": "2026-03-17T17:28:24.094Z",
     "layer": 3,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -129,51 +141,45 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "Strategic Inference #1: Gravity reserves depleted to 58% — overnight replenishment required. Assumption count listed as 0.",
+          "finding": "Strategic Inference: SCADA Automated Failover Thesis Validated - assumption_count listed as 0",
           "rule_violated": "LZ-EPH-003",
-          "violation": "The reasoning assumes reserves were 'consumed during the demand event' and will be 'replenished during low-demand overnight hours (standard operational practice)' without evidence that overnight replenishment is actually occurring or that this timeline is accurate. The operator log states reserves 'will require' overnight replenishment (future prediction) but does not confirm replenishment has begun or will succeed. The finding treats a forward-looking operator statement as equivalent to a measured fact. At minimum, assumptions include: (1) replenishment process will occur as stated, (2) overnight conditions will be sufficient for replenishment, (3) no intervening demand will prevent replenishment. These are unproven assumptions presented as null hypothesis with zero assumption count.",
+          "violation": "The finding states 'Inference requires 0 assumptions beyond the thesis description' but the inference that 'SCADA likely tripped or load-reduced pumps during peak demand' is not directly observed in the telemetry. The current telemetry shows post-incident state only. The inference that the system 'executed its designed fail-safe architecture' during the event requires assuming the causal chain: (1) pumps were stressed during event, (2) SCADA responded by tripping/reducing them, (3) reserves deployed as a result. None of these intermediate states are directly measured. The assumption count should be at least 2-3, not 0.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Strategic Inference #1: Expected timeline 'hours' and materialization signal 'Next telemetry reading showing reserve level above 58% would confirm replenishment is occurring.'",
-          "rule_violated": "LZ-RC-005",
-          "violation": "The entire strategic inference is anchored to a forward-looking prediction ('overnight replenishment') from the operator log, not a historical measurement. The timeline and materialization signal are predictions about future system behavior. The finding assigns 'high' confidence to reasoning that fundamentally rests on whether a predicted future event (replenishment) will occur. Per LZ-RC-005, predictions and measurements carry fundamentally different evidentiary weight, but this finding treats the operator's forward-looking statement as having the same weight as the measured 58% reading.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Player Analysis - SCADA: 'The most parsimonious interpretation is that SCADA is operating as designed — maintaining system parameters within safe ranges.' Confidence: medium.",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The finding explicitly states 'Whether SCADA autonomously achieved this or operators assisted is unknown and unresolvable with current data' (acknowledging the SIG-007 contradiction), yet still presents 'SCADA is operating as designed' as the most parsimonious interpretation with medium confidence. The evidence cited only shows end-state (current readings within safe ranges), not process. The confidence should be lower given the acknowledged fundamental uncertainty about attribution. Medium confidence implies reasonable evidentiary support for the interpretation, but the finding's own analysis shows the interpretation cannot be distinguished from alternatives.",
+          "finding": "Strategic Inference: Gravity Reserve Depleted to 58% - assumption_count listed as 1, but states 'requires assuming pre-incident reserves were materially higher than 58%, which is likely but not verified'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The finding acknowledges one assumption (pre-incident reserves were higher) but the core vulnerability inference requires additional unverified assumptions: (1) that the replenishment process will take the time the operator estimates, (2) that no compensating controls exist beyond documented systems, (3) that the depletion rate in a future event would be similar to the past event. The finding later addresses assumption (2) as an 'alternative explanation' but does not count it in the assumption chain for the primary explanation. If the primary explanation relies on 'no additional compensating controls' being true, that is an unproven assumption that should be counted.",
           "severity": "MINOR"
         },
         {
-          "finding": "Feedback Loop #1: 'The trigger to 'active_accelerating' would be reserves dropping below ~30% while pumps are under load'",
-          "rule_violated": "LZ-RC-005",
-          "violation": "The entire trigger specification is a forward-looking prediction about future system states and thresholds that have not been observed or validated. The 30% threshold, the 80% threshold for second-event triggering, and the specific cascade sequence (pump trip → reserve acceleration → KS-4 approach) are all predictive scenarios, not measurements or verified system behaviors. While it is appropriate to model potential futures in a feedback loop analysis, the language presents these thresholds with specificity that implies they are derived from system specifications or observed behavior, when they appear to be analytical constructs.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "Compound Stress Inference: 'The specific catalyst that could push orderly → disorderly is: a second major demand event (comparable to or exceeding the one that just occurred) BEFORE reserves recover above ~80%.'",
-          "rule_violated": "LZ-EPH-003",
-          "violation": "This catalyst specification rests on multiple unproven assumptions: (1) the first demand event's magnitude is known (it is not per SIG-008), so 'comparable to or exceeding' cannot be quantified; (2) the 80% reserve threshold for safety is an analytical construct, not a measured or specified system parameter; (3) the cascade mechanism (pump trip → reserve acceleration → KS-4 approach) is a predicted behavior chain that has not been observed. While the physical logic is sound, this represents 3+ unproven assumptions compounded into a specific catalyst definition. The finding does not count these assumptions or flag this as speculative.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Thesis Paradox: 'The more the thesis is validated (reserves deploy successfully during incidents), the more frequently the system enters degraded-reserve states. High-frequency incident response PROVES the architecture works while simultaneously degrading its capacity margin.'",
+          "finding": "Feedback Loop: Reserve Depletion → Vulnerability Window - current_state listed as 'active_orderly'",
           "rule_violated": "LZ-RC-001",
-          "violation": "This presents a correlation (reserve deployment coincides with reserve depletion) as if it reveals a causal paradox or tension in the system design. The 'paradox' is actually a tautology: using reserves depletes reserves. The framing suggests this creates a meaningful strategic tension ('This tension cannot be resolved — it can only be managed'), but this is simply the physical reality of any consumable backup resource. There is no paradox or design tension here — reserves are meant to be used and replenished. The finding elevates a straightforward physical relationship into a strategic insight without justification.",
+          "violation": "The feedback loop description states it 'is currently dormant (no second event is occurring) but the PRECONDITIONS for it to activate are present' but then lists current_state as 'active_orderly' rather than 'dormant'. This is an internal contradiction. If the loop is dormant, it cannot simultaneously be active_orderly. The preconditions being present does not make a dormant loop active. This appears to conflate 'vulnerable to activation' with 'currently operating'.",
           "severity": "MINOR"
         },
         {
-          "finding": "Scenario Probabilities - Thesis Confirmed: 45% probability assigned with confidence strengthening logic 'with each successive incident that produces process data showing SCADA automated logic performing as claimed.'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "The 45% probability is derived from a single post-incident data point (current telemetry showing safe parameters). The finding acknowledges 'supportive end-state, unverified process' and that 'a single incident with full forensics could move this significantly,' which indicates this is one observation, not a trend. Assigning a specific 45% probability to thesis confirmation based on one incident's end-state (without process data) violates the principle that a single data point does not establish a pattern. The probability figure implies a level of calibration that the evidence base (n=1 incident, process unknown) cannot support.",
+          "finding": "Compound Stress Inference: thesis_paradox statement",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The 'thesis paradox' section presents a logically coherent narrative about systems being 'simultaneously most proven AND most vulnerable immediately after successfully handling a crisis' but this is abstract reasoning without verifiable anchoring to the specific measurements. The paradox is a conceptual framework, not a finding derived from the data. While the underlying observation (reserves depleted after use) is real, the 'paradox' framing adds interpretive narrative that is not falsifiable or verifiable from the telemetry. This risks elevating a coherent story to the status of evidence.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Player Analysis: Grid Operators - confidence listed as 'medium' for inferred_strategy",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The evidence cited is a single operator log entry (one data point) from which the finding infers 'competent post-incident management' and 'established protocols'. The finding explicitly acknowledges significant uncertainty ('gap is AMBIGUOUS', 'cannot resolve this ambiguity', multiple possible interpretations per CL-022) yet assigns medium confidence. When the evidence is explicitly ambiguous and limited to a single statement, and the finding acknowledges it cannot distinguish between multiple interpretations, confidence should be low, not medium. Medium confidence implies the finding is more likely correct than not, but the finding's own reasoning does not support that threshold.",
           "severity": "MODERATE"
         },
         {
-          "finding": "X402 Paper Trades: All four questions assigned 'confidence_data_exists: high' or 'medium' for data sources that are assumed to exist but have not been verified.",
+          "finding": "Scenario Probability: thesis_confirmed at 65%",
           "rule_violated": "LZ-EPH-002",
-          "violation": "The confidence ratings for data existence are not proportional to evidence. The finding states 'Municipal water systems are regulated entities with documentation requirements' and 'Every SCADA system records historical trends; this data almost certainly exists' — but these are assumptions about typical system architectures, not verification that THIS system has these records available. High confidence in data existence requires evidence that the data exists, not reasoning that it should exist. The confidence levels should be lower (low to medium at most) given that data existence is inferred, not confirmed.",
+          "violation": "The finding assigns 65% probability to thesis confirmation while simultaneously stating that 'the margin of that validation is unknown due to absent peak-event telemetry' and acknowledging that if peak telemetry revealed narrow margins, the thesis may have 'nearly failed'. The confidence is not proportional to the evidence gap. A 65% probability implies moderate-to-strong confidence, but the analysis explicitly identifies that the single most important data point (peak-event telemetry) is missing and could shift the assessment by 15-20 percentage points in either direction. When the finding states the key evidence for determining comfortable-pass vs near-miss is unavailable, assigning 65% rather than a wider uncertainty range (e.g., 50-70%) or lower confidence is disproportionate.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Behavioral Pattern: 'Operator focus on replenishment timeline mirrors the system's actual primary vulnerability' - significance listed as 'medium'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "This finding presents correlation (operator mentions replenishment, system's vulnerability is reserve depletion) as evidence of a causal relationship ('suggesting operator situational awareness is aligned with actual system state'). The operator mentioning replenishment does not establish that the operator's awareness is aligned with the actual vulnerability structure - the operator could be noting replenishment for routine reasons unrelated to strategic vulnerability assessment. The finding treats the co-occurrence as meaningful alignment without independent evidence that the operator's statement reflects vulnerability awareness rather than standard protocol acknowledgment.",
           "severity": "MINOR"
         }
       ],
@@ -181,15 +187,15 @@
       "model_used": "claude-sonnet-4-5-20250929",
       "gate_failed": false,
       "findings_reviewed": 47,
-      "clean_findings": 39,
-      "reviewer_notes": "The output demonstrates strong adherence to the corrections ledger and appropriately rejects speculative inference classes. The violations are concentrated in three areas: (1) undercounting assumptions when null hypothesis reasoning incorporates forward-looking operator statements, (2) assigning specific probability figures to scenario outcomes based on single-incident data, and (3) treating predicted future behavior (replenishment, cascade triggers) as having similar evidentiary weight to current measurements. The most significant violations are in Strategic Inference #1 (assumption counting) and Scenario Probabilities (single data point treated as calibration basis). The overall analytical framework is sound, but several findings would benefit from more conservative confidence levels and explicit assumption counting when reasoning incorporates predictions or system behavior models that have not been directly observed."
+      "clean_findings": 40,
+      "reviewer_notes": "The output shows strong application of the corrections ledger (11+ rejections properly applied to operator inference, 7+ to SCADA, 4+ to demand source) and appropriate use of INSUFFICIENT_EVIDENCE declarations in hidden moves analysis. The violations are concentrated in assumption counting (LZ-EPH-003) and confidence calibration (LZ-EPH-002). The most significant issue is the SCADA thesis validation claiming 0 assumptions when inferring causal behavior during an unobserved event window - this is a moderate violation that affects a high-confidence, high-impact finding. The scenario probability assignments show appropriate uncertainty acknowledgment in the reasoning but then assign point estimates that don't fully reflect that uncertainty. Overall, the reasoning structure is sound but confidence calibration needs tightening in 3-4 key findings."
     },
-    "violations_count": 8,
+    "violations_count": 7,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   },
   {
-    "timestamp": "2026-03-12T04:28:32.479Z",
+    "timestamp": "2026-03-17T17:31:47.190Z",
     "layer": 4,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -198,50 +204,44 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "SCADA Validation — Null Hypothesis Holds (system returned to equilibrium because stressor ceased, not uniquely attributable to automated logic) - final_composite adjusted from 4 to 5",
+          "finding": "Reserve Depletion Creates Refractory Period / Vulnerability Window - classification as VALID with '1 assumption'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The reasoning states 'classification VALID with 1 assumption (pre-incident reserves were materially higher than 58%)' but this undercounts assumptions. The inference that reserves at 58% create a vulnerability window requires: (1) pre-incident reserves were materially higher, (2) a repeat event is possible during the recovery period, (3) the repeat event would have similar magnitude/characteristics, (4) the system response would follow the same pattern consuming similar reserves. While the mathematical logic about starting from 58% is sound, the strategic implication (vulnerability window exists) rests on multiple unproven assumptions about future events and system behavior under those events.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Thesis Status = CONTESTED with confidence = MEDIUM",
           "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence marked as 'medium' while simultaneously stating the process is 'unknown' and 'unverifiable from current data'. The severity adjustment upward (+1) is justified, but 'medium' confidence on an explicitly unresolvable attribution question overstates evidentiary support. The honest confidence level for 'we cannot distinguish between three equally plausible explanations' is LOW, not MEDIUM.",
+          "violation": "The output claims MEDIUM confidence in thesis status while acknowledging 'the peak-event data gap prevents determining whether the validation was a comfortable pass or a near-miss' and 'this single data gap is the difference between a 65% thesis-confirmed and an 80%+ thesis-confirmed assessment' (a 15-20 percentage point swing). A data gap that can shift the assessment by 15-20 percentage points is not consistent with MEDIUM confidence - it indicates the confidence should be LOW. The reasoning correctly identifies the massive uncertainty but assigns a confidence level disproportionate to that uncertainty.",
           "severity": "MODERATE"
         },
         {
-          "finding": "System Demonstrated Thesis-Consistent Resilience — final composite adjusted from 4 to 5 with 'medium' confidence",
+          "finding": "SCADA Automated Failover Thesis Validated - confidence = MEDIUM despite 'Zero assumptions required'",
           "rule_violated": "LZ-EPH-002",
-          "violation": "The reasoning correctly applies LZ-RC-002 (single data point does not establish trend) and LZ-CC-001 (narrative coherence is not evidence), concluding the thesis is 'not confirmed'. However, it assigns 'medium' confidence to a finding that explicitly states the validation claim is unsupported. Medium confidence implies moderate evidentiary support exists. The evidence cited supports only that current readings are normal — it does NOT support medium confidence in any thesis validation assessment. Confidence should be LOW or the finding should be reframed as 'current readings are normal (high confidence), thesis validation is unverifiable (insufficient evidence)'.",
+          "violation": "The reasoning states 'Zero assumptions required' and provides 'four independent Tier 1 data points' supporting the validation, yet assigns MEDIUM confidence solely due to 'absent peak-event telemetry'. However, the thesis validation claim is specifically about whether the system recovered and returned to design parameters post-event - which is fully verified by current telemetry with zero assumptions. The peak-event data gap affects knowledge of how close the system came to failure during the event, but does not affect confidence in the observable fact that the system did recover. The confidence level conflates two different claims: (1) the system recovered [HIGH confidence, zero assumptions, four independent data points], and (2) the system had comfortable margins during peak stress [LOW/UNKNOWN confidence, data unavailable]. Assigning MEDIUM confidence to the validation collapses these distinct claims inappropriately.",
           "severity": "MODERATE"
         },
         {
-          "finding": "No Operator Action Log — Null Hypothesis Holds (logs exist elsewhere in systems not visible in our data feed) - assigned 'partial' data support and 50% weight",
-          "rule_violated": "LZ-RC-003",
-          "violation": "The reasoning states 'we have only one data point supporting this (the summary-format operator log field suggesting brevity is by design)'. This treats the ABSENCE of detailed logs as a data point SUPPORTING the hypothesis that logs exist elsewhere. LZ-RC-003 explicitly states absence of evidence is informationally neutral — it is neither evidence of presence nor evidence of absence. The 50% weight assignment implies partial confirmation when there is actually zero confirmation. The null hypothesis is plausible, but plausibility is not evidence. This should be flagged as INSUFFICIENT_EVIDENCE with confidence LOW, not assigned partial support.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Compound Stress Level MONITORING - 'cycles_at_current_level: 1' combined with 'delta_since_last: de-escalating'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "If this is the first cycle at MONITORING level (cycles_at_current_level: 1), there is no prior measurement to compare against, making 'de-escalating' a claim about trend direction from a single data point. Either this is cycle 1 (in which case trend direction is unknowable), or it is cycle 2+ and the count is wrong. The reasoning may be comparing incident-state to post-incident-state rather than monitoring-cycle to monitoring-cycle, but the language conflates event transition with monitoring trend, violating the single-point-not-a-trend rule.",
+          "finding": "Compound Stress Level = ELEVATED - self-challenge section",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The self-challenge presents arguments both supporting and challenging ELEVATED classification, notes that all active systems are nominal with substantial margins, acknowledges the degraded parameter (reserves at 58%) is 'designed to be consumed and replenished as part of normal operations', yet forces resolution to ELEVATED rather than declaring 'classification uncertain - could be either MONITORING or ELEVATED depending on how much weight is given to a consumable reserve operating within design parameters'. The reasoning avoids 'I don't know' when the self-challenge itself demonstrates genuine ambiguity between two reasonable classifications.",
           "severity": "MINOR"
         },
         {
-          "finding": "Thesis Status CONTESTED with 'medium' confidence",
+          "finding": "Action Recommendation = INCREASE_MONITORING with reasoning that MAINTAIN_OPERATIONS 'would underweight the reserve vulnerability'",
           "rule_violated": "LZ-EPH-002",
-          "violation": "The reasoning for CONTESTED status is sound: evidence simultaneously supports and undermines core claims. However, the confidence assignment is questionable. The analysis explicitly identifies that the keystone differentiating claim 'cannot be verified or falsified with available data' and that incident severity is 'completely unknown'. When the core thesis claim is unverifiable and the most important contextual variable is completely unknown, 'medium' confidence in the CONTESTED classification overstates certainty. The status itself may be correct, but confidence should be LOW given the pervasive data gaps acknowledged throughout.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Final Bear Pressure: 4 - presented as a single number without confidence interval or uncertainty quantification",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The output assigns a precise single-integer bear pressure score (4) despite identifying multiple MEDIUM and LOW confidence assessments feeding into it, explicitly stating the 'biggest uncertainty' could shift the score '2+ points in either direction', and marking the thesis as CONTESTED. A point estimate without uncertainty bounds implies false precision. The honest representation would be a range (e.g., 3-5) or a point estimate with explicit confidence bounds. Presenting '4' as if it were a confident measurement when the underlying analysis is shot through with acknowledged uncertainties violates confidence-proportional-to-evidence.",
-          "severity": "MODERATE"
+          "violation": "The reasoning states all active components are nominal, all kill switches are GREEN or MONITORING with comfortable margins, no second stressor is present, and the system is in orderly recovery. The only degraded parameter is reserves at 58% - a level that still provides 48% margin above the 10% kill switch threshold. The claim that MAINTAIN_OPERATIONS would 'underweight' this is not proportional to the evidence: a 48% margin above threshold with orderly recovery in progress does not strongly justify elevated monitoring absent additional evidence of imminent threat. The confidence in the action recommendation appears higher than the evidence supporting the distinction between MAINTAIN and INCREASE_MONITORING.",
+          "severity": "MINOR"
         }
       ],
       "compliance": "MODERATE_ISSUES",
       "model_used": "claude-sonnet-4-5-20250929",
       "gate_failed": false,
       "findings_reviewed": 47,
-      "clean_findings": 41,
-      "reviewer_notes": "This output demonstrates exceptional self-discipline in avoiding speculative inference (the corrections ledger chain worked beautifully) and correctly applying null hypothesis testing. The violations are ALL in the confidence calibration layer — the reasoning processes are generally sound, but confidence assignments systematically overstate certainty relative to acknowledged evidence gaps. The analysis correctly identifies what it doesn't know but then assigns MEDIUM confidence to findings built on those unknowns. This is a subtle but important pattern: the system is honest about uncertainty in its reasoning but not calibrating confidence scores to match that honesty. Four of six violations are LZ-EPH-002 (confidence proportional to evidence), suggesting a systemic calibration issue rather than random errors. Recommend review of confidence assignment logic in scoring layer."
+      "clean_findings": 42,
+      "reviewer_notes": "This output demonstrates exceptionally strong epistemic discipline in most areas - the corrections ledger enforcement is rigorous, null hypotheses are consistently tested, speculative inferences are properly stripped, and the LZ-EH-005 paradox handling is exemplary. The violations identified are primarily around assumption counting (LZ-EPH-003) and confidence calibration (LZ-EPH-002), not fabrication or plausibility traps. The analyst is correctly identifying uncertainties but occasionally mis-calibrating how much those uncertainties should affect confidence levels. The 'zero assumptions' claim for thesis validation is particularly notable - the recovery to design parameters is indeed zero-assumption from current telemetry, but the analyst conflated this with knowledge of peak-event margins, creating an inappropriate confidence reduction. Overall this represents high-quality reasoning with calibration issues rather than structural epistemological failures."
     },
-    "violations_count": 6,
+    "violations_count": 5,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   }

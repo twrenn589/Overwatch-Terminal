@@ -1,40 +1,39 @@
 [
   {
-    "layer3_inference": "SCADA hidden moves — background diagnostics, restart preparation, secondary pump management",
+    "layer3_inference": "SCADA may be running internal diagnostics on the tripped pump to determine restart readiness",
     "signal_ids": [
-      "20260312-0339-SIG-001",
-      "20260312-0339-SIG-007",
-      "20260312-0339-SIG-011"
+      "20260317-1642-SIG-001",
+      "20260317-1642-SIG-012"
     ],
-    "rejection_reason": "SPECULATIVE classification (3+ assumptions) with no data support. Rejected by corrections ledger entries CL-001, CL-004, CL-010, CL-011 across 4+ independent evaluations. No telemetry supports any inference about SCADA internal state beyond what is reported. This inference class was correctly identified and rejected by Layer 3 itself — Layer 4 confirms the rejection.",
-    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "rejection_reason": "Layer 3 correctly classified this as SPECULATIVE with 3 assumptions and low confidence, and correctly noted it has been stripped 6+ times across the corrections chain. Layer 4 confirms the rejection. No data supports this inference. Per CL-001, CL-004, CL-010, CL-011, CL-015, CL-018, this inference class has been exhaustively vetted and consistently rejected. The pump is TRIPPED_OFFLINE and that is the entirety of the observable state.",
+    "root_cause": "ASSUMPTION_FAILURE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T03:50:04.257Z",
+    "timestamp": "2026-03-17T16:54:37.591Z",
     "source": "layer4_reconcile"
   },
   {
-    "layer3_inference": "Grid Operators hidden moves — off-log contingency coordination",
+    "layer3_inference": "Operators may be performing off-log activities including FD coordination, isolation valve preparation, or regulatory notification",
     "signal_ids": [
-      "20260312-0339-SIG-010"
+      "20260317-1642-SIG-007"
     ],
-    "rejection_reason": "SPECULATIVE classification (3+ assumptions) with no data support. Rejected by 7+ corrections ledger entries — the most thoroughly vetted rejection in the chain. Layer 3 correctly self-policed this inference. Layer 4 confirms.",
-    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "rejection_reason": "Layer 3 correctly classified this as SPECULATIVE with 3 assumptions and low confidence, and correctly noted it is the most thoroughly vetted and consistently rejected inference in the analysis chain (10+ corrections ledger entries). Layer 4 confirms the rejection. The operator log contains three entries. That is the extent of observable operator behavior. No inference about off-log activity is permitted.",
+    "root_cause": "ASSUMPTION_FAILURE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T03:50:04.257Z",
+    "timestamp": "2026-03-17T16:54:37.591Z",
     "source": "layer4_reconcile"
   },
   {
-    "layer3_inference": "Demand Source hidden moves",
+    "layer3_inference": "Demand source hidden actions — any inference about unidentified entity behavior",
     "signal_ids": [
-      "20260312-0339-SIG-008"
+      "20260317-1642-SIG-008"
     ],
-    "rejection_reason": "SPECULATIVE (3+ assumptions). Entity is unidentified — inferring behavior of an unknown actor requires assuming identity, intent, and duration. Layer 3 correctly classified and rejected. Layer 4 confirms.",
+    "rejection_reason": "Layer 3 correctly classified this as SPECULATIVE with 4 assumptions on an unidentified entity. Layer 4 confirms the rejection. You cannot infer the strategy of an actor you cannot identify. Per CL-017, this is structurally unscoreable.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T03:50:04.257Z",
+    "timestamp": "2026-03-17T16:54:37.591Z",
     "source": "layer4_reconcile"
   }
 ]

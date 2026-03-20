@@ -250,5 +250,65 @@
     "source": "evolution_layer4_reconcile",
     "promoted_at": "2026-03-12T04:28:32.498Z",
     "times_applied": 0
+  },
+  {
+    "id": "CL-022",
+    "status": "active",
+    "belief": "Operators may be performing off-log coordination or readiness actions",
+    "reality": "Layer 3 correctly self-identified this as SPECULATIVE with no supporting evidence and acknowledged 9+ corrections ledger rejections. Stripped per burden of proof: SPECULATIVE classification (75% discount) combined with no data support (full strip). This inference has been conclusively and repeatedly rejected across the analytical pipeline.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Operators may be performing off-log coordination or readiness actions",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-17T16:40:48.740Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-023",
+    "status": "active",
+    "belief": "Demand source trajectory is modelable (escalating, stabilizing, or de-escalating)",
+    "reality": "Layer 3 correctly self-classified as SPECULATIVE with no data support. Per CL-017 and CL-019, demand source behavior requires 3+ assumptions about an unidentified actor. Stripped entirely. The demand source's trajectory remains structurally opaque.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Demand source trajectory is modelable (escalating, stabilizing, or de-escalating)",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-17T16:40:48.740Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-024",
+    "status": "active",
+    "belief": "SCADA may be running internal diagnostics on the tripped pump to determine restart readiness",
+    "reality": "Layer 3 correctly classified this as SPECULATIVE with 3 assumptions and low confidence, and correctly noted it has been stripped 6+ times across the corrections chain. Layer 4 confirms the rejection. No data supports this inference. Per CL-001, CL-004, CL-010, CL-011, CL-015, CL-018, this inference class has been exhaustively vetted and consistently rejected. The pump is TRIPPED_OFFLINE and that is the entirety of the observable state.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: ASSUMPTION_FAILURE",
+    "trigger": "SCADA may be running internal diagnostics on the tripped pump to determine restart readiness",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-17T16:55:22.584Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-025",
+    "status": "active",
+    "belief": "Operators may be performing off-log activities including FD coordination, isolation valve preparation, or regulatory notification",
+    "reality": "Layer 3 correctly classified this as SPECULATIVE with 3 assumptions and low confidence, and correctly noted it is the most thoroughly vetted and consistently rejected inference in the analysis chain (10+ corrections ledger entries). Layer 4 confirms the rejection. The operator log contains three entries. That is the extent of observable operator behavior. No inference about off-log activity is permitted.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: ASSUMPTION_FAILURE",
+    "trigger": "Operators may be performing off-log activities including FD coordination, isolation valve preparation, or regulatory notification",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-17T16:55:22.584Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-026",
+    "status": "active",
+    "belief": "Demand source hidden actions — any inference about unidentified entity behavior",
+    "reality": "Layer 3 correctly classified this as SPECULATIVE with 4 assumptions on an unidentified entity. Layer 4 confirms the rejection. You cannot infer the strategy of an actor you cannot identify. Per CL-017, this is structurally unscoreable.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Demand source hidden actions — any inference about unidentified entity behavior",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-17T16:55:22.584Z",
+    "times_applied": 0
   }
 ]

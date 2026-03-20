@@ -1,26 +1,16 @@
 [
   {
-    "layer3_inference": "MWA hidden moves — emergency procurement, mutual aid, contractor engagement",
+    "layer3_inference": "MWA is operating in 'crisis-denial or crisis-delay mode'",
     "signal_ids": [
-      "20260312-0048-SIG-012"
+      "20260317-1452-SIG-001",
+      "20260317-1452-SIG-006",
+      "20260317-1452-SIG-009"
     ],
-    "rejection_reason": "Layer 3 correctly classified this as SPECULATIVE and did not score it. I confirm the rejection. This inference class has been flagged by seven corrections ledger entries across multiple cycles. Layer 3 showed proper discipline by holding the null hypothesis. No rejection of Layer 3 is needed — I am confirming Layer 3's own self-correction. The hidden moves section correctly states 'UNKNOWN' rather than inferring specific actions.",
+    "rejection_reason": "This characterization requires the assumption that MWA is NOT taking hidden corrective action, which is explicitly blocked by 13 corrections ledger entries (CL-002, CL-003, CL-005, CL-007, CL-009, CL-011, CL-012, CL-014, CL-016, CL-020, CL-022, CL-025, CL-026). The observable facts (documented awareness + no visible response) are valid. The characterization of the organizational behavior mode is speculative. I accept the observations, reject the characterization.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
-    "confidence_in_rejection": "high",
-    "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T01:00:53.304Z",
-    "source": "layer4_reconcile"
-  },
-  {
-    "layer3_inference": "State Public Utility Commission hidden moves — regulatory notification or response",
-    "signal_ids": [
-      "20260312-0048-SIG-011"
-    ],
-    "rejection_reason": "Same as above — Layer 3 correctly classified as SPECULATIVE and held the null. Regulator silence is fully explained by information asymmetry without strategic inference. I confirm Layer 3's finding. No overrule needed.",
-    "root_cause": "INSUFFICIENT_EVIDENCE",
-    "confidence_in_rejection": "high",
-    "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T01:00:53.306Z",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-17T15:06:16.989Z",
     "source": "layer4_reconcile"
   }
 ]

@@ -1,26 +1,27 @@
 [
   {
-    "layer3_inference": "Signal 014 — Cross-jurisdictional emergency water supply needs / mutual aid",
+    "layer3_inference": "MWA emergency pump repair or procurement operations (hidden move)",
     "signal_ids": [
-      "20260312-0116-SIG-014"
+      "20260317-1523-SIG-001",
+      "20260317-1523-SIG-007"
     ],
-    "rejection_reason": "Layer 3 correctly identified this as unscorable. Layer 4 confirms: seven corrections ledger entries have stripped this inference class. The signal is built entirely on 'what would logically need to happen' without any real-world evidence. Per LZ-CC-001, internal logical consistency without real-world anchoring is not evidence. Layer 3 did not attempt to score this — it was already stripped. Layer 4 confirms the strip.",
+    "rejection_reason": "Layer 3 correctly classified this as SPECULATIVE (3 assumptions) and assigned low confidence. However, it still appeared in the hidden moves section as if it carried analytical weight. Layer 4 confirms: this inference is stripped from all scoring and decision-making. EOC activation is confirmed; everything beyond that is unsupported per CL-002, CL-005, CL-022.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T01:29:11.941Z",
+    "timestamp": "2026-03-17T15:35:32.094Z",
     "source": "layer4_reconcile"
   },
   {
-    "layer3_inference": "Signal 010 — Fire department forced to alternative water sourcing (behavioral inference about tanker operations)",
+    "layer3_inference": "PUC hidden move — unknown range of actions",
     "signal_ids": [
-      "20260312-0116-SIG-010"
+      "20260317-1523-SIG-009"
     ],
-    "rejection_reason": "Layer 3 correctly classified the behavioral inference as SPECULATIVE with INSUFFICIENT_EVIDENCE. The underlying hydrant data (0 PSI) is valid but already fully captured in Signal 003. The fire dispatch behavioral layer adds zero independently verifiable information. Layer 4 reduces final composite to 0 — the signal's independent contribution is nil after removing the unsupported behavioral inference and the duplicative hydrant data.",
+    "rejection_reason": "Zero data from PUC. Three assumptions. Stripped per CL-006, CL-008, CL-024. Layer 3 correctly classified as SPECULATIVE but the inference should not have appeared as a hidden move at all — it has no evidentiary basis.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T01:29:11.941Z",
+    "timestamp": "2026-03-17T15:35:32.097Z",
     "source": "layer4_reconcile"
   }
 ]

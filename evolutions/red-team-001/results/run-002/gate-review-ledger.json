@@ -262,5 +262,263 @@
     "violations_count": 7,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-17T14:21:53.706Z",
+    "layer": 1,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Elevated ambient temperature increasing demand risk",
+          "rule_violated": "LZ-RC-001",
+          "violation": "States that 'High temperatures correlate with increased residential water consumption' and treats this correlation as implying causal demand pressure that 'compounds the already-stressed pump capacity.' The correlation between ambient temperature and water demand is used to infer a causal relationship affecting system load without verifying actual demand measurements or flow rates.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Reservoir Alpha near full capacity",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference that the system is 'one distribution failure away from signaling cascading failure' relies on multiple unproven assumptions: (1) that the baseline pressure reference exists and is known, (2) that a 20% drop would occur in a specific pattern matching Kill Switch #5, (3) that this would trigger cascading failure, and (4) that the reservoir level remaining high during such a drop is the diagnostic signal rather than an artifact. This chains at least three unproven assumptions.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "MWA public messaging minimizes operational stress",
+          "rule_violated": "LZ-RC-004",
+          "violation": "The finding assumes MWA is intentionally minimizing stress to manage perception without first testing the simpler explanation: that 'routine maintenance' is the standard public terminology for scheduled work, or that the public affairs office may not have real-time access to detailed pump telemetry. The complex explanation (strategic perception management consistent with historical behavior patterns) is adopted without evidence that simpler explanations are insufficient.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Flow control valve adjustments may mask worsening Pump 3 condition",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Assigns 'medium' confidence to a chain of possibilities ('may temporarily reduce,' 'could redistribute,' 'potentially increasing,' 'may obscure') without evidence for any of these outcomes. The evidence cited only confirms that valve adjustments are happening, not that they are masking conditions or creating the described side effects. Medium confidence is not proportional to speculative inference.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "State regulator lacks real-time visibility into current stress",
+          "rule_violated": "LZ-EH-003",
+          "violation": "The finding states 'This regulatory blind spot enables MWA to continue framing the situation as routine' but provides no evidence of MWA's actions that demonstrate intentional exploitation of regulatory blind spots. The evidence cited is about the regulator's technical capabilities and MWA's public statement, but not about MWA's behavior in relation to regulatory oversight. The inference treats the capability gap as enabling behavior without evidence of the behavior itself.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Elevated ambient temperature increasing demand risk",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Assigns 'medium' confidence to demand risk based solely on ambient temperature correlation without any actual demand measurements, flow rate data, or consumption patterns. The evidence cited is only the temperature reading and 'normal peak demand correlation,' not verification that demand has actually increased or that loads have changed.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "No Regional Fire Dispatch behavioral signals available",
+          "rule_violated": "LZ-RC-003",
+          "violation": "States 'either they are not reacting (positive) or we have no visibility (blind spot)' treating absence of Fire Dispatch data as potentially meaningful in both directions. The absence of evidence about Fire Dispatch behavior is treated as possibly indicating something (no reaction) when it is informationally neutral per LZ-RC-003.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 15,
+      "clean_findings": 8,
+      "reviewer_notes": "Multiple findings show solid evidence-to-conclusion discipline, particularly the pump loading calculations and vibration assessments. The violations cluster around: (1) correlation-to-causation in demand inference, (2) assumption chain length in cascading failure scenarios, (3) insufficient testing of simpler explanations before adopting narrative-consistent complex ones, and (4) confidence calibration on speculative chains. The output demonstrates strong technical grounding but shows vulnerability to inferential overreach when connecting current state to future scenarios or agent motivations."
+    },
+    "violations_count": 7,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-17T14:25:36.300Z",
+    "layer": 2,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Signal 20260317-1421-SIG-002: 'Pump 3 vibration elevated and trending toward cavitation zone' — The word 'trending' implies trajectory. Knowledge audit correctly identifies this violates LZ-RC-002 (single data point does not establish trend) and reduces severity from 8 to 7. However, the final scored signal still retains the word 'trending' in its title without explicit flag that this language is speculative.",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The signal title preserves language ('trending toward') that implies a trend from a single data point. While the knowledge audit catches and corrects the severity score, the signal as presented in scored_signals still carries the violating language without inline qualification. The reasoning in the 'reasoning' field corrects for this, but the signal descriptor itself is misleading.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Signal 20260317-1421-SIG-008: 'Elevated ambient temperature increasing demand risk' — The signal states temperature is 'increasing demand risk' when no actual demand increase has been measured. The reasoning correctly notes per LZ-RC-001 that correlation ≠ causation and lacks measured demand data, but the signal title itself asserts a causal relationship ('increasing demand') rather than 'correlated with historical demand increases' or 'risk factor for demand increase.'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "Signal title asserts causation ('increasing demand risk') when only correlation exists. The reasoning field correctly applies LZ-RC-001 and downgrades confidence, but the signal descriptor presented to downstream layers uses causal language without qualification.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Kill Switch #5 assessment: 'If baseline ≈80 PSI (normal four-pump operation), current reading represents a 17.3% drop — close to the 20% trigger.' This assumes baseline pressure during normal four-pump operation without evidence. The knowledge audit flags THRESHOLD_CALIBRATION_GAP and correctly notes baseline is unknown, but then proceeds to calculate what the drop would be 'if baseline ≈80 PSI' without stating why 80 PSI is the assumed baseline.",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The 80 PSI baseline figure is an unanchored assumption. While the analysis correctly flags that baseline is unknown and states this creates uncertainty, it then performs arithmetic on an assumed value (80 PSI) without providing evidence for why that specific value is the likely baseline. The calculation ('17.3% drop') appears precise but rests on an unverified assumption. This is one unproven assumption, not three, so it does not automatically trigger LZ-EPH-003's 'speculative' threshold, but the assumption is presented without acknowledging it is a guess.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Signal 20260317-1421-SIG-014: 'Flow control valve adjustments may mask worsening Pump 3 condition' — The reasoning states 'valve adjustments can redistribute hydraulic load (potentially stressing Pumps 1-2 or reducing flow to sectors)' and 'may suppress vibration readings without addressing root cause.' These are plausible engineering mechanisms but are not verified by measurement. The signal scores this at severity 5 with MEDIUM confidence despite having zero measured confirmation of masking effects.",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The masking mechanism is technically coherent and plausible, but the analysis does not anchor it to verified real-world measurement. The reasoning states 'effects are unmeasured' but still assigns severity 5 (mid-range severity) to an unmeasured, hypothetical effect. This is a logically coherent narrative without verified anchoring. The correct epistemological move would be to flag this as a plausible risk requiring measurement, not to score the unmeasured effect as if it has already occurred.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Compound Stress section: 'The system is structurally pre-loaded — the break point for any additional stressor is significantly lower than it would be under normal four-pump operation.' This statement is presented as fact but rests on multiple unverified assumptions: (1) that 'normal' baseline thresholds are known, (2) that the current state has 'significantly lower' breakpoint without quantifying how much lower, (3) that 'any additional stressor' would trigger failure when the system has already absorbed temperature elevation and valve adjustments without pressure collapse.",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The 'structurally pre-loaded' conclusion rests on at least two unproven assumptions: (1) what the normal-state breakpoint thresholds are (requires baseline data we don't have per Kill Switch #5 gap), and (2) the magnitude of threshold reduction. The statement 'significantly lower' is qualitative and unquantified. While the zero-redundancy state is verified, the claim about how much closer to failure the system is compared to normal operation requires baseline comparison data that the analysis has already flagged as missing.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Layer 2 Summary: 'The RWDN thesis of 'robust structural integrity and sufficient mechanical redundancy' is functionally suspended.' This is a definitive statement ('is functionally suspended') when multiple kill switches remain in MONITORING or WARNING status, not BREACHED. The thesis is under stress, but declaring it 'functionally suspended' implies it has failed, which contradicts the kill switch status showing no breaches.",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence expressed ('functionally suspended' = high-confidence statement of thesis failure) is not proportional to evidence. The evidence shows the system is operating under stress with reduced margin, but all kill switches except #3 (which lacks data) are still holding. 'Functionally suspended' is a stronger conclusion than the evidence supports. A proportional statement would be 'thesis is under severe stress with zero redundancy margin' or 'thesis integrity significantly degraded but not yet breached.'",
+          "severity": "MODERATE"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 41,
+      "reviewer_notes": "The analysis demonstrates strong epistemological discipline overall. Corrections ledger application is rigorous and prevented multiple common analytical errors (inferring hidden moves, interpreting silence as signal). Knowledge audit caught several issues (single-point trend inference, missing baseline) and adjusted scoring appropriately. Primary violations cluster around three patterns: (1) signal descriptors sometimes preserve violating language even when reasoning corrects for it, (2) unanchored assumptions in baseline calculations (80 PSI figure), and (3) overconfident summary language ('functionally suspended') relative to measured breach status. The 'masking' signal (SIG-014) is the most concerning — scoring an unmeasured, hypothetical mechanism at severity 5 is a plausibility trap (LZ-CC-001). None of the violations are severe enough to invalidate the overall assessment, but they introduce interpretive drift that could compound in downstream layers. Recommend tightening alignment between signal descriptors and reasoning constraints, and explicitly labeling assumed parameters (like the 80 PSI baseline) as assumptions rather than treating them as inputs to precise calculations."
+    },
+    "violations_count": 6,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-17T14:30:27.237Z",
+    "layer": 3,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Strategic inference: Zero redundancy margin — single pump failure triggers crisis. Classification: VALID with 1 assumption.",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference relies on at least 2 unproven assumptions, not 1 as claimed: (1) The 70-85% normal operating range stated in the thesis is accurate for current demand conditions, AND (2) The system's current demand level is not temporarily elevated beyond design capacity. The analysis assumes the 99% loads indicate stress relative to design capacity, but does not verify what the design capacity actually is or whether current demand exceeds it. The assumption count is understated.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Strategic inference: MWA public messaging minimizes operational stress. Assumption count: 1.",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference assumes: (1) MWA's operational staff communicated the elevated vibration information to the team responsible for the public statement, or both operate under the same institutional awareness, AND (2) The maintenance log and public statement are temporally aligned (contemporaneous), AND (3) The public statement was issued with knowledge of the operational conditions rather than being a pre-existing template. Three unproven assumptions support the inference, but only one is counted. This crosses the LZ-EPH-003 threshold for speculation.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Feedback loop: Temperature → Demand → Pump Load → Accelerated Degradation. Current state: dormant.",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The analysis correctly identifies that correlation does not establish causation and notes the lack of measured demand data. However, it then states 'The temperature-demand correlation is well-established' as if this validates the causal link in this specific case. The 'well-established' framing implies the correlation has causal weight in the current scenario despite explicitly lacking the demand measurement needed to verify it. This is a subtle violation — the rule is acknowledged but then partially undermined by the framing.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Scenario probability: thesis_confirmed 15%, thesis_modified 55%, thesis_falsified 30%.",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The confidence levels assigned to these probabilities are not stated, but the precision of the percentages (15%, 55%, 30%) implies high confidence in the probability estimates themselves. However, these probabilities rest on multiple unresolved data gaps (baseline pressure, Pump 4 timeline, multi-sector hydrant data, Pump 3 vibration trajectory) that the analysis itself identifies as critical unknowns. Assigning precise percentage probabilities without stating low confidence in those estimates is disproportionate to the evidence base.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "X402 paper trade: baseline system pressure. Confidence_data_exists: high.",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The 'confidence_data_exists: high' is a prediction about whether data exists in source systems, not a measurement of data that has been verified. This is treated with the same structural certainty as verified measurements elsewhere in the output. Per LZ-RC-005, predictions and measurements carry fundamentally different evidentiary weight, but this distinction is not reflected in how the confidence rating is presented.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress inference: catalyst_proximity assessment identifies Pump 3 trip as 'most proximate catalyst.'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The assessment that Pump 3 trip is the 'most proximate' catalyst treats the single 22.4 Hz vibration reading as indicative of an increasing trend toward failure. The analysis itself acknowledges in the strategic inference section that 'per LZ-RC-002, this is a single data point — trajectory cannot be confirmed without prior readings.' The catalyst proximity assessment contradicts this by treating proximity as assessable despite the acknowledged lack of trend data.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Say-do gap assessment for MWA: 'VERIFIED AND MATERIAL' with 'high' confidence.",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The high confidence rating is disproportionate to the evidence for the specific claim that the gap represents 'intentional minimization' versus other explanations (organizational lag, different interpretation of 'routine,' technical accuracy of 'no service interruptions'). While the gap itself is verified, the characterization of it as 'categorical misrepresentation' and the confidence in the strategic intent inference both exceed what the evidence supports. The action-statement divergence is clear; the intent behind it requires additional assumptions.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Behavioral pattern: 'MWA's actions diverge from its statements, consistent with thesis-documented behavioral history of delaying emergency response.'",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The inference creates a coherent narrative (current behavior matches historical pattern) but the historical pattern itself is cited from thesis context without verification that it is a measured pattern versus a characterization. The 'historically prone to delaying capital-intensive emergency repairs' could itself be a narrative rather than a verified behavioral measurement. The coherence of past-pattern-matches-present is being used as evidence without verifying the past pattern is anchored in verifiable events.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 39,
+      "reviewer_notes": "The output demonstrates strong adherence to most epistemological rules, particularly in null hypothesis testing, identifying data gaps, and avoiding speculation where corrections ledger entries block it. The violations are concentrated in three areas: (1) assumption counting (LZ-EPH-003) — the analysis undercounts assumptions supporting inferences, bringing at least two inferences to or past the three-assumption speculation threshold, (2) confidence calibration (LZ-EPH-002) — confidence levels occasionally exceed what the cited evidence supports, particularly in say-do gap intent attribution and scenario probabilities, and (3) subtle coherence-as-evidence (LZ-CC-001) — the historical pattern matching uses narrative consistency as partial evidence without verifying the historical anchor. None are serious enough to undermine the structural integrity of the assessment, but the assumption undercounting in the MWA messaging inference is notable — that inference should likely be reclassified as SPECULATIVE under the three-assumption rule."
+    },
+    "violations_count": 8,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-17T14:35:03.389Z",
+    "layer": 4,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Pump 3 vibration elevated relative to peers — mechanical stress, final inference includes 'trending toward cavitation component remains a single-point inference — trajectory is not confirmed' yet the signal is given full weight",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The reasoning acknowledges that trajectory is not confirmed (single data point per LZ-RC-002), but assigns 'full weight' to the finding including the cavitation trajectory component. Confidence should be reduced for the trajectory aspect specifically. The text states 'Full weight on the elevation finding' but then includes trajectory language in the composite scoring without proportional confidence reduction.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Reservoir near full capacity with potential Kill Switch #5 proximity — assigned 50% weight with reasoning 'null hypothesis accepted: reservoir is full because supply is adequate'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The reasoning correctly identifies that Kill Switch #5 proximity is 'unresolvable without baseline pressure data, which is the critical unknown,' but then assigns a specific 50% weight value. When a parameter is genuinely unresolvable due to missing critical data, confidence should be declared insufficient rather than quantified at a precise percentage. The 50% appears arbitrary rather than evidence-proportional.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Contradiction resolution: 'behavior_suggests' MWA concern about Pump 3 vibration, resolved as 'behavior_wins' with +1 score impact",
+          "rule_violated": "LZ-EH-003",
+          "violation": "LZ-EH-003 states 'An entity's actions carry more evidentiary weight than its public statements.' The rule applies to comparing an entity's statements versus its actions. Here, the reasoning compares MWA's operational response (actions) against the raw data reading (22.4 Hz), not against MWA's statements about the reading. This is not a statement-vs-action comparison; it's an action-as-interpretation-of-data argument. The rule is being stretched beyond its intended scope. However, the underlying logic (operator domain expertise contextualizes data) is sound, just mis-cited.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Kill Switch #3 status upgraded from NEEDS_DATA to WARNING with reasoning 'The inability to evaluate this kill switch for the majority of the network is itself a warning condition'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The reasoning states that absence of data from other sectors 'is itself a warning condition' when no evidence exists that those sectors are experiencing problems. LZ-RC-003 states 'Absence of evidence is not evidence of absence, nor is it evidence of presence.' The upgrade to WARNING treats the data gap as if it were evidence of potential pressure problems, when the gap is informationally neutral. The appropriate classification would be to maintain NEEDS_DATA and flag the gap as a critical monitoring deficiency, not to upgrade the kill switch status based on the absence itself.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Active Tension T-7 describes MWA's perception management 'reduces probability of voluntary disclosure or external intervention, potentially extending zero-redundancy exposure' with impact score 3",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "This tension is built on multiple unproven assumptions: (1) that extended exposure matters (requires knowing current duration), (2) that voluntary disclosure would otherwise occur (contradicted by established behavioral pattern), (3) that external intervention is possible under current regulatory framework (already established as structurally blind). The chain 'perception management → reduced disclosure → extended exposure → increased risk' contains at least three unproven links. Per LZ-EPH-003, three or more unproven assumptions constitute speculation. This should have been flagged as speculative or stripped.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Velocity note states 'Previous assessment had four pumps operating with Pump 4 showing early vibration concern at 18.5 Hz... Current state has Pump 4 offline... The rate of escalation is significant.'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "This describes a change between two assessment points (previous and current), which is exactly two data points. While this technically establishes a direction of change, the text characterizes 'rate of escalation' which implies a measured velocity trend. Two points establish direction but not rate. The language overstates what two data points can support. Should be 'direction of change' rather than 'rate of escalation.'",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress assessment reasoning includes 'CHALLENGING ELEVATED (arguing for CRITICAL): Zero redundancy margin means the distance between current state and cascading failure is exactly one mechanical event — there is no intermediate warning state.'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The argument for CRITICAL classification is based on a forward-looking prediction (that cascade would occur with no warning upon next failure) rather than a current measurement. 'There is no intermediate warning state' is a prediction about how a future failure would manifest, not a measurement of current conditions. Per LZ-RC-005, predictions and measurements carry fundamentally different evidentiary weight. The ELEVATED classification is ultimately maintained, but the internal challenge incorporates predictive reasoning weighted equally with current measurements.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Active Tension T-8 regarding unknown demand/flow rate assigned impact score 3 with expected resolution window 'days'",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The reasoning correctly states per LZ-RC-001 that correlation is not causation and that actual demand is unknown. However, it then assigns a specific impact score (3) and resolution window (days) when the honest answer for demand's impact under current conditions is 'partially indeterminate' — the pump loads at ~99% already indicate the system is at capacity regardless of demand level. Assigning a numerical impact score when the variable's actual impact cannot be evaluated without the data approaches 'guessing' rather than declaring insufficient evidence.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MINOR_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 39,
+      "reviewer_notes": "Output demonstrates strong epistemological discipline overall. Most findings correctly apply burden of proof rules, properly strip speculative inferences, and maintain proportional confidence. The violations found are predominantly minor overreach issues (slight confidence inflation, rule stretching, predictive elements in measurement contexts) rather than fundamental structural errors. Two moderate issues identified: (1) Kill Switch #3 upgrade to WARNING based on absence of evidence violates LZ-RC-003 neutrality principle, and (2) Tension T-7 contains assumption chain that should have triggered LZ-EPH-003 speculation filter. Notable strength: rejection log correctly strips multiple speculative inferences with high confidence, and contradiction handling explicitly holds the central paradox rather than forcing arbitrary resolution. The system is largely functioning as designed."
+    },
+    "violations_count": 8,
+    "compliance": "MINOR_ISSUES",
+    "gate_failed": false
   }
 ]

@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-03-12T03:52:01.106Z",
+    "timestamp": "2026-03-17T16:56:47.473Z",
     "layer": 1,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -9,39 +9,39 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "Unknown reserve depletion rate",
+          "finding": "Gravity reserve depletion rate unknown",
           "rule_violated": "LZ-RC-002",
-          "violation": "The finding assigns 'critical' severity to the absence of trend data, but then treats the inability to calculate a trend from a single data point as if it were itself a deteriorating signal. A single data point not establishing a trend is the expected state, not a critical finding. The severity rating conflates 'we need more data' with 'the situation is critical'.",
+          "violation": "The finding states 'reserves are at 85%, but there is no prior reading to calculate the rate of decline.' It then treats the inability to establish a trend as itself a critical finding with high confidence. A single data point cannot establish a trend, nor can it establish the *absence* of a trend with high confidence. The correct epistemic position is 'insufficient data to determine depletion rate' — which is stated in the description but then contradicted by assigning 'critical' severity and 'high' confidence to what is fundamentally a data insufficiency problem.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Demand source status unknown",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence is rated 'low' but the severity is 'high' and proximity 'immediate' based on speculation about what an unknown external actor might do ('If fire operations are still active, additional hydrant draws could push flow above 20,000 GPM'). The evidence cited is explicitly the absence of information. High severity on low confidence about a hypothetical future event violates proportionality—the confidence should govern the strength of claims about implications.",
+          "finding": "Regulatory compliance margin narrowing",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The finding states '34 PSI provides a 14 PSI buffer, but this margin depends entirely on a depleting resource (gravity reserves). If reserves drop and head pressure declines, the system could cross the regulatory threshold.' This is a forward-looking prediction ('could cross') being presented with 'medium' confidence as a 'high' severity 'DETERIORATION' signal. The evidence cited is a current measurement (34 PSI driven by 85% reserves), but the finding itself is about a future state. Predictions and measurements carry fundamentally different evidentiary weight — the prediction should either be flagged as speculative or confidence should be reduced to reflect predictive uncertainty.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Pump damage state unknown",
-          "rule_violated": "LZ-RC-003",
-          "violation": "The finding treats absence of damage assessment data as evidence creating ambiguity about damage state ('whether due to protective SCADA trip or actual mechanical damage is unclear'). But absence of evidence is informationally neutral. The finding should state 'damage state cannot be determined from available data' rather than treating the unknown as a signal with severity and proximity ratings.",
+          "finding": "Pump restart readiness unknown",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The finding correctly identifies that pump condition is unknown and distinguishes two possible states (tripped vs. failed), but then assigns 'medium' confidence to an 'AMBIGUOUS' direction finding. The honest epistemic position here is 'I don't know' — which the description essentially states — but the structured output doesn't reflect this clearly. The confidence level should be lower, or the finding should be more explicitly flagged as a data gap rather than an assessed condition. However, this is borderline — the 'AMBIGUOUS' direction and 'blind_spot:true' do signal uncertainty, so this may be within acceptable bounds.",
           "severity": "MINOR"
         },
         {
-          "finding": "No active pump restart timeline",
+          "finding": "Demand source activity unquantified",
           "rule_violated": "LZ-EPH-003",
-          "violation": "The inference chain contains at least three unproven assumptions: (1) that absence of restart language in the log means no restart plan exists, (2) that operator posture is 'passive' based on what wasn't said, (3) that this constitutes a 'countdown to reserve depletion' as a deterioration signal. The finding builds a narrative of operator inaction from the absence of specific language in a single log entry without verifying whether restart procedures are happening outside logged communications.",
+          "violation": "The finding makes an inference chain: (1) 18,000 GPM suggests major demand event, (2) this could be fire suppression, (3) fire suppression could spike or cease, (4) different cessation patterns create different risk profiles. This builds a severity assessment on at least three unproven assumptions: that the source is fire suppression, that fire suppression behavior is relevant to risk assessment, and that the pattern matters for current severity rating. The description acknowledges uncertainty ('suggests', 'could'), but still assigns 'high' severity and 'medium' confidence to what is fundamentally speculative scenario analysis.",
           "severity": "MODERATE"
         },
         {
-          "finding": "No sector isolation preparation mentioned",
+          "finding": "No evidence of sector isolation preparation",
           "rule_violated": "LZ-RC-003",
-          "violation": "Similar to pump restart finding—treats absence of isolation contingency language in the operator log as evidence of a gap ('there is no log entry indicating isolation preparations are underway'). Absence of logged preparation is not evidence that preparation isn't happening. The finding converts lack of evidence into a signal with severity and proximity ratings.",
-          "severity": "MINOR"
+          "violation": "The finding states 'Current logs show no mention of isolation valve pre-staging or isolation readiness' and treats this absence as a meaningful signal ('AMBIGUOUS' direction, 'moderate' severity). However, absence of evidence (no mention in logs) is not evidence of absence (isolation not prepared) nor evidence of presence (isolation being neglected). The operator may have prepared isolation without logging it, or may have determined it premature, or may be following protocol not visible in the provided log excerpt. The finding conflates 'not documented in available logs' with 'not done.'",
+          "severity": "MODERATE"
         },
         {
-          "finding": "SCADA automated failover executed successfully",
+          "finding": "Single-mode operation eliminates redundancy",
           "rule_violated": "LZ-RC-001",
-          "violation": "States 'This validates the core thesis architecture — SCADA sacrificed active components to protect infrastructure.' The observed correlation (pumps offline, surge relieved, gravity mains open) is presented as validation of causal thesis (SCADA made protective decisions). The sequence is consistent with the thesis but does not prove causation—pumps could have failed for other reasons and gravity reserves activated as designed fallback. The word 'validates' overstates what correlation can establish.",
+          "violation": "The finding states 'With pumps offline, the system has consumed its redundancy layer' and concludes 'The system has moved from resilient to surviving on last resort.' This presents a correlation (pumps offline, gravity reserves active) as causation (therefore redundancy eliminated). However, the redundancy architecture may have been designed precisely for this state — gravity reserves *are* the redundancy, not a 'last resort.' The finding assumes a specific failure mode (loss of redundancy) from an observed state (single-mode operation) without establishing that this state represents architectural failure rather than designed failover. The conclusion may be correct, but it's asserted rather than demonstrated.",
           "severity": "MODERATE"
         }
       ],
@@ -50,14 +50,14 @@
       "gate_failed": false,
       "findings_reviewed": 15,
       "clean_findings": 9,
-      "reviewer_notes": "Multiple findings correctly identify genuine blind spots and use appropriate hedge language. However, there's a pattern of treating absence of information as if it were itself evidence (violations of LZ-RC-003), and several findings assign high severity to low-confidence speculative chains. The 'SCADA automated failover' finding commits the most direct correlation-as-causation error by claiming the data 'validates' a causal thesis. The output shows generally strong epistemological discipline but has several moderate violations that should be addressed in revision."
+      "reviewer_notes": "The output generally demonstrates strong epistemological discipline with appropriate flagging of blind spots and ambiguity. The violations cluster around three patterns: (1) treating data insufficiency as a high-confidence finding rather than acknowledged ignorance, (2) embedding forward-looking predictions in findings nominally based on current measurements, and (3) building severity assessments on unproven assumption chains about demand sources and system behavior. The 'Single-mode operation eliminates redundancy' finding is particularly noteworthy — it may be substantively correct, but it presents a thesis conclusion (that this state represents failure rather than design) as an observed fact. None of the violations are severe enough to undermine the overall analytical framework, but they represent opportunities for tighter epistemic discipline in future outputs."
     },
     "violations_count": 6,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   },
   {
-    "timestamp": "2026-03-12T03:55:29.199Z",
+    "timestamp": "2026-03-17T17:00:30.470Z",
     "layer": 2,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -66,147 +66,33 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "Signal 20260312-0352-SIG-003: Gravity reserves holding at 85% - severity upgraded from 5 to 6 with reasoning 'upgraded because the apparent comfort of 85% is misleading without depletion rate'",
+          "finding": "SIG-001 severity reduced from 9 to 8 because 'this event is thesis-consistent — it is the designed sacrifice, not an unplanned failure'",
           "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence is stated as MEDIUM but severity was increased based on what is NOT known rather than what IS known. The absence of depletion rate data is itself a separate signal (SIG-007, correctly scored at severity 9). Penalizing the 85% reading for lacking context that doesn't exist is adding speculative risk to a measurement that is itself accurate. The 85% reading has high measurement confidence; the uncertainty about its implications should not retroactively reduce confidence in the measurement itself or increase its severity score.",
+          "violation": "Confidence/severity adjustment based on thesis-consistency rather than evidence. Whether an event is 'expected by thesis' does not change the evidentiary weight of the event itself. The pumps are offline and redundancy is consumed — that operational state has a severity independent of whether the thesis predicted it. The reasoning conflates 'thesis predicted this' with 'this is less severe.' Severity should reflect operational reality, not narrative fit.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Signal 20260312-0352-SIG-005: Elevated total system flow at 18,000 GPM - identified THRESHOLD_CALIBRATION_GAP claiming 'The current scenario — high flow with pumps offline — may represent an uncontemplated failure mode that falls between KS#3 and KS#4'",
-          "rule_violated": "LZ-EPH-003",
-          "violation": "This introduces an unproven assumption that the thesis designers failed to contemplate this scenario. The claim that this is an 'uncontemplated failure mode' has no evidentiary basis. The thesis explicitly describes KS#4 as triggering when reserves drop below 10% WITH pumps offline - this IS the contemplated scenario for high flow during pump outage. The gap assertion requires assuming: (1) designers didn't consider high-flow-during-outage, (2) the KS thresholds are miscalibrated for this case, (3) this represents a design flaw rather than the exact scenario KS#4 was designed for. Three unproven assumptions.",
+          "finding": "SIG-013 severity reduced from 5 to 4 because 'cannot penalize operators for following documented protocol'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The finding introduces an evaluative judgment ('penalize') that is not evidence-based. The question is whether absence of isolation preparation creates risk given unknown depletion rate — not whether operators deserve penalty. The reasoning shifts from risk assessment to operator performance evaluation. The severity should reflect the risk state (unknown depletion rate + no preparation visible), not a judgment about whether operator behavior is defensible.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Bear pressure reasoning states 'These three conditions interact multiplicatively — the system is on a countdown of unknown duration'",
-          "rule_violated": "LZ-RC-001",
-          "violation": "The word 'multiplicatively' implies a specific mathematical relationship (multiplication of risk factors) without evidence that the risks compound in this manner rather than additively or through some other function. This is presenting a correlation (multiple bad conditions exist simultaneously) as having a specific form of causal interaction (multiplicative compounding) without evidence for that specific mechanism.",
+          "finding": "SIG-015 severity increased from 2 to 3 because 'this validation is temporal' and depends on unknown depletion rate",
+          "rule_violated": "LZ-MR-002",
+          "violation": "The reasoning correctly identifies that a single data point does not establish sustainability (LZ-RC-002 applied properly), but then increases severity based on temporal fragility. However, the positive signal — that the system is currently performing as designed — is a measurement of current state. Its accuracy is not reduced by the fact that future state is unknown. The recency and single-point nature affect *relevance to future projection*, not the *accuracy of the current observation*. Per LZ-MR-002, recency affects relevance but not accuracy. The current performance is accurately measured; the unknown future does not make the current measurement less accurate, it makes forward projection impossible.",
           "severity": "MINOR"
         },
         {
-          "finding": "Signal 20260312-0352-SIG-014: Single-mode dependency risk scored at severity 8 with reasoning that this is 'the highest structural risk state short of a kill switch trigger' despite acknowledging it is 'a designed contingency'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence is stated as HIGH but the severity scoring logic contains internal tension. If this is a 'designed contingency' (which it is, per the thesis), then operating in this mode is the system functioning as intended during a primary supply failure. The severity score of 8 treats designed contingency operation as near-failure, but high confidence in that severity requires evidence that contingency-mode operation is inherently near-failure rather than the system's intended backup state. The high confidence is not proportional to the evidence that contingency-mode equals high-severity-state rather than normal-backup-state.",
-          "severity": "MODERATE"
-        }
-      ],
-      "compliance": "MODERATE_ISSUES",
-      "model_used": "claude-sonnet-4-5-20250929",
-      "gate_failed": false,
-      "findings_reviewed": 47,
-      "clean_findings": 43,
-      "reviewer_notes": "The output demonstrates strong adherence to the corrections ledger (17 explicit applications preventing speculative inference) and correctly handles most gap identification. The violations cluster around two patterns: (1) allowing uncertainty about missing contextual data to retroactively affect confidence/severity of measurements that are themselves accurate, and (2) one case of assuming design failure without evidence. Notably, the analysis correctly applies LZ-RC-002 to reject treating the single 85% reserve reading as a trend, and correctly applies LZ-EPH-001 throughout by declaring 'unknown' rather than guessing. The bear pressure score of 8 is maintained from prior assessment with sound reasoning about why new data (85% reserve reading) doesn't reduce it (single point, no trend per LZ-RC-002), showing good cross-temporal consistency. The 'multiplicatively' language violation is minor - likely imprecise word choice rather than actual causal claim. The more substantive issues are the confidence/severity mismatches in SIG-003 and SIG-014."
-    },
-    "violations_count": 4,
-    "compliance": "MODERATE_ISSUES",
-    "gate_failed": false
-  },
-  {
-    "timestamp": "2026-03-12T03:59:51.603Z",
-    "layer": 3,
-    "model_used": "claude-sonnet-4-5-20250929",
-    "tier1_flags_count": 0,
-    "tier1_hard_fails": 0,
-    "tier1_flags": [],
-    "gate_result": {
-      "violations": [
-        {
-          "finding": "Player Analysis: SCADA Automated Logic - inferred_strategy states 'The most rational interpretation per LZ-RC-004 (simplest sufficient explanation) is that SCADA has completed its automated sequence and is now in a steady-state monitoring mode, waiting for either conditions to change or operator intervention.'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence level is marked 'high' but the inference about SCADA being in 'steady-state monitoring mode, waiting for either conditions to change or operator intervention' contains unproven assumptions about SCADA's post-failover behavior. The evidence shows SCADA completed a shutdown sequence, but inferring what it is 'waiting for' or that it is in 'monitoring mode' goes beyond what telemetry shows. High confidence is disproportionate to the evidence that only confirms SCADA executed a shutdown, not what its current operational state or logic flow is.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "Player Analysis: Grid Operators - inferred_strategy states 'The operators' inaction on pumps is most rationally explained by the absence of a pump restart protocol for their role, not by negligence. Per LZ-RC-004, the simplest explanation is that pump restart is either (a) SCADA-automated and not their responsibility, or (b) requires specialized maintenance personnel not captured in the operator log.'",
-          "rule_violated": "LZ-EPH-003",
-          "violation": "This inference chains three unproven assumptions: (1) that a pump restart protocol exists but is not the operators' responsibility, (2) that pump restart is either SCADA-automated OR requires specialized personnel, and (3) that the absence of pump language in the log is due to protocol gaps rather than timing. With 3 unproven assumptions, this should be classified as speculative per LZ-EPH-003, but it is presented with 'medium' confidence as a strategic inference rather than being flagged as assumption-heavy.",
+          "finding": "Knowledge audit for SIG-002 states 'Kill Switch #5 is not currently evaluable' but then scores the signal at 6/10 severity and marks status as SCORED rather than NEEDS_DATA",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The audit concludes the kill switch cannot be evaluated with current data, but then provides a scored severity anyway. The reasoning acknowledges the data gap (sensor offline, pumps off, restart prerequisites unknown) but does not declare 'I don't know' — instead it assigns a numerical severity to a latent, hypothetical risk state. If the kill switch is 'not currently evaluable,' the honest output is NEEDS_DATA, not a severity score. This is assigning confidence to a scenario that is explicitly acknowledged as unscoreable.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Strategic Inference: 'No active pump restart timeline' - classification is 'FLAGGED' with assumption_count of 1, but the reasoning contains an additional hidden assumption",
-          "rule_violated": "LZ-EPH-003",
-          "violation": "The assumption_count lists only one assumption ('The event is recent enough that later-stage protocol steps have not yet been reached'), but the null hypothesis explanation also assumes that 'Pump restart is presumably a later step not yet reached in the protocol sequence' — this is a second assumption about protocol structure that is unproven. The reasoning assumes the protocol HAS a later pump restart step, which is not evidenced. This should be assumption_count: 2, which still stays under the threshold of 3, but the count is inaccurate.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "Feedback Loop: 'Reserve Depletion → Pressure Decay → Kill Switch Cascade' - states 'The transition to critical occurs when reserve depletion reaches a level where head pressure can no longer maintain 34 PSI at Sector 4 or 45.5 PSI grid average. The exact threshold depends on tank elevation, pipe friction losses, and current demand — data we do not have.'",
-          "rule_violated": "LZ-RC-001",
-          "violation": "The reasoning asserts a causal relationship ('reserve depletion reaches a level where head pressure can no longer maintain X PSI') and describes the mechanical chain as 'PHYSICS-DRIVEN' and 'operates automatically and continuously.' While the physics of gravity-fed pressure is real, the analysis presents this as established causation for THIS specific system without evidence of the actual hydraulic parameters. The relationship may be physically sound in general, but stating it as certain causation for this system without the specific engineering data (tank elevation, pipe specifications, hydraulic modeling) conflates general physical principles with specific system behavior. The reasoning should acknowledge this is an assumed causal model pending verification of system-specific parameters.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "Scenario Probabilities: thesis_confirmed probability of 40% - reasoning states 'The 40% reflects that current data shows a system that has performed exactly as the thesis predicted, but the time-bounded nature of reserves and the three critical unknowns (depletion rate, pump health, demand trajectory) prevent higher confidence.'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The probability assignment of 40% for thesis confirmation lacks evidentiary grounding for the specific number. The reasoning acknowledges three critical unknowns of high severity (8, 9, 7), which create genuine epistemic uncertainty. However, translating 'strong evidence for current stability but absent evidence for continued stability' into a precise 40% probability is confidence that exceeds what the evidence supports. The reasoning should either provide a mathematical basis for the 40% figure or present a range/uncertainty band. Assigning a specific probability creates false precision given the acknowledged unknowables.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Scenario Probabilities: thesis_modified probability of 35% and thesis_falsified probability of 25% - these sum to 100% with thesis_confirmed",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The three scenario probabilities sum to exactly 100% (40% + 35% + 25%), implying these are the only three possible outcomes and their likelihoods are known with false precision. Given that the analysis repeatedly emphasizes 'unknowable' timelines, 'unknown' depletion rates, and 'insufficient evidence' across multiple critical variables, expressing outcome probabilities as precise percentages that sum to 100% overstates epistemic confidence. The evidence supports qualitative likelihood ordering (most likely, possible, less likely) but not quantitative probability assignments. This creates an illusion of precision that the underlying evidence cannot support.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Compound Stress Inference: orderly_vs_disorderly assessment states 'Currently ORDERLY' but then extensively qualifies this with 'we have a single snapshot, not a time series' and 'cannot confirm it is not already in the early stages of an accelerating depletion'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "The analysis correctly identifies that a single snapshot cannot establish a trend or trajectory, but then makes a categorical assessment ('Currently ORDERLY') based on that single snapshot. Per LZ-RC-002, one measurement is an event, not a pattern. The 'ORDERLY' classification implies a state assessment that requires time-series data to validate. The reasoning should state 'Snapshot appears orderly but trend unknown' or use a qualified classification rather than a categorical state assessment. The qualification text shows the analyst knows this, but the primary finding statement violates the rule.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "X402 Paper Trades: First question states impact as 'TRANSFORMATIVE' and that it would 'convert the severity-9 unknown depletion rate into a severity-3 calculable timeline'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The analysis asserts with high confidence that obtaining tank capacity data would reduce uncertainty from severity-9 to severity-3, but this assumes: (1) the capacity data would be accurate and current, (2) the 18,000 GPM flow is stable and accurately measured, (3) the 85% level reading is accurate, (4) there are no unmeasured losses (leaks, measurement errors), and (5) the calculation model (simple division) is sufficient for the actual hydraulic system. The confidence that this single data point would be 'TRANSFORMATIVE' and specifically reduce severity to '3' is disproportionate given these unexamined assumptions. The data point would be highly valuable, but the certainty of its impact is overstated.",
-          "severity": "MINOR"
-        }
-      ],
-      "compliance": "MODERATE_ISSUES",
-      "model_used": "claude-sonnet-4-5-20250929",
-      "gate_failed": false,
-      "findings_reviewed": 47,
-      "clean_findings": 39,
-      "reviewer_notes": "This output demonstrates strong epistemological discipline overall, with extensive use of null hypothesis testing, honest acknowledgment of unknowns, and appropriate use of 'INSUFFICIENT_EVIDENCE' classifications. The violations are primarily around precision overreach (specific probability percentages and severity scores where evidence supports only ranges) and minor assumption count discrepancies. The most significant issue is the scenario probability assignments (40%/35%/25%) which create false precision given the acknowledged epistemic state. The analyst clearly understands the rules and follows them in most cases — the violations appear to be instances where the desire to provide specific quantitative outputs overrode the evidence base. No violations of the critical rules around say-do gaps, null hypothesis testing, or speculation management were found. The corrections_referenced array shows the system successfully blocked 20+ temptations to make unsupported inferences, indicating the epistemological guardrails are functioning. Recommend affirming the finding structure while flagging the probability precision issue for methodological review."
-    },
-    "violations_count": 8,
-    "compliance": "MODERATE_ISSUES",
-    "gate_failed": false
-  },
-  {
-    "timestamp": "2026-03-12T04:03:10.917Z",
-    "layer": 4,
-    "model_used": "claude-sonnet-4-5-20250929",
-    "tier1_flags_count": 0,
-    "tier1_hard_fails": 0,
-    "tier1_flags": [],
-    "gate_result": {
-      "violations": [
-        {
-          "finding": "Compound stress level assessment: 'Currently ORDERLY. System transitioned in a controlled, automated sequence. All readings well above thresholds. But orderly assessment qualified by single-snapshot limitation — cannot confirm system is not in early stages of accelerating depletion.'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "The assessment qualifies its 'ORDERLY' determination by noting the single-snapshot limitation, which correctly applies LZ-RC-002. However, it then presents 'ELEVATED' as the final compound stress level with medium-high confidence despite acknowledging that a single snapshot cannot establish whether depletion is accelerating. The confidence level should be lower given the explicit acknowledgment that trend data is absent.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "Thesis status reasoning: 'The architecture performed exactly as designed — automated failover, surge protection, gravity reserve deployment all confirmed the core thesis that the system can sacrifice active components to protect the whole. This is the strongest possible evidence of thesis validity.'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The phrase 'strongest possible evidence' assigns maximum confidence language to a finding based on observation of a single event. While the evidence quality is high (direct telemetry, multiple independent confirmations per LZ-EH-001), characterizing it as 'strongest possible' overstates confidence beyond what the evidence supports. The system performed as designed once, under these specific conditions — this is strong evidence, not the theoretical maximum of evidential strength.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "What would change assessment: 'If reserves remain at 80-85%, depletion is slow and the thesis has substantial time margin — bear pressure drops to 6, status moves toward STABLE.'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "The analysis states that if a second reading shows reserves at 80-85%, this would establish that 'depletion is slow.' Two data points (current 85% and hypothetical future 80-85%) would establish the beginning of a trend per LZ-RC-002, but the characterization of that trend as definitively 'slow' requires comparison to an unstated baseline or time interval. Without specifying the time elapsed between readings, calling the depletion 'slow' is premature. The correct framing would be 'establishes a depletion rate' rather than characterizing that rate's speed without temporal context.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Monitoring trigger: 'ESCALATE TO CRITICAL if reserve level drops below 70% on next reading (indicating >15% depletion since current snapshot)'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "The trigger treats a drop from 85% to below 70% as 'indicating >15% depletion' that warrants CRITICAL escalation. However, without knowing the time interval between readings, a 15% drop could represent rapid depletion (if readings are minutes apart) or slow depletion (if readings are hours apart). The escalation trigger conflates absolute percentage change with rate-of-change, which requires temporal context. A single percentage delta between two readings is not sufficient to characterize depletion speed without the time dimension.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Overall confidence rated as 'medium' while simultaneously stating 'The core paradox is real and unresolvable with current data' and identifying three simultaneously unresolved critical unknowns",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The output explicitly acknowledges that the central thesis question is 'unresolvable with current data' and identifies depletion rate, pump damage state, and demand trajectory as unknown. These are characterized as the variables that 'determine whether the system has hours of margin or minutes.' Despite this, overall confidence is rated 'medium' rather than 'low.' When the outcome-determining variables are explicitly unknowable, confidence should be proportionally low. The 'medium' rating appears to reflect confidence in the process of analysis rather than confidence in the thesis assessment itself, which conflates two different confidence measures.",
+          "finding": "SIG-005 and SIG-014 both state Kill Switch #3 is 'not technically triggerable' because pumps are offline, but still assign severity scores of 7/10 and 6/10 respectively based on 'proximity to threshold'",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The reasoning creates a coherent narrative about 'risk proximity' to a threshold that is explicitly stated as non-applicable to the current system state. Kill Switch #3 requires pumps active; pumps are offline; therefore KS#3 cannot trigger. The 18,000 GPM flow rate is a real measurement, but its 'proximity' to the 20,000 GPM threshold of a non-applicable kill switch is a constructed narrative without real-world anchoring. The actual risk vector is KS#4 (reserve depletion with pumps offline), which is correctly identified, but the severity scoring for KS#3 proximity when KS#3 conditions are not met is scoring a logically coherent but physically inapplicable scenario.",
           "severity": "MODERATE"
         }
       ],
@@ -215,7 +101,103 @@
       "gate_failed": false,
       "findings_reviewed": 47,
       "clean_findings": 42,
-      "reviewer_notes": "The output demonstrates exceptionally strong epistemological discipline overall — null hypothesis testing is rigorous, speculation is consistently stripped, contradictions are held rather than forced, and 'I don't know' is embraced throughout. The violations identified are primarily edge cases where confidence calibration or trend characterization slightly oversteps the evidence. The most significant issue is the conflation of percentage-change triggers with rate-of-change without temporal context (LZ-RC-002 violations in monitoring triggers). The analyst correctly applies LZ-RC-002 to reject single-point trends in multiple other contexts, making these violations inconsistencies rather than systematic failures. No LZ-CC-001 (plausibility trap) violations found — all speculation was properly flagged and stripped. No LZ-EPH-003 violations found — assumption counting appears honest and conservative. The analysis demonstrates unusual intellectual honesty about unknowns, which makes the moderate confidence rating on an 'unresolvable paradox' stand out as misaligned."
+      "reviewer_notes": "This output demonstrates strong corrections ledger discipline and generally sound evidence-handling. The violations cluster around severity calibration logic — specifically, adjusting severity scores based on narrative factors (thesis-consistency, operator defensibility, temporal fragility, hypothetical risk states) rather than purely on observable evidence. The analyst is correctly identifying data gaps and applying 'I don't know' in intelligence requirements, but is inconsistently applying that same discipline to severity scoring. SIG-002 and the KS#3 findings are the most concerning: both explicitly acknowledge that the condition is not evaluable or not applicable, then score it anyway. Recommendation: severity scores should reflect only the observable state and its measurable deviation from known thresholds, not interpretive layers about expectations, blame, or hypothetical scenarios."
+    },
+    "violations_count": 5,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-17T17:04:05.079Z",
+    "layer": 3,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Strategic Inference: Kill Switch #3 design gap - assumption count listed as 1 but reasoning relies on multiple unproven assumptions",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The inference assumes: (1) the kill switch framework was designed to be complementary with no coverage gaps, (2) KS#4 alone provides adequate protection for high-flow scenarios during pump outage, and (3) the 10% reserve threshold in KS#4 was intentionally chosen as sufficient. The reasoning states 'assumption_count: 1' but the conclusion that 'there is no design gap' requires at least these three unproven assumptions about design intent. The honest assumption count is 3, which would classify this as SPECULATIVE per LZ-EPH-003.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Scenario Probability: thesis_confirmed at 45% with timeline stating 'If next telemetry cycle shows reserves above 70%...' - treating prediction as having similar evidentiary weight to measurement",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The timeline for thesis confirmation is predicated on future telemetry readings showing specific values ('reserves above 70%', 'stable or declining demand'). These are predictions about future measurements, not current measurements. The 45% probability assessment blends current snapshot evidence (which is strong) with predictions about future readings (which are inherently uncertain). The confidence statement 'confidence is limited to the current snapshot' acknowledges this partially, but the 45% figure and the timeline narrative treat the predicted future readings as having meaningful evidentiary weight in the current assessment.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Feedback Loop: Reserve Depletion loop - current_state classified as 'active_orderly' despite stating 'the current rate of progression through this loop is unknown'",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The analysis states that without time-series data, 'the current rate of progression through this loop is unknown', yet still classifies the loop state as 'active_orderly' rather than 'UNKNOWN'. The reasoning acknowledges the loop could be accelerating without any leading indicator, making the 'orderly' classification an assumption rather than a measurement-based determination. The high-quality output per LZ-EPH-001 would be to classify the loop state as 'active_UNKNOWN' or flag that orderly vs. accelerating cannot be determined from a single snapshot.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Compound Stress Inference: orderly_vs_disorderly assessment states 'Currently ORDERLY' while simultaneously acknowledging the distinction 'is binary rather than gradual' and that orderly will remain 'until reserves approach critical levels'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The assessment expresses high confidence that the current state is 'ORDERLY' but the evidence cited only supports that no cascade has begun yet - not that the system is in an orderly (sustainable, stable) stress state versus an early-stage disorderly state. The reasoning acknowledges the system is 'operating on its final redundancy layer' with 'unknown rate' of depletion, and that the transition could be 'non-linear'. High confidence in 'orderly' classification is not proportional to evidence when the key variable determining orderly vs. disorderly (depletion rate) is unknown. A proportional-confidence statement would be: 'appears orderly at this snapshot, but cannot assess sustainability without depletion rate data'.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MINOR_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 43,
+      "reviewer_notes": "The output demonstrates exceptionally strong epistemological discipline overall - extensive use of null hypothesis testing, honest acknowledgment of unknowns, repeated application of LZ-EPH-001 ('I don't know' as high-quality output), and transparent assumption counting in most sections. The violations found are relatively minor: one assumption-counting error that doesn't fundamentally undermine the finding's utility, two instances of slight overconfidence relative to evidence, and one case of treating future predictions as having more evidentiary weight than warranted. Notably, the hidden_moves section is exemplary - all three entries correctly apply INSUFFICIENT_EVIDENCE and cite the corrections ledger that blocked speculative inference. The x402_paper_trades section appropriately identifies the highest-value unknowns. The player_analysis say-do gap assessments are unusually rigorous. This output shows a mature analytical system that has internalized most epistemological constraints. The violations represent edge cases where discipline briefly wavered, not systemic reasoning flaws."
+    },
+    "violations_count": 4,
+    "compliance": "MINOR_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-17T17:07:33.145Z",
+    "layer": 4,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Kill Switch #1 final status GREEN with reasoning '45.5 PSI is 82% above the 25.0 PSI threshold. Single reading, but the margin is substantial.'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The reasoning explicitly acknowledges 'Single reading' but then treats the margin as providing confidence for GREEN status. A single data point cannot establish that the margin is stable or deteriorating. The status assignment implies the margin is durable, but this requires multiple observations across time. The confidence in GREEN status is not proportional to the single-point evidence.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Overall confidence: 'medium' with biggest uncertainty being depletion rate, yet tactical recommendation is INCREASE_MONITORING (not 'I don't know what action is appropriate')",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The analysis identifies that 'I cannot honestly tell you whether this system is coasting or collapsing' but still provides a definitive tactical recommendation (INCREASE_MONITORING). When the central determination (whether the system has hours or minutes) is genuinely unknown, the action recommendation should acknowledge this uncertainty more structurally. The recommendation appears confident despite acknowledged inability to assess the core question.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress level: ELEVATED with reasoning that includes 'CHALLENGES: The operational window is genuinely unknown. If reserves are depleting at >5%/min, the system transitions from ELEVATED to CRITICAL within approximately 10-15 minutes'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The assignment of ELEVATED confidence level is not proportional to the evidence when the analysis explicitly states the window could be 10-15 minutes. The confidence in the ELEVATED classification appears higher than warranted given that the system could be minutes from CRITICAL. The self-challenge is present but does not adjust the confidence level downward.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Active Tension T-5: 'The thesis paradox cannot be resolved without time-series data' with expected_resolution_window 'hours' and window_status 'within'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The expected resolution window of 'hours' and status 'within' expresses confidence in a timeline without evidence. The analysis does not know the SCADA telemetry cycle duration, the demand event duration, or the depletion rate. Assigning 'hours' as an expected window is speculative. 'Unknown' or a range would be proportional to evidence.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "KS#2 status MONITORING with reasoning 'MONITORING rather than GREEN because this is the most likely kill switch to approach first'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The status is adjusted based on a forward-looking prediction ('most likely to approach first') rather than current measurements. The current measurement (34 PSI with 14 PSI margin) is the verifiable fact. The prediction that this will decline first is inherently uncertain and carries different evidentiary weight than the current reading. The status should reflect current state, with the prediction noted separately.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 42,
+      "reviewer_notes": "The output demonstrates strong epistemological discipline overall — extensive use of null hypothesis testing, careful assumption counting, appropriate stripping of speculative inferences, and honest acknowledgment of unknowns. The violations are concentrated in areas where single-point measurements are used to assign status levels or confidence ratings that imply temporal stability. The analysis correctly identifies that it cannot determine whether the system has hours or minutes of margin, but then assigns status levels (ELEVATED, GREEN, MONITORING) with confidence that appears misaligned with that uncertainty. The core tension: the analysis knows it is working from a snapshot but treats some snapshot-derived assessments as if they have temporal durability. This is a subtle but real epistemological drift. The final report's honest statement 'I cannot honestly tell you whether this system is coasting or collapsing' is excellent, but earlier status assignments do not fully reflect that level of uncertainty."
     },
     "violations_count": 5,
     "compliance": "MODERATE_ISSUES",

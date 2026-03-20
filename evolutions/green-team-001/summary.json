@@ -4,7 +4,7 @@
   "evolution_type": "resilience_test",
   "evolution_number": 1,
   "mode": "full",
-  "run_timestamp": "2026-03-12T04:28:32.500Z",
+  "run_timestamp": "2026-03-17T17:32:54.252Z",
   "total_steps": 6,
   "completed_steps": 6,
   "failed_steps": 0,
@@ -16,14 +16,13 @@
       "thesis_status": "STABLE",
       "confidence": "medium",
       "action": "MAINTAIN_OPERATIONS",
-      "bear_pressure": 2,
-      "rejection_count": 4,
-      "corrections_promoted": 4,
+      "rejection_count": 0,
+      "corrections_promoted": 0,
       "gate_compliance": {
-        "layer1": "MODERATE_ISSUES",
-        "layer2": "SERIOUS_ISSUES",
-        "layer3": "MODERATE_ISSUES",
-        "layer4": "MODERATE_ISSUES"
+        "layer1": "MINOR_ISSUES",
+        "layer2": "MODERATE_ISSUES",
+        "layer3": "SERIOUS_ISSUES",
+        "layer4": "MINOR_ISSUES"
       },
       "errors": []
     },
@@ -34,9 +33,8 @@
       "thesis_status": "CONTESTED",
       "confidence": "medium",
       "action": "INCREASE_MONITORING",
-      "bear_pressure": 7,
-      "rejection_count": 1,
-      "corrections_promoted": 0,
+      "rejection_count": 2,
+      "corrections_promoted": 2,
       "gate_compliance": {
         "layer1": "MODERATE_ISSUES",
         "layer2": "MODERATE_ISSUES",
@@ -52,14 +50,13 @@
       "thesis_status": "CONTESTED",
       "confidence": "medium",
       "action": "INCREASE_MONITORING",
-      "bear_pressure": 8,
       "rejection_count": 3,
       "corrections_promoted": 3,
       "gate_compliance": {
         "layer1": "MODERATE_ISSUES",
         "layer2": "MODERATE_ISSUES",
         "layer3": "MODERATE_ISSUES",
-        "layer4": "MINOR_ISSUES"
+        "layer4": "MODERATE_ISSUES"
       },
       "errors": []
     },
@@ -70,13 +67,12 @@
       "thesis_status": "CONTESTED",
       "confidence": "medium",
       "action": "INCREASE_MONITORING",
-      "bear_pressure": 8,
       "rejection_count": 0,
       "corrections_promoted": 0,
       "gate_compliance": {
         "layer1": "MODERATE_ISSUES",
         "layer2": "MODERATE_ISSUES",
-        "layer3": "MODERATE_ISSUES",
+        "layer3": "MINOR_ISSUES",
         "layer4": "MODERATE_ISSUES"
       },
       "errors": []
@@ -85,17 +81,16 @@
       "step": 5,
       "label": "Stabilization and Capacity Confirmation",
       "simulated_date": "08:45:00",
-      "thesis_status": "CONTESTED",
+      "thesis_status": "STABLE",
       "confidence": "medium",
       "action": "INCREASE_MONITORING",
-      "bear_pressure": 5,
-      "rejection_count": 3,
-      "corrections_promoted": 3,
+      "rejection_count": 0,
+      "corrections_promoted": 0,
       "gate_compliance": {
         "layer1": "MODERATE_ISSUES",
         "layer2": "MODERATE_ISSUES",
         "layer3": "MODERATE_ISSUES",
-        "layer4": "MODERATE_ISSUES"
+        "layer4": "MINOR_ISSUES"
       },
       "errors": []
     },
@@ -106,9 +101,8 @@
       "thesis_status": "CONTESTED",
       "confidence": "medium",
       "action": "INCREASE_MONITORING",
-      "bear_pressure": 4,
-      "rejection_count": 3,
-      "corrections_promoted": 1,
+      "rejection_count": 0,
+      "corrections_promoted": 0,
       "gate_compliance": {
         "layer1": "MODERATE_ISSUES",
         "layer2": "MODERATE_ISSUES",
@@ -152,7 +146,7 @@
       {
         "step": 5,
         "expected_status": "SUPPORTED",
-        "actual_status": "CONTESTED",
+        "actual_status": "STABLE",
         "match": false,
         "notes": "Clear evidence of structural viability. The system is operating in a stable, mixed-mode configuration. Pressure is well above the 20 PSI critical contamination threshold."
       },
@@ -165,7 +159,7 @@
       }
     ]
   },
-  "corrections_ledger_final_count": 21,
+  "corrections_ledger_final_count": 26,
   "obscuration": {
     "original_domain": "Municipal Water Distribution SCADA Telemetry",
     "method": "Sector names and specific pump designations normalized",

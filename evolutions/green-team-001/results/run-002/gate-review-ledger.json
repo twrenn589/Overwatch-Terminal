@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-03-12T03:24:52.671Z",
+    "timestamp": "2026-03-17T16:27:58.145Z",
     "layer": 1,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -9,39 +9,63 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "Cavitation acoustic sensor at WARNING_ELEVATED - 'The clock is now running on this sensor state'",
+          "finding": "Cavitation acoustic sensor at WARNING_ELEVATED",
           "rule_violated": "LZ-RC-005",
-          "violation": "The statement 'the clock is now running' implies a forward-looking prediction (that something will happen within a timeframe) but is presented with the same evidentiary weight as the measurement itself. The sensor reading is a measurement; the temporal progression to CRITICAL_DAMAGE is a prediction. These are categorically different.",
-          "severity": "MINOR"
+          "violation": "The finding states 'If this condition is sustained without SCADA tripping the pumps offline, destructive mechanical failure occurs' — treating a forward-looking prediction (future mechanical failure) with the same evidentiary weight as the current measurement (WARNING_ELEVATED status). The prediction of what 'will occur' if conditions persist is given certainty inappropriate for a future event.",
+          "severity": "MODERATE"
         },
         {
           "finding": "Surge relief valve closed during extreme transient",
-          "rule_violated": "LZ-EH-005",
-          "violation": "The finding identifies a contradiction between valve status (CLOSED) and operator characterization of event ('massive sudden draw'), then resolves it by offering two explanations ('draw ramped gradually' or 'set point not reached') without independent tie-breaking evidence. The contradiction itself should be flagged as the finding, not resolved through speculation.",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence is rated 'medium' but the reasoning chain includes: (1) assumption that pumps will trip, (2) assumption this will create water hammer, (3) assumption the valve must actuate at that moment, and (4) assumption that current CLOSED status indicates unknown readiness. This is built on multiple unproven assumptions about future events, yet confidence is not proportionally reduced to 'low'.",
           "severity": "MODERATE"
         },
         {
-          "finding": "SCADA has not yet tripped pumps despite WARNING_ELEVATED cavitation - concludes 'duration of WARNING_ELEVATED state is unknown — this is a gap in available data'",
+          "finding": "Surge relief valve closed during extreme transient",
           "rule_violated": "LZ-EPH-003",
-          "violation": "The inference that 'either SCADA logic requires CRITICAL_DAMAGE before tripping, or a duration timer hasn't elapsed' rests on at least three unproven assumptions: (1) SCADA would definitely trip at WARNING_ELEVATED, (2) if not tripping, a timer mechanism exists, (3) that timer hasn't yet elapsed. This is an assumption chain of 3+ links without verification.",
+          "violation": "The inference chain contains at least three unproven assumptions: (1) pumps will trip imminently, (2) this will create water hammer conditions requiring valve actuation, (3) the valve's readiness is untested and therefore questionable. By the rule's threshold, this qualifies as speculative regardless of individual plausibility.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "SCADA auto-trip timing unknown under sustained WARNING_ELEVATED",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'medium' for a finding explicitly acknowledging 'critical unknown', 'gap...is a critical unknown', and 'SCADA trip logic thresholds not visible in current data'. When the core finding is 'we don't know', medium confidence is disproportionate to the evidence (which is absence of evidence). Should be low confidence or the finding should acknowledge this as LZ-EPH-001 territory.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Pressure differential suggests gravity reserves not yet deploying",
+          "finding": "Post-pump-trip pressure trajectory unmodeled",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The finding treats the post-trip pressure trajectory as if it can be analyzed with evidentiary weight comparable to current measurements. The entire analysis concerns a future event that has not occurred ('When SCADA trips primary pumps...') and explicitly acknowledges the dependencies are 'not visible'. This conflates prediction with measurement.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Operator posture is passive monitoring per protocol",
           "rule_violated": "LZ-RC-001",
-          "violation": "The finding correlates high reserve level (98%) with high pump load (98.5%) and infers causation ('pumps are bearing the entire load' because 'tanks have not yet opened'). The correlation is noted, but the causal mechanism ('deployment occurs on pressure differential trigger') is asserted without direct evidence that the trigger threshold has or hasn't been reached.",
+          "violation": "The finding describes operator behavior (observing protocol, not taking proactive action) and labels this as 'CONTRADICTORY' direction, implying a causal relationship between passive monitoring and deteriorating mechanical conditions. The correlation between operator posture and mechanical state is presented with causal framing ('during a rapidly deteriorating mechanical situation' implies the posture affects or fails to prevent deterioration), but no evidence establishes that operator action would alter pump cavitation or load state.",
           "severity": "MINOR"
         },
         {
-          "finding": "Imminent state transition: pump trip and gravity handoff - 'SCADA will likely trip pumps to prevent cavitation damage'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence is listed as 'medium' but the finding makes a definitive prediction ('SCADA will likely trip') and describes a specific future scenario ('rapid pressure drop that should activate gravity reserves') based on current state readings. The evidence cited (pump load + cavitation status) is measurement, but the confidence expressed applies to a prediction, not a measurement. For a forward-looking prediction with acknowledged gaps (SCADA timer duration unknown, valve behavior untested), medium confidence may be too high.",
+          "finding": "No inter-sector transfer or mutual aid activation visible",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The finding acknowledges 'Whether interconnects exist and are unused, or don't exist, is unknown' but assigns direction 'AMBIGUOUS' with severity 'moderate' and draws implications about 'total available water supply' being limited. This is using absence of evidence (no data on interconnects) to make inferences about system capability. The absence is correctly noted as unknown, but then treated as if it has evidentiary value for assessing supply limitations.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Imminent state transition: pump trip and gravity handoff",
+          "finding": "Regulatory compliance margin narrowing under stress",
           "rule_violated": "LZ-RC-005",
-          "violation": "The entire finding is predictive ('will likely trip', 'causing a rapid pressure drop', 'should activate gravity reserves', 'period of maximum vulnerability') but is categorized with the same severity/proximity structure as measurement-based findings. Predictions are inherently uncertain and should be distinguished from verifiable measurements in evidentiary weight.",
+          "violation": "The finding assigns 'DETERIORATION' direction and 'moderate' severity based almost entirely on a future conditional: 'system is on a trajectory where pump trip could rapidly compress that margin'. The analysis of consequences ('speed from current state to regulatory violation depends on...') is forward-looking prediction given weight comparable to the current measurement of 41.2 PSI. Current state shows compliance; the finding's weight rests on predicted future violation.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Single-reading vs. consecutive-reading ambiguity",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The finding correctly identifies that only a single data point is available, but then assigns analytical weight to questions about whether 'current values represent a stable plateau versus a point on a rapid decline curve'. Without multiple observations, no trend can be established, yet the finding treats the possibility of a trend as analytically significant. The honest position per LZ-EPH-001 would be 'insufficient data to assess trend' rather than treating single-point ambiguity as a finding with 'moderate' severity.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Fire department demand potentially uncoordinated with utility",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The finding builds on multiple unproven assumptions: (1) 'highly probable' language indicates lack of coordination rather than uncertainty in assessment, (2) lack of confirmed coordination means no communication channel exists, (3) fire operations could spike demand further, (4) utility has no ability to forecast. This is at least three sequential assumptions, qualifying the inference as speculative per the rule.",
           "severity": "MODERATE"
         }
       ],
@@ -49,15 +73,15 @@
       "model_used": "claude-sonnet-4-5-20250929",
       "gate_failed": false,
       "findings_reviewed": 15,
-      "clean_findings": 9,
-      "reviewer_notes": "Four findings involve prediction/measurement conflation (LZ-RC-005) or confidence calibration issues with forward-looking statements (LZ-EPH-002). One finding attempts to resolve a genuine data contradiction without tie-breaking evidence (LZ-EH-005). One finding contains a 3+ assumption chain (LZ-EPH-003). The violations cluster around handling of temporal uncertainty and contradictory signals. The majority of findings (9/15) followed all rules correctly. The analytical output demonstrates strong evidence-anchoring and blind-spot identification, but predictive inferences need tighter epistemic discipline."
+      "clean_findings": 5,
+      "reviewer_notes": "Multiple violations of LZ-RC-005 (prediction vs measurement) across forward-looking scenarios. Several findings correctly identify knowledge gaps but then assign confidence or severity ratings inconsistent with acknowledged uncertainty. The 'surge relief valve' finding is a SERIOUS violation with compounded assumptions about future state treated as analyzable present condition. Five findings (primary pump load, system flow threshold, gravity reserves intact, Sector 4 pressure, grid average pressure) demonstrated clean reasoning with evidence-proportional confidence."
     },
-    "violations_count": 6,
+    "violations_count": 10,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   },
   {
-    "timestamp": "2026-03-12T03:29:27.081Z",
+    "timestamp": "2026-03-17T16:32:26.837Z",
     "layer": 2,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -66,118 +90,156 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "SIG-008 bear pressure scoring: 'SCADA has not yet tripped pumps despite WARNING_ELEVATED cavitation' scored at severity 8 with MEDIUM confidence, reasoning states 'Per LZ-EH-005, if the design documentation (SCADA protects pumps) and the observation (pumps still running during cavitation) genuinely conflict, the contradiction itself is the finding.'",
-          "rule_violated": "LZ-EH-005",
-          "violation": "The reasoning correctly identifies a potential contradiction between design documentation and observed behavior, but then proceeds to score it as a directional signal (severity 8 negative pressure) rather than flagging the contradiction itself as the finding. LZ-EH-005 requires that when primary sources of equal evidentiary weight contradict, the contradiction must be flagged rather than resolved. The output should have flagged this as an unresolved contradiction requiring tie-breaking evidence (SCADA trip logic parameters or WARNING_ELEVATED duration data), not scored it as if the contradiction has been resolved in favor of 'SCADA is behaving anomalously.'",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "SIG-015 'Imminent state transition: pump trip and gravity handoff' reasoning states it 'combines observations from SIG-001, SIG-002, SIG-004, SIG-007 to project an imminent state transition' and acknowledges per LZ-EPH-003 that 'this inference about the transition outcome rests on 3+ unproven assumptions' making it SPECULATIVE, but then scores the transition itself at severity 8 with MEDIUM confidence",
-          "rule_violated": "LZ-EPH-003",
-          "violation": "The reasoning correctly identifies that predicting the transition OUTCOME violates LZ-EPH-003 due to assumption chains, but then attempts to split the finding into 'existence of approaching transition' (scored) vs 'outcome' (not scored). However, the term 'imminent' itself is a timing prediction (when will it occur) which depends on unknown SCADA trip logic parameters. The finding conflates the well-supported observation that preconditions exist (pumps at max load, cavitation at WARNING_ELEVATED) with the prediction that a transition is 'imminent.' The preconditions are verifiable; the imminence is speculative. The severity score should apply only to the verified preconditions, with 'imminence' flagged as assumption-dependent.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Bear pressure reasoning states 'WHY 7 AND NOT HIGHER: No kill switch has been triggered. The system is under extreme stress but the thesis's safety margins are holding.' This treats the absence of kill switch triggering as strong positive evidence.",
-          "rule_violated": "LZ-RC-003",
-          "violation": "The reasoning uses 'no kill switches have triggered' as affirmative evidence that safety margins are 'holding.' Per LZ-RC-003, absence of evidence (no trigger event) is not evidence of absence (system is not about to trigger) nor evidence of presence (safety margins are adequate). The kill switches not having triggered yet is informationally neutral about their likelihood of triggering in the next reading. The reasoning should rely on the measured buffers (41.2 PSI vs 20.0 threshold, 50.1 PSI vs 25.0 threshold) as the positive evidence, not the absence of the trigger event itself.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "SIG-007 'Surge relief valve closed during extreme transient' reasoning states 'The concern is FORWARD-LOOKING: when pumps trip, sudden flow cessation could create water hammer' and scores this at severity 6",
-          "rule_violated": "LZ-RC-005",
-          "violation": "The severity score of 6 is explicitly assigned to a forward-looking prediction (what will happen when pumps trip) rather than to a verifiable current-state measurement. Per LZ-RC-005, predictions and measurements carry fundamentally different evidentiary weight. The current measurement is 'valve status = CLOSED' which is itself not alarming (may simply not have reached set point). The severity score conflates the certain measurement (valve closed) with the uncertain prediction (valve may not respond correctly during pump trip). The reasoning acknowledges this is 'FORWARD-LOOKING' but then scores the prediction as if it were a measurement.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "SIG-009 'Demand source characteristics unknown' is scored at severity 7 (Tier 2, weighted 4.9) with reasoning 'we are scoring the importance of a gap, not a measured condition'",
-          "rule_violated": "LZ-EPH-001",
-          "violation": "The signal is explicitly described as unknown, yet assigned a directional severity score. Per LZ-EPH-001, 'I don't know' is a high-quality output and should not be converted into a directional severity score. The importance of the gap should be noted in the knowledge audit or as a flagged unknown, but scoring the gap itself as if it were a measured signal with directional pressure (7 = negative pressure on bear thesis) treats uncertainty as if it were evidence. The correct output is 'demand source unknown — cannot score directional impact.'",
-          "severity": "SERIOUS"
-        },
-        {
-          "finding": "SIG-011 'Single-snapshot reserve depletion rate unmeasurable' scored at severity 6 with reasoning 'The severity reflects the IMPORTANCE of the gap, not a threat direction'",
-          "rule_violated": "LZ-EPH-001",
-          "violation": "Same structural error as SIG-009. A measurement limitation is being scored as if it were a directional signal. Per LZ-EPH-001, the honest answer is 'rate unknown — cannot assess.' The importance of obtaining the next data point should be flagged in the summary or as a monitoring priority, not scored as a severity-6 signal. Scoring the gap itself conflates 'this information is important' with 'this information indicates threat level X.'",
-          "severity": "SERIOUS"
-        },
-        {
-          "finding": "Knowledge audit for SIG-015 states 'per LZ-EPH-003: this inference about the transition outcome rests on 3+ unproven assumptions (SCADA will trip soon, gravity will engage quickly enough, pressure won't drop below 20 PSI during transition, surge relief will handle water hammer). It is therefore SPECULATIVE as a prediction of outcome' but then in scored_signals the same finding is scored at severity 8 with confidence MEDIUM, stating 'Scored 8 for the severity of the transition as a structural event'",
+          "finding": "SIG-001 severity score 9/10 reasoning states 'Severity 9 rather than 10 because the condition itself is not a kill switch — it is the precursor forcing function.'",
           "rule_violated": "LZ-EPH-002",
-          "violation": "The knowledge audit correctly identifies the inference as SPECULATIVE due to assumption chains, but the scored signal assigns MEDIUM confidence to a severity-8 score. Per LZ-EPH-002, confidence must be proportional to evidence. If the outcome depends on 3+ unproven assumptions (making it speculative per LZ-EPH-003), confidence cannot be MEDIUM — it should be LOW or the finding should be split such that only the non-speculative components (verified preconditions exist) receive a confidence rating. The output attempts the split in reasoning but does not carry it through to the confidence assignment.",
+          "violation": "The severity reduction from 10 to 9 is justified by distinguishing precursor from kill switch activation, but the output does not provide evidence-based criteria for why a precursor one step removed from kill switch activation should be scored 9 rather than 8, 7, or 10. The confidence in the specific numerical assignment (9) is higher than the evidence cited supports. The reasoning explains what the signal IS but not why that specific severity number is proportional to the evidence.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-004 knowledge gap states 'If gravity reserves can only deliver 5,000 GPM but demand is 19,500 GPM, the reserves are intact but insufficient.' This specific hypothetical (5,000 GPM) is used to illustrate the gap.",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The 5,000 GPM figure is a hypothetical with no anchoring in the data. While used illustratively to explain the gap, it creates a specific numeric scenario (reserves delivering only 25% of demand) that could anchor subsequent reasoning without evidentiary basis. The gap explanation would be equally valid without the specific number: 'The delivery rate capacity is unknown, so reserves may be quantitatively intact but functionally insufficient.' The specific 5,000 GPM example is a coherent illustration but lacks real-world anchoring.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-007 assessment states 'Water hammer severity is unmodeled' and cites unknown pipe lengths, diameters, and flow velocities, then scores severity 6/10 and increases it from a pre-audit 5/10 'because the audit revealed that CLOSED tells us nothing about operational readiness, and the triggering condition (pump trip) is foreseeable.'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The output identifies three unknowns (pipe specs, flow velocity, valve readiness) but then assigns a specific severity score (6/10) and justifies a 1-point increase based on 'foreseeability' of the triggering condition. The confidence in the severity score is not proportional to the evidence: if water hammer dynamics are 'unmodeled' and valve readiness is 'untested,' the basis for scoring exactly 6/10 rather than acknowledging wider uncertainty is unclear. The score implies more precision than the admitted gaps support.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-010 scored 8/10 severity with reasoning: 'Scored 8 because it is the bridge between current stability and potential system failure.' The score increased from pre-audit 7/10 to 8/10 'because the audit revealed this is the critical link between current state and potential kill switch activation.'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The severity score is justified by the gap's importance ('critical link') rather than by the magnitude or probability of the outcome. The reasoning explains WHY the gap matters but not HOW MUCH impact the gap has on the kill switch probability. The 1-point increase is based on recognizing the gap's centrality, but centrality and severity are not the same dimension. A critical gap with wide possible outcomes (pressure could be 5 PSI or 50 PSI post-trip) might warrant 'I don't know' more than a confident 8/10. The precision of the score is higher than the uncertainty acknowledged.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Bear pressure reasoning states 'The previous bear pressure of 2 reflected a quiescent state. The system is now in active crisis with all readings taken during an extreme transient event.' This implies causal attribution of the pressure increase to the 'active crisis' state.",
-          "rule_violated": "LZ-RC-001",
-          "violation": "The reasoning correlates the bear pressure increase (2 → 7) with the 'active crisis' classification, but the bear pressure score should be derived from the measured signals and their relationship to kill switch thresholds, not from a narrative classification of the system state as 'crisis.' The co-occurrence of 'active crisis' language and bear pressure 7 does not mean the crisis classification caused or justifies the score. The score should be justified solely by the weighted severity of measured signals. The reasoning does provide this justification in the bullet points, but then adds the crisis-state correlation as if it were additional supporting evidence, which conflates correlation with causation.",
+          "finding": "SIG-006 reasoning states 'High confidence because the margin is large enough that even significant post-trip degradation would need to halve the grid average to approach the threshold.'",
+          "rule_violated": "LZ-RC-004",
+          "violation": "This reasoning assumes that 'halving' the grid average pressure would be required to approach the 25 PSI threshold from 50.1 PSI. This assumes a linear relationship and no localized collapse propagation. The simpler hypothesis ('we have one reading of 50.1 PSI, which is 25.1 PSI above threshold') is sufficient. The additional claim about what 'would need to' happen to threaten the threshold is a model of future behavior that has not been tested against the null hypothesis (that post-trip dynamics are unknown). The reasoning adds complexity (modeling required degradation magnitude) without evidence that simpler explanation (current margin exists, trajectory unknown) is insufficient.",
           "severity": "MINOR"
+        },
+        {
+          "finding": "Kill switch #2 status is marked 'WARNING' with notes: 'WARNING status because the transition event that could compress this margin is foreseeable, not because the current value is close to threshold.'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The WARNING status is assigned based on a forward-looking prediction (pump trip is 'foreseeable' and 'could compress this margin') rather than current measurement. The current measurement (41.2 PSI with 21.2 PSI margin) would support a MONITORING status. The WARNING status is based on predicted future state change, not verified present condition. Per LZ-RC-005, predictions and measurements carry fundamentally different evidentiary weight, and the status label should reflect the current measured state, not the anticipated trajectory. The reasoning conflates 'foreseeable transition' with 'current warning condition.'",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Kill switch #5 status is marked 'WARNING' with notes: 'WARNING status because the precursor condition is active and the gap to trigger is narrow.'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The 'gap to trigger is narrow' claim is asserted with high confidence despite the output explicitly stating the SCADA trip timing is unknown (SIG-008). If the gap is 'one state transition away' (WARNING_ELEVATED → CRITICAL_DAMAGE) but the dwell time before SCADA trips is unknown, then the temporal gap could be 10 seconds or 10 minutes. The confidence that the gap is 'narrow' is not proportional to the evidence, which shows only that the sensor state is one level below threshold, not that the time-to-threshold or time-to-protective-trip is short. The WARNING status may be appropriate, but the reasoning confidence exceeds what the unknown timing supports.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Layer 2 summary states 'a pump trip is the most foreseeable near-term event' based on SIG-001 (98.5% load) and SIG-002 (WARNING_ELEVATED cavitation).",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The claim that pump trip is 'the most foreseeable near-term event' is a forward-looking prediction presented with high confidence. While the precursor conditions (high load, active cavitation) are measurements, the timing and certainty of the pump trip are not. The output elsewhere correctly identifies SCADA trip timing as unknown (SIG-008), yet here presents the trip as 'foreseeable' without acknowledging the temporal uncertainty. This conflates 'precursor conditions exist' (measurement) with 'event will occur soon' (prediction). The foreseeability claim has higher confidence than the unknown SCADA logic supports.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Layer 2 summary states 'Current pressure margins are real but pump-sustained — their durability post-trip is the central unknown' and identifies this as requiring Layer 3 focus. However, the summary then directs Layer 3 to determine 'What Sector 4 pressure does immediately after trip — this determines whether kill switch #2 is approached.'",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The output correctly identifies post-trip pressure trajectory as unknowable from current data (SIG-010: elevation differential, pipe losses, gravity flow rate all unknown). It then tasks Layer 3 with determining this value. If the data gaps are structural (elevation, pipe specs), Layer 3 data of the same type (more SCADA telemetry) cannot resolve them. The honest output is 'post-trip pressure cannot be determined without infrastructure data not present in SCADA feeds,' but instead the output implies Layer 3 can resolve it. This avoids 'I don't know' as the finding and instead defers the gap as solvable by further monitoring, when the gap type (THESIS_CAPABILITY_GAP per the knowledge audit) indicates it is not.",
+          "severity": "MODERATE"
         }
       ],
       "compliance": "MODERATE_ISSUES",
       "model_used": "claude-sonnet-4-5-20250929",
       "gate_failed": false,
       "findings_reviewed": 47,
-      "clean_findings": 39,
-      "reviewer_notes": "Two SERIOUS violations both involve scoring gaps/unknowns as if they were directional signals (SIG-009, SIG-011). This is a structural pattern: the output correctly identifies what is unknown in the knowledge audit, then proceeds to assign severity scores to the unknowns themselves. Four MODERATE violations involve conflating predictions with measurements (SIG-007, SIG-015) or failing to properly flag contradictions (SIG-008). The output demonstrates strong knowledge audit discipline and extensive citation of correction ledger entries, but the transition from 'I don't know' in the audit to directional scoring in the signals array undermines LZ-EPH-001. The SIG-008 contradiction (SCADA design vs observed behavior) should have been flagged as unresolved per LZ-EH-005 rather than scored as anomalous behavior. Recommend Sunday review focus on: (1) the gap-scoring pattern and (2) whether the SIG-008 contradiction genuinely meets LZ-EH-005 criteria for equal-weight sources or whether design documentation vs real-time telemetry have different evidentiary weights that would allow resolution."
+      "clean_findings": 38,
+      "reviewer_notes": "This output demonstrates strong epistemological discipline in most areas — particularly in the application of the corrections ledger (CL-001, CL-004, CL-005, CL-009, CL-017) to prevent unwarranted inferences, and in the comprehensive knowledge audit that honestly identifies gaps. The violations are concentrated in two patterns: (1) confidence in specific numerical severity scores that exceed the precision warranted by acknowledged unknowns (LZ-EPH-002), and (2) treatment of forward-looking predictions ('foreseeable' pump trip, post-trip pressure trajectory) with confidence levels appropriate to measurements rather than predictions (LZ-RC-005). The most significant issue is the Layer 2 summary tasking Layer 3 with resolving a gap the output itself classified as a THESIS_CAPABILITY_GAP requiring infrastructure data not available in telemetry — this contradicts the honest 'I don't know' that the knowledge audit supports (LZ-EPH-001). None of the violations are SERIOUS enough to undermine the core findings, but the pattern of over-confidence in numerical precision and future-state predictions should be flagged for Sunday review. The output is substantially compliant and the violations are correctable through tighter calibration of confidence language and severity score justification."
     },
-    "violations_count": 8,
+    "violations_count": 9,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   },
   {
-    "timestamp": "2026-03-12T03:33:42.441Z",
+    "timestamp": "2026-03-17T16:36:44.138Z",
     "layer": 3,
-    "model_used": "claude-sonnet-4-5-20250929",
-    "tier1_flags_count": 0,
+    "model_used": "claude-opus-4-6",
+    "tier1_flags_count": 1,
     "tier1_hard_fails": 0,
-    "tier1_flags": [],
+    "tier1_flags": [
+      {
+        "rule_id": "LZ-EPH-003",
+        "finding": "SCADA say-do gap: thesis says 'ruthless' pump protection, but pumps remain online during active cavitation warning",
+        "detail": "assumption_count is 0 but assumptions array has 1 entries. Miscount detected.",
+        "severity": "FLAG",
+        "timestamp": "2026-03-17T16:36:03.017Z"
+      }
+    ],
     "gate_result": {
       "violations": [
         {
-          "finding": "Strategic Inference #1 - SCADA pump trip analysis - confidence rating of 'medium'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence is rated 'medium' when the finding explicitly states 'I will not infer SCADA's internal logic state' and relies on characterization from thesis documentation ('ruthless') that is not a specification. The evidence cited (pumps running, cavitation at WARNING_ELEVATED) supports only the observation, not the inference about what SCADA's trip parameters are. The finding correctly identifies this as unknowable but then assigns medium confidence to the null hypothesis explanation. If the trip parameters are unknowable, confidence should be low or the finding should be 'INSUFFICIENT_EVIDENCE'.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Strategic Inference #3 - Imminent state transition - classification as 'VALID' with one assumption",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "The finding classifies the inference as VALID with one assumption ('Demand will persist at current or higher levels') but rates confidence as 'medium'. The entire inference depends on this single unproven assumption about demand trajectory, which is explicitly identified as unknown in SIG-009. The reasoning acknowledges 'we have no data on demand trajectory' yet proceeds to classify the inference as valid rather than INSUFFICIENT_EVIDENCE. Confidence should be proportional to the fact that the core driver (demand persistence) is unmeasured.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Scenario Probabilities - thesis_confirmed 45%, thesis_modified 30%, thesis_falsified 25%",
+          "finding": "Strategic inference: SCADA say-do gap — assumption_count listed as 0 but assumptions array contains 1 entry ('The alternative explanation assumes SCADA trip threshold is at CRITICAL_DAMAGE only — one unproven assumption')",
           "rule_violated": "LZ-EPH-003",
-          "violation": "The probability assignments rest on multiple unproven assumptions: (1) SCADA trip logic parameters and timing, (2) gravity tank head pressure and deployment dynamics, (3) surge valve response during transition, (4) demand trajectory and persistence, (5) transition speed of gravity flow. The analysis itself identifies these as 'multiple compounding unknowns' and 'genuine uncertainty' yet assigns specific probability percentages. With 3+ core assumptions about the transition mechanism unresolved, these probabilities are speculative. The honest answer per LZ-EPH-001 would be 'INSUFFICIENT_EVIDENCE to assign probabilities until transition parameters are known'.",
-          "severity": "SERIOUS"
+          "violation": "The assumption_count field states 0 but the assumptions array contains 1 entry. This is an arithmetic miscount. While 1 assumption does not trigger the speculative threshold (3+), the miscount itself is a structural integrity error in self-reporting. The code-level flag correctly identified this.",
+          "severity": "MINOR"
         },
         {
-          "finding": "Player Analysis - SCADA 'inferred_strategy' stating 'SCADA is executing its programmed logic faithfully'",
+          "finding": "Hidden move: SCADA Automated Logic — 'SCADA may be executing internal countdown or dwell-time evaluation before protective pump trip' classified as SPECULATIVE with assumption_count 3",
           "rule_violated": "LZ-EPH-002",
-          "violation": "The finding rates confidence as 'medium' for the statement that SCADA is executing programmed logic faithfully, but the same section acknowledges that SCADA's actual programmed parameters 'cannot be confirmed from available data' and that trip logic may include 'thresholds or timers we cannot see'. If the programmed logic is invisible, the claim that SCADA is faithfully executing it is an assumption, not an inference. The evidence supports only that pumps are running, not that this represents faithful execution of unknown logic.",
+          "violation": "The classification as SPECULATIVE and confidence as 'low' are correct and rule-compliant. However, the 'evidence_hints' field states 'Kill switch #5 language acknowledges sustained WARNING_ELEVATED as a precondition, implying dwell time is designed' — this is cited as an evidence hint but is actually an inference from thesis language, not from observed SCADA behavior. This blurs the line between evidence and interpretation but the low confidence and SPECULATIVE classification mitigate the impact.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Scenario probability: thesis_confirmed at 40%",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "A specific probability of 40% is assigned to thesis confirmation, but the key evidence cited includes the unresolved gravity delivery adequacy gap — which the analysis itself repeatedly identifies as THE decisive unknown. Assigning a numeric probability when the central variable is acknowledged as unknown implies a precision that the evidence does not support. The analysis correctly identifies that the thesis 'cannot be evaluated as confirmed or falsified until the pump-trip transition actually occurs' in the inference summary, yet assigns a 40% probability in the scenario section. These are in tension. The honest output per LZ-EPH-001 would be to acknowledge that the probabilities are not calculable given the central unknown.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Compound Stress Inference - 'catalyst_proximity: CLOSE but temporally undefined'",
+          "finding": "Scenario probability: thesis_modified at 35%",
           "rule_violated": "LZ-EPH-002",
-          "violation": "The assessment states the catalyst is 'CLOSE' while simultaneously stating its temporal proximity 'depends on SCADA logic we cannot observe' and has 'unknown timing' for all three possible triggers. 'CLOSE' implies measurable proximity, but the finding provides no temporal measurement or bound. The honest characterization per LZ-EPH-001 would be 'proximity unknowable without SCADA trip parameters'. The use of 'CLOSE' conveys confidence not supported by the evidence.",
+          "violation": "Same issue as thesis_confirmed. A specific 35% probability is assigned to a scenario whose realization depends on the unmodeled gravity delivery variable, which the analysis admits is unknown. The modification scenario ('pressure drops to 25-30 PSI range') cites specific PSI values that have no evidentiary basis — no hydraulic model, no elevation data, no friction coefficients are available. The specificity of '25-30 PSI' creates false precision from no data.",
           "severity": "MODERATE"
+        },
+        {
+          "finding": "Scenario probability: thesis_falsified at 25%",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Same structural issue. A 25% probability is assigned when the central variable (gravity delivery adequacy) is explicitly unknown. All three probabilities sum to 100%, creating the appearance of a complete probability distribution when the evidence base explicitly cannot support one. The analysis itself states the outcome is unknowable until the pump-trip transition occurs.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Compound stress inference: 'The catalyst is approaching the system on a timeline governed by the unknown SCADA dwell time'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The statement treats the pump trip as a near-certainty ('not IF but WHEN') based on current WARNING_ELEVATED status. While this is presented as a foreseeable event rather than a confirmed measurement, the framing gives predictive weight approaching certainty. The pump trip is a prediction, not a measurement. SCADA could also NOT trip if, for instance, demand subsides and cavitation drops below WARNING_ELEVATED before the dwell time elapses. The analysis acknowledges this possibility nowhere in the compound stress section, treating the trip as inevitable rather than conditional.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Behavioral pattern: 'SCADA and Operators are both in wait for threshold mode while conditions actively deteriorate'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The characterization 'conditions actively deteriorate' implies a trend, but the analysis is based on a single snapshot of telemetry data. There is no prior reading to compare against. The analysis cannot establish that conditions are deteriorating (getting worse over time) versus conditions being static at a stressed state. The output itself notes elsewhere that trend data is unavailable (x402 paper trade requesting prior readings). A single reading at WARNING_ELEVATED is a state, not a deterioration trajectory.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Feedback loop: Demand → Pump Stress → Cavitation → Forced Trip → Pressure Drop → Gravity Activation — current_state classified as 'active_accelerating'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The loop is classified as 'accelerating' but the analysis has only a single time-point of telemetry data. Acceleration requires at minimum two data points showing increasing rate of change. The justification ('time itself is the forcing variable') is a physical reasoning argument, not an observed measurement of acceleration. The analysis conflates a physically plausible narrative about degradation over time with observed acceleration, which has not been measured. Per LZ-CC-001, physical plausibility without measurement is not evidence.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Player analysis: Demand Source inferred_strategy — 'The demand source is pursuing its own operational objective (probable fire suppression) with no regard for — and likely no visibility into — water system stress levels'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The claim that the demand source has 'no visibility into water system stress levels' treats absence of evidence of coordination as evidence of no visibility. Per LZ-RC-003, the absence of visible coordination data does not prove the demand source lacks visibility. The analysis correctly applies CL-005 to not credit coordination, but then goes further to assert the demand source positively lacks visibility, which is an inference from absence.",
+          "severity": "MINOR"
         }
       ],
       "compliance": "MODERATE_ISSUES",
-      "model_used": "claude-sonnet-4-5-20250929",
+      "model_used": "claude-opus-4-6",
       "gate_failed": false,
-      "findings_reviewed": 47,
-      "clean_findings": 42,
-      "reviewer_notes": "The output demonstrates strong epistemological discipline in most areas, particularly in corrections ledger application and null hypothesis testing. The violations cluster around a specific pattern: correctly identifying unknowns and data gaps, then assigning confidence levels or classifications that are not proportional to those gaps. The analyst appears to understand what is unknown but struggles to translate that understanding into appropriately cautious confidence ratings. The most serious violation is the scenario probability assignment—the analysis itself explains why these probabilities cannot be known, then provides them anyway. This is the classic 'satisficing' error: providing an answer because one is expected rather than declaring INSUFFICIENT_EVIDENCE. Strategic Inferences #2, #4, #5, and #6 all correctly hold to null hypothesis and show proper reasoning. The hidden moves section correctly rejects all speculation per corrections ledger. The violations do not appear to be directional (favoring thesis or opposing it)—they are structural overconfidence issues."
+      "findings_reviewed": 28,
+      "clean_findings": 19,
+      "reviewer_notes": "The most significant structural issue is the assignment of specific numeric probabilities (40/35/25) to scenarios when the analysis itself repeatedly and correctly identifies that the decisive variable (gravity delivery adequacy) is unknown. The analysis demonstrates excellent epistemological discipline in most areas — the corrections ledger application is rigorous, null hypothesis testing is consistently applied, hidden moves are correctly classified as SPECULATIVE, and the 'I don't know' principle is well-applied in most findings. The probability assignment section contradicts the epistemological discipline demonstrated everywhere else in the output. The 'active_accelerating' and 'actively deteriorating' language throughout the output is a recurring single-data-point-as-trend issue that appears in multiple sections. Recommend the Sunday audit examine whether the probability assignment framework should require explicit acknowledgment when central variables are unknown, rather than forcing numeric distribution."
     },
-    "violations_count": 5,
+    "violations_count": 9,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   },
   {
-    "timestamp": "2026-03-12T03:37:37.937Z",
+    "timestamp": "2026-03-17T16:40:48.682Z",
     "layer": 4,
     "model_used": "claude-sonnet-4-5-20250929",
     "tier1_flags_count": 0,
@@ -186,62 +248,50 @@
     "gate_result": {
       "violations": [
         {
-          "finding": "Compound stress level elevated to CRITICAL with reasoning: 'two kill switches simultaneously at WARNING status is an unprecedented escalation'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "Single data point treated as trend. The analysis calls this 'unprecedented escalation' based on a single telemetry snapshot with no historical comparison data. There is no verified evidence that two kill switches at WARNING simultaneously has never happened before, nor that this represents an escalation from a previous state (no prior readings exist in this dataset). The characterization of 'unprecedented' and 'escalation' implies a historical pattern that has not been established.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Thesis status CONTESTED with 25% falsification probability scenario from Layer 3, reweighted but retained in reasoning",
+          "finding": "Compound stress level assessment: ELEVATED with reasoning that 'CRITICAL would require either a kill switch at imminent trigger or a component failure — neither has occurred'",
           "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence not proportional to evidence. The output acknowledges the 25% probability 'carries false precision for an event with this many unknowns' and notes it rests on 3+ unproven assumptions, yet the specific percentage is retained in the rejection log and implicitly carries weight in the CONTESTED classification reasoning. If the precision is false and the assumptions are unproven per LZ-EPH-003, the probability itself should be stripped, not just flagged. The output hedges rather than fully applying its own epistemological standard.",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "Inference that 'state transition (pump trip and gravity handoff) is approaching' classified as VALID with 'one assumption (demand persistence)'",
-          "rule_violated": "LZ-EPH-003",
-          "violation": "Assumption count is understated. The inference actually rests on multiple unproven assumptions: (1) demand persists long enough, (2) SCADA will trip the pumps at all (the null hypothesis says this is likely but unverified), (3) the trip will occur soon rather than after cavitation escalates further, (4) the transition will involve gravity handoff rather than some other response. The output counts only assumption #1. While the output does appropriately reduce weight for the prediction vs. the measurement of preconditions, the classification as VALID with 'one assumption' understates the inference chain.",
+          "violation": "Confidence is not proportional to evidence. The output acknowledges that SCADA trip timing is unknown (kill switch #5 may be at 'sustained WARNING_ELEVATED'), post-pump-trip pressure trajectory is unmodeled (kill switch #2 could be approached immediately after a foreseeable event), and the output itself states 'the next state transition (pump trip) could occur at any moment.' The reasoning declares that a kill switch is not at 'imminent trigger' while simultaneously acknowledging two kill switches are at WARNING status with unknown temporal proximity to activation. The claim 'neither has occurred' conflates 'not yet triggered' with 'not imminent' without evidentiary basis for the timing distinction.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Kill Switch #1 downgraded from MONITORING to GREEN with reasoning 'buffer is so substantial that even a significant system-wide pressure drop would not approach the threshold in the next cycle'",
-          "rule_violated": "LZ-RC-005",
-          "violation": "Prediction given inappropriate weight. The reasoning for downgrade is a forward-looking prediction ('would not approach the threshold in the next cycle') rather than a measurement-based assessment. The current 50.1 PSI measurement is 2x the 25.0 PSI threshold, which supports GREEN status, but the justification explicitly relies on predicting the next cycle's behavior. The conclusion may be correct, but the reasoning violates the distinction between measurements (current state = GREEN-worthy) and predictions (future state = speculative).",
-          "severity": "MINOR"
-        },
-        {
-          "finding": "Velocity note: 'System transitioned from quiescent (bear pressure 2) to active crisis (bear pressure 7) in a single telemetry cycle — this is the fastest possible escalation rate'",
-          "rule_violated": "LZ-RC-002",
-          "violation": "Single data point treated as trend. The output has only one telemetry snapshot and claims to measure 'escalation rate' and 'velocity.' The reference to 'bear pressure 2' appears to come from the thesis's baseline characterization, not from a prior telemetry reading in this monitoring sequence. Without at least two measurements from this monitoring system, 'escalation rate' and 'velocity' are unmeasurable. The finding confuses the thesis's prior baseline assessment with an actual prior measurement.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Final bear pressure of 7 with 'biggest uncertainty' cited as SCADA trip logic parameters, and claim that this 'could swing 2-3 points in either direction'",
-          "rule_violated": "LZ-EPH-002",
-          "violation": "Confidence not proportional to uncertainty acknowledged. The output acknowledges that the single biggest uncertainty could move bear pressure by 2-3 points (from 4-5 up to 9-10), representing a 30-43% swing in the assessment. This level of acknowledged uncertainty is inconsistent with 'medium' overall confidence. If a single unknown can move the assessment from 'approaching crisis resolution' (4-5) to 'emergency threshold' (9-10), the confidence in the current assessment of 7 should be 'low,' not 'medium.' The output's own sensitivity analysis undermines its stated confidence level.",
-          "severity": "MODERATE"
-        },
-        {
-          "finding": "Paradox between SCADA design characterization and observed behavior 'held per LZ-EH-005' with medium confidence resolution",
+          "finding": "Contradiction resolution: SCADA say-do gap resolved as 'paradox_held' with conclusion that 'Per LZ-EH-005, contradictions between equal-weight sources must be flagged, not resolved. The thesis statement and the observed behavior are both primary evidence. The contradiction itself is the finding.'",
           "rule_violated": "LZ-EH-005",
-          "violation": "Contradiction resolution violates the rule's requirement. LZ-EH-005 states that when primary sources of equal evidentiary weight directly contradict, the contradiction must be flagged rather than resolved, and 'the contradiction itself is the finding.' The output does flag the contradiction but then partially resolves it by accepting a 'null hypothesis' that SCADA's trip parameters might be different than the thesis implies. This is reasonable operational reasoning, but it violates the strict epistemological requirement: the output should declare the contradiction unresolvable without the SCADA configuration data (which would be independent, tie-breaking evidence). Instead, it hedges with 'paradox held' while simultaneously offering a resolution pathway. The output is trying to have it both ways.",
+          "violation": "The output correctly invokes LZ-EH-005 and correctly flags the contradiction, but then violates the rule by providing a resolution mechanism ('may resolve temporally') and offering conditional predictions about what would vindicate each interpretation ('if SCADA trips soon, the characterization holds... if it doesn't trip and damage progresses, the characterization was inaccurate'). LZ-EH-005 requires that equal-weight contradictions be flagged as the finding itself, not that they be flagged AND THEN resolved through speculative temporal pathways. The output attempts to have it both ways — claiming to hold the paradox while simultaneously sketching resolution conditions.",
           "severity": "MODERATE"
         },
         {
-          "finding": "Unresolved tension described as 'The imminent pump trip is simultaneously the highest-risk and highest-validation event for the thesis. This paradox cannot be resolved analytically — it resolves only through observation'",
-          "rule_violated": "LZ-CC-001",
-          "violation": "Logically coherent narrative presented without real-world anchoring. The characterization of the pump trip as 'simultaneously highest-risk and highest-validation' is internally consistent and rhetorically compelling, but it is a narrative framing rather than a data-anchored observation. The pump trip will produce observable outcomes (pressure maintained or not, reserves depleted or not), and those outcomes will either support or contradict the thesis. The 'paradox' language suggests a philosophical tension rather than an empirical question with a measurable answer. This is the Plausibility Trap — the narrative is coherent but not anchored to verifiable physical measurements that can resolve the framing.",
+          "finding": "Inference: 'SCADA may be executing internal countdown before pump trip' with final_weight reduced_75 and classification SPECULATIVE",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The output classifies this inference as SPECULATIVE and applies a 75% weight discount, but the reasoning supporting this inference rests on 3+ unproven assumptions: (1) that SCADA has a dwell time parameter, (2) that WARNING_ELEVATED is within the dwell tolerance, (3) that the dwell time has not yet elapsed. Per LZ-EPH-003, 'An inference built on three or more unproven assumptions is speculative, regardless of how plausible each individual assumption appears.' The output correctly identifies speculation but then allows the inference to remain at 75% weight. LZ-EPH-003 establishes a hard threshold: 3+ assumptions = speculative classification should result in exclusion from weight-bearing inference, not merely discounting. The burden of proof framework appears to allow SPECULATIVE inferences at reduced weight, which conflicts with LZ-EPH-003's harder boundary.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Kill switch #2 assessment: 'WARNING confirmed. While 21.2 PSI margin exists currently, this margin is contingent on active pumping that is about to end. The post-trip pressure is THE decisive measurement.'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The reasoning treats a forward-looking prediction ('pumping that is about to end') with equal evidentiary weight to a current measurement (41.2 PSI current reading, 21.2 PSI current margin). The phrase 'about to end' is a prediction, not a measurement. The current state is WARNING based on measured present conditions, but the escalation reasoning conflates the measured present state with a predicted future state. Per LZ-RC-005, 'Forward-looking predictions and historical measurements carry fundamentally different evidentiary weight. Predictions are inherently uncertain. Measurements are verifiable.' The WARNING status may be justified, but the reasoning should distinguish between what is measured now (safe margin) and what is predicted (margin loss after pump trip).",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Thesis status reasoning: 'Evidence pulls in both directions simultaneously: current stability supports the thesis, but that stability is about to be tested by a foreseeable transition whose outcome is unmodeled.'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The reasoning treats a future event ('about to be tested') as having current evidentiary weight equivalent to measured current stability. The phrase 'about to be tested' is predictive. Current measurements show stability within design parameters (thesis-supporting evidence). The unmodeled future transition is not evidence that currently pulls against the thesis — it is uncertainty about future evidence. Per LZ-RC-005, predictions and measurements are categorically different. The thesis status of CONTESTED may be appropriate, but the reasoning conflates present evidence (supports thesis) with future uncertainty (unknown) as if they are equivalent forces 'pulling in both directions simultaneously.'",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "What would change assessment: 'If it holds above 30 PSI, thesis status moves to STRENGTHENING... If it drops below 25 PSI, thesis status moves to WEAKENING... If it drops below 20 PSI... thesis status becomes FALSIFIED'",
+          "rule_violated": "LZ-RC-005",
+          "violation": "This is meta-commentary about how future measurements would change the assessment, which is appropriate guidance. However, the precision of the thresholds (30 PSI, 25 PSI, 20 PSI) is presented without justification for why those specific values would trigger those specific status changes. The 20 PSI threshold is anchored to kill switch #2 (verifiable), but the 30 PSI and 25 PSI thresholds appear to be forward projections without empirical anchoring. This creates a false precision in predicting how future evidence would be weighted. The violation is mild because this is explicitly labeled as forward-looking guidance, but the unjustified precision in predictive thresholds suggests treating predictions with measurement-level specificity.",
           "severity": "MINOR"
         }
       ],
       "compliance": "MODERATE_ISSUES",
       "model_used": "claude-sonnet-4-5-20250929",
       "gate_failed": false,
-      "findings_reviewed": 47,
-      "clean_findings": 39,
-      "reviewer_notes": "The output demonstrates strong epistemological discipline in most areas — particularly in correctly stripping speculative inferences, applying null hypotheses, and using LZ-EH-003 (actions over statements) appropriately. However, it has a systematic issue with single-snapshot measurements being treated as trends or velocities (LZ-RC-002 violations), and confidence calibration is inconsistent with the acknowledged uncertainties (LZ-EPH-002). The most significant issue is the LZ-EH-005 handling: the output correctly identifies the need to hold contradictions but then undermines that by offering resolution pathways, suggesting the analyst is uncomfortable with true epistemological ambiguity. The output would be stronger if it more cleanly separated 'what we measure' from 'what we predict' and fully embraced 'I don't know' where the data gaps are genuine. The violations are moderate in severity but numerous enough to warrant attention in the Sunday audit — this is sophisticated analysis that is stretching epistemological rules rather than breaking them carelessly."
+      "findings_reviewed": 87,
+      "clean_findings": 81,
+      "reviewer_notes": "The output demonstrates strong epistemological discipline in most areas — null hypotheses are tested first, data gaps are honestly flagged, speculative inferences are stripped or discounted, and 'I don't know' is used appropriately for the gravity delivery capacity question. The violations center on temporal reasoning: the output struggles to maintain the distinction between measured present states and predicted future states, particularly when the predicted state transition is highly foreseeable (pump trip). This creates a pattern where predictions about imminent events are weighted nearly as heavily as current measurements. The LZ-EH-005 violation is the most significant — the output correctly identifies the need to flag contradictions but then undermines that discipline by offering speculative resolution pathways. The LZ-EPH-002 violation regarding compound stress classification shows overconfidence given acknowledged unknowns about temporal proximity to kill switch activation. Overall, the reasoning is sound in ~93% of findings, but the violations occur in high-impact assessments (compound stress level, thesis status, kill switch evaluations)."
     },
-    "violations_count": 8,
+    "violations_count": 6,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
   }

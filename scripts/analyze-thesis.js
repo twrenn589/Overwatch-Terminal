@@ -757,6 +757,7 @@ For each significant signal from Layer 1, perform the following check BEFORE sco
    - Assess compound stress level using the thresholds defined in the THESIS CONTEXT (Compound Stress Matrix section).
    - The break point of a pre-loaded structure is LOWER than the break point of an unloaded structure. If one leg is already elevated, less force is needed from the other two to reach critical. State this explicitly.
    - Velocity and trajectory matter as much as current level. A fast move toward a threshold is more dangerous than sitting at it.
+   - COMPONENT VERIFICATION RULE: When claiming collective directional movement across multiple indicators (e.g., "all legs deteriorating," "simultaneous convergence"), verify each component independently against its own current data before making the collective claim. Asserting uniform direction without per-component verification is a factual error. If one component contradicts the collective claim, state the exception explicitly. [Graduated from CL-017]
 
 4. KNOWLEDGE GAP IDENTIFICATION
    Honestly identify what you DON'T know. This is high-value output. Admitting "I don't know X and it matters for this assessment" is MORE valuable than guessing.
@@ -769,6 +770,8 @@ For each significant signal from Layer 1, perform the following check BEFORE sco
    - THRESHOLD_CALIBRATION_GAP: "This threshold was set under different conditions and may need recalibration"
    - DATA_AVAILABILITY_GAP: "I need data that isn't in my current inputs to score this accurately"
    - COMPETITIVE_KNOWLEDGE_GAP: "I don't understand the competing infrastructure well enough to assess this signal"
+
+   OBSERVABILITY RULE: If infrastructure relevant to the thesis has no publicly observable usage data, its theoretical operational failure modes cannot be scored as current signals — there is nothing to measure. Classify the absence of observable data as a DATA_AVAILABILITY_GAP and flag the infrastructure as a structural gap candidate for Layer 4. If you are uncertain whether observable data exists, say so explicitly and flag it as a candidate for deeper investigation — do not assume either availability or absence. Sustained non-adoption over a meaningful timeframe is a distinct, separately scorable signal — but it requires evidence of non-adoption, not mere absence of data. [Graduated from CL-011]
 
 === PHASE 2: CONTEXTUAL SCORING ===
 
@@ -783,6 +786,7 @@ For each signal from Layer 1:
      * Tier 1 (core thesis sources): full weight
      * Tier 2 (domain monitors): 0.7x weight
      * Tier 3 (keyword catches): 0.4x weight unless corroborated
+   - SOURCE TRACK RECORD CHECK: Before assigning severity above 5 to any marketing communication, press release, or public statement, verify the source entity's track record of follow-through in the thesis domain. An entity with a documented history of slow adoption or non-delivery requires corroborating evidence of actual technical deployment or contractual commitment before reaching high severity. Marketing language does not upgrade evidentiary weight. [Graduated from CL-005]
 
 2. THESIS RELEVANCE
    - DIRECT: Threat directly impacts a kill switch or falsification criterion
@@ -1041,6 +1045,8 @@ For each major finding from Layer 2, provide the most rational explanation given
 For every inference that passes the null hypothesis test, you MUST declare:
 - expected_timeline: How long before this inference should produce observable evidence? Days, weeks, months, or quarters.
 - materialization_signal: What specific, observable outcome would confirm this inference?
+
+EXTERNAL CONDITIONS ≠ INTERNAL RESPONSE: External conditions acting on a thesis-relevant entity are not evidence of how that entity is responding internally. Do not infer acceleration, strategic shifts, or changed timelines from external pressure without direct evidence of changed plans, resource allocation, or announced actions from the entity itself. Without that evidence, the null hypothesis holds. [Graduated from CL-033]
 
 D) HIDDEN MOVES — What are players most likely doing that they're NOT talking about? Based on incentive analysis, what non-public actions would be rational?
 

@@ -1,39 +1,42 @@
 [
   {
-    "layer3_inference": "MWA emergency procurement of Pump 4 parts (hidden move)",
+    "layer3_inference": "MWA emergency procurement / mutual aid activation (hidden move)",
     "signal_ids": [
-      "20260312-0034-SIG-004",
-      "20260312-0034-SIG-013"
+      "20260317-1438-SIG-004",
+      "20260317-1438-SIG-011"
     ],
-    "rejection_reason": "SPECULATIVE classification (3 assumptions) with zero supporting data. Correctly stripped by Layer 3 before reaching Layer 4. I confirm the stripping. This inference class has been flagged across CL-002, CL-003, CL-005, CL-007, and CL-009 — five separate corrections ledger entries. The persistent recurrence of this inference class across cycles is noted. It is plausible but entirely unsupported.",
+    "rejection_reason": "SPECULATIVE classification with 3 assumptions and zero supporting data. This inference class has been flagged across 7+ corrections ledger entries with zero evidence ever materializing. Stripped entirely from scoring per burden of proof protocol.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T00:46:17.253Z",
+    "timestamp": "2026-03-17T14:50:47.102Z",
     "source": "layer4_reconcile"
   },
   {
-    "layer3_inference": "MWA internal demand management (hidden move)",
+    "layer3_inference": "MWA internal contingency planning for Pump 3 failure (hidden move)",
     "signal_ids": [
-      "20260312-0034-SIG-014"
+      "20260317-1438-SIG-001",
+      "20260317-1438-SIG-002",
+      "20260317-1438-SIG-014"
     ],
-    "rejection_reason": "SPECULATIVE classification (3 assumptions) with zero supporting data. Per LZ-RC-003, absence of visible conservation orders does not confirm they haven't been issued. Per CL-007, this inference class is stripped.",
+    "rejection_reason": "SPECULATIVE classification with 3 assumptions and zero supporting data. Maintenance log shows awareness (temp warning) but zero documented contingency actions. Per corrections ledger, this inference class is unsupported.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T00:46:17.253Z",
+    "timestamp": "2026-03-17T14:50:47.102Z",
     "source": "layer4_reconcile"
   },
   {
-    "layer3_inference": "State Public Utility Commission behind-the-scenes engagement with MWA (hidden move)",
+    "layer3_inference": "State PUC behind-the-scenes inquiry to MWA (hidden move)",
     "signal_ids": [
-      "20260312-0034-SIG-006"
+      "20260317-1438-SIG-006",
+      "20260317-1438-SIG-015"
     ],
-    "rejection_reason": "SPECULATIVE classification (3 assumptions) with zero supporting data. Filing content is more consistent with structural unawareness than with aware-but-managing-privately. Per CL-006 and CL-008, stripped.",
+    "rejection_reason": "SPECULATIVE classification with 3 assumptions and zero supporting data. The regulator's own filing is reassuring in tone. The phrase 'slightly degraded' is framed positively. No evidence of concern triggering follow-up.",
     "root_cause": "INSUFFICIENT_EVIDENCE",
     "confidence_in_rejection": "high",
     "corrections_ledger_action": "auto_commit",
-    "timestamp": "2026-03-12T00:46:17.253Z",
+    "timestamp": "2026-03-17T14:50:47.102Z",
     "source": "layer4_reconcile"
   }
 ]

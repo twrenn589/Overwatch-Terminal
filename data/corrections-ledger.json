@@ -87,7 +87,8 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "RETIRED",
+    "retirement_reason": "Graduated to layer prompt instruction \u2014 lesson embedded permanently in analyze-thesis.js"
   },
   {
     "id": "CL-006",
@@ -195,7 +196,8 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "RETIRED",
+    "retirement_reason": "Graduated to layer prompt instruction \u2014 lesson embedded permanently in analyze-thesis.js"
   },
   {
     "id": "CL-012",
@@ -303,7 +305,8 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "RETIRED",
+    "retirement_reason": "Graduated to layer prompt instruction \u2014 lesson embedded permanently in analyze-thesis.js"
   },
   {
     "id": "CL-018",
@@ -593,7 +596,8 @@
     "confidence_in_lesson": "HIGH",
     "times_applied": 0,
     "times_applicable_but_missed": 0,
-    "status": "ACTIVE"
+    "status": "RETIRED",
+    "retirement_reason": "Graduated to layer prompt instruction \u2014 lesson embedded permanently in analyze-thesis.js"
   },
   {
     "id": "CL-034",

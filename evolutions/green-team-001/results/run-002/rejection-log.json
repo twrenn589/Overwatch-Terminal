@@ -1,16 +1,26 @@
 [
   {
-    "layer3_inference": "Layer 3 scenario probability: 25% thesis falsification",
+    "layer3_inference": "Operators may be performing off-log coordination or readiness actions",
     "signal_ids": [
-      "20260312-0324-SIG-015",
-      "20260312-0324-SIG-002",
-      "20260312-0324-SIG-008"
+      "20260317-1627-SIG-011"
     ],
-    "rejection_reason": "Not rejected but reweighted. The 25% falsification probability is reasonable as a rough estimate but per LZ-EPH-003, the transition outcome prediction rests on 3+ unproven assumptions (SCADA will trip soon, gravity will be too slow, demand persists, surge valve fails). The probability itself is a prediction, not a measurement (LZ-RC-005). Layer 4 accepts the directional assessment (falsification is possible) but notes the specific percentage carries false precision for an event with this many unknowns.",
-    "root_cause": "ASSUMPTION_FAILURE",
-    "confidence_in_rejection": "medium",
-    "corrections_ledger_action": "flag_for_review",
-    "timestamp": "2026-03-12T03:36:53.779Z",
+    "rejection_reason": "Layer 3 correctly self-identified this as SPECULATIVE with no supporting evidence and acknowledged 9+ corrections ledger rejections. Stripped per burden of proof: SPECULATIVE classification (75% discount) combined with no data support (full strip). This inference has been conclusively and repeatedly rejected across the analytical pipeline.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-17T16:40:01.336Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Demand source trajectory is modelable (escalating, stabilizing, or de-escalating)",
+    "signal_ids": [
+      "20260317-1627-SIG-009"
+    ],
+    "rejection_reason": "Layer 3 correctly self-classified as SPECULATIVE with no data support. Per CL-017 and CL-019, demand source behavior requires 3+ assumptions about an unidentified actor. Stripped entirely. The demand source's trajectory remains structurally opaque.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-17T16:40:01.337Z",
     "source": "layer4_reconcile"
   }
 ]
