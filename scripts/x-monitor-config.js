@@ -8,7 +8,7 @@ const X_MONITOR_ACCOUNTS = {
       'bgarlinghouse',
       'MonicaLongSF',
       's_alderoty',
-      'JoelKatz',
+      'SECPaulSAtkins',
       'SECGov',
       'HiddenRoadHQ',
       'SBIGroupJP',
@@ -29,6 +29,7 @@ const X_MONITOR_ACCOUNTS = {
       'CoinDesk',
       'TheBlock__',
       'WatcherGuru',
+      'ChairmanSelig',
     ],
   },
 };
