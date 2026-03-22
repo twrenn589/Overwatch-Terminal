@@ -76,6 +76,13 @@ const KS_SEVERITY = {
   'triggered': 3,
 };
 
+const CI_STATUS_SEVERITY = {
+  'INSUFFICIENT_DATA': 0,
+  'MIXED': 1,
+  'PATTERN_FORMING': 2,
+  'CONVERGING': 3,
+};
+
 function log(msg)  { console.log(`[auditor] ${msg}`); }
 function warn(msg) { console.warn(`[auditor] WARN: ${msg}`); }
 function err(msg)  { console.error(`[auditor] ERROR: ${msg}`); }
@@ -201,6 +208,7 @@ function extractTrajectory(history, lookback) {
     tensions:         Array.isArray(entry.unresolved_tensions) ? entry.unresolved_tensions : [],
     dispositions:     Array.isArray(entry.previous_tension_dispositions) ? entry.previous_tension_dispositions : [],
     kill_switches:    entry.kill_switches || [],
+    compound_indices: entry.compound_indices || [],
     timestamp:        entry.timestamp || entry._generated_at || null,
   }));
 }
@@ -596,6 +604,41 @@ function checkAnomalyTriggers(currentEntry, previousEntry, anomalyTriggers) {
               });
             }
           }
+        }
+        break;
+      }
+
+      case 'INDEX_CONVERGENCE_SHIFT': {
+        const currentCI = currentEntry.compound_indices || [];
+        const previousCI = previousEntry.compound_indices || [];
+        for (const ci of currentCI) {
+          const prev = previousCI.find(p => p.id === ci.id);
+          if (prev) {
+            const currentSev = CI_STATUS_SEVERITY[ci.convergence_status] ?? 0;
+            const prevSev = CI_STATUS_SEVERITY[prev.convergence_status] ?? 0;
+            if (Math.abs(currentSev - prevSev) >= 2) {
+              triggered.push({
+                trigger_id: trigger.id,
+                detail: `Index "${ci.name}" shifted from ${prev.convergence_status} to ${ci.convergence_status} (Δ${currentSev - prevSev})`,
+              });
+            }
+          }
+        }
+        break;
+      }
+
+      case 'FALSIFICATION_PROXIMITY': {
+        const ciEntries = currentEntry.compound_indices || [];
+        let negCount = 0;
+        for (const ci of ciEntries) {
+          if (ci.convergence_direction === 'NEGATIVE' && (ci.convergence_status === 'CONVERGING' || ci.convergence_status === 'PATTERN_FORMING')) negCount++;
+          if (ci.inverse && ci.convergence_direction === 'POSITIVE' && (ci.convergence_status === 'CONVERGING' || ci.convergence_status === 'PATTERN_FORMING')) negCount++;
+        }
+        if (negCount >= 2) {
+          triggered.push({
+            trigger_id: trigger.id,
+            detail: `${negCount} indices at or near CONVERGING_NEGATIVE — approaching falsification review threshold`,
+          });
         }
         break;
       }

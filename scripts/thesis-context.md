@@ -9,6 +9,42 @@ XRP is being positioned as the institutional settlement layer for the next globa
 ## Position
 Monitoring institutional adoption metrics. This is an analytical framework, not financial advice.
 
+## Compound Indices (Convergence-Based Falsification Framework)
+
+Five convergence-based indices replace single-threshold kill switches. Each index answers a thesis question through component signal convergence. The system evaluates patterns, not individual numbers.
+
+### CI-1: Settlement Activity Index
+Thesis question: Is the thesis asset actually being used for institutional settlement?
+Components: On-chain institutional payment volume, RLUSD circulation and velocity, corridor exchange activity, RippleNet partner transaction patterns, institutional wallet growth, x402-acquired settlement intelligence.
+Inverse: No. Convergence strengthens the thesis.
+
+### CI-2: Institutional Adoption Index
+Thesis question: Are institutions building on and deploying the thesis asset's infrastructure?
+Components: ETF AUM and flow direction, custody and clearing infrastructure, PermDEX institutional adoption, RWA partnerships and tokenization, announcement-to-deployment conversion.
+Inverse: No. Convergence strengthens the thesis.
+
+### CI-3: Regulatory Progress Index
+Thesis question: Is the regulatory environment moving toward or away from enabling the thesis?
+Components: Federal framework progress (Clarity Act), state-level crypto adoption, international regulatory clarity, ETF approval trajectory, compliance infrastructure development.
+Inverse: No. Convergence strengthens the thesis.
+
+### CI-4: Japan/Asia Adoption Index
+Thesis question: Is the critical Japan/Asia corridor developing?
+Components: SBI integration depth, new Asian corridor partners, BOJ policy signals, Japan regulatory environment.
+Inverse: No. Convergence strengthens the thesis.
+
+### CI-5: Competitive Displacement Index (INVERSE)
+Thesis question: Is competing infrastructure displacing the thesis asset?
+Components: SWIFT upgrade and modernization progress, stablecoin settlement competition, central bank digital currency development, alternative cross-border infrastructure deployment.
+Inverse: YES. Convergence in this index WEAKENS the thesis.
+
+### Convergence Evaluation
+- Each component is assessed for direction: GROWING | STABLE | DECLINING
+- Agreement ratio calculated across assessable components only
+- Convergence status: CONVERGING (~85%+) | PATTERN_FORMING (~70%+) | MIXED | INSUFFICIENT_DATA
+- Convergence direction: POSITIVE | NEGATIVE | CONTESTED | UNDETERMINED
+- FALSIFIED review triggers when 3+ indices reach CONVERGING_NEGATIVE sustained across 3+ consecutive runs
+
 ## Kill Switches (Falsification Criteria)
 
 ### Actively Monitored by System (5)
