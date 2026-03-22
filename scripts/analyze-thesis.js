@@ -418,6 +418,12 @@ ${alertLines}
 🎯 <b>KILL SWITCH CHANGES:</b> ${(analysis.kill_switch_updates ?? []).filter(k => k.recommended_status !== k.previous_status).length}
 ${ksChanges}
 
+📊 <b>COMPOUND INDICES:</b>
+${(analysis.compound_indices ?? []).map(ci => {
+  const dir = ci.inverse ? (ci.convergence_direction === 'POSITIVE' ? '⚠️ COMPETITIVE PRESSURE' : '✅ NO DISPLACEMENT') : (ci.convergence_direction === 'POSITIVE' ? '✅' : ci.convergence_direction === 'NEGATIVE' ? '⚠️' : '⬜');
+  return `• ${ci.name}: ${ci.convergence_status} ${dir} (${ci.assessable}/${ci.total} visible)`;
+}).join('\n') || 'Not yet evaluated'}
+
 📊 <b>SCORECARD CHANGES:</b> ${(analysis.scorecard_updates ?? []).filter(s => s.recommended_status !== s.previous_status).length}
 ${scChanges}
 
@@ -804,6 +810,22 @@ For each signal from Layer 1:
 4. KILL SWITCH STATUS CHECK
    For each of the 10 falsification criteria, report current status based on available data. Flag any that have moved since last assessment. Flag any where data is unavailable (this is distinct from data showing negative results).
 
+5b. COMPOUND INDEX EVALUATION
+   For each compound index defined in the thesis context, evaluate convergence across component signals:
+   - Assess each component's data_availability: CURRENT | STALE | NO_DATA | UNKNOWN_AVAILABILITY | NOT_OBSERVABLE
+   - For assessable components, determine direction: GROWING | STABLE | DECLINING
+   - Calculate agreement_ratio across assessable components only (exclude NOT_OBSERVABLE and components with no data)
+   - Determine convergence_status based on agreement_ratio and the index's convergence thresholds:
+     * >= converging_pct → CONVERGING
+     * >= pattern_forming_pct → PATTERN_FORMING
+     * Below pattern_forming_pct → MIXED
+     * Too many components lack data → INSUFFICIENT_DATA
+   - Determine convergence_direction: POSITIVE | NEGATIVE | CONTESTED | UNDETERMINED
+     * CONTESTED: components are assessable but pulling in opposite directions — the paradox is the finding
+     * UNDETERMINED: insufficient directional signal to make a call
+   - For inverse indices (inverse: true in config), report direction as observed — the architecture handles interpretation
+   - Flag data gaps as acquisition candidates for x402
+
 5. COMPOUND STRESS ASSESSMENT
    Report the current compound stress level with:
    - Current values of all three legs
@@ -874,6 +896,39 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "current_value": "...",
       "target": "...",
       "movement_since_last": "improved | stable | deteriorated | unknown"
+    }
+  ],
+  "compound_index_evaluation": [
+    {
+      "index_id": "from config",
+      "index_name": "from config",
+      "thesis_question": "from config",
+      "component_assessments": [
+        {
+          "component_id": "from config",
+          "component_name": "from config",
+          "data_availability": "CURRENT | STALE | NO_DATA | UNKNOWN_AVAILABILITY | NOT_OBSERVABLE",
+          "direction": "GROWING | STABLE | DECLINING | null",
+          "confidence": "HIGH | MEDIUM | LOW | null",
+          "evidence_summary": "what evidence supports this direction assessment",
+          "signal_ids": ["from Layer 1"]
+        }
+      ],
+      "assessable_components": 0,
+      "total_components": 0,
+      "direction_summary": { "GROWING": 0, "STABLE": 0, "DECLINING": 0 },
+      "agreement_ratio": 0.0,
+      "convergence_status": "CONVERGING | PATTERN_FORMING | MIXED | INSUFFICIENT_DATA",
+      "convergence_direction": "POSITIVE | NEGATIVE | CONTESTED | UNDETERMINED",
+      "inverse": false,
+      "observability_note": "N of M defined components assessable. Index composition reviewed at Sunday audit.",
+      "data_gaps": [
+        {
+          "component_id": "from config",
+          "gap_type": "NO_DATA | UNKNOWN_AVAILABILITY | STALE",
+          "acquisition_candidate": true
+        }
+      ]
     }
   ],
   "compound_stress": {
@@ -1345,6 +1400,14 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 
 5. KILL SWITCH REVIEW — Review all 10 falsification criteria. If any kill switch is TRIGGERED, state this FIRST. Everything else is secondary.
 
+5b. COMPOUND INDEX REVIEW — For each compound index from Layer 2's compound_index_evaluation, review the convergence assessment:
+   - Confirm or override Layer 2's convergence_status and convergence_direction
+   - Apply Layer 3 behavioral context: does game theory evidence change the convergence picture?
+   - If overriding, state what Layer 2 assessed and why you disagree
+   - For inverse indices (inverse: true), CONVERGING_POSITIVE means competition IS displacing the thesis — this counts as negative for the thesis
+   - WEIGHT CONTEXT: If specific components matter more in the current environment, state which and why. Equal weighting is the default — override with justification.
+   - FALSIFICATION REVIEW: Count indices at CONVERGING_NEGATIVE (including inverse indices where CONVERGING_POSITIVE = negative for thesis). If count reaches the falsification threshold from config sustained across consecutive runs, you MUST either declare FALSIFIED or provide a survival justification naming specific verifiable evidence.
+
 6. THESIS STATUS — Declare thesis_status as one of: STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE | FALSIFIED. Then declare confidence_in_status as: high | medium | low. Write thesis_status_reasoning (2-3 sentences explaining why this status, not just describing the data). CONTESTED means evidence is pulling in both directions simultaneously — hold the paradox, do not force resolution. INSUFFICIENT_EVIDENCE means the data does not support a determination — say so.
 FALSIFIED means the thesis has been disproven — falsification criteria have been met. FALSIFIED is terminal. If you declare FALSIFIED, action_recommendation MUST be ${actionSevere}. No exceptions. Do not declare FALSIFIED unless specific falsification criteria have been triggered with confirming evidence.
 
@@ -1450,6 +1513,30 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "reasoning": "why"
     }
   ],
+  "compound_index_review": [
+    {
+      "index_id": "from config",
+      "index_name": "from config",
+      "layer2_convergence_status": "from Layer 2",
+      "layer2_convergence_direction": "from Layer 2",
+      "layer2_agreement_ratio": 0.0,
+      "layer3_context": "relevant behavioral evidence from Layer 3",
+      "final_convergence_status": "CONVERGING | PATTERN_FORMING | MIXED | INSUFFICIENT_DATA",
+      "final_convergence_direction": "POSITIVE | NEGATIVE | CONTESTED | UNDETERMINED",
+      "override": false,
+      "override_reasoning": "null or string — required if override is true",
+      "weight_context": "null or string — when specific components matter more in the current environment, state which and why",
+      "reasoning": "why this final assessment"
+    }
+  ],
+  "falsification_review": {
+    "indices_at_converging_negative": 0,
+    "inverse_index_at_converging_positive": false,
+    "consecutive_runs_negative": 0,
+    "falsification_review_triggered": false,
+    "falsification_review_result": "NOT_TRIGGERED | SURVIVED | FALSIFIED",
+    "survival_justification": "null or string — REQUIRED if triggered but not FALSIFIED. Must name specific verifiable evidence."
+  },
   "rejection_log": [
     {
       "layer3_inference": "what Layer 3 believed",
@@ -1707,6 +1794,25 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     };
   });
 
+  // 5b. compound_indices[] — reshape from Layer 4's compound_index_review[]
+  // Enrich with Layer 2 observability data and config inverse flag
+  const l2Indices = contextualizeResult.compound_index_evaluation || [];
+  const compoundIndices = (reconcileResult.compound_index_review || []).map(ci => {
+    const l2Match = l2Indices.find(l2 => l2.index_id === ci.index_id);
+    return {
+      id:                    ci.index_id,
+      name:                  ci.index_name,
+      convergence_status:    ci.final_convergence_status || 'INSUFFICIENT_DATA',
+      convergence_direction: ci.final_convergence_direction || 'UNDETERMINED',
+      agreement_ratio:       ci.layer2_agreement_ratio || 0,
+      assessable:            l2Match ? l2Match.assessable_components : 0,
+      total:                 l2Match ? l2Match.total_components : 0,
+      reasoning:             ci.reasoning || '',
+      inverse:               l2Match ? (l2Match.inverse || false) : false,
+      override:              ci.override || false
+    };
+  });
+
   // 6. Top-level scalar fields
 
   const dashCompat = {
@@ -1721,6 +1827,7 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     bias_check:                 biasCheck,
     kill_switches:              killSwitches,
     new_kill_switches_recommended: [],
+    compound_indices:           compoundIndices,
 
     // Preserve the raw four-layer output for audit/debugging
     // The dashboard ignores these fields, but they're available for inspection
@@ -2005,6 +2112,7 @@ async function main() {
             bias_check: { bull_indicators: 0, bear_indicators: 0, ratio: '0:0', assessment: 'Pipeline degraded — Layer 4 unavailable' },
             kill_switches: [],
             new_kill_switches_recommended: [],
+            compound_indices: [],
             _pipeline_version: '2-layer-fallback',
             _generated_at: new Date().toISOString()
           };
@@ -2022,6 +2130,7 @@ async function main() {
           bias_check: { bull_indicators: 0, bear_indicators: 0, ratio: '0:0', assessment: 'Pipeline degraded — Layers 3-4 unavailable' },
           kill_switches: [],
           new_kill_switches_recommended: [],
+          compound_indices: [],
           _pipeline_version: '2-layer-fallback',
           _generated_at: new Date().toISOString()
         };

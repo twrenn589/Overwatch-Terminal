@@ -31,9 +31,14 @@
 
   "anomaly_triggers": [
     {
-      "id": "KILL_SWITCH_JUMP",
-      "description": "Any kill switch changes status by 2+ levels in a single run",
-      "trigger": "kill_switch_status_delta >= 2"
+      "id": "INDEX_CONVERGENCE_SHIFT",
+      "description": "Any compound index convergence_status changes by 2+ levels in a single run (CONVERGING=3, PATTERN_FORMING=2, MIXED=1, INSUFFICIENT_DATA=0)",
+      "trigger": "convergence_status_delta >= 2"
+    },
+    {
+      "id": "FALSIFICATION_PROXIMITY",
+      "description": "2+ indices at CONVERGING_NEGATIVE in a single run (one short of FALSIFIED review threshold)",
+      "trigger": "indices_converging_negative >= 2"
     },
     {
       "id": "COMPOUND_STRESS_ESCALATION",
@@ -69,6 +74,111 @@
     "escalate_to": "EXIT_SIGNAL",
     "deescalate_to": "HOLD_POSITION"
   },
+
+  "compound_indices_description": "Domain-specific compound indices. Each index answers a thesis question through convergence of component signals. The STRUCTURE is domain-agnostic architecture. The CONTENT is domain-specific. Replace entirely when deploying on a new domain.",
+
+  "compound_indices": [
+    {
+      "id": "CI-1",
+      "name": "Settlement Activity Index",
+      "thesis_question": "Is the thesis asset actually being used for institutional settlement?",
+      "inverse": false,
+      "replaces_kill_switches": [1, 8, 10],
+      "components": [
+        { "id": "CI-1-C1", "name": "On-chain institutional payment volume", "data_availability_default": "UNKNOWN_AVAILABILITY" },
+        { "id": "CI-1-C2", "name": "RLUSD circulation and velocity", "data_availability_default": "CURRENT" },
+        { "id": "CI-1-C3", "name": "Corridor exchange activity", "data_availability_default": "NO_DATA" },
+        { "id": "CI-1-C4", "name": "RippleNet partner transaction patterns", "data_availability_default": "UNKNOWN_AVAILABILITY" },
+        { "id": "CI-1-C5", "name": "Institutional wallet growth", "data_availability_default": "NO_DATA" },
+        { "id": "CI-1-C6", "name": "x402-acquired settlement intelligence", "data_availability_default": "NOT_OBSERVABLE" }
+      ],
+      "convergence_thresholds": {
+        "converging_pct": 85,
+        "pattern_forming_pct": 70
+      }
+    },
+    {
+      "id": "CI-2",
+      "name": "Institutional Adoption Index",
+      "thesis_question": "Are institutions building on and deploying the thesis asset's infrastructure?",
+      "inverse": false,
+      "replaces_kill_switches": [3, 6],
+      "components": [
+        { "id": "CI-2-C1", "name": "ETF AUM and flow direction", "data_availability_default": "CURRENT" },
+        { "id": "CI-2-C2", "name": "Custody and clearing infrastructure", "data_availability_default": "CURRENT" },
+        { "id": "CI-2-C3", "name": "PermDEX institutional adoption", "data_availability_default": "NO_DATA" },
+        { "id": "CI-2-C4", "name": "RWA partnerships and tokenization", "data_availability_default": "CURRENT" },
+        { "id": "CI-2-C5", "name": "Announcement-to-deployment conversion", "data_availability_default": "CURRENT" }
+      ],
+      "convergence_thresholds": {
+        "converging_pct": 85,
+        "pattern_forming_pct": 70
+      }
+    },
+    {
+      "id": "CI-3",
+      "name": "Regulatory Progress Index",
+      "thesis_question": "Is the regulatory environment moving toward or away from enabling the thesis?",
+      "inverse": false,
+      "replaces_kill_switches": [4, 5],
+      "components": [
+        { "id": "CI-3-C1", "name": "Federal framework progress (Clarity Act)", "data_availability_default": "CURRENT" },
+        { "id": "CI-3-C2", "name": "State-level crypto adoption", "data_availability_default": "CURRENT" },
+        { "id": "CI-3-C3", "name": "International regulatory clarity", "data_availability_default": "CURRENT" },
+        { "id": "CI-3-C4", "name": "ETF approval trajectory", "data_availability_default": "CURRENT" },
+        { "id": "CI-3-C5", "name": "Compliance infrastructure development", "data_availability_default": "CURRENT" }
+      ],
+      "convergence_thresholds": {
+        "converging_pct": 85,
+        "pattern_forming_pct": 70
+      }
+    },
+    {
+      "id": "CI-4",
+      "name": "Japan/Asia Adoption Index",
+      "thesis_question": "Is the critical Japan/Asia corridor developing?",
+      "inverse": false,
+      "replaces_kill_switches": [7],
+      "components": [
+        { "id": "CI-4-C1", "name": "SBI integration depth", "data_availability_default": "CURRENT" },
+        { "id": "CI-4-C2", "name": "New Asian corridor partners", "data_availability_default": "UNKNOWN_AVAILABILITY" },
+        { "id": "CI-4-C3", "name": "BOJ policy signals", "data_availability_default": "CURRENT" },
+        { "id": "CI-4-C4", "name": "Japan regulatory environment", "data_availability_default": "CURRENT" }
+      ],
+      "convergence_thresholds": {
+        "converging_pct": 85,
+        "pattern_forming_pct": 70
+      }
+    },
+    {
+      "id": "CI-5",
+      "name": "Competitive Displacement Index",
+      "thesis_question": "Is competing infrastructure displacing the thesis asset?",
+      "inverse": true,
+      "replaces_kill_switches": [2, 9],
+      "components": [
+        { "id": "CI-5-C1", "name": "SWIFT upgrade and modernization progress", "data_availability_default": "CURRENT" },
+        { "id": "CI-5-C2", "name": "Stablecoin settlement competition", "data_availability_default": "CURRENT" },
+        { "id": "CI-5-C3", "name": "Central bank digital currency development", "data_availability_default": "CURRENT" },
+        { "id": "CI-5-C4", "name": "Alternative cross-border infrastructure deployment", "data_availability_default": "CURRENT" }
+      ],
+      "convergence_thresholds": {
+        "converging_pct": 85,
+        "pattern_forming_pct": 70
+      }
+    }
+  ],
+
+  "falsification_criteria": {
+    "min_indices_converging_negative": 3,
+    "min_consecutive_runs": 3,
+    "description": "FALSIFIED review triggers when 3+ of 5 indices reach CONVERGING_NEGATIVE sustained across 3+ consecutive runs. For inverse indices, CONVERGING_POSITIVE counts as negative for the thesis. Calibration candidate."
+  },
+
+  "convergence_status_enum": ["CONVERGING", "PATTERN_FORMING", "MIXED", "INSUFFICIENT_DATA"],
+  "convergence_direction_enum": ["POSITIVE", "NEGATIVE", "CONTESTED", "UNDETERMINED"],
+  "component_direction_enum": ["GROWING", "STABLE", "DECLINING"],
+  "data_availability_enum": ["CURRENT", "STALE", "NO_DATA", "UNKNOWN_AVAILABILITY", "NOT_OBSERVABLE"],
 
   "x402_budget": {
     "cycle_limit_drops": 5000,
